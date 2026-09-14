@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEET PG Resident Directory</title>
-    <script src="https://tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <!-- Updated to use the latest, stable Supabase JS delivery bundle -->
-    <script src="https://jsdelivr.net"></script>
+    <!-- Working CDN Tailwind & FontAwesome Links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Correct Supabase JS SDK CDN Link -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
 
@@ -65,10 +66,10 @@
 
     <!-- Supabase Integration Initialization -->
     <script>
-        const SUPABASE_URL = 'https://supabase.co';
+        // Exact Supabase credentials from your project
+        const SUPABASE_URL = 'https://uwrwtttkqywsmehexmbf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
         
-        // Correct global client initialization 
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         let selectedMap = new Map();
 
@@ -80,18 +81,19 @@
             tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold animate-pulse">Searching Database...</td></tr>';
 
             try {
-                // Queries standard CANDIDATE table
-                let dbQuery = supabase.from('CANDIDATE').select('*');
+                // Table name matched to exact case: 'Candidate'
+                let dbQuery = supabase.from('Candidate').select('*');
 
-                // Apply case-insensitive wildcard match filters
+                // Filter on exact Supabase database column: "NAME OF THE CANDIDATE"
                 if (query) {
-                    dbQuery = dbQuery.ilike('NAME', `%${query}%`);
+                    dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
                 }
+                
+                // Filter on exact Supabase database column: "State"
                 if (stateQuery) {
-                    dbQuery = dbQuery.ilike('STATE', `%${stateQuery}%`);
+                    dbQuery = dbQuery.ilike('State', `%${stateQuery}%`);
                 }
 
-                // Enforce a hard cap row layout safety return limit
                 dbQuery = dbQuery.limit(50);
 
                 const { data, error } = await dbQuery;
@@ -105,7 +107,7 @@
                         <tr>
                             <td colspan="5" class="p-6 text-center text-amber-400 font-medium">
                                 <i class="fa-solid fa-triangle-exclamation mr-2"></i> No records found.<br>
-                                <span class="text-xs text-slate-400 block mt-1">If your table has rows, make sure Row Level Security (RLS) is turned off or has a public SELECT policy enabled on Supabase.</span>
+                                <span class="text-xs text-slate-400 block mt-1">Try broadening your search term or search by first name.</span>
                             </td>
                         </tr>`;
                     return;
@@ -113,13 +115,13 @@
 
                 tbody.innerHTML = '';
                 data.forEach(item => {
-                    // Normalizing fallback fields case-by-case to match varying schema formats
-                    const id = item.id || item.RANK || item.rank || Math.random().toString();
-                    const name = item.NAME || item.CANDIDATE_NAME || item.name || 'N/A';
-                    const rank = item.RANK || item.AIR_RANK || item.rank || 'N/A';
-                    const state = item.STATE || item.state || 'N/A';
-                    const city = item.CITY || item.city || '';
-                    const phone = item.PHONE || item.MOBILE || item.PHONE_NUMBER || item.phone || 'Locked';
+                    // Match column schema mapping from your Supabase table
+                    const id = item['APPLICATION ID'] || Math.random().toString();
+                    const name = item['NAME OF THE CANDIDATE'] || 'N/A';
+                    const rank = item['NEET-PG 2025 PUBLISH RANK'] || item['AIR_RANK'] || 'N/A';
+                    const state = item['State'] || 'N/A';
+                    const city = item['City'] || '';
+                    const phone = item['Candidate Mobile'] || 'Locked';
 
                     const stateCity = city ? `${state}, ${city}` : state;
                     const isChecked = selectedMap.has(id);
@@ -127,7 +129,6 @@
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-slate-800/50 transition';
                     
-                    // Secure structural template parsing strings safely without breaking inline JS actions
                     tr.innerHTML = `
                         <td class="p-3 text-center">
                             <input type="checkbox" ${isChecked ? 'checked' : ''} class="row-checkbox w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-0">
@@ -138,7 +139,6 @@
                         <td class="p-3 font-mono text-slate-400">${phone}</td>
                     `;
 
-                    // Using a programmatic safe event listener to prevent apostrophes (') in names from breaking the script
                     tr.querySelector('.row-checkbox').addEventListener('change', function() {
                         toggleSelect(id, name, rank, stateCity, phone);
                     });
