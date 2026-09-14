@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- html2pdf Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
 
-    <!-- Navbar -->
+    <!-- Header -->
     <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 p-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div>
@@ -34,18 +32,20 @@
         </div>
     </header>
 
-    <!-- Controls -->
+    <!-- Main Content -->
     <main class="max-w-7xl mx-auto p-4 flex-grow w-full space-y-4">
         <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col md:flex-row gap-3">
-            <input type="text" id="searchInput" placeholder="Search by Candidate Name..." class="bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white flex-grow">
-            <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
-            <button onclick="searchDatabase()" class="bg-emerald-600 text-white px-4 py-2 text-xs font-bold rounded-lg">Search DB</button>
+            <input type="text" id="searchInput" placeholder="Search by Candidate Name..." class="bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-white flex-grow focus:outline-none focus:border-indigo-500">
+            <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <button onclick="searchDatabase()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 text-xs font-bold rounded-lg transition-all">
+                Search DB
+            </button>
         </div>
 
         <!-- Directory Table -->
         <div class="bg-slate-800 border border-slate-700 rounded-xl overflow-x-auto">
             <table class="w-full text-left text-xs">
-                <thead class="bg-slate-900 text-slate-400 uppercase">
+                <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-700">
                     <tr>
                         <th class="p-3 text-center">Select</th>
                         <th class="p-3">AIR Rank</th>
@@ -55,33 +55,42 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody" class="divide-y divide-slate-700">
-                    <!-- Results populate here dynamically -->
+                    <tr>
+                        <td colspan="5" class="p-6 text-center text-slate-400">
+                            Enter a candidate name or state above and tap <b>Search DB</b>.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </main>
 
-    <!-- JavaScript Engine -->
+    <!-- Supabase Connection & Script -->
     <script>
-        // REPLACE THESE WITH YOUR SUPABASE CREDENTIALS FROM PHASE 2 STEP 7
-        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-        const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY";
+        const SUPABASE_URL = "https://uwrwtttkqywsmehexmbf.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+        
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
         let selectedMap = new Map();
 
         async function searchDatabase() {
             const query = document.getElementById('searchInput').value.trim();
             const state = document.getElementById('stateInput').value.trim();
+            const tbody = document.getElementById('tableBody');
 
-            let dbQuery = supabase.from('candidates').select('*').limit(50);
+            tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold">Searching 138,000+ records...</td></tr>`;
+
+            // Query the 'Candidate' table
+            let dbQuery = supabase.from('Candidate').select('*').limit(50);
 
             if (query) dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
             if (state) dbQuery = dbQuery.ilike('State', `%${state}%`);
 
             const { data, error } = await dbQuery;
+
             if (error) {
-                alert("Error searching database: " + error.message);
+                console.error("Supabase Error:", error);
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-400">Error fetching data: ${error.message}</td></tr>`;
                 return;
             }
 
@@ -92,26 +101,27 @@
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
 
-            if(!candidates || candidates.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">No candidates found. Try searching.</td></tr>`;
+            if (!candidates || candidates.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">No candidates found matching your search.</td></tr>`;
                 return;
             }
 
             candidates.forEach(c => {
-                const id = c['APPLICATION ID'] || c.id;
-                const name = c['NAME OF THE CANDIDATE'];
-                const rank = c['NEET-PG 2025\nPUBLISH RANK'];
-                const state = c['State'];
-                const city = c['City'];
-                const rawPhone = String(c['Candidate Mobile']);
-                const maskedPhone = rawPhone.substring(0, 5) + "*****";
+                const id = c['APPLICATION ID'] || Math.random();
+                const name = c['NAME OF THE CANDIDATE'] || 'N/A';
+                const rank = c['NEET-PG 2025 PUBLISH RANK'] || c['NEET-PG 2025\nPUBLISH RANK'] || 'N/A';
+                const state = c['State'] || 'N/A';
+                const city = c['City'] || 'N/A';
+                const rawPhone = String(c['Candidate Mobile'] || '');
+                const maskedPhone = rawPhone.length >= 5 ? rawPhone.substring(0, 5) + "*****" : "*****";
 
                 const isChecked = selectedMap.has(id);
 
                 const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-750 transition-colors";
                 tr.innerHTML = `
                     <td class="p-3 text-center">
-                        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleSelect('${id}', '${name}', '${rank}', '${state}', '${rawPhone}')" class="w-4 h-4 accent-indigo-600">
+                        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleSelect('${id}', '${name}', '${rank}', '${state}', '${rawPhone}')" class="w-4 h-4 accent-indigo-600 cursor-pointer">
                     </td>
                     <td class="p-3 font-bold text-slate-300">#${rank}</td>
                     <td class="p-3 font-bold text-white">${name}</td>
@@ -147,7 +157,7 @@
             }
             const count = selectedMap.size;
             const cost = Math.ceil(count / 4) * 199;
-            alert(`Selected: ${count} PGs.\nTotal Payable: ₹${cost}.\n\nSending approval notification to admin...`);
+            alert(`Selected: ${count} PGs.\nTotal Payable: ₹${cost}.\n\nSending request to unlock numbers...`);
         }
     </script>
 </body>
