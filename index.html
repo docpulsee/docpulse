@@ -18,7 +18,7 @@
                 <p class="text-xs text-slate-400">138,000+ Verified Candidate Database</p>
             </div>
             <div class="flex items-center gap-3">
-                <div class="bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 rounded-lg text-xs">
+                <div class="bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-xs">
                     <span class="text-slate-400">Selected:</span> 
                     <span id="selectedCount" class="font-bold text-indigo-400">0 PG(s)</span> | 
                     <span class="text-slate-400">Cost:</span> 
@@ -64,8 +64,8 @@
 
     <!-- Supabase Connection & Script -->
     <script>
-        const SUPABASE_URL = 'https://uvrwttsqxemneshexbbf.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2cnd0dHNxeGVtbmVzaGV4YmJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMTYxMDYsImV4cCI6MjA1Njc5MjEwNn0.8m9qRndOh7i6s-85vE80jSvh4J-F5vYdGvh2vG1-B_Q';
+        const SUPABASE_URL = 'https://uwrwtttkqywsmehexmbf.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         let selectedMap = new Map();
@@ -77,14 +77,12 @@
 
             tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold">Searching Database...</td></tr>';
 
-            let dbQuery = supabase.from('CANDIDATE').select('*').limit(30);
+            let dbQuery = supabase.from('CANDIDATE').select('*').limit(50);
 
-            // Apply name filter if entered
             if (query) {
                 dbQuery = dbQuery.ilike('NAME', `%${query}%`);
             }
 
-            // Apply state filter if entered
             if (stateQuery) {
                 dbQuery = dbQuery.ilike('STATE', `%${stateQuery}%`);
             }
