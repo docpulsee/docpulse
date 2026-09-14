@@ -16,47 +16,55 @@
             background-image: radial-gradient(#111b21 1px, transparent 0);
             background-size: 24px 24px;
         }
+        /* Custom Scrollbar for Filters */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="text-slate-100 font-sans min-h-screen flex flex-col">
 
-    <!-- WhatsApp Teal Header -->
-    <header class="w-full bg-[#1f2c34] border-b border-[#2a3942] sticky top-0 z-40 shadow-md">
+    <!-- Colorful Header Bar -->
+    <header class="w-full bg-gradient-to-r from-[#1f2c34] via-[#111b21] to-[#1f2c34] border-b border-[#2a3942] sticky top-0 z-40 shadow-xl">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center text-white text-lg font-bold">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#00a884] via-[#25d366] to-[#34d399] flex items-center justify-center text-slate-900 text-xl font-black shadow-lg shadow-emerald-900/30">
                     <i class="fa-solid fa-user-doctor"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-[#e9edef] leading-tight">NEET PG Resident Directory</h1>
-                    <p class="text-xs text-[#8696a0]">138,000+ Verified Candidate Database</p>
+                    <h1 class="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400 leading-tight">NEET PG Resident Directory</h1>
+                    <p class="text-xs text-[#8696a0] font-medium">138,000+ Verified Candidates • Instant Unlocks</p>
                 </div>
             </div>
             
             <!-- Selection Summary & Actions -->
             <div class="flex items-center gap-2">
-                <div class="bg-[#111b21] border border-[#2a3942] rounded-lg px-3 py-1.5 text-xs flex items-center gap-2">
+                <div class="bg-[#111b21]/90 border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs flex items-center gap-2 shadow-inner">
                     <div>
                         <span class="text-[#8696a0]">Selected:</span> 
-                        <span id="selectedCount" class="font-bold text-[#00a884]">0 candidate(s)</span>
+                        <span id="selectedCount" class="font-bold text-[#00a884]">0 candidates</span>
                     </div>
                     <span class="text-[#2a3942]">|</span>
                     <div>
                         <span class="text-[#8696a0]">Total:</span> 
-                        <span id="fCost" class="font-bold text-[#25d366]">₹0</span>
+                        <span id="fCost" class="font-bold text-[#25d366] text-sm">₹0</span>
                     </div>
                 </div>
 
-                <button onclick="shareToWhatsApp()" title="Export list to WhatsApp" class="bg-[#25d366] hover:bg-[#20bd5a] text-white p-2 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+                <button onclick="shareToWhatsApp()" title="Export list to WhatsApp" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white p-2.5 rounded-xl text-xs font-semibold transition shadow-md flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-sm"></i> <span class="hidden sm:inline">Share</span>
                 </button>
 
-                <button onclick="clearSelections()" title="Clear all selected" class="bg-[#2a3942] hover:bg-[#3b4a54] text-[#8696a0] hover:text-red-400 p-2 rounded-lg text-xs transition">
+                <button onclick="clearSelections()" title="Clear all selected" class="bg-[#2a3942] hover:bg-red-500/20 text-[#8696a0] hover:text-red-400 p-2.5 rounded-xl text-xs font-semibold transition border border-transparent hover:border-red-500/30">
                     <i class="fa-solid fa-trash-can mr-1"></i> Clear
                 </button>
 
-                <button onclick="openCheckout()" class="bg-[#00a884] hover:bg-[#029071] text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow">
-                    Unlock Numbers
+                <button onclick="openCheckout()" class="bg-gradient-to-r from-[#00a884] to-[#25d366] hover:opacity-90 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/20 flex items-center gap-1.5">
+                    <i class="fa-solid fa-[#lock] fa-lock"></i> Unlock Numbers
                 </button>
             </div>
         </div>
@@ -65,62 +73,78 @@
     <!-- Main Container -->
     <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
         
-        <!-- Advanced Search Box -->
-        <div class="bg-[#1f2c34] p-4 rounded-2xl border border-[#2a3942] shadow-lg flex flex-col gap-3">
+        <!-- Interactive Category Quick Tabs -->
+        <div class="mb-4">
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-xs">
+                <span class="text-[#8696a0] font-semibold uppercase tracking-wider text-[10px] mr-1"><i class="fa-solid fa-sliders text-[#00a884] mr-1"></i> Quick Filters:</span>
+                <button onclick="applyQuickTab('', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-emerald-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition">All Records</button>
+                <button onclick="applyQuickTab('KARNATAKA', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-cyan-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-cyan-400 mr-1"></i>Karnataka</button>
+                <button onclick="applyQuickTab('MAHARASHTRA', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-amber-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-amber-400 mr-1"></i>Maharashtra</button>
+                <button onclick="applyQuickTab('DELHI', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-purple-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-purple-400 mr-1"></i>Delhi</button>
+                <button onclick="applyQuickTab('', 'AIIMS')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-rose-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-hospital text-rose-400 mr-1"></i>AIIMS Institutes</button>
+                <button onclick="applyQuickTab('', 'DNB')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-indigo-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-building-columns text-indigo-400 mr-1"></i>DNB Hospitals</button>
+            </div>
+        </div>
+
+        <!-- Advanced Filter Control Panel -->
+        <div class="bg-[#1f2c34] p-5 rounded-2xl border border-[#2a3942] shadow-xl flex flex-col gap-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <!-- Name Filter -->
+                <!-- Name Search Input -->
                 <div class="relative">
-                    <i class="fa-solid fa-user absolute left-3 top-3 text-[#8696a0] text-sm"></i>
-                    <input type="text" id="searchInput" placeholder="Search Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                    <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-emerald-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Search Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884] focus:ring-1 focus:ring-[#00a884] transition">
                 </div>
 
-                <!-- State Filter -->
+                <!-- State Search Input -->
                 <div class="relative">
-                    <i class="fa-solid fa-location-dot absolute left-3 top-3 text-[#8696a0] text-sm"></i>
-                    <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                    <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-cyan-400 text-sm"></i>
+                    <input type="text" id="stateInput" placeholder="State (e.g. KARNATAKA, DELHI)..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition">
                 </div>
 
-                <!-- Hospital / College Filter -->
+                <!-- College / Institute / Hospital Multi-Column Search -->
                 <div class="relative">
-                    <i class="fa-solid fa-hospital absolute left-3 top-3 text-[#8696a0] text-sm"></i>
-                    <input type="text" id="collegeInput" placeholder="Filter by College / Hospital..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                    <i class="fa-solid fa-hospital-user absolute left-3.5 top-3.5 text-purple-400 text-sm"></i>
+                    <input type="text" id="collegeInput" placeholder="College / Institute / Hospital Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
                 </div>
             </div>
 
-            <!-- Rank Range & Search Trigger Bar -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-[#2a3942]">
+            <!-- AIR Brackets & Search Trigger Action Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#2a3942]/60">
                 <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <span class="text-xs text-[#8696a0] whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 mr-1"></i> AIR Bracket:</span>
-                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-24 focus:outline-none focus:border-[#00a884]">
-                    <span class="text-[#8696a0] text-xs">-</span>
-                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-24 focus:outline-none focus:border-[#00a884]">
+                    <span class="text-xs text-[#8696a0] font-semibold whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 text-amber-400 mr-1"></i> AIR Bracket:</span>
+                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-28 focus:outline-none focus:border-[#00a884]">
+                    <span class="text-[#8696a0] text-xs font-bold">-</span>
+                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-28 focus:outline-none focus:border-[#00a884]">
                 </div>
 
-                <button id="searchBtn" class="bg-[#00a884] hover:bg-[#029071] text-white font-semibold px-8 py-2 rounded-xl text-sm transition shadow flex items-center justify-center gap-2 w-full sm:w-auto">
-                    <i class="fa-solid fa-search"></i> Search Candidates
+                <button id="searchBtn" class="bg-gradient-to-r from-[#00a884] via-[#25d366] to-[#00a884] hover:opacity-90 text-slate-950 font-black px-8 py-2.5 rounded-xl text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Candidates
                 </button>
             </div>
         </div>
 
         <!-- Bulk Operations Bar -->
-        <div id="bulkControlBar" class="hidden mt-4 bg-[#1f2c34] px-4 py-2 rounded-xl border border-[#2a3942] flex items-center justify-between text-xs text-[#8696a0]">
+        <div id="bulkControlBar" class="hidden mt-4 bg-[#1f2c34] px-4 py-2.5 rounded-xl border border-[#2a3942] flex items-center justify-between text-xs text-[#8696a0] shadow-sm">
             <div class="flex items-center gap-3">
-                <button onclick="selectAllVisible(true)" class="hover:text-[#00a884] font-medium transition">
-                    <i class="fa-regular fa-square-check mr-1"></i> Select All Loaded
+                <button onclick="selectAllVisible(true)" class="hover:text-[#00a884] font-semibold transition flex items-center gap-1">
+                    <i class="fa-regular fa-square-check text-[#00a884]"></i> Select All Visible
                 </button>
-                <span>|</span>
-                <button onclick="selectAllVisible(false)" class="hover:text-red-400 font-medium transition">
-                    <i class="fa-regular fa-square mr-1"></i> Deselect All Loaded
+                <span class="text-[#2a3942]">|</span>
+                <button onclick="selectAllVisible(false)" class="hover:text-red-400 font-semibold transition flex items-center gap-1">
+                    <i class="fa-regular fa-square text-red-400"></i> Deselect All
                 </button>
             </div>
-            <span id="pricingTierNotice" class="text-[#25d366] font-semibold">Tier Rate: ₹199 per 4 contacts</span>
+            <span class="text-[#25d366] font-extrabold bg-[#111b21] px-3 py-1 rounded-lg border border-[#2a3942]">
+                Rate: ₹199 per 4 unlocks
+            </span>
         </div>
 
-        <!-- Directory List Container -->
+        <!-- Candidate Cards Container -->
         <div id="resultsContainer" class="mt-4 flex flex-col gap-3">
-            <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-[#8696a0]">
-                <i class="fa-regular fa-comments text-4xl mb-3 text-[#00a884]"></i>
-                <p class="text-sm">Enter search parameters above and tap **Search Candidates** to list records.</p>
+            <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-10 text-center text-[#8696a0] shadow-md">
+                <i class="fa-regular fa-comments text-5xl mb-3 text-[#00a884] opacity-80"></i>
+                <h3 class="text-base font-bold text-slate-200 mb-1">Search the Resident Directory</h3>
+                <p class="text-xs">Enter candidate name, college, hospital, or state filters above and click **Search Candidates**.</p>
             </div>
         </div>
     </main>
@@ -141,11 +165,17 @@
             }
         }
 
+        window.applyQuickTab = function(stateName, collegeName) {
+            document.getElementById('stateInput').value = stateName;
+            document.getElementById('collegeInput').value = collegeName;
+            window.searchDatabase();
+        };
+
         window.searchDatabase = async function() {
             if (!dbClient) {
                 initSupabase();
                 if (!dbClient) {
-                    alert("Supabase SDK did not load. Please refresh.");
+                    alert("Supabase SDK initializing. Please try again.");
                     return;
                 }
             }
@@ -158,9 +188,9 @@
             const container = document.getElementById('resultsContainer');
 
             container.innerHTML = `
-                <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-[#00a884]">
-                    <i class="fa-solid fa-spinner fa-spin text-3xl mb-2"></i>
-                    <p class="text-sm font-semibold">Searching Candidate Database...</p>
+                <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-10 text-center text-[#00a884]">
+                    <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-3"></i>
+                    <p class="text-sm font-bold">Querying Supabase Candidate Records...</p>
                 </div>`;
 
             try {
@@ -172,9 +202,12 @@
                 if (stateQuery) {
                     dbQuery = dbQuery.ilike('State', `%${stateQuery}%`);
                 }
+
+                // Check standard variations for college, hospital, institute columns
                 if (collegeQuery) {
-                    dbQuery = dbQuery.or(`College.ilike.%${collegeQuery}%,Hospital.ilike.%${collegeQuery}%`);
+                    dbQuery = dbQuery.or(`College.ilike.%${collegeQuery}%,COLLEGE.ilike.%${collegeQuery}%,Hospital.ilike.%${collegeQuery}%,Institute.ilike.%${collegeQuery}%,Allotted Institute.ilike.%${collegeQuery}%`);
                 }
+
                 if (minRank) {
                     dbQuery = dbQuery.gte('NEET-PG 2025 PUBLISH RANK', parseInt(minRank));
                 }
@@ -193,7 +226,8 @@
                     container.innerHTML = `
                         <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-amber-400">
                             <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-                            <p class="text-sm font-semibold">No candidates found matching your specific filters.</p>
+                            <p class="text-sm font-bold">No candidates found matching your search filters.</p>
+                            <p class="text-xs text-[#8696a0] mt-1">Try broadening your search term or rank range.</p>
                         </div>`;
                     return;
                 }
@@ -205,10 +239,14 @@
                 data.forEach(item => {
                     const id = item['APPLICATION ID'] || Math.random().toString();
                     const name = item['NAME OF THE CANDIDATE'] || 'N/A';
-                    const rank = item['NEET-PG 2025 PUBLISH RANK'] || 'N/A';
+                    const rank = item['NEET-PG 2025 PUBLISH RANK'] || item['AIR_RANK'] || 'N/A';
                     const state = item['State'] || 'N/A';
                     const city = item['City'] || '';
-                    const college = item['College'] || item['Hospital'] || 'N/A';
+                    
+                    // Match College/Hospital dynamically from CSV column headers
+                    const college = item['College'] || item['COLLEGE'] || item['Hospital'] || item['Institute'] || item['Allotted Institute'] || 'N/A';
+                    const quota = item['Quota'] || item['QUOTA'] || '';
+                    const course = item['Course'] || item['Branch'] || item['SUBJECT'] || '';
                     const phone = item['Candidate Mobile'] || 'Locked';
 
                     const locationText = city ? `${state}, ${city}` : state;
@@ -216,31 +254,40 @@
 
                     const card = document.createElement('div');
                     card.id = `candidate-card-${id}`;
-                    card.className = `bg-[#1f2c34] hover:bg-[#202c33] border border-[#2a3942] p-4 rounded-2xl transition flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none ${isChecked ? 'ring-2 ring-[#00a884] bg-[#202c33]' : ''}`;
+                    card.className = `bg-[#1f2c34] hover:bg-[#202c33] border border-[#2a3942] p-4 rounded-2xl transition-all duration-150 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none shadow-md ${isChecked ? 'ring-2 ring-[#00a884] bg-[#202c33]' : ''}`;
                     
                     card.innerHTML = `
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-[#2a3942] bg-[#111b21] accent-[#00a884] cursor-pointer">
-                            <div class="w-12 h-12 rounded-full bg-[#111b21] border border-[#2a3942] flex items-center justify-center text-[#00a884] font-bold text-lg flex-shrink-0">
+                        <div class="flex items-start md:items-center gap-4">
+                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-[#2a3942] bg-[#111b21] accent-[#00a884] cursor-pointer mt-1 md:mt-0">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#111b21] to-[#2a3942] border border-[#2a3942] flex items-center justify-center text-[#00a884] font-black text-xl flex-shrink-0 shadow-inner">
                                 ${name.charAt(0)}
                             </div>
-                            <div>
+                            <div class="flex flex-col gap-1">
                                 <div class="flex items-center gap-2 flex-wrap">
                                     <h3 class="font-bold text-[#e9edef] text-base">${name}</h3>
-                                    <span class="bg-[#111b21] text-[#00a884] border border-[#00a884]/30 text-xs font-semibold px-2 py-0.5 rounded-full">
+                                    <span class="bg-emerald-950/80 text-[#25d366] border border-[#00a884]/40 text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
                                         AIR ${rank}
                                     </span>
+                                    ${quota ? `<span class="bg-amber-950/80 text-amber-400 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-full">${quota}</span>` : ''}
                                 </div>
-                                <p class="text-xs text-[#8696a0] mt-0.5">
-                                    <i class="fa-solid fa-location-dot mr-1"></i>${locationText}
-                                </p>
-                                ${college !== 'N/A' ? `<p class="text-xs text-[#00a884] mt-0.5"><i class="fa-solid fa-hospital mr-1"></i>${college}</p>` : ''}
+                                
+                                <div class="flex items-center gap-3 text-xs text-[#8696a0] flex-wrap">
+                                    <span><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i>${locationText}</span>
+                                    ${course ? `<span><i class="fa-solid fa-stethoscope text-emerald-400 mr-1"></i>${course}</span>` : ''}
+                                </div>
+
+                                ${college !== 'N/A' ? `
+                                    <p class="text-xs text-purple-300 font-medium">
+                                        <i class="fa-solid fa-hospital-user text-purple-400 mr-1"></i>${college}
+                                    </p>` : ''
+                                }
                             </div>
                         </div>
-                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between">
-                            <span class="text-xs text-[#8696a0]">Phone Number</span>
-                            <span class="font-mono text-sm px-3 py-1 rounded-lg bg-[#111b21] text-[#25d366] border border-[#2a3942] font-medium">
-                                <i class="fa-solid fa-lock text-xs mr-1 text-[#8696a0]"></i> ${phone}
+
+                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between border-t md:border-t-0 pt-2 md:pt-0 border-[#2a3942]/50">
+                            <span class="text-[11px] text-[#8696a0] font-medium">Phone Access</span>
+                            <span class="font-mono text-sm px-3.5 py-1.5 rounded-xl bg-[#111b21] text-[#25d366] border border-[#2a3942] font-semibold shadow-inner flex items-center gap-1.5">
+                                <i class="fa-solid fa-lock text-xs text-[#8696a0]"></i> ${phone}
                             </span>
                         </div>
                     `;
@@ -264,7 +311,7 @@
                 container.innerHTML = `
                     <div class="bg-[#1f2c34] border border-red-500/30 rounded-2xl p-6 text-center text-red-400">
                         <i class="fa-solid fa-circle-exclamation text-3xl mb-2"></i>
-                        <p class="text-sm font-semibold">Query Failed</p>
+                        <p class="text-sm font-bold">Query Execution Failed</p>
                         <p class="text-xs font-mono text-[#8696a0] mt-1">${err.message || err}</p>
                     </div>`;
             }
@@ -283,7 +330,7 @@
             loadedCandidates.forEach(item => {
                 const id = item['APPLICATION ID'] || Math.random().toString();
                 const name = item['NAME OF THE CANDIDATE'] || 'N/A';
-                const rank = item['NEET-PG 2025 PUBLISH RANK'] || 'N/A';
+                const rank = item['NEET-PG 2025 PUBLISH RANK'] || item['AIR_RANK'] || 'N/A';
                 const state = item['State'] || 'N/A';
                 const city = item['City'] || '';
                 const phone = item['Candidate Mobile'] || 'Locked';
@@ -313,7 +360,7 @@
             const count = selectedMap.size;
             const cost = count > 0 ? Math.ceil(count / 4) * 199 : 0;
 
-            document.getElementById('selectedCount').innerText = `${count} candidate(s)`;
+            document.getElementById('selectedCount').innerText = `${count} candidates`;
             document.getElementById('fCost').innerText = `₹${cost}`;
         };
 
