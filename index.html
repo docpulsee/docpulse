@@ -11,7 +11,6 @@
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* WhatsApp-style custom background pattern */
         body {
             background-color: #0b141a;
             background-image: radial-gradient(#111b21 1px, transparent 0);
@@ -23,7 +22,7 @@
 
     <!-- WhatsApp Teal Header -->
     <header class="w-full bg-[#1f2c34] border-b border-[#2a3942] sticky top-0 z-40 shadow-md">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex sm:flex-row justify-between items-center gap-3">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center text-white text-lg font-bold">
                     <i class="fa-solid fa-user-doctor"></i>
@@ -34,7 +33,7 @@
                 </div>
             </div>
             
-            <!-- Selection Summary & Clear Action -->
+            <!-- Selection Summary & Actions -->
             <div class="flex items-center gap-2">
                 <div class="bg-[#111b21] border border-[#2a3942] rounded-lg px-3 py-1.5 text-xs flex items-center gap-2">
                     <div>
@@ -48,7 +47,10 @@
                     </div>
                 </div>
 
-                <!-- Clear Selection Button -->
+                <button onclick="shareToWhatsApp()" title="Export list to WhatsApp" class="bg-[#25d366] hover:bg-[#20bd5a] text-white p-2 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> <span class="hidden sm:inline">Share</span>
+                </button>
+
                 <button onclick="clearSelections()" title="Clear all selected" class="bg-[#2a3942] hover:bg-[#3b4a54] text-[#8696a0] hover:text-red-400 p-2 rounded-lg text-xs transition">
                     <i class="fa-solid fa-trash-can mr-1"></i> Clear
                 </button>
@@ -61,27 +63,64 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full">
-        <!-- WhatsApp Search Bar Box -->
-        <div class="bg-[#1f2c34] p-4 rounded-2xl border border-[#2a3942] shadow-lg flex flex-col md:flex-row gap-3 md:items-center">
-            <div class="relative w-full md:w-1/2">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-[#8696a0] text-sm"></i>
-                <input type="text" id="searchInput" placeholder="Search by Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+    <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+        
+        <!-- Advanced Search Box -->
+        <div class="bg-[#1f2c34] p-4 rounded-2xl border border-[#2a3942] shadow-lg flex flex-col gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Name Filter -->
+                <div class="relative">
+                    <i class="fa-solid fa-user absolute left-3 top-3 text-[#8696a0] text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Search Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                </div>
+
+                <!-- State Filter -->
+                <div class="relative">
+                    <i class="fa-solid fa-location-dot absolute left-3 top-3 text-[#8696a0] text-sm"></i>
+                    <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                </div>
+
+                <!-- Hospital / College Filter -->
+                <div class="relative">
+                    <i class="fa-solid fa-hospital absolute left-3 top-3 text-[#8696a0] text-sm"></i>
+                    <input type="text" id="collegeInput" placeholder="Filter by College / Hospital..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                </div>
             </div>
-            <div class="relative w-full md:w-1/2">
-                <i class="fa-solid fa-location-dot absolute left-3 top-3 text-[#8696a0] text-sm"></i>
-                <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-9 pr-3 py-2 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+
+            <!-- Rank Range & Search Trigger Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-[#2a3942]">
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <span class="text-xs text-[#8696a0] whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 mr-1"></i> AIR Bracket:</span>
+                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-24 focus:outline-none focus:border-[#00a884]">
+                    <span class="text-[#8696a0] text-xs">-</span>
+                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-24 focus:outline-none focus:border-[#00a884]">
+                </div>
+
+                <button id="searchBtn" class="bg-[#00a884] hover:bg-[#029071] text-white font-semibold px-8 py-2 rounded-xl text-sm transition shadow flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i class="fa-solid fa-search"></i> Search Candidates
+                </button>
             </div>
-            <button id="searchBtn" class="bg-[#00a884] hover:bg-[#029071] text-white font-semibold px-6 py-2 rounded-xl text-sm transition shadow flex items-center justify-center gap-2">
-                <i class="fa-solid fa-search"></i> Search
-            </button>
+        </div>
+
+        <!-- Bulk Operations Bar -->
+        <div id="bulkControlBar" class="hidden mt-4 bg-[#1f2c34] px-4 py-2 rounded-xl border border-[#2a3942] flex items-center justify-between text-xs text-[#8696a0]">
+            <div class="flex items-center gap-3">
+                <button onclick="selectAllVisible(true)" class="hover:text-[#00a884] font-medium transition">
+                    <i class="fa-regular fa-square-check mr-1"></i> Select All Loaded
+                </button>
+                <span>|</span>
+                <button onclick="selectAllVisible(false)" class="hover:text-red-400 font-medium transition">
+                    <i class="fa-regular fa-square mr-1"></i> Deselect All Loaded
+                </button>
+            </div>
+            <span id="pricingTierNotice" class="text-[#25d366] font-semibold">Tier Rate: ₹199 per 4 contacts</span>
         </div>
 
         <!-- Directory List Container -->
-        <div id="resultsContainer" class="mt-6 flex flex-col gap-3">
+        <div id="resultsContainer" class="mt-4 flex flex-col gap-3">
             <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-[#8696a0]">
                 <i class="fa-regular fa-comments text-4xl mb-3 text-[#00a884]"></i>
-                <p class="text-sm">Enter a candidate name or state above and click **Search** to list records.</p>
+                <p class="text-sm">Enter search parameters above and tap **Search Candidates** to list records.</p>
             </div>
         </div>
     </main>
@@ -92,12 +131,13 @@
         
         let dbClient = null;
         let selectedMap = new Map();
+        let loadedCandidates = [];
 
         function initSupabase() {
             if (window.supabase && window.supabase.createClient) {
                 dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             } else {
-                console.error("Supabase SDK failed to load from CDN.");
+                console.error("Supabase SDK failed to load.");
             }
         }
 
@@ -105,13 +145,16 @@
             if (!dbClient) {
                 initSupabase();
                 if (!dbClient) {
-                    alert("Supabase SDK did not load. Please check your internet connection.");
+                    alert("Supabase SDK did not load. Please refresh.");
                     return;
                 }
             }
 
             const query = document.getElementById('searchInput').value.trim();
             const stateQuery = document.getElementById('stateInput').value.trim();
+            const collegeQuery = document.getElementById('collegeInput').value.trim();
+            const minRank = document.getElementById('minRank').value.trim();
+            const maxRank = document.getElementById('maxRank').value.trim();
             const container = document.getElementById('resultsContainer');
 
             container.innerHTML = `
@@ -129,6 +172,15 @@
                 if (stateQuery) {
                     dbQuery = dbQuery.ilike('State', `%${stateQuery}%`);
                 }
+                if (collegeQuery) {
+                    dbQuery = dbQuery.or(`College.ilike.%${collegeQuery}%,Hospital.ilike.%${collegeQuery}%`);
+                }
+                if (minRank) {
+                    dbQuery = dbQuery.gte('NEET-PG 2025 PUBLISH RANK', parseInt(minRank));
+                }
+                if (maxRank) {
+                    dbQuery = dbQuery.lte('NEET-PG 2025 PUBLISH RANK', parseInt(maxRank));
+                }
 
                 dbQuery = dbQuery.limit(50);
 
@@ -137,38 +189,43 @@
                 if (error) throw error;
 
                 if (!data || data.length === 0) {
+                    document.getElementById('bulkControlBar').classList.add('hidden');
                     container.innerHTML = `
                         <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-amber-400">
                             <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-                            <p class="text-sm font-semibold">No candidates found matching your criteria.</p>
+                            <p class="text-sm font-semibold">No candidates found matching your specific filters.</p>
                         </div>`;
                     return;
                 }
 
+                loadedCandidates = data;
+                document.getElementById('bulkControlBar').classList.remove('hidden');
                 container.innerHTML = '';
+
                 data.forEach(item => {
                     const id = item['APPLICATION ID'] || Math.random().toString();
                     const name = item['NAME OF THE CANDIDATE'] || 'N/A';
                     const rank = item['NEET-PG 2025 PUBLISH RANK'] || 'N/A';
                     const state = item['State'] || 'N/A';
                     const city = item['City'] || '';
+                    const college = item['College'] || item['Hospital'] || 'N/A';
                     const phone = item['Candidate Mobile'] || 'Locked';
 
                     const locationText = city ? `${state}, ${city}` : state;
                     const isChecked = selectedMap.has(id);
 
-                    // WhatsApp Card Design
                     const card = document.createElement('div');
-                    card.className = `bg-[#1f2c34] hover:bg-[#202c33] border border-[#2a3942] p-4 rounded-2xl transition flex items-center justify-between gap-4 cursor-pointer select-none ${isChecked ? 'ring-2 ring-[#00a884] bg-[#202c33]' : ''}`;
+                    card.id = `candidate-card-${id}`;
+                    card.className = `bg-[#1f2c34] hover:bg-[#202c33] border border-[#2a3942] p-4 rounded-2xl transition flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none ${isChecked ? 'ring-2 ring-[#00a884] bg-[#202c33]' : ''}`;
                     
                     card.innerHTML = `
                         <div class="flex items-center gap-4">
-                            <input type="checkbox" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-[#2a3942] bg-[#111b21] accent-[#00a884] cursor-pointer">
+                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-[#2a3942] bg-[#111b21] accent-[#00a884] cursor-pointer">
                             <div class="w-12 h-12 rounded-full bg-[#111b21] border border-[#2a3942] flex items-center justify-center text-[#00a884] font-bold text-lg flex-shrink-0">
                                 ${name.charAt(0)}
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2 flex-wrap">
                                     <h3 class="font-bold text-[#e9edef] text-base">${name}</h3>
                                     <span class="bg-[#111b21] text-[#00a884] border border-[#00a884]/30 text-xs font-semibold px-2 py-0.5 rounded-full">
                                         AIR ${rank}
@@ -177,18 +234,18 @@
                                 <p class="text-xs text-[#8696a0] mt-0.5">
                                     <i class="fa-solid fa-location-dot mr-1"></i>${locationText}
                                 </p>
+                                ${college !== 'N/A' ? `<p class="text-xs text-[#00a884] mt-0.5"><i class="fa-solid fa-hospital mr-1"></i>${college}</p>` : ''}
                             </div>
                         </div>
-                        <div class="text-right">
-                            <span class="text-xs text-[#8696a0] block mb-1">Phone Number</span>
+                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between">
+                            <span class="text-xs text-[#8696a0]">Phone Number</span>
                             <span class="font-mono text-sm px-3 py-1 rounded-lg bg-[#111b21] text-[#25d366] border border-[#2a3942] font-medium">
                                 <i class="fa-solid fa-lock text-xs mr-1 text-[#8696a0]"></i> ${phone}
                             </span>
                         </div>
                     `;
 
-                    // Toggle on card or checkbox click
-                    const checkbox = card.querySelector('.row-checkbox');
+                    const checkbox = card.querySelector(`#cb-${id}`);
                     card.addEventListener('click', (e) => {
                         if (e.target !== checkbox) {
                             checkbox.checked = !checkbox.checked;
@@ -222,7 +279,36 @@
             updateCart();
         };
 
-        // Pricing Logic: ₹199 per set of 4 numbers
+        window.selectAllVisible = function(shouldSelect) {
+            loadedCandidates.forEach(item => {
+                const id = item['APPLICATION ID'] || Math.random().toString();
+                const name = item['NAME OF THE CANDIDATE'] || 'N/A';
+                const rank = item['NEET-PG 2025 PUBLISH RANK'] || 'N/A';
+                const state = item['State'] || 'N/A';
+                const city = item['City'] || '';
+                const phone = item['Candidate Mobile'] || 'Locked';
+                const locationText = city ? `${state}, ${city}` : state;
+
+                const cb = document.getElementById(`cb-${id}`);
+                const card = document.getElementById(`candidate-card-${id}`);
+
+                if (shouldSelect) {
+                    if (!selectedMap.has(id)) selectedMap.set(id, { id, name, rank, state: locationText, phone });
+                    if (cb) cb.checked = true;
+                    if (card) {
+                        card.classList.add('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
+                    }
+                } else {
+                    selectedMap.delete(id);
+                    if (cb) cb.checked = false;
+                    if (card) {
+                        card.classList.remove('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
+                    }
+                }
+            });
+            updateCart();
+        };
+
         window.updateCart = function() {
             const count = selectedMap.size;
             const cost = count > 0 ? Math.ceil(count / 4) * 199 : 0;
@@ -231,7 +317,6 @@
             document.getElementById('fCost').innerText = `₹${cost}`;
         };
 
-        // Clear all selected candidates
         window.clearSelections = function() {
             selectedMap.clear();
             updateCart();
@@ -242,6 +327,24 @@
                     card.classList.remove('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
                 }
             });
+        };
+
+        window.shareToWhatsApp = function() {
+            if (selectedMap.size === 0) {
+                alert('Please select candidates first to share.');
+                return;
+            }
+            let text = `*NEET PG Selected Residents Request*\n-------------------------\n`;
+            let index = 1;
+            selectedMap.forEach(item => {
+                text += `${index}. ${item.name} (AIR: ${item.rank}) - ${item.state}\n`;
+                index++;
+            });
+            const cost = Math.ceil(selectedMap.size / 4) * 199;
+            text += `-------------------------\nTotal Items: ${selectedMap.size}\nTotal Price: ₹${cost}\n\nPlease help unlock these contacts.`;
+            
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/?text=${encoded}`, '_blank');
         };
 
         window.openCheckout = function() {
