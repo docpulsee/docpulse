@@ -12,9 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
-            background-color: #0b141a;
-            background-image: radial-gradient(#111b21 1px, transparent 0);
-            background-size: 24px 24px;
+            background-color: #070f14;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(236, 72, 153, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
         }
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -32,72 +35,80 @@
             white-space: nowrap;
             animation: ticker 35s linear infinite;
         }
-        @keyframes softPulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.03); opacity: 1; }
+        @keyframes playfulBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.01); }
         }
-        .calm-pulse {
-            animation: softPulse 4s ease-in-out infinite;
+        .playful-glow {
+            animation: playfulBounce 3.5s ease-in-out infinite;
+        }
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), inset 0 0 25px rgba(6, 182, 212, 0.4); }
+        }
+        .neon-box {
+            animation: neonPulse 3s infinite;
         }
     </style>
 </head>
 <body class="text-slate-100 font-sans min-h-screen flex flex-col">
 
-    <!-- Live Verified News Ticker Bar (Times of India & AajTak Format) -->
-    <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-900 border-b border-emerald-500/20 text-emerald-300 text-xs py-2 px-4 overflow-hidden relative shadow-inner">
+    <!-- Live Verified News Ticker Bar -->
+    <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 border-b border-emerald-400/30 text-slate-950 font-bold text-xs py-2.5 px-4 overflow-hidden relative shadow-md">
         <div class="max-w-6xl mx-auto flex items-center gap-3">
-            <span class="bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
-                <i class="fa-solid fa-newspaper"></i> Live News
+            <span class="bg-slate-950 text-emerald-400 font-black px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
+                <i class="fa-solid fa-bolt text-amber-400"></i> Live News
             </span>
             <div class="overflow-hidden whitespace-nowrap w-full relative">
-                <div class="animate-ticker flex items-center gap-12 font-medium">
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted with 180 questions format.</span>
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use exact matrix conversion tables and normalisation formulas to estimate probable ranks prior to official results.</span>
+                <div class="animate-ticker flex items-center gap-12 font-bold text-slate-950">
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted with 180 questions format.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use exact matrix conversion tables and normalisation formulas to estimate probable ranks prior to official results.</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Colorful Header Bar -->
-    <header class="w-full bg-[#1f2c34] border-b border-[#2a3942] sticky top-0 z-40 shadow-xl">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#00a884] via-[#25d366] to-[#34d399] flex items-center justify-center text-slate-900 text-xl font-black shadow-lg shadow-emerald-900/30">
+    <header class="w-full bg-[#0d1b2a]/90 backdrop-blur-md border-b border-cyan-500/20 sticky top-0 z-40 shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-500 flex items-center justify-center text-slate-950 text-2xl font-black shadow-lg shadow-emerald-500/30">
                     <i class="fa-solid fa-user-doctor"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-[#8696a0] font-medium">138,000+ Verified Candidates • Python-Locked Original Matrix</p>
+                    <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 leading-tight">DocPulse</h1>
+                    <p class="text-xs text-slate-400 font-medium">138,000+ Verified Candidates • Python-Locked Original Matrix</p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-2 flex-wrap">
-                <button onclick="openPredictorModal()" class="bg-[#2a3942] hover:bg-emerald-500/20 text-emerald-400 font-semibold px-3.5 py-2 rounded-xl text-xs transition border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-seedling text-emerald-400"></i> 2026 Python Matrix Predictor
+            <div class="flex items-center gap-2.5 flex-wrap">
+                <button onclick="openPredictorModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center gap-2 border border-emerald-300/40">
+                    <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" class="w-4 h-4 rounded-full object-cover" alt="gif">
+                    <span>Rank Predictor & Marks Calc</span>
                 </button>
 
-                <button onclick="exportCounselingReport()" class="bg-[#2a3942] hover:bg-cyan-500/20 text-cyan-400 font-semibold px-3.5 py-2 rounded-xl text-xs transition border border-cyan-500/30 flex items-center gap-1.5">
-                    <i class="fa-solid fa-file-arrow-down"></i> Export PDF Report
+                <button onclick="exportCounselingReport()" class="bg-[#1b263b] hover:bg-cyan-500/20 text-cyan-300 font-bold px-3.5 py-2.5 rounded-xl text-xs transition border border-cyan-500/40 flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-file-arrow-down text-cyan-400"></i> Export PDF Report
                 </button>
 
-                <div class="bg-[#111b21]/90 border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs flex items-center gap-2 shadow-inner">
+                <div class="bg-[#1b263b]/90 border border-emerald-500/30 rounded-xl px-3.5 py-2 text-xs flex items-center gap-2.5 shadow-inner">
                     <div>
-                        <span class="text-[#8696a0]">Selected:</span> 
-                        <span id="selectedCount" class="font-bold text-[#00a884]">0</span>
+                        <span class="text-slate-400">Selected:</span> 
+                        <span id="selectedCount" class="font-black text-emerald-400">0</span>
                     </div>
-                    <span class="text-[#2a3942]">|</span>
+                    <span class="text-slate-600">|</span>
                     <div>
-                        <span class="text-[#8696a0]">Total:</span> 
-                        <span id="fCost" class="font-bold text-[#25d366]">₹0</span>
+                        <span class="text-slate-400">Total:</span> 
+                        <span id="fCost" class="font-black text-cyan-400">₹0</span>
                     </div>
                 </div>
 
-                <button onclick="clearSelections()" title="Clear all selected" class="bg-[#2a3942] hover:bg-red-500/20 text-[#8696a0] hover:text-red-400 p-2.5 rounded-xl text-xs font-semibold transition border border-transparent">
+                <button onclick="clearSelections()" title="Clear all selected" class="bg-[#1b263b] hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 p-2.5 rounded-xl text-xs font-bold transition border border-slate-700">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
 
-                <button onclick="shareToWhatsApp()" class="bg-gradient-to-r from-[#00a884] to-[#25d366] hover:opacity-90 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-emerald-500/20 flex items-center gap-1.5">
+                <button onclick="shareToWhatsApp()" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-green-500/30 flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-sm"></i> Request on WhatsApp
                 </button>
             </div>
@@ -110,121 +121,134 @@
         <!-- Interactive Category Quick Tabs -->
         <div class="mb-4">
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-xs">
-                <span class="text-[#8696a0] font-semibold uppercase tracking-wider text-[10px] mr-1"><i class="fa-solid fa-sliders text-[#00a884] mr-1"></i> Quick Filters:</span>
-                <button onclick="applyQuickTab('', '', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-emerald-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition">All Records</button>
-                <button onclick="applyQuickTab('KARNATAKA', '', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-cyan-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-cyan-400 mr-1"></i>Karnataka</button>
-                <button onclick="applyQuickTab('MAHARASHTRA', '', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-amber-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-amber-400 mr-1"></i>Maharashtra</button>
-                <button onclick="applyQuickTab('DELHI', '', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-purple-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-map-pin text-purple-400 mr-1"></i>Delhi</button>
-                <button onclick="applyQuickTab('', 'AIIMS', '')" class="bg-[#1f2c34] hover:bg-[#2a3942] text-rose-400 font-semibold px-3 py-1.5 rounded-lg border border-[#2a3942] whitespace-nowrap transition"><i class="fa-solid fa-hospital text-rose-400 mr-1"></i>AIIMS Institutes</button>
+                <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] mr-1"><i class="fa-solid fa-sliders text-emerald-400 mr-1"></i> Quick Filters:</span>
+                <button onclick="applyQuickTab('', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-emerald-300 font-bold px-3.5 py-2 rounded-xl border border-emerald-500/30 whitespace-nowrap transition shadow-sm">All Records</button>
+                <button onclick="applyQuickTab('KARNATAKA', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-cyan-300 font-bold px-3.5 py-2 rounded-xl border border-cyan-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-cyan-400 mr-1"></i>Karnataka</button>
+                <button onclick="applyQuickTab('MAHARASHTRA', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-amber-300 font-bold px-3.5 py-2 rounded-xl border border-amber-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-amber-400 mr-1"></i>Maharashtra</button>
+                <button onclick="applyQuickTab('DELHI', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-purple-300 font-bold px-3.5 py-2 rounded-xl border border-purple-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-purple-400 mr-1"></i>Delhi</button>
+                <button onclick="applyQuickTab('', 'AIIMS', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-rose-300 font-bold px-3.5 py-2 rounded-xl border border-rose-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-hospital text-rose-400 mr-1"></i>AIIMS Institutes</button>
             </div>
         </div>
 
         <!-- Advanced Filter Control Panel -->
-        <div class="bg-[#1f2c34] p-5 rounded-2xl border border-[#2a3942] shadow-xl flex flex-col gap-4">
+        <div class="bg-[#111927] p-5 rounded-2xl border border-cyan-500/25 shadow-2xl flex flex-col gap-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div class="relative">
                     <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-emerald-400 text-sm"></i>
-                    <input type="text" id="searchInput" placeholder="Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
+                    <input type="text" id="searchInput" placeholder="Candidate Name..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-emerald-400">
                 </div>
 
                 <div class="relative">
                     <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-cyan-400 text-sm"></i>
-                    <input type="text" id="stateInput" placeholder="State (e.g. KARNATAKA)..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-cyan-500">
+                    <input type="text" id="stateInput" placeholder="State (e.g. KARNATAKA)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-cyan-400">
                 </div>
 
                 <div class="relative">
                     <i class="fa-solid fa-hospital-user absolute left-3.5 top-3.5 text-purple-400 text-sm"></i>
-                    <input type="text" id="collegeInput" placeholder="College / Hospital Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-purple-500">
+                    <input type="text" id="collegeInput" placeholder="College / Hospital Name..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-purple-400">
                 </div>
 
                 <div class="relative">
                     <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-amber-400 text-sm"></i>
-                    <input type="text" id="emailInput" placeholder="Email ID..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-amber-500">
+                    <input type="text" id="emailInput" placeholder="Email ID..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-amber-400">
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#2a3942]/60">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-800">
                 <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <span class="text-xs text-[#8696a0] font-semibold whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 text-amber-400 mr-1"></i> AIR Bracket:</span>
-                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-28 focus:outline-none focus:border-[#00a884]">
-                    <span class="text-[#8696a0] text-xs font-bold">-</span>
-                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#111b21] border border-[#2a3942] rounded-xl px-3 py-1.5 text-xs text-[#e9edef] w-full sm:w-28 focus:outline-none focus:border-[#00a884]">
+                    <span class="text-xs text-slate-400 font-bold whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 text-amber-400 mr-1"></i> AIR Bracket:</span>
+                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 w-full sm:w-28 focus:outline-none focus:border-emerald-400">
+                    <span class="text-slate-500 text-xs font-bold">-</span>
+                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 w-full sm:w-28 focus:outline-none focus:border-emerald-400">
                 </div>
 
-                <button id="searchBtn" class="bg-gradient-to-r from-[#00a884] via-[#25d366] to-[#00a884] hover:opacity-90 text-slate-950 font-black px-8 py-2.5 rounded-xl text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 w-full sm:w-auto">
+                <button id="searchBtn" class="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black px-8 py-3 rounded-xl text-sm transition shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 w-full sm:w-auto">
                     <i class="fa-solid fa-magnifying-glass"></i> Search Candidates
                 </button>
             </div>
         </div>
 
         <!-- Bulk Operations Bar -->
-        <div id="bulkControlBar" class="hidden mt-4 bg-[#1f2c34] px-4 py-2.5 rounded-xl border border-[#2a3942] flex items-center justify-between text-xs text-[#8696a0] shadow-sm">
+        <div id="bulkControlBar" class="hidden mt-4 bg-[#111927] px-4 py-3 rounded-xl border border-cyan-500/20 flex items-center justify-between text-xs text-slate-300 shadow-md">
             <div class="flex items-center gap-3">
-                <button onclick="selectAllVisible(true)" class="hover:text-[#00a884] font-semibold transition flex items-center gap-1">
-                    <i class="fa-regular fa-square-check text-[#00a884]"></i> Select All Visible
+                <button onclick="selectAllVisible(true)" class="hover:text-emerald-400 font-bold transition flex items-center gap-1.5">
+                    <i class="fa-regular fa-square-check text-emerald-400"></i> Select All Visible
                 </button>
-                <span class="text-[#2a3942]">|</span>
-                <button onclick="selectAllVisible(false)" class="hover:text-red-400 font-semibold transition flex items-center gap-1">
-                    <i class="fa-regular fa-square text-red-400"></i> Deselect All
+                <span class="text-slate-700">|</span>
+                <button onclick="selectAllVisible(false)" class="hover:text-rose-400 font-bold transition flex items-center gap-1.5">
+                    <i class="fa-regular fa-square text-rose-400"></i> Deselect All
                 </button>
             </div>
-            <span class="text-[#25d366] font-extrabold bg-[#111b21] px-3 py-1 rounded-lg border border-[#2a3942]">
+            <span class="text-cyan-300 font-black bg-[#0b131d] px-3.5 py-1.5 rounded-lg border border-cyan-500/30 shadow-inner">
                 Rate: ₹199 per 4 unlocks
             </span>
         </div>
 
         <!-- Candidate Cards Container -->
         <div id="resultsContainer" class="mt-4 flex flex-col gap-3">
-            <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-10 text-center text-[#8696a0] shadow-md">
-                <i class="fa-regular fa-comments text-5xl mb-3 text-[#00a884] opacity-80"></i>
-                <h3 class="text-base font-bold text-slate-200 mb-1">Search the Resident Directory</h3>
-                <p class="text-xs">Enter candidate filters above and click **Search Candidates** to load records.</p>
+            <div class="bg-[#111927] border border-cyan-500/20 rounded-2xl p-12 text-center text-slate-400 shadow-xl">
+                <img src="https://media.giphy.com/media/xTiTnMhJTwNHCHdTZS/giphy.gif" class="w-20 h-20 mx-auto mb-4 rounded-2xl object-cover border border-emerald-400/40 shadow-lg" alt="gif">
+                <h3 class="text-lg font-black text-slate-100 mb-1">Search the Resident Directory</h3>
+                <p class="text-xs text-slate-400">Enter candidate filters above and click **Search Candidates** to load verified records.</p>
             </div>
         </div>
 
-        <!-- Explanatory Logic Section Down Below (Updated to New Python-Locked Table Spec) -->
-        <section class="mt-8 bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-6 shadow-xl">
-            <h3 class="text-emerald-400 font-extrabold text-sm mb-3 flex items-center gap-2">
+        <!-- Explanatory Logic Section Down Below -->
+        <section class="mt-8 bg-[#111927] border border-cyan-500/20 rounded-2xl p-6 shadow-xl">
+            <h3 class="text-emerald-400 font-black text-sm mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-code text-cyan-400"></i> Python-Locked Rank Calculation Logic & Methodology
             </h3>
-            <div class="text-xs text-[#8696a0] leading-relaxed flex flex-col gap-2">
-                <p>The ranking algorithm operates strictly on the extracted Python mapping table: <code class="bg-[#111b21] text-emerald-300 px-2 py-0.5 rounded font-mono border border-[#2a3942]">Rank2026(M720) = Rank2024(M720 / 0.9 + 25)</code>.</p>
-                <p><strong>Why this logic is applied:</strong> The underlying script translates candidate marks out of 720 into precise correct-answer equivalents and maps them against historical 2024/2026 datasets. For instance, scoring 600 marks (150 correct answers) maps to an original predicted rank of ~79, whereas 489 marks (132 correct answers) maps to ~7,500, and 400 marks (100 correct answers) corresponds to ~43,000. This non-linear scaling accounts for the exact score bunching and normalization curves implemented in the PDF database.</p>
+            <div class="text-xs text-slate-400 leading-relaxed flex flex-col gap-2">
+                <p>The ranking algorithm operates strictly on the extracted Python mapping table: <code class="bg-[#0b131d] text-emerald-300 px-2.5 py-1 rounded-md font-mono border border-emerald-500/30">Rank2026(M720) = Rank2024(M720 / 0.9 + 25)</code>.</p>
+                <p><strong>How scoring works:</strong> You enter your number of correct and wrong answers. The system automatically computes your total marks out of 720 (assuming correct answers earn +4 and wrong answers deduct -1, treating all remaining 180 questions as left/unattempted), then applies the Python-locked bracket normalization to output your accurate predicted rank.</p>
             </div>
         </section>
     </main>
 
-    <!-- Psychologically Calming & Cute Python-Locked Matrix Predictor Modal Dialog -->
+    <!-- Psychologically Calming, Playful & Engaging Matrix Predictor Modal Dialog -->
     <div id="predictorModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gradient-to-b from-[#1f2c34] to-[#162229] border border-emerald-500/30 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative calm-pulse">
-            <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-[#8696a0] hover:text-white text-xl bg-[#111b21] w-8 h-8 rounded-full flex items-center justify-center border border-[#2a3942] transition">
+        <div class="bg-gradient-to-b from-[#111927] via-[#0d1622] to-[#080d14] border-2 border-emerald-400/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative neon-box">
+            <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg bg-[#0b131d] w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
             <div class="flex items-center gap-3.5 mb-5">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-teal-500/30 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
-                    <i class="fa-solid fa-shield-heart"></i>
-                </div>
+                <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" class="w-12 h-12 rounded-2xl object-cover border border-emerald-400/50 shadow-md" alt="gif">
                 <div>
-                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">NEET PG 2026 Python Matrix Predictor</h3>
-                    <p class="text-xs text-[#8696a0]">Powered by 100% Python-Extracted Reference Table</p>
+                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">NEET PG 2026 Interactive Rank Calc</h3>
+                    <p class="text-xs text-slate-400 font-medium">Enter correct & wrong • Auto-calculate marks & rank!</p>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 mb-6">
-                <div>
-                    <label class="block text-xs font-bold text-emerald-300/90 mb-1.5 flex items-center justify-between">
-                        <span><i class="fa-solid fa-star text-amber-400 mr-1.5"></i> Enter Marks (out of 720):</span>
-                        <span class="text-[10px] text-[#8696a0] font-normal">Exact Python Table Bracket</span>
-                    </label>
-                    <input type="number" id="predMarks" placeholder="e.g. 520" min="100" max="720" class="bg-[#111b21] border border-[#2a3942] rounded-2xl px-4 py-3 text-sm text-white w-full focus:outline-none focus:border-emerald-500 shadow-inner">
+            <div class="flex flex-col gap-4 mb-5">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-[#0b131d] p-3.5 rounded-2xl border border-emerald-500/30 shadow-inner">
+                        <label class="block text-xs font-bold text-emerald-300 mb-1.5 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i> Correct Answers:
+                        </label>
+                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarks()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
+                    </div>
+
+                    <div class="bg-[#0b131d] p-3.5 rounded-2xl border border-rose-500/30 shadow-inner">
+                        <label class="block text-xs font-bold text-rose-300 mb-1.5 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-xmark text-rose-400"></i> Wrong Answers:
+                        </label>
+                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarks()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
+                    </div>
+                </div>
+
+                <!-- Live Auto-Calculated Marks Banner -->
+                <div class="bg-gradient-to-r from-emerald-950/70 via-teal-950/70 to-cyan-950/70 border border-cyan-400/40 rounded-2xl p-3.5 text-center shadow-inner">
+                    <span class="text-xs text-slate-300 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
+                    <span id="liveMarksDisplay" class="text-2xl font-black text-cyan-300">0 / 720</span>
+                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-400 mt-1">Remaining questions treated as left/unattempted</span>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-emerald-300/90 mb-1.5">
-                        <i class="fa-solid fa-stethoscope text-purple-400 mr-1.5"></i> Dream Specialty / Branch:
+                    <label class="block text-xs font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-stethoscope text-purple-400"></i> Dream Specialty / Branch:
                     </label>
-                    <select id="predBranch" class="bg-[#111b21] border border-[#2a3942] rounded-2xl px-4 py-3 text-sm text-white w-full focus:outline-none focus:border-emerald-500 shadow-inner">
+                    <select id="predBranch" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-400 shadow-inner">
                         <option value="General Medicine">MD General Medicine</option>
                         <option value="Radiodiagnosis">MD Radiodiagnosis</option>
                         <option value="Pediatrics">MD Pediatrics</option>
@@ -236,12 +260,12 @@
                 </div>
             </div>
 
-            <button onclick="runPythonMatrixPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate Using Python-Locked Table
+            <button onclick="runPythonMatrixPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My 2026 Rank Now!
             </button>
 
             <!-- Cute & Psychologically Calming Result Container -->
-            <div id="predResultBox" class="mt-5 hidden p-4 sm:p-5 rounded-2xl bg-[#111b21]/90 border border-emerald-500/30 text-xs text-slate-200 shadow-xl">
+            <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-[#0b131d] border border-emerald-400/40 text-xs text-slate-200 shadow-xl">
                 <!-- Dynamically populated -->
             </div>
         </div>
@@ -283,6 +307,16 @@
             window.searchDatabase();
         };
 
+        window.calculateLiveMarks = function() {
+            const correctVal = parseInt(document.getElementById('predCorrect').value) || 0;
+            const wrongVal = parseInt(document.getElementById('predWrong').value) || 0;
+            const totalMarks = (correctVal * 4) - (wrongVal * 1);
+            const leftQ = 180 - (correctVal + wrongVal);
+            
+            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
+            document.getElementById('leftQuestionsNote').innerText = `(${leftQ} questions left unattempted)`;
+        };
+
         window.searchDatabase = async function() {
             if (!dbClient) {
                 initSupabase();
@@ -301,7 +335,7 @@
             const container = document.getElementById('resultsContainer');
 
             container.innerHTML = `
-                <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-10 text-center text-[#00a884]">
+                <div class="bg-[#111927] border border-cyan-500/20 rounded-2xl p-10 text-center text-emerald-400 shadow-xl">
                     <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-3"></i>
                     <p class="text-sm font-bold">Querying Supabase Candidate Records...</p>
                 </div>`;
@@ -337,7 +371,7 @@
                 if (!data || data.length === 0) {
                     document.getElementById('bulkControlBar').classList.add('hidden');
                     container.innerHTML = `
-                        <div class="bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-8 text-center text-amber-400">
+                        <div class="bg-[#111927] border border-amber-500/30 rounded-2xl p-8 text-center text-amber-300 shadow-xl">
                             <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
                             <p class="text-sm font-bold">No candidates found matching your filters.</p>
                         </div>`;
@@ -358,32 +392,30 @@
                     const email = item['Email'] || item['EMAIL'] || item['Candidate Email'] || '';
                     const quota = item['Quota'] || item['QUOTA'] || '';
                     const course = item['Course'] || item['Branch'] || item['SUBJECT'] || '';
-                    const stipend = item['Stipend'] || item['STIPEND'] || '₹1.1L - ₹1.5L / mo';
-                    const bond = item['Bond'] || item['BOND'] || '1 Year / 10 Lakhs';
 
                     const locationText = city ? `${state}, ${city}` : state;
                     const isChecked = selectedMap.has(id);
 
                     const card = document.createElement('div');
                     card.id = `candidate-card-${id}`;
-                    card.className = `bg-[#1f2c34] hover:bg-[#202c33] border border-[#2a3942] p-4 rounded-2xl transition-all duration-150 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none shadow-md ${isChecked ? 'ring-2 ring-[#00a884] bg-[#202c33]' : ''}`;
+                    card.className = `bg-[#111927] hover:bg-[#162231] border border-cyan-500/20 p-4 rounded-2xl transition-all duration-150 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none shadow-lg ${isChecked ? 'ring-2 ring-emerald-400 bg-[#162231]' : ''}`;
                     
                     card.innerHTML = `
                         <div class="flex items-start md:items-center gap-4">
-                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-[#2a3942] bg-[#111b21] accent-[#00a884] cursor-pointer mt-1 md:mt-0">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#111b21] to-[#2a3942] border border-[#2a3942] flex items-center justify-center text-[#00a884] font-black text-xl flex-shrink-0 shadow-inner">
+                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-slate-700 bg-[#0b131d] accent-emerald-400 cursor-pointer mt-1 md:mt-0">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0b131d] to-[#1b263b] border border-cyan-500/30 flex items-center justify-center text-emerald-400 font-black text-xl flex-shrink-0 shadow-inner">
                                 ${name.charAt(0)}
                             </div>
                             <div class="flex flex-col gap-1">
                                 <div class="flex items-center gap-2 flex-wrap">
-                                    <h3 class="font-bold text-[#e9edef] text-base">${name}</h3>
-                                    <span class="bg-emerald-950/80 text-[#25d366] border border-[#00a884]/40 text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                                    <h3 class="font-bold text-slate-100 text-base">${name}</h3>
+                                    <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
                                         AIR ${rank}
                                     </span>
-                                    ${quota ? `<span class="bg-amber-950/80 text-amber-400 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-full">${quota}</span>` : ''}
+                                    ${quota ? `<span class="bg-amber-950 text-amber-300 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-full">${quota}</span>` : ''}
                                 </div>
                                 
-                                <div class="flex items-center gap-3 text-xs text-[#8696a0] flex-wrap">
+                                <div class="flex items-center gap-3 text-xs text-slate-400 flex-wrap">
                                     <span><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i>${locationText}</span>
                                     ${course ? `<span><i class="fa-solid fa-stethoscope text-emerald-400 mr-1"></i>${course}</span>` : ''}
                                     ${email ? `<span><i class="fa-solid fa-envelope text-amber-400 mr-1"></i>${email}</span>` : ''}
@@ -391,15 +423,13 @@
 
                                 <div class="flex items-center gap-3 text-[11px] text-slate-300 flex-wrap mt-0.5">
                                     ${college !== 'N/A' ? `<span class="text-purple-300"><i class="fa-solid fa-hospital-user text-purple-400 mr-1"></i>${college}</span>` : ''}
-                                    <span class="text-teal-300"><i class="fa-solid fa-indian-rupee-sign text-teal-400 mr-1"></i>Stipend: ${stipend}</span>
-                                    <span class="text-rose-300"><i class="fa-solid fa-file-contract text-rose-400 mr-1"></i>Bond: ${bond}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between border-t md:border-t-0 pt-2 md:pt-0 border-[#2a3942]/50">
-                            <span class="text-[11px] text-[#8696a0] font-medium">Contact Number</span>
-                            <span class="font-mono text-xs px-3.5 py-1.5 rounded-xl bg-[#111b21] text-amber-400 border border-amber-500/20 font-semibold shadow-inner flex items-center gap-1.5">
+                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between border-t md:border-t-0 pt-2 md:pt-0 border-slate-800">
+                            <span class="text-[11px] text-slate-400 font-medium">Contact Number</span>
+                            <span class="font-mono text-xs px-3.5 py-1.5 rounded-xl bg-[#0b131d] text-amber-300 border border-amber-500/30 font-bold shadow-inner flex items-center gap-1.5">
                                 <i class="fa-solid fa-lock text-[10px] text-amber-400"></i> +91 XXXXX XXXXX
                             </span>
                         </div>
@@ -412,8 +442,8 @@
                         }
                         toggleSelect(id, name, rank, locationText);
                         card.classList.toggle('ring-2');
-                        card.classList.toggle('ring-[#00a884]');
-                        card.classList.toggle('bg-[#202c33]');
+                        card.classList.toggle('ring-emerald-400');
+                        card.classList.toggle('bg-[#162231]');
                     });
 
                     container.appendChild(card);
@@ -422,10 +452,10 @@
             } catch (err) {
                 console.error('Fetch Error:', err);
                 container.innerHTML = `
-                    <div class="bg-[#1f2c34] border border-red-500/30 rounded-2xl p-6 text-center text-red-400">
+                    <div class="bg-[#111927] border border-rose-500/30 rounded-2xl p-6 text-center text-rose-400 shadow-xl">
                         <i class="fa-solid fa-circle-exclamation text-3xl mb-2"></i>
                         <p class="text-sm font-bold">Query Execution Failed</p>
-                        <p class="text-xs font-mono text-[#8696a0] mt-1">${err.message || err}</p>
+                        <p class="text-xs font-mono text-slate-400 mt-1">${err.message || err}</p>
                     </div>`;
             }
         };
@@ -455,13 +485,13 @@
                     if (!selectedMap.has(id)) selectedMap.set(id, { id, name, rank, state: locationText });
                     if (cb) cb.checked = true;
                     if (card) {
-                        card.classList.add('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
+                        card.classList.add('ring-2', 'ring-emerald-400', 'bg-[#162231]');
                     }
                 } else {
                     selectedMap.delete(id);
                     if (cb) cb.checked = false;
                     if (card) {
-                        card.classList.remove('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
+                        card.classList.remove('ring-2', 'ring-emerald-400', 'bg-[#162231]');
                     }
                 }
             });
@@ -483,7 +513,7 @@
                 cb.checked = false;
                 const card = cb.closest('div.border');
                 if (card) {
-                    card.classList.remove('ring-2', 'ring-[#00a884]', 'bg-[#202c33]');
+                    card.classList.remove('ring-2', 'ring-emerald-400', 'bg-[#162231]');
                 }
             });
         };
@@ -496,14 +526,17 @@
         };
 
         window.runPythonMatrixPredictor = function() {
-            const marksInput = parseInt(document.getElementById('predMarks').value);
+            const correctInput = parseInt(document.getElementById('predCorrect').value);
+            const wrongInput = parseInt(document.getElementById('predWrong').value);
             const branch = document.getElementById('predBranch').value;
             const resBox = document.getElementById('predResultBox');
 
-            if (isNaN(marksInput)) {
-                alert('Please enter your estimated marks out of 720.');
+            if (isNaN(correctInput) || isNaN(wrongInput)) {
+                alert('Please enter both correct and wrong answers.');
                 return;
             }
+
+            const marksInput = (correctInput * 4) - (wrongInput * 1);
 
             // Match against pythonMatrixData
             let matchedRow = pythonMatrixData.find(row => row.marks === marksInput);
@@ -513,21 +546,20 @@
             }
 
             const predRankStr = matchedRow.rankStr;
-            const correctAnswers = matchedRow.correct;
 
             let comfortTitle = "You're in a wonderful place!";
             let comfortMsg = "";
-            let badgeColor = "text-emerald-400 bg-emerald-950/60 border-emerald-500/30";
+            let badgeColor = "text-emerald-300 bg-emerald-950 border-emerald-500/30";
 
             if (matchedRow.rawRank <= 1000) {
                 comfortTitle = "🌟 Elite Standing for 2026!";
-                comfortMsg = `With ${marksInput} marks (${correctAnswers} correct answers), your Python-locked 2026 original rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
+                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your Python-locked 2026 original rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
             } else if (matchedRow.rawRank <= 15000) {
                 comfortTitle = "🌱 Secure & Promising Horizon";
-                comfortMsg = `At ${marksInput} marks (${correctAnswers} correct answers), your Python-locked rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
+                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your Python-locked rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted Python matrix rank is **${predRankStr}** for ${marksInput} marks (${correctAnswers} correct answers). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
+                comfortMsg = `Your predicted Python matrix rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
             }
 
             resBox.classList.remove('hidden');
@@ -537,9 +569,9 @@
                     <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Python Rank ${predRankStr}</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
-                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-[#2a3942] text-[11px] text-[#8696a0]">
-                    <div>Table Correct Answers: <span class="text-teal-400 font-bold">${correctAnswers}</span></div>
-                    <div>Formula Locked: <span class="text-cyan-400 font-bold">M720/0.9 + 25</span></div>
+                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
+                    <div>Calculated Marks: <span class="text-cyan-300 font-bold">${marksInput} / 720</span></div>
+                    <div>Formula Locked: <span class="text-emerald-300 font-bold">M720/0.9 + 25</span></div>
                 </div>
             `;
         };
