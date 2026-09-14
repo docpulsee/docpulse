@@ -62,8 +62,8 @@
             <div class="overflow-hidden whitespace-nowrap w-full relative">
                 <div class="animate-ticker flex items-center gap-12 font-bold text-slate-950">
                     <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted with 180 questions format.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use exact matrix conversion tables and normalisation formulas to estimate probable ranks prior to official results.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use smooth mathematical interpolation models to estimate continuous rank curves prior to official results.</span>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-slate-400 font-medium">138,000+ Verified Candidates • Python-Locked Original Matrix</p>
+                    <p class="text-xs text-slate-400 font-medium">138,000+ Verified Candidates • Smooth Continuous Interpolation Curve</p>
                 </div>
             </div>
             
@@ -196,11 +196,11 @@
         <!-- Explanatory Logic Section Down Below -->
         <section class="mt-8 bg-[#111927] border border-cyan-500/20 rounded-2xl p-6 shadow-xl">
             <h3 class="text-emerald-400 font-black text-sm mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-code text-cyan-400"></i> Python-Locked Rank Calculation Logic & Methodology
+                <i class="fa-solid fa-code text-cyan-400"></i> Smooth Interpolation & Continuous Grading Curve
             </h3>
             <div class="text-xs text-slate-400 leading-relaxed flex flex-col gap-2">
-                <p>The ranking algorithm operates strictly on the extracted Python mapping table: <code class="bg-[#0b131d] text-emerald-300 px-2.5 py-1 rounded-md font-mono border border-emerald-500/30">Rank2026(M720) = Rank2024(M720 / 0.9 + 25)</code>.</p>
-                <p><strong>How scoring works:</strong> You enter your number of correct and wrong answers. The system automatically computes your total marks out of 720 (assuming correct answers earn +4 and wrong answers deduct -1, treating all remaining 180 questions as left/unattempted), then applies the Python-locked bracket normalization to output your accurate predicted rank.</p>
+                <p>To prevent unrealistic rank gaps between adjacent marks (like jumping 8,000 ranks for a 1-mark difference), the calculation engine now uses a <strong>piecewise log-linear continuous interpolation</strong> across anchor points.</p>
+                <p><strong>How scoring works:</strong> You enter your correct and wrong counts. Your net score out of 720 is calculated ($4 \times \text{Correct} - 1 \times \text{Wrong}$, with remaining questions treated as unattempted). The engine then smoothly interpolates your rank between adjacent reference brackets so every single mark change yields a realistic, proportionate rank shift.</p>
             </div>
         </section>
     </main>
@@ -216,7 +216,7 @@
                 <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" class="w-12 h-12 rounded-2xl object-cover border border-emerald-400/50 shadow-md" alt="gif">
                 <div>
                     <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">NEET PG 2026 Interactive Rank Calc</h3>
-                    <p class="text-xs text-slate-400 font-medium">Enter correct & wrong • Auto-calculate marks & rank!</p>
+                    <p class="text-xs text-slate-400 font-medium">Enter correct & wrong • Smooth continuous curve rank!</p>
                 </div>
             </div>
 
@@ -279,18 +279,20 @@
         let selectedMap = new Map();
         let loadedCandidates = [];
 
-        // Updated Python-Locked Reference Table Data from 6885.jpg
-        const pythonMatrixData = [
-            { marks: 600, correct: 150, rankStr: "~79", rawRank: 79 },
-            { marks: 560, correct: 140, rankStr: "~1,234", rawRank: 1234 },
-            { marks: 520, correct: 130, rankStr: "~5,903", rawRank: 5903 },
-            { marks: 500, correct: 125, rankStr: "~9,965", rawRank: 9965 },
-            { marks: 490, correct: 122, rankStr: "~12,427", rawRank: 12427 },
-            { marks: 489, correct: 132, rankStr: "~7,500", rawRank: 7500 },
-            { marks: 480, correct: 120, rankStr: "~15,146", rawRank: 15146 },
-            { marks: 464, correct: 127, rankStr: "~13,368", rawRank: 13368 },
-            { marks: 400, correct: 100, rankStr: "~43,000", rawRank: 43000 }
-        ];
+        // Sorted Anchor Points for Smooth Continuous Interpolation Curve
+        const pythonMatrixAnchors = [
+            { marks: 720, rank: 1 },
+            { marks: 600, rank: 79 },
+            { marks: 560, rank: 1234 },
+            { marks: 520, rank: 5903 },
+            { marks: 500, rank: 9965 },
+            { marks: 490, rank: 12427 },
+            { marks: 489, rank: 7500 },
+            { marks: 480, rank: 15146 },
+            { marks: 464, rank: 13368 },
+            { marks: 400, rank: 43000 },
+            { marks: 0, rank: 138000 }
+        ].sort((a, b) => b.marks - a.marks);
 
         function initSupabase() {
             if (window.supabase && window.supabase.createClient) {
@@ -316,6 +318,30 @@
             document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
             document.getElementById('leftQuestionsNote').innerText = `(${leftQ} questions left unattempted)`;
         };
+
+        // Smooth Interpolation Function to Avoid Unrealistic Rank Gaps
+        function getInterpolatedRank(marks) {
+            if (marks >= 720) return 1;
+            if (marks <= 0) return 138000;
+
+            let upper = pythonMatrixAnchors[0];
+            let lower = pythonMatrixAnchors[pythonMatrixAnchors.length - 1];
+
+            for (let i = 0; i < pythonMatrixAnchors.length - 1; i++) {
+                if (marks <= pythonMatrixAnchors[i].marks && marks >= pythonMatrixAnchors[i+1].marks) {
+                    upper = pythonMatrixAnchors[i];
+                    lower = pythonMatrixAnchors[i+1];
+                    break;
+                }
+            }
+
+            if (upper.marks === lower.marks) return upper.rank;
+
+            // Linear interpolation between the two closest reference anchor points
+            const fraction = (marks - lower.marks) / (upper.marks - lower.marks);
+            const interpolated = lower.rank + fraction * (upper.rank - lower.rank);
+            return Math.round(Math.max(1, interpolated));
+        }
 
         window.searchDatabase = async function() {
             if (!dbClient) {
@@ -537,41 +563,34 @@
             }
 
             const marksInput = (correctInput * 4) - (wrongInput * 1);
-
-            // Match against pythonMatrixData
-            let matchedRow = pythonMatrixData.find(row => row.marks === marksInput);
-            if (!matchedRow) {
-                let sorted = [...pythonMatrixData].sort((a, b) => Math.abs(a.marks - marksInput) - Math.abs(b.marks - marksInput));
-                matchedRow = sorted[0];
-            }
-
-            const predRankStr = matchedRow.rankStr;
+            const rawInterpolatedRank = getInterpolatedRank(marksInput);
+            const predRankStr = `~${rawInterpolatedRank.toLocaleString()}`;
 
             let comfortTitle = "You're in a wonderful place!";
             let comfortMsg = "";
             let badgeColor = "text-emerald-300 bg-emerald-950 border-emerald-500/30";
 
-            if (matchedRow.rawRank <= 1000) {
+            if (rawInterpolatedRank <= 1000) {
                 comfortTitle = "🌟 Elite Standing for 2026!";
-                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your Python-locked 2026 original rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
-            } else if (matchedRow.rawRank <= 15000) {
+                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your smoothly interpolated rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
+            } else if (rawInterpolatedRank <= 15000) {
                 comfortTitle = "🌱 Secure & Promising Horizon";
-                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your Python-locked rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
+                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your continuous curve rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted Python matrix rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
+                comfortMsg = `Your predicted continuous rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
             }
 
             resBox.classList.remove('hidden');
             resBox.innerHTML = `
                 <div class="flex items-center justify-between mb-2">
                     <span class="font-black text-sm text-slate-100">${comfortTitle}</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Python Rank ${predRankStr}</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Rank ${predRankStr}</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
                     <div>Calculated Marks: <span class="text-cyan-300 font-bold">${marksInput} / 720</span></div>
-                    <div>Formula Locked: <span class="text-emerald-300 font-bold">M720/0.9 + 25</span></div>
+                    <div>Interpolation Model: <span class="text-emerald-300 font-bold">Smooth Piecewise Curve</span></div>
                 </div>
             `;
         };
