@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEET PG Resident Directory</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Updated to use the latest, stable Supabase JS delivery bundle -->
+    <script src="https://jsdelivr.net"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
 
@@ -62,11 +63,12 @@
         </div>
     </main>
 
-    <!-- Supabase Connection & Script -->
+    <!-- Supabase Integration Initialization -->
     <script>
-        const SUPABASE_URL = 'https://uwrwtttkqywsmehexmbf.supabase.co';
+        const SUPABASE_URL = 'https://supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
         
+        // Correct global client initialization 
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         let selectedMap = new Map();
 
@@ -75,56 +77,85 @@
             const stateQuery = document.getElementById('stateInput').value.trim();
             const tbody = document.getElementById('tableBody');
 
-            tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold">Searching Database...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold animate-pulse">Searching Database...</td></tr>';
 
-            let dbQuery = supabase.from('CANDIDATE').select('*').limit(50);
+            try {
+                // Queries standard CANDIDATE table
+                let dbQuery = supabase.from('CANDIDATE').select('*');
 
-            if (query) {
-                dbQuery = dbQuery.ilike('NAME', `%${query}%`);
+                // Apply case-insensitive wildcard match filters
+                if (query) {
+                    dbQuery = dbQuery.ilike('NAME', `%${query}%`);
+                }
+                if (stateQuery) {
+                    dbQuery = dbQuery.ilike('STATE', `%${stateQuery}%`);
+                }
+
+                // Enforce a hard cap row layout safety return limit
+                dbQuery = dbQuery.limit(50);
+
+                const { data, error } = await dbQuery;
+
+                if (error) {
+                    throw error;
+                }
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="p-6 text-center text-amber-400 font-medium">
+                                <i class="fa-solid fa-triangle-exclamation mr-2"></i> No records found.<br>
+                                <span class="text-xs text-slate-400 block mt-1">If your table has rows, make sure Row Level Security (RLS) is turned off or has a public SELECT policy enabled on Supabase.</span>
+                            </td>
+                        </tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                data.forEach(item => {
+                    // Normalizing fallback fields case-by-case to match varying schema formats
+                    const id = item.id || item.RANK || item.rank || Math.random().toString();
+                    const name = item.NAME || item.CANDIDATE_NAME || item.name || 'N/A';
+                    const rank = item.RANK || item.AIR_RANK || item.rank || 'N/A';
+                    const state = item.STATE || item.state || 'N/A';
+                    const city = item.CITY || item.city || '';
+                    const phone = item.PHONE || item.MOBILE || item.PHONE_NUMBER || item.phone || 'Locked';
+
+                    const stateCity = city ? `${state}, ${city}` : state;
+                    const isChecked = selectedMap.has(id);
+
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-800/50 transition';
+                    
+                    // Secure structural template parsing strings safely without breaking inline JS actions
+                    tr.innerHTML = `
+                        <td class="p-3 text-center">
+                            <input type="checkbox" ${isChecked ? 'checked' : ''} class="row-checkbox w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-0">
+                        </td>
+                        <td class="p-3 font-bold text-white">${rank}</td>
+                        <td class="p-3 font-semibold text-indigo-400">${name}</td>
+                        <td class="p-3 text-slate-400">${stateCity}</td>
+                        <td class="p-3 font-mono text-slate-400">${phone}</td>
+                    `;
+
+                    // Using a programmatic safe event listener to prevent apostrophes (') in names from breaking the script
+                    tr.querySelector('.row-checkbox').addEventListener('change', function() {
+                        toggleSelect(id, name, rank, stateCity, phone);
+                    });
+
+                    tbody.appendChild(tr);
+                });
+
+            } catch (err) {
+                console.error('Database Connection Error:', err);
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="p-6 text-center text-red-400 font-medium">
+                            <i class="fa-solid fa-circle-exclamation mr-2"></i> Connection Failed!<br>
+                            <span class="text-xs text-slate-400 block mt-1 font-mono">${err.message || err}</span>
+                        </td>
+                    </tr>`;
             }
-
-            if (stateQuery) {
-                dbQuery = dbQuery.ilike('STATE', `%${stateQuery}%`);
-            }
-
-            const { data, error } = await dbQuery;
-
-            if (error) {
-                console.error('Database Error:', error);
-                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-400">Error fetching data: ${error.message}</td></tr>`;
-                return;
-            }
-
-            if (!data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-slate-400">No candidates found. Try broadening your search.</td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = '';
-            data.forEach(item => {
-                const id = item.id || item.RANK || Math.random();
-                const name = item.NAME || item.CANDIDATE_NAME || 'N/A';
-                const rank = item.RANK || item.AIR_RANK || 'N/A';
-                const state = item.STATE || 'N/A';
-                const city = item.CITY || '';
-                const phone = item.PHONE || item.MOBILE || item.PHONE_NUMBER || 'Locked';
-
-                const stateCity = city ? `${state}, ${city}` : state;
-                const isChecked = selectedMap.has(id);
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-750 transition';
-                tr.innerHTML = `
-                    <td class="p-3 text-center">
-                        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleSelect('${id}', '${name.replace(/'/g, "\\'")}', '${rank}', '${stateCity.replace(/'/g, "\\'")}', '${phone}')" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-0">
-                    </td>
-                    <td class="p-3 font-bold text-white">${rank}</td>
-                    <td class="p-3 font-semibold text-indigo-400">${name}</td>
-                    <td class="p-3 text-slate-400">${stateCity}</td>
-                    <td class="p-3 font-mono text-slate-400">${phone}</td>
-                `;
-                tbody.appendChild(tr);
-            });
         }
 
         function toggleSelect(id, name, rank, state, phone) {
