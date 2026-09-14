@@ -81,7 +81,7 @@
       let dbQuery = supabase.from('Candidate').select('*').limit(30);
 
       if (query) dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
-      if (state) dbQuery = dbQuery.ilike('STATE', `%${state}%`);
+      if (state) dbQuery = dbQuery.ilike('State', `%${state}%`);
 
       const { data, error } = await dbQuery;
 
@@ -107,9 +107,9 @@
         const id = c['APPLICATION ID'] || Math.random();
         const name = c['NAME OF THE CANDIDATE'] || 'N/A';
         const rank = c['NEET-PG 2025 PUBLISH RANK'] || 'N/A';
-        const state = c['STATE'] || 'N/A';
-        const city = c['CITY'] || 'N/A';
-        const rawPhone = String(c['MOBILE'] || '');
+        const state = c['State'] || 'N/A';
+        const city = c['City'] || 'N/A';
+        const rawPhone = String(c['Candidate Mobile'] || '');
         const maskedPhone = rawPhone.length > 5 ? rawPhone.substring(0, 5) + '*****' : '*****';
 
         const isChecked = selectedMap.has(id);
