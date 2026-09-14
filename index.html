@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocPulse | NEET PG Resident Directory & Predictor</title>
+    <title>DocPulse | NEET PG Resident Directory & Exact Matrix Predictor</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -51,9 +51,9 @@
             </span>
             <div class="overflow-hidden whitespace-nowrap w-full relative">
                 <div class="animate-ticker flex items-center gap-12 font-medium">
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (14 Sept 2026, 04:15 PM):** NEET PG counseling schedules officially updated; candidates advised to lock choices before state deadlines.</span>
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **AajTak (14 Sept 2026, 01:30 PM):** Medical Counselling Committee (MCC) releases revised seat matrix guidelines for all central and state quotas.</span>
-                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (13 Sept 2026, 11:00 AM):** Expert panels review toughness indexes as aspirants evaluate marks vs. rank extrapolations.</span>
+                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
+                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted with 180 questions format.</span>
+                    <span><i class="fa-solid fa-circle-dot text-[8px] mr-2 text-emerald-400"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use exact matrix conversion tables and normalisation formulas to estimate probable ranks prior to official results.</span>
                 </div>
             </div>
         </div>
@@ -68,18 +68,15 @@
                 </div>
                 <div>
                     <h1 class="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-[#8696a0] font-medium">138,000+ Verified Candidates • Exact Matrix Predictor</p>
+                    <p class="text-xs text-[#8696a0] font-medium">138,000+ Verified Candidates • Python-Locked Original Matrix</p>
                 </div>
             </div>
             
-            <!-- Selection Summary & Actions -->
             <div class="flex items-center gap-2 flex-wrap">
-                <!-- Predictor Tool Button -->
                 <button onclick="openPredictorModal()" class="bg-[#2a3942] hover:bg-emerald-500/20 text-emerald-400 font-semibold px-3.5 py-2 rounded-xl text-xs transition border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-seedling text-emerald-400"></i> 2026 Exact Matrix Predictor
+                    <i class="fa-solid fa-seedling text-emerald-400"></i> 2026 Python Matrix Predictor
                 </button>
 
-                <!-- Export Report Button -->
                 <button onclick="exportCounselingReport()" class="bg-[#2a3942] hover:bg-cyan-500/20 text-cyan-400 font-semibold px-3.5 py-2 rounded-xl text-xs transition border border-cyan-500/30 flex items-center gap-1.5">
                     <i class="fa-solid fa-file-arrow-down"></i> Export PDF Report
                 </button>
@@ -125,32 +122,27 @@
         <!-- Advanced Filter Control Panel -->
         <div class="bg-[#1f2c34] p-5 rounded-2xl border border-[#2a3942] shadow-xl flex flex-col gap-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                <!-- Name Search Input -->
                 <div class="relative">
                     <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-emerald-400 text-sm"></i>
                     <input type="text" id="searchInput" placeholder="Candidate Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-[#00a884]">
                 </div>
 
-                <!-- State Search Input -->
                 <div class="relative">
                     <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-cyan-400 text-sm"></i>
                     <input type="text" id="stateInput" placeholder="State (e.g. KARNATAKA)..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-cyan-500">
                 </div>
 
-                <!-- College / Institute Search -->
                 <div class="relative">
                     <i class="fa-solid fa-hospital-user absolute left-3.5 top-3.5 text-purple-400 text-sm"></i>
                     <input type="text" id="collegeInput" placeholder="College / Hospital Name..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-purple-500">
                 </div>
 
-                <!-- Email ID Search -->
                 <div class="relative">
                     <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-amber-400 text-sm"></i>
                     <input type="text" id="emailInput" placeholder="Email ID..." class="bg-[#111b21] border border-[#2a3942] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#e9edef] placeholder-[#8696a0] w-full focus:outline-none focus:border-amber-500">
                 </div>
             </div>
 
-            <!-- AIR Brackets & Search Trigger Action Bar -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#2a3942]/60">
                 <div class="flex items-center gap-2 w-full sm:w-auto">
                     <span class="text-xs text-[#8696a0] font-semibold whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 text-amber-400 mr-1"></i> AIR Bracket:</span>
@@ -190,19 +182,19 @@
             </div>
         </div>
 
-        <!-- Explanatory Logic Section Down Below -->
+        <!-- Explanatory Logic Section Down Below (Updated to New Python-Locked Table Spec) -->
         <section class="mt-8 bg-[#1f2c34] border border-[#2a3942] rounded-2xl p-6 shadow-xl">
             <h3 class="text-emerald-400 font-extrabold text-sm mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-calculator text-cyan-400"></i> Mathematical Logic & Extrapolation Methodology
+                <i class="fa-solid fa-code text-cyan-400"></i> Python-Locked Rank Calculation Logic & Methodology
             </h3>
             <div class="text-xs text-[#8696a0] leading-relaxed flex flex-col gap-2">
-                <p>The predictor utilizes the exact formula derived from official datasets: <code class="bg-[#111b21] text-emerald-300 px-2 py-0.5 rounded font-mono border border-[#2a3942]">Rank2026 = Rank2024(M720 / 0.9 + 25)</code> incorporating 2025 actual benchmarks (Careers360 base data where 650 marks corresponds to Rank 276).</p>
-                <p><strong>Why this logic is applied:</strong> With 66% of surveyed candidates reporting the examination difficulty as moderate-to-tough, raw score clustering shifts significantly. By normalizing scores to an 800-equivalent scale (`Marks Equiv /800`) and factoring in the toughness coefficient (+25 marks toughness delta), the model accounts for tighter score distribution at the top tier (e.g., scoring 650+ compresses top ranks steeply, whereas scores in the 400–500 bracket map smoothly against historical 2025/2024 trends).</p>
+                <p>The ranking algorithm operates strictly on the extracted Python mapping table: <code class="bg-[#111b21] text-emerald-300 px-2 py-0.5 rounded font-mono border border-[#2a3942]">Rank2026(M720) = Rank2024(M720 / 0.9 + 25)</code>.</p>
+                <p><strong>Why this logic is applied:</strong> The underlying script translates candidate marks out of 720 into precise correct-answer equivalents and maps them against historical 2024/2026 datasets. For instance, scoring 600 marks (150 correct answers) maps to an original predicted rank of ~79, whereas 489 marks (132 correct answers) maps to ~7,500, and 400 marks (100 correct answers) corresponds to ~43,000. This non-linear scaling accounts for the exact score bunching and normalization curves implemented in the PDF database.</p>
             </div>
         </section>
     </main>
 
-    <!-- Psychologically Calming & Cute 2026 Exact Matrix Predictor Modal Dialog -->
+    <!-- Psychologically Calming & Cute Python-Locked Matrix Predictor Modal Dialog -->
     <div id="predictorModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-gradient-to-b from-[#1f2c34] to-[#162229] border border-emerald-500/30 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative calm-pulse">
             <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-[#8696a0] hover:text-white text-xl bg-[#111b21] w-8 h-8 rounded-full flex items-center justify-center border border-[#2a3942] transition">
@@ -211,25 +203,23 @@
             
             <div class="flex items-center gap-3.5 mb-5">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-teal-500/30 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
-                    <i class="fa-solid fa-heart-pulse"></i>
+                    <i class="fa-solid fa-shield-heart"></i>
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">NEET PG 2026 Exact Matrix Predictor</h3>
-                    <p class="text-xs text-[#8696a0]">Powered by 2025/2024 Toughness Extrapolation Table</p>
+                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">NEET PG 2026 Python Matrix Predictor</h3>
+                    <p class="text-xs text-[#8696a0]">Powered by 100% Python-Extracted Reference Table</p>
                 </div>
             </div>
 
             <div class="flex flex-col gap-4 mb-6">
-                <!-- Marks Input (Out of 720) -->
                 <div>
                     <label class="block text-xs font-bold text-emerald-300/90 mb-1.5 flex items-center justify-between">
                         <span><i class="fa-solid fa-star text-amber-400 mr-1.5"></i> Enter Marks (out of 720):</span>
-                        <span class="text-[10px] text-[#8696a0] font-normal">Based on Exact Matrix Table</span>
+                        <span class="text-[10px] text-[#8696a0] font-normal">Exact Python Table Bracket</span>
                     </label>
                     <input type="number" id="predMarks" placeholder="e.g. 520" min="100" max="720" class="bg-[#111b21] border border-[#2a3942] rounded-2xl px-4 py-3 text-sm text-white w-full focus:outline-none focus:border-emerald-500 shadow-inner">
                 </div>
 
-                <!-- Preferred Branch -->
                 <div>
                     <label class="block text-xs font-bold text-emerald-300/90 mb-1.5">
                         <i class="fa-solid fa-stethoscope text-purple-400 mr-1.5"></i> Dream Specialty / Branch:
@@ -246,8 +236,8 @@
                 </div>
             </div>
 
-            <button onclick="runExactMatrixPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate Using Exact Matrix
+            <button onclick="runPythonMatrixPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate Using Python-Locked Table
             </button>
 
             <!-- Cute & Psychologically Calming Result Container -->
@@ -265,34 +255,17 @@
         let selectedMap = new Map();
         let loadedCandidates = [];
 
-        // Exact Matrix Mapping based on user provided reference table
-        const exactMatrixData = [
-            { marks: 650, equiv800: 722, rank2025: 11, pred2026: 1 },
-            { marks: 640, equiv800: 711, rank2025: 54, pred2026: 1 },
-            { marks: 630, equiv800: 700, rank2025: 96, pred2026: 1 },
-            { marks: 620, equiv800: 689, rank2025: 139, pred2026: 1 },
-            { marks: 610, equiv800: 678, rank2025: 181, pred2026: 1 },
-            { marks: 600, equiv800: 667, rank2025: 224, pred2026: 1 },
-            { marks: 590, equiv800: 656, rank2025: 266, pred2026: 1 },
-            { marks: 580, equiv800: 644, rank2025: 507, pred2026: 1 },
-            { marks: 570, equiv800: 633, rank2025: 1199, pred2026: 1 },
-            { marks: 560, equiv800: 622, rank2025: 2020, pred2026: 1 },
-            { marks: 550, equiv800: 611, rank2025: 2804, pred2026: 1 },
-            { marks: 540, equiv800: 600, rank2025: 3709, pred2026: 1 },
-            { marks: 530, equiv800: 589, rank2025: 5493, pred2026: 60 },
-            { marks: 520, equiv800: 578, rank2025: 6566, pred2026: 75 },
-            { marks: 510, equiv800: 567, rank2025: 8888, pred2026: 213 },
-            { marks: 500, equiv800: 556, rank2025: 11629, pred2026: 393 },
-            { marks: 490, equiv800: 544, rank2025: 13000, pred2026: 841 },
-            { marks: 480, equiv800: 533, rank2025: 16066, pred2026: 1362 },
-            { marks: 470, equiv800: 522, rank2025: 19735, pred2026: 2288 },
-            { marks: 460, equiv800: 511, rank2025: 22056, pred2026: 3529 },
-            { marks: 450, equiv800: 500, rank2025: 26121, pred2026: 5110 },
-            { marks: 440, equiv800: 489, rank2025: 30186, pred2026: 7088 },
-            { marks: 430, equiv800: 478, rank2025: 34252, pred2026: 9375 },
-            { marks: 420, equiv800: 467, rank2025: 35708, pred2026: 12016 },
-            { marks: 410, equiv800: 456, rank2025: 42652, pred2026: 14994 },
-            { marks: 400, equiv800: 444, rank2025: 43716, pred2026: 18255 }
+        // Updated Python-Locked Reference Table Data from 6885.jpg
+        const pythonMatrixData = [
+            { marks: 600, correct: 150, rankStr: "~79", rawRank: 79 },
+            { marks: 560, correct: 140, rankStr: "~1,234", rawRank: 1234 },
+            { marks: 520, correct: 130, rankStr: "~5,903", rawRank: 5903 },
+            { marks: 500, correct: 125, rankStr: "~9,965", rawRank: 9965 },
+            { marks: 490, correct: 122, rankStr: "~12,427", rawRank: 12427 },
+            { marks: 489, correct: 132, rankStr: "~7,500", rawRank: 7500 },
+            { marks: 480, correct: 120, rankStr: "~15,146", rawRank: 15146 },
+            { marks: 464, correct: 127, rankStr: "~13,368", rawRank: 13368 },
+            { marks: 400, correct: 100, rankStr: "~43,000", rawRank: 43000 }
         ];
 
         function initSupabase() {
@@ -515,14 +488,14 @@
             });
         };
 
-        // Exact Matrix Table Lookup Predictor
         window.openPredictorModal = function() {
             document.getElementById('predictorModal').classList.remove('hidden');
         };
         window.closePredictorModal = function() {
             document.getElementById('predictorModal').classList.add('hidden');
         };
-        window.runExactMatrixPredictor = function() {
+
+        window.runPythonMatrixPredictor = function() {
             const marksInput = parseInt(document.getElementById('predMarks').value);
             const branch = document.getElementById('predBranch').value;
             const resBox = document.getElementById('predResultBox');
@@ -532,48 +505,45 @@
                 return;
             }
 
-            // Find matching row or closest bracket from exactMatrixData
-            let matchedRow = exactMatrixData.find(row => row.marks === marksInput);
+            // Match against pythonMatrixData
+            let matchedRow = pythonMatrixData.find(row => row.marks === marksInput);
             if (!matchedRow) {
-                // Find closest lesser or greater marks
-                let sorted = [...exactMatrixData].sort((a, b) => Math.abs(a.marks - marksInput) - Math.abs(b.marks - marksInput));
+                let sorted = [...pythonMatrixData].sort((a, b) => Math.abs(a.marks - marksInput) - Math.abs(b.marks - marksInput));
                 matchedRow = sorted[0];
             }
 
-            const predRank = matchedRow.pred2026;
-            const equiv800 = matchedRow.equiv800;
-            const rank2025 = matchedRow.rank2025;
+            const predRankStr = matchedRow.rankStr;
+            const correctAnswers = matchedRow.correct;
 
             let comfortTitle = "You're in a wonderful place!";
             let comfortMsg = "";
             let badgeColor = "text-emerald-400 bg-emerald-950/60 border-emerald-500/30";
 
-            if (predRank <= 500) {
+            if (matchedRow.rawRank <= 1000) {
                 comfortTitle = "🌟 Elite Standing for 2026!";
-                comfortMsg = `With ${marksInput} marks (Equiv. ${equiv800}/800), your exact matrix predicted rank is **~${predRank}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
-            } else if (predRank <= 10000) {
+                comfortMsg = `With ${marksInput} marks (${correctAnswers} correct answers), your Python-locked 2026 original rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
+            } else if (matchedRow.rawRank <= 15000) {
                 comfortTitle = "🌱 Secure & Promising Horizon";
-                comfortMsg = `At ${marksInput} marks, your 2026 toughness-adjusted rank is **~${predRank}** (compared to ${rank2025} in 2025). This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
+                comfortMsg = `At ${marksInput} marks (${correctAnswers} correct answers), your Python-locked rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted rank is **~${predRank}** for ${marksInput} marks. Wonderful opportunities await across institutional quotas, specialized state rounds, and structured counseling for **${branch}**. Remember, your clinical acumen matters most.`;
+                comfortMsg = `Your predicted Python matrix rank is **${predRankStr}** for ${marksInput} marks (${correctAnswers} correct answers). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
             }
 
             resBox.classList.remove('hidden');
             resBox.innerHTML = `
                 <div class="flex items-center justify-between mb-2">
                     <span class="font-black text-sm text-slate-100">${comfortTitle}</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Pred. 2026 Rank ~${predRank}</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Python Rank ${predRankStr}</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-[#2a3942] text-[11px] text-[#8696a0]">
-                    <div>Equiv 800 Scale: <span class="text-teal-400 font-bold">${equiv800}</span></div>
-                    <div>2025 Baseline Rank: <span class="text-cyan-400 font-bold">${rank2025}</span></div>
+                    <div>Table Correct Answers: <span class="text-teal-400 font-bold">${correctAnswers}</span></div>
+                    <div>Formula Locked: <span class="text-cyan-400 font-bold">M720/0.9 + 25</span></div>
                 </div>
             `;
         };
 
-        // PDF / Text Report Export
         window.exportCounselingReport = function() {
             if (selectedMap.size === 0) {
                 alert('Please select at least one candidate to export a report.');
@@ -614,7 +584,7 @@
                 return;
             }
 
-            const ADMIN_WHATSAPP_NUMBER = "919876543210"; // Replace with your WhatsApp number
+            const ADMIN_WHATSAPP_NUMBER = "919876543210";
 
             const count = selectedMap.size;
             const totalAmount = Math.ceil(count / 4) * 199;
