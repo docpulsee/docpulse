@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET PG Senior Resident Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- html2pdf Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 p-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>
+                <h1 class="text-lg font-bold text-white">NEET PG Resident Directory</h1>
+                <p class="text-xs text-slate-400">138,000+ Verified Candidate Database</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs">
+                    <span class="text-slate-400">Selected: </span>
+                    <span id="selectedCount" class="font-bold text-indigo-400">0 PGs</span> | 
+                    <span class="text-slate-400">Cost: </span>
+                    <span id="totalCost" class="font-bold text-emerald-400">₹0</span>
+                </div>
+                <button onclick="openCheckout()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs px-4 py-2 rounded-lg">
+                    Unlock Numbers
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Controls -->
+    <main class="max-w-7xl mx-auto p-4 flex-grow w-full space-y-4">
+        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col md:flex-row gap-3">
+            <input type="text" id="searchInput" placeholder="Search by Candidate Name..." class="bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white flex-grow">
+            <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+            <button onclick="searchDatabase()" class="bg-emerald-600 text-white px-4 py-2 text-xs font-bold rounded-lg">Search DB</button>
+        </div>
+
+        <!-- Directory Table -->
+        <div class="bg-slate-800 border border-slate-700 rounded-xl overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead class="bg-slate-900 text-slate-400 uppercase">
+                    <tr>
+                        <th class="p-3 text-center">Select</th>
+                        <th class="p-3">AIR Rank</th>
+                        <th class="p-3">Candidate Name</th>
+                        <th class="p-3">State & City</th>
+                        <th class="p-3">Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-slate-700">
+                    <!-- Results populate here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- JavaScript Engine -->
+    <script>
+        // REPLACE THESE WITH YOUR SUPABASE CREDENTIALS FROM PHASE 2 STEP 7
+        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+        const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let selectedMap = new Map();
+
+        async function searchDatabase() {
+            const query = document.getElementById('searchInput').value.trim();
+            const state = document.getElementById('stateInput').value.trim();
+
+            let dbQuery = supabase.from('candidates').select('*').limit(50);
+
+            if (query) dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
+            if (state) dbQuery = dbQuery.ilike('State', `%${state}%`);
+
+            const { data, error } = await dbQuery;
+            if (error) {
+                alert("Error searching database: " + error.message);
+                return;
+            }
+
+            renderTable(data);
+        }
+
+        function renderTable(candidates) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            if(!candidates || candidates.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">No candidates found. Try searching.</td></tr>`;
+                return;
+            }
+
+            candidates.forEach(c => {
+                const id = c['APPLICATION ID'] || c.id;
+                const name = c['NAME OF THE CANDIDATE'];
+                const rank = c['NEET-PG 2025\nPUBLISH RANK'];
+                const state = c['State'];
+                const city = c['City'];
+                const rawPhone = String(c['Candidate Mobile']);
+                const maskedPhone = rawPhone.substring(0, 5) + "*****";
+
+                const isChecked = selectedMap.has(id);
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 text-center">
+                        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleSelect('${id}', '${name}', '${rank}', '${state}', '${rawPhone}')" class="w-4 h-4 accent-indigo-600">
+                    </td>
+                    <td class="p-3 font-bold text-slate-300">#${rank}</td>
+                    <td class="p-3 font-bold text-white">${name}</td>
+                    <td class="p-3 text-slate-400">${city}, ${state}</td>
+                    <td class="p-3 font-mono text-slate-400">+91 ${maskedPhone}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleSelect(id, name, rank, state, phone) {
+            if (selectedMap.has(id)) {
+                selectedMap.delete(id);
+            } else {
+                selectedMap.set(id, { name, rank, state, phone });
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            const count = selectedMap.size;
+            const blocks = Math.ceil(count / 4);
+            const cost = blocks * 199;
+
+            document.getElementById('selectedCount').innerText = `${count} PGs`;
+            document.getElementById('totalCost').innerText = `₹${cost}`;
+        }
+
+        function openCheckout() {
+            if (selectedMap.size === 0) {
+                alert("Please select at least 1 candidate.");
+                return;
+            }
+            const count = selectedMap.size;
+            const cost = Math.ceil(count / 4) * 199;
+            alert(`Selected: ${count} PGs.\nTotal Payable: ₹${cost}.\n\nSending approval notification to admin...`);
+        }
+    </script>
+</body>
+</html>
