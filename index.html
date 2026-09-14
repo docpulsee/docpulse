@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEET PG Resident Directory</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome CDN -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase JS SDK CDN -->
+    <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
@@ -39,7 +39,7 @@
         <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col md:flex-row gap-3 md:items-center">
             <input type="text" id="searchInput" placeholder="Search by Candidate Name..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 w-full md:w-1/2 focus:outline-none focus:border-indigo-500">
             <input type="text" id="stateInput" placeholder="Filter by State (e.g. KARNATAKA)" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 w-full md:w-1/2 focus:outline-none focus:border-indigo-500">
-            <button onclick="searchDatabase()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-2 rounded-lg text-sm transition">
+            <button id="searchBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-2 rounded-lg text-sm transition">
                 Search DB
             </button>
         </div>
@@ -65,26 +65,30 @@
         </div>
     </main>
 
-    <!-- Supabase Integration Script -->
     <script>
         const SUPABASE_URL = 'https://uwrwtttkqywsmehexmbf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
         
-        let supabase;
+        let dbClient = null;
         let selectedMap = new Map();
 
-        window.addEventListener('DOMContentLoaded', () => {
-            if (window.supabase) {
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Initialize Supabase Client Safely
+        function initSupabase() {
+            if (window.supabase && window.supabase.createClient) {
+                dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             } else {
-                console.error('Supabase SDK failed to load.');
+                console.error("Supabase SDK failed to load from CDN.");
             }
-        });
+        }
 
-        async function searchDatabase() {
-            if (!supabase) {
-                alert('Database client is initializing or failed to load. Please refresh.');
-                return;
+        // Search Function attached to Global Window Scope
+        window.searchDatabase = async function() {
+            if (!dbClient) {
+                initSupabase();
+                if (!dbClient) {
+                    alert("Supabase SDK did not load. Please check your internet connection or disable ad-blockers.");
+                    return;
+                }
             }
 
             const query = document.getElementById('searchInput').value.trim();
@@ -94,7 +98,8 @@
             tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-indigo-400 font-semibold animate-pulse">Searching Database...</td></tr>';
 
             try {
-                let dbQuery = supabase.from('Candidate').select('*');
+                // Table: 'Candidate' (Title Case)
+                let dbQuery = dbClient.from('Candidate').select('*');
 
                 if (query) {
                     dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
@@ -113,8 +118,7 @@
                     tbody.innerHTML = `
                         <tr>
                             <td colspan="5" class="p-6 text-center text-amber-400 font-medium">
-                                <i class="fa-solid fa-triangle-exclamation mr-2"></i> No records found.<br>
-                                <span class="text-xs text-slate-400 block mt-1">Try broadening your search criteria.</span>
+                                <i class="fa-solid fa-triangle-exclamation mr-2"></i> No records found matching your input.
                             </td>
                         </tr>`;
                     return;
@@ -153,35 +157,35 @@
                 });
 
             } catch (err) {
-                console.error('Database Error:', err);
+                console.error('Fetch Error:', err);
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="5" class="p-6 text-center text-red-400 font-medium">
-                            <i class="fa-solid fa-circle-exclamation mr-2"></i> Connection Failed!<br>
+                            <i class="fa-solid fa-circle-exclamation mr-2"></i> Database Query Failed<br>
                             <span class="text-xs text-slate-400 block mt-1 font-mono">${err.message || err}</span>
                         </td>
                     </tr>`;
             }
-        }
+        };
 
-        function toggleSelect(id, name, rank, state, phone) {
+        window.toggleSelect = function(id, name, rank, state, phone) {
             if (selectedMap.has(id)) {
                 selectedMap.delete(id);
             } else {
                 selectedMap.set(id, { id, name, rank, state, phone });
             }
             updateCart();
-        }
+        };
 
-        function updateCart() {
+        window.updateCart = function() {
             const count = selectedMap.size;
             const cost = Math.ceil(count / 4) * 49;
 
             document.getElementById('selectedCount').innerText = `${count} PG(s)`;
             document.getElementById('fCost').innerText = `₹${cost}`;
-        }
+        };
 
-        function openCheckout() {
+        window.openCheckout = function() {
             if (selectedMap.size === 0) {
                 alert('Please select at least 1 candidate.');
                 return;
@@ -189,7 +193,13 @@
             const count = selectedMap.size;
             const cost = Math.ceil(count / 4) * 49;
             alert(`Selected ${count} candidate(s). Total cost: ₹${cost}.`);
-        }
+        };
+
+        // Attach event listeners safely when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initSupabase();
+            document.getElementById('searchBtn').addEventListener('click', window.searchDatabase);
+        });
     </script>
 </body>
 </html>
