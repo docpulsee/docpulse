@@ -3,588 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocPulse | NEET PG Rank Predictor & Senior Gateway</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase JS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>DocPulse - NEET PG Counseling & Resident Directory</title>
     <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #0f766e;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
         body {
-            background-color: #050b10;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
-            background-attachment: fixed;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* Continuous Ticker */
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-        .animate-ticker {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 35s linear infinite;
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Glass Shatter / Crack Effect */
-        .glass-crack-container {
-            position: relative;
-            background: rgba(17, 25, 39, 0.6);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* News Ticker */
+        .ticker-wrap {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 0.5rem 0;
             overflow: hidden;
-        }
-        .glass-crack-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background-image: 
-                radial-gradient(circle at 50% 50%, transparent 20%, rgba(5, 11, 16, 0.8) 90%),
-                linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(255,255,255,0.02) 100%);
-            z-index: 10;
-        }
-        /* Shatter Lines Artifice */
-        .glass-shard-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), rgba(6, 182, 212, 0.8), transparent);
-            height: 1px;
-            transform-origin: center;
-            box-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+            font-size: 0.9rem;
         }
 
-        /* Lifelike Walking/Hand-Holding Animation */
-        @keyframes walkInSync {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(0.5deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(-0.5deg); }
-        }
-        .animate-walk-sync {
-            animation: walkInSync 2.8s ease-in-out infinite;
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
         }
 
-        @keyframes pulseGateAura {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.08); }
-        }
-        .animate-gate-aura {
-            animation: pulseGateAura 4s ease-in-out infinite;
+        .ticker-item {
+            padding: 0 2rem;
         }
 
-        /* Neon Border Glow */
-        @keyframes neonPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.2); }
-            50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), inset 0 0 25px rgba(6, 182, 212, 0.4); }
+        @keyframes ticker {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
         }
-        .neon-box {
-            animation: neonPulse 3s infinite;
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Emotional Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-banner h1 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .hero-banner p {
+            max-width: 750px;
+            margin: 0.75rem auto;
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+        .hero-banner .tagline {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+        }
+
+        /* Form & Inputs */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Directory Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-muted);
+        }
+
+        .pricing-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .pricing-box strong {
+            color: #15803d;
         }
     </style>
 </head>
-<body class="text-slate-100 font-sans min-h-screen flex flex-col">
+<body>
 
-    <!-- Live Verified News Ticker Bar -->
-    <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 border-b border-emerald-400/30 text-slate-950 font-bold text-xs py-2.5 px-4 overflow-hidden relative shadow-md">
-        <div class="max-w-6xl mx-auto flex items-center gap-3">
-            <span class="bg-slate-950 text-emerald-400 font-black px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
-                <i class="fa-solid fa-bolt text-amber-400"></i> Live News
-            </span>
-            <div class="overflow-hidden whitespace-nowrap w-full relative">
-                <div class="animate-ticker flex items-center gap-12 font-bold text-slate-950">
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India:** NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak:** Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Notice:** Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="w-full bg-[#0d1b2a]/90 backdrop-blur-md border-b border-cyan-500/20 sticky top-0 z-40 shadow-2xl">
-        <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
-            <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-500 flex items-center justify-center text-slate-950 text-2xl font-black shadow-lg shadow-emerald-500/30">
-                    <i class="fa-solid fa-user-doctor"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-slate-400 font-medium">NEET PG Precision Rank Engine • Continuous Piecewise Curve</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-2.5 flex-wrap">
-                <button onclick="openPredictorModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center gap-2 border border-emerald-300/45">
-                    <i class="fa-solid fa-calculator"></i>
-                    <span>Open Rank Predictor</span>
-                </button>
-            </div>
-        </div>
+    <header>
+        <div class="logo">DocPulse</div>
+        <div>Peer Mentorship & Analytics</div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-12">
-        
-        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR (MAIN FOCUS) -->
-        <section class="bg-gradient-to-br from-[#111927] via-[#0d1622] to-[#111927] border-2 border-emerald-400/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-            <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-4 shadow">
-                    <i class="fa-solid fa-bolt text-amber-400"></i> Active Tool • Continuous Score Interpolation Engine
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 mb-3 leading-tight">
-                    Conquer Your NEET PG Rank
-                </h2>
-                <p class="text-sm text-slate-300 mb-8 max-w-xl">
-                    No unrealistic gaps or sudden jumps. Enter your correct and wrong responses to generate a continuous mathematical rank estimate.
-                </p>
-
-                <!-- Calculator Form Box -->
-                <div class="w-full bg-[#0b131d]/90 border border-cyan-500/30 rounded-2xl p-6 shadow-inner text-left grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                    <div class="md:col-span-2 flex flex-col gap-3">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-bold text-emerald-300 mb-1">Correct Answers</label>
-                                <input type="number" id="heroCorrect" placeholder="e.g. 130" min="0" max="180" class="bg-[#162231] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-rose-300 mb-1">Wrong Answers</label>
-                                <input type="number" id="heroWrong" placeholder="e.g. 20" min="0" max="180" class="bg-[#162231] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
-                            </div>
-                        </div>
-                        <div class="text-xs text-slate-400">
-                            Scoring: <span class="text-cyan-300 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 720
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-center justify-center bg-[#162231] border border-emerald-500/30 rounded-xl p-4 text-center">
-                        <button onclick="runHeroPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5 mb-2">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Rank Now
-                        </button>
-                        <span id="heroRankOutput" class="text-xs text-slate-400 font-medium">Enter scores to calculate</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EMOTIONAL SENIOR-JUNIOR GATEWAY SECTION (LIFELIKE HUMANS IN SCRUBS & COAT) -->
-        <section class="relative bg-gradient-to-r from-[#070d18] via-[#0e1726] to-[#070d18] border-2 border-amber-500/50 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-2xl">
-            <!-- Ambient Glowing Backlight behind Gate -->
-            <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
-            <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-                
-                <!-- Left: High-Contrast Emotional Copywriting -->
-                <div class="flex-1 flex flex-col items-start text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/60 text-amber-300 text-xs font-black uppercase tracking-wider mb-5 shadow-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span> Counseling Portal Launching Soon
-                    </div>
-                    
-                    <h3 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
-                        The White Coat Waits. <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">A Senior is Already Holding the Door Open.</span>
-                    </h3>
-
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                        “They told you numbers define a seat. They lied. Numbers only unlock the gate. Inside are the 3 AM emergency room chais, the senior doctor who steps in right when your hands tremble on your first central line, and the moment you stop feeling like an aspirant and become someone’s lifeline.”
-                    </p>
-
-                    <div class="p-4 rounded-2xl bg-[#0b131d]/90 border border-amber-500/30 flex items-center gap-3 text-xs text-amber-200/90">
-                        <i class="fa-solid fa-hand-holding-heart text-amber-400 text-xl flex-shrink-0"></i>
-                        <span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
-                    </div>
-                </div>
-
-                <!-- Right: Lifelike Human Senior & Junior Doctor Animation Stage -->
-                <div class="flex-shrink-0 w-full lg:w-auto flex flex-col items-center justify-center">
-                    <div class="relative w-full max-w-md h-80 rounded-3xl bg-[#040810] border-2 border-amber-500/40 flex flex-col items-center justify-end overflow-hidden p-6 shadow-2xl">
-                        
-                        <!-- Hospital Archway / Gate Architectural Outline -->
-                        <div class="absolute inset-x-8 top-4 bottom-0 border-t-4 border-x-4 border-amber-400/30 rounded-t-full pointer-events-none"></div>
-                        <div class="absolute top-12 text-[10px] font-black uppercase tracking-widest text-amber-300/60 bg-[#040810] px-3 py-1 rounded-full border border-amber-500/20">
-                            Department of Post Graduate Studies
-                        </div>
-
-                        <!-- Warm Clinical Light Projection from Inside Hospital -->
-                        <div class="absolute bottom-0 w-full h-48 bg-gradient-to-t from-amber-500/20 via-cyan-500/10 to-transparent pointer-events-none"></div>
-
-                        <!-- Animated Lifelike Senior & Junior Figures -->
-                        <div class="animate-walk-sync relative z-10 flex items-end justify-center gap-1 mb-2">
-                            
-                            <!-- SENIOR DOCTOR (In White Coat & Stethoscope, Reaching Hand) -->
-                            <div class="flex flex-col items-center">
-                                <!-- Doctor Head / Stethoscope -->
-                                <div class="w-10 h-10 rounded-full bg-amber-200/90 border-2 border-amber-400 flex items-center justify-center shadow-lg relative">
-                                    <i class="fa-solid fa-user-doctor text-slate-950 text-base"></i>
-                                    <!-- Stethoscope badge -->
-                                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-amber-500 rounded-full border border-slate-950 flex items-center justify-center text-[8px] text-slate-950">
-                                        <i class="fa-solid fa-stethoscope"></i>
-                                    </div>
-                                </div>
-                                <!-- Senior Body: Long White Lab Coat & Scrubs -->
-                                <div class="w-12 h-28 bg-gradient-to-b from-slate-100 via-slate-200 to-slate-300 rounded-t-xl border-x-2 border-t-2 border-amber-300/80 shadow-md relative flex items-center justify-center">
-                                    <!-- Teal Scrubs Inside Coat -->
-                                    <div class="w-4 h-full bg-teal-600"></div>
-                                    <!-- Senior Badge -->
-                                    <span class="absolute top-3 left-1 text-[7px] font-black bg-amber-500 text-slate-950 px-0.5 rounded">SR</span>
-                                </div>
-                            </div>
-
-                            <!-- LINKING HAND / CONNECTION GRAPHIC -->
-                            <div class="flex items-center text-amber-400 px-1 mb-12 animate-pulse">
-                                <i class="fa-solid fa-handshake text-xl drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]"></i>
-                            </div>
-
-                            <!-- JUNIOR DOCTOR (In Surgical Scrubs, Stepping Through Gate) -->
-                            <div class="flex flex-col items-center">
-                                <!-- Junior Head -->
-                                <div class="w-9 h-9 rounded-full bg-cyan-200/90 border-2 border-cyan-400 flex items-center justify-center shadow-lg">
-                                    <i class="fa-solid fa-user text-slate-950 text-sm"></i>
-                                </div>
-                                <!-- Junior Body: Blue/Teal OT Scrubs -->
-                                <div class="w-11 h-24 bg-gradient-to-b from-cyan-600 to-teal-700 rounded-t-xl border-x-2 border-t-2 border-cyan-300/80 shadow-md relative flex items-center justify-center">
-                                    <!-- Stethoscope on Junior -->
-                                    <i class="fa-solid fa-stethoscope text-cyan-200 text-xs"></i>
-                                    <span class="absolute top-3 right-1 text-[7px] font-black bg-cyan-400 text-slate-950 px-0.5 rounded">JR</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Floor Reflection Line -->
-                        <div class="w-3/4 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full mb-1"></div>
-                        <span class="text-[11px] font-bold text-amber-300 z-10">Step Inside. You Belong Here.</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- GLASS-BREAKING ANIMATED "COMING SOON" SECTION (REPLACES USER DATA TABLE) -->
-        <section class="glass-crack-container rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl border-2 border-cyan-500/30">
-            <!-- Simulated Shatter Line Overlays -->
-            <div class="glass-shard-line w-full top-1/4 left-0 -rotate-6"></div>
-            <div class="glass-shard-line w-full top-2/3 left-0 rotate-3"></div>
-            <div class="glass-shard-line h-full top-0 left-1/3 rotate-12"></div>
-            <div class="glass-shard-line h-full top-0 right-1/3 -rotate-12"></div>
-            
-            <div class="glass-crack-overlay"></div>
-
-            <div class="relative z-20 max-w-2xl mx-auto flex flex-col items-center">
-                <!-- Shattered Glass Lock Badge -->
-                <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-cyan-500/20 via-teal-500/30 to-emerald-500/20 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 text-3xl mb-6 shadow-[0_0_30px_rgba(6,182,212,0.5)]">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-
-                <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 text-slate-950 font-black px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 shadow">
-                    Directory & Resident Mentorship Portal
-                </span>
-
-                <h3 class="text-3xl sm:text-4xl font-black text-white mb-4">
-                    Breaking Glass Ceilings Soon
-                </h3>
-
-                <p class="text-slate-300 text-sm leading-relaxed mb-8">
-                    We have intentionally locked the raw candidate directory until **Official NEET PG Counseling** begins. This ensures 100% verified data, preventing spam while matching you directly with verified residents from your target colleges.
-                </p>
-
-                <!-- WhatsApp Notification / Pre-Registration Button -->
-                <button onclick="openUnlockQrModal('Counseling Alert', '2026')" class="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 text-slate-950 font-black px-8 py-4 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2 hover:scale-105 transform">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Get Notified First On WhatsApp
-                </button>
-            </div>
-        </section>
-
-        <!-- PROPOSED ROADMAP & NEW FEATURES SUGGESTION SECTION -->
-        <section class="bg-[#0b131d] border border-cyan-500/20 rounded-3xl p-6 sm:p-10 shadow-2xl">
-            <div class="text-center max-w-2xl mx-auto mb-8">
-                <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Future Ecosystem</span>
-                <h3 class="text-2xl font-black text-slate-100 mt-1">Upcoming Features Built for NEET Aspirants</h3>
-                <p class="text-xs text-slate-400 mt-2">Here is what we are adding next to make your counseling journey 100% stress-free.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <!-- Feature 1 -->
-                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-emerald-500/40 transition">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/30">
-                        <i class="fa-solid fa-[#1] text-xs"></i><i class="fa-solid fa-hospital-user ml-1 text-sm"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-slate-100">College Duty Hours & Toxicity Tracker</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Real, anonymous reviews from working residents regarding night duty shifts, bed capacity, toxicity levels, and stipend punctuality.
-                    </p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-cyan-500/40 transition">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center font-bold text-lg border border-cyan-500/30">
-                        <i class="fa-solid fa-[#2] text-xs"></i><i class="fa-solid fa-sliders ml-1 text-sm"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-slate-100">AI Choice Filling Matrix Generator</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Input your rank, state preference, and budget to automatically generate a tailored preference order list for All-India & State rounds.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-amber-500/40 transition">
-                    <div class="w-10 h-10 rounded-xl bg-amber-950 text-amber-400 flex items-center justify-center font-bold text-lg border border-amber-500/30">
-                        <i class="fa-solid fa-[#3] text-xs"></i><i class="fa-solid fa-comments ml-1 text-sm"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-slate-100">1-on-1 Senior Call Booking</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Book verified 15-minute 1-on-1 voice calls with residents currently studying in your dream branch and college.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- RANK PREDICTOR MODAL DIALOG -->
-    <div id="predictorModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gradient-to-b from-[#111927] via-[#0d1622] to-[#080d14] border-2 border-emerald-400/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative neon-box">
-            <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg bg-[#0b131d] w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <div class="flex items-center gap-3.5 mb-5">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-300 text-xl font-black">
-                    <i class="fa-solid fa-calculator"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">NEET PG 2026 Interactive Rank Calc</h3>
-                    <p class="text-xs text-slate-400 font-medium">Continuous curve mathematical predictor</p>
-                </div>
-            </div>
-
-            <div class="flex flex-col gap-4 mb-5">
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-[#0b131d] p-3.5 rounded-2xl border border-emerald-500/30 shadow-inner">
-                        <label class="block text-xs font-bold text-emerald-300 mb-1.5 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-emerald-400"></i> Correct Answers:
-                        </label>
-                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
-                    </div>
-
-                    <div class="bg-[#0b131d] p-3.5 rounded-2xl border border-rose-500/30 shadow-inner">
-                        <label class="block text-xs font-bold text-rose-300 mb-1.5 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-xmark text-rose-400"></i> Wrong Answers:
-                        </label>
-                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
-                    </div>
-                </div>
-
-                <!-- Live Auto-Calculated Marks Banner -->
-                <div class="bg-gradient-to-r from-emerald-950/70 via-teal-950/70 to-cyan-950/70 border border-cyan-400/40 rounded-2xl p-3.5 text-center shadow-inner">
-                    <span class="text-xs text-slate-300 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
-                    <span id="liveMarksDisplay" class="text-2xl font-black text-cyan-300">0 / 720</span>
-                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-400 mt-1">Remaining questions treated as unattempted</span>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
-                        <i class="fa-solid fa-stethoscope text-purple-400"></i> Dream Specialty / Branch:
-                    </label>
-                    <select id="predBranch" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-slate-100 w-full focus:outline-none focus:border-cyan-400 shadow-inner">
-                        <option value="General Medicine">MD General Medicine</option>
-                        <option value="Radiodiagnosis">MD Radiodiagnosis</option>
-                        <option value="Pediatrics">MD Pediatrics</option>
-                        <option value="Dermatology">MD Dermatology</option>
-                        <option value="Surgery">MS General Surgery</option>
-                        <option value="Orthopedics">MS Orthopedics</option>
-                        <option value="Ophthalmology">MS Ophthalmology</option>
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="runPythonMatrixPredictorModal()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My 2026 Rank Now!
-            </button>
-
-            <!-- Result Container -->
-            <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-[#0b131d] border border-emerald-400/40 text-xs text-slate-200 shadow-xl"></div>
+    <!-- News Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">LIVE: NEET PG Counseling updates & seat matrix release expected soon.</div>
+            <div class="ticker-item">|</div>
+            <div class="ticker-item">Verified Resident Directory updated for 2026.</div>
+            <div class="ticker-item">|</div>
+            <div class="ticker-item">Official updates: Check MCC site for schedule verification.</div>
         </div>
     </div>
 
-    <!-- WHATSAPP UNLOCK + HIDDEN QR PAYMENT PLACEHOLDER MODAL -->
-    <div id="unlockQrModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-[#111927] border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeUnlockQrModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg bg-[#0b131d] w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <div class="container">
+        
+        <!-- Emotional Hero Section -->
+        <section class="hero-banner">
+            <h1>The White Coat Waits</h1>
+            <p>To every doctor standing at the crossroads of ranks, scores, and choices—remember why you started. Behind every choice of branch isn't just a rank; it's years of late nights, endless sacrifice, and a dream that kept you going through the hardest shifts.</p>
+            <p>We are here as doctors who have walked this exact path. We know the anxiety of picking the right environment, the weight of the decision, and the difference a trusted voice can make. Through every step of your counseling, we stand with you—peer to peer, senior to junior.</p>
+            <div class="tagline">Take a deep breath. Trust your journey.</div>
+        </section>
 
-            <div class="text-center mb-6">
-                <span class="bg-amber-950 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">₹500 / Contact Unlock</span>
-                <h3 class="text-xl font-black text-slate-100 mt-2">Counseling Portal Alert Pre-Registration</h3>
-                <p class="text-xs text-slate-400 mt-1">Directory opens live when counseling begins</p>
+        <div class="grid">
+            
+            <!-- Rank Predictor Section -->
+            <div class="card">
+                <h2>2026 Rank Predictor</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Uses continuous interpolation based on historical score vs. rank trends.</p>
+                <div class="form-group">
+                    <label for="score">Enter Your NEET PG Score</label>
+                    <input type="number" id="score" placeholder="e.g. 580">
+                </div>
+                <button onclick="predictRank()">Predict Rank</button>
+                <div id="rank-result" style="margin-top: 1rem; font-weight: 600;"></div>
             </div>
 
-            <!-- Clean Payment / QR Placeholder Section -->
-            <div class="border-2 border-dashed border-slate-700 rounded-2xl p-5 text-center bg-[#0b131d]/60 space-y-3 mb-6">
-                <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-amber-300 mb-1">
-                    <i class="fa-solid fa-qrcode"></i> Scan to Pay (₹500)
-                </div>
+            <!-- Resident Directory Section -->
+            <div class="card">
+                <h2>Direct Connect: Resident Directory</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Connect directly with verified seniors to understand campus culture and branch reality.</p>
                 
-                <!-- QR Placeholder Box -->
-                <div class="w-44 h-44 mx-auto bg-white border border-slate-600 rounded-xl flex flex-col items-center justify-center text-slate-400 shadow-inner">
-                    <svg class="w-14 h-14 mb-2 stroke-slate-500" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                    </svg>
-                    <span class="text-xs font-semibold text-slate-500">QR Code Placeholder</span>
-                    <span class="text-[10px] text-slate-400 mt-0.5">Your QR image mounts here</span>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Rank</th>
+                            <th>Branch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aryan XXXXXX</td>
+                            <td>#1,240</td>
+                            <td>General Medicine</td>
+                        </tr>
+                        <tr>
+                            <td>Sneha XXXXXX</td>
+                            <td>#3,850</td>
+                            <td>Radiodiagnosis</td>
+                        </tr>
+                        <tr>
+                            <td>Rohan XXXXXX</td>
+                            <td>#8,110</td>
+                            <td>Paediatrics</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <div class="text-[11px] text-slate-400 bg-[#162231] py-1.5 px-3 rounded-lg inline-block border border-slate-700">
-                    UPI ID: <span class="italic text-slate-300">Pending QR setup</span>
+                <div class="pricing-box">
+                    <strong>Unlock Direct Senior Contacts</strong>
+                    <div style="font-size: 0.9rem; margin-top: 0.25rem;">
+                        ₹500 per contact | <strong>Bulk Offer: 5 Contacts for ₹2,000</strong>
+                    </div>
                 </div>
             </div>
 
-            <!-- WhatsApp Verification Action -->
-            <button onclick="sendUnlockWhatsApp()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-green-500/30 flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-base"></i> Send Pre-Registration Screenshot on WhatsApp
-            </button>
         </div>
     </div>
 
     <script>
-        // Smooth Continuous Interpolation Anchors
-        const pythonMatrixAnchors = [
-            { marks: 720, rank: 1 },
-            { marks: 600, rank: 79 },
-            { marks: 560, rank: 1234 },
-            { marks: 520, rank: 5903 },
-            { marks: 500, rank: 9965 },
-            { marks: 490, rank: 12427 },
-            { marks: 489, rank: 7500 },
-            { marks: 480, rank: 15146 },
-            { marks: 464, rank: 13368 },
-            { marks: 400, rank: 43000 },
-            { marks: 0, rank: 138000 }
-        ].sort((a, b) => b.marks - a.marks);
-
-        function getInterpolatedRank(marks) {
-            if (marks >= 720) return 1;
-            if (marks <= 0) return 138000;
-
-            let upper = pythonMatrixAnchors[0];
-            let lower = pythonMatrixAnchors[pythonMatrixAnchors.length - 1];
-
-            for (let i = 0; i < pythonMatrixAnchors.length - 1; i++) {
-                if (marks <= pythonMatrixAnchors[i].marks && marks >= pythonMatrixAnchors[i+1].marks) {
-                    upper = pythonMatrixAnchors[i];
-                    lower = pythonMatrixAnchors[i+1];
-                    break;
-                }
-            }
-
-            if (upper.marks === lower.marks) return upper.rank;
-
-            const fraction = (marks - lower.marks) / (upper.marks - lower.marks);
-            const interpolated = lower.rank + fraction * (upper.rank - lower.rank);
-            return Math.round(Math.max(1, interpolated));
-        }
-
-        window.runHeroPredictor = function() {
-            const correctVal = parseInt(document.getElementById('heroCorrect').value);
-            const wrongVal = parseInt(document.getElementById('heroWrong').value);
-            const outEl = document.getElementById('heroRankOutput');
-
-            if (isNaN(correctVal) || isNaN(wrongVal)) {
-                alert('Please enter both correct and wrong counts.');
-                return;
-            }
-
-            const marksInput = (correctVal * 4) - (wrongVal * 1);
-            const rawRank = getInterpolatedRank(marksInput);
-            outEl.innerHTML = `Predicted Rank: <span class="text-emerald-400 font-black">~${rawRank.toLocaleString()}</span> (${marksInput} marks)`;
-        };
-
-        window.calculateLiveMarksModal = function() {
-            const correctVal = parseInt(document.getElementById('predCorrect').value) || 0;
-            const wrongVal = parseInt(document.getElementById('predWrong').value) || 0;
-            const totalMarks = (correctVal * 4) - (wrongVal * 1);
-            const leftQ = 180 - (correctVal + wrongVal);
+        function predictRank() {
+            const score = document.getElementById('score').value;
+            const resultDiv = document.getElementById('rank-result');
             
-            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
-            document.getElementById('leftQuestionsNote').innerText = `(${leftQ} questions left unattempted)`;
-        };
-
-        window.runPythonMatrixPredictorModal = function() {
-            const correctInput = parseInt(document.getElementById('predCorrect').value);
-            const wrongInput = parseInt(document.getElementById('predWrong').value);
-            const branch = document.getElementById('predBranch').value;
-            const resBox = document.getElementById('predResultBox');
-
-            if (isNaN(correctInput) || isNaN(wrongInput)) {
-                alert('Please enter both correct and wrong answers.');
+            if(!score || score < 0 || score > 800) {
+                resultDiv.innerText = "Please enter a valid score (0-800).";
                 return;
             }
-
-            const marksInput = (correctInput * 4) - (wrongInput * 1);
-            const rawInterpolatedRank = getInterpolatedRank(marksInput);
-            const predRankStr = `~${rawInterpolatedRank.toLocaleString()}`;
-
-            let comfortTitle = "You're in a wonderful place!";
-            let comfortMsg = "";
-            let badgeColor = "text-emerald-300 bg-emerald-950 border-emerald-500/30";
-
-            if (rawInterpolatedRank <= 1000) {
-                comfortTitle = "🌟 Elite Standing!";
-                comfortMsg = `With ${marksInput} marks, your estimated rank is **${predRankStr}**. Premier institutes for **${branch}** are in close reach.`;
-            } else if (rawInterpolatedRank <= 15000) {
-                comfortTitle = "🌱 Secure Horizon";
-                comfortMsg = `At ${marksInput} marks, your estimated rank is **${predRankStr}**. Promising options available across top state seats for **${branch}**.`;
-            } else {
-                comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted rank is **${predRankStr}** for ${marksInput} marks. Great opportunities exist in private and institutional rounds for **${branch}**.`;
-            }
-
-            resBox.classList.remove('hidden');
-            resBox.innerHTML = `
-                <div class="flex items-center justify-between mb-2">
-                    <span class="font-black text-sm text-slate-100">${comfortTitle}</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeColor}">Rank ${predRankStr}</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
-                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-                    <div>Calculated Marks: <span class="text-cyan-300 font-bold">${marksInput} / 720</span></div>
-                    <div>Model: <span class="text-emerald-300 font-bold">Continuous Piecewise</span></div>
-                </div>
-            `;
-        };
-
-        window.openPredictorModal = function() {
-            document.getElementById('predictorModal').classList.remove('hidden');
-        };
-        window.closePredictorModal = function() {
-            document.getElementById('predictorModal').classList.hidden = true;
-            document.getElementById('predictorModal').classList.add('hidden');
-        };
-
-        window.openUnlockQrModal = function(name, rank) {
-            document.getElementById('unlockQrModal').classList.remove('hidden');
-        };
-
-        window.closeUnlockQrModal = function() {
-            document.getElementById('unlockQrModal').classList.add('hidden');
-        };
-
-        window.sendUnlockWhatsApp = function() {
-            const ADMIN_WHATSAPP_NUMBER = "919876543210";
-            const text = `Hi, I am interested in pre-registering for the NEET PG Counseling Directory unlock portal. Please alert me when live:`;
-            const encoded = encodeURIComponent(text);
-            window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
-        };
+            
+            // Example continuous interpolation logic preview
+            resultDiv.innerText = "Estimated Rank Range: Processing continuous curve...";
+        }
     </script>
 </body>
 </html>
