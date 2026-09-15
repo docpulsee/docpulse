@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocPulse | NEET PG Rank Predictor & Senior Gateway</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
@@ -44,10 +47,20 @@
             0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2); }
             50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4); }
         }
+
+        /* Floating Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 
+    <!-- Live Verified News Ticker Bar -->
     <div class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 text-white font-bold text-xs py-2.5 px-4 overflow-hidden relative shadow-md">
         <div class="max-w-6xl mx-auto flex items-center gap-3">
             <span class="bg-white text-sky-700 font-black px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
@@ -55,7 +68,7 @@
             </span>
             <div class="overflow-hidden whitespace-nowrap w-full relative">
                 <div class="animate-ticker flex items-center gap-12 font-bold text-white">
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **Times of India:** NEET PG answer key expected to be released by NBEMS via natboard.edu.in.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **Times of India:** NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
                     <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **AajTak:** Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
                     <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **Notice:** Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
                 </div>
@@ -63,6 +76,7 @@
         </div>
     </div>
 
+    <!-- Header -->
     <header class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3.5">
@@ -84,8 +98,10 @@
         </div>
     </header>
 
+    <!-- Main Container -->
     <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-10">
         
+        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR -->
         <section class="bg-white border-2 border-sky-400/40 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold mb-4 shadow-sm">
@@ -98,20 +114,21 @@
                     No unrealistic gaps or sudden jumps. Enter your correct and wrong responses to generate a continuous mathematical rank estimate.
                 </p>
 
+                <!-- Calculator Form Box -->
                 <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-inner text-left grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                     <div class="md:col-span-2 flex flex-col gap-3">
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-bold text-sky-700 mb-1">Correct Answers</label>
-                                <input type="number" id="heroCorrect" placeholder="e.g. 140" min="0" max="200" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
+                                <input type="number" id="heroCorrect" placeholder="e.g. 130" min="0" max="180" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-rose-600 mb-1">Wrong Answers</label>
-                                <input type="number" id="heroWrong" placeholder="e.g. 30" min="0" max="200" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
+                                <input type="number" id="heroWrong" placeholder="e.g. 20" min="0" max="180" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
                             </div>
                         </div>
                         <div class="text-xs text-slate-500">
-                            Scoring: <span class="text-sky-600 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 800
+                            Scoring: <span class="text-sky-600 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 720
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center bg-white border border-sky-200 rounded-xl p-4 text-center shadow-sm">
@@ -124,12 +141,69 @@
             </div>
         </section>
 
+        <!-- ANIMATED DIRECT CONNECT TO SENIOR SECTION (NEW INCOMING FEATURE) -->
+        <section class="bg-gradient-to-br from-indigo-900 via-slate-900 to-teal-950 border-2 border-indigo-500/40 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden">
+            <!-- Glow background effect -->
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -top-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex-1 text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold mb-4 animate-pulse">
+                        <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span> COMING SOON
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-3">
+                        Direct Connect to Seniors of Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-amber-200">Dream College</span>
+                    </h3>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                        Get authentic, unvarnished guidance on duty hours, stipend, clinical exposure, and department culture straight from active resident doctors before filling your counseling choices.
+                    </p>
+
+                    <!-- Interactive Dream College Quick Select -->
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-xl max-w-lg">
+                        <label class="block text-xs font-semibold text-teal-200 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-building-columns"></i> Select Your Dream Institution:
+                        </label>
+                        <select id="dreamCollegeSelect" class="w-full bg-slate-800 text-white border border-slate-600 rounded-xl px-3 py-2.5 text-xs font-medium focus:outline-none focus:border-teal-400">
+                            <option value="MAMC Delhi">MAMC, New Delhi</option>
+                            <option value="KGMU Lucknow">KGMU, Lucknow</option>
+                            <option value="VMMCH & Safdarjung">VMMCH & Safdarjung Hospital, New Delhi</option>
+                            <option value="Seth GS & KEM Mumbai">KEM Hospital, Mumbai</option>
+                            <option value="BJMC Ahmedabad">BJMC, Ahmedabad</option>
+                            <option value="MMC Chennai">Madras Medical College, Chennai</option>
+                        </select>
+                        <button onclick="subscribeSeniorConnect()" class="mt-3 w-full bg-gradient-to-r from-teal-400 to-sky-400 hover:from-teal-500 hover:to-sky-500 text-slate-950 font-black py-2.5 rounded-xl text-xs transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Request Priority Resident Link
+                        </button>
+                        <span id="connectStatusMsg" class="block text-[11px] text-teal-300 mt-2 text-center font-medium"></span>
+                    </div>
+                </div>
+
+                <!-- Animated Badge / Graphic -->
+                <div class="flex-shrink-0 w-full md:w-72 flex justify-center items-center">
+                    <div class="relative w-56 h-56 rounded-full border-2 border-teal-400/40 bg-indigo-950/80 p-4 flex flex-col items-center justify-center text-center shadow-2xl animate-float">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-teal-400 to-sky-400 flex items-center justify-center text-slate-900 text-2xl font-black mb-3 shadow-lg shadow-teal-400/30">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <span class="text-xs font-black text-white uppercase tracking-wider">1-on-1 Resident</span>
+                        <span class="text-[11px] font-bold text-teal-300 mt-1">Direct Mentorship</span>
+                        <span class="mt-3 px-3 py-1 bg-amber-400/20 border border-amber-400/40 text-amber-300 rounded-full text-[10px] font-black uppercase tracking-widest">
+                            Launching Soon
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMOTIONAL SENIOR-JUNIOR GATEWAY SECTION (EMBEDDED SUPABASE GIF) -->
         <section class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
+            <!-- Ambient Backlight -->
             <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
             <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
                 
+                <!-- Left: High-Contrast Copywriting -->
                 <div class="flex-1 flex flex-col items-start text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider mb-5 shadow-sm">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span> Counseling Portal Launching Soon
@@ -149,6 +223,7 @@
                         <span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
                     </div>
 
+                    <!-- Email Notification Button -->
                     <a href="mailto:docpulsee@gmail.com?subject=NEET%20PG%20Mentorship%20%26%20Counseling%20Updates&body=Dear%20DocPulse%20Team%2C%0A%0AI%20would%20like%20to%20get%20notified%20as%20soon%20as%20the%20DocPulse%20Verified%20Senior%20Resident%20Directory%20and%20Counseling%20Mentorship%20Portal%20go%20live.%0A%0AThank%20you%20for%20building%20this%20platform%20to%20help%20aspirants%20connect%20with%20seniors." 
                        class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg shadow-sky-500/25 flex items-center gap-2.5 hover:scale-105 transform border border-sky-300">
                         <i class="fa-solid fa-envelope-open-text text-base"></i>
@@ -156,15 +231,18 @@
                     </a>
                 </div>
 
+                <!-- Right: REAL SUPABASE ANIMATED GIF STAGE -->
                 <div class="flex-shrink-0 w-full lg:w-96 flex flex-col items-center justify-center">
                     <div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl flex items-center justify-center">
                         
+                        <!-- Uploaded Supabase Storage GIF -->
                         <img 
                             src="https://uwrwtttkqywsmehexmbf.supabase.co/storage/v1/object/public/Gif/Untitled%20design.gif" 
                             alt="Senior Doctor holding Junior Doctor hand and sharing tea" 
                             class="w-full h-full object-cover"
                         />
 
+                        <!-- Permanent Bottom Overlay -->
                         <div class="absolute bottom-3 inset-x-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 rounded-xl py-2 px-3 text-center z-10 shadow-lg">
                             <span class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-heart text-rose-500"></i> Step Inside. You Belong Here.
@@ -179,6 +257,7 @@
 
     </main>
 
+    <!-- RANK PREDICTOR MODAL DIALOG -->
     <div id="predictorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border-2 border-sky-400 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative vibrant-box">
             <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg bg-slate-100 w-9 h-9 rounded-full flex items-center justify-center border border-slate-200 transition">
@@ -201,20 +280,21 @@
                         <label class="block text-xs font-bold text-sky-700 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-check text-sky-500"></i> Correct Answers:
                         </label>
-                        <input type="number" id="predCorrect" placeholder="e.g. 140" min="0" max="200" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
+                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
                     </div>
 
                     <div class="bg-slate-50 p-3.5 rounded-2xl border border-rose-200 shadow-inner">
                         <label class="block text-xs font-bold text-rose-600 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-xmark text-rose-500"></i> Wrong Answers:
                         </label>
-                        <input type="number" id="predWrong" placeholder="e.g. 30" min="0" max="200" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
+                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
                     </div>
                 </div>
 
+                <!-- Live Auto-Calculated Marks Banner -->
                 <div class="bg-gradient-to-r from-sky-50 via-teal-50 to-emerald-50 border border-sky-200 rounded-2xl p-3.5 text-center shadow-inner">
-                    <span class="text-xs text-slate-600 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 800):</span>
-                    <span id="liveMarksDisplay" class="text-2xl font-black text-sky-700">0 / 800</span>
+                    <span class="text-xs text-slate-600 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
+                    <span id="liveMarksDisplay" class="text-2xl font-black text-sky-700">0 / 720</span>
                     <span id="leftQuestionsNote" class="block text-[10px] text-slate-500 mt-1">Remaining questions treated as unattempted</span>
                 </div>
 
@@ -238,31 +318,30 @@
                 <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My Rank Now!
             </button>
 
+            <!-- Result Container -->
             <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-slate-50 border border-sky-200 text-xs text-slate-700 shadow-sm"></div>
         </div>
     </div>
 
     <script>
-        // Continuous Interpolation Anchor Calculation Engine
-        // Corrected strictly strictly for 800 total marks scaling (200 questions * 4)
+        // Continuous Interpolation Anchor Calculation Engine (Strictly 720 Max Marks / 180 Questions)
         const pythonMatrixAnchors = [
-            { marks: 800, rank: 1 },
-            { marks: 680, rank: 10 },
-            { marks: 620, rank: 250 },
-            { marks: 580, rank: 1200 },
-            { marks: 540, rank: 3500 },
-            { marks: 500, rank: 7500 },
-            { marks: 460, rank: 13500 },
-            { marks: 420, rank: 22000 },
-            { marks: 380, rank: 35000 },
-            { marks: 300, rank: 70000 },
-            { marks: 200, rank: 110000 },
-            { marks: 0, rank: 180000 }
+            { marks: 720, rank: 1 },
+            { marks: 600, rank: 79 },
+            { marks: 560, rank: 1234 },
+            { marks: 520, rank: 5903 },
+            { marks: 500, rank: 9965 },
+            { marks: 490, rank: 12427 },
+            { marks: 489, rank: 7500 },
+            { marks: 480, rank: 15146 },
+            { marks: 464, rank: 13368 },
+            { marks: 400, rank: 43000 },
+            { marks: 0, rank: 138000 }
         ].sort((a, b) => b.marks - a.marks);
 
         function getInterpolatedRank(marks) {
-            if (marks >= 800) return 1;
-            if (marks <= 0) return 180000;
+            if (marks >= 720) return 1;
+            if (marks <= 0) return 138000;
 
             let upper = pythonMatrixAnchors[0];
             let lower = pythonMatrixAnchors[pythonMatrixAnchors.length - 1];
@@ -292,8 +371,8 @@
                 return;
             }
 
-            if (correctVal + wrongVal > 200) {
-                alert('Total attempted questions cannot exceed 200.');
+            if (correctVal + wrongVal > 180) {
+                alert('Total questions cannot exceed 180.');
                 return;
             }
 
@@ -306,12 +385,12 @@
             const correctVal = parseInt(document.getElementById('predCorrect').value) || 0;
             const wrongVal = parseInt(document.getElementById('predWrong').value) || 0;
             const totalMarks = (correctVal * 4) - (wrongVal * 1);
-            const leftQ = 200 - (correctVal + wrongVal);
+            const leftQ = 180 - (correctVal + wrongVal);
             
-            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 800`;
+            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
             document.getElementById('leftQuestionsNote').innerText = leftQ >= 0 
                 ? `(${leftQ} questions left unattempted)` 
-                : `(Exceeds 200 total questions!)`;
+                : `(Exceeds 180 total questions!)`;
         };
 
         window.runPythonMatrixPredictorModal = function() {
@@ -325,8 +404,8 @@
                 return;
             }
 
-            if (correctInput + wrongInput > 200) {
-                alert('Total attempted questions cannot exceed 200.');
+            if (correctInput + wrongInput > 180) {
+                alert('Total questions cannot exceed 180.');
                 return;
             }
 
@@ -357,10 +436,16 @@
                 </div>
                 <p class="text-slate-600 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200 text-[11px] text-slate-500">
-                    <div>Calculated Marks: <span class="text-sky-700 font-bold">${marksInput} / 800</span></div>
+                    <div>Calculated Marks: <span class="text-sky-700 font-bold">${marksInput} / 720</span></div>
                     <div>Model: <span class="text-teal-700 font-bold">Continuous Piecewise</span></div>
                 </div>
             `;
+        };
+
+        window.subscribeSeniorConnect = function() {
+            const college = document.getElementById('dreamCollegeSelect').value;
+            const statusEl = document.getElementById('connectStatusMsg');
+            statusEl.innerText = `Priority access logged for ${college}! We will alert docpulsee@gmail.com upon launch.`;
         };
 
         window.openPredictorModal = function() {
