@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocPulse | NEET PG Rank Predictor & Senior Gateway</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
@@ -48,7 +45,7 @@
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-center: center;
             transition: opacity 0.5s ease-out, visibility 0.5s;
             pointer-events: none;
         }
@@ -82,17 +79,36 @@
             transition: opacity 0.4s ease 0.8s, visibility 0.4s ease 0.8s;
         }
 
-        /* Lifelike Walking/Hand-Holding Animation */
-        @keyframes walkInSync {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(0.5deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(-0.5deg); }
+        /* CINEMATIC STORY ANIMATION FADE CYCLE */
+        @keyframes storySceneCycle {
+            0%, 45% { opacity: 1; transform: scale(1); }
+            50%, 95% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
-        .animate-walk-sync {
-            animation: walkInSync 2.8s ease-in-out infinite;
+        @keyframes storySceneCycleAlt {
+            0%, 45% { opacity: 0; transform: scale(1.05); }
+            50%, 95% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05); }
         }
 
+        .animate-scene-1 {
+            animation: storySceneCycle 10s ease-in-out infinite;
+        }
+        .animate-scene-2 {
+            animation: storySceneCycleAlt 10s ease-in-out infinite;
+        }
+
+        /* Steam Rise Animation for Canteen Chai */
+        @keyframes steamRise {
+            0% { opacity: 0.8; transform: translateY(0) scaleX(1); }
+            50% { opacity: 0.4; transform: translateY(-8px) scaleX(1.3); }
+            100% { opacity: 0; transform: translateY(-16px) scaleX(1.6); }
+        }
+        .animate-steam {
+            animation: steamRise 2s ease-out infinite;
+        }
+
+        /* Glow Aura */
         @keyframes pulseGateAura {
             0%, 100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 0.8; transform: scale(1.08); }
@@ -101,19 +117,17 @@
             animation: pulseGateAura 4s ease-in-out infinite;
         }
 
-        /* Border Glow */
-        @keyframes vibrantPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2), inset 0 0 15px rgba(20, 184, 166, 0.1); }
-            50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4), inset 0 0 20px rgba(20, 184, 166, 0.2); }
-        }
         .vibrant-box {
             animation: vibrantPulse 3s infinite;
+        }
+        @keyframes vibrantPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4); }
         }
     </style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 
-    <!-- Live Verified News Ticker Bar -->
     <div class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 text-white font-bold text-xs py-2.5 px-4 overflow-hidden relative shadow-md">
         <div class="max-w-6xl mx-auto flex items-center gap-3">
             <span class="bg-white text-sky-700 font-black px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
@@ -129,7 +143,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3.5">
@@ -151,10 +164,8 @@
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-10">
         
-        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR -->
         <section class="bg-white border-2 border-sky-400/40 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold mb-4 shadow-sm">
@@ -167,7 +178,6 @@
                     No unrealistic gaps or sudden jumps. Enter your correct and wrong responses to generate a continuous mathematical rank estimate.
                 </p>
 
-                <!-- Calculator Form Box -->
                 <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-inner text-left grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                     <div class="md:col-span-2 flex flex-col gap-3">
                         <div class="grid grid-cols-2 gap-3">
@@ -194,15 +204,12 @@
             </div>
         </section>
 
-        <!-- EMOTIONAL SENIOR-JUNIOR GATEWAY SECTION -->
         <section class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
-            <!-- Ambient Glowing Backlight behind Gate -->
             <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
             <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
                 
-                <!-- Left: High-Contrast Emotional Copywriting -->
                 <div class="flex-1 flex flex-col items-start text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider mb-5 shadow-sm">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span> Counseling Portal Launching Soon
@@ -218,71 +225,78 @@
                     </p>
 
                     <div class="p-4 rounded-2xl bg-white border border-amber-300/80 flex items-center gap-3 text-xs text-amber-900 shadow-sm">
-                        <i class="fa-solid fa-hand-holding-heart text-amber-500 text-xl flex-shrink-0"></i>
+                        <i class="fa-solid fa-mug-hot text-amber-500 text-xl flex-shrink-0"></i>
                         <span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
                     </div>
                 </div>
 
-                <!-- Right: Lifelike Human Senior & Junior Doctor Animation Stage -->
-                <div class="flex-shrink-0 w-full lg:w-auto flex flex-col items-center justify-center">
-                    <div class="relative w-full max-w-md h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 flex flex-col items-center justify-end overflow-hidden p-6 shadow-2xl">
+                <div class="flex-shrink-0 w-full lg:w-96 flex flex-col items-center justify-center">
+                    <div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl group">
                         
-                        <!-- Hospital Archway / Gate Architectural Outline -->
-                        <div class="absolute inset-x-8 top-4 bottom-0 border-t-4 border-x-4 border-amber-400/40 rounded-t-full pointer-events-none"></div>
-                        <div class="absolute top-12 text-[10px] font-black uppercase tracking-widest text-amber-300 bg-slate-900 px-3 py-1 rounded-full border border-amber-500/30">
-                            Department of Post Graduate Studies
-                        </div>
-
-                        <!-- Warm Clinical Light Projection from Inside Hospital -->
-                        <div class="absolute bottom-0 w-full h-48 bg-gradient-to-t from-amber-500/20 via-sky-500/10 to-transparent pointer-events-none"></div>
-
-                        <!-- Animated Lifelike Senior & Junior Figures -->
-                        <div class="animate-walk-sync relative z-10 flex items-end justify-center gap-1 mb-2">
+                        <div class="animate-scene-1 absolute inset-0 bg-gradient-to-br from-amber-950/90 via-slate-900 to-slate-950 flex flex-col items-center justify-center p-6 text-center transition-all duration-1000">
                             
-                            <!-- SENIOR DOCTOR (In White Coat & Stethoscope) -->
-                            <div class="flex flex-col items-center">
-                                <div class="w-10 h-10 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center shadow-lg relative">
-                                    <i class="fa-solid fa-user-doctor text-slate-900 text-base"></i>
-                                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-amber-500 rounded-full border border-slate-900 flex items-center justify-center text-[8px] text-white">
-                                        <i class="fa-solid fa-stethoscope"></i>
-                                    </div>
+                            <div class="relative mb-4">
+                                <div class="w-20 h-20 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 text-3xl shadow-lg">
+                                    <i class="fa-solid fa-mug-hot"></i>
                                 </div>
-                                <div class="w-12 h-28 bg-gradient-to-b from-slate-100 via-slate-200 to-slate-300 rounded-t-xl border-x-2 border-t-2 border-amber-300 shadow-md relative flex items-center justify-center">
-                                    <div class="w-4 h-full bg-teal-600"></div>
-                                    <span class="absolute top-3 left-1 text-[7px] font-black bg-amber-500 text-slate-950 px-0.5 rounded">SR</span>
+                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 flex gap-1 text-amber-200">
+                                    <i class="fa-solid fa-wind text-xs animate-steam"></i>
+                                    <i class="fa-solid fa-wind text-xs animate-steam" style="animation-delay: 0.5s;"></i>
                                 </div>
                             </div>
 
-                            <!-- LINKING HAND / CONNECTION GRAPHIC -->
-                            <div class="flex items-center text-amber-400 px-1 mb-12 animate-pulse">
-                                <i class="fa-solid fa-handshake text-xl drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]"></i>
+                            <div class="bg-amber-400/10 border border-amber-400/30 rounded-full px-3 py-1 mb-2">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-300 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-utensils text-amber-400"></i> Scene 1: Hospital Canteen
+                                </span>
                             </div>
 
-                            <!-- JUNIOR DOCTOR (In Surgical Scrubs) -->
-                            <div class="flex flex-col items-center">
-                                <div class="w-9 h-9 rounded-full bg-sky-100 border-2 border-sky-400 flex items-center justify-center shadow-lg">
-                                    <i class="fa-solid fa-user text-slate-900 text-sm"></i>
-                                </div>
-                                <div class="w-11 h-24 bg-gradient-to-b from-sky-600 to-teal-700 rounded-t-xl border-x-2 border-t-2 border-sky-300 shadow-md relative flex items-center justify-center">
-                                    <i class="fa-solid fa-stethoscope text-sky-200 text-xs"></i>
-                                    <span class="absolute top-3 right-1 text-[7px] font-black bg-sky-400 text-slate-950 px-0.5 rounded">JR</span>
-                                </div>
+                            <h4 class="text-base font-bold text-white mb-1">3 AM Post-Duty Chai</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed max-w-xs">
+                                Senior doctor unwinding over hot tea, reassuring the new junior that every tough shift builds confidence.
+                            </p>
+                            
+                            <div class="mt-4 flex items-center gap-2 text-[10px] text-amber-400/80">
+                                <i class="fa-solid fa-arrow-right-long animate-pulse"></i> Next: Campus Walkthrough
                             </div>
                         </div>
 
-                        <!-- Floor Reflection Line -->
-                        <div class="w-3/4 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full mb-1"></div>
-                        <span class="text-[11px] font-bold text-amber-300 z-10">Step Inside. You Belong Here.</span>
+                        <div class="animate-scene-2 absolute inset-0 bg-gradient-to-br from-sky-950/90 via-slate-900 to-teal-950 flex flex-col items-center justify-center p-6 text-center transition-all duration-1000">
+                            
+                            <div class="w-20 h-20 rounded-full bg-teal-500/20 border border-teal-400/50 flex items-center justify-center text-teal-300 text-3xl mb-4 shadow-lg">
+                                <i class="fa-solid fa-hospital-user"></i>
+                            </div>
+
+                            <div class="bg-teal-400/10 border border-teal-400/30 rounded-full px-3 py-1 mb-2">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-teal-300 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-walking text-teal-300"></i> Scene 2: Department Orientation
+                                </span>
+                            </div>
+
+                            <h4 class="text-base font-bold text-white mb-1">Walking The Wards Together</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed max-w-xs">
+                                Senior introducing the junior to the ICUs, OPDs, and showing them around their new home for residency.
+                            </p>
+
+                            <div class="mt-4 flex items-center gap-2 text-[10px] text-teal-400/80">
+                                <i class="fa-solid fa-rotate animate-spin"></i> Looping Mentorship Story
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-3 inset-x-4 bg-slate-900/80 backdrop-blur-md border border-slate-700/80 rounded-xl py-1.5 px-3 text-center z-20">
+                            <span class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-heart text-rose-500"></i> Step Inside. You Belong Here.
+                            </span>
+                        </div>
+
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- AUTOMATIC CONTINUOUS LOOP GLASS BREAK REVEAL SECTION -->
         <section class="glass-chamber rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-xl border-2 border-sky-300/60">
             
-            <!-- AUTOMATED LOOPING GLASS OVERLAY PANE -->
             <div id="glassPane" class="glass-pane">
                 <div class="shard-tl absolute top-0 left-0 w-1/2 h-1/2 bg-white/40 border-r border-b border-sky-300/50 backdrop-blur-md"></div>
                 <div class="shard-tr absolute top-0 right-0 w-1/2 h-1/2 bg-white/40 border-l border-b border-sky-300/50 backdrop-blur-md"></div>
@@ -299,14 +313,11 @@
                 </div>
             </div>
 
-            <!-- REVEAL CONTENT ACTIVE UNDERNEATH -->
             <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-                <!-- Glowing Reveal Badge -->
                 <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 border-2 border-white flex items-center justify-center text-white text-3xl mb-4 shadow-lg shadow-sky-500/30 animate-pulse">
                     <i class="fa-solid fa-sparkles"></i>
                 </div>
 
-                <!-- Explicit "WE ARE COMING SOON" Title -->
                 <h2 class="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 uppercase tracking-tight mb-2">
                     WE ARE COMING SOON
                 </h2>
@@ -319,7 +330,6 @@
                     We are unlocking direct candidate-to-resident connectivity right when **Official NEET PG Counseling** begins. Get verified access to real senior residents across medical colleges in India.
                 </p>
 
-                <!-- EMAIL NOTIFICATION BUTTON LINKED DIRECTLY TO DOCPULSEE@GMAIL.COM -->
                 <a href="mailto:docpulsee@gmail.com?subject=NEET%20PG%20Mentorship%20%26%20Counseling%20Updates&body=Dear%20DocPulse%20Team%2C%0A%0AI%20would%20like%20to%20get%20notified%20as%20soon%20as%20the%20DocPulse%20Verified%20Senior%20Resident%20Directory%20and%20Counseling%20Mentorship%20Portal%20go%20live.%0A%0AThank%20you%20for%20building%20this%20platform%20to%20help%20aspirants%20connect%20with%20seniors.%20Wishing%20everyone%20the%20very%20best%20for%20the%20future!" 
                    class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-black px-8 py-4 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-sky-500/25 flex items-center gap-2.5 hover:scale-105 transform border border-sky-300">
                     <i class="fa-solid fa-envelope-open-text text-lg"></i>
@@ -330,7 +340,6 @@
 
     </main>
 
-    <!-- RANK PREDICTOR MODAL DIALOG -->
     <div id="predictorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border-2 border-sky-400 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative vibrant-box">
             <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg bg-slate-100 w-9 h-9 rounded-full flex items-center justify-center border border-slate-200 transition">
@@ -364,7 +373,6 @@
                     </div>
                 </div>
 
-                <!-- Live Auto-Calculated Marks Banner -->
                 <div class="bg-gradient-to-r from-sky-50 via-teal-50 to-emerald-50 border border-sky-200 rounded-2xl p-3.5 text-center shadow-inner">
                     <span class="text-xs text-slate-600 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
                     <span id="liveMarksDisplay" class="text-2xl font-black text-sky-700">0 / 720</span>
@@ -391,7 +399,6 @@
                 <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My Rank Now!
             </button>
 
-            <!-- Result Container -->
             <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-slate-50 border border-sky-200 text-xs text-slate-700 shadow-sm"></div>
         </div>
     </div>
@@ -403,19 +410,13 @@
             if (!glass) return;
 
             function runLoopCycle() {
-                // Step 1: Repair / Show intact glass pane
                 glass.classList.remove('shattering');
-
-                // Step 2: Automatically break glass after 1.5 seconds
                 setTimeout(() => {
                     glass.classList.add('shattering');
                 }, 1500);
             }
 
-            // Execute immediately on page load
             runLoopCycle();
-
-            // Loop every 6 seconds (1.5s closed + 4.5s open reveal window)
             setInterval(runLoopCycle, 6000);
         }
 
