@@ -45,7 +45,7 @@
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            justify-center: center;
+            justify-content: center;
             transition: opacity 0.5s ease-out, visibility 0.5s;
             pointer-events: none;
         }
@@ -77,35 +77,6 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.4s ease 0.8s, visibility 0.4s ease 0.8s;
-        }
-
-        /* CINEMATIC STORY ANIMATION FADE CYCLE */
-        @keyframes storySceneCycle {
-            0%, 45% { opacity: 1; transform: scale(1); }
-            50%, 95% { opacity: 0; transform: scale(1.05); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes storySceneCycleAlt {
-            0%, 45% { opacity: 0; transform: scale(1.05); }
-            50%, 95% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.05); }
-        }
-
-        .animate-scene-1 {
-            animation: storySceneCycle 10s ease-in-out infinite;
-        }
-        .animate-scene-2 {
-            animation: storySceneCycleAlt 10s ease-in-out infinite;
-        }
-
-        /* Steam Rise Animation for Canteen Chai */
-        @keyframes steamRise {
-            0% { opacity: 0.8; transform: translateY(0) scaleX(1); }
-            50% { opacity: 0.4; transform: translateY(-8px) scaleX(1.3); }
-            100% { opacity: 0; transform: translateY(-16px) scaleX(1.6); }
-        }
-        .animate-steam {
-            animation: steamRise 2s ease-out infinite;
         }
 
         /* Glow Aura */
@@ -231,59 +202,15 @@
                 </div>
 
                 <div class="flex-shrink-0 w-full lg:w-96 flex flex-col items-center justify-center">
-                    <div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl group">
+                    <div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl flex items-center justify-center">
                         
-                        <div class="animate-scene-1 absolute inset-0 bg-gradient-to-br from-amber-950/90 via-slate-900 to-slate-950 flex flex-col items-center justify-center p-6 text-center transition-all duration-1000">
-                            
-                            <div class="relative mb-4">
-                                <div class="w-20 h-20 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 text-3xl shadow-lg">
-                                    <i class="fa-solid fa-mug-hot"></i>
-                                </div>
-                                <div class="absolute -top-3 left-1/2 -translate-x-1/2 flex gap-1 text-amber-200">
-                                    <i class="fa-solid fa-wind text-xs animate-steam"></i>
-                                    <i class="fa-solid fa-wind text-xs animate-steam" style="animation-delay: 0.5s;"></i>
-                                </div>
-                            </div>
+                        <img 
+                            src="https://uwrwtttkqywsmehexmbf.supabase.co/storage/v1/object/public/Gif/Untitled%20design.gif" 
+                            alt="Senior Doctor holding Junior Doctor hand and sharing tea" 
+                            class="w-full h-full object-cover"
+                        />
 
-                            <div class="bg-amber-400/10 border border-amber-400/30 rounded-full px-3 py-1 mb-2">
-                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-300 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-utensils text-amber-400"></i> Scene 1: Hospital Canteen
-                                </span>
-                            </div>
-
-                            <h4 class="text-base font-bold text-white mb-1">3 AM Post-Duty Chai</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed max-w-xs">
-                                Senior doctor unwinding over hot tea, reassuring the new junior that every tough shift builds confidence.
-                            </p>
-                            
-                            <div class="mt-4 flex items-center gap-2 text-[10px] text-amber-400/80">
-                                <i class="fa-solid fa-arrow-right-long animate-pulse"></i> Next: Campus Walkthrough
-                            </div>
-                        </div>
-
-                        <div class="animate-scene-2 absolute inset-0 bg-gradient-to-br from-sky-950/90 via-slate-900 to-teal-950 flex flex-col items-center justify-center p-6 text-center transition-all duration-1000">
-                            
-                            <div class="w-20 h-20 rounded-full bg-teal-500/20 border border-teal-400/50 flex items-center justify-center text-teal-300 text-3xl mb-4 shadow-lg">
-                                <i class="fa-solid fa-hospital-user"></i>
-                            </div>
-
-                            <div class="bg-teal-400/10 border border-teal-400/30 rounded-full px-3 py-1 mb-2">
-                                <span class="text-[10px] font-black uppercase tracking-widest text-teal-300 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-walking text-teal-300"></i> Scene 2: Department Orientation
-                                </span>
-                            </div>
-
-                            <h4 class="text-base font-bold text-white mb-1">Walking The Wards Together</h4>
-                            <p class="text-xs text-slate-300 leading-relaxed max-w-xs">
-                                Senior introducing the junior to the ICUs, OPDs, and showing them around their new home for residency.
-                            </p>
-
-                            <div class="mt-4 flex items-center gap-2 text-[10px] text-teal-400/80">
-                                <i class="fa-solid fa-rotate animate-spin"></i> Looping Mentorship Story
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-3 inset-x-4 bg-slate-900/80 backdrop-blur-md border border-slate-700/80 rounded-xl py-1.5 px-3 text-center z-20">
+                        <div class="absolute bottom-3 inset-x-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 rounded-xl py-2 px-3 text-center z-10 shadow-lg">
                             <span class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-heart text-rose-500"></i> Step Inside. You Belong Here.
                             </span>
