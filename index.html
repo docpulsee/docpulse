@@ -12,11 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
-            background-color: #070f14;
+            background-color: #050b10;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(236, 72, 153, 0.08) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
             background-attachment: fixed;
         }
         .no-scrollbar::-webkit-scrollbar {
@@ -26,6 +26,8 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Continuous Ticker */
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -35,20 +37,53 @@
             white-space: nowrap;
             animation: ticker 35s linear infinite;
         }
-        @keyframes handPull {
-            0%, 100% { transform: translateX(0) scale(1); filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.3)); }
-            50% { transform: translateX(12px) scale(1.03); filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)); }
+
+        /* Glass Shatter / Crack Effect */
+        .glass-crack-container {
+            position: relative;
+            background: rgba(17, 25, 39, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
         }
-        .animate-hand-pull {
-            animation: handPull 3.5s ease-in-out infinite;
+        .glass-crack-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 20%, rgba(5, 11, 16, 0.8) 90%),
+                linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(255,255,255,0.02) 100%);
+            z-index: 10;
         }
-        @keyframes gateGlow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.9; }
+        /* Shatter Lines Artifice */
+        .glass-shard-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), rgba(6, 182, 212, 0.8), transparent);
+            height: 1px;
+            transform-origin: center;
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
         }
-        .animate-gate-glow {
-            animation: gateGlow 3s ease-in-out infinite;
+
+        /* Lifelike Walking/Hand-Holding Animation */
+        @keyframes walkInSync {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-4px) rotate(0.5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-4px) rotate(-0.5deg); }
         }
+        .animate-walk-sync {
+            animation: walkInSync 2.8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGateAura {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.08); }
+        }
+        .animate-gate-aura {
+            animation: pulseGateAura 4s ease-in-out infinite;
+        }
+
+        /* Neon Border Glow */
         @keyframes neonPulse {
             0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.2); }
             50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), inset 0 0 25px rgba(6, 182, 212, 0.4); }
@@ -68,15 +103,15 @@
             </span>
             <div class="overflow-hidden whitespace-nowrap w-full relative">
                 <div class="animate-ticker flex items-center gap-12 font-bold text-slate-950">
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Notice:** Directory unlock features launch with counseling; rank predictor active right now!</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India:** NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak:** Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Notice:** Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Colorful Header Bar -->
+    <!-- Header -->
     <header class="w-full bg-[#0d1b2a]/90 backdrop-blur-md border-b border-cyan-500/20 sticky top-0 z-40 shadow-2xl">
         <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3.5">
@@ -85,7 +120,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-slate-400 font-medium">NEET Rank Predictor • Smooth Continuous Interpolation Curve</p>
+                    <p class="text-xs text-slate-400 font-medium">NEET PG Precision Rank Engine • Continuous Piecewise Curve</p>
                 </div>
             </div>
             
@@ -99,22 +134,22 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-10">
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-12">
         
-        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR -->
+        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR (MAIN FOCUS) -->
         <section class="bg-gradient-to-br from-[#111927] via-[#0d1622] to-[#111927] border-2 border-emerald-400/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-4 shadow">
-                    <i class="fa-solid fa-bolt text-amber-400"></i> Primary Tool Active Now • 2026 Scoring Curve
+                    <i class="fa-solid fa-bolt text-amber-400"></i> Active Tool • Continuous Score Interpolation Engine
                 </div>
                 <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 mb-3 leading-tight">
-                    Conquer Your NEET Rank with Mathematical Precision
+                    Conquer Your NEET PG Rank
                 </h2>
                 <p class="text-sm text-slate-300 mb-8 max-w-xl">
-                    No erratic leaps. Enter your correct and wrong response counts for a smooth piecewise continuous interpolation rank projection.
+                    No unrealistic gaps or sudden jumps. Enter your correct and wrong responses to generate a continuous mathematical rank estimate.
                 </p>
 
-                <!-- Quick Inline Calculator Preview / Trigger Box -->
+                <!-- Calculator Form Box -->
                 <div class="w-full bg-[#0b131d]/90 border border-cyan-500/30 rounded-2xl p-6 shadow-inner text-left grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                     <div class="md:col-span-2 flex flex-col gap-3">
                         <div class="grid grid-cols-2 gap-3">
@@ -128,188 +163,191 @@
                             </div>
                         </div>
                         <div class="text-xs text-slate-400">
-                            Formula: <span class="text-cyan-300 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 720
+                            Scoring: <span class="text-cyan-300 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 720
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center bg-[#162231] border border-emerald-500/30 rounded-xl p-4 text-center">
                         <button onclick="runHeroPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5 mb-2">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Rank
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Rank Now
                         </button>
-                        <span id="heroRankOutput" class="text-xs text-slate-400 font-medium">Enter scores to evaluate</span>
+                        <span id="heroRankOutput" class="text-xs text-slate-400 font-medium">Enter scores to calculate</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EMOTIONAL TEASER SECTION: COMING SOON SENIOR GATEWAY -->
-        <section class="relative bg-gradient-to-r from-[#0b0f19] via-[#121824] to-[#0b0f19] border-2 border-amber-500/40 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-2xl">
-            <!-- Ambient Glow Backdrop -->
-            <div class="absolute -right-20 -top-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none animate-gate-glow"></div>
-            <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- EMOTIONAL SENIOR-JUNIOR GATEWAY SECTION (LIFELIKE HUMANS IN SCRUBS & COAT) -->
+        <section class="relative bg-gradient-to-r from-[#070d18] via-[#0e1726] to-[#070d18] border-2 border-amber-500/50 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-2xl">
+            <!-- Ambient Glowing Backlight behind Gate -->
+            <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
+            <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-                <!-- Left: High-Contrast Emotional Copy & Launch Status Badge -->
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+                
+                <!-- Left: High-Contrast Emotional Copywriting -->
                 <div class="flex-1 flex flex-col items-start text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/50 text-amber-300 text-xs font-black uppercase tracking-wider mb-5 shadow">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Coming Soon • Launches With Counseling
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/60 text-amber-300 text-xs font-black uppercase tracking-wider mb-5 shadow-lg">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span> Counseling Portal Launching Soon
                     </div>
                     
-                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
-                        The White Coat Waits. <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400">Your Rank Opens the Gate.</span>
+                    <h3 class="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
+                        The White Coat Waits. <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">A Senior is Already Holding the Door Open.</span>
                     </h3>
 
-                    <blockquote class="border-l-4 border-amber-400 pl-4 py-1 text-slate-300 text-sm italic mb-6 leading-relaxed">
-                        “They told you numbers define a seat. They lied. Numbers only unlock the gate. Inside are the 3 AM chai runs, the senior who covers your first cardiac arrest call, and the moment you stop feeling like an aspirant and become the lifeline.”
-                    </blockquote>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        “They told you numbers define a seat. They lied. Numbers only unlock the gate. Inside are the 3 AM emergency room chais, the senior doctor who steps in right when your hands tremble on your first central line, and the moment you stop feeling like an aspirant and become someone’s lifeline.”
+                    </p>
 
-                    <div class="flex items-center gap-3 bg-[#111927]/90 border border-cyan-500/30 px-4 py-3 rounded-2xl w-full sm:w-auto">
-                        <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">
-                            <i class="fa-solid code fa-lock"></i>
-                        </div>
-                        <div class="text-xs">
-                            <span class="text-slate-200 font-bold block">First-Name Directory & Contact Unlock</span>
-                            <span class="text-slate-400">₹500 / contact • Unlocks live as counseling rounds begin</span>
-                        </div>
+                    <div class="p-4 rounded-2xl bg-[#0b131d]/90 border border-amber-500/30 flex items-center gap-3 text-xs text-amber-200/90">
+                        <i class="fa-solid fa-hand-holding-heart text-amber-400 text-xl flex-shrink-0"></i>
+                        <span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
                     </div>
                 </div>
 
-                <!-- Right: Animated High-Contrast Senior Holding Junior Hand Graphic / Silhouette Stage -->
+                <!-- Right: Lifelike Human Senior & Junior Doctor Animation Stage -->
                 <div class="flex-shrink-0 w-full lg:w-auto flex flex-col items-center justify-center">
-                    <div class="relative w-full max-w-sm h-64 sm:h-72 rounded-3xl bg-[#070b12] border border-amber-500/30 flex flex-col items-center justify-center overflow-hidden p-6 shadow-inner">
-                        <!-- Simulated Archway / Hospital Threshold Frame -->
-                        <div class="absolute inset-x-6 top-6 bottom-6 border-t-2 border-x-2 border-amber-500/20 rounded-t-full pointer-events-none"></div>
-                        <div class="absolute bottom-6 inset-x-12 h-0.5 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                    <div class="relative w-full max-w-md h-80 rounded-3xl bg-[#040810] border-2 border-amber-500/40 flex flex-col items-center justify-end overflow-hidden p-6 shadow-2xl">
+                        
+                        <!-- Hospital Archway / Gate Architectural Outline -->
+                        <div class="absolute inset-x-8 top-4 bottom-0 border-t-4 border-x-4 border-amber-400/30 rounded-t-full pointer-events-none"></div>
+                        <div class="absolute top-12 text-[10px] font-black uppercase tracking-widest text-amber-300/60 bg-[#040810] px-3 py-1 rounded-full border border-amber-500/20">
+                            Department of Post Graduate Studies
+                        </div>
 
-                        <!-- Animated Hand-Pull SVG Vector Illustration -->
-                        <div class="animate-hand-pull flex items-center justify-center gap-2 mb-4">
-                            <!-- Senior Hand / Scrub Silhouette glowing amber/gold rim -->
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600/40 to-yellow-500/60 border border-amber-400/70 flex items-center justify-center text-amber-200 shadow-lg shadow-amber-500/30">
-                                <i class="fa-solid fa-hands-holding-child text-2xl"></i>
+                        <!-- Warm Clinical Light Projection from Inside Hospital -->
+                        <div class="absolute bottom-0 w-full h-48 bg-gradient-to-t from-amber-500/20 via-cyan-500/10 to-transparent pointer-events-none"></div>
+
+                        <!-- Animated Lifelike Senior & Junior Figures -->
+                        <div class="animate-walk-sync relative z-10 flex items-end justify-center gap-1 mb-2">
+                            
+                            <!-- SENIOR DOCTOR (In White Coat & Stethoscope, Reaching Hand) -->
+                            <div class="flex flex-col items-center">
+                                <!-- Doctor Head / Stethoscope -->
+                                <div class="w-10 h-10 rounded-full bg-amber-200/90 border-2 border-amber-400 flex items-center justify-center shadow-lg relative">
+                                    <i class="fa-solid fa-user-doctor text-slate-950 text-base"></i>
+                                    <!-- Stethoscope badge -->
+                                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-amber-500 rounded-full border border-slate-950 flex items-center justify-center text-[8px] text-slate-950">
+                                        <i class="fa-solid fa-stethoscope"></i>
+                                    </div>
+                                </div>
+                                <!-- Senior Body: Long White Lab Coat & Scrubs -->
+                                <div class="w-12 h-28 bg-gradient-to-b from-slate-100 via-slate-200 to-slate-300 rounded-t-xl border-x-2 border-t-2 border-amber-300/80 shadow-md relative flex items-center justify-center">
+                                    <!-- Teal Scrubs Inside Coat -->
+                                    <div class="w-4 h-full bg-teal-600"></div>
+                                    <!-- Senior Badge -->
+                                    <span class="absolute top-3 left-1 text-[7px] font-black bg-amber-500 text-slate-950 px-0.5 rounded">SR</span>
+                                </div>
                             </div>
-                            <div class="text-amber-300/60 font-mono text-xl">→</div>
-                            <!-- Junior Threshold Entry Icon -->
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-600/40 to-teal-500/60 border border-cyan-400/70 flex items-center justify-center text-cyan-200 shadow-lg shadow-cyan-500/30">
-                                <i class="fa-solid fa-hospital-user text-2xl"></i>
+
+                            <!-- LINKING HAND / CONNECTION GRAPHIC -->
+                            <div class="flex items-center text-amber-400 px-1 mb-12 animate-pulse">
+                                <i class="fa-solid fa-handshake text-xl drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]"></i>
+                            </div>
+
+                            <!-- JUNIOR DOCTOR (In Surgical Scrubs, Stepping Through Gate) -->
+                            <div class="flex flex-col items-center">
+                                <!-- Junior Head -->
+                                <div class="w-9 h-9 rounded-full bg-cyan-200/90 border-2 border-cyan-400 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-user text-slate-950 text-sm"></i>
+                                </div>
+                                <!-- Junior Body: Blue/Teal OT Scrubs -->
+                                <div class="w-11 h-24 bg-gradient-to-b from-cyan-600 to-teal-700 rounded-t-xl border-x-2 border-t-2 border-cyan-300/80 shadow-md relative flex items-center justify-center">
+                                    <!-- Stethoscope on Junior -->
+                                    <i class="fa-solid fa-stethoscope text-cyan-200 text-xs"></i>
+                                    <span class="absolute top-3 right-1 text-[7px] font-black bg-cyan-400 text-slate-950 px-0.5 rounded">JR</span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="text-center">
-                            <span class="text-xs font-black text-amber-300 uppercase tracking-widest block mb-1">Building The Bridge</span>
-                            <span class="text-[11px] text-slate-400 block px-4">We are hard at work mapping verified resident mentor connections for your specific rank bracket.</span>
-                        </div>
+                        <!-- Floor Reflection Line -->
+                        <div class="w-3/4 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full mb-1"></div>
+                        <span class="text-[11px] font-bold text-amber-300 z-10">Step Inside. You Belong Here.</span>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- PREVIEW LOCKED DIRECTORY SEARCH / DEMO SECTION -->
-        <section class="bg-[#111927] border border-cyan-500/25 rounded-3xl p-6 sm:p-8 shadow-2xl">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
-                <div>
-                    <h3 class="text-lg font-black text-slate-100 flex items-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass text-cyan-400"></i> Rank-First Directory Preview (Locked)
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Search by First Name or Rank • ₹500 per contact unlock via WhatsApp QR verification</p>
-                </div>
-                <div class="bg-amber-950/70 border border-amber-500/40 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2">
-                    <i class="fa-solid fa-clock-rotate-left"></i> Unlocks Live With Counseling Start
-                </div>
-            </div>
+        <!-- GLASS-BREAKING ANIMATED "COMING SOON" SECTION (REPLACES USER DATA TABLE) -->
+        <section class="glass-crack-container rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl border-2 border-cyan-500/30">
+            <!-- Simulated Shatter Line Overlays -->
+            <div class="glass-shard-line w-full top-1/4 left-0 -rotate-6"></div>
+            <div class="glass-shard-line w-full top-2/3 left-0 rotate-3"></div>
+            <div class="glass-shard-line h-full top-0 left-1/3 rotate-12"></div>
+            <div class="glass-shard-line h-full top-0 right-1/3 -rotate-12"></div>
+            
+            <div class="glass-crack-overlay"></div>
 
-            <!-- Search Controls: Rank & First Name Only -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                <div class="relative">
-                    <i class="fa-solid fa-arrow-down-1-9 text-amber-400 absolute left-3.5 top-3.5 text-sm"></i>
-                    <input type="number" id="previewRankSearch" placeholder="Search by Rank (e.g. 5000)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-xs text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-amber-400">
+            <div class="relative z-20 max-w-2xl mx-auto flex flex-col items-center">
+                <!-- Shattered Glass Lock Badge -->
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-cyan-500/20 via-teal-500/30 to-emerald-500/20 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 text-3xl mb-6 shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+                    <i class="fa-solid fa-shield-halved"></i>
                 </div>
-                <div class="relative">
-                    <i class="fa-solid fa-user text-emerald-400 absolute left-3.5 top-3.5 text-sm"></i>
-                    <input type="text" id="previewNameSearch" placeholder="Search First Name (e.g. Rohan)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-xs text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-emerald-400">
-                </div>
-                <button onclick="filterPreviewDirectory()" class="bg-gradient-to-r from-emerald-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black rounded-xl py-2.5 text-xs transition shadow flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-filter"></i> Apply Rank/Name Filter
+
+                <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 text-slate-950 font-black px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 shadow">
+                    Directory & Resident Mentorship Portal
+                </span>
+
+                <h3 class="text-3xl sm:text-4xl font-black text-white mb-4">
+                    Breaking Glass Ceilings Soon
+                </h3>
+
+                <p class="text-slate-300 text-sm leading-relaxed mb-8">
+                    We have intentionally locked the raw candidate directory until **Official NEET PG Counseling** begins. This ensures 100% verified data, preventing spam while matching you directly with verified residents from your target colleges.
+                </p>
+
+                <!-- WhatsApp Notification / Pre-Registration Button -->
+                <button onclick="openUnlockQrModal('Counseling Alert', '2026')" class="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 text-slate-950 font-black px-8 py-4 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2 hover:scale-105 transform">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Get Notified First On WhatsApp
                 </button>
             </div>
+        </section>
 
-            <!-- Sample Locked Directory Cards (First Name + Rank + ₹500 Unlock WhatsApp Modal Trigger) -->
-            <div id="directoryPreviewList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-black text-base">
-                            R
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-100 text-sm">Rohan</span>
-                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 4,890</span>
-                            </div>
-                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
-                        </div>
+        <!-- PROPOSED ROADMAP & NEW FEATURES SUGGESTION SECTION -->
+        <section class="bg-[#0b131d] border border-cyan-500/20 rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Future Ecosystem</span>
+                <h3 class="text-2xl font-black text-slate-100 mt-1">Upcoming Features Built for NEET Aspirants</h3>
+                <p class="text-xs text-slate-400 mt-2">Here is what we are adding next to make your counseling journey 100% stress-free.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Feature 1 -->
+                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-emerald-500/40 transition">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/30">
+                        <i class="fa-solid fa-[#1] text-xs"></i><i class="fa-solid fa-hospital-user ml-1 text-sm"></i>
                     </div>
-                    <button onclick="openUnlockQrModal('Rohan', '4,890')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
-                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
-                    </button>
+                    <h4 class="font-bold text-sm text-slate-100">College Duty Hours & Toxicity Tracker</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Real, anonymous reviews from working residents regarding night duty shifts, bed capacity, toxicity levels, and stipend punctuality.
+                    </p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-black text-base">
-                            A
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-100 text-sm">Aarav</span>
-                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 12,400</span>
-                            </div>
-                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
-                        </div>
+                <!-- Feature 2 -->
+                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-cyan-500/40 transition">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center font-bold text-lg border border-cyan-500/30">
+                        <i class="fa-solid fa-[#2] text-xs"></i><i class="fa-solid fa-sliders ml-1 text-sm"></i>
                     </div>
-                    <button onclick="openUnlockQrModal('Aarav', '12,400')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
-                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
-                    </button>
+                    <h4 class="font-bold text-sm text-slate-100">AI Choice Filling Matrix Generator</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Input your rank, state preference, and budget to automatically generate a tailored preference order list for All-India & State rounds.
+                    </p>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-purple-950 border border-purple-500/40 flex items-center justify-center text-purple-300 font-black text-base">
-                            P
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-100 text-sm">Priya</span>
-                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 7,500</span>
-                            </div>
-                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
-                        </div>
+                <!-- Feature 3 -->
+                <div class="bg-[#111927] border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-amber-500/40 transition">
+                    <div class="w-10 h-10 rounded-xl bg-amber-950 text-amber-400 flex items-center justify-center font-bold text-lg border border-amber-500/30">
+                        <i class="fa-solid fa-[#3] text-xs"></i><i class="fa-solid fa-comments ml-1 text-sm"></i>
                     </div>
-                    <button onclick="openUnlockQrModal('Priya', '7,500')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
-                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
-                    </button>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-amber-950 border border-amber-500/40 flex items-center justify-center text-amber-300 font-black text-base">
-                            V
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-100 text-sm">Vikram</span>
-                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 15,100</span>
-                            </div>
-                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
-                        </div>
-                    </div>
-                    <button onclick="openUnlockQrModal('Vikram', '15,100')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
-                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
-                    </button>
+                    <h4 class="font-bold text-sm text-slate-100">1-on-1 Senior Call Booking</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Book verified 15-minute 1-on-1 voice calls with residents currently studying in your dream branch and college.
+                    </p>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- RANK PREDICTOR MODAL DIALOG -->
@@ -325,7 +363,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">NEET PG 2026 Interactive Rank Calc</h3>
-                    <p class="text-xs text-slate-400 font-medium">Smooth continuous curve rank prediction</p>
+                    <p class="text-xs text-slate-400 font-medium">Continuous curve mathematical predictor</p>
                 </div>
             </div>
 
@@ -350,7 +388,7 @@
                 <div class="bg-gradient-to-r from-emerald-950/70 via-teal-950/70 to-cyan-950/70 border border-cyan-400/40 rounded-2xl p-3.5 text-center shadow-inner">
                     <span class="text-xs text-slate-300 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
                     <span id="liveMarksDisplay" class="text-2xl font-black text-cyan-300">0 / 720</span>
-                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-400 mt-1">Remaining questions treated as left/unattempted</span>
+                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-400 mt-1">Remaining questions treated as unattempted</span>
                 </div>
 
                 <div>
@@ -387,8 +425,8 @@
 
             <div class="text-center mb-6">
                 <span class="bg-amber-950 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">₹500 / Contact Unlock</span>
-                <h3 class="text-xl font-black text-slate-100 mt-2">Unlock Contact for <span id="modalTargetName" class="text-emerald-400">Candidate</span></h3>
-                <p class="text-xs text-slate-400 mt-1">Target Rank: <span id="modalTargetRank" class="text-cyan-300 font-bold">AIR N/A</span></p>
+                <h3 class="text-xl font-black text-slate-100 mt-2">Counseling Portal Alert Pre-Registration</h3>
+                <p class="text-xs text-slate-400 mt-1">Directory opens live when counseling begins</p>
             </div>
 
             <!-- Clean Payment / QR Placeholder Section -->
@@ -413,22 +451,13 @@
 
             <!-- WhatsApp Verification Action -->
             <button onclick="sendUnlockWhatsApp()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-green-500/30 flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-base"></i> Send Payment Screenshot on WhatsApp
+                <i class="fa-brands fa-whatsapp text-base"></i> Send Pre-Registration Screenshot on WhatsApp
             </button>
-            <p class="text-[10px] text-center text-slate-400 mt-3">
-                Directory unlocks live once counseling rounds officially commence.
-            </p>
         </div>
     </div>
 
     <script>
-        const SUPABASE_URL = 'https://uwrwtttkqywsmehexmbf.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
-        
-        let dbClient = null;
-        let activeUnlockCandidate = { name: '', rank: '' };
-
-        // Sorted Anchor Points for Smooth Continuous Interpolation Curve
+        // Smooth Continuous Interpolation Anchors
         const pythonMatrixAnchors = [
             { marks: 720, rank: 1 },
             { marks: 600, rank: 79 },
@@ -443,13 +472,6 @@
             { marks: 0, rank: 138000 }
         ].sort((a, b) => b.marks - a.marks);
 
-        function initSupabase() {
-            if (window.supabase && window.supabase.createClient) {
-                dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-            }
-        }
-
-        // Smooth Interpolation Function to Avoid Unrealistic Rank Gaps
         function getInterpolatedRank(marks) {
             if (marks >= 720) return 1;
             if (marks <= 0) return 138000;
@@ -508,7 +530,7 @@
                 return;
             }
 
-            const marksInput = (correctInput * 4) - (wrongVal * 1);
+            const marksInput = (correctInput * 4) - (wrongInput * 1);
             const rawInterpolatedRank = getInterpolatedRank(marksInput);
             const predRankStr = `~${rawInterpolatedRank.toLocaleString()}`;
 
@@ -517,14 +539,14 @@
             let badgeColor = "text-emerald-300 bg-emerald-950 border-emerald-500/30";
 
             if (rawInterpolatedRank <= 1000) {
-                comfortTitle = "🌟 Elite Standing for 2026!";
-                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your smoothly interpolated rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure.`;
+                comfortTitle = "🌟 Elite Standing!";
+                comfortMsg = `With ${marksInput} marks, your estimated rank is **${predRankStr}**. Premier institutes for **${branch}** are in close reach.`;
             } else if (rawInterpolatedRank <= 15000) {
-                comfortTitle = "🌱 Secure & Promising Horizon";
-                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your continuous curve rank is **${predRankStr}**. Comfortably within reach of esteemed state medical universities for **${branch}**.`;
+                comfortTitle = "🌱 Secure Horizon";
+                comfortMsg = `At ${marksInput} marks, your estimated rank is **${predRankStr}**. Promising options available across top state seats for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted continuous rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas for **${branch}**.`;
+                comfortMsg = `Your predicted rank is **${predRankStr}** for ${marksInput} marks. Great opportunities exist in private and institutional rounds for **${branch}**.`;
             }
 
             resBox.classList.remove('hidden');
@@ -536,7 +558,7 @@
                 <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
                     <div>Calculated Marks: <span class="text-cyan-300 font-bold">${marksInput} / 720</span></div>
-                    <div>Curve Model: <span class="text-emerald-300 font-bold">Continuous Piecewise</span></div>
+                    <div>Model: <span class="text-emerald-300 font-bold">Continuous Piecewise</span></div>
                 </div>
             `;
         };
@@ -545,13 +567,11 @@
             document.getElementById('predictorModal').classList.remove('hidden');
         };
         window.closePredictorModal = function() {
+            document.getElementById('predictorModal').classList.hidden = true;
             document.getElementById('predictorModal').classList.add('hidden');
         };
 
         window.openUnlockQrModal = function(name, rank) {
-            activeUnlockCandidate = { name, rank };
-            document.getElementById('modalTargetName').innerText = name;
-            document.getElementById('modalTargetRank').innerText = `AIR ${rank}`;
             document.getElementById('unlockQrModal').classList.remove('hidden');
         };
 
@@ -561,20 +581,10 @@
 
         window.sendUnlockWhatsApp = function() {
             const ADMIN_WHATSAPP_NUMBER = "919876543210";
-            const text = `Hi, I paid ₹500 for rank unlock [First Name: ${activeUnlockCandidate.name}, AIR ${activeUnlockCandidate.rank}]. Here is my payment screenshot:`;
+            const text = `Hi, I am interested in pre-registering for the NEET PG Counseling Directory unlock portal. Please alert me when live:`;
             const encoded = encodeURIComponent(text);
             window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
         };
-
-        window.filterPreviewDirectory = function() {
-            const rankVal = document.getElementById('previewRankSearch').value.trim();
-            const nameVal = document.getElementById('previewNameSearch').value.trim().toLowerCase();
-            alert(`Filter applied: Rank ${rankVal || 'Any'} | First Name ${nameVal || 'Any'}. Full Supabase database search launches with counseling.`);
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initSupabase();
-        });
     </script>
 </body>
 </html>
