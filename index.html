@@ -39,11 +39,11 @@
             color: var(--primary);
         }
 
-        /* News Ticker */
+        /* Animated Live News Ticker */
         .ticker-wrap {
             background: #1e293b;
             color: #ffffff;
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             overflow: hidden;
             font-size: 0.9rem;
         }
@@ -69,9 +69,11 @@
             padding: 0 1rem;
         }
 
-        /* Emotional Banner */
+        /* Animated Emotional Hero Section */
         .hero-banner {
-            background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+            background: linear-gradient(-45deg, #e0f2fe, #ccfbf1, #bae6fd, #a7f3d0);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
             border-radius: 12px;
             padding: 2.5rem;
             text-align: center;
@@ -79,10 +81,16 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .hero-banner h1 {
             color: var(--primary-dark);
             margin-top: 0;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
         .hero-banner p {
@@ -95,7 +103,7 @@
         .hero-banner .tagline {
             font-weight: 700;
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-top: 1.5rem;
         }
 
@@ -123,7 +131,7 @@
             color: var(--primary-dark);
         }
 
-        /* Form & Inputs */
+        /* Form Inputs */
         .form-group {
             margin-bottom: 1rem;
         }
@@ -211,7 +219,7 @@
 
     <div class="container">
         
-        <!-- Emotional Hero Section -->
+        <!-- Animated Hero Section with Emotional Message -->
         <section class="hero-banner">
             <h1>The White Coat Waits</h1>
             <p>To every doctor standing at the crossroads of ranks, scores, and choices—remember why you started. Behind every choice of branch isn't just a rank; it's years of late nights, endless sacrifice, and a dream that kept you going through the hardest shifts.</p>
@@ -224,7 +232,7 @@
             <!-- Rank Predictor Section -->
             <div class="card">
                 <h2>2026 Rank Predictor</h2>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">Uses continuous interpolation based on historical score vs. rank trends.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Calculates continuous rank projections based on marks without dynamic parameter tags.</p>
                 <div class="form-group">
                     <label for="score">Enter Your NEET PG Score</label>
                     <input type="number" id="score" placeholder="e.g. 580">
@@ -233,7 +241,7 @@
                 <div id="rank-result" style="margin-top: 1rem; font-weight: 600;"></div>
             </div>
 
-            <!-- Resident Directory Section -->
+            <!-- Directory Section (Completely Masked) -->
             <div class="card">
                 <h2>Direct Connect: Resident Directory</h2>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Connect directly with verified seniors to understand campus culture and branch reality.</p>
@@ -286,7 +294,6 @@
                 return;
             }
             
-            // Example continuous interpolation logic preview
             resultDiv.innerText = "Estimated Rank Range: Processing continuous curve...";
         }
     </script>
