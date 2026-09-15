@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocPulse | NEET PG Resident Directory & Exact Matrix Predictor</title>
+    <title>DocPulse | NEET PG Rank Predictor & Senior Gateway</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -35,12 +35,19 @@
             white-space: nowrap;
             animation: ticker 35s linear infinite;
         }
-        @keyframes playfulBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-4px) scale(1.01); }
+        @keyframes handPull {
+            0%, 100% { transform: translateX(0) scale(1); filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.3)); }
+            50% { transform: translateX(12px) scale(1.03); filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)); }
         }
-        .playful-glow {
-            animation: playfulBounce 3.5s ease-in-out infinite;
+        .animate-hand-pull {
+            animation: handPull 3.5s ease-in-out infinite;
+        }
+        @keyframes gateGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+        }
+        .animate-gate-glow {
+            animation: gateGlow 3s ease-in-out infinite;
         }
         @keyframes neonPulse {
             0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.2); }
@@ -63,7 +70,7 @@
                 <div class="animate-ticker flex items-center gap-12 font-bold text-slate-950">
                     <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 18:01 IST):** NEET PG 2026 answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
                     <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **AajTak (24 Aug 2026, 17:27 IST):** NEET PG 2026 admit card schedule updated by NBEMS; single-shift CBT exam successfully conducted.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Times of India (14 Sep 2026, 11:38 IST):** Aspirants use smooth mathematical interpolation models to estimate continuous rank curves prior to official results.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-300"></i> **Notice:** Directory unlock features launch with counseling; rank predictor active right now!</span>
                 </div>
             </div>
         </div>
@@ -78,134 +85,234 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-slate-400 font-medium">138,000+ Verified Candidates • Smooth Continuous Interpolation Curve</p>
+                    <p class="text-xs text-slate-400 font-medium">NEET Rank Predictor • Smooth Continuous Interpolation Curve</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-2.5 flex-wrap">
-                <button onclick="openPredictorModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center gap-2 border border-emerald-300/40">
-                    <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" class="w-4 h-4 rounded-full object-cover" alt="gif">
-                    <span>Rank Predictor & Marks Calc</span>
-                </button>
-
-                <button onclick="exportCounselingReport()" class="bg-[#1b263b] hover:bg-cyan-500/20 text-cyan-300 font-bold px-3.5 py-2.5 rounded-xl text-xs transition border border-cyan-500/40 flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-file-arrow-down text-cyan-400"></i> Export PDF Report
-                </button>
-
-                <div class="bg-[#1b263b]/90 border border-emerald-500/30 rounded-xl px-3.5 py-2 text-xs flex items-center gap-2.5 shadow-inner">
-                    <div>
-                        <span class="text-slate-400">Selected:</span> 
-                        <span id="selectedCount" class="font-black text-emerald-400">0</span>
-                    </div>
-                    <span class="text-slate-600">|</span>
-                    <div>
-                        <span class="text-slate-400">Total:</span> 
-                        <span id="fCost" class="font-black text-cyan-400">₹0</span>
-                    </div>
-                </div>
-
-                <button onclick="clearSelections()" title="Clear all selected" class="bg-[#1b263b] hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 p-2.5 rounded-xl text-xs font-bold transition border border-slate-700">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-
-                <button onclick="shareToWhatsApp()" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-green-500/30 flex items-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Request on WhatsApp
+                <button onclick="openPredictorModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center gap-2 border border-emerald-300/45">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>Open Rank Predictor</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col gap-10">
         
-        <!-- Interactive Category Quick Tabs -->
-        <div class="mb-4">
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-xs">
-                <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] mr-1"><i class="fa-solid fa-sliders text-emerald-400 mr-1"></i> Quick Filters:</span>
-                <button onclick="applyQuickTab('', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-emerald-300 font-bold px-3.5 py-2 rounded-xl border border-emerald-500/30 whitespace-nowrap transition shadow-sm">All Records</button>
-                <button onclick="applyQuickTab('KARNATAKA', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-cyan-300 font-bold px-3.5 py-2 rounded-xl border border-cyan-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-cyan-400 mr-1"></i>Karnataka</button>
-                <button onclick="applyQuickTab('MAHARASHTRA', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-amber-300 font-bold px-3.5 py-2 rounded-xl border border-amber-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-amber-400 mr-1"></i>Maharashtra</button>
-                <button onclick="applyQuickTab('DELHI', '', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-purple-300 font-bold px-3.5 py-2 rounded-xl border border-purple-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-map-pin text-purple-400 mr-1"></i>Delhi</button>
-                <button onclick="applyQuickTab('', 'AIIMS', '')" class="bg-[#1b263b] hover:bg-[#27374d] text-rose-300 font-bold px-3.5 py-2 rounded-xl border border-rose-500/30 whitespace-nowrap transition shadow-sm"><i class="fa-solid fa-hospital text-rose-400 mr-1"></i>AIIMS Institutes</button>
+        <!-- HERO SECTION: PRIMARY NEET RANK PREDICTOR -->
+        <section class="bg-gradient-to-br from-[#111927] via-[#0d1622] to-[#111927] border-2 border-emerald-400/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+            <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-4 shadow">
+                    <i class="fa-solid fa-bolt text-amber-400"></i> Primary Tool Active Now • 2026 Scoring Curve
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 mb-3 leading-tight">
+                    Conquer Your NEET Rank with Mathematical Precision
+                </h2>
+                <p class="text-sm text-slate-300 mb-8 max-w-xl">
+                    No erratic leaps. Enter your correct and wrong response counts for a smooth piecewise continuous interpolation rank projection.
+                </p>
+
+                <!-- Quick Inline Calculator Preview / Trigger Box -->
+                <div class="w-full bg-[#0b131d]/90 border border-cyan-500/30 rounded-2xl p-6 shadow-inner text-left grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <div class="md:col-span-2 flex flex-col gap-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-emerald-300 mb-1">Correct Answers</label>
+                                <input type="number" id="heroCorrect" placeholder="e.g. 130" min="0" max="180" class="bg-[#162231] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-rose-300 mb-1">Wrong Answers</label>
+                                <input type="number" id="heroWrong" placeholder="e.g. 20" min="0" max="180" class="bg-[#162231] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
+                            </div>
+                        </div>
+                        <div class="text-xs text-slate-400">
+                            Formula: <span class="text-cyan-300 font-mono font-bold">(Correct × 4) - (Wrong × 1)</span> out of 720
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center bg-[#162231] border border-emerald-500/30 rounded-xl p-4 text-center">
+                        <button onclick="runHeroPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Rank
+                        </button>
+                        <span id="heroRankOutput" class="text-xs text-slate-400 font-medium">Enter scores to evaluate</span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Advanced Filter Control Panel -->
-        <div class="bg-[#111927] p-5 rounded-2xl border border-cyan-500/25 shadow-2xl flex flex-col gap-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                <div class="relative">
-                    <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-emerald-400 text-sm"></i>
-                    <input type="text" id="searchInput" placeholder="Candidate Name..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-emerald-400">
+        <!-- EMOTIONAL TEASER SECTION: COMING SOON SENIOR GATEWAY -->
+        <section class="relative bg-gradient-to-r from-[#0b0f19] via-[#121824] to-[#0b0f19] border-2 border-amber-500/40 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-2xl">
+            <!-- Ambient Glow Backdrop -->
+            <div class="absolute -right-20 -top-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none animate-gate-glow"></div>
+            <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                <!-- Left: High-Contrast Emotional Copy & Launch Status Badge -->
+                <div class="flex-1 flex flex-col items-start text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/50 text-amber-300 text-xs font-black uppercase tracking-wider mb-5 shadow">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Coming Soon • Launches With Counseling
+                    </div>
+                    
+                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
+                        The White Coat Waits. <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400">Your Rank Opens the Gate.</span>
+                    </h3>
+
+                    <blockquote class="border-l-4 border-amber-400 pl-4 py-1 text-slate-300 text-sm italic mb-6 leading-relaxed">
+                        “They told you numbers define a seat. They lied. Numbers only unlock the gate. Inside are the 3 AM chai runs, the senior who covers your first cardiac arrest call, and the moment you stop feeling like an aspirant and become the lifeline.”
+                    </blockquote>
+
+                    <div class="flex items-center gap-3 bg-[#111927]/90 border border-cyan-500/30 px-4 py-3 rounded-2xl w-full sm:w-auto">
+                        <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">
+                            <i class="fa-solid code fa-lock"></i>
+                        </div>
+                        <div class="text-xs">
+                            <span class="text-slate-200 font-bold block">First-Name Directory & Contact Unlock</span>
+                            <span class="text-slate-400">₹500 / contact • Unlocks live as counseling rounds begin</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="relative">
-                    <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-cyan-400 text-sm"></i>
-                    <input type="text" id="stateInput" placeholder="State (e.g. KARNATAKA)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-cyan-400">
-                </div>
+                <!-- Right: Animated High-Contrast Senior Holding Junior Hand Graphic / Silhouette Stage -->
+                <div class="flex-shrink-0 w-full lg:w-auto flex flex-col items-center justify-center">
+                    <div class="relative w-full max-w-sm h-64 sm:h-72 rounded-3xl bg-[#070b12] border border-amber-500/30 flex flex-col items-center justify-center overflow-hidden p-6 shadow-inner">
+                        <!-- Simulated Archway / Hospital Threshold Frame -->
+                        <div class="absolute inset-x-6 top-6 bottom-6 border-t-2 border-x-2 border-amber-500/20 rounded-t-full pointer-events-none"></div>
+                        <div class="absolute bottom-6 inset-x-12 h-0.5 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
 
-                <div class="relative">
-                    <i class="fa-solid fa-hospital-user absolute left-3.5 top-3.5 text-purple-400 text-sm"></i>
-                    <input type="text" id="collegeInput" placeholder="College / Hospital Name..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-purple-400">
-                </div>
+                        <!-- Animated Hand-Pull SVG Vector Illustration -->
+                        <div class="animate-hand-pull flex items-center justify-center gap-2 mb-4">
+                            <!-- Senior Hand / Scrub Silhouette glowing amber/gold rim -->
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600/40 to-yellow-500/60 border border-amber-400/70 flex items-center justify-center text-amber-200 shadow-lg shadow-amber-500/30">
+                                <i class="fa-solid fa-hands-holding-child text-2xl"></i>
+                            </div>
+                            <div class="text-amber-300/60 font-mono text-xl">→</div>
+                            <!-- Junior Threshold Entry Icon -->
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-600/40 to-teal-500/60 border border-cyan-400/70 flex items-center justify-center text-cyan-200 shadow-lg shadow-cyan-500/30">
+                                <i class="fa-solid fa-hospital-user text-2xl"></i>
+                            </div>
+                        </div>
 
-                <div class="relative">
-                    <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-amber-400 text-sm"></i>
-                    <input type="text" id="emailInput" placeholder="Email ID..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-amber-400">
+                        <div class="text-center">
+                            <span class="text-xs font-black text-amber-300 uppercase tracking-widest block mb-1">Building The Bridge</span>
+                            <span class="text-[11px] text-slate-400 block px-4">We are hard at work mapping verified resident mentor connections for your specific rank bracket.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVIEW LOCKED DIRECTORY SEARCH / DEMO SECTION -->
+        <section class="bg-[#111927] border border-cyan-500/25 rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+                <div>
+                    <h3 class="text-lg font-black text-slate-100 flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-400"></i> Rank-First Directory Preview (Locked)
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Search by First Name or Rank • ₹500 per contact unlock via WhatsApp QR verification</p>
+                </div>
+                <div class="bg-amber-950/70 border border-amber-500/40 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Unlocks Live With Counseling Start
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-800">
-                <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <span class="text-xs text-slate-400 font-bold whitespace-nowrap"><i class="fa-solid fa-arrow-down-1-9 text-amber-400 mr-1"></i> AIR Bracket:</span>
-                    <input type="number" id="minRank" placeholder="Min Rank" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 w-full sm:w-28 focus:outline-none focus:border-emerald-400">
-                    <span class="text-slate-500 text-xs font-bold">-</span>
-                    <input type="number" id="maxRank" placeholder="Max Rank" class="bg-[#0b131d] border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 w-full sm:w-28 focus:outline-none focus:border-emerald-400">
+            <!-- Search Controls: Rank & First Name Only -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                <div class="relative">
+                    <i class="fa-solid fa-arrow-down-1-9 text-amber-400 absolute left-3.5 top-3.5 text-sm"></i>
+                    <input type="number" id="previewRankSearch" placeholder="Search by Rank (e.g. 5000)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-xs text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-amber-400">
                 </div>
-
-                <button id="searchBtn" class="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black px-8 py-3 rounded-xl text-sm transition shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 w-full sm:w-auto">
-                    <i class="fa-solid fa-magnifying-glass"></i> Search Candidates
+                <div class="relative">
+                    <i class="fa-solid fa-user text-emerald-400 absolute left-3.5 top-3.5 text-sm"></i>
+                    <input type="text" id="previewNameSearch" placeholder="Search First Name (e.g. Rohan)..." class="bg-[#0b131d] border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-xs text-slate-100 placeholder-slate-500 w-full focus:outline-none focus:border-emerald-400">
+                </div>
+                <button onclick="filterPreviewDirectory()" class="bg-gradient-to-r from-emerald-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black rounded-xl py-2.5 text-xs transition shadow flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-filter"></i> Apply Rank/Name Filter
                 </button>
             </div>
-        </div>
 
-        <!-- Bulk Operations Bar -->
-        <div id="bulkControlBar" class="hidden mt-4 bg-[#111927] px-4 py-3 rounded-xl border border-cyan-500/20 flex items-center justify-between text-xs text-slate-300 shadow-md">
-            <div class="flex items-center gap-3">
-                <button onclick="selectAllVisible(true)" class="hover:text-emerald-400 font-bold transition flex items-center gap-1.5">
-                    <i class="fa-regular fa-square-check text-emerald-400"></i> Select All Visible
-                </button>
-                <span class="text-slate-700">|</span>
-                <button onclick="selectAllVisible(false)" class="hover:text-rose-400 font-bold transition flex items-center gap-1.5">
-                    <i class="fa-regular fa-square text-rose-400"></i> Deselect All
-                </button>
-            </div>
-            <span class="text-cyan-300 font-black bg-[#0b131d] px-3.5 py-1.5 rounded-lg border border-cyan-500/30 shadow-inner">
-                Rate: ₹199 per 4 unlocks
-            </span>
-        </div>
+            <!-- Sample Locked Directory Cards (First Name + Rank + ₹500 Unlock WhatsApp Modal Trigger) -->
+            <div id="directoryPreviewList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-black text-base">
+                            R
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-100 text-sm">Rohan</span>
+                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 4,890</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
+                        </div>
+                    </div>
+                    <button onclick="openUnlockQrModal('Rohan', '4,890')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
+                    </button>
+                </div>
 
-        <!-- Candidate Cards Container -->
-        <div id="resultsContainer" class="mt-4 flex flex-col gap-3">
-            <div class="bg-[#111927] border border-cyan-500/20 rounded-2xl p-12 text-center text-slate-400 shadow-xl">
-                <img src="https://media.giphy.com/media/xTiTnMhJTwNHCHdTZS/giphy.gif" class="w-20 h-20 mx-auto mb-4 rounded-2xl object-cover border border-emerald-400/40 shadow-lg" alt="gif">
-                <h3 class="text-lg font-black text-slate-100 mb-1">Search the Resident Directory</h3>
-                <p class="text-xs text-slate-400">Enter candidate filters above and click **Search Candidates** to load verified records.</p>
-            </div>
-        </div>
+                <!-- Card 2 -->
+                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-black text-base">
+                            A
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-100 text-sm">Aarav</span>
+                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 12,400</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
+                        </div>
+                    </div>
+                    <button onclick="openUnlockQrModal('Aarav', '12,400')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
+                    </button>
+                </div>
 
-        <!-- Explanatory Logic Section Down Below -->
-        <section class="mt-8 bg-[#111927] border border-cyan-500/20 rounded-2xl p-6 shadow-xl">
-            <h3 class="text-emerald-400 font-black text-sm mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-code text-cyan-400"></i> Smooth Interpolation & Continuous Grading Curve
-            </h3>
-            <div class="text-xs text-slate-400 leading-relaxed flex flex-col gap-2">
-                <p>To prevent unrealistic rank gaps between adjacent marks (like jumping 8,000 ranks for a 1-mark difference), the calculation engine now uses a <strong>piecewise log-linear continuous interpolation</strong> across anchor points.</p>
-                <p><strong>How scoring works:</strong> You enter your correct and wrong counts. Your net score out of 720 is calculated ($4 \times \text{Correct} - 1 \times \text{Wrong}$, with remaining questions treated as unattempted). The engine then smoothly interpolates your rank between adjacent reference brackets so every single mark change yields a realistic, proportionate rank shift.</p>
+                <!-- Card 3 -->
+                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-purple-950 border border-purple-500/40 flex items-center justify-center text-purple-300 font-black text-base">
+                            P
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-100 text-sm">Priya</span>
+                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 7,500</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
+                        </div>
+                    </div>
+                    <button onclick="openUnlockQrModal('Priya', '7,500')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
+                    </button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-[#0b131d] border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-amber-950 border border-amber-500/40 flex items-center justify-center text-amber-300 font-black text-base">
+                            V
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-100 text-sm">Vikram</span>
+                                <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">AIR 15,100</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">Contact: Locked (Coming with Counseling)</span>
+                        </div>
+                    </div>
+                    <button onclick="openUnlockQrModal('Vikram', '15,100')" class="bg-[#1b263b] hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-3 py-2 rounded-xl text-xs transition flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-lock text-[10px]"></i> ₹500 Unlock
+                    </button>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Psychologically Calming, Playful & Engaging Matrix Predictor Modal Dialog -->
+    <!-- RANK PREDICTOR MODAL DIALOG -->
     <div id="predictorModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-gradient-to-b from-[#111927] via-[#0d1622] to-[#080d14] border-2 border-emerald-400/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative neon-box">
             <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg bg-[#0b131d] w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 transition">
@@ -213,10 +320,12 @@
             </button>
             
             <div class="flex items-center gap-3.5 mb-5">
-                <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" class="w-12 h-12 rounded-2xl object-cover border border-emerald-400/50 shadow-md" alt="gif">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-300 text-xl font-black">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
                 <div>
                     <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300">NEET PG 2026 Interactive Rank Calc</h3>
-                    <p class="text-xs text-slate-400 font-medium">Enter correct & wrong • Smooth continuous curve rank!</p>
+                    <p class="text-xs text-slate-400 font-medium">Smooth continuous curve rank prediction</p>
                 </div>
             </div>
 
@@ -226,14 +335,14 @@
                         <label class="block text-xs font-bold text-emerald-300 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-check text-emerald-400"></i> Correct Answers:
                         </label>
-                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarks()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
+                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-300 w-full focus:outline-none focus:border-emerald-400">
                     </div>
 
                     <div class="bg-[#0b131d] p-3.5 rounded-2xl border border-rose-500/30 shadow-inner">
                         <label class="block text-xs font-bold text-rose-300 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-xmark text-rose-400"></i> Wrong Answers:
                         </label>
-                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarks()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
+                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-[#162231] border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-300 w-full focus:outline-none focus:border-rose-400">
                     </div>
                 </div>
 
@@ -260,14 +369,55 @@
                 </div>
             </div>
 
-            <button onclick="runPythonMatrixPredictor()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
+            <button onclick="runPythonMatrixPredictorModal()" class="w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My 2026 Rank Now!
             </button>
 
-            <!-- Cute & Psychologically Calming Result Container -->
-            <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-[#0b131d] border border-emerald-400/40 text-xs text-slate-200 shadow-xl">
-                <!-- Dynamically populated -->
+            <!-- Result Container -->
+            <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-[#0b131d] border border-emerald-400/40 text-xs text-slate-200 shadow-xl"></div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP UNLOCK + HIDDEN QR PAYMENT PLACEHOLDER MODAL -->
+    <div id="unlockQrModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#111927] border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeUnlockQrModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg bg-[#0b131d] w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="bg-amber-950 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">₹500 / Contact Unlock</span>
+                <h3 class="text-xl font-black text-slate-100 mt-2">Unlock Contact for <span id="modalTargetName" class="text-emerald-400">Candidate</span></h3>
+                <p class="text-xs text-slate-400 mt-1">Target Rank: <span id="modalTargetRank" class="text-cyan-300 font-bold">AIR N/A</span></p>
             </div>
+
+            <!-- Clean Payment / QR Placeholder Section -->
+            <div class="border-2 border-dashed border-slate-700 rounded-2xl p-5 text-center bg-[#0b131d]/60 space-y-3 mb-6">
+                <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-amber-300 mb-1">
+                    <i class="fa-solid fa-qrcode"></i> Scan to Pay (₹500)
+                </div>
+                
+                <!-- QR Placeholder Box -->
+                <div class="w-44 h-44 mx-auto bg-white border border-slate-600 rounded-xl flex flex-col items-center justify-center text-slate-400 shadow-inner">
+                    <svg class="w-14 h-14 mb-2 stroke-slate-500" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+                    </svg>
+                    <span class="text-xs font-semibold text-slate-500">QR Code Placeholder</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">Your QR image mounts here</span>
+                </div>
+
+                <div class="text-[11px] text-slate-400 bg-[#162231] py-1.5 px-3 rounded-lg inline-block border border-slate-700">
+                    UPI ID: <span class="italic text-slate-300">Pending QR setup</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Verification Action -->
+            <button onclick="sendUnlockWhatsApp()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-slate-950 font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-green-500/30 flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-base"></i> Send Payment Screenshot on WhatsApp
+            </button>
+            <p class="text-[10px] text-center text-slate-400 mt-3">
+                Directory unlocks live once counseling rounds officially commence.
+            </p>
         </div>
     </div>
 
@@ -276,8 +426,7 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys';
         
         let dbClient = null;
-        let selectedMap = new Map();
-        let loadedCandidates = [];
+        let activeUnlockCandidate = { name: '', rank: '' };
 
         // Sorted Anchor Points for Smooth Continuous Interpolation Curve
         const pythonMatrixAnchors = [
@@ -297,27 +446,8 @@
         function initSupabase() {
             if (window.supabase && window.supabase.createClient) {
                 dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-            } else {
-                console.error("Supabase SDK failed to load.");
             }
         }
-
-        window.applyQuickTab = function(stateName, collegeName, emailQuery) {
-            document.getElementById('stateInput').value = stateName;
-            document.getElementById('collegeInput').value = collegeName;
-            document.getElementById('emailInput').value = emailQuery;
-            window.searchDatabase();
-        };
-
-        window.calculateLiveMarks = function() {
-            const correctVal = parseInt(document.getElementById('predCorrect').value) || 0;
-            const wrongVal = parseInt(document.getElementById('predWrong').value) || 0;
-            const totalMarks = (correctVal * 4) - (wrongVal * 1);
-            const leftQ = 180 - (correctVal + wrongVal);
-            
-            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
-            document.getElementById('leftQuestionsNote').innerText = `(${leftQ} questions left unattempted)`;
-        };
 
         // Smooth Interpolation Function to Avoid Unrealistic Rank Gaps
         function getInterpolatedRank(marks) {
@@ -337,221 +467,37 @@
 
             if (upper.marks === lower.marks) return upper.rank;
 
-            // Linear interpolation between the two closest reference anchor points
             const fraction = (marks - lower.marks) / (upper.marks - lower.marks);
             const interpolated = lower.rank + fraction * (upper.rank - lower.rank);
             return Math.round(Math.max(1, interpolated));
         }
 
-        window.searchDatabase = async function() {
-            if (!dbClient) {
-                initSupabase();
-                if (!dbClient) {
-                    alert("Supabase SDK initializing. Please try again.");
-                    return;
-                }
+        window.runHeroPredictor = function() {
+            const correctVal = parseInt(document.getElementById('heroCorrect').value);
+            const wrongVal = parseInt(document.getElementById('heroWrong').value);
+            const outEl = document.getElementById('heroRankOutput');
+
+            if (isNaN(correctVal) || isNaN(wrongVal)) {
+                alert('Please enter both correct and wrong counts.');
+                return;
             }
 
-            const query = document.getElementById('searchInput').value.trim();
-            const stateQuery = document.getElementById('stateInput').value.trim();
-            const collegeQuery = document.getElementById('collegeInput').value.trim();
-            const emailQuery = document.getElementById('emailInput').value.trim();
-            const minRank = document.getElementById('minRank').value.trim();
-            const maxRank = document.getElementById('maxRank').value.trim();
-            const container = document.getElementById('resultsContainer');
-
-            container.innerHTML = `
-                <div class="bg-[#111927] border border-cyan-500/20 rounded-2xl p-10 text-center text-emerald-400 shadow-xl">
-                    <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-3"></i>
-                    <p class="text-sm font-bold">Querying Supabase Candidate Records...</p>
-                </div>`;
-
-            try {
-                let dbQuery = dbClient.from('Candidate').select('*');
-
-                if (query) {
-                    dbQuery = dbQuery.ilike('NAME OF THE CANDIDATE', `%${query}%`);
-                }
-                if (stateQuery) {
-                    dbQuery = dbQuery.ilike('State', `%${stateQuery}%`);
-                }
-                if (collegeQuery) {
-                    dbQuery = dbQuery.or(`College.ilike.%${collegeQuery}%,COLLEGE.ilike.%${collegeQuery}%,Hospital.ilike.%${collegeQuery}%,Institute.ilike.%${collegeQuery}%,Allotted Institute.ilike.%${collegeQuery}%`);
-                }
-                if (emailQuery) {
-                    dbQuery = dbQuery.or(`Email.ilike.%${emailQuery}%,EMAIL.ilike.%${emailQuery}%,Candidate Email.ilike.%${emailQuery}%`);
-                }
-                if (minRank) {
-                    dbQuery = dbQuery.gte('NEET-PG 2025 PUBLISH RANK', parseInt(minRank));
-                }
-                if (maxRank) {
-                    dbQuery = dbQuery.lte('NEET-PG 2025 PUBLISH RANK', parseInt(maxRank));
-                }
-
-                dbQuery = dbQuery.limit(50);
-
-                const { data, error } = await dbQuery;
-
-                if (error) throw error;
-
-                if (!data || data.length === 0) {
-                    document.getElementById('bulkControlBar').classList.add('hidden');
-                    container.innerHTML = `
-                        <div class="bg-[#111927] border border-amber-500/30 rounded-2xl p-8 text-center text-amber-300 shadow-xl">
-                            <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-                            <p class="text-sm font-bold">No candidates found matching your filters.</p>
-                        </div>`;
-                    return;
-                }
-
-                loadedCandidates = data;
-                document.getElementById('bulkControlBar').classList.remove('hidden');
-                container.innerHTML = '';
-
-                data.forEach(item => {
-                    const id = item['APPLICATION ID'] || Math.random().toString();
-                    const name = item['NAME OF THE CANDIDATE'] || 'N/A';
-                    const rank = item['NEET-PG 2025 PUBLISH RANK'] || item['AIR_RANK'] || 'N/A';
-                    const state = item['State'] || 'N/A';
-                    const city = item['City'] || '';
-                    const college = item['College'] || item['COLLEGE'] || item['Hospital'] || item['Institute'] || item['Allotted Institute'] || 'N/A';
-                    const email = item['Email'] || item['EMAIL'] || item['Candidate Email'] || '';
-                    const quota = item['Quota'] || item['QUOTA'] || '';
-                    const course = item['Course'] || item['Branch'] || item['SUBJECT'] || '';
-
-                    const locationText = city ? `${state}, ${city}` : state;
-                    const isChecked = selectedMap.has(id);
-
-                    const card = document.createElement('div');
-                    card.id = `candidate-card-${id}`;
-                    card.className = `bg-[#111927] hover:bg-[#162231] border border-cyan-500/20 p-4 rounded-2xl transition-all duration-150 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none shadow-lg ${isChecked ? 'ring-2 ring-emerald-400 bg-[#162231]' : ''}`;
-                    
-                    card.innerHTML = `
-                        <div class="flex items-start md:items-center gap-4">
-                            <input type="checkbox" id="cb-${id}" ${isChecked ? 'checked' : ''} class="row-checkbox w-5 h-5 rounded border-slate-700 bg-[#0b131d] accent-emerald-400 cursor-pointer mt-1 md:mt-0">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0b131d] to-[#1b263b] border border-cyan-500/30 flex items-center justify-center text-emerald-400 font-black text-xl flex-shrink-0 shadow-inner">
-                                ${name.charAt(0)}
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <h3 class="font-bold text-slate-100 text-base">${name}</h3>
-                                    <span class="bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
-                                        AIR ${rank}
-                                    </span>
-                                    ${quota ? `<span class="bg-amber-950 text-amber-300 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-full">${quota}</span>` : ''}
-                                </div>
-                                
-                                <div class="flex items-center gap-3 text-xs text-slate-400 flex-wrap">
-                                    <span><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i>${locationText}</span>
-                                    ${course ? `<span><i class="fa-solid fa-stethoscope text-emerald-400 mr-1"></i>${course}</span>` : ''}
-                                    ${email ? `<span><i class="fa-solid fa-envelope text-amber-400 mr-1"></i>${email}</span>` : ''}
-                                </div>
-
-                                <div class="flex items-center gap-3 text-[11px] text-slate-300 flex-wrap mt-0.5">
-                                    ${college !== 'N/A' ? `<span class="text-purple-300"><i class="fa-solid fa-hospital-user text-purple-400 mr-1"></i>${college}</span>` : ''}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-left md:text-right flex md:flex-col items-center md:items-end justify-between border-t md:border-t-0 pt-2 md:pt-0 border-slate-800">
-                            <span class="text-[11px] text-slate-400 font-medium">Contact Number</span>
-                            <span class="font-mono text-xs px-3.5 py-1.5 rounded-xl bg-[#0b131d] text-amber-300 border border-amber-500/30 font-bold shadow-inner flex items-center gap-1.5">
-                                <i class="fa-solid fa-lock text-[10px] text-amber-400"></i> +91 XXXXX XXXXX
-                            </span>
-                        </div>
-                    `;
-
-                    const checkbox = card.querySelector(`#cb-${id}`);
-                    card.addEventListener('click', (e) => {
-                        if (e.target !== checkbox) {
-                            checkbox.checked = !checkbox.checked;
-                        }
-                        toggleSelect(id, name, rank, locationText);
-                        card.classList.toggle('ring-2');
-                        card.classList.toggle('ring-emerald-400');
-                        card.classList.toggle('bg-[#162231]');
-                    });
-
-                    container.appendChild(card);
-                });
-
-            } catch (err) {
-                console.error('Fetch Error:', err);
-                container.innerHTML = `
-                    <div class="bg-[#111927] border border-rose-500/30 rounded-2xl p-6 text-center text-rose-400 shadow-xl">
-                        <i class="fa-solid fa-circle-exclamation text-3xl mb-2"></i>
-                        <p class="text-sm font-bold">Query Execution Failed</p>
-                        <p class="text-xs font-mono text-slate-400 mt-1">${err.message || err}</p>
-                    </div>`;
-            }
+            const marksInput = (correctVal * 4) - (wrongVal * 1);
+            const rawRank = getInterpolatedRank(marksInput);
+            outEl.innerHTML = `Predicted Rank: <span class="text-emerald-400 font-black">~${rawRank.toLocaleString()}</span> (${marksInput} marks)`;
         };
 
-        window.toggleSelect = function(id, name, rank, state) {
-            if (selectedMap.has(id)) {
-                selectedMap.delete(id);
-            } else {
-                selectedMap.set(id, { id, name, rank, state });
-            }
-            updateCart();
+        window.calculateLiveMarksModal = function() {
+            const correctVal = parseInt(document.getElementById('predCorrect').value) || 0;
+            const wrongVal = parseInt(document.getElementById('predWrong').value) || 0;
+            const totalMarks = (correctVal * 4) - (wrongVal * 1);
+            const leftQ = 180 - (correctVal + wrongVal);
+            
+            document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
+            document.getElementById('leftQuestionsNote').innerText = `(${leftQ} questions left unattempted)`;
         };
 
-        window.selectAllVisible = function(shouldSelect) {
-            loadedCandidates.forEach(item => {
-                const id = item['APPLICATION ID'] || Math.random().toString();
-                const name = item['NAME OF THE CANDIDATE'] || 'N/A';
-                const rank = item['NEET-PG 2025 PUBLISH RANK'] || item['AIR_RANK'] || 'N/A';
-                const state = item['State'] || 'N/A';
-                const city = item['City'] || '';
-                const locationText = city ? `${state}, ${city}` : state;
-
-                const cb = document.getElementById(`cb-${id}`);
-                const card = document.getElementById(`candidate-card-${id}`);
-
-                if (shouldSelect) {
-                    if (!selectedMap.has(id)) selectedMap.set(id, { id, name, rank, state: locationText });
-                    if (cb) cb.checked = true;
-                    if (card) {
-                        card.classList.add('ring-2', 'ring-emerald-400', 'bg-[#162231]');
-                    }
-                } else {
-                    selectedMap.delete(id);
-                    if (cb) cb.checked = false;
-                    if (card) {
-                        card.classList.remove('ring-2', 'ring-emerald-400', 'bg-[#162231]');
-                    }
-                }
-            });
-            updateCart();
-        };
-
-        window.updateCart = function() {
-            const count = selectedMap.size;
-            const cost = count > 0 ? Math.ceil(count / 4) * 199 : 0;
-
-            document.getElementById('selectedCount').innerText = count;
-            document.getElementById('fCost').innerText = `₹${cost}`;
-        };
-
-        window.clearSelections = function() {
-            selectedMap.clear();
-            updateCart();
-            document.querySelectorAll('.row-checkbox').forEach(cb => {
-                cb.checked = false;
-                const card = cb.closest('div.border');
-                if (card) {
-                    card.classList.remove('ring-2', 'ring-emerald-400', 'bg-[#162231]');
-                }
-            });
-        };
-
-        window.openPredictorModal = function() {
-            document.getElementById('predictorModal').classList.remove('hidden');
-        };
-        window.closePredictorModal = function() {
-            document.getElementById('predictorModal').classList.add('hidden');
-        };
-
-        window.runPythonMatrixPredictor = function() {
+        window.runPythonMatrixPredictorModal = function() {
             const correctInput = parseInt(document.getElementById('predCorrect').value);
             const wrongInput = parseInt(document.getElementById('predWrong').value);
             const branch = document.getElementById('predBranch').value;
@@ -562,7 +508,7 @@
                 return;
             }
 
-            const marksInput = (correctInput * 4) - (wrongInput * 1);
+            const marksInput = (correctInput * 4) - (wrongVal * 1);
             const rawInterpolatedRank = getInterpolatedRank(marksInput);
             const predRankStr = `~${rawInterpolatedRank.toLocaleString()}`;
 
@@ -572,13 +518,13 @@
 
             if (rawInterpolatedRank <= 1000) {
                 comfortTitle = "🌟 Elite Standing for 2026!";
-                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your smoothly interpolated rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure. Take a well-deserved deep breath!`;
+                comfortMsg = `With ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your smoothly interpolated rank is **${predRankStr}**. Premier institutions and top government seats for **${branch}** are exceptionally secure.`;
             } else if (rawInterpolatedRank <= 15000) {
                 comfortTitle = "🌱 Secure & Promising Horizon";
-                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your continuous curve rank is **${predRankStr}**. This places you comfortably within reach of esteemed state medical universities and central institutions for **${branch}**.`;
+                comfortMsg = `At ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong), your continuous curve rank is **${predRankStr}**. Comfortably within reach of esteemed state medical universities for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted continuous rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas and specialized state rounds for **${branch}**. Remember, your clinical acumen matters most.`;
+                comfortMsg = `Your predicted continuous rank is **${predRankStr}** for ${marksInput} marks (${correctInput} correct, ${wrongInput} wrong). Wonderful opportunities await across institutional quotas for **${branch}**.`;
             }
 
             resBox.classList.remove('hidden');
@@ -590,79 +536,44 @@
                 <p class="text-slate-300 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
                     <div>Calculated Marks: <span class="text-cyan-300 font-bold">${marksInput} / 720</span></div>
-                    <div>Interpolation Model: <span class="text-emerald-300 font-bold">Smooth Piecewise Curve</span></div>
+                    <div>Curve Model: <span class="text-emerald-300 font-bold">Continuous Piecewise</span></div>
                 </div>
             `;
         };
 
-        window.exportCounselingReport = function() {
-            if (selectedMap.size === 0) {
-                alert('Please select at least one candidate to export a report.');
-                return;
-            }
-
-            let report = `=========================================\n`;
-            report += `       DOCPULSE COUNSELING REPORT        \n`;
-            report += `=========================================\n\n`;
-            report += `Generated on: ${new Date().toLocaleDateString()}\n`;
-            report += `Total Selected Candidates: ${selectedMap.size}\n\n`;
-            report += `-----------------------------------------\n`;
-            report += `CANDIDATE LIST & DETAILS:\n`;
-            report += `-----------------------------------------\n`;
-
-            let i = 1;
-            selectedMap.forEach(item => {
-                report += `${i}. Name: ${item.name} | AIR: ${item.rank} | Location: ${item.state} | ID: ${item.id}\n`;
-                i++;
-            });
-
-            report += `\n=========================================\n`;
-            report += `End of DocPulse Report - https://docpulse.in\n`;
-
-            const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'DocPulse_Counseling_Report.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+        window.openPredictorModal = function() {
+            document.getElementById('predictorModal').classList.remove('hidden');
+        };
+        window.closePredictorModal = function() {
+            document.getElementById('predictorModal').classList.add('hidden');
         };
 
-        window.shareToWhatsApp = function() {
-            if (selectedMap.size === 0) {
-                alert('Please select at least 1 candidate to generate a request.');
-                return;
-            }
+        window.openUnlockQrModal = function(name, rank) {
+            activeUnlockCandidate = { name, rank };
+            document.getElementById('modalTargetName').innerText = name;
+            document.getElementById('modalTargetRank').innerText = `AIR ${rank}`;
+            document.getElementById('unlockQrModal').classList.remove('hidden');
+        };
 
+        window.closeUnlockQrModal = function() {
+            document.getElementById('unlockQrModal').classList.add('hidden');
+        };
+
+        window.sendUnlockWhatsApp = function() {
             const ADMIN_WHATSAPP_NUMBER = "919876543210";
+            const text = `Hi, I paid ₹500 for rank unlock [First Name: ${activeUnlockCandidate.name}, AIR ${activeUnlockCandidate.rank}]. Here is my payment screenshot:`;
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+        };
 
-            const count = selectedMap.size;
-            const totalAmount = Math.ceil(count / 4) * 199;
-
-            let message = `*NEW CONTACT UNLOCK REQUEST (DocPulse)*\n`;
-            message += `-----------------------------------\n`;
-            message += `*Total Candidates:* ${count}\n`;
-            message += `*Total Amount Payable:* ₹${totalAmount}\n`;
-            message += `-----------------------------------\n\n`;
-            message += `*Selected Candidates List:*\n`;
-
-            let index = 1;
-            selectedMap.forEach(item => {
-                message += `${index}. ${item.name} (AIR ${item.rank}) - ID: ${item.id}\n`;
-                index++;
-            });
-
-            message += `\n-----------------------------------\n`;
-            message += `Please share the payment QR code for ₹${totalAmount} to unlock these contacts.`;
-
-            const encodedText = encodeURIComponent(message);
-            window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodedText}`, '_blank');
+        window.filterPreviewDirectory = function() {
+            const rankVal = document.getElementById('previewRankSearch').value.trim();
+            const nameVal = document.getElementById('previewNameSearch').value.trim().toLowerCase();
+            alert(`Filter applied: Rank ${rankVal || 'Any'} | First Name ${nameVal || 'Any'}. Full Supabase database search launches with counseling.`);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
             initSupabase();
-            document.getElementById('searchBtn').addEventListener('click', window.searchDatabase);
         });
     </script>
 </body>
