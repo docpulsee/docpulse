@@ -19,13 +19,6 @@
                 radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.05) 0px, transparent 50%);
             background-attachment: fixed;
         }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
 
         /* Continuous Ticker */
         @keyframes ticker {
@@ -38,7 +31,7 @@
             animation: ticker 35s linear infinite;
         }
 
-        /* GLASS SHATTER ANIMATION ENGINE */
+        /* AUTOMATIC LOOPING GLASS SHATTER ENGINE */
         .glass-chamber {
             position: relative;
             background: rgba(255, 255, 255, 0.9);
@@ -47,22 +40,20 @@
             overflow: hidden;
         }
 
-        /* Glass Pane Overlay */
         .glass-pane {
             position: absolute;
             inset: 0;
             z-index: 20;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(224, 242, 254, 0.6) 50%, rgba(255, 255, 255, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(224, 242, 254, 0.7) 50%, rgba(255, 255, 255, 0.9) 100%);
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            justify-center: center;
-            transition: opacity 0.6s ease-out, visibility 0.6s;
-            pointer-events: auto;
-            cursor: pointer;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+            pointer-events: none;
         }
 
-        /* Shatter Keyframe Animations for Shards */
+        /* Shatter Animations */
         @keyframes shatterTopLeft {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
             100% { transform: translate(-120%, -120%) rotate(-45deg); opacity: 0; }
@@ -80,16 +71,15 @@
             100% { transform: translate(120%, 120%) rotate(35deg); opacity: 0; }
         }
 
-        /* Triggered Shatter Classes */
-        .shattering .shard-tl { animation: shatterTopLeft 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        .shattering .shard-tr { animation: shatterTopRight 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        .shattering .shard-bl { animation: shatterBottomLeft 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        .shattering .shard-br { animation: shatterBottomRight 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .shattering .shard-tl { animation: shatterTopLeft 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .shattering .shard-tr { animation: shatterTopRight 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .shattering .shard-bl { animation: shatterBottomLeft 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .shattering .shard-br { animation: shatterBottomRight 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 
         .shattering {
-            pointer-events: none !important;
             opacity: 0;
-            transition: opacity 0.3s ease 0.6s;
+            visibility: hidden;
+            transition: opacity 0.4s ease 0.8s, visibility 0.4s ease 0.8s;
         }
 
         /* Lifelike Walking/Hand-Holding Animation */
@@ -289,36 +279,34 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE ANIMATED GLASS-BREAKING REVEAL SECTION -->
+        <!-- AUTOMATIC CONTINUOUS LOOP GLASS BREAK REVEAL SECTION -->
         <section class="glass-chamber rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-xl border-2 border-sky-300/60">
             
-            <!-- COVER GLASS PANE (SHATTERS ON CLICK OR BUTTON) -->
-            <div id="glassPane" onclick="triggerGlassShatter()" class="glass-pane group">
-                <!-- Inner Glass Shard Layers -->
+            <!-- AUTOMATED LOOPING GLASS OVERLAY PANE -->
+            <div id="glassPane" class="glass-pane">
                 <div class="shard-tl absolute top-0 left-0 w-1/2 h-1/2 bg-white/40 border-r border-b border-sky-300/50 backdrop-blur-md"></div>
                 <div class="shard-tr absolute top-0 right-0 w-1/2 h-1/2 bg-white/40 border-l border-b border-sky-300/50 backdrop-blur-md"></div>
                 <div class="shard-bl absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/40 border-r border-t border-sky-300/50 backdrop-blur-md"></div>
                 <div class="shard-br absolute bottom-0 right-0 w-1/2 h-1/2 bg-white/40 border-l border-t border-sky-300/50 backdrop-blur-md"></div>
 
-                <!-- Glass Lock Badge / Prompt -->
-                <div class="relative z-30 flex flex-col items-center gap-3 transform group-hover:scale-105 transition">
-                    <div class="w-20 h-20 rounded-full bg-white/90 border-2 border-sky-400 shadow-2xl flex items-center justify-center text-sky-600 text-3xl animate-bounce">
-                        <i class="fa-solid fa-hand-pointer"></i>
+                <div class="relative z-30 flex flex-col items-center gap-2">
+                    <div class="w-16 h-16 rounded-full bg-white/90 border-2 border-sky-400 shadow-xl flex items-center justify-center text-sky-600 text-2xl animate-pulse">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
-                    <span class="bg-sky-600 text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg">
-                        Tap To Shatter The Barrier
+                    <span class="bg-sky-600/90 text-white text-[11px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow">
+                        Breaking Glass Ceiling...
                     </span>
                 </div>
             </div>
 
-            <!-- HIDDEN CONTENT REVEALED AFTER SHATTER -->
+            <!-- REVEAL CONTENT ACTIVE UNDERNEATH -->
             <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
                 <!-- Glowing Reveal Badge -->
                 <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 border-2 border-white flex items-center justify-center text-white text-3xl mb-4 shadow-lg shadow-sky-500/30 animate-pulse">
                     <i class="fa-solid fa-sparkles"></i>
                 </div>
 
-                <!-- Explicit "WE ARE COMING SOON" Big Reveal Title -->
+                <!-- Explicit "WE ARE COMING SOON" Title -->
                 <h2 class="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 uppercase tracking-tight mb-2">
                     WE ARE COMING SOON
                 </h2>
@@ -331,10 +319,12 @@
                     We are unlocking direct candidate-to-resident connectivity right when **Official NEET PG Counseling** begins. Get verified access to real senior residents across medical colleges in India.
                 </p>
 
-                <!-- WhatsApp Notification Button -->
-                <button onclick="openUnlockQrModal('Counseling Alert', '2026')" class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black px-8 py-4 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2 hover:scale-105 transform">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Get Notified First On WhatsApp
-                </button>
+                <!-- EMAIL NOTIFICATION BUTTON LINKED DIRECTLY TO DOCPULSEE@GMAIL.COM -->
+                <a href="mailto:docpulsee@gmail.com?subject=NEET%20PG%20Mentorship%20%26%20Counseling%20Updates&body=Dear%20DocPulse%20Team%2C%0A%0AI%20would%20like%20to%20get%20notified%20as%20soon%20as%20the%20DocPulse%20Verified%20Senior%20Resident%20Directory%20and%20Counseling%20Mentorship%20Portal%20go%20live.%0A%0AThank%20you%20for%20building%20this%20platform%20to%20help%20aspirants%20connect%20with%20seniors.%20Wishing%20everyone%20the%20very%20best%20for%20the%20future!" 
+                   class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-black px-8 py-4 rounded-2xl text-xs sm:text-sm transition shadow-xl shadow-sky-500/25 flex items-center gap-2.5 hover:scale-105 transform border border-sky-300">
+                    <i class="fa-solid fa-envelope-open-text text-lg"></i>
+                    <span>Get Notified Via Email (docpulsee@gmail.com)</span>
+                </a>
             </div>
         </section>
 
@@ -352,7 +342,7 @@
                     <i class="fa-solid fa-calculator"></i>
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-slate-900">NEET PG 2026 Interactive Rank Calc</h3>
+                    <h3 class="text-lg font-black text-slate-900">NEET PG Interactive Rank Calc</h3>
                     <p class="text-xs text-slate-500 font-medium">Continuous curve mathematical predictor</p>
                 </div>
             </div>
@@ -398,7 +388,7 @@
             </div>
 
             <button onclick="runPythonMatrixPredictorModal()" class="w-full bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:opacity-95 text-white font-black py-3.5 rounded-2xl text-sm transition shadow-lg shadow-sky-500/20 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My 2026 Rank Now!
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My Rank Now!
             </button>
 
             <!-- Result Container -->
@@ -406,56 +396,32 @@
         </div>
     </div>
 
-    <!-- WHATSAPP UNLOCK + HIDDEN QR PAYMENT PLACEHOLDER MODAL -->
-    <div id="unlockQrModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white border-2 border-amber-400 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeUnlockQrModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg bg-slate-100 w-9 h-9 rounded-full flex items-center justify-center border border-slate-200 transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <span class="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">₹500 / Contact Unlock</span>
-                <h3 class="text-xl font-black text-slate-900 mt-2">Counseling Portal Alert Pre-Registration</h3>
-                <p class="text-xs text-slate-500 mt-1">Directory opens live when counseling begins</p>
-            </div>
-
-            <!-- Clean Payment / QR Placeholder Section -->
-            <div class="border-2 border-dashed border-slate-300 rounded-2xl p-5 text-center bg-slate-50 space-y-3 mb-6">
-                <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-amber-700 mb-1">
-                    <i class="fa-solid fa-qrcode"></i> Scan to Pay (₹500)
-                </div>
-                
-                <!-- QR Placeholder Box -->
-                <div class="w-44 h-44 mx-auto bg-white border border-slate-300 rounded-xl flex flex-col items-center justify-center text-slate-400 shadow-sm">
-                    <svg class="w-14 h-14 mb-2 stroke-slate-400" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                    </svg>
-                    <span class="text-xs font-semibold text-slate-500">QR Code Placeholder</span>
-                    <span class="text-[10px] text-slate-400 mt-0.5">Your QR image mounts here</span>
-                </div>
-
-                <div class="text-[11px] text-slate-600 bg-white py-1.5 px-3 rounded-lg inline-block border border-slate-200 shadow-sm">
-                    UPI ID: <span class="italic text-slate-800 font-medium">Pending QR setup</span>
-                </div>
-            </div>
-
-            <!-- WhatsApp Verification Action -->
-            <button onclick="sendUnlockWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-base"></i> Send Pre-Registration Screenshot on WhatsApp
-            </button>
-        </div>
-    </div>
-
     <script>
-        // Trigger Glass Shatter Function
-        function triggerGlassShatter() {
+        // AUTOMATIC GLASS SHATTERING LOOP ENGINE
+        function startGlassBreakLoop() {
             const glass = document.getElementById('glassPane');
-            if (glass) {
-                glass.classList.add('shattering');
+            if (!glass) return;
+
+            function runLoopCycle() {
+                // Step 1: Repair / Show intact glass pane
+                glass.classList.remove('shattering');
+
+                // Step 2: Automatically break glass after 1.5 seconds
+                setTimeout(() => {
+                    glass.classList.add('shattering');
+                }, 1500);
             }
+
+            // Execute immediately on page load
+            runLoopCycle();
+
+            // Loop every 6 seconds (1.5s closed + 4.5s open reveal window)
+            setInterval(runLoopCycle, 6000);
         }
 
-        // Smooth Continuous Interpolation Anchors
+        window.addEventListener('DOMContentLoaded', startGlassBreakLoop);
+
+        // Continuous Interpolation Anchor Calculation Engine
         const pythonMatrixAnchors = [
             { marks: 720, rank: 1 },
             { marks: 600, rank: 79 },
@@ -566,21 +532,6 @@
         };
         window.closePredictorModal = function() {
             document.getElementById('predictorModal').classList.add('hidden');
-        };
-
-        window.openUnlockQrModal = function(name, rank) {
-            document.getElementById('unlockQrModal').classList.remove('hidden');
-        };
-
-        window.closeUnlockQrModal = function() {
-            document.getElementById('unlockQrModal').classList.add('hidden');
-        };
-
-        window.sendUnlockWhatsApp = function() {
-            const ADMIN_WHATSAPP_NUMBER = "919876543210";
-            const text = `Hi, I am interested in pre-registering for the NEET PG Counseling Directory unlock portal. Please alert me when live:`;
-            const encoded = encodeURIComponent(text);
-            window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
         };
     </script>
 </body>
