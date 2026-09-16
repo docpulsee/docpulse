@@ -283,24 +283,25 @@
     </div>
 
     <script>
-        // Continuous Interpolation Anchor Calculation Engine (Strictly 720 Max Marks / 180 Questions)
+        // Strictly monotonic decreasing anchors (Higher Marks -> Lower Numerical Rank)
         const pythonMatrixAnchors = [
             { marks: 720, rank: 1 },
-            { marks: 600, rank: 79 },
-            { marks: 560, rank: 1234 },
-            { marks: 520, rank: 5903 },
-            { marks: 500, rank: 9965 },
-            { marks: 490, rank: 12427 },
-            { marks: 489, rank: 7500 },
-            { marks: 480, rank: 15146 },
-            { marks: 464, rank: 13368 },
-            { marks: 400, rank: 43000 },
-            { marks: 0, rank: 138000 }
+            { marks: 600, rank: 80 },
+            { marks: 560, rank: 1200 },
+            { marks: 520, rank: 5500 },
+            { marks: 504, rank: 7100 },
+            { marks: 490, rank: 9200 },
+            { marks: 480, rank: 11000 },
+            { marks: 450, rank: 18000 },
+            { marks: 400, rank: 35000 },
+            { marks: 300, rank: 75000 },
+            { marks: 200, rank: 115000 },
+            { marks: 0, rank: 150000 }
         ].sort((a, b) => b.marks - a.marks);
 
         function getInterpolatedRank(marks) {
             if (marks >= 720) return 1;
-            if (marks <= 0) return 138000;
+            if (marks <= 0) return 150000;
 
             let upper = pythonMatrixAnchors[0];
             let lower = pythonMatrixAnchors[pythonMatrixAnchors.length - 1];
@@ -315,8 +316,9 @@
 
             if (upper.marks === lower.marks) return upper.rank;
 
+            // Linear interpolation between valid bounds
             const fraction = (marks - lower.marks) / (upper.marks - lower.marks);
-            const interpolated = lower.rank + fraction * (upper.rank - lower.rank);
+            const interpolated = lower.rank - fraction * (lower.rank - upper.rank);
             return Math.round(Math.max(1, interpolated));
         }
 
