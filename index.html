@@ -177,7 +177,7 @@ body{background-color:#f8fafc;background-image:radial-gradient(at 0% 0%, rgba(14
 <h3 class="text-xl font-black text-slate-900">Unlock Q4-Q12 + Full Report - ₹149</h3>
 <p class="text-sm text-slate-600 mt-1 mb-3">You completed 3 free questions! This is Payment Page <b>nfwlr3Q (pl_Td8cSFM95cgnGZ)</b> - Active, No Expiry, Unlimited students can pay same link. No PAID bug.</p>
 
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://rzp.io/rzp/nfwlr3Q" alt="Payment Page QR nfwlr3Q" class="w-52 h-52 mx-auto rounded-xl border shadow mb-4 object-contain bg-white p-2">
+<!-- QR REMOVED - Link only as requested -->
 
 <div class="text-left bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-4 text-[11px]">
 <b>Payment Page Details (from your screenshot):</b><br>
@@ -307,8 +307,14 @@ function selectOpt(idx){
   opt.b.forEach(b=>{if(branchesData[b]) scores[b]+=2});
   opt.s.forEach(b=>{if(branchesData[b]) scores[b]+=1});
   toast(opt.t+' noted!');
-  // After 3Q, show payment page if not paid
+  saveProgress();
+  // After 3Q, show payment page if not paid - SAVE PROGRESS BEFORE
   if(currentQ===2 && !checkPaidSecure()){
+    currentQ++; // move to next (Q4 index)
+    saveProgress();
+    currentQ--; // revert for display consistency but saved Q is 3
+    // Actually save with Q=3
+    localStorage.setItem('docpulse_currentQ_nfwlr3Q', '3');
     document.getElementById('branchQ').classList.add('hidden');
     document.getElementById('branchPaywall').classList.remove('hidden');
     return;
@@ -346,15 +352,41 @@ document.getElementById('iPaidBtn').onclick=()=>{
   },800);
 };
 
-// Auto-detect redirect ?paid=1 or razorpay_payment_id on load
+// SAVE scores before paywall
+function saveProgress(){
+  localStorage.setItem('docpulse_scores_nfwlr3Q', JSON.stringify(scores));
+  localStorage.setItem('docpulse_currentQ_nfwlr3Q', currentQ.toString());
+}
+
+// Auto-detect redirect ?paid=1 or razorpay_payment_id on load - FIXED to auto-open remaining questions
 window.addEventListener('load', ()=>{
   const params=new URLSearchParams(location.search);
-  if(params.get('paid')==='1' || params.has('razorpay_payment_id') || params.has('razorpay_payment_link_id')){
+  const isPaidRedirect = params.get('paid')==='1' || params.has('razorpay_payment_id') || params.has('razorpay_payment_link_id') || params.has('razorpay_payment_link_status');
+  if(isPaidRedirect){
+    // Restore scores
+    try{
+      const savedScores = localStorage.getItem('docpulse_scores_nfwlr3Q');
+      const savedQ = localStorage.getItem('docpulse_currentQ_nfwlr3Q');
+      if(savedScores) scores = JSON.parse(savedScores);
+      if(savedQ) currentQ = parseInt(savedQ);
+    }catch(e){}
     localStorage.setItem(PAID_KEY,'true');
     localStorage.setItem(LEFT_KEY,'2');
-    toast('✅ Payment detected via redirect! Unlocking Q4-Q12...');
-    setTimeout(()=>{ branchModal.classList.remove('hidden'); branchModal.classList.add('flex'); currentQ=3; showQuestion(); },600);
+    // Ensure we continue from Q4 (index 3) if we just finished 3
+    if(currentQ<3) currentQ=3;
+    // Clear URL but keep modal open logic
     history.replaceState({},'',location.pathname);
+    toast('✅ Payment verified! Opening remaining questions Q4-Q12...');
+    setTimeout(()=>{
+      branchModal.classList.remove('hidden');
+      branchModal.classList.add('flex');
+      document.getElementById('branchStart').classList.add('hidden');
+      document.getElementById('branchPaywall').classList.add('hidden');
+      document.getElementById('branchScanning').classList.add('hidden');
+      document.getElementById('branchResult').classList.add('hidden');
+      document.getElementById('branchQ').classList.remove('hidden');
+      renderQ();
+    },800);
   }
 });
 
