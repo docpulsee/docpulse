@@ -110,13 +110,13 @@ animation: vibrantPulse 3s infinite;
 
 <div class="flex items-center gap-2.5 flex-wrap">
 <!-- ABOUT US BUTTON -->
-<button onclick="document.getElementById('aboutUsSection').scrollIntoView({behavior:'smooth'})" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
+<button onclick="openAboutUsModal()" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
 <i class="fa-solid fa-circle-info text-slate-400"></i> About Us
 </button>
 
 <!-- SMALL BUTTON NEXT TO ABOUT US -->
 <button onclick="openBranchPayment()" class="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-bold px-3 py-2 rounded-lg text-[11px] transition shadow-md shadow-amber-500/20 flex items-center gap-1.5 border border-amber-300">
-<i class="fa-solid fa-compass text-[10px]"></i> Get to know your branch
+<i class="fa-solid fa-compass text-[10px]"></i> Get to know your branch - ₹149
 </button>
 
 <button onclick="openPredictorModal()" class="bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-600 hover:to-teal-600 text-white font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-sky-500/20 flex items-center gap-2 border border-sky-300">
@@ -165,13 +165,6 @@ Scoring: <span class="text-sky-600 font-mono font-bold">(Correct × 4) - (Wrong 
 </div>
 </div>
 </div>
-</section>
-
-<section id="aboutUsSection" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
-<h3 class="text-lg font-black text-slate-900 mb-3"><i class="fa-solid fa-circle-info text-sky-500 mr-2"></i>About Us</h3>
-<p class="text-sm text-slate-600 leading-relaxed">
-DocPulse is built by NEET PG aspirants for aspirants. Rank is just the gate. Inside is the real journey - which branch fits your DNA? Click <b>"Get to know your branch"</b> to discover your Doctor DNA based on 12 real scenarios from 100+ residents.
-</p>
 </section>
 
 <section class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
@@ -554,7 +547,7 @@ window.openBranchPayment = function() {
     localStorage.setItem('docpulse_payment_initiated', 'true');
     localStorage.setItem('docpulse_payment_time', new Date().toISOString());
   } catch(e){}
-  window.open('https://rzp.io/rzp/nfwlr3Q', '_blank');
+  window.open('https://rzp.io/rzp/nfwlr3Q', '_blank'); // ₹149 payment
   setTimeout(function(){
     if(confirm('After completing payment on Razorpay, click OK to unlock your branch finder.\n\nYour payment page: https://rzp.io/rzp/nfwlr3Q\n\nIf you already paid, you will be taken to https://docpulsee.github.io/docpulse/branch-dna.html')){
       window.location.href = 'https://docpulsee.github.io/docpulse/branch-dna.html?paid=1';
@@ -622,5 +615,59 @@ document.getElementById('predictorModal').classList.add('hidden');
 };
 runHeroPredictor();
 </script>
+
+<!-- ABOUT US EMOTIONAL POPUP MODAL -->
+<div id="aboutUsModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+<div class="bg-white rounded-[2rem] max-w-md w-full p-7 md:p-8 shadow-2xl border border-slate-200 relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500"></div>
+<button onclick="closeAboutUsModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-800">
+<i class="fa-solid fa-xmark"></i>
+</button>
+
+<div class="flex items-center gap-3 mb-5">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-lg">
+<i class="fa-solid fa-heart-pulse"></i>
+</div>
+<div>
+<h3 class="text-[18px] font-black text-slate-900">About Us</h3>
+<p class="text-[11px] text-slate-500 font-medium">Doctors for Doctors</p>
+</div>
+</div>
+
+<div class="space-y-4 text-[14px] leading-[1.7] text-slate-700">
+<p class="font-semibold text-slate-900">We are a team of doctors who struggled during chaotic counselling.</p>
+<p>We remember the sleepless nights, the endless PDFs, the confusion of which college, which branch, and that fear of making the wrong choice that could define our entire career.</p>
+<p>No senior to guide. No real data. Only rumors and anxiety.</p>
+<p class="bg-gradient-to-r from-sky-50 to-teal-50 border border-sky-100 rounded-2xl p-4 text-[13.5px] font-medium text-slate-800">
+<i class="fa-solid fa-hand-holding-heart text-sky-500 mr-1.5"></i>
+So we built it together — <span class="font-black text-slate-900">as doctors, for doctors</span> — so that you don't suffer like we did.
+</p>
+<p class="text-[13px] text-slate-600">DocPulse is not just a rank predictor. It's the senior we never had. It's the clarity we craved. Made by those who walked through the same fire, for you.</p>
+</div>
+
+<div class="mt-7 flex gap-2.5">
+<button onclick="closeAboutUsModal(); openBranchPayment();" class="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold py-3 rounded-xl text-[13px] shadow-md">
+<i class="fa-solid fa-compass mr-1"></i> Get to know your branch - ₹149
+</button>
+<button onclick="closeAboutUsModal()" class="px-5 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-bold text-[13px]">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+window.openAboutUsModal = function(){
+  document.getElementById('aboutUsModal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+};
+window.closeAboutUsModal = function(){
+  document.getElementById('aboutUsModal').classList.add('hidden');
+  document.body.style.overflow='';
+};
+// Close on outside click
+document.getElementById('aboutUsModal')?.addEventListener('click', function(e){
+  if(e.target.id==='aboutUsModal') closeAboutUsModal();
+});
+</script>
+
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
