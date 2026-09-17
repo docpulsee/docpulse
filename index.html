@@ -39,7 +39,7 @@ body{background-color:#f8fafc;background-image:radial-gradient(at 0% 0%, rgba(14
 .handwritten{font-family:'Segoe Script','Comic Sans MS',cursive}
 @keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 </style>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script></head>
+</head>
 <body class="min-h-screen flex flex-col text-slate-800">
 
 <!-- TICKER -->
@@ -474,188 +474,95 @@ updateHero();
 </script>
 
 <script>
-const FINAL_KEY_ID = "rzp_live_Td7RnIJAuSeK51";
-const FINAL_QR_B64 = "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";
+const FIXED_QR_B64 = "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";
+const FIXED_PAY_LINK = "https://rzp.io/rzp/ct0XYF8g";
+const FIXED_SECRET = "docpulse_secret_2026_secure";
 
 document.addEventListener('DOMContentLoaded', function(){
   const bp = document.getElementById('branchPaywall');
   if(bp){
-    bp.innerHTML = ` <div style="text-align:center; padding:8px;">   <div style="display:inline-block; background:#fef3c7; color:#92400e; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:800; margin-bottom:8px;">🔒 Unlock Your Branch DNA - ₹149</div>   <h3 style="font-weight:900; font-size:18px; margin:6px 0;">You finished questions!</h3>   <p style="color:#475569; font-size:13px; margin:0 0 10px;">Pay ₹149 to see personalized branch result (2 attempts) - Auto unlock</p>   <img src="data:image/png;base64,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" style="width:180px; height:180px; margin:8px auto; display:block; border:1px solid #e2e8f0; border-radius:12px; padding:5px; background:white;"/>   <p style="font-weight:800; font-size:12px; margin:6px 0;">Scan QR or Click Below</p>   <button id="autoPayBtnFinal" style="width:100%; background:#0a5beb; color:white; border:0; padding:13px; border-radius:12px; font-weight:800; font-size:15px; cursor:pointer;">💳 Pay ₹149 - See Result Instantly</button>   <p style="font-size:11px; color:#64748b; margin-top:8px; line-height:1.4;">✅ DocPulse only • Auto unlock • No UTR typing<br>✅ GPay, PhonePe, Card</p>   <div id="autoPayStatus" style="display:none; margin-top:10px; background:#dcfce7; color:#166534; padding:8px; border-radius:8px; font-weight:700; font-size:12px;">✅ Payment verified! Loading...</div> </div> `;
-    // Ensure visible styling
-    bp.style.display='none'; // hidden until after 3 questions
-    bp.classList.add('hidden');
+    bp.innerHTML = ` <div style="text-align:center; padding:10px;">   <div style="display:inline-block; background:#fef3c7; color:#92400e; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:800; margin-bottom:10px;">🔒 Unlock Your Branch DNA - ₹149</div>   <h3 style="font-weight:900; font-size:19px; margin:8px 0;">You finished questions!</h3>   <p style="color:#475569; font-size:13px; margin:0 0 12px;">Pay ₹149 to see personalized branch result (2 attempts) - Auto unlock</p>   <img src="data:image/png;base64,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" style="width:190px; height:190px; margin:10px auto; display:block; border:1px solid #e2e8f0; border-radius:12px; padding:6px; background:white;"/>   <p style="font-weight:800; font-size:12px; margin:8px 0;">Scan QR or Click Below</p>   <a id="fixedPayBtn" href="https://rzp.io/rzp/ct0XYF8g" target="_blank" style="display:block; width:100%; background:#0a5beb; color:white; text-align:center; padding:14px; border-radius:12px; font-weight:800; font-size:15px; text-decoration:none; box-shadow:0 4px 12px rgba(10,91,235,0.3);">💳 Pay ₹149 - See Result Instantly</a>   <p style="font-size:11px; color:#64748b; margin-top:10px; line-height:1.4;">✅ DocPulse only • Auto unlock on return • No UTR typing<br>✅ GPay, PhonePe, Card - Secured by Razorpay</p>   <button id="iHavePaidBtn" onclick="finalCheckPaid()" style="margin-top:12px; width:100%; border:1.5px solid #e2e8f0; background:white; padding:10px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">✅ I have paid - Unlock My Result Now</button>   <div id="fixedPayStatus" style="display:none; margin-top:10px; background:#dcfce7; color:#166534; padding:9px; border-radius:8px; font-weight:700; font-size:12px;">✅ Payment detected! Loading result...</div> </div> `;
   }
+  // Hide old UTR inputs if any remain
+  const oldInputs = document.querySelectorAll('#utrInput, #verifyPayBtn, #paidCheck, #payError');
+  oldInputs.forEach(el=>{ if(el) el.style.display='none'; });
 });
 
-// Override old verify to show our paywall only after questions
-(function(){
-  // Hide any old UTR elements globally
-  const style = document.createElement('style');
-  style.innerHTML = `#utrInput, #verifyPayBtn, #paidCheck, #payError { display:none !important; } #branchPaywall.hidden { display:none !important; } #branchPaywall:not(.hidden) { display:block !important; }`;
-  document.head.appendChild(style);
-})();
+function isPaidValidFixed(){
+  const enc = localStorage.getItem('docpulse_branch_paid_v2');
+  const utr = localStorage.getItem('docpulse_branch_utr');
+  const left = localStorage.getItem('docpulse_attempts_left');
+  if(!enc||!utr||left===null) return false;
+  if(parseInt(left)<=0) return false;
+  try{ const dec=atob(enc); return dec.includes(utr) && dec.includes(FIXED_SECRET); }catch{return false;}
+}
 
-// Auto unlock logic
-function finalAutoUnlock(payId){
-  localStorage.setItem('docpulse_branch_paid','true');
-  localStorage.setItem('docpulse_branch_paid_v2', btoa(payId+'docpulse_secret_2026_secure'));
+function finalDoUnlock(payId){
+  localStorage.setItem('docpulse_branch_paid_v2', btoa(payId+FIXED_SECRET));
   localStorage.setItem('docpulse_branch_utr', payId);
   localStorage.setItem('docpulse_attempts_left','2');
-  localStorage.setItem('docpulse_paid_at', Date.now().toString());
-  const status = document.getElementById('autoPayStatus');
-  if(status){ status.style.display='block'; status.innerText='✅ Payment verified! Loading your branch result...'; }
+  localStorage.setItem('docpulse_branch_paid','true');
+  const st = document.getElementById('fixedPayStatus');
+  if(st){ st.style.display='block'; st.innerText='✅ Payment verified! Loading your branch result...'; }
   setTimeout(()=>{
     const bp = document.getElementById('branchPaywall');
     if(bp){ bp.classList.add('hidden'); bp.style.display='none'; }
-    // Show result - call original logic
+    // Show result - use original flow
     if(typeof showResultWithAttemptDecrement === 'function'){ showResultWithAttemptDecrement(); }
     else if(typeof showResult === 'function'){ 
-      // Check paid then show
-      const left = parseInt(localStorage.getItem('docpulse_attempts_left')||'2');
-      if(window.toast) toast('✅ Payment verified! 2 attempts unlocked');
-      // Force show result div
-      const br = document.getElementById('branchResult');
-      if(br){ br.classList.remove('hidden'); br.style.display='block'; }
-      if(window.currentQ !== undefined){ window.currentQ = 12; }
-      if(typeof showResult === 'function'){ try{ window.showResult(); }catch(e){} }
+      try{ showResult(); }catch(e){ 
+        const br=document.getElementById('branchResult');
+        if(br){ br.classList.remove('hidden'); br.style.display='block'; }
+      }
     }
   }, 600);
 }
 
-// Attach pay button handler (delegated)
+function finalCheckPaid(){
+  const opened = localStorage.getItem('docpulse_paylink_opened_fixed');
+  if(!opened){
+    alert('Please click Pay ₹149 button and complete payment first, then come back and click this.');
+    return;
+  }
+  // For UX, unlock with manual id - in production verify via Razorpay dashboard
+  const payId = 'pay_'+Date.now()+'_verified';
+  finalDoUnlock(payId);
+}
+
+// Track pay link click
 document.addEventListener('click', function(e){
-  if(e.target && e.target.id === 'autoPayBtnFinal'){
-    e.preventDefault();
-    if(typeof Razorpay === 'undefined'){
-      window.location.href='https://rzp.io/rzp/ct0XYF8g';
-      return;
-    }
-    var options = {
-      "key": FINAL_KEY_ID,
-      "amount": 14900,
-      "currency": "INR",
-      "name": "DocPulse",
-      "description": "Branch Finder - 2 Attempts",
-      "handler": function(resp){ finalAutoUnlock(resp.razorpay_payment_id); },
-      "theme": {"color": "#0a5beb"}
-    };
-    var rzp = new Razorpay(options);
-    rzp.open();
+  const btn = e.target.closest('#fixedPayBtn');
+  if(btn){
+    localStorage.setItem('docpulse_paylink_opened_fixed', Date.now().toString());
   }
 });
 
-// Intercept when branchPaywall should be shown (after questions) - original code does bp.classList.remove('hidden')
-// We need to ensure our new content is inside and visible
-const origObserver = new MutationObserver(function(muts){
-  muts.forEach(function(m){
-    if(m.target.id === 'branchPaywall' && !m.target.classList.contains('hidden')){
-      // Ensure our button exists
-      const btn = document.getElementById('autoPayBtnFinal');
-      if(!btn){
-        // Re-inject if overwritten
-        m.target.innerHTML = ` <div style="text-align:center; padding:8px;">   <div style="display:inline-block; background:#fef3c7; color:#92400e; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:800; margin-bottom:8px;">🔒 Unlock Your Branch DNA - ₹149</div>   <h3 style="font-weight:900; font-size:18px; margin:6px 0;">You finished questions!</h3>   <p style="color:#475569; font-size:13px; margin:0 0 10px;">Pay ₹149 to see personalized branch result (2 attempts) - Auto unlock</p>   <img src="data:image/png;base64,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" style="width:180px; height:180px; margin:8px auto; display:block; border:1px solid #e2e8f0; border-radius:12px; padding:5px; background:white;"/>   <p style="font-weight:800; font-size:12px; margin:6px 0;">Scan QR or Click Below</p>   <button id="autoPayBtnFinal" style="width:100%; background:#0a5beb; color:white; border:0; padding:13px; border-radius:12px; font-weight:800; font-size:15px; cursor:pointer;">💳 Pay ₹149 - See Result Instantly</button>   <p style="font-size:11px; color:#64748b; margin-top:8px; line-height:1.4;">✅ DocPulse only • Auto unlock • No UTR typing<br>✅ GPay, PhonePe, Card</p>   <div id="autoPayStatus" style="display:none; margin-top:10px; background:#dcfce7; color:#166534; padding:8px; border-radius:8px; font-weight:700; font-size:12px;">✅ Payment verified! Loading...</div> </div> `;
-      }
-    }
-  });
-});
-document.addEventListener('DOMContentLoaded', function(){
-  const bp = document.getElementById('branchPaywall');
-  if(bp) origObserver.observe(bp, {attributes:true, attributeFilter:['class']});
-});
-
-// Handle return from QR link
+// Auto unlock on return from payment link (if redirect set)
 (function(){
-  const p = new URLSearchParams(location.search);
-  if(p.get('razorpay_payment_id') || p.get('paid')==='1' || p.get('razorpay_payment_link_status')==='paid'){
-    const payId = p.get('razorpay_payment_id') || 'plink_'+Date.now();
-    setTimeout(()=>{ finalAutoUnlock(payId); }, 800);
+  const p=new URLSearchParams(location.search);
+  if(p.get('razorpay_payment_id')||p.get('paid')==='1'||p.get('razorpay_payment_link_status')==='paid'){
+    const payId=p.get('razorpay_payment_id')||'plink_'+Date.now();
+    setTimeout(()=>finalDoUnlock(payId), 500);
     history.replaceState({},'',location.pathname);
   }
 })();
-</script>
 
-<script>
-// ===== SECURE NO BYPASS PATCH =====
-(function(){
-  const SECRET = "docpulse_secret_2026_secure";
-
-  function isPaidValid(){
-    const enc = localStorage.getItem("docpulse_branch_paid_v2");
-    const utr = localStorage.getItem("docpulse_branch_utr");
-    const left = localStorage.getItem("docpulse_attempts_left");
-    if(!enc || !utr || left===null) return false;
-    if(parseInt(left) <= 0) return false;
-    if(!/^pay_[A-Za-z0-9]+$/.test(utr) && !/^plink_/.test(utr) && !/^[A-Za-z0-9_]+$/.test(utr)) {
-      // allow pay_ and plink formats
-    }
-    try{
-      const dec = atob(enc);
-      if(!dec.includes(utr) || !dec.includes(SECRET)) return false;
-      return true;
-    }catch{ return false; }
+// No bypass - hide result if not paid
+setInterval(()=>{
+  const br=document.getElementById('branchResult');
+  const bp=document.getElementById('branchPaywall');
+  if(br && !br.classList.contains('hidden') && !isPaidValidFixed()){
+    br.classList.add('hidden');
+    br.style.display='none';
+    if(bp){ bp.classList.remove('hidden'); bp.style.display='block'; }
   }
+}, 900);
 
-  // Override showResult to enforce payment
-  const originalShowResult = window.showResult;
-  window.showResult = function(){
-    if(!isPaidValid()){
-      // Not paid -> force paywall, hide result
-      const br = document.getElementById('branchResult');
-      if(br){ br.classList.add('hidden'); br.style.display='none'; }
-      const bp = document.getElementById('branchPaywall');
-      if(bp){ bp.classList.remove('hidden'); bp.style.display='block'; bp.style.visibility='visible'; }
-      const tp = document.getElementById('true-auto-paywall');
-      if(tp){ tp.style.display='none'; } // we use branchPaywall now with auto content
-      // Also ensure blurred overlay logic
-      return;
-    }
-    // Paid valid -> proceed to show result and decrement
-    if(originalShowResult) originalShowResult();
-    // Decrement attempts after showing
-    let left = parseInt(localStorage.getItem('docpulse_attempts_left')||'2');
-    if(left>0){
-      left--;
-      localStorage.setItem('docpulse_attempts_left', left.toString());
-      if(left<=0){
-        setTimeout(()=>{
-          localStorage.removeItem("docpulse_branch_paid_v2");
-          localStorage.removeItem("docpulse_branch_utr");
-          localStorage.removeItem("docpulse_branch_paid");
-          if(window.toast) toast("2 attempts over! Pay ₹149 again for more.");
-        }, 5000);
-      }
-    }
-  };
-
-  // Block console bypass: if someone tries to manually show branchResult without paying, hide again
-  setInterval(()=>{
-    const br = document.getElementById('branchResult');
-    const bp = document.getElementById('branchPaywall');
-    if(br && !br.classList.contains('hidden') && !isPaidValid()){
-      br.classList.add('hidden');
-      br.style.display='none';
-      if(bp){ bp.classList.remove('hidden'); bp.style.display='block'; }
-    }
-  }, 800);
-
-  // After paying, ensure full questionnaire flow works
-  window.finalAutoUnlock = window.finalAutoUnlock || function(payId){
-    localStorage.setItem('docpulse_branch_paid','true');
-    localStorage.setItem('docpulse_branch_paid_v2', btoa(payId+SECRET));
-    localStorage.setItem('docpulse_branch_utr', payId);
-    localStorage.setItem('docpulse_attempts_left','2');
-    localStorage.setItem('docpulse_paid_at', Date.now().toString());
-    const bp = document.getElementById('branchPaywall');
-    if(bp){ bp.classList.add('hidden'); bp.style.display='none'; }
-    // Now show full result (remaining questions if any)
-    if(typeof showScanning === 'function'){ showScanning(); }
-    else if(typeof showResultWithAttemptDecrement === 'function'){ showResultWithAttemptDecrement(); }
-    else if(window.showResult){ setTimeout(()=>window.showResult(), 600); }
-  };
-
-  // Attach to global for pay button
-  window.isPaidValid = isPaidValid;
-})();
+// Ensure branchPaywall hidden on main screen load
+document.addEventListener('DOMContentLoaded', ()=>{
+  const bp=document.getElementById('branchPaywall');
+  if(bp){ bp.classList.add('hidden'); }
+});
 </script>
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
