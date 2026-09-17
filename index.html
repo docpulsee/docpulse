@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: #f8fafc;
             background-image: 
@@ -53,6 +55,23 @@
             0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2); }
             50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4); }
         }
+
+        /* Unity pulse animation for specialty badges in About Us */
+        @keyframes unityPulse {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.2), 0 4px 6px -2px rgba(14, 165, 233, 0.1);
+            }
+        }
+
+        .badge-unity-1 { animation: unityPulse 4s ease-in-out infinite 0s; }
+        .badge-unity-2 { animation: unityPulse 4s ease-in-out infinite 1s; }
+        .badge-unity-3 { animation: unityPulse 4s ease-in-out infinite 2s; }
+        .badge-unity-4 { animation: unityPulse 4s ease-in-out infinite 3s; }
     </style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -94,7 +113,8 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-2.5 flex-wrap">
+            <div class="flex items-center gap-3 flex-wrap text-xs font-semibold text-slate-600">
+                <a href="#about-us" class="hover:text-sky-600 transition-colors hidden sm:inline-block">About Us</a>
                 <button onclick="openPredictorModal()" class="bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-600 hover:to-teal-600 text-white font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-sky-500/20 flex items-center gap-2 border border-sky-300">
                     <i class="fa-solid fa-calculator"></i>
                     <span>Open Rank Predictor</span>
@@ -192,6 +212,59 @@
         </section>
 
     </main>
+
+    <section id="about-us" class="bg-slate-100 text-slate-900 py-16 px-4 border-t border-slate-200 mt-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-rose-100 text-rose-700 border border-rose-200 rounded-full px-3.5 py-1 text-xs font-black mb-4 shadow-sm">
+                <span>❤️</span> Built by Doctors, For Future Doctors
+            </div>
+            
+            <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-4 leading-tight">
+                We’ve Walked in Your Shoes. We Know the Counseling Chaos.
+            </h2>
+            
+            <p class="text-slate-700 leading-relaxed text-sm md:text-base mb-8 font-medium">
+                We are a group of resident doctors across General Surgery, Radiodiagnosis, Community Medicine, and Anatomy. During our own NEET PG counseling, we struggled through vague rank predictions, misleading seat advice, and endless panic. We created <strong class="text-sky-700 font-bold">DocPulse</strong> so no aspirant has to face counseling blind or alone ever again.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                <div class="badge-unity-1 bg-white border border-slate-200 rounded-2xl p-4 text-center text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center justify-center gap-2">
+                    <span class="text-xl">🔪</span>
+                    <span>General Surgery</span>
+                </div>
+                <div class="badge-unity-2 bg-white border border-slate-200 rounded-2xl p-4 text-center text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center justify-center gap-2">
+                    <span class="text-xl">🦴</span>
+                    <span>Radiodiagnosis</span>
+                </div>
+                <div class="badge-unity-3 bg-white border border-slate-200 rounded-2xl p-4 text-center text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center justify-center gap-2">
+                    <span class="text-xl">🩺</span>
+                    <span>Community Medicine</span>
+                </div>
+                <div class="badge-unity-4 bg-white border border-slate-200 rounded-2xl p-4 text-center text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center justify-center gap-2">
+                    <span class="text-xl">🧬</span>
+                    <span>Anatomy</span>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <span>🤝</span> Our Guarantee To You
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-1 font-medium">
+                        Pure algorithmic transparency, no hidden fees, and genuine resident mentorship when counseling starts.
+                    </p>
+                </div>
+                <a href="#calculator" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors whitespace-nowrap shadow-sm">
+                    Back to Top ↑
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        © 2026 DocPulse • Designed with care for Indian Medical Graduates
+    </footer>
 
     <div id="predictorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border-2 border-sky-400 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative vibrant-box">
@@ -619,7 +692,7 @@
             document.getElementById('predictorModal').classList.add('hidden');
         };
 
-        // Initialize Hero on load
+        // Initialize Hero calculation on load
         runHeroPredictor();
     </script>
 </body>
