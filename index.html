@@ -11,7 +11,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-KT453TYW06');
     </script>
 
@@ -70,15 +69,15 @@
             </span>
             <div class="overflow-hidden whitespace-nowrap w-full relative">
                 <div class="animate-ticker flex items-center gap-12 font-bold text-white">
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **Times of India:** NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **AajTak:** Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
-                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> **Notice:** Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> Times of India: NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> AajTak: Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
+                    <span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> Notice: Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Highlight Sub-Bar: Direct Connect Coming Soon -->
+    <!-- Highlight Sub-Bar -->
     <div class="bg-slate-900 text-slate-200 text-[11px] py-1.5 px-4 border-b border-indigo-500/30 shadow-inner flex items-center justify-center">
         <div class="max-w-6xl mx-auto flex items-center gap-2 justify-center font-medium">
             <span class="flex h-2 w-2 relative">
@@ -98,7 +97,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 leading-tight">DocPulse</h1>
-                    <p class="text-xs text-slate-500 font-medium">NEET PG Precision Rank Engine • Continuous Piecewise Curve</p>
+                    <p class="text-xs text-slate-500 font-medium">NEET PG Precision Rank Engine • Meta Moderate-Difficult Model</p>
                 </div>
             </div>
             
@@ -118,13 +117,13 @@
         <section class="bg-white border-2 border-sky-400/40 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold mb-4 shadow-sm">
-                    <i class="fa-solid fa-bolt text-amber-500"></i> Active Tool • Continuous Score Interpolation Engine
+                    <i class="fa-solid fa-bolt text-amber-500"></i> Active Tool • Meta Equiv Engine (0.88 Difficulty)
                 </div>
                 <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3 leading-tight">
                     Conquer Your NEET PG Rank
                 </h2>
                 <p class="text-sm text-slate-600 mb-8 max-w-xl">
-                    No unrealistic gaps or sudden jumps. Enter your correct and wrong responses to generate a continuous mathematical rank estimate.
+                    Monotonic mapping based on Meta's 800-point equivalency model. Enter your correct and wrong responses to generate a precise rank estimate.
                 </p>
 
                 <!-- Calculator Form Box -->
@@ -132,12 +131,12 @@
                     <div class="md:col-span-2 flex flex-col gap-3">
                         <div class="grid grid-cols-2 gap-3">
                             <div>
-                                <label class="block text-xs font-bold text-sky-700 mb-1">Correct Answers</label>
-                                <input type="number" id="heroCorrect" placeholder="e.g. 130" min="0" max="180" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
+                                <label class="block text-xs font-bold text-sky-700 mb-1">Correct Answers (×4)</label>
+                                <input type="number" id="heroCorrect" value="136" min="0" max="180" oninput="runHeroPredictor()" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-rose-600 mb-1">Wrong Answers</label>
-                                <input type="number" id="heroWrong" placeholder="e.g. 20" min="0" max="180" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
+                                <label class="block text-xs font-bold text-rose-600 mb-1">Wrong Answers (×-1)</label>
+                                <input type="number" id="heroWrong" value="40" min="0" max="180" oninput="runHeroPredictor()" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
                             </div>
                         </div>
                         <div class="text-xs text-slate-500">
@@ -148,21 +147,18 @@
                         <button onclick="runHeroPredictor()" class="w-full bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:opacity-95 text-white font-black py-3 rounded-xl text-xs transition shadow-md shadow-sky-500/20 flex items-center justify-center gap-1.5 mb-2">
                             <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Rank Now
                         </button>
-                        <span id="heroRankOutput" class="text-xs text-slate-500 font-medium">Enter scores to calculate</span>
+                        <div id="heroRankOutput" class="text-xs text-slate-500 font-medium">Enter scores to calculate</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EMOTIONAL SENIOR-JUNIOR GATEWAY SECTION (EMBEDDED SUPABASE GIF) -->
+        <!-- SENIOR-JUNIOR GATEWAY SECTION -->
         <section class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
-            <!-- Ambient Backlight -->
             <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
             <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-                
-                <!-- Left: High-Contrast Copywriting -->
                 <div class="flex-1 flex flex-col items-start text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider mb-5 shadow-sm">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span> Counseling Portal Launching Soon
@@ -182,7 +178,6 @@
                         <span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
                     </div>
 
-                    <!-- Email Notification Button -->
                     <a href="mailto:docpulsee@gmail.com?subject=NEET%20PG%20Mentorship%20%26%20Counseling%20Updates&body=Dear%20DocPulse%20Team%2C%0A%0AI%20would%20like%20to%20get%20notified%20as%20soon%20as%20the%20DocPulse%20Verified%20Senior%20Resident%20Directory%20and%20Counseling%20Mentorship%20Portal%20go%20live.%0A%0AThank%20you%20for%20building%20this%20platform%20to%20help%20aspirants%20connect%20with%20seniors." 
                        class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg shadow-sky-500/25 flex items-center gap-2.5 hover:scale-105 transform border border-sky-300">
                         <i class="fa-solid fa-envelope-open-text text-base"></i>
@@ -190,27 +185,20 @@
                     </a>
                 </div>
 
-                <!-- Right: REAL SUPABASE ANIMATED GIF STAGE -->
                 <div class="flex-shrink-0 w-full lg:w-96 flex flex-col items-center justify-center">
                     <div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl flex items-center justify-center">
-                        
-                        <!-- Uploaded Supabase Storage GIF -->
                         <img 
                             src="https://uwrwtttkqywsmehexmbf.supabase.co/storage/v1/object/public/Gif/Untitled%20design.gif" 
                             alt="Senior Doctor holding Junior Doctor hand and sharing tea" 
                             class="w-full h-full object-cover"
                         />
-
-                        <!-- Permanent Bottom Overlay -->
                         <div class="absolute bottom-3 inset-x-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 rounded-xl py-2 px-3 text-center z-10 shadow-lg">
                             <span class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-heart text-rose-500"></i> Step Inside. You Belong Here.
                             </span>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -229,7 +217,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-black text-slate-900">NEET PG Interactive Rank Calc</h3>
-                    <p class="text-xs text-slate-500 font-medium">Continuous curve mathematical predictor</p>
+                    <p class="text-xs text-slate-500 font-medium">Meta 800-Equiv Algorithm (Factor 0.88)</p>
                 </div>
             </div>
 
@@ -239,22 +227,21 @@
                         <label class="block text-xs font-bold text-sky-700 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-check text-sky-500"></i> Correct Answers:
                         </label>
-                        <input type="number" id="predCorrect" placeholder="e.g. 130" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
+                        <input type="number" id="predCorrect" value="136" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-sky-700 w-full focus:outline-none focus:border-sky-500 shadow-sm">
                     </div>
 
                     <div class="bg-slate-50 p-3.5 rounded-2xl border border-rose-200 shadow-inner">
                         <label class="block text-xs font-bold text-rose-600 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-xmark text-rose-500"></i> Wrong Answers:
                         </label>
-                        <input type="number" id="predWrong" placeholder="e.g. 20" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
+                        <input type="number" id="predWrong" value="40" min="0" max="180" oninput="calculateLiveMarksModal()" class="bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-bold text-rose-600 w-full focus:outline-none focus:border-rose-400 shadow-sm">
                     </div>
                 </div>
 
-                <!-- Live Auto-Calculated Marks Banner -->
                 <div class="bg-gradient-to-r from-sky-50 via-teal-50 to-emerald-50 border border-sky-200 rounded-2xl p-3.5 text-center shadow-inner">
                     <span class="text-xs text-slate-600 font-bold block mb-0.5">Auto-Calculated Total Marks (Out of 720):</span>
-                    <span id="liveMarksDisplay" class="text-2xl font-black text-sky-700">0 / 720</span>
-                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-500 mt-1">Remaining questions treated as unattempted</span>
+                    <span id="liveMarksDisplay" class="text-2xl font-black text-sky-700">504 / 720</span>
+                    <span id="leftQuestionsNote" class="block text-[10px] text-slate-500 mt-1">(4 questions unattempted)</span>
                 </div>
 
                 <div>
@@ -277,69 +264,86 @@
                 <i class="fa-solid fa-wand-magic-sparkles"></i> Predict My Rank Now!
             </button>
 
-            <!-- Result Container -->
             <div id="predResultBox" class="mt-4 hidden p-4 rounded-2xl bg-slate-50 border border-sky-200 text-xs text-slate-700 shadow-sm"></div>
         </div>
     </div>
 
     <script>
-        // Strictly monotonic decreasing anchors (Higher Marks -> Lower Numerical Rank)
-        const pythonMatrixAnchors = [
-            { marks: 720, rank: 1 },
-            { marks: 600, rank: 80 },
-            { marks: 560, rank: 1200 },
-            { marks: 520, rank: 5500 },
-            { marks: 504, rank: 7100 },
-            { marks: 490, rank: 9200 },
-            { marks: 480, rank: 11000 },
-            { marks: 450, rank: 18000 },
-            { marks: 400, rank: 35000 },
-            { marks: 300, rank: 75000 },
-            { marks: 200, rank: 115000 },
-            { marks: 0, rank: 150000 }
-        ].sort((a, b) => b.marks - a.marks);
+        // META 800-POINT BASELINE MAPPING DATA
+        const PG_MAP = [
+            { m: 0, min: 229435, max: 229435, avg: 229435 },
+            { m: 100, min: 210000, max: 210000, avg: 210000 },
+            { m: 200, min: 175000, max: 175000, avg: 175000 },
+            { m: 300, min: 130000, max: 130000, avg: 130000 },
+            { m: 400, min: 85000, max: 85000, avg: 85000 },
+            { m: 500, min: 42000, max: 42000, avg: 42000 },
+            { m: 560, min: 22000, max: 23000, avg: 22500 },
+            { m: 600, min: 11000, max: 12000, avg: 11500 },
+            { m: 650, min: 3500, max: 4000, avg: 3750 },
+            { m: 700, min: 150, max: 300, avg: 225 },
+            { m: 707, min: 1, max: 1, avg: 1 }
+        ];
 
-        function getInterpolatedRank(marks) {
-            if (marks >= 720) return 1;
-            if (marks <= 0) return 150000;
+        // Meta Rank Engine (Interpolates over 800 scale and applies difficulty factor 0.88)
+        function calculateMetaRank(marks720) {
+            const m720 = Math.max(0, Math.min(720, marks720));
+            const eq800 = m720 * (800 / 720);
+            const clampedM = Math.max(0, Math.min(707, eq800));
 
-            let upper = pythonMatrixAnchors[0];
-            let lower = pythonMatrixAnchors[pythonMatrixAnchors.length - 1];
+            let lo = PG_MAP[0];
+            let hi = PG_MAP[PG_MAP.length - 1];
 
-            for (let i = 0; i < pythonMatrixAnchors.length - 1; i++) {
-                if (marks <= pythonMatrixAnchors[i].marks && marks >= pythonMatrixAnchors[i+1].marks) {
-                    upper = pythonMatrixAnchors[i];
-                    lower = pythonMatrixAnchors[i+1];
+            for (let i = 0; i < PG_MAP.length; i++) {
+                if (PG_MAP[i].m <= clampedM) lo = PG_MAP[i];
+                if (PG_MAP[i].m >= clampedM) {
+                    hi = PG_MAP[i];
                     break;
                 }
             }
 
-            if (upper.marks === lower.marks) return upper.rank;
+            let baseMin = lo.min;
+            let baseMax = lo.max;
+            let baseAvg = lo.avg;
 
-            // Linear interpolation between valid bounds
-            const fraction = (marks - lower.marks) / (upper.marks - lower.marks);
-            const interpolated = lower.rank - fraction * (lower.rank - upper.rank);
-            return Math.round(Math.max(1, interpolated));
+            if (lo.m !== hi.m) {
+                const t = (clampedM - lo.m) / (hi.m - lo.m);
+                baseMin = Math.round(lo.min + t * (hi.min - lo.min));
+                baseMax = Math.round(lo.max + t * (hi.max - lo.max));
+                baseAvg = Math.round(lo.avg + t * (hi.avg - lo.avg));
+            }
+
+            const factor = 0.88;
+            const adjustedMin = Math.max(1, Math.round(baseMin * factor));
+            const adjustedMax = Math.max(1, Math.round(baseMax * factor));
+            const adjustedAvg = Math.round((adjustedMin + adjustedMax) / 2);
+
+            return {
+                rank: adjustedAvg,
+                min: adjustedMin,
+                max: adjustedMax,
+                eq800: eq800.toFixed(1),
+                percentage: ((m720 / 720) * 100).toFixed(2)
+            };
         }
 
         window.runHeroPredictor = function() {
-            const correctVal = parseInt(document.getElementById('heroCorrect').value);
-            const wrongVal = parseInt(document.getElementById('heroWrong').value);
+            const correctVal = parseInt(document.getElementById('heroCorrect').value) || 0;
+            const wrongVal = parseInt(document.getElementById('heroWrong').value) || 0;
             const outEl = document.getElementById('heroRankOutput');
 
-            if (isNaN(correctVal) || isNaN(wrongVal)) {
-                alert('Please enter both correct and wrong counts.');
-                return;
-            }
-
             if (correctVal + wrongVal > 180) {
-                alert('Total questions cannot exceed 180.');
+                outEl.innerHTML = `<span class="text-rose-600 font-bold">Total questions cannot exceed 180</span>`;
                 return;
             }
 
-            const marksInput = (correctVal * 4) - (wrongVal * 1);
-            const rawRank = getInterpolatedRank(marksInput);
-            outEl.innerHTML = `Predicted Rank: <span class="text-sky-600 font-black">~${rawRank.toLocaleString()}</span> (${marksInput} marks)`;
+            const totalMarks = (correctVal * 4) - (wrongVal * 1);
+            const res = calculateMetaRank(totalMarks);
+
+            outEl.innerHTML = `
+                <div class="text-base font-black text-sky-600">Predicted Rank: ~${res.rank.toLocaleString()}</div>
+                <div class="text-[11px] text-slate-500 font-bold mt-0.5">${totalMarks} Marks | Range: ${res.min.toLocaleString()} - ${res.max.toLocaleString()}</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">800-Scale Equiv: ${res.eq800} (${res.percentage}%)</div>
+            `;
         };
 
         window.calculateLiveMarksModal = function() {
@@ -350,43 +354,38 @@
             
             document.getElementById('liveMarksDisplay').innerText = `${totalMarks} / 720`;
             document.getElementById('leftQuestionsNote').innerText = leftQ >= 0 
-                ? `(${leftQ} questions left unattempted)` 
+                ? `(${leftQ} questions unattempted)` 
                 : `(Exceeds 180 total questions!)`;
         };
 
         window.runPythonMatrixPredictorModal = function() {
-            const correctInput = parseInt(document.getElementById('predCorrect').value);
-            const wrongInput = parseInt(document.getElementById('predWrong').value);
+            const correctInput = parseInt(document.getElementById('predCorrect').value) || 0;
+            const wrongInput = parseInt(document.getElementById('predWrong').value) || 0;
             const branch = document.getElementById('predBranch').value;
             const resBox = document.getElementById('predResultBox');
-
-            if (isNaN(correctInput) || isNaN(wrongInput)) {
-                alert('Please enter both correct and wrong answers.');
-                return;
-            }
 
             if (correctInput + wrongInput > 180) {
                 alert('Total questions cannot exceed 180.');
                 return;
             }
 
-            const marksInput = (correctInput * 4) - (wrongInput * 1);
-            const rawInterpolatedRank = getInterpolatedRank(marksInput);
-            const predRankStr = `~${rawInterpolatedRank.toLocaleString()}`;
+            const totalMarks = (correctInput * 4) - (wrongInput * 1);
+            const res = calculateMetaRank(totalMarks);
+            const predRankStr = `~${res.rank.toLocaleString()}`;
 
             let comfortTitle = "You're in a wonderful place!";
             let comfortMsg = "";
             let badgeColor = "text-sky-700 bg-sky-100 border-sky-300";
 
-            if (rawInterpolatedRank <= 1000) {
+            if (res.rank <= 1000) {
                 comfortTitle = "🌟 Elite Standing!";
-                comfortMsg = `With ${marksInput} marks, your estimated rank is **${predRankStr}**. Premier institutes for **${branch}** are in close reach.`;
-            } else if (rawInterpolatedRank <= 15000) {
+                comfortMsg = `With ${totalMarks} marks, your estimated rank is **${predRankStr}**. Premier institutes for **${branch}** are in close reach.`;
+            } else if (res.rank <= 15000) {
                 comfortTitle = "🌱 Secure Horizon";
-                comfortMsg = `At ${marksInput} marks, your estimated rank is **${predRankStr}**. Promising options available across top state seats for **${branch}**.`;
+                comfortMsg = `At ${totalMarks} marks, your estimated rank is **${predRankStr}**. Promising options available across top state seats for **${branch}**.`;
             } else {
                 comfortTitle = "☕ Every Doctor’s Path is Unique";
-                comfortMsg = `Your predicted rank is **${predRankStr}** for ${marksInput} marks. Great opportunities exist in private and institutional rounds for **${branch}**.`;
+                comfortMsg = `Your predicted rank is **${predRankStr}** for ${totalMarks} marks. Great opportunities exist in private and institutional rounds for **${branch}**.`;
             }
 
             resBox.classList.remove('hidden');
@@ -397,18 +396,24 @@
                 </div>
                 <p class="text-slate-600 leading-relaxed text-xs sm:text-sm font-normal mb-3">${comfortMsg}</p>
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200 text-[11px] text-slate-500">
-                    <div>Calculated Marks: <span class="text-sky-700 font-bold">${marksInput} / 720</span></div>
-                    <div>Model: <span class="text-teal-700 font-bold">Continuous Piecewise</span></div>
+                    <div>Marks: <span class="text-sky-700 font-bold">${totalMarks} / 720</span></div>
+                    <div>800-Equiv: <span class="text-teal-700 font-bold">${res.eq800} / 800</span></div>
+                    <div>Range: <span class="text-slate-700 font-bold">${res.min.toLocaleString()} - ${res.max.toLocaleString()}</span></div>
+                    <div>Model: <span class="text-slate-700 font-bold">Meta 0.88 Auto</span></div>
                 </div>
             `;
         };
 
         window.openPredictorModal = function() {
             document.getElementById('predictorModal').classList.remove('hidden');
+            calculateLiveMarksModal();
         };
         window.closePredictorModal = function() {
             document.getElementById('predictorModal').classList.add('hidden');
         };
+
+        // Initialize Hero on load
+        runHeroPredictor();
     </script>
 </body>
 </html>
