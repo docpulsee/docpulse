@@ -208,16 +208,13 @@ animation: vibrantPulse 3s infinite;
 
 <div class="flex items-center gap-2.5 flex-wrap" style="overflow: visible;">
 <!-- ABOUT US BUTTON -->
-<div class="relative flex items-center gap-2">
-<!-- Blinking red dot / heart -->
-<div class="relative flex items-center justify-center">
-<span class="absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75 animate-ping"></span>
-<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500 shadow-sm shadow-red-500/30 heart-blink flex items-center justify-center text-white text-[6px]">❤</span>
-</div>
-<button onclick="openAboutUsModal()" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
-<i class="fa-solid fa-circle-info text-slate-400"></i> About Us
+<button onclick="openAboutUsModal()" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-2">
+<span class="relative w-5 h-5 rounded-md bg-red-50 border border-red-200 flex items-center justify-center">
+<span class="absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-60 animate-ping"></span>
+<span class="relative text-[10px] heart-blink">❤️</span>
+</span>
+About Us
 </button>
-</div>
 
 <!-- SMALL BUTTON NEXT TO ABOUT US WITH AUTO TOOLTIP (LIKE PHOTO SAMPLE) -->
 <div class="branch-tip-wrapper">
