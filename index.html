@@ -51,7 +51,7 @@ background-attachment: fixed;
 .animate-ticker {
 display: inline-block;
 white-space: nowrap;
-animation: ticker 35s linear infinite;
+animation: ticker 90s linear infinite;
 }
 @keyframes pulseGateAura {
 0%, 100% { opacity: 0.4; transform: scale(1); }
@@ -68,21 +68,106 @@ animation: vibrantPulse 3s infinite;
 50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4); }
 }
 </style>
+
+
+<style>
+.branch-tip-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: visible !important;
+}
+.branch-auto-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 10px 14px;
+  border-radius: 10px;
+  white-space: normal;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+.branch-auto-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #111827;
+}
+@keyframes fadeInDark {
+  0% { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.92); background: rgba(17,24,39,0.05); }
+  30% { opacity: 0.2; background: rgba(17,24,39,0.25); }
+  60% { opacity: 0.6; background: rgba(17,24,39,0.65); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); background: #111827; }
+}
+@keyframes fadeOutDark {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); background: #111827; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.93); background: rgba(17,24,39,0.1); }
+}
+.branch-auto-tooltip.show {
+  animation: fadeInDark 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.branch-auto-tooltip.hide {
+  animation: fadeOutDark 1.6s ease forwards;
+}
+@keyframes pulseAmber {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+.branch-pulse-btn { animation: pulseAmber 2.2s infinite; }
+</style>
+
+
+<style>
+@keyframes heartBeat {
+  0%,100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(0.95); }
+  45% { transform: scale(1.1); }
+}
+.heart-blink { animation: heartBeat 1.6s infinite; }
+</style>
+
+
+<style>
+@keyframes popPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+  50% { transform: scale(1.12); box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+@keyframes floatClose {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-2px) scale(1.08); }
+}
+.close-pop {
+  animation: popPulse 1.8s infinite, floatClose 2s ease-in-out infinite;
+}
+.close-pop:hover { animation: none; transform: scale(1.2); }
+</style>
+
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 
 <div class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 text-white font-bold text-xs py-2.5 px-4 overflow-hidden relative shadow-md">
 <div class="max-w-6xl mx-auto flex items-center gap-3">
 <span class="bg-white text-sky-700 font-black px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider flex items-center gap-1 shadow flex-shrink-0">
-<i class="fa-solid fa-bolt text-amber-500"></i> Live News
+<span class="relative flex h-2 w-2 mr-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span> LIVE
 </span>
 <div class="overflow-hidden whitespace-nowrap w-full relative">
-<div class="animate-ticker flex items-center gap-12 font-bold text-white">
-<span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> Times of India: NEET PG answer key expected to be released by NBEMS this week via natboard.edu.in.</span>
-<span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> AajTak: Single-shift CBT exam successfully conducted. Rank predictor active below.</span>
-<span><i class="fa-solid fa-star text-[9px] mr-2 text-amber-200"></i> Notice: Verified Resident Mentorship & Contact Directory launching with Counseling!</span>
+<div id="liveNewsTicker" class="animate-ticker flex items-center gap-10 font-bold text-white">Loading fun facts...</div>
 </div>
-</div>
+<span id="newsUpdateTime" class="text-[9px] font-medium opacity-70 hidden md:block flex-shrink-0"></span>
 </div>
 </div>
 
@@ -96,8 +181,8 @@ animation: vibrantPulse 3s infinite;
 </div>
 </div>
 
-<header class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-<div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
+<header class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-sm" style="overflow: visible;">
+<div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3" style="overflow: visible;">
 <div class="flex items-center gap-3.5">
 <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-sky-500/20">
 <i class="fa-solid fa-user-doctor"></i>
@@ -108,16 +193,26 @@ animation: vibrantPulse 3s infinite;
 </div>
 </div>
 
-<div class="flex items-center gap-2.5 flex-wrap">
+<div class="flex items-center gap-2.5 flex-wrap" style="overflow: visible;">
 <!-- ABOUT US BUTTON -->
+<div class="relative flex items-center gap-2">
+<!-- Blinking red dot / heart -->
+<div class="relative flex items-center justify-center">
+<span class="absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75 animate-ping"></span>
+<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500 shadow-sm shadow-red-500/30 heart-blink flex items-center justify-center text-white text-[6px]">❤</span>
+</div>
 <button onclick="openAboutUsModal()" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
 <i class="fa-solid fa-circle-info text-slate-400"></i> About Us
 </button>
+</div>
 
-<!-- SMALL BUTTON NEXT TO ABOUT US -->
-<button onclick="openBranchPayment()" class="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-bold px-3 py-2 rounded-lg text-[11px] transition shadow-md shadow-amber-500/20 flex items-center gap-1.5 border border-amber-300">
+<!-- SMALL BUTTON NEXT TO ABOUT US WITH AUTO TOOLTIP (LIKE PHOTO SAMPLE) -->
+<div class="branch-tip-wrapper">
+<div id="branchAutoTip" class="branch-auto-tooltip">Medicine? Derma? Radio? Surgery? Take 90 sec Doctor DNA test — 12 Qs to find YOUR perfect branch that won't burn you out 🧬</div>
+<button onclick="openBranchPayment()" class="branch-pulse-btn bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-bold px-3 py-2 rounded-lg text-[11px] transition shadow-md shadow-amber-500/20 flex items-center gap-1.5 border border-amber-300">
 <i class="fa-solid fa-compass text-[10px]"></i> Get to know your branch - ₹149
 </button>
+</div>
 
 <button onclick="openPredictorModal()" class="bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-600 hover:to-teal-600 text-white font-black px-4 py-2.5 rounded-xl text-xs transition shadow-lg shadow-sky-500/20 flex items-center gap-2 border border-sky-300">
 <i class="fa-solid fa-calculator"></i>
@@ -616,40 +711,50 @@ document.getElementById('predictorModal').classList.add('hidden');
 runHeroPredictor();
 </script>
 
-<!-- ABOUT US EMOTIONAL POPUP MODAL -->
-<div id="aboutUsModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
-<div class="bg-white rounded-[2rem] max-w-md w-full p-7 md:p-8 shadow-2xl border border-slate-200 relative overflow-hidden">
+<!-- ABOUT US EMOTIONAL POPUP MODAL - SMALL & INTERESTING -->
+<div id="aboutUsModal" class="fixed inset-0 bg-slate-900/15 backdrop-blur-[3px] z-[60] hidden flex items-center justify-center p-4">
+<div class="bg-white/90 backdrop-blur-xl rounded-[2rem] max-w-[420px] w-full shadow-[0_25px_80px_rgba(0,0,0,0.15)] border border-white/50 relative overflow-hidden">
 <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500"></div>
-<button onclick="closeAboutUsModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-800">
-<i class="fa-solid fa-xmark"></i>
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-sky-100 rounded-full blur-3xl opacity-40"></div>
+<button onclick="closeAboutUsModal()" class="close-pop absolute top-5 right-5 w-9 h-9 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-700 hover:text-red-500 shadow-lg z-10 cursor-pointer">
+<i class="fa-solid fa-xmark text-[12px]"></i>
 </button>
 
-<div class="flex items-center gap-3 mb-5">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-lg">
+<div class="p-7 relative">
+<div class="flex items-center gap-3.5 mb-5">
+<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 flex items-center justify-center text-white text-[20px] shadow-md">
 <i class="fa-solid fa-heart-pulse"></i>
 </div>
 <div>
-<h3 class="text-[18px] font-black text-slate-900">About Us</h3>
-<p class="text-[11px] text-slate-500 font-medium">Doctors for Doctors</p>
+<h3 class="text-[18px] font-black text-slate-900 leading-tight">About Us</h3>
+<p class="text-[11px] text-slate-500 font-bold">Doctors for Doctors</p>
 </div>
 </div>
 
-<div class="space-y-4 text-[14px] leading-[1.7] text-slate-700">
-<p class="font-semibold text-slate-900">We are a team of doctors who struggled during chaotic counselling.</p>
-<p>We remember the sleepless nights, the endless PDFs, the confusion of which college, which branch, and that fear of making the wrong choice that could define our entire career.</p>
-<p>No senior to guide. No real data. Only rumors and anxiety.</p>
-<p class="bg-gradient-to-r from-sky-50 to-teal-50 border border-sky-100 rounded-2xl p-4 text-[13.5px] font-medium text-slate-800">
-<i class="fa-solid fa-hand-holding-heart text-sky-500 mr-1.5"></i>
-So we built it together — <span class="font-black text-slate-900">as doctors, for doctors</span> — so that you don't suffer like we did.
-</p>
-<p class="text-[13px] text-slate-600">DocPulse is not just a rank predictor. It's the senior we never had. It's the clarity we craved. Made by those who walked through the same fire, for you.</p>
+<div class="space-y-3.5">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-1.5 h-1.5 bg-rose-400 rounded-full flex-shrink-0"></div>
+<p class="text-[13.5px] font-bold text-slate-900 leading-snug">We are a team of doctors who struggled during chaotic counselling.</p>
 </div>
 
-<div class="mt-7 flex gap-2.5">
-<button onclick="closeAboutUsModal(); openBranchPayment();" class="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-white font-bold py-3 rounded-xl text-[13px] shadow-md">
-<i class="fa-solid fa-compass mr-1"></i> Get to know your branch - ₹149
-</button>
-<button onclick="closeAboutUsModal()" class="px-5 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-bold text-[13px]">Close</button>
+<div class="bg-slate-50 border border-slate-100 rounded-2xl p-3.5 flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-2.5 py-1 rounded-full text-[10.5px] font-bold shadow-sm"><i class="fa-regular fa-moon text-slate-400"></i> Sleepless nights</span>
+<span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-2.5 py-1 rounded-full text-[10.5px] font-bold shadow-sm"><i class="fa-regular fa-file-pdf text-slate-400"></i> Endless PDFs</span>
+<span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-2.5 py-1 rounded-full text-[10.5px] font-bold shadow-sm"><i class="fa-solid fa-question text-slate-400"></i> Wrong choice fear</span>
+</div>
+
+<p class="text-[13px] text-slate-600 leading-[1.6]">We remember the confusion of which college, which branch, and that fear of making the wrong choice that could define our entire career. <span class="font-semibold text-slate-800">No senior to guide. No real data. Only rumors.</span></p>
+
+<div class="bg-gradient-to-r from-sky-50 to-teal-50 border border-sky-100 rounded-2xl p-4">
+<p class="text-[13px] font-medium text-slate-800 leading-[1.5]"><i class="fa-solid fa-hand-holding-heart text-sky-500 mr-1.5"></i> So we built it together — <span class="font-black text-slate-900">as doctors, for doctors</span> — so you don't suffer like we did.</p>
+</div>
+
+<p class="text-[11.5px] text-slate-500 leading-[1.5] text-center italic">DocPulse is the senior we never had. The clarity we craved.</p>
+</div>
+
+<div class="mt-6 flex justify-center">
+<button onclick="closeAboutUsModal()" class="px-8 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-[12.5px]">Got it, thanks ❤️</button>
+</div>
 </div>
 </div>
 </div>
@@ -663,9 +768,133 @@ window.closeAboutUsModal = function(){
   document.getElementById('aboutUsModal').classList.add('hidden');
   document.body.style.overflow='';
 };
-// Close on outside click
 document.getElementById('aboutUsModal')?.addEventListener('click', function(e){
   if(e.target.id==='aboutUsModal') closeAboutUsModal();
+});
+</script>
+
+
+
+
+<script>
+window.openBranchPayment = function(){
+  try{
+    const paid = localStorage.getItem('docpulse_paid')==='true';
+    const reportGenerated = localStorage.getItem('docpulse_report_generated')==='true';
+    if(paid && !reportGenerated){
+      window.location.href='https://docpulsee.github.io/docpulse/branch-dna.html?paid=1';
+      return;
+    }
+    if(paid && reportGenerated){
+      if(confirm('Your one-time Doctor DNA report is already used. Pay ₹149 again for new report?')){
+        localStorage.removeItem('docpulse_report_generated');
+        sessionStorage.setItem('allow_one_report','true');
+        window.open('https://rzp.io/rzp/nfwlr3Q','_blank');
+      }
+      return;
+    }
+    window.open('https://rzp.io/rzp/nfwlr3Q','_blank');
+  }catch(e){ window.open('https://rzp.io/rzp/nfwlr3Q','_blank'); }
+};
+
+// Full message auto tooltip - fade 4-5 sec, disappear, reappear fade to dark
+(function(){
+  const fullMessage = "Medicine? Derma? Radio? Surgery? Take 90 sec Doctor DNA test — 12 Qs to find YOUR perfect branch that won't burn you out 🧬";
+  function showTip(){
+    const tip = document.getElementById('branchAutoTip');
+    if(!tip) return;
+    tip.textContent = fullMessage;
+    tip.classList.remove('hide');
+    tip.classList.add('show');
+    // Stay for 5 sec after slow fade, then slow fade out
+    setTimeout(()=>{
+      tip.classList.remove('show');
+      tip.classList.add('hide');
+    }, 5000);
+  }
+  // First show after 2 sec
+  setTimeout(showTip, 2000);
+  // Reappear every 10 sec (fade to dark again)
+  setInterval(showTip, 10000);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+// GUARANTEED WORKING FUN FACTS TICKER - 22 headlines
+document.addEventListener('DOMContentLoaded', function(){
+  const tickerEl = document.getElementById('liveNewsTicker');
+  const timeEl = document.getElementById('newsUpdateTime');
+  if(!tickerEl) return;
+
+  const facts = [
+    "NBEMS: NEET PG 2026 counselling dates soon - natboard.edu.in",
+    "INICET July 2026: AIIMS pattern update - aiimsexams.ac.in",
+    "☕ Coffee before noon = 16% lower heart risk",
+    "😴 7 hrs sleep cleans brain toxins 60% faster - Harvard",
+    "🥗 30 plants a week = stronger immunity",
+    "🚶 8000 steps daily beats meditation for anxiety",
+    "🍫 Dark chocolate 30g daily improves focus & mood",
+    "📱 Phone in bedroom cuts melatonin by 55%",
+    "💧 Water before meals helps lose 44% more weight",
+    "☀️ 20 mins sunlight = daily vitamin D - free medicine",
+    "😂 Laughing 15 mins burns 40 calories",
+    "⏰ 14-hour fast window improves metabolism",
+    "🪑 Sitting 11+ hrs = 40% higher death risk - stand up!",
+    "🎵 Music during surgery reduces anesthesia 20%",
+    "🧠 Brain uses 20% of body energy - thinking is workout",
+    "📚 Chewing gum improves concentration 10%",
+    "❄️ Cold water face splash resets anxiety in 30 sec",
+    "✍️ Handwritten notes remember 34% better than typed",
+    "🫁 2 mins deep breathing lowers BP same as 30 min walk",
+    "⚕️ Doctors sleeping <6 hrs make 2x more errors",
+    "NMC: New PG curriculum from 2026 - nmc.org.in",
+    "NMC: 50% attendance must for PG residents"
+  ];
+
+  // Build ticker HTML with icons
+  const tickerHTML = facts.map(text => {
+    let source = "Fact";
+    if(text.includes("NBEMS") || text.includes("NEET")) source = "NEET PG";
+    else if(text.includes("INICET") || text.includes("AIIMS")) source = "INICET";
+    else if(text.includes("NMC")) source = "NMC";
+    else if(text.includes("☕")) source = "Heart";
+    else if(text.includes("😴")) source = "Sleep";
+    else if(text.includes("🥗")) source = "Gut";
+    else if(text.includes("🚶")) source = "Mental";
+    else if(text.includes("🍫")) source = "Brain";
+    else if(text.includes("📱")) source = "Sleep Tip";
+    else if(text.includes("💧")) source = "Weight";
+    else if(text.includes("☀️")) source = "Vitamin D";
+    else if(text.includes("😂")) source = "Fun";
+    else if(text.includes("⏰")) source = "Nutrition";
+    else if(text.includes("🪑")) source = "Alert";
+    else if(text.includes("🎵")) source = "Surgery";
+    else if(text.includes("🧠")) source = "Brain";
+    else if(text.includes("📚")) source = "Study";
+    else if(text.includes("❄️")) source = "Anxiety";
+    else if(text.includes("✍️")) source = "Memory";
+    else if(text.includes("🫁")) source = "Breathing";
+    else if(text.includes("⚕️")) source = "Doctor";
+    
+    return `<span class="flex items-center gap-2 whitespace-nowrap"><span class="bg-white/30 px-2.5 py-0.5 rounded-full text-[9px] font-black">${source}</span> ${text}</span>`;
+  }).join('<span class="opacity-30 mx-3">•</span>');
+
+  // Duplicate for seamless loop
+  tickerEl.innerHTML = tickerHTML + '<span class="opacity-30 mx-8">★</span>' + tickerHTML;
+  
+  if(timeEl){
+    timeEl.textContent = 'Fun Facts • Daily';
+  }
+  
+  // Make ticker slower for many headlines
+  tickerEl.style.animationDuration = '90s';
 });
 </script>
 
