@@ -1009,7 +1009,7 @@ function __neetpgRunApp(){
     newScript.type = 'text/babel';
     newScript.text = srcEl.textContent;
     srcEl.parentNode.insertBefore(newScript, srcEl.nextSibling);
-    Babel.transformScriptTags([newScript]);
+    Babel.transformScriptTags();
   } catch (e) {
     var rootEl = document.getElementById('root');
     if (rootEl) rootEl.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#a2273a;font-family:system-ui,sans-serif;">The counselling directory failed to start (' + (e && e.message ? e.message : e) + '). Please reload the page.</div>';
@@ -1690,4 +1690,4 @@ function App(){
                     className={`p-3 rounded-xl cursor-pointer border ${selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?"row-ring border-tok":"border-tok"}`}
                     style={selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?{background:'var(--accent-soft)'}:{background:'var(--surface-alt)'}}>
                     <div className="text-xs font-medium flex items-center justify-between gap-2">
-      
+                 
