@@ -1130,6 +1130,8 @@ function useAuth(){
 function PaywallCard({ authState, contextLabel }){
   const [email, setEmail] = React.useState('');
   const [sent, setSent] = React.useState(false);
+  const [signInError, setSignInError] = React.useState(null);
+  const [sending, setSending] = React.useState(false);
   const payHref = RAZORPAY_PAYMENT_LINK + (email ? `?prefill[email]=${encodeURIComponent(email)}` : '');
   return (
     <div className="rounded-2xl border border-tok p-5 text-center" style={{background:'var(--surface-alt)'}}>
@@ -1142,10 +1144,20 @@ function PaywallCard({ authState, contextLabel }){
           <div className="flex flex-col gap-2 items-center">
             <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com"
               className="input-tok rounded-lg px-3 py-2 text-xs w-full max-w-xs" />
-            <button onClick={async ()=>{ if(!email) return; await authState.signInWithEmail(email); setSent(true); }}
-              className="rounded-lg px-4 py-2 text-xs font-semibold" style={{background:'var(--btn-bg)', color:'var(--btn-text)'}}>
-              Sign in to continue
+            <button disabled={sending} onClick={async ()=>{
+                if(!email) return;
+                setSending(true); setSignInError(null);
+                const { error } = await authState.signInWithEmail(email);
+                setSending(false);
+                if(error){ setSignInError(error.message || String(error)); }
+                else { setSent(true); }
+              }}
+              className="rounded-lg px-4 py-2 text-xs font-semibold" style={{background:'var(--btn-bg)', color:'var(--btn-text)', opacity: sending?0.6:1}}>
+              {sending ? 'Sending…' : 'Sign in to continue'}
             </button>
+            {signInError && (
+              <div className="text-[11px] font-semibold" style={{color:'var(--bad)'}}>{signInError}</div>
+            )}
           </div>
         )
       ) : (
@@ -1678,122 +1690,4 @@ function App(){
                     style={selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?{background:'var(--accent-soft)'}:{background:'var(--surface-alt)'}}>
                     <div className="text-xs font-medium flex items-center justify-between gap-2">
                       <span>{b.Spec_Norm} ({b.Deg})</span>
-                      {b.Has_DU && <span className="tag-du text-[9px] px-1.5 py-0.5 rounded-full shrink-0">DU</span>}
-                    </div>
-                    <div className="text-[10px] text-dim mono" style={!isUnlocked(b.I) ? {filter:'blur(4px)'} : {}}>Fee {fmtMoney(b.Annual_Fees_INR)} · Stip {fmtMoney(b.Stipend_Y1_INR)}{b.Rank_Status!=="ranks" ? " · no ranks" : ""}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex-1 overflow-auto p-6 relative">
-              {!isUnlocked(selectedBranch.I) && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center p-6" style={{background:'color-mix(in srgb, var(--surface) 88%, transparent)', backdropFilter:'blur(6px)'}}>
-                  <div className="max-w-sm w-full"><PaywallCard authState={authState} contextLabel={selectedBranch.Display_Name} /></div>
-                </div>
-              )}
-              <div style={!isUnlocked(selectedBranch.I) ? {filter:'blur(6px)', pointerEvents:'none', userSelect:'none'} : {}}>
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  <div className="tile-fee rounded-2xl p-4">
-                    <div className="text-[10px] text-dim uppercase tracking-wide flex items-center justify-between">
-                      <span>Annual fee</span>
-                      {srcBadge(selectedBranch.Fees_Badge)}
-                    </div>
-                    <div className="text-lg font-bold mono">{fmtMoney(selectedBranch.Annual_Fees_INR)}</div>
-                    <div className="text-[10px] text-dim">{selectedBranch.Fees_Note ? selectedBranch.Fees_Note : "Per year"}</div>
-                  </div>
-                  <div className="tile-good rounded-2xl p-4">
-                    <div className="text-[10px] uppercase tracking-wide flex items-center justify-between" style={{opacity:.8}}>
-                      <span>Stipend Y1 / Y2 / Y3 (per month)</span>
-                      {srcBadge(selectedBranch.Stipend_Badge)}
-                    </div>
-                    <div className="text-sm font-bold mono">{fmtMoney(selectedBranch.Stipend_Y1_INR)} / {fmtMoney(selectedBranch.Stipend_Y2_INR)} / {fmtMoney(selectedBranch.Stipend_Y3_INR)}</div>
-                  </div>
-                </div>
-                <div className="text-[10px] text-dim mb-4 -mt-4">OFFICIAL = state government order or the college's/NBEMS's own published circular. THIRD-PARTY EST. = no primary document found for this branch — shown as a typical/estimated figure so nothing is blank; treat as a rough guide only.</div>
-
-                {(selectedBranch.Bond_Years || selectedBranch.Bond_Penalty_INR) ? (
-                  <div className="tile-bad rounded-2xl p-3 mb-4 text-xs">
-                    Bond: {selectedBranch.Bond_Years ?? 0} year(s) · Penalty {fmtMoney(selectedBranch.Bond_Penalty_INR)}
-                  </div>
-                ) : null}
-
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs text-dim">Quota / Round</label>
-                    <span className="text-[10px] text-dim mono">
-                      {roundsAvailable(selectedBranch).length} with data
-                    </span>
-                  </div>
-                  {roundsAvailable(selectedBranch).length===0 ? (
-                    <div className="text-xs text-dim tile-fee rounded-xl px-3 py-2">
-                      No closing-rank data found for this branch. {selectedBranch.Rank_Status==="not_in_mcc" ? "This institute is listed by NMC but did not appear in the MCC allotment results we processed." : "This institute appears in the MCC seat matrix but had no candidates allotted here in the rounds we processed."}
-                    </div>
-                  ) : (
-                    <div className="flex flex-wrap gap-1.5">
-                      {roundsAvailable(selectedBranch).map(rt=>(
-                        <button key={rt} onClick={()=>setRoundSel(rt)}
-                          className={`seg-btn px-3 py-1.5 rounded-lg text-xs border ${rt===roundSel?"active border-tok":"border-tok"}`}
-                          style={rt===roundSel?{borderColor:'var(--accent)'}:{}}>
-                          {tagLabel(rt)}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {roundSel && (
-                <div className="surface border border-tok rounded-2xl overflow-hidden">
-                  <div className="grid grid-cols-5 gap-0 text-xs">
-                    {CATS.map(c=><div key={c} className="surface-alt p-3 font-semibold border-b border-tok text-center">{c}</div>)}
-                  </div>
-                  <div className="grid grid-cols-5 gap-0 text-xs mono">
-                    {CATS.map(c=>(
-                      <div key={c} className="p-3 border-b border-tok text-center">{fmtNum(getRankRow(selectedBranch,roundSel)[c])}</div>
-                    ))}
-                  </div>
-                </div>
-                )}
-
-                {roundsAvailable(selectedBranch).length>0 && (
-                <div className="mt-4">
-                  <div className="text-xs font-semibold text-dim mb-2">All quotas / rounds with data (GN / EWS / OBC / SC / ST)</div>
-                  <div className="overflow-auto border border-tok rounded-2xl max-h-72">
-                    <table className="w-full text-[11px] mono">
-                      <thead><tr className="surface-alt"><th className="p-2 text-left font-semibold" style={{position:'sticky',top:0}}>Quota · Round</th><th style={{position:'sticky',top:0}}>GN</th><th style={{position:'sticky',top:0}}>EWS</th><th style={{position:'sticky',top:0}}>OBC</th><th style={{position:'sticky',top:0}}>SC</th><th style={{position:'sticky',top:0}}>ST</th></tr></thead>
-                      <tbody>
-                        {roundsAvailable(selectedBranch).map(rt=>{
-                          const row = getRankRow(selectedBranch, rt);
-                          const isDU = rt.startsWith("DU");
-                          return (
-                            <tr key={rt} className={`border-t border-tok ${rt===roundSel?"row-ring":""}`} style={isDU?{background:'var(--du-soft)'}:{}}>
-                              <td className="p-2 font-medium">{tagLabel(rt)}</td>
-                              <td className="text-center">{fmtNum(row.GN)}</td>
-                              <td className="text-center">{fmtNum(row.EWS)}</td>
-                              <td className="text-center">{fmtNum(row.OBC)}</td>
-                              <td className="text-center font-semibold">{fmtNum(row.SC)}</td>
-                              <td className="text-center">{fmtNum(row.ST)}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="text-[10px] text-dim mt-2">Closing rank = worst (highest-numbered) NEET PG all-India rank actually allotted a seat in that quota/round/category, taken directly from MCC's published allotment result PDFs.</div>
-                </div>
-                )}
-
-                <RatingsPanel branch={selectedBranch} />
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-const root=ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App/>);
-</script>
-</body>
-</html>
+                      {b.Has_DU && <span clas
