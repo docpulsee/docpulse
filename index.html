@@ -1049,6 +1049,7 @@ function useAuth(){
   const [user, setUser] = React.useState(null);
   const [paid, setPaid] = React.useState(false);
   const [authLoading, setAuthLoading] = React.useState(true);
+  const [verifyStatus, setVerifyStatus] = React.useState(null); // null | 'checking' | 'ok' | {error:string}
 
   const refreshProfile = React.useCallback(async (u)=>{
     if(!sb || !u) { setPaid(false); return; }
@@ -1086,11 +1087,30 @@ function useAuth(){
     const params = new URLSearchParams(window.location.search);
     const paymentId = params.get('razorpay_payment_id');
     if(paymentId && user){
+      setVerifyStatus('checking');
       (async ()=>{
         try {
-          await sb.functions.invoke('verify-payment', { body: { payment_id: paymentId, user_id: user.id } });
+          const { data, error } = await sb.functions.invoke('verify-payment', { body: { payment_id: paymentId, user_id: user.id } });
+          if(error){
+            // supabase-js puts the function's own JSON error body on error.context in most versions;
+            // fall back to error.message so something useful is always shown.
+            let detail = error.message || String(error);
+            try {
+              if(error.context && typeof error.context.json === 'function'){
+                const body = await error.context.json();
+                if(body && body.error) detail = body.error;
+              }
+            } catch(_e){}
+            setVerifyStatus({ error: detail });
+          } else if(data && data.error){
+            setVerifyStatus({ error: data.error });
+          } else {
+            setVerifyStatus('ok');
+          }
           await refreshProfile(user);
-        } catch(e){ /* verification pending / failed — user can retry from Pay button */ }
+        } catch(e){
+          setVerifyStatus({ error: (e && e.message) ? e.message : String(e) });
+        }
         const clean = window.location.origin + window.location.pathname;
         window.history.replaceState({}, '', clean);
       })();
@@ -1104,7 +1124,7 @@ function useAuth(){
   }
   async function signOut(){ if(sb) await sb.auth.signOut(); }
 
-  return { user, paid, authLoading, signInWithEmail, signOut, configured: !!sb };
+  return { user, paid, authLoading, signInWithEmail, signOut, configured: !!sb, verifyStatus };
 }
 
 function PaywallCard({ authState, contextLabel }){
@@ -1454,6 +1474,15 @@ function App(){
 
   return (
     <div className="min-h-screen">
+      {authState.verifyStatus==='checking' && (
+        <div className="text-center text-xs font-semibold py-2 px-3" style={{background:'var(--warn-soft)',color:'var(--warn)'}}>Confirming your payment with Razorpay…</div>
+      )}
+      {authState.verifyStatus && authState.verifyStatus.error && (
+        <div className="text-center text-xs font-semibold py-2 px-3" style={{background:'var(--bad-soft)',color:'var(--bad)'}}>Payment verification failed: {authState.verifyStatus.error} — please screenshot this and contact support, or retry the Pay button.</div>
+      )}
+      {authState.verifyStatus==='ok' && !authState.paid && (
+        <div className="text-center text-xs font-semibold py-2 px-3" style={{background:'var(--warn-soft)',color:'var(--warn)'}}>Payment verified but your account isn't showing as unlocked yet — try refreshing the page in a few seconds.</div>
+      )}
       <header className="header-surface z-30 border-b border-tok">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3 flex-wrap">
           <div>
