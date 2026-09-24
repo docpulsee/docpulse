@@ -1000,6 +1000,771 @@ document.addEventListener('DOMContentLoaded', function(){
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script><script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
-<script id="data-json" type="application/json">
-[{"Display_Name":"7 Air Force Hospital, NATHU SINGH ROAD KANPUR CANTT KANPUR","State":"Uttar Pradesh","Address":"7 Air Force Hospital, , NATHU SINGH ROAD KANPUR CANTT KANPUR, Uttar Pradesh, 208004","Src":"MCC","I":0,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"AFMS_R2_Closing_GN":26914,"AFMS_R3_Closing_GN":190254,"AFMS_ST_Closing_GN":40131},"Seats":{},"Added":{"DNB R2":2},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":147500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"7 Air Force Hospital, NATHU SINGH ROAD KANPUR CANTT KANPUR","State":"Uttar Pradesh","Address":"7 Air Force Hospital, , NATHU SINGH ROAD KANPUR CANTT KANPUR, Uttar Pradesh, 208004","Src":"MCC","I":0,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Medicine","R":{"AFMS_R2_Closing_GN":109264},"Seats":{},"Added":{"DNB R2":2},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":147500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"7 Air Force Hospital, NATHU SINGH ROAD KANPUR CANTT KANPUR","State":"Uttar Pradesh","Address":"7 Air Force Hospital, , NATHU SINGH ROAD KANPUR CANTT KANPUR, Uttar Pradesh, 208004","Src":"MCC","I":0,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"AFMS_R2_Closing_GN":109222,"AFMS_R3_Closing_GN":117747},"Seats":{},"Added":{"DNB R2":2},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":147500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"DNB_R1_Closing_GN":27802,"DNB_R2_Closing_GN":31198,"DNB_R3_Closing_GN":35393,"DNB_ST_Closing_GN":40540},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"DNB_R1_Closing_GN":18552,"DNB_R2_Closing_GN":21751,"DNB_R3_Closing_GN":26348},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Obstetrics and Gynaecology","R":{"DNB_R1_Closing_GN":11891,"DNB_R2_Closing_GN":13910,"DNB_R3_Closing_GN":17135,"DNB_ST_Closing_GN":19778},"Seats":{"DNB":1},"Added":{},"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Orthopaedics","R":{"DNB_R1_Closing_GN":17540,"DNB_R2_Closing_GN":27301,"DNB_R3_Closing_GN":32063},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Radiation Oncology","R":{"DNB_R1_Closing_GN":19966,"DNB_R2_Closing_GN":21290,"DNB_R3_Closing_GN":23691,"DNB_ST_Closing_GN":30499},"Seats":{"DNB":1},"Added":{},"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.)","State":"Haryana","Address":"Aadhar Health Institute, (A UNIT OF VLCOM HEALTHCARE P LTD.) ,Aadhar Health Institute, A UNIT OF VLCOM HEALTHCARE P LTD. Tosham Road, Hisar, Haryana- 125001, Haryana, 125001","Src":"MCC","I":332,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Radio Diagnosis","R":{"DNB_R1_Closing_GN":2965,"DNB_R2_Closing_GN":3552},"Seats":{"DNB":1},"Added":{},"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":125000,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"DNB_R1_Closing_GN":24464,"DNB_R2_Closing_GN":28958,"DNB_R3_Closing_GN":33997},"Seats":{"DNB":4},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":4,"Has_DU":false,"Total_Seats":4,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Medicine","R":{"DNB_R1_Closing_GN":5468,"DNB_R2_Closing_GN":6286,"DNB_R3_Closing_GN":7182},"Seats":{"DNB":4},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":4,"Has_DU":false,"Total_Seats":4,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Ophthalmology","R":{"DNB_R1_Closing_GN":20463,"DNB_R2_Closing_GN":22592,"DNB_R3_Closing_GN":29961,"DNB_ST_Closing_GN":35202},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Orthopaedics","R":{"DNB_R1_Closing_GN":19177,"DNB_R2_Closing_GN":23932,"DNB_R3_Closing_GN":26386},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Paediatrics","R":{"DNB_R1_Closing_GN":9535,"DNB_R2_Closing_GN":11981,"DNB_R3_Closing_GN":14123},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Pathology","R":{"DNB_R1_Closing_GN":35385,"DNB_R2_Closing_GN":45371,"DNB_R3_Closing_GN":49311,"DNB_ST_Closing_GN":49259},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","State":"Delhi","Address":"Aakash Healthcare Super Specialty Hospital, Delhi,HOSPITAL PLOT, ROAD NO- 201,SECTOR 3 DWARKA, NEW DELHI, Delhi (NCT), 110075","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":112000,"Stipend_Y2_INR":115000,"Stipend_Y3_INR":118000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aakash Healthcare Super Specialty Hospital, Delhi","I":333,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Radio Diagnosis","R":{"DNB_R1_Closing_GN":1500,"DNB_R2_Closing_GN":2149},"Seats":{"DNB":4},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":4,"Has_DU":false,"Total_Seats":4,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"AAKASH HOSPITAL, Tamil Nadu","State":"Tamil Nadu","Address":"AAKASH HOSPITAL,Tamil Nadu,NO 393-1 T H ROAD, THIRUVOTTIYUR, CHENNAI, Tamil Nadu, 600019","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":35000,"Stipend_Y2_INR":37000,"Stipend_Y3_INR":39000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"AAKASH HOSPITAL,Tamil Nadu","I":334,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"DNB_R1_Closing_GN":18973,"DNB_R2_Closing_GN":21773,"DNB_R3_Closing_GN":18128},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur","State":"Uttar Pradesh","Address":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur, Sonauli Road, Gorakhnath, Gorakhpur Uttar Pradesh , Uttar Pradesh-273015,Phase-1, keshav puram, Gorakhnath Rd, near anandlok hospital, behind Dr. Nk jaiswal, Nathmalpur, Gorakhnath, Gorakhpur, Uttar Pradesh 273015","Src":"MCC","Management":"Government","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"2","Bond_Penalty_INR":4000000,"NMC_Name":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur, Sonauli Road, Gorakhnath, Gorakhpur Uttar Pradesh , Uttar Pradesh-273015","I":335,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"DNB_R1_Closing_GN":20328,"DNB_R2_Closing_GN":23895,"DNB_R3_Closing_GN":30101},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur","State":"Uttar Pradesh","Address":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur, Sonauli Road, Gorakhnath, Gorakhpur Uttar Pradesh , Uttar Pradesh-273015,Phase-1, keshav puram, Gorakhnath Rd, near anandlok hospital, behind Dr. Nk jaiswal, Nathmalpur, Gorakhnath, Gorakhpur, Uttar Pradesh 273015","Src":"MCC","Management":"Government","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"2","Bond_Penalty_INR":4000000,"NMC_Name":"Aanandlok Remedial Research Centre Pvt. Ltd., Nathmalpur, Sonauli Road, Gorakhnath, Gorakhpur Uttar Pradesh , Uttar Pradesh-273015","I":335,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"DNB_R1_Closing_GN":35136,"DNB_R2_Closing_GN":47987,"DNB_R3_Closing_GN":51096},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"OFFICIAL","Annual_Fees_INR":147500,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank."},{"Display_Name":"Aarogya Hospital","State":"Delhi","Address":"Aarogya Hospital, Plot No-27/28 Chitra Vihar Viaksh Marg East Delhi, Delhi-110019 , 27/28 Chitra Vihar, Vikas Mard","Src":"MCC","I":336,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Medicine","R":{"DNB_R2_Closing_GN":8260,"DNB_R3_Closing_GN":10358,"DNB_ST_Closing_GN":14514},"Seats":{},"Added":{"DNB R2":1},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":114500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Aarthi Hospital, Tamil Nadu","State":"Tamil Nadu","Address":"Aarthi Hospital, Tamil Nadu,DOOR NO 60 SANTHAIPETTAI ROAD KOVILPATTI KOVILPATTI TALUK THOOTHUKUDI DISTRICT, Tamil Nadu, 628502","Src":"MCC","I":337,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Radio Diagnosis","R":{"DNB_R1_Closing_GN":12562,"DNB_R2_Closing_GN":14778,"DNB_R3_Closing_GN":18248,"DNB_ST_Closing_GN":20221},"Seats":{"DNB":6},"Added":{},"Total_Seats":6,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":114500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"AARTHI SCANS PVT LTD","State":"Karnataka","Address":"AARTHI SCANS PVT LTD, No.156, 9th Main Road, 3rd Block, Jaya Nagar, Bengaluru, Karnataka-560011,AARTHI SCANS PVT LTD, No.156, 9th Main Road, 3rd Block, Jaya Nagar, Bengaluru, Karnataka-560011","Src":"MCC","Management":"Government","University_Name":"NBEMS","Stipend_Y1_INR":56250,"Stipend_Y2_INR":62500,"Stipend_Y3_INR":68750,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"3","Bond_Penalty_INR":5000000,"NMC_Name":"AARTHI SCANS PVT LTD, No.156, 9th Main Road, 3rd Block, Jaya Nagar, Bengaluru, Karnataka- 560011","I":338,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Radio Diagnosis","R":{"DNB_R1_Closing_GN":4029,"DNB_R2_Closing_GN":5809,"DNB_R3_Closing_GN":6125},"Seats":{"DNB":1},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":1,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Anaesthesiology","R":{"PS_R1_Closing_GN":96503,"PS_R2_Closing_GN":112120,"PS_R3_Closing_GN":128603,"PS_ST_Closing_GN":139901},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":8,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Anatomy","R":{"PS_R3_Closing_GN":217665,"PS_ST_Closing_GN":213914},"Seats":{},"Added":{},"Annual_Fees_INR":467000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":3,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Biochemistry","R":{"PS_R1_Closing_GN":123685,"PS_R3_Closing_GN":226681},"Seats":{},"Added":{},"Annual_Fees_INR":467000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":2,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Community Medicine","R":{"PS_R1_Closing_GN":110357,"PS_R3_Closing_GN":184825},"Seats":{},"Added":{"OTH R2":4},"Annual_Fees_INR":967000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":8,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Dermatology","R":{"NRI_R3_Closing_GN":191045,"NRI_ST_Closing_GN":182223,"PS_R1_Closing_GN":43780,"PS_R2_Closing_GN":53466,"PS_R3_Closing_GN":56312},"Seats":{},"Added":{"NRI R2":1,"OTH R2":1},"Annual_Fees_INR":5467000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":5,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Emergency Medicine","R":{"PS_R1_Closing_GN":83443,"PS_R2_Closing_GN":99234,"PS_R3_Closing_GN":108411,"PS_ST_Closing_GN":127333},"Seats":{},"Added":{"OTH R2":1},"Annual_Fees_INR":3967000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":4,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"General Medicine","R":{"NRI_R3_Closing_GN":207560,"NRI_ST_Closing_GN":143217,"PS_R1_Closing_GN":56974,"PS_R2_Closing_GN":65195,"PS_R3_Closing_GN":79140},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":14,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Microbiology","R":{"PS_R3_Closing_GN":215325},"Seats":{},"Added":{"OTH R2":2},"Annual_Fees_INR":467000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":6,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Obstetrics and Gynaecology","R":{"NRI_R1_Closing_GN":109868,"NRI_R3_Closing_GN":208810,"NRI_ST_Closing_GN":177196,"PS_R1_Closing_GN":65148,"PS_R2_Closing_GN":67946,"PS_R3_Closing_GN":82350},"Seats":{},"Added":{},"Annual_Fees_INR":3500000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":6,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Paediatrics","R":{"NRI_R3_Closing_GN":212701,"NRI_ST_Closing_GN":196821,"PS_R1_Closing_GN":68045,"PS_R2_Closing_GN":78562,"PS_R3_Closing_GN":103329},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":10,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Pathology","R":{"PS_R1_Closing_GN":129201,"PS_R3_Closing_GN":145608},"Seats":{},"Added":{},"Annual_Fees_INR":1967000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":2,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Pharmacology","R":{"PS_R3_Closing_GN":188847},"Seats":{},"Added":{},"Annual_Fees_INR":467000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":2,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Psychiatry","R":{"PS_R1_Closing_GN":85873,"PS_R2_Closing_GN":100672,"PS_R3_Closing_GN":109325,"PS_ST_Closing_GN":131657},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":5,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Radio Diagnosis","R":{"NRI_R3_Closing_GN":171216,"NRI_ST_Closing_GN":200099,"PS_R1_Closing_GN":41465,"PS_R2_Closing_GN":55050,"PS_R3_Closing_GN":72249},"Seats":{},"Added":{"NRI R2":2,"OTH R2":2},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":9,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Respiratory Medicine","R":{"PS_R1_Closing_GN":72091,"PS_R2_Closing_GN":77828,"PS_R3_Closing_GN":111142,"PS_ST_Closing_GN":127831},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":2,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MS","Course_Type":"MD/MS","Spec_Norm":"ENT","R":{"PS_R1_Closing_GN":85618,"PS_R2_Closing_GN":109636,"PS_R3_Closing_GN":132303,"PS_ST_Closing_GN":149575},"Seats":{},"Added":{"OTH R2":2},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":7,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MS","Course_Type":"MD/MS","Spec_Norm":"General Surgery","R":{"PS_R1_Closing_GN":90971,"PS_R2_Closing_GN":112069,"PS_R3_Closing_GN":128173,"PS_ST_Closing_GN":133647},"Seats":{},"Added":{},"Annual_Fees_INR":3500000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":14,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MS","Course_Type":"MD/MS","Spec_Norm":"Ophthalmology","R":{"PS_R1_Closing_GN":77469,"PS_R2_Closing_GN":95732,"PS_R3_Closing_GN":109262},"Seats":{},"Added":{},"Annual_Fees_INR":3000000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":2,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL, PONDY - CUDDALORE MAIN ROAD","State":"Puducherry","Address":"AARUPADAI VEEDU MEDICAL COLLEGE AND HOSPITAL,PONDY - CUDDALORE MAIN ROAD, KIRUMAMPAKKAM, BAHOUR COMMUNE PANCHAYAT, PUDUCHERRY, Puducherry, 607402","Src":"MCC","Management":"Private","University_Name":"Vinayaka Missions University (Deemed), Salem","Stipend_Y1_INR":50000,"Stipend_Y2_INR":52500,"Stipend_Y3_INR":55000,"Stipend_Source":null,"Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarupadai Veedu Medical College, Pondicherry","I":339,"Deg":"MS","Course_Type":"MD/MS","Spec_Norm":"Orthopaedics","R":{"PS_R1_Closing_GN":89344,"PS_R2_Closing_GN":116726,"PS_R3_Closing_GN":141849},"Seats":{},"Added":{"OTH R2":4},"Annual_Fees_INR":3500000,"Fees_Source":"aggregator:https://collegedunia.com/college/10214-aarupadai-veedu-medical-college-avmc-pondicherry/courses-fees","Fees_Note":"Collegedunia gave only a few explicit specialty totals (Pathology, Dermatology, Community Medicine, Emergency Medicine, Anatomy, and an MS range 90L-1.58Cr); remaining specialties estimated by mapping to nearest tier (basic sciences ~4.67L/yr, mid-clinical ~30-35L/yr). Low confidence on the estimated entries.","NMC_Seats":9,"Has_DU":false,"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":null},{"Display_Name":"Aarvy Healthcare Private Limited, Haryana","State":"Haryana","Address":"Aarvy Healthcare Private Limited,Haryana,Aarvy healthcare super specialty Hospital, Sector 90, Gurugram, Haryana, Haryana-122505, Haryana, 122505","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarvy Healthcare Private Limited,Haryana","I":340,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"DNB_R1_Closing_GN":19621,"DNB_R2_Closing_GN":23211,"DNB_R3_Closing_GN":25921},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aarvy Healthcare Private Limited, Haryana","State":"Haryana","Address":"Aarvy Healthcare Private Limited,Haryana,Aarvy healthcare super specialty Hospital, Sector 90, Gurugram, Haryana, Haryana-122505, Haryana, 122505","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarvy Healthcare Private Limited,Haryana","I":340,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"DNB_R1_Closing_GN":36796,"DNB_R2_Closing_GN":42685,"DNB_R3_Closing_GN":47997},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"OFFICIAL","Annual_Fees_INR":147500,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank."},{"Display_Name":"Aarvy Healthcare Private Limited, Haryana","State":"Haryana","Address":"Aarvy Healthcare Private Limited,Haryana,Aarvy healthcare super specialty Hospital, Sector 90, Gurugram, Haryana, Haryana-122505, Haryana, 122505","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aarvy Healthcare Private Limited,Haryana","I":340,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Radio Diagnosis","R":{"DNB_R1_Closing_GN":7828,"DNB_R2_Closing_GN":10877,"DNB_R3_Closing_GN":8604},"Seats":{"DNB":2},"Added":{},"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"OFFICIAL","Annual_Fees_INR":147500,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank."},{"Display_Name":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI","State":"Gujarat","Address":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI, Gujarat ,Aayush multi-speciality hospital,savsar plot,morbi, Gujarat, 363641","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100800,"Stipend_Y2_INR":102480,"Stipend_Y3_INR":105000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI, Gujarat","I":341,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Medicine","R":{"DNB_R1_Closing_GN":5499,"DNB_R2_Closing_GN":6928,"DNB_R3_Closing_GN":8116},"Seats":{"DNB":1},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":1,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI","State":"Gujarat","Address":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI, Gujarat ,Aayush multi-speciality hospital,savsar plot,morbi, Gujarat, 363641","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100800,"Stipend_Y2_INR":102480,"Stipend_Y3_INR":105000,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"AAYUSH MULTISPECIALITY HOSPITAL, MORBI, Gujarat","I":341,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Orthopaedics","R":{"DNB_R1_Closing_GN":19496,"DNB_R2_Closing_GN":19333,"DNB_R3_Closing_GN":23808},"Seats":{"DNB":1},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":1,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Aayush NRI LEPL healthcare Private Limited, Andhra Pradesh","State":"Andhra Pradesh","Address":"Aayush NRI LEPL healthcare Private Limited, Andhra Pradesh,48-13-3 3 A, SRI RAMACHANDRA NAGAR VIJAYAWADA, Andhra Pradesh, 520008","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":60823,"Stipend_Y2_INR":61528,"Stipend_Y3_INR":64767,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Aayush NRI LEPL healthcare Private Limited, Andhra Pradesh","I":342,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Emergency Medicine","R":{"DNB_R1_Closing_GN":23098,"DNB_R2_Closing_GN":24590,"DNB_R3_Closing_GN":33464},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Abhi Eye Hospital, Tamil Nadu","State":"Tamil Nadu","Address":"Abhi Eye Hospital, Tamil Nadu ,ABHI EYE HOSPITAL,JOTHIMILL STREET, JOTHI NAGAR,ATTUR-T.K,SALEM-D.T, Tamil Nadu, 636102","Src":"MCC","I":343,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Ophthalmology","R":{"DNB_R1_Closing_GN":33133,"DNB_R2_Closing_GN":41393,"DNB_R3_Closing_GN":49857},"Seats":{"DNB":1},"Added":{},"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":114500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Acchutha Eye Care, H3 EVN Road Periyar Nagar Erode","State":"Tamil Nadu","Address":"Acchutha Eye Care, , H3 EVN Road Periyar Nagar Erode, Tamil Nadu, 638009","Src":"MCC","I":344,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Ophthalmology","R":{"DNB_R2_Closing_GN":35985,"DNB_R3_Closing_GN":37697},"Seats":{},"Added":{"DNB R2":1},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":114500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19","State":"Haryana","Address":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002,Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002","I":345,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Anaesthesiology","R":{"DNB_R2_Closing_GN":30673,"DNB_R3_Closing_GN":36831,"DNB_ST_Closing_GN":39277},"Seats":{},"Added":{"DNB R2":2},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"OFFICIAL","Annual_Fees_INR":147500,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank."},{"Display_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19","State":"Haryana","Address":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002,Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002","I":345,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Medicine","R":{"DNB_R1_Closing_GN":7728,"DNB_R2_Closing_GN":8075,"DNB_R3_Closing_GN":9329},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19","State":"Haryana","Address":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002,Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002","I":345,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"General Surgery","R":{"DNB_R2_Closing_GN":20687,"DNB_R3_Closing_GN":25233},"Seats":{},"Added":{"DNB R2":2},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"OFFICIAL","Annual_Fees_INR":147500,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank."},{"Display_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19","State":"Haryana","Address":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002,Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86","Src":"MCC","Management":"Private","University_Name":"NBEMS","Stipend_Y1_INR":100980,"Stipend_Y2_INR":104040,"Stipend_Y3_INR":107100,"Stipend_Source":"nbems_floor_or_state_scale","Bond_Years":"0","Bond_Penalty_INR":0,"NMC_Name":"Accord Superspeciality Hospital Khasra No. 22, Kila. 19, 20, 21, 22, Sector 86, Village-Tehsil-District: Faridabad Haryana – 121002","I":345,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Orthopaedics","R":{"DNB_R1_Closing_GN":22904,"DNB_R2_Closing_GN":26067,"DNB_R3_Closing_GN":33916},"Seats":{"DNB":2},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Acharya Harihar Post Graduate Institute of Cancer, Cuttack","State":"Odisha","Address":"Acharya Harihar Post Graduate Institute of Cancer, Cuttack,Cuttack Odisha, Odisha, 753007","Src":"MCC","Management":"Government","University_Name":"Utkal University","Stipend_Y1_INR":70686,"Stipend_Y2_INR":74052,"Stipend_Y3_INR":77418,"Stipend_Source":"state_dme_official","Bond_Years":"2","Bond_Penalty_INR":4000000,"NMC_Name":"PG/OD/01/G/1: Acharya Harihar Regional Cancer Centre, Cuttack","I":346,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Anaesthesiology","R":{"AIQ_R1_Closing_EWS":25833,"AIQ_R2_Closing_EWS":30031,"AIQ_R3_Closing_EWS":33873},"Seats":{"AIQ":1},"Added":{},"Annual_Fees_INR":35000,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":2,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Acharya Harihar Post Graduate Institute of Cancer, Cuttack","State":"Odisha","Address":"Acharya Harihar Post Graduate Institute of Cancer, Cuttack,Cuttack Odisha, Odisha, 753007","Src":"MCC","Management":"Government","University_Name":"Utkal University","Stipend_Y1_INR":70686,"Stipend_Y2_INR":74052,"Stipend_Y3_INR":77418,"Stipend_Source":"state_dme_official","Bond_Years":"2","Bond_Penalty_INR":4000000,"NMC_Name":"PG/OD/01/G/1: Acharya Harihar Regional Cancer Centre, Cuttack","I":346,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Pathology","R":{"AIQ_R1_Closing_GN":28434,"AIQ_R2_Closing_GN":32461,"AIQ_R3_Closing_GN":30369},"Seats":{"AIQ":2},"Added":{},"Annual_Fees_INR":35000,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":4,"Has_DU":false,"Total_Seats":2,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":"OFFICIAL"},{"Display_Name":"Acharya Shree Bhikshu Govt. Hospital, Moti Nagar","State":"Delhi","Address":"Acharya Shree Bhikshu Govt. Hospital, Moti Nagar, Delhi-110015,Acharya Shree Bhikshu Govt. Hosptial, Moti Nagar, New Delhi-110015","Src":"MCC","I":347,"Deg":"DNB Diploma","Course_Type":"DNB","Spec_Norm":"Obstetrics and Gynaecology","R":{"DNB_R1_Closing_EWS":14672,"DNB_R1_Closing_SC":41021,"DNB_R1_Closing_ST":66193,"DNB_R2_Closing_EWS":24131,"DNB_R2_Closing_SC":34879,"DNB_R2_Closing_ST":71382,"DNB_R3_Closing_SC":40622,"DNB_R3_Closing_ST":90546,"DNB_ST_Closing_SC":53868},"Seats":{"DNB":3},"Added":{},"Total_Seats":3,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":114500,"Fees_Source":"aggregator:regional_typical_estimate","Fees_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank.","Stipend_Y1_INR":43000,"Stipend_Y2_INR":45150,"Stipend_Y3_INR":47300,"Stipend_Source":"aggregator:regional_typical_estimate","Stipend_Note":"No institute-specific figure found anywhere; this is a typical value for similar (state/management/course) seats, shown as an estimate so the field is not blank."},{"Display_Name":"A C P M Medical College, Maharashtra","State":"Maharashtra","Address":"A C P M Medical College,Maharashtra,A C P M Medical College, Sakri Road, Dhule, Maharashtra-424001","Src":"MCC","Management":"Private","University_Name":"Maharashtra University of Health Sciences, Nashik","Stipend_Y1_INR":65791,"Stipend_Y2_INR":69080,"Stipend_Y3_INR":72370,"Stipend_Source":null,"Bond_Years":"1","Bond_Penalty_INR":5000000,"NMC_Name":"A C P M Medical College,Maharashtra","I":348,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"ENT","R":{"DNB_R1_Closing_GN":18640},"Seats":{"DNB":1},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":1,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":null},{"Display_Name":"A C P M Medical College, Maharashtra","State":"Maharashtra","Address":"A C P M Medical College,Maharashtra,A C P M Medical College, Sakri Road, Dhule, Maharashtra-424001","Src":"MCC","Management":"Private","University_Name":"Maharashtra University of Health Sciences, Nashik","Stipend_Y1_INR":65791,"Stipend_Y2_INR":69080,"Stipend_Y3_INR":72370,"Stipend_Source":null,"Bond_Years":"1","Bond_Penalty_INR":5000000,"NMC_Name":"A C P M Medical College,Maharashtra","I":348,"Deg":"DNB","Course_Type":"DNB","Spec_Norm":"Emergency Medicine","R":{"DNB_R1_Closing_GN":17981,"DNB_R2_Closing_GN":23800,"DNB_R3_Closing_GN":29242},"Seats":{"DNB":1},"Added":{},"Annual_Fees_INR":147500,"Fees_Source":null,"Fees_Note":null,"NMC_Seats":1,"Has_DU":false,"Total_Seats":1,"Rank_Status":"ranks","Fees_Badge":null,"Stipend_Badge":null},{"Display_Name":"A.C.S. Medical College and Hospital","State":"Tamil Nadu","Address":"A.C.S. Medical College and Hospital,A.C.S. Medical College and Hospital, Tamil Nadu, 600077","Src":"MCC","I":349,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Anaesthesiology","R":{"PS_R1_Closing_GN":98489,"PS_R2_Closing_GN":116969,"PS_R3_Closing_GN":129688,"PS_ST_Closing_GN":145269},"Seats":{},"Added":{},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":30000,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank.","Stipend_Y1_INR":48000,"Stipend_Y2_INR":50400,"Stipend_Y3_INR":52800,"Stipend_Source":"aggregator:legacy_reference_dataset","Stipend_Note":"Estimate from a prior internal reference dataset (not an official order) — shown so the field is not blank."},{"Display_Name":"A.C.S. Medical College and Hospital","State":"Tamil Nadu","Address":"A.C.S. Medical College and Hospital,A.C.S. Medical College and Hospital, Tamil Nadu, 600077","Src":"MCC","I":349,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Anatomy","R":{"PS_R3_Closing_GN":202825,"PS_ST_Closing_GN":204121},"Seats":{},"Added":{},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":30000,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank.","Stipend_Y1_INR":48000,"Stipend_Y2_INR":50400,"Stipend_Y3_INR":52800,"Stipend_Source":"aggregator:legacy_reference_dataset","Stipend_Note":"Estimate from a prior internal reference dataset (not an official order) — shown so the field is not blank."},{"Display_Name":"A.C.S. Medical College and Hospital","State":"Tamil Nadu","Address":"A.C.S. Medical College and Hospital,A.C.S. Medical College and Hospital, Tamil Nadu, 600077","Src":"MCC","I":349,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Biochemistry","R":{"PS_R3_Closing_GN":210578,"PS_ST_Closing_GN":222959},"Seats":{},"Added":{},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":30000,"Fees_Source":"aggregator:legacy_reference_dataset","Fees_Note":"Estimate from a prior internal reference dataset (not an official government/college figure) — shown so the field is not blank.","Stipend_Y1_INR":48000,"Stipend_Y2_INR":50400,"Stipend_Y3_INR":52800,"Stipend_Source":"aggregator:legacy_reference_dataset","Stipend_Note":"Estimate from a prior internal reference dataset (not an official order) — shown so the field is not blank."},{"Display_Name":"A.C.S. Medical College and Hospital","State":"Tamil Nadu","Address":"A.C.S. Medical College and Hospital,A.C.S. Medical College and Hospital, Tamil Nadu, 600077","Src":"MCC","I":349,"Deg":"MD","Course_Type":"MD/MS","Spec_Norm":"Community Medicine","R":{"PS_R1_Closing_GN":120319,"PS_R3_Closing_GN":200419,"PS_ST_Closing_GN":203147},"Seats":{},"Added":{"OTH R2":4},"Total_Seats":null,"Rank_Status":"ranks","Fees_Badge":"THIRD-PARTY EST.","Stipend_Badge":"THIRD-PARTY EST.","Annual_Fees_INR":30000,"Fees_Source":"aggregator:legacy_reference_dataset"
-Preview truncated for large file
+<script>
+window.DATA = null;
+function __neetpgRunApp(){
+  try {
+    var src = document.getElementById('neetpg-app-src').textContent;
+    var compiled = Babel.transform(src, { presets: ['react'] }).code;
+    var s = document.createElement('script');
+    s.text = compiled;
+    document.body.appendChild(s);
+  } catch (e) {
+    var rootEl = document.getElementById('root');
+    if (rootEl) rootEl.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#a2273a;font-family:system-ui,sans-serif;">The counselling directory failed to start. Please reload the page.</div>';
+    console.error('Failed to compile/run app script', e);
+  }
+}
+fetch('neetpg_data.json').then(function(r){ return r.json(); }).then(function(d){
+  window.DATA = d;
+  __neetpgRunApp();
+}).catch(function(e){
+  var rootEl = document.getElementById('root');
+  if (rootEl) rootEl.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#a2273a;font-family:system-ui,sans-serif;">Could not load counselling data (neetpg_data.json). Make sure that file is uploaded in the same folder as index.html on GitHub.</div>';
+  console.error('Failed to load neetpg_data.json', e);
+});
+</script>
+<script type="text/plain" id="neetpg-app-src">
+/* ============== FILL THESE IN BEFORE DEPLOYING ==============
+   1. Create a free project at supabase.com
+   2. Project Settings -> API -> copy "Project URL" and "anon public" key below
+   3. Run supabase_schema.sql (given alongside this file) in the SQL editor
+   4. Deploy the verify-payment Edge Function (given alongside this file)
+   5. In Razorpay dashboard, set this Payment Page's redirect/callback URL to
+      your hosted app's URL (Supabase itself does not serve static HTML sites --
+      host this single file on Vercel/Netlify/Cloudflare Pages, all free, and
+      point it at the same Supabase project for auth+data)
+================================================================= */
+const SUPABASE_URL = "https://uwrwtttkqywsmehexmbf.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+const RAZORPAY_PAYMENT_LINK = "https://rzp.io/rzp/855iHd2o";
+const PRICE_DISPLAY = "₹3,900";
+const SAMPLE_INSTITUTE_ID = 1365; // Madras Medical College — every field OFFICIAL-badged, safe to show free
+
+const sb = (SUPABASE_URL.startsWith('http') && window.supabase)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+function useAuth(){
+  const [user, setUser] = React.useState(null);
+  const [paid, setPaid] = React.useState(false);
+  const [authLoading, setAuthLoading] = React.useState(true);
+
+  const refreshProfile = React.useCallback(async (u)=>{
+    if(!sb || !u) { setPaid(false); return; }
+    try {
+      let { data } = await sb.from('profiles').select('is_paid').eq('id', u.id).maybeSingle();
+      if(!data){
+        await sb.from('profiles').insert({ id: u.id, email: u.email, is_paid: false });
+        data = { is_paid: false };
+      }
+      setPaid(!!data.is_paid);
+    } catch(e){ setPaid(false); }
+  }, []);
+
+  React.useEffect(()=>{
+    if(!sb){ setAuthLoading(false); return; }
+    (async ()=>{
+      const { data: { session } } = await sb.auth.getSession();
+      setUser(session?.user || null);
+      if(session?.user) await refreshProfile(session.user);
+      setAuthLoading(false);
+    })();
+    const { data: sub } = sb.auth.onAuthStateChange((_evt, session)=>{
+      setUser(session?.user || null);
+      if(session?.user) refreshProfile(session.user);
+    });
+    return ()=>{ sub?.subscription?.unsubscribe?.(); };
+  }, [refreshProfile]);
+
+  // After a Razorpay redirect back to this page, ask our Edge Function to verify
+  // the payment server-side (using the Razorpay secret, never exposed to the browser)
+  // and mark this account paid. Configure the redirect/callback URL in the Razorpay
+  // Payment Page settings to point back at this app's URL.
+  React.useEffect(()=>{
+    if(!sb) return;
+    const params = new URLSearchParams(window.location.search);
+    const paymentId = params.get('razorpay_payment_id');
+    if(paymentId && user){
+      (async ()=>{
+        try {
+          await sb.functions.invoke('verify-payment', { body: { payment_id: paymentId, user_id: user.id } });
+          await refreshProfile(user);
+        } catch(e){ /* verification pending / failed — user can retry from Pay button */ }
+        const clean = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, '', clean);
+      })();
+    }
+  }, [user, refreshProfile]);
+
+  async function signInWithEmail(email){
+    if(!sb) return { error: 'Supabase not configured yet' };
+    const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + window.location.pathname } });
+    return { error };
+  }
+  async function signOut(){ if(sb) await sb.auth.signOut(); }
+
+  return { user, paid, authLoading, signInWithEmail, signOut, configured: !!sb };
+}
+
+function PaywallCard({ authState, contextLabel }){
+  const [email, setEmail] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  const payHref = RAZORPAY_PAYMENT_LINK + (email ? `?prefill[email]=${encodeURIComponent(email)}` : '');
+  return (
+    <div className="rounded-2xl border border-tok p-5 text-center" style={{background:'var(--surface-alt)'}}>
+      <div className="text-sm font-semibold text-tok mb-1">Unlock {contextLabel || "full details"}</div>
+      <div className="text-xs text-dim mb-4">One-time payment of <b>{PRICE_DISPLAY}</b> unlocks fees, stipend, closing ranks and ratings for every institute. (Madras Medical College is shown free as a sample.)</div>
+      {!authState.user ? (
+        sent ? (
+          <div className="text-xs text-dim">Check your email for a sign-in link, then come back to this page.</div>
+        ) : (
+          <div className="flex flex-col gap-2 items-center">
+            <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com"
+              className="input-tok rounded-lg px-3 py-2 text-xs w-full max-w-xs" />
+            <button onClick={async ()=>{ if(!email) return; await authState.signInWithEmail(email); setSent(true); }}
+              className="rounded-lg px-4 py-2 text-xs font-semibold" style={{background:'var(--btn-bg)', color:'var(--btn-text)'}}>
+              Sign in to continue
+            </button>
+          </div>
+        )
+      ) : (
+        <a href={payHref} target="_blank" rel="noreferrer"
+          className="inline-block rounded-lg px-5 py-2.5 text-xs font-semibold" style={{background:'var(--btn-bg)', color:'var(--btn-text)'}}>
+          Pay {PRICE_DISPLAY} with Razorpay
+        </a>
+      )}
+      {!authState.configured && (
+        <div className="text-[10px] mt-3" style={{color:'var(--bad)'}}>Supabase isn't configured yet in this file — payments won't unlock anything until SUPABASE_URL/SUPABASE_ANON_KEY are filled in.</div>
+      )}
+    </div>
+  );
+}
+
+const DATA = window.DATA;
+const CATS = ["GN","EWS","OBC","SC","ST"];
+const QNAMES = {AIQ:"All-India Quota",DNB:"DNB Quota",DU:"Delhi University",IP:"IP University",AMU:"Aligarh Muslim University",
+  BHU:"Banaras Hindu University",PS:"State/Paid Seat",NRI:"NRI Quota",AFMS:"Armed Forces Medical",JM:"Jain Minority",MM:"Muslim Minority"};
+const RNAMES = {R1:"Round 1",R2:"Round 2",R3:"Round 3",ST:"Stray"};
+
+function fmtMoney(n){ if(n===null||n===undefined) return "—"; return "₹"+Number(n).toLocaleString('en-IN'); }
+function fmtNum(n){ return (n===null||n===undefined) ? "—" : Number(n).toLocaleString('en-IN'); }
+function srcBadge(b){
+  if(!b) return <span className="badge-close text-[8px] px-1.5 py-0.5 rounded-full" style={{background:'var(--warn-soft)',color:'var(--warn)'}}>UNVERIFIED</span>;
+  if(b==="OFFICIAL") return <span className="badge-close text-[8px] px-1.5 py-0.5 rounded-full" style={{background:'var(--good-soft)',color:'var(--good)'}}>OFFICIAL</span>;
+  if(b==="THIRD-PARTY EST.") return <span className="badge-close text-[8px] px-1.5 py-0.5 rounded-full" style={{background:'var(--du-soft)',color:'var(--du)'}}>THIRD-PARTY EST.</span>;
+  return <span className="badge-close text-[8px] px-1.5 py-0.5 rounded-full" style={{background:'var(--warn-soft)',color:'var(--warn)'}}>UNVERIFIED</span>;
+}
+// which quota+round tags a branch actually has closing-rank data for, in a sensible order
+const QORDER = ["AIQ","DNB","DU","IP","AMU","BHU","PS","NRI","AFMS","JM","MM"];
+const RORDER = ["R1","R2","R3","ST"];
+function roundsAvailable(branch){
+  const R = branch.R || {};
+  const tags = new Set();
+  Object.keys(R).forEach(k=>{ const m=k.match(/^([A-Z]+)_([A-Z0-9]+)_Closing_/); if(m) tags.add(m[1]+"_"+m[2]); });
+  return QORDER.flatMap(q=>RORDER.map(r=>q+"_"+r)).filter(t=>tags.has(t));
+}
+function getRankRow(branch, tag){
+  const R = branch.R || {};
+  const row = {};
+  CATS.forEach(c => { row[c] = R[`${tag}_Closing_${c}`] ?? null; });
+  return row;
+}
+function tagLabel(tag){ const [q,r]=tag.split("_"); return `${QNAMES[q]||q} · ${RNAMES[r]||r}`; }
+function branchKey(b){ return `${b.I}__${b.Deg}__${b.Spec_Norm}`.replace(/[^a-zA-Z0-9_.-]/g,'_').slice(0,180); }
+
+const FAIMA_FALLBACK = { toxicity: 3, hours: 4, handsOn: 3 };
+const FAIMA_NOTE = "No data yet for this institute. Shown instead: the national baseline from FAIMA's RMS 2.0 resident-doctor survey (1,260 residents, 28 states/UTs) — 61% work 36+ hrs continuously, 66% report high/extremely high workload, ~40% call the work environment toxic. Not specific to this institute — rate it below to add real signal.";
+const FAIMA_SOURCE = "https://news.careers360.com/faima-rms-2-0-survey-flags-burnout-among-resident-doctors-61-percent-worked-over-36-hours-sleep-deprivation-staff-shortages";
+
+const RATING_DIMS = [
+  {key:'toxicity', short:'Toxicity', label:'Toxicity / work culture', lo:'Chill, respectful', hi:'Very toxic'},
+  {key:'hours', short:'Hours', label:'Work hours', lo:'Reasonable (<60/wk)', hi:'Brutal (>90/wk)'},
+  {key:'handsOn', short:'Hands-on', label:'Hands-on surgical/clinical exposure', lo:'Mostly observing', hi:'Very hands-on'},
+];
+
+function aggregateRatings(docs){
+  const out = {};
+  RATING_DIMS.forEach(d=>{
+    const vals = docs.map(x=>x[d.key]).filter(v=>typeof v==='number' && v>=1 && v<=5);
+    out[d.key] = { n: vals.length, avg: vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null };
+  });
+  return out;
+}
+
+function RatingsPanel({branch}){
+  const bKey = branchKey(branch);
+  const [dbApi, setDbApi] = React.useState(undefined); // undefined=checking, null=unavailable, object=ready
+  const [docs, setDocs] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [myVote, setMyVote] = React.useState({});
+  const [saving, setSaving] = React.useState(false);
+  const [voterId] = React.useState(()=>{
+    try {
+      let id = localStorage.getItem('neetpg_voter_id_v1');
+      if(!id){ id = 'v_'+Math.random().toString(36).slice(2)+Date.now().toString(36); localStorage.setItem('neetpg_voter_id_v1', id); }
+      return id;
+    } catch(e){ return 'v_'+Math.random().toString(36).slice(2); }
+  });
+
+  React.useEffect(()=>{
+    let cancelled = false;
+    (async ()=>{
+      try {
+        if(!(window.claude && window.claude.use)){ if(!cancelled) setDbApi(null); return; }
+        const api = await window.claude.use('db');
+        if(!cancelled) setDbApi(api || null);
+      } catch(e){ if(!cancelled) setDbApi(null); }
+    })();
+    return ()=>{ cancelled = true; };
+  }, []);
+
+  React.useEffect(()=>{
+    if(dbApi === undefined) return;
+    if(dbApi === null){ setLoading(false); return; }
+    let cancelled = false;
+    setLoading(true);
+    (async ()=>{
+      try {
+        const [snap, instSnap] = await Promise.all([
+          dbApi.collection('ratings').where('branchKey','==',bKey).limit(500).get(),
+          dbApi.collection('ratings').where('instKey','==',branch.I).limit(20).get(),
+        ]);
+        if(cancelled) return;
+        const list = snap.docs.map(d=>d.data()).concat(instSnap.docs.map(d=>d.data()));
+        setDocs(list);
+        const mine = list.find(x=>x.voterId===voterId && x.branchKey===bKey);
+        setMyVote(mine ? {toxicity:mine.toxicity, hours:mine.hours, handsOn:mine.handsOn} : {});
+      } catch(e){ /* leave panel in empty state */ }
+      if(!cancelled) setLoading(false);
+    })();
+    return ()=>{ cancelled = true; };
+  }, [dbApi, bKey]);
+
+  async function castVote(dim, value){
+    if(!dbApi) return;
+    const next = {...myVote, [dim]: value};
+    setMyVote(next);
+    setSaving(true);
+    try {
+      await dbApi.collection('ratings').doc(bKey+'__'+voterId).set({
+        branchKey: bKey, voterId, ...next, ts: Date.now(),
+      });
+      const [snap, instSnap] = await Promise.all([
+        dbApi.collection('ratings').where('branchKey','==',bKey).limit(500).get(),
+        dbApi.collection('ratings').where('instKey','==',branch.I).limit(20).get(),
+      ]);
+      setDocs(snap.docs.map(d=>d.data()).concat(instSnap.docs.map(d=>d.data())));
+    } catch(e){ /* keep local optimistic vote even if the write failed */ }
+    setSaving(false);
+  }
+
+  const usingFallback = !loading && dbApi !== null && docs.length===0;
+  const agg = usingFallback
+    ? {toxicity:{n:0,avg:FAIMA_FALLBACK.toxicity}, hours:{n:0,avg:FAIMA_FALLBACK.hours}, handsOn:{n:0,avg:FAIMA_FALLBACK.handsOn}}
+    : aggregateRatings(docs);
+
+  const [expanded, setExpanded] = React.useState(false);
+  const seedCount = docs.filter(x=>x.seed).length;
+  const userCount = docs.length - seedCount;
+
+  return (
+    <div className="mt-4 surface border border-tok rounded-2xl overflow-hidden">
+      <button type="button" onClick={()=>setExpanded(e=>!e)}
+        className="w-full flex items-center justify-between gap-2 p-3 text-left" style={{background:'var(--surface-alt)'}}>
+        <div className="flex items-center gap-2 min-w-0 flex-wrap">
+          <span className="text-[11px] font-semibold text-dim shrink-0">Work culture (crowd)</span>
+          {loading ? (
+            <span className="text-[10px] text-dim">loading…</span>
+          ) : dbApi===null ? (
+            <span className="text-[10px] text-dim">unavailable</span>
+          ) : (
+            <div className="flex items-center gap-2 flex-wrap min-w-0">
+              {RATING_DIMS.map(d=>{
+                const a = agg[d.key];
+                return (
+                  <span key={d.key} className="text-[10px] mono px-1.5 py-0.5 rounded-md border border-tok shrink-0" style={{background:'var(--surface)'}}>
+                    {d.short}: {a.n ? a.avg.toFixed(1) : (usingFallback ? "~"+a.avg.toFixed(1) : "—")}
+                  </span>
+                );
+              })}
+              {usingFallback && (
+                <span className="text-[9px] px-1.5 py-0.5 rounded-md shrink-0" style={{background:'var(--warn-soft)', color:'var(--warn)'}}>
+                  unconfirmed · FAIMA survey, not this institute
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+        <span className="text-[10px] text-dim shrink-0">{expanded ? "hide ▲" : "details ▼"}</span>
+      </button>
+
+      {expanded && (
+        <div className="p-4 pt-3">
+          <div className="text-[10px] text-dim mb-3">No official body publishes toxicity, work-hour or hands-on-exposure data. {usingFallback ? FAIMA_NOTE : (seedCount>0 ? `${seedCount} note${seedCount===1?"":"s"} below ${userCount>0?`plus ${userCount} app rating${userCount===1?"":"s"} `:""}are sourced from public/aggregated resident data — unofficial, not verified, shown only as a starting signal.` : "This section is opinion from students/residents, not an official source.")} Cast your own rating any time — it updates the average immediately.</div>
+
+          {dbApi === null ? (
+            <div className="text-[11px] text-dim tile-fee rounded-xl px-3 py-2">Crowd ratings aren't available in this view.</div>
+          ) : loading ? (
+            <div className="text-[11px] text-dim">Loading ratings…</div>
+          ) : (
+            <div className="space-y-3">
+              {RATING_DIMS.map(d=>{
+                const a = agg[d.key];
+                const pct = a.avg ? ((a.avg-1)/4*100) : 0;
+                return (
+                  <div key={d.key}>
+                    <div className="flex items-center justify-between text-[11px] mb-1">
+                      <span className="font-medium">{d.label}</span>
+                      <span className="text-dim mono">{a.n ? `${a.avg.toFixed(1)}/5 (${a.n})` : (usingFallback ? `~${a.avg.toFixed(1)}/5 (national baseline)` : "no ratings yet")}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[9px] text-dim mb-1">
+                      <span>{d.lo}</span><span>{d.hi}</span>
+                    </div>
+                    <div className="rounded-full overflow-hidden" style={{height:6, background:'var(--surface-alt)', border:'1px solid var(--border)'}}>
+                      {(a.n || usingFallback) ? <div style={{width:pct+'%', height:'100%', background: usingFallback ? 'var(--warn)' : 'var(--accent)'}}></div> : null}
+                    </div>
+                    <div className="flex gap-1 mt-1.5">
+                      {[1,2,3,4,5].map(v=>(
+                        <button key={v} disabled={saving} onClick={()=>castVote(d.key, v)}
+                          className="seg-btn flex-1 py-1 rounded-md text-[10px] border border-tok"
+                          style={myVote[d.key]===v?{borderColor:'var(--accent)', background:'var(--accent-soft)', fontWeight:600}:{}}>
+                          {v}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+              {usingFallback ? (
+                <div className="text-[9px] text-dim tile-fee rounded-lg px-2 py-1.5">
+                  "{FAIMA_NOTE}" — <a href={FAIMA_SOURCE} target="_blank" rel="noreferrer" className="underline">source</a>
+                </div>
+              ) : docs.filter(x=>x.seed && x.note).slice(0,3).map((x,i)=>(
+                <div key={i} className="text-[9px] text-dim tile-fee rounded-lg px-2 py-1.5">
+                  "{x.note}"{x.source ? <> — <a href={x.source} target="_blank" rel="noreferrer" className="underline">source</a></> : null}
+                </div>
+              ))}
+              <div className="text-[9px] text-dim">Your rating is saved per-browser and can be changed any time by tapping a different number.</div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function App(){
+  const authState = useAuth();
+  const isUnlocked = React.useCallback((instId)=> instId===SAMPLE_INSTITUTE_ID || authState.paid, [authState.paid]);
+  const [mode,setMode]=React.useState("browse"); // "browse" | "predict"
+  const [search,setSearch]=React.useState("");
+  const [specialty,setSpecialty]=React.useState("");
+  const [state,setState]=React.useState("");
+  const [courseType,setCourseType]=React.useState("All");
+  const [duOnly,setDuOnly]=React.useState(false);
+  const [rankedOnly,setRankedOnly]=React.useState(false);
+  const [modal,setModal]=React.useState(null);
+  const [selectedBranch,setSelectedBranch]=React.useState(null);
+  const [roundSel,setRoundSel]=React.useState(null);
+  const [visibleCount,setVisibleCount]=React.useState(150);
+
+  // --- rank predictor state ---
+  const [pRank,setPRank]=React.useState("");
+  const [pCat,setPCat]=React.useState("GN");
+  const [pQuotas,setPQuotas]=React.useState(()=>new Set(["AIQ","DNB","PS","NRI"]));
+  const [pSpecialty,setPSpecialty]=React.useState("");
+  const [pState,setPState]=React.useState("");
+  const [pCourseType,setPCourseType]=React.useState("All");
+  const [pVisible,setPVisible]=React.useState(100);
+
+  const specialties=React.useMemo(()=>[...new Set(DATA.map(d=>d.Spec_Norm))].filter(Boolean).sort(),[]);
+  const states=React.useMemo(()=>[...new Set(DATA.map(d=>d.State))].filter(Boolean).sort(),[]);
+
+  const filtered = React.useMemo(()=>{
+    let res=DATA;
+    if(search){
+      const q=search.toLowerCase();
+      res=res.filter(d=>(d.Display_Name||"").toLowerCase().includes(q) || (d.Spec_Norm||"").toLowerCase().includes(q));
+    }
+    if(specialty) res=res.filter(d=>d.Spec_Norm===specialty);
+    if(state) res=res.filter(d=>d.State===state);
+    if(courseType!=="All") res=res.filter(d=>d.Course_Type===courseType);
+    if(duOnly) res=res.filter(d=>d.Has_DU);
+    if(rankedOnly) res=res.filter(d=>d.Rank_Status==="ranks");
+    return res;
+  },[search,specialty,state,courseType,duOnly,rankedOnly]);
+
+  const institutes = React.useMemo(()=>{
+    const map={};
+    filtered.forEach(d=>{
+      const k=d.I;
+      if(!map[k]) map[k]={id:k, displayName:d.Display_Name, state:d.State, src:d.Src, branches:[], hasDU:false, anyRanks:false};
+      map[k].branches.push(d);
+      if(d.Has_DU) map[k].hasDU=true;
+      if(d.Rank_Status==="ranks") map[k].anyRanks=true;
+    });
+    return Object.values(map).sort((a,b)=>(b.anyRanks-a.anyRanks) || a.displayName.localeCompare(b.displayName));
+  },[filtered]);
+
+  React.useEffect(()=>{ setVisibleCount(150); },[search,specialty,state,courseType,duOnly,rankedOnly]);
+  const shown = institutes.slice(0,visibleCount);
+
+  // --- rank predictor: which branches were actually reachable, historically, at this rank ---
+  const predictResults = React.useMemo(()=>{
+    const rankNum = parseInt(pRank,10);
+    if(!rankNum || rankNum<1) return null;
+    const rows=[];
+    DATA.forEach(d=>{
+      if(pSpecialty && d.Spec_Norm!==pSpecialty) return;
+      if(pState && d.State!==pState) return;
+      if(pCourseType!=="All" && d.Course_Type!==pCourseType) return;
+      const R = d.R||{};
+      let best=null; // {tag, closing}
+      Object.keys(R).forEach(k=>{
+        const m=k.match(/^([A-Z]+)_([A-Z0-9]+)_Closing_([A-Z]+)$/);
+        if(!m) return;
+        const [,q,r,cat]=m;
+        if(cat!==pCat) return;
+        if(!pQuotas.has(q)) return;
+        const closing = R[k];
+        if(closing>=rankNum){ // a candidate at this rank (or worse) actually got this seat that round
+          if(!best || closing<best.closing) best = {tag:q+"_"+r, closing};
+        }
+      });
+      if(best) rows.push({...d, _bestTag:best.tag, _bestClosing:best.closing, _margin:best.closing-rankNum});
+    });
+    rows.sort((a,b)=>a._margin-b._margin); // tightest (closest-call) admits first — realistic ordering, not "safest first"
+    return rows;
+  },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType]);
+
+  React.useEffect(()=>{ setPVisible(100); },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType]);
+  const toggleQuota=(q)=>{ setPQuotas(prev=>{ const n=new Set(prev); n.has(q)?n.delete(q):n.add(q); return n; }); };
+
+  const openInst = (inst) => {
+    setModal(inst.id);
+    const b = inst.branches[0];
+    setSelectedBranch(b);
+    const av = roundsAvailable(b);
+    setRoundSel(av.length ? av[0] : null);
+  };
+  const pickBranch = (b) => { setSelectedBranch(b); const av=roundsAvailable(b); setRoundSel(av.length?av[0]:null); };
+
+  const totalMdMs = DATA.filter(d=>d.Course_Type==="MD/MS" && d.Rank_Status==="ranks").length===0?0:1;
+
+  return (
+    <div className="min-h-screen">
+      <header className="header-surface z-30 border-b border-tok">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <h1 className="text-lg font-semibold text-tok">NEET PG <span style={{color:'var(--accent)'}}>Navigator</span></h1>
+            <p className="text-xs text-dim mt-0.5">Built from official MCC allotment results + NMC/NBEMS seat matrices · all quotas · all rounds</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="seg flex gap-1 p-1 rounded-xl">
+              <button onClick={()=>setMode("browse")} className={`seg-btn px-3 py-1.5 rounded-lg text-sm ${mode==="browse"?"active":""}`}>Browse</button>
+              <button onClick={()=>setMode("predict")} className={`seg-btn px-3 py-1.5 rounded-lg text-sm ${mode==="predict"?"active":""}`}>Predict my colleges</button>
+            </div>
+            <div className="text-xs text-dim mono whitespace-nowrap text-right">
+              <div>{mode==="browse" ? institutes.length.toLocaleString('en-IN')+" institutes" : (predictResults? predictResults.length.toLocaleString('en-IN')+" reachable branches" : "")}</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {mode==="predict" ? (
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <div className="surface border border-tok rounded-2xl shadow-sm p-4 mb-6">
+          <div className="text-sm font-semibold text-tok mb-1">Enter your NEET PG rank to see which branches were actually reachable at that rank</div>
+          <div className="text-[11px] text-dim mb-3">
+            Lower rank number = better performance. A seat's "last rank admitted" is the worst (highest-numbered) rank that got in — so <b>your rank must be equal to or lower (better) than that number</b> to have a shot at it. Example: if your rank is {pRank||"8500"} and a seat's last rank admitted was {pRank? (parseInt(pRank,10)+50) : 8550}, you clear it — {pRank? (parseInt(pRank,10)+50) : 8550} is worse than {pRank||"8500"}, meaning candidates even weaker than you got in.
+          </div>
+          <div className="flex flex-wrap gap-3 items-center mb-3">
+            <div className="flex-1 min-w-[260px]">
+              <div className="flex items-center gap-3 mb-1">
+                <input type="range" min="1" max="150000" step="1" value={pRank||1}
+                  onChange={e=>setPRank(e.target.value)}
+                  className="flex-1" style={{accentColor:'var(--accent)'}}/>
+                <input type="number" min="1" value={pRank} onChange={e=>setPRank(e.target.value)} placeholder="e.g. 8500"
+                  className="input-tok rounded-xl px-3 py-2 text-sm outline-none w-28 mono"/>
+              </div>
+              <div className="text-[10px] text-dim">Drag the slider or type your exact all-India NEET PG rank</div>
+            </div>
+            <select value={pCat} onChange={e=>setPCat(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              {CATS.map(c=><option key={c} value={c}>{c==="GN"?"General / Open":c}</option>)}
+            </select>
+            <select value={pSpecialty} onChange={e=>setPSpecialty(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              <option value="">All specialties</option>
+              {specialties.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+            <select value={pState} onChange={e=>setPState(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              <option value="">All states</option>
+              {states.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+            <div className="seg flex gap-1 p-1 rounded-xl">
+              {["All","MD/MS","DNB"].map(t=>(
+                <button key={t} onClick={()=>setPCourseType(t)} className={`seg-btn px-3 py-1.5 rounded-lg text-sm ${pCourseType===t?"active":""}`}>{t}</button>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-1.5 items-center">
+            <span className="text-xs text-dim mr-1">Quotas to include:</span>
+            {QORDER.map(q=>(
+              <label key={q} className={`chip-toggle flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs cursor-pointer ${pQuotas.has(q)?"active":""}`}>
+                <input type="checkbox" className="hidden" checked={pQuotas.has(q)} onChange={()=>toggleQuota(q)}/>
+                {QNAMES[q]||q}
+              </label>
+            ))}
+          </div>
+          <div className="text-[10px] text-dim mt-3">
+            Sorted tightest-fit first — the toughest branches you can still realistically clear appear at the top; safer, easier-to-get options are further down. This is a real historical outcome (someone at that rank was actually allotted that seat), not an estimate — cutoffs move year to year, so treat it as a guide to where you're in range, not a guarantee.
+          </div>
+        </div>
+
+        {!predictResults && (
+          <div className="text-center text-dim py-16 text-sm">Set your rank above to see reachable colleges.</div>
+        )}
+        {predictResults && predictResults.length===0 && (
+          <div className="text-center text-dim py-16 text-sm">No branch in the selected quotas/category had a "last rank admitted" of {pRank} or worse, in the rounds we have data for.</div>
+        )}
+        {predictResults && predictResults.length>0 && (
+          <div className="space-y-2">
+            {predictResults.slice(0,authState.paid?pVisible:3).map((d,i)=>(
+              <div key={i} className="card rounded-xl p-3 flex items-center justify-between gap-3 cursor-pointer"
+                onClick={()=>{ setModal(d.I); setSelectedBranch(d); setRoundSel(d._bestTag); setMode("browse"); }}>
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-medium text-tok truncate">{d.Display_Name}</div>
+                  <div className="text-[11px] text-dim">{d.Spec_Norm} · {d.Deg} · {d.State||"State unknown"}</div>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="text-xs font-semibold mono" style={{color: d._margin<500 ? 'var(--warn)' : 'var(--good)'}}>last rank admitted {fmtNum(d._bestClosing)}</div>
+                  <div className="text-[10px] text-dim">{tagLabel(d._bestTag)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {predictResults && !authState.paid && predictResults.length>3 && (
+          <div className="mt-4"><PaywallCard authState={authState} contextLabel={`the other ${(predictResults.length-3).toLocaleString('en-IN')} reachable branches`} /></div>
+        )}
+        {predictResults && authState.paid && predictResults.length>pVisible && (
+          <div className="text-center mt-6">
+            <button onClick={()=>setPVisible(v=>v+100)} className="btn-solid px-5 py-2.5 rounded-xl text-sm font-medium">
+              Show {Math.min(100, predictResults.length-pVisible)} more (of {predictResults.length.toLocaleString('en-IN')})
+            </button>
+          </div>
+        )}
+      </div>
+      ) : (
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <div className="surface border border-tok rounded-2xl shadow-sm p-4 mb-6">
+          <div className="flex gap-2 mb-3">
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search institute or specialty — e.g. Ravindra Nath Tagore, Biochemistry"
+              className="input-tok flex-1 rounded-xl px-4 py-2.5 text-sm outline-none"/>
+            <button onClick={()=>{setSearch(""); setSpecialty(""); setState(""); setCourseType("All"); setDuOnly(false); setRankedOnly(false)}}
+              className="btn-solid px-4 py-2 rounded-xl text-sm font-medium">Clear</button>
+          </div>
+          <div className="flex flex-wrap gap-2 items-center">
+            <select value={specialty} onChange={e=>setSpecialty(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              <option value="">All specialties</option>
+              {specialties.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+            <select value={state} onChange={e=>setState(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              <option value="">All states</option>
+              {states.map(s=><option key={s} value={s}>{s}</option>)}
+            </select>
+            <div className="seg flex gap-1 p-1 rounded-xl">
+              {["All","MD/MS","DNB"].map(t=>(
+                <button key={t} onClick={()=>setCourseType(t)} className={`seg-btn px-3 py-1.5 rounded-lg text-sm ${courseType===t?"active":""}`}>{t}</button>
+              ))}
+            </div>
+            <label className={`chip-toggle flex items-center gap-2 px-3 py-2 rounded-xl text-sm cursor-pointer ${duOnly?"active":""}`}>
+              <input type="checkbox" checked={duOnly} onChange={e=>setDuOnly(e.target.checked)}/>
+              Delhi University quota only
+            </label>
+            <label className={`chip-toggle flex items-center gap-2 px-3 py-2 rounded-xl text-sm cursor-pointer ${rankedOnly?"active":""}`}>
+              <input type="checkbox" checked={rankedOnly} onChange={e=>setRankedOnly(e.target.checked)}/>
+              Has closing-rank data only
+            </label>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {shown.map((inst,i)=>(
+            <div key={i} className="card rounded-2xl shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer"
+              onClick={()=>openInst(inst)}>
+              <div className="flex justify-between items-start mb-2 gap-2">
+                <div className="font-semibold text-sm text-tok" style={{display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>{inst.displayName}</div>
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <span className="tag-region text-[10px] px-2 py-1 rounded-full whitespace-nowrap">{inst.state || "State unknown"}</span>
+                  {inst.hasDU && <span className="tag-du text-[10px] px-2 py-1 rounded-full font-medium whitespace-nowrap">DU quota</span>}
+                </div>
+              </div>
+              <div className="flex gap-2 mb-3 flex-wrap" style={!isUnlocked(inst.id) ? {filter:'blur(4px)', userSelect:'none'} : {}}>
+                <div className="tile-fee rounded-lg px-2.5 py-1.5 flex-1 min-w-[80px]">
+                  <div className="text-[10px] text-dim">FEE (1 branch)</div>
+                  <div className="text-xs font-semibold mono">{fmtMoney(inst.branches[0].Annual_Fees_INR)}</div>
+                </div>
+                <div className="tile-good rounded-lg px-2.5 py-1.5 flex-1 min-w-[80px]">
+                  <div className="text-[10px]" style={{opacity:.8}}>STIPEND Y1</div>
+                  <div className="text-xs font-semibold mono">{fmtMoney(inst.branches[0].Stipend_Y1_INR)}</div>
+                </div>
+              </div>
+              {!isUnlocked(inst.id) && <div className="text-[9px] mb-1" style={{color:'var(--warn)'}}>🔒 locked — unlock full access</div>}
+              <div className="text-[11px] text-dim">{inst.branches.length} branch{inst.branches.length===1?"":"es"} · {inst.anyRanks ? "closing ranks available" : "no allotment/closing-rank data found"}</div>
+            </div>
+          ))}
+        </div>
+        {institutes.length===0 && <div className="text-center text-dim py-16 text-sm">No colleges match these filters.</div>}
+        {institutes.length>visibleCount && (
+          <div className="text-center mt-6">
+            <button onClick={()=>setVisibleCount(v=>v+150)} className="btn-solid px-5 py-2.5 rounded-xl text-sm font-medium">
+              Show {Math.min(150, institutes.length-visibleCount)} more (of {institutes.length.toLocaleString('en-IN')})
+            </button>
+          </div>
+        )}
+      </div>
+      )}
+
+      {modal!==null && selectedBranch && (
+        <div className="overlay fixed inset-0 flex items-center justify-center p-4 z-50" onClick={()=>setModal(null)}>
+          <div className="modal rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col" onClick={e=>e.stopPropagation()}>
+            <div className="p-6 border-b border-tok flex justify-between items-start gap-3">
+              <div>
+                <h2 className="font-semibold text-tok">{selectedBranch.Display_Name}</h2>
+                <p className="text-xs text-dim mt-1">{selectedBranch.State || "State unknown"} · {selectedBranch.Deg} · {selectedBranch.Spec_Norm}{selectedBranch.Management ? " · "+selectedBranch.Management : ""}</p>
+                {selectedBranch.NMC_Name && selectedBranch.NMC_Name!==selectedBranch.Display_Name && (
+                  <p className="text-[10px] text-dim mt-1">NMC record: {selectedBranch.NMC_Name}</p>
+                )}
+              </div>
+              <button onClick={()=>setModal(null)} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
+            </div>
+
+            <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
+              <div className="md:w-1/3 border-b md:border-b-0 md:border-r border-tok overflow-auto p-4 space-y-2 max-h-48 md:max-h-none">
+                <div className="text-xs font-semibold text-dim mb-2">Branches</div>
+                {DATA.filter(d=>d.I===modal).map((b,idx)=>(
+                  <div key={idx} onClick={()=>pickBranch(b)}
+                    className={`p-3 rounded-xl cursor-pointer border ${selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?"row-ring border-tok":"border-tok"}`}
+                    style={selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?{background:'var(--accent-soft)'}:{background:'var(--surface-alt)'}}>
+                    <div className="text-xs font-medium flex items-center justify-between gap-2">
+                      <span>{b.Spec_Norm} ({b.Deg})</span>
+                      {b.Has_DU && <span className="tag-du text-[9px] px-1.5 py-0.5 rounded-full shrink-0">DU</span>}
+                    </div>
+                    <div className="text-[10px] text-dim mono" style={!isUnlocked(b.I) ? {filter:'blur(4px)'} : {}}>Fee {fmtMoney(b.Annual_Fees_INR)} · Stip {fmtMoney(b.Stipend_Y1_INR)}{b.Rank_Status!=="ranks" ? " · no ranks" : ""}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex-1 overflow-auto p-6 relative">
+              {!isUnlocked(selectedBranch.I) && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center p-6" style={{background:'color-mix(in srgb, var(--surface) 88%, transparent)', backdropFilter:'blur(6px)'}}>
+                  <div className="max-w-sm w-full"><PaywallCard authState={authState} contextLabel={selectedBranch.Display_Name} /></div>
+                </div>
+              )}
+              <div style={!isUnlocked(selectedBranch.I) ? {filter:'blur(6px)', pointerEvents:'none', userSelect:'none'} : {}}>
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  <div className="tile-fee rounded-2xl p-4">
+                    <div className="text-[10px] text-dim uppercase tracking-wide flex items-center justify-between">
+                      <span>Annual fee</span>
+                      {srcBadge(selectedBranch.Fees_Badge)}
+                    </div>
+                    <div className="text-lg font-bold mono">{fmtMoney(selectedBranch.Annual_Fees_INR)}</div>
+                    <div className="text-[10px] text-dim">{selectedBranch.Fees_Note ? selectedBranch.Fees_Note : "Per year"}</div>
+                  </div>
+                  <div className="tile-good rounded-2xl p-4">
+                    <div className="text-[10px] uppercase tracking-wide flex items-center justify-between" style={{opacity:.8}}>
+                      <span>Stipend Y1 / Y2 / Y3 (per month)</span>
+                      {srcBadge(selectedBranch.Stipend_Badge)}
+                    </div>
+                    <div className="text-sm font-bold mono">{fmtMoney(selectedBranch.Stipend_Y1_INR)} / {fmtMoney(selectedBranch.Stipend_Y2_INR)} / {fmtMoney(selectedBranch.Stipend_Y3_INR)}</div>
+                  </div>
+                </div>
+                <div className="text-[10px] text-dim mb-4 -mt-4">OFFICIAL = state government order or the college's/NBEMS's own published circular. THIRD-PARTY EST. = no primary document found for this branch — shown as a typical/estimated figure so nothing is blank; treat as a rough guide only.</div>
+
+                {(selectedBranch.Bond_Years || selectedBranch.Bond_Penalty_INR) ? (
+                  <div className="tile-bad rounded-2xl p-3 mb-4 text-xs">
+                    Bond: {selectedBranch.Bond_Years ?? 0} year(s) · Penalty {fmtMoney(selectedBranch.Bond_Penalty_INR)}
+                  </div>
+                ) : null}
+
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs text-dim">Quota / Round</label>
+                    <span className="text-[10px] text-dim mono">
+                      {roundsAvailable(selectedBranch).length} with data
+                    </span>
+                  </div>
+                  {roundsAvailable(selectedBranch).length===0 ? (
+                    <div className="text-xs text-dim tile-fee rounded-xl px-3 py-2">
+                      No closing-rank data found for this branch. {selectedBranch.Rank_Status==="not_in_mcc" ? "This institute is listed by NMC but did not appear in the MCC allotment results we processed." : "This institute appears in the MCC seat matrix but had no candidates allotted here in the rounds we processed."}
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-1.5">
+                      {roundsAvailable(selectedBranch).map(rt=>(
+                        <button key={rt} onClick={()=>setRoundSel(rt)}
+                          className={`seg-btn px-3 py-1.5 rounded-lg text-xs border ${rt===roundSel?"active border-tok":"border-tok"}`}
+                          style={rt===roundSel?{borderColor:'var(--accent)'}:{}}>
+                          {tagLabel(rt)}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {roundSel && (
+                <div className="surface border border-tok rounded-2xl overflow-hidden">
+                  <div className="grid grid-cols-5 gap-0 text-xs">
+                    {CATS.map(c=><div key={c} className="surface-alt p-3 font-semibold border-b border-tok text-center">{c}</div>)}
+                  </div>
+                  <div className="grid grid-cols-5 gap-0 text-xs mono">
+                    {CATS.map(c=>(
+                      <div key={c} className="p-3 border-b border-tok text-center">{fmtNum(getRankRow(selectedBranch,roundSel)[c])}</div>
+                    ))}
+                  </div>
+                </div>
+                )}
+
+                {roundsAvailable(selectedBranch).length>0 && (
+                <div className="mt-4">
+                  <div className="text-xs font-semibold text-dim mb-2">All quotas / rounds with data (GN / EWS / OBC / SC / ST)</div>
+                  <div className="overflow-auto border border-tok rounded-2xl max-h-72">
+                    <table className="w-full text-[11px] mono">
+                      <thead><tr className="surface-alt"><th className="p-2 text-left font-semibold" style={{position:'sticky',top:0}}>Quota · Round</th><th style={{position:'sticky',top:0}}>GN</th><th style={{position:'sticky',top:0}}>EWS</th><th style={{position:'sticky',top:0}}>OBC</th><th style={{position:'sticky',top:0}}>SC</th><th style={{position:'sticky',top:0}}>ST</th></tr></thead>
+                      <tbody>
+                        {roundsAvailable(selectedBranch).map(rt=>{
+                          const row = getRankRow(selectedBranch, rt);
+                          const isDU = rt.startsWith("DU");
+                          return (
+                            <tr key={rt} className={`border-t border-tok ${rt===roundSel?"row-ring":""}`} style={isDU?{background:'var(--du-soft)'}:{}}>
+                              <td className="p-2 font-medium">{tagLabel(rt)}</td>
+                              <td className="text-center">{fmtNum(row.GN)}</td>
+                              <td className="text-center">{fmtNum(row.EWS)}</td>
+                              <td className="text-center">{fmtNum(row.OBC)}</td>
+                              <td className="text-center font-semibold">{fmtNum(row.SC)}</td>
+                              <td className="text-center">{fmtNum(row.ST)}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="text-[10px] text-dim mt-2">Closing rank = worst (highest-numbered) NEET PG all-India rank actually allotted a seat in that quota/round/category, taken directly from MCC's published allotment result PDFs.</div>
+                </div>
+                )}
+
+                <RatingsPanel branch={selectedBranch} />
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+const root=ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+</script>
+</body>
+</html>
