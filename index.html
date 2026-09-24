@@ -1004,14 +1004,15 @@ document.addEventListener('DOMContentLoaded', function(){
 window.DATA = null;
 function __neetpgRunApp(){
   try {
-    var src = document.getElementById('neetpg-app-src').textContent;
-    var compiled = Babel.transform(src, { presets: ['react'] }).code;
-    var s = document.createElement('script');
-    s.text = compiled;
-    document.body.appendChild(s);
+    var srcEl = document.getElementById('neetpg-app-src');
+    var newScript = document.createElement('script');
+    newScript.type = 'text/babel';
+    newScript.text = srcEl.textContent;
+    srcEl.parentNode.insertBefore(newScript, srcEl.nextSibling);
+    Babel.transformScriptTags([newScript]);
   } catch (e) {
     var rootEl = document.getElementById('root');
-    if (rootEl) rootEl.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#a2273a;font-family:system-ui,sans-serif;">The counselling directory failed to start. Please reload the page.</div>';
+    if (rootEl) rootEl.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#a2273a;font-family:system-ui,sans-serif;">The counselling directory failed to start (' + (e && e.message ? e.message : e) + '). Please reload the page.</div>';
     console.error('Failed to compile/run app script', e);
   }
 }
@@ -1689,5 +1690,4 @@ function App(){
                     className={`p-3 rounded-xl cursor-pointer border ${selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?"row-ring border-tok":"border-tok"}`}
                     style={selectedBranch.Spec_Norm===b.Spec_Norm && selectedBranch.Deg===b.Deg?{background:'var(--accent-soft)'}:{background:'var(--surface-alt)'}}>
                     <div className="text-xs font-medium flex items-center justify-between gap-2">
-                      <span>{b.Spec_Norm} ({b.Deg})</span>
-                      {b.Has_DU && <span clas
+      
