@@ -251,7 +251,7 @@ animation: vibrantPulse 3s infinite;
 <span class="relative flex h-2 w-2 mr-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span> LIVE
 </span>
 <div class="overflow-hidden whitespace-nowrap w-full relative">
-<div id="liveNewsTicker" class="animate-ticker flex items-center gap-10 font-bold text-white">Loading fun facts...</div>
+<div id="liveNewsTicker" class="animate-ticker flex items-center gap-10 font-bold text-white">Loading live news…</div>
 </div>
 <span id="newsUpdateTime" class="text-[9px] font-medium opacity-70 hidden md:block flex-shrink-0"></span>
 </div>
@@ -1116,74 +1116,75 @@ window.openBranchPayment = function(){
 
 
 <script>
-// GUARANTEED WORKING FUN FACTS TICKER - 22 headlines
+// LIVE TICKER: real NEET PG / counselling headlines (via our "news" Supabase function,
+// which reads Google News), with health facts mixed in. Falls back to facts only if
+// the news can't load, so the bar is never empty or showing stale "news".
 document.addEventListener('DOMContentLoaded', function(){
   const tickerEl = document.getElementById('liveNewsTicker');
   const timeEl = document.getElementById('newsUpdateTime');
   if(!tickerEl) return;
+  const NEWS_URL = "https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/news";
+  const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
 
   const facts = [
-    "NBEMS: NEET PG 2026 counselling dates soon - natboard.edu.in",
-    "INICET July 2026: AIIMS pattern update - aiimsexams.ac.in",
-    "☕ Coffee before noon = 16% lower heart risk",
-    "😴 7 hrs sleep cleans brain toxins 60% faster - Harvard",
-    "🥗 30 plants a week = stronger immunity",
-    "🚶 8000 steps daily beats meditation for anxiety",
-    "🍫 Dark chocolate 30g daily improves focus & mood",
-    "📱 Phone in bedroom cuts melatonin by 55%",
-    "💧 Water before meals helps lose 44% more weight",
-    "☀️ 20 mins sunlight = daily vitamin D - free medicine",
-    "😂 Laughing 15 mins burns 40 calories",
-    "⏰ 14-hour fast window improves metabolism",
-    "🪑 Sitting 11+ hrs = 40% higher death risk - stand up!",
-    "🎵 Music during surgery reduces anesthesia 20%",
-    "🧠 Brain uses 20% of body energy - thinking is workout",
-    "📚 Chewing gum improves concentration 10%",
-    "❄️ Cold water face splash resets anxiety in 30 sec",
-    "✍️ Handwritten notes remember 34% better than typed",
-    "🫁 2 mins deep breathing lowers BP same as 30 min walk",
-    "⚕️ Doctors sleeping <6 hrs make 2x more errors",
-    "NMC: New PG curriculum from 2026 - nmc.org.in",
-    "NMC: 50% attendance must for PG residents"
+    ["Sleep", "😴 Sleep clears waste from the brain via the glymphatic system — protect your 7 hours"],
+    ["Study", "✍️ Testing yourself beats re-reading — retrieval practice is one of the best-proven study methods"],
+    ["Study", "📚 Spacing revision over days beats cramming the same hours into one night"],
+    ["Heart", "🚶 Regular brisk walking lowers blood pressure and heart disease risk"],
+    ["Sun", "☀️ Short daily sunlight exposure helps your body make vitamin D"],
+    ["Sleep Tip", "📱 Screens before bed delay sleep — keep the phone out of reach at night"],
+    ["Breathing", "🫁 Slow breathing (about 6 breaths a minute) can calm the stress response"],
+    ["Doctor", "⚕️ Fatigue raises error risk — rest is patient safety too"],
+    ["Brain", "🧠 The brain uses about 20% of the body's energy at rest"],
+    ["Hydration", "💧 Mild dehydration can hurt focus — keep water at your desk"],
+    ["Movement", "🪑 Long sitting is linked to poorer health — stand up every 30–60 minutes"],
+    ["Diet", "🥗 A varied, plant-rich diet supports a healthier gut microbiome"],
   ];
-
-  // Build ticker HTML with icons
-  const tickerHTML = facts.map(text => {
-    let source = "Fact";
-    if(text.includes("NBEMS") || text.includes("NEET")) source = "NEET PG";
-    else if(text.includes("INICET") || text.includes("AIIMS")) source = "INICET";
-    else if(text.includes("NMC")) source = "NMC";
-    else if(text.includes("☕")) source = "Heart";
-    else if(text.includes("😴")) source = "Sleep";
-    else if(text.includes("🥗")) source = "Gut";
-    else if(text.includes("🚶")) source = "Mental";
-    else if(text.includes("🍫")) source = "Brain";
-    else if(text.includes("📱")) source = "Sleep Tip";
-    else if(text.includes("💧")) source = "Weight";
-    else if(text.includes("☀️")) source = "Vitamin D";
-    else if(text.includes("😂")) source = "Fun";
-    else if(text.includes("⏰")) source = "Nutrition";
-    else if(text.includes("🪑")) source = "Alert";
-    else if(text.includes("🎵")) source = "Surgery";
-    else if(text.includes("🧠")) source = "Brain";
-    else if(text.includes("📚")) source = "Study";
-    else if(text.includes("❄️")) source = "Anxiety";
-    else if(text.includes("✍️")) source = "Memory";
-    else if(text.includes("🫁")) source = "Breathing";
-    else if(text.includes("⚕️")) source = "Doctor";
-    
-    return `<span class="flex items-center gap-2 whitespace-nowrap"><span class="bg-white/30 px-2.5 py-0.5 rounded-full text-[9px] font-black">${source}</span> ${text}</span>`;
-  }).join('<span class="opacity-30 mx-3">•</span>');
-
-  // Duplicate for seamless loop
-  tickerEl.innerHTML = tickerHTML + '<span class="opacity-30 mx-8">★</span>' + tickerHTML;
-  
-  if(timeEl){
-    timeEl.textContent = 'Fun Facts • Daily';
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  function ago(iso){
+    const m = Math.max(1, Math.round((Date.now() - new Date(iso).getTime())/60000));
+    if(m < 60) return m + "m ago";
+    const hr = Math.round(m/60); if(hr < 24) return hr + "h ago";
+    const d = Math.round(hr/24); return d + "d ago";
   }
-  
-  // Make ticker slower for many headlines
-  tickerEl.style.animationDuration = '90s';
+  const factHTML = ([tag, text]) => `<span class="flex items-center gap-2 whitespace-nowrap"><span class="bg-white/30 px-2.5 py-0.5 rounded-full text-[9px] font-black">${esc(tag)}</span> ${esc(text)}</span>`;
+  const newsHTML = (n) => `<a href="${esc(n.url)}" target="_blank" rel="noopener" class="flex items-center gap-2 whitespace-nowrap hover:underline"><span class="${n.category==='health'?'bg-emerald-900/40':'bg-rose-600/80'} px-2.5 py-0.5 rounded-full text-[9px] font-black">${n.category==='health'?'HEALTH':'NEET PG'} · ${esc(ago(n.published))}</span> ${esc(n.title)}${n.source?` <span class="opacity-70 font-medium">— ${esc(n.source)}</span>`:''}</a>`;
+  const SEP = '<span class="opacity-30 mx-3">•</span>';
+
+  function render(news){
+    let parts;
+    if(news && news.length){
+      // mix: two headlines, then one fact
+      parts = []; let f = 0;
+      news.forEach((n,i)=>{ parts.push(newsHTML(n)); if(i%2===1) parts.push(factHTML(facts[f++ % facts.length])); });
+    } else {
+      parts = facts.map(factHTML);
+    }
+    const html = parts.join(SEP);
+    tickerEl.innerHTML = html + '<span class="opacity-30 mx-8">★</span>' + html;
+    // keep a steady reading speed however many items there are
+    tickerEl.style.animationDuration = Math.max(60, parts.length * 7) + 's';
+  }
+
+  async function loadNews(){
+    try {
+      const res = await fetch(NEWS_URL, { headers: { apikey: ANON_KEY, Authorization: 'Bearer ' + ANON_KEY } });
+      if(!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const items = (data.items || []).filter(n => n && n.title && n.url && n.published);
+      if(!items.length) throw new Error('empty');
+      render(items);
+      if(timeEl) timeEl.textContent = 'Live news • updated ' + ago(data.updated_at || new Date().toISOString());
+    } catch(_e){
+      if(!tickerEl.querySelector('a')) render(null);   // keep previous headlines if a refresh fails
+      if(timeEl && !tickerEl.querySelector('a')) timeEl.textContent = 'Health facts';
+    }
+  }
+
+  render(null);                       // instant: facts first
+  if(timeEl) timeEl.textContent = 'Loading live news…';
+  loadNews();
+  setInterval(loadNews, 15*60*1000);  // refresh every 15 minutes while the page is open
 });
 </script>
 
