@@ -414,6 +414,20 @@ class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-
 
 </main>
 
+<footer class="border-t border-slate-200 bg-white/70 mt-6">
+<div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-slate-500">
+<div><span class="font-black text-slate-700">DocPulse</span> · NEET PG counselling directory · Not affiliated with MCC, NBEMS or NMC</div>
+<nav class="flex flex-wrap gap-x-4 gap-y-2">
+<a href="#" onclick="openAboutUsModal(); return false;" class="hover:text-slate-800 hover:underline">About</a>
+<a href="terms.html" class="hover:text-slate-800 hover:underline">Terms</a>
+<a href="refund.html" class="hover:text-slate-800 hover:underline">Refund Policy</a>
+<a href="privacy.html" class="hover:text-slate-800 hover:underline">Privacy</a>
+<a href="contact.html" class="hover:text-slate-800 hover:underline">Contact</a>
+<a href="mailto:docpulsee@gmail.com" class="hover:text-slate-800 hover:underline">docpulsee@gmail.com</a>
+</nav>
+</div>
+</footer>
+
 <div id="predictorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
 <div class="bg-white border-2 border-sky-400 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative vibrant-box">
 <button onclick="closePredictorModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg bg-slate-100 w-9 h-9 rounded-full flex items-center justify-center border border-slate-200 transition">
@@ -1946,6 +1960,173 @@ function ChoiceListPanel({ list, setList, onClose, rankLine }){
   );
 }
 
+// ---------- Report an error ----------
+const REPORT_TYPES = ["Fee is wrong","Stipend is wrong","Closing rank is wrong","Bond / seats wrong","College name or location wrong","Something else"];
+function ReportErrorModal({ target, onClose, userEmail }){
+  const [kind, setKind] = React.useState(REPORT_TYPES[0]);
+  const [details, setDetails] = React.useState("");
+  const [email, setEmail] = React.useState(userEmail || "");
+  const [state, setState] = React.useState(null); // null | 'sending' | 'done' | {mailto}
+  const what = `${target.name}${target.spec ? ` — ${target.spec} (${target.deg})` : ""}`;
+  async function submit(){
+    if(!details.trim()){ setState({ error: "Please tell us what's wrong (and the correct value if you know it)." }); return; }
+    setState('sending');
+    const row = { inst_key: String(target.inst), branch_key: target.branchKey || null, college: target.name, branch: target.spec ? `${target.spec} (${target.deg})` : null,
+                  issue: kind, details: details.trim().slice(0,2000), reporter_email: email.trim() || null, page_url: window.location.href.slice(0,300) };
+    try {
+      if(!sb) throw new Error("no db");
+      const { error } = await sb.from('error_reports').insert(row);
+      if(error) throw error;
+      setState('done');
+    } catch(_e){
+      const body = `College: ${what}\nIssue: ${kind}\nDetails: ${details.trim()}\nReported by: ${email.trim()||"(not given)"}`;
+      setState({ mailto: "mailto:docpulsee@gmail.com?subject=" + encodeURIComponent("DocPulse error report — " + target.name) + "&body=" + encodeURIComponent(body) });
+    }
+  }
+  return (
+    <div className="overlay fixed inset-0 flex items-center justify-center p-4 z-[60]" onClick={onClose}>
+      <div className="modal rounded-3xl max-w-md w-full overflow-hidden" onClick={e=>e.stopPropagation()}>
+        <div className="p-5 border-b border-tok flex justify-between items-start gap-3">
+          <div>
+            <h2 className="font-semibold text-tok">Report an error</h2>
+            <p className="text-xs text-dim mt-1">{what}</p>
+          </div>
+          <button onClick={onClose} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
+        </div>
+        {state==='done' ? (
+          <div className="p-6 text-center">
+            <div className="text-2xl mb-2">🙏</div>
+            <div className="text-sm font-semibold text-tok mb-1">Thanks — we'll check and fix it.</div>
+            <div className="text-xs text-dim mb-4">Corrections from students are how this data gets better for everyone.</div>
+            <button onClick={onClose} className="btn-solid px-5 py-2 rounded-xl text-sm font-medium">Done</button>
+          </div>
+        ) : state && state.mailto ? (
+          <div className="p-6 text-center">
+            <div className="text-sm text-tok mb-3">Couldn't save it automatically — please send it by email instead:</div>
+            <a href={state.mailto} className="btn-solid inline-block px-5 py-2 rounded-xl text-sm font-medium">Open email to docpulsee@gmail.com</a>
+          </div>
+        ) : (
+          <div className="p-5 flex flex-col gap-2.5">
+            <select value={kind} onChange={e=>setKind(e.target.value)} className="input-tok rounded-xl px-3 py-2 text-sm">
+              {REPORT_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
+            </select>
+            <textarea value={details} onChange={e=>setDetails(e.target.value)} rows={3} maxLength={2000}
+              placeholder="What's wrong? If you know the correct value (and where it's from), please add it."
+              className="input-tok rounded-xl px-3 py-2 text-sm outline-none resize-none"/>
+            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="Your email (optional — if we need to ask something)"
+              className="input-tok rounded-xl px-3 py-2 text-sm outline-none"/>
+            {state && state.error && <div className="text-[11px] font-semibold" style={{color:'var(--bad)'}}>{state.error}</div>}
+            <button onClick={submit} disabled={state==='sending'} className="btn-solid px-4 py-2.5 rounded-xl text-sm font-semibold" style={{opacity:state==='sending'?0.6:1}}>
+              {state==='sending' ? "Sending…" : "Send report"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+function ReportLink({ onClick, className }){
+  return <button onClick={e=>{ e.stopPropagation(); onClick(); }} className={"text-[10px] text-dim hover:underline "+(className||"")} title="Report an error in this college's data">⚑ Report error</button>;
+}
+
+// ---------- Compare colleges (paid feature) ----------
+const COMPARE_MAX = 4;
+function CompareModal({ rows, onRemove, onClose, cat, userLoc }){
+  const catLabel = cat==="GN" ? "General" : cat;
+  const num = v => (v===null||v===undefined||v==="") ? null : Number(v);
+  // mark the best cell in a row: "min" or "max"
+  function bestIdx(vals, mode){
+    const ok = vals.map((v,i)=>[v,i]).filter(([v])=>v!==null && !isNaN(v));
+    if(ok.length<2) return -1;
+    ok.sort((a,b)=> mode==="min" ? a[0]-b[0] : b[0]-a[0]);
+    return ok[0][0]===ok[1][0] ? -1 : ok[0][1];
+  }
+  const fee = rows.map(r=>num(r.Annual_Fees_INR));
+  const s1 = rows.map(r=>num(r.Stipend_Y1_INR)), s3 = rows.map(r=>num(r.Stipend_Y3_INR));
+  const bondY = rows.map(r=>num(r.Bond_Years)), bondP = rows.map(r=>num(r.Bond_Penalty_INR));
+  const dist = rows.map(r=>{ const d=instDistance(r.I,userLoc); return d?d.km:null; });
+  const seats = rows.map(r=>num(r.Total_Seats!=null?r.Total_Seats:r.NMC_Seats));
+  const netValue = rows.map((r,i)=>{ // 3-year stipend minus 3 years of fees (bond penalty shown separately)
+    const a=num(r.Stipend_Y1_INR), b=num(r.Stipend_Y2_INR)??a, c=num(r.Stipend_Y3_INR)??b, f=fee[i];
+    if(a===null||f===null) return null; return (a+b+c)*12 - f*3;
+  });
+  const cut = rows.map(r=>{
+    const tags = roundsAvailable(r);
+    const vals = tags.map(t=>[t, getRankRow(r,t)[cat]]).filter(([,v])=>v!==null && v!==undefined);
+    return vals;
+  });
+  const bestCut = rows.map((r,i)=>cut[i].length ? Math.max(...cut[i].map(([,v])=>v)) : null);
+  const B = {
+    fee: bestIdx(fee,"min"), s1: bestIdx(s1,"max"), s3: bestIdx(s3,"max"), bondY: bestIdx(bondY,"min"),
+    bondP: bestIdx(bondP,"min"), dist: bestIdx(dist,"min"), seats: bestIdx(seats,"max"), net: bestIdx(netValue,"max"), cut: bestIdx(bestCut,"max"),
+  };
+  const cellStyle = (isBest)=> isBest ? {background:'var(--good-soft)', color:'var(--good)', fontWeight:700} : undefined;
+  const Row = ({label, sub, vals, best, render})=>(
+    <tr className="border-t border-tok align-top">
+      <td className="p-2.5 text-[11px] font-semibold text-dim whitespace-nowrap sticky left-0" style={{background:'var(--surface-alt)'}}>{label}{sub && <div className="font-normal text-[10px]">{sub}</div>}</td>
+      {vals.map((v,i)=><td key={i} className="p-2.5 text-xs mono" style={cellStyle(i===best)}>{render ? render(v,i) : (v===null||v===undefined ? "—" : v)}</td>)}
+    </tr>
+  );
+  return (
+    <div className="overlay fixed inset-0 flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="modal rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col" onClick={e=>e.stopPropagation()}>
+        <div className="p-5 border-b border-tok flex justify-between items-start gap-3">
+          <div>
+            <h2 className="font-semibold text-tok">Compare colleges</h2>
+            <p className="text-xs text-dim mt-1">Green = best in that row. Closing ranks shown for {catLabel} category. Fees/stipend badges follow the college page (official vs estimate).</p>
+          </div>
+          <button onClick={onClose} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
+        </div>
+        {rows.length<2 ? (
+          <div className="p-10 text-center text-sm text-dim">Add at least 2 branches to compare — tap <b>“⇄ Compare”</b> on any result or college page.</div>
+        ) : (
+        <div className="overflow-auto flex-1">
+          <table className="w-full text-left" style={{minWidth: 180 + rows.length*190}}>
+            <thead>
+              <tr>
+                <th className="p-2.5 sticky left-0" style={{background:'var(--surface-alt)'}}></th>
+                {rows.map((r,i)=>(
+                  <th key={i} className="p-2.5 align-top" style={{minWidth:190}}>
+                    <div className="text-xs font-semibold text-tok leading-snug">{r.Display_Name}</div>
+                    <div className="text-[11px] text-dim mt-0.5">{r.Spec_Norm} · {r.Deg}</div>
+                    <button onClick={()=>onRemove(r)} className="text-[10px] underline mt-1" style={{color:'var(--bad)'}}>Remove</button>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <Row label="State" vals={rows.map(r=>r.State||"—")} best={-1}/>
+              {userLoc && <Row label="Distance" sub={`from ${userLoc.label}`} vals={dist} best={B.dist} render={(v,i)=> v===null ? "—" : fmtKm(instDistance(rows[i].I,userLoc))}/>}
+              <Row label="Management" vals={rows.map(r=>r.Management||"—")} best={-1}/>
+              <Row label="Seats" vals={seats} best={B.seats} render={v=>v===null?"—":fmtNum(v)}/>
+              <Row label="Annual fee" vals={fee} best={B.fee} render={(v,i)=><span>{fmtMoney(v)} <span className="ml-1 align-middle">{srcBadge(rows[i].Fees_Badge)}</span></span>}/>
+              <Row label="Stipend Year 1" sub="per month" vals={s1} best={B.s1} render={(v,i)=><span>{fmtMoney(v)} <span className="ml-1 align-middle">{srcBadge(rows[i].Stipend_Badge)}</span></span>}/>
+              <Row label="Stipend Year 3" sub="per month" vals={s3} best={B.s3} render={v=>fmtMoney(v)}/>
+              <Row label="3-year net" sub="stipend − fees" vals={netValue} best={B.net} render={v=> v===null ? "—" : (v<0?"−":"")+fmtMoney(Math.abs(v))}/>
+              <Row label="Bond" sub="years" vals={bondY} best={B.bondY} render={v=> v===null ? "—" : (v===0 ? "No bond" : v+" yr")}/>
+              <Row label="Bond penalty" vals={bondP} best={B.bondP} render={v=> v===null ? "—" : (v===0 ? "None" : fmtMoney(v))}/>
+              <Row label={`Closing ranks`} sub={`${catLabel} · by round`} vals={cut} best={B.cut} render={vals=> vals.length ? (
+                <div className="space-y-0.5">{vals.slice(0,6).map(([t,v])=><div key={t}><span className="text-dim">{tagLabel(t).replace("All-India Quota","AIQ")}:</span> {fmtNum(v)}</div>)}{vals.length>6 && <div className="text-dim">+{vals.length-6} more</div>}</div>
+              ) : "No data"}/>
+            </tbody>
+          </table>
+        </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const BUCKETS = {
+  safe:   { label:"Safe",   color:"#15803d", bg:"rgba(22,163,74,0.12)",  hint:"Last year's cutoff was more than 15% beyond your rank" },
+  target: { label:"Target", color:"#b45309", bg:"rgba(245,158,11,0.15)", hint:"Reachable last year, but within 15% of your rank" },
+  dream:  { label:"Dream",  color:"#7c3aed", bg:"rgba(139,92,246,0.14)", hint:"Closed just before your rank last year (up to 10% short) — possible if cutoffs move" },
+};
+function BucketChip({ b }){
+  const s = BUCKETS[b]; if(!s) return null;
+  return <span title={s.hint} className="text-[9px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded-md shrink-0" style={{color:s.color, background:s.bg}}>{s.label}</span>;
+}
+
 function App(){
   const authState = useAuth();
   // Paid users' choice-filling list, remembered on this device.
@@ -1954,6 +2135,27 @@ function App(){
   });
   const setChoiceList = (v)=>{ setChoiceListRaw(v); try { localStorage.setItem('dp_choice_list', JSON.stringify(v)); } catch(_e){} };
   const [listOpen, setListOpen] = React.useState(false);
+  const [compareKeys, setCompareKeysRaw] = React.useState(()=>{
+    try { const s = localStorage.getItem('dp_compare'); return s ? JSON.parse(s) : []; } catch(_e){ return []; }
+  });
+  const setCompareKeys = (v)=>{ setCompareKeysRaw(v); try { localStorage.setItem('dp_compare', JSON.stringify(v)); } catch(_e){} };
+  const [compareOpen, setCompareOpen] = React.useState(false);
+  const [reportTarget, setReportTarget] = React.useState(null);
+  const reportInst = (inst)=> setReportTarget({ inst: inst.id, name: inst.displayName });
+  const reportBranch = (d)=> setReportTarget({ inst: d.I, name: d.Display_Name, spec: d.Spec_Norm, deg: d.Deg, branchKey: branchListKey(d) });
+  const [compareMsg, setCompareMsg] = React.useState(null);
+  const inCompare = (d)=> compareKeys.includes(branchListKey(d));
+  const toggleCompare = (d)=>{
+    const k = branchListKey(d);
+    if(compareKeys.includes(k)) { setCompareKeys(compareKeys.filter(x=>x!==k)); return; }
+    if(compareKeys.length>=COMPARE_MAX){ setCompareMsg(`You can compare up to ${COMPARE_MAX} at a time — remove one first.`); setTimeout(()=>setCompareMsg(null),3500); return; }
+    setCompareKeys([...compareKeys, k]);
+  };
+  const compareRows = React.useMemo(()=>{
+    if(!compareKeys.length) return [];
+    const byKey = {}; DATA.forEach(d=>{ const k=branchListKey(d); if(compareKeys.includes(k) && !byKey[k]) byKey[k]=d; });
+    return compareKeys.map(k=>byKey[k]).filter(Boolean);
+  },[compareKeys]);
   const inList = (d)=> choiceList.some(x=>x.key===branchListKey(d));
   const toggleInList = (d, dist)=>{
     const k = branchListKey(d);
@@ -1968,6 +2170,8 @@ function App(){
   const [radiusKm, setRadiusKm] = React.useState("");
   const [pRadiusKm, setPRadiusKm] = React.useState("");
   const [pSort, setPSort] = React.useState("fit"); // "fit" | "near"
+  const [pDream, setPDream] = React.useState(false);   // also show "dream" seats just out of reach
+  const [pBucket, setPBucket] = React.useState("all"); // "all" | "safe" | "target" | "dream"
   const isUnlocked = React.useCallback((instId)=> instId===SAMPLE_INSTITUTE_ID || authState.paid, [authState.paid]);
   const [mode,setMode]=React.useState("browse"); // "browse" | "predict"
   const [search,setSearch]=React.useState("");
@@ -2030,7 +2234,7 @@ function App(){
   const shown = institutes.slice(0,visibleCount);
 
   // --- rank predictor: which branches were actually reachable, historically, at this rank ---
-  const predictResults = React.useMemo(()=>{
+  const predictAll = React.useMemo(()=>{
     const rankNum = parseInt(pRank,10);
     if(!rankNum || rankNum<1) return null;
     const rows=[];
@@ -2039,7 +2243,8 @@ function App(){
       if(pState && d.State!==pState) return;
       if(pCourseType!=="All" && d.Course_Type!==pCourseType) return;
       const R = d.R||{};
-      let best=null; // {tag, closing}
+      let best=null;  // reachable: tightest round whose last admitted rank was at or beyond this rank
+      let dream=null; // just out of reach: closest round that closed up to 10% before this rank
       Object.keys(R).forEach(k=>{
         const m=k.match(/^([A-Z]+)_([A-Z0-9]+)_Closing_([A-Z]+)$/);
         if(!m) return;
@@ -2049,20 +2254,32 @@ function App(){
         const closing = R[k];
         if(closing>=rankNum){ // a candidate at this rank (or worse) actually got this seat that round
           if(!best || closing<best.closing) best = {tag:q+"_"+r, closing};
+        } else if(pDream && closing >= rankNum*0.9){
+          if(!dream || closing>dream.closing) dream = {tag:q+"_"+r, closing};
         }
       });
-      if(best){
+      const pick = best || dream;
+      if(pick){
         const dist = instDistance(d.I, userLoc);
         if(userLoc && pRadiusKm && !(dist && dist.km <= Number(pRadiusKm))) return;
-        rows.push({...d, _bestTag:best.tag, _bestClosing:best.closing, _margin:best.closing-rankNum, _dist:dist});
+        const margin = pick.closing-rankNum;
+        const bucket = !best ? "dream" : (margin <= rankNum*0.15 ? "target" : "safe");
+        rows.push({...d, _bestTag:pick.tag, _bestClosing:pick.closing, _margin:margin, _dist:dist, _bucket:bucket});
       }
     });
     if(userLoc && pSort==="near") rows.sort((a,b)=>((a._dist?a._dist.km:1e9)-(b._dist?b._dist.km:1e9)) || a._margin-b._margin);
     else rows.sort((a,b)=>a._margin-b._margin); // tightest (closest-call) admits first — realistic ordering, not "safest first"
     return rows;
-  },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType,userLoc,pRadiusKm,pSort]);
+  },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType,userLoc,pRadiusKm,pSort,pDream]);
+  const bucketCounts = React.useMemo(()=>{
+    const c={safe:0,target:0,dream:0}; (predictAll||[]).forEach(r=>{ c[r._bucket]++; }); return c;
+  },[predictAll]);
+  const predictResults = React.useMemo(()=>{
+    if(!predictAll) return null;
+    return pBucket==="all" ? predictAll : predictAll.filter(r=>r._bucket===pBucket);
+  },[predictAll,pBucket]);
 
-  React.useEffect(()=>{ setPVisible(100); },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType,userLoc,pRadiusKm,pSort]);
+  React.useEffect(()=>{ setPVisible(100); },[pRank,pCat,pQuotas,pSpecialty,pState,pCourseType,userLoc,pRadiusKm,pSort,pDream,pBucket]);
   // Hand the student's current search to the counselling booking popup, so booking needs no retyping.
   React.useEffect(()=>{
     window.__dpConsultCtx = {
@@ -2192,6 +2409,27 @@ function App(){
               </div>
             )}
           </div>
+          {predictAll && (
+            <div className="mt-3 flex flex-wrap gap-1.5 items-center">
+              <span className="text-xs text-dim mr-1">Show:</span>
+              {[["all","All",predictAll.length],["safe","Safe",bucketCounts.safe],["target","Target",bucketCounts.target]].concat(pDream?[["dream","Dream",bucketCounts.dream]]:[]).map(([k,l,n])=>(
+                <button key={k} onClick={()=>setPBucket(k)}
+                  className={`chip-toggle px-2.5 py-1.5 rounded-lg text-xs ${pBucket===k?"active":""}`}
+                  style={k!=="all" && pBucket!==k ? {color:BUCKETS[k].color} : undefined}>
+                  {l} <span className="mono">{n.toLocaleString('en-IN')}</span>
+                </button>
+              ))}
+              <label className={`chip-toggle flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs cursor-pointer ${pDream?"active":""}`} title={BUCKETS.dream.hint}>
+                <input type="checkbox" className="hidden" checked={pDream} onChange={e=>{ setPDream(e.target.checked); if(!e.target.checked && pBucket==="dream") setPBucket("all"); }}/>
+                ✨ Include Dream seats
+              </label>
+            </div>
+          )}
+          {predictAll && (
+            <div className="text-[10px] text-dim mt-2">
+              <b style={{color:BUCKETS.safe.color}}>Safe</b> = last year's cutoff was 15%+ beyond your rank · <b style={{color:BUCKETS.target.color}}>Target</b> = reachable, but within 15% · <b style={{color:BUCKETS.dream.color}}>Dream</b> = closed up to 10% before your rank — possible only if cutoffs move.
+            </div>
+          )}
           <div className="text-[10px] text-dim mt-3">
             {userLoc && <span>Distances are straight-line from {userLoc.label} ("~" = approximate location). </span>}
             {userLoc && pSort==="near" && <span>Showing nearest first (ties broken by tightest fit). </span>}
@@ -2216,7 +2454,10 @@ function App(){
         {!predictResults && (
           <div className="text-center text-dim py-16 text-sm">Set your rank above to see reachable colleges.</div>
         )}
-        {predictResults && predictResults.length===0 && (
+        {predictResults && predictResults.length===0 && predictAll && predictAll.length>0 && (
+          <div className="text-center text-dim py-16 text-sm">No {BUCKETS[pBucket] ? BUCKETS[pBucket].label : ""} seats with these filters — <button onClick={()=>setPBucket("all")} className="underline">show all {predictAll.length.toLocaleString('en-IN')}</button>.</div>
+        )}
+        {predictResults && predictResults.length===0 && !(predictAll && predictAll.length>0) && (
           <div className="text-center text-dim py-16 text-sm">No branch in the selected quotas/category had a "last rank admitted" of {pRank} or worse, in the rounds we have data for.</div>
         )}
         {predictResults && predictResults.length>0 && (
@@ -2225,17 +2466,25 @@ function App(){
               <div key={i} className="card rounded-xl p-3 flex items-center justify-between gap-3 cursor-pointer"
                 onClick={()=>{ setModal(d.I); setSelectedBranch(d); setRoundSel(d._bestTag); setMode("browse"); }}>
                 <div className="min-w-0 flex-1">
-                  <div className="text-sm font-medium text-tok truncate">{d.Display_Name}</div>
+                  <div className="text-sm font-medium text-tok flex items-center gap-2 min-w-0"><BucketChip b={d._bucket}/><span className="truncate">{d.Display_Name}</span></div>
                   <div className="text-[11px] text-dim">{d.Spec_Norm} · {d.Deg} · {d.State||"State unknown"}{d._dist && <span style={{color:'var(--accent)'}} className="font-semibold"> · 📍 {fmtKm(d._dist)}</span>}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-xs font-semibold mono" style={{color: d._margin<500 ? 'var(--warn)' : 'var(--good)'}}>last rank admitted {fmtNum(d._bestClosing)}</div>
+                  <div className="text-xs font-semibold mono" style={{color: d._bucket==='dream' ? BUCKETS.dream.color : (d._margin<500 ? 'var(--warn)' : 'var(--good)')}}>last rank admitted {fmtNum(d._bestClosing)}</div>
                   <div className="text-[10px] text-dim">{tagLabel(d._bestTag)}</div>
+                  <div><ReportLink onClick={()=>reportBranch(d)}/></div>
                   {authState.paid && (
                     <button onClick={e=>{ e.stopPropagation(); toggleInList(d, d._dist); }}
                       className="mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md border"
                       style={inList(d) ? {background:'var(--accent)', color:'#fff', borderColor:'var(--accent)'} : {color:'var(--accent)', borderColor:'var(--accent)'}}>
                       {inList(d) ? "✓ In my list" : "+ Add to list"}
+                    </button>
+                  )}
+                  {authState.paid && (
+                    <button onClick={e=>{ e.stopPropagation(); toggleCompare(d); }}
+                      className="mt-1 ml-1 text-[10px] font-bold px-2 py-0.5 rounded-md border"
+                      style={inCompare(d) ? {background:'#0f766e', color:'#fff', borderColor:'#0f766e'} : {color:'#0f766e', borderColor:'#0f766e'}}>
+                      {inCompare(d) ? "✓ Comparing" : "⇄ Compare"}
                     </button>
                   )}
                 </div>
@@ -2248,13 +2497,13 @@ function App(){
                 onClick={()=>{ const el=document.getElementById('predict-paywall'); if(el) el.scrollIntoView({behavior:'smooth', block:'center'}); }}>
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-medium text-tok truncate flex items-center gap-2">
-                    <span>🔒</span>
+                    <BucketChip b={d._bucket}/><span>🔒</span>
                     <span style={{filter:'blur(5px)', userSelect:'none'}} aria-hidden="true">Hidden College Name Medical Institute</span>
                   </div>
                   <div className="text-[11px] text-dim">{d.Spec_Norm} · {d.Deg}{d._dist && <span style={{color:'var(--accent)'}} className="font-semibold"> · 📍 {fmtKm(d._dist)}</span>}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-xs font-semibold mono" style={{color: d._margin<500 ? 'var(--warn)' : 'var(--good)'}}>last rank admitted {fmtNum(d._bestClosing)}</div>
+                  <div className="text-xs font-semibold mono" style={{color: d._bucket==='dream' ? BUCKETS.dream.color : (d._margin<500 ? 'var(--warn)' : 'var(--good)')}}>last rank admitted {fmtNum(d._bestClosing)}</div>
                   <div className="text-[10px] text-dim">unlock to see college</div>
                 </div>
               </div>
@@ -2283,7 +2532,10 @@ function App(){
               <div className="card rounded-2xl shadow-sm p-4 text-left">
                 <div className="flex justify-between items-start mb-2 gap-2">
                   <div className="font-semibold text-sm text-tok">{sampleInst.displayName}</div>
-                  <span className="tag-region text-[10px] px-2 py-1 rounded-full whitespace-nowrap">{sampleInst.state || "State unknown"}</span>
+                  <div className="flex flex-col items-end gap-1 shrink-0">
+                    <span className="tag-region text-[10px] px-2 py-1 rounded-full whitespace-nowrap">{sampleInst.state || "State unknown"}</span>
+                    <ReportLink onClick={()=>reportInst(sampleInst)}/>
+                  </div>
                 </div>
                 <div className="flex gap-2 mb-3 flex-wrap">
                   <div className="tile-fee rounded-lg px-2.5 py-1.5 flex-1 min-w-[80px]">
@@ -2379,7 +2631,10 @@ function App(){
                   <div className="text-xs font-semibold mono">{fmtMoney(inst.branches[0].Stipend_Y1_INR)}</div>
                 </div>
               </div>
-              <div className="text-[11px] text-dim">{inst.branches.length} branch{inst.branches.length===1?"":"es"} · {inst.anyRanks ? "closing ranks available" : "no allotment/closing-rank data found"}</div>
+              <div className="flex justify-between items-end gap-2">
+                <div className="text-[11px] text-dim">{inst.branches.length} branch{inst.branches.length===1?"":"es"} · {inst.anyRanks ? "closing ranks available" : "no allotment/closing-rank data found"}</div>
+                <ReportLink onClick={()=>reportInst(inst)} className="shrink-0"/>
+              </div>
             </div>
           ))}
         </div>
@@ -2394,6 +2649,23 @@ function App(){
       </div>
       )}
 
+      {reportTarget && (
+        <ReportErrorModal target={reportTarget} userEmail={authState.user ? authState.user.email : ""} onClose={()=>setReportTarget(null)} />
+      )}
+      {authState.paid && compareKeys.length>0 && (
+        <button onClick={()=>setCompareOpen(true)}
+          className="fixed z-40 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg flex items-center gap-2"
+          style={{right:'16px', bottom:'calc(76px + env(safe-area-inset-bottom, 0px))', background:'#0f766e'}}>
+          ⇄ Compare ({compareKeys.length})
+        </button>
+      )}
+      {compareMsg && (
+        <div className="fixed z-50 rounded-xl px-4 py-2.5 text-xs font-semibold shadow-lg" style={{right:'16px', bottom:'calc(136px + env(safe-area-inset-bottom, 0px))', background:'var(--surface)', color:'var(--bad)', border:'1px solid var(--bad)'}}>{compareMsg}</div>
+      )}
+      {compareOpen && authState.paid && (
+        <CompareModal rows={compareRows} cat={pCat} userLoc={userLoc} onClose={()=>setCompareOpen(false)}
+          onRemove={(r)=>{ const n=compareKeys.filter(k=>k!==branchListKey(r)); setCompareKeys(n); if(n.length===0) setCompareOpen(false); }} />
+      )}
       {authState.paid && (
         <button onClick={()=>setListOpen(true)}
           className="fixed z-40 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg flex items-center gap-2"
@@ -2422,6 +2694,14 @@ function App(){
                     {inList(selectedBranch) ? `✓ ${selectedBranch.Spec_Norm} is in my choice list` : `+ Add ${selectedBranch.Spec_Norm} (${selectedBranch.Deg}) to my choice list`}
                   </button>
                 )}
+                {authState.paid && (
+                  <button onClick={()=>toggleCompare(selectedBranch)}
+                    className="mt-2 ml-2 text-xs font-bold px-3 py-1.5 rounded-lg border"
+                    style={inCompare(selectedBranch) ? {background:'#0f766e', color:'#fff', borderColor:'#0f766e'} : {color:'#0f766e', borderColor:'#0f766e'}}>
+                    {inCompare(selectedBranch) ? "✓ In compare" : "⇄ Compare"}
+                  </button>
+                )}
+                <div className="mt-2"><ReportLink onClick={()=>reportBranch(selectedBranch)} className="text-[11px]"/></div>
               </div>
               <button onClick={()=>setModal(null)} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
             </div>
