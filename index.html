@@ -1239,6 +1239,11 @@ const RAZORPAY_PAYMENT_LINK = "https://rzp.io/rzp/855iHd2o"; // fallback link, u
 const RAZORPAY_KEY_ID = "rzp_live_TfrVp5WBEyPS7y"; // this is your PUBLIC key id, safe to expose in browser code (never the secret)
 const PRICE_PAISE = 390000; // ₹3,900.00 — Razorpay amounts are always in paise
 const PRICE_DISPLAY = "₹3,900";
+const REPORT_PRICE_PAISE = 29900;   // ₹299 Seat Report
+const REPORT_PRICE_DISPLAY = "₹299";
+const REPORT_MAX_SEATS = 30;
+const UPGRADE_PRICE_PAISE = 360100; // ₹3,601 — full access for people who already bought the ₹299 report
+const UPGRADE_PRICE_DISPLAY = "₹3,601";
 const SAMPLE_INSTITUTE_ID = 1365; // Madras Medical College — every field OFFICIAL-badged, safe to show free
 
 const sb = (SUPABASE_URL.startsWith('http') && window.supabase)
@@ -1251,6 +1256,14 @@ function useAuth(){
   const [authLoading, setAuthLoading] = React.useState(true);
   const [verifyStatus, setVerifyStatus] = React.useState(null); // null | 'checking' | 'ok' | {error:string}
 
+  const [reportCredit, setReportCredit] = React.useState(false); // bought a ₹299 Seat Report -> upgrade for ₹3,601
+  const refreshReportCredit = React.useCallback(async (u)=>{
+    if(!sb || !u){ setReportCredit(false); return; }
+    try {
+      const { data } = await sb.from('report_purchases').select('payment_id').eq('user_id', u.id).limit(1);
+      setReportCredit(!!(data && data.length));
+    } catch(_e){ setReportCredit(false); }
+  }, []);
   const refreshProfile = React.useCallback(async (u)=>{
     if(!sb || !u) { setPaid(false); return; }
     try {
@@ -1260,6 +1273,7 @@ function useAuth(){
         data = { is_paid: false };
       }
       setPaid(!!data.is_paid);
+      refreshReportCredit(u);
     } catch(e){ setPaid(false); }
   }, []);
 
@@ -1382,7 +1396,7 @@ function useAuth(){
   }
   async function signOut(){ if(sb) await sb.auth.signOut(); }
 
-  return { user, paid, authLoading, signInWithEmail, verifyOtpCode, signInWithGoogle, signOut, configured: !!sb, verifyStatus, setVerifyStatus, verifyPayment };
+  return { user, paid, authLoading, signInWithEmail, verifyOtpCode, signInWithGoogle, signOut, configured: !!sb, verifyStatus, setVerifyStatus, verifyPayment, reportCredit, refreshReportCredit };
 }
 
 function PaywallCard({ authState, contextLabel }){
@@ -1401,7 +1415,7 @@ function PaywallCard({ authState, contextLabel }){
     }
     const rzp = new window.Razorpay({
       key: RAZORPAY_KEY_ID,
-      amount: PRICE_PAISE,
+      amount: authState.reportCredit ? UPGRADE_PRICE_PAISE : PRICE_PAISE,
       currency: 'INR',
       name: 'DocPulse',
       description: 'NEET PG counselling directory — full access',
@@ -1422,7 +1436,7 @@ function PaywallCard({ authState, contextLabel }){
   return (
     <div className="rounded-2xl border border-tok p-5 text-center" style={{background:'var(--surface-alt)'}}>
       <div className="text-sm font-semibold text-tok mb-1">Unlock {contextLabel || "full details"}</div>
-      <div className="text-xs text-dim mb-2">One-time payment of <b>{PRICE_DISPLAY}</b> unlocks fees, stipend, closing ranks and ratings for every institute. (Madras Medical College is shown free as a sample.)</div>
+      <div className="text-xs text-dim mb-2">One-time payment of <b>{authState.reportCredit ? UPGRADE_PRICE_DISPLAY : PRICE_DISPLAY}</b>{authState.reportCredit && <span> (your {REPORT_PRICE_DISPLAY} Seat Report counts — normally {PRICE_DISPLAY})</span>} unlocks fees, stipend, closing ranks and ratings for every institute. (Madras Medical College is shown free as a sample.)</div>
       <div className="flex items-center justify-center gap-1.5 text-[10px] font-semibold mb-4" style={{color:'var(--good)'}}>
         <span>🛡️</span>
         <span>Not satisfied? Full refund within 24 hours, no questions asked — just email docpulsee@gmail.com.</span>
@@ -1448,7 +1462,7 @@ function PaywallCard({ authState, contextLabel }){
         <div className="flex flex-col gap-2 items-center">
           <button onClick={openCheckout} disabled={checking}
             className="inline-block rounded-lg px-5 py-2.5 text-xs font-semibold" style={{background:'var(--btn-bg)', color:'var(--btn-text)', opacity:checking?0.6:1}}>
-            {checking ? 'Confirming…' : `Pay ${PRICE_DISPLAY} with Razorpay`}
+            {checking ? 'Confirming…' : `Pay ${authState.reportCredit ? UPGRADE_PRICE_DISPLAY : PRICE_DISPLAY} with Razorpay`}
           </button>
           <button onClick={()=>setShowManual(s=>!s)} className="text-[10px] text-dim underline">
             Paid already but it's not unlocked?
@@ -1901,6 +1915,156 @@ async function downloadChoiceListPdf(list, meta){
   }
   doc.save(fileBase + ".pdf");
   return { ok: true };
+}
+
+// ---------- ₹299 Seat Report ----------
+// Picks up to 30 seats from the student's current predictor results: a mix of Dream/Target/Safe,
+// respecting their filters and sort, so the report is personal but capped (the full, re-runnable
+// version across every round is the ₹3,900 directory).
+function pickReportSeats(all){
+  if(!all || !all.length) return [];
+  const by = { dream:[], target:[], safe:[] };
+  all.forEach(r=>{ if(by[r._bucket]) by[r._bucket].push(r); });
+  // If the student gave a location, the report should be about seats near home: nearest first within each group.
+  if(all.some(r=>r._dist)){
+    const km = r => r._dist ? r._dist.km : 1e9;
+    Object.values(by).forEach(list=>list.sort((a,b)=>km(a)-km(b) || a._margin-b._margin));
+  }
+  const quota = { dream: Math.min(6, by.dream.length), target: Math.min(12, by.target.length) };
+  quota.safe = Math.min(REPORT_MAX_SEATS - quota.dream - quota.target, by.safe.length);
+  let picked = [...by.dream.slice(0,quota.dream), ...by.target.slice(0,quota.target), ...by.safe.slice(0,quota.safe)];
+  if(picked.length < REPORT_MAX_SEATS){ // top up from whatever is left, in the student's own order
+    const have = new Set(picked.map(branchListKey));
+    for(const r of all){ if(picked.length>=REPORT_MAX_SEATS) break; if(!have.has(branchListKey(r))){ picked.push(r); have.add(branchListKey(r)); } }
+  }
+  return picked;
+}
+async function downloadSeatReportPdf(seats, meta){
+  const JsPDF = await getJsPDF();
+  if(!JsPDF) return { error: "Couldn't load the PDF maker — check your connection and tap 'Download my report' again. Your purchase is saved." };
+  const doc = new JsPDF({ unit:"pt", format:"a4", orientation:"landscape" });
+  const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight(), M = 36;
+  const today = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  let y = M;
+  doc.setFillColor(124,58,237); doc.rect(0,0,W,6,"F");
+  doc.setFont("helvetica","bold"); doc.setFontSize(20); doc.setTextColor(17,17,17);
+  doc.text("My NEET PG Seat Report", M, y+14); y += 36;
+  doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(70,70,70);
+  [meta.rankLine, meta.filterLine, `Prepared ${today} by DocPulse, from previous-year MCC allotment data`].filter(Boolean).forEach(l=>{ doc.text(pdfSafe(l), M, y); y+=14; });
+  y += 6;
+  // summary boxes
+  const counts = { dream:0, target:0, safe:0 }; seats.forEach(s=>counts[s._bucket]++);
+  const boxes = [["Dream", counts.dream, [124,58,237], "closed up to 10% before your rank"], ["Target", counts.target, [180,83,9], "reachable, within 15% of your rank"], ["Safe", counts.safe, [21,128,61], "cutoff 15%+ beyond your rank"]];
+  const bw = (W-2*M-24)/3;
+  boxes.forEach(([l,n,c,d],i)=>{
+    const x = M + i*(bw+12);
+    doc.setDrawColor(...c); doc.setLineWidth(1); doc.roundedRect(x, y, bw, 44, 6, 6, "S");
+    doc.setFont("helvetica","bold"); doc.setFontSize(16); doc.setTextColor(...c); doc.text(String(n), x+12, y+26);
+    doc.setFontSize(11); doc.text(l, x+44, y+20);
+    doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(90,90,90); doc.text(d, x+44, y+33);
+  });
+  y += 62;
+  const cols = [ ["#",18], ["Type",42], ["Institute",196], ["Course",120], ["State / distance",98], ["Annual fee",62], ["Stipend Y1",62], ["Bond",78], ["Last rank admitted (round)",W-2*M-18-42-196-120-98-62-62-78] ];
+  const xs = []; { let x=M; cols.forEach(([,w])=>{ xs.push(x); x+=w; }); }
+  function header(){
+    doc.setFillColor(243,240,255); doc.rect(M-4, y-11, W-2*M+8, 18, "F");
+    doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setTextColor(60,40,120);
+    cols.forEach(([t],i)=>doc.text(t, xs[i], y)); y += 16;
+  }
+  header();
+  const bucketColor = { dream:[124,58,237], target:[180,83,9], safe:[21,128,61] };
+  const money = v => (v===null||v===undefined) ? "-" : "Rs " + Number(v).toLocaleString('en-IN');
+  seats.forEach((s,i)=>{
+    const bond = (s.Bond_Years===0 || s.Bond_Years==="0") ? "No bond" : (s.Bond_Years ? `${s.Bond_Years} yr${s.Bond_Penalty_INR?` / ${money(s.Bond_Penalty_INR)}`:""}` : "-");
+    const place = [s.State, s._dist ? fmtKm(s._dist).replace("within 5 km","<5 km") : null].filter(Boolean).join(" | ");
+    const cells = [String(i+1), BUCKETS[s._bucket].label, s.Display_Name, `${s.Spec_Norm} (${s.Deg})`, place,
+      money(s.Annual_Fees_INR) + (s.Fees_Badge==="OFFICIAL" ? "" : "*"), money(s.Stipend_Y1_INR), bond,
+      `${Number(s._bestClosing).toLocaleString('en-IN')} (${tagLabel(s._bestTag).replace("All-India Quota","AIQ")})`];
+    doc.setFontSize(8.5);
+    const wrapped = cells.map((c,ci)=>{
+      doc.setFont("helvetica", (ci===1||ci===2) ? "bold" : "normal");   // measure in the same weight we print in
+      return ci===0 ? [pdfSafe(c)] : doc.splitTextToSize(pdfSafe(c), cols[ci][1]-10);
+    });
+    const hgt = Math.max(...wrapped.map(w=>w.length))*10.5 + 7;
+    if(y + hgt > H - 58){ doc.addPage(); y = M; header(); }
+    if(i%2===1){ doc.setFillColor(250,250,252); doc.rect(M-4, y-9, W-2*M+8, hgt, "F"); }
+    wrapped.forEach((w,ci)=>{
+      if(ci===1){ doc.setFont("helvetica","bold"); doc.setTextColor(...bucketColor[s._bucket]); }
+      else if(ci===2){ doc.setFont("helvetica","bold"); doc.setTextColor(17,17,17); }
+      else { doc.setFont("helvetica","normal"); doc.setTextColor(40,40,40); }
+      doc.text(w, xs[ci], y);
+    });
+    y += hgt;
+  });
+  y += 10;
+  if(y > H - 110){ doc.addPage(); y = M; }
+  doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(100,100,100);
+  doc.text("* fee is an estimate or unverified - confirm with the college. Cutoffs change every year: use this as a guide to where you're in range, not a guarantee.", M, y); y += 20;
+  doc.setFillColor(245,243,255); doc.roundedRect(M-4, y-12, W-2*M+8, 66, 6, 6, "F");
+  doc.setFont("helvetica","bold"); doc.setFontSize(11); doc.setTextColor(76,29,149);
+  doc.text("Next: re-check every round, compare colleges and build your ordered choice list", M+6, y+4);
+  doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor(60,60,60);
+  const upsell = doc.splitTextToSize(pdfSafe(`This report is a snapshot of ${seats.length} seats. Full DocPulse access covers all 2,153 institutes, every quota and round, with compare + choice-list PDF - and your ${REPORT_PRICE_DISPLAY} counts: upgrade for ${UPGRADE_PRICE_DISPLAY}.`), W-2*M-12);
+  doc.text(upsell, M+6, y+20);
+  doc.text("docpulsee.github.io/docpulse  |  docpulsee@gmail.com", M+6, y+20+upsell.length*12);
+  const pages = doc.internal.getNumberOfPages();
+  for(let p=1;p<=pages;p++){ doc.setPage(p); doc.setFontSize(8); doc.setTextColor(140,140,140); doc.text(`DocPulse Seat Report  |  Page ${p} of ${pages}`, W-M, H-20, {align:"right"}); if(meta.student) doc.text(pdfSafe("Prepared for " + meta.student), M, H-20); }
+  doc.save("DocPulse-Seat-Report" + (meta.fileTag ? "-" + meta.fileTag : "") + ".pdf");
+  return { ok:true };
+}
+
+function SeatReportCard({ authState, predictAll, meta }){
+  const [busy, setBusy] = React.useState(false);
+  const [msg, setMsg] = React.useState(null);
+  const [saved, setSaved] = React.useState(()=>{ try { const s=localStorage.getItem('dp_last_report'); return s?JSON.parse(s):null; } catch(_e){ return null; } });
+  const seats = React.useMemo(()=>pickReportSeats(predictAll), [predictAll]);
+  if(!predictAll || !predictAll.length) return null;
+  const counts = { dream:0, target:0, safe:0 }; seats.forEach(s=>counts[s._bucket]++);
+  async function makePdf(rows, m){ const r = await downloadSeatReportPdf(rows, m); setMsg(r.error ? { bad:true, text:r.error } : { bad:false, text:"Report downloaded. Check your Downloads folder." }); }
+  function buy(){
+    setMsg(null);
+    if(!authState.user){ setMsg({ bad:true, text:"Sign in first (top right) — your report and your ₹299 credit are saved to your account." }); return; }
+    if(!window.Razorpay){ setMsg({ bad:true, text:"Payment window couldn't load — check your connection and try again." }); return; }
+    const snapshot = seats.map(s=>({...s}));
+    const rzp = new window.Razorpay({
+      key: RAZORPAY_KEY_ID, amount: REPORT_PRICE_PAISE, currency: 'INR', name: 'DocPulse',
+      description: `Seat Report — ${snapshot.length} seats`, prefill: { email: authState.user.email }, theme: { color: '#7c3aed' },
+      handler: async function(resp){
+        setBusy(true);
+        try {
+          const store = { at: Date.now(), payment_id: resp.razorpay_payment_id, meta, seats: snapshot };
+          try { localStorage.setItem('dp_last_report', JSON.stringify(store)); } catch(_e){}
+          setSaved(store);
+          if(sb){ await sb.from('report_purchases').insert({ user_id: authState.user.id, email: authState.user.email, payment_id: resp.razorpay_payment_id, amount: REPORT_PRICE_PAISE, params: meta }); }
+          if(authState.refreshReportCredit) authState.refreshReportCredit(authState.user);
+          await makePdf(snapshot, meta);
+        } catch(_e){ setMsg({ bad:true, text:"Payment received — if the PDF didn't download, tap 'Download my report'. Payment ID: " + resp.razorpay_payment_id }); }
+        setBusy(false);
+      },
+    });
+    rzp.on('payment.failed', r=> setMsg({ bad:true, text:'Payment failed: ' + ((r && r.error && r.error.description) || 'unknown reason') }));
+    rzp.open();
+  }
+  return (
+    <div className="rounded-2xl p-4 mt-4 border" style={{background:'var(--surface-alt)', borderColor:'var(--border)'}}>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-bold text-tok">Not ready for full access? Get your Seat Report — {REPORT_PRICE_DISPLAY}</div>
+          <div className="text-xs text-dim mt-0.5">
+            A PDF of your best {seats.length} seats for this search — <b style={{color:BUCKETS.dream.color}}>{counts.dream} Dream</b>, <b style={{color:BUCKETS.target.color}}>{counts.target} Target</b>, <b style={{color:BUCKETS.safe.color}}>{counts.safe} Safe</b> — with college names, fees, stipend, bond and last year's cutoff. Instant download. Your {REPORT_PRICE_DISPLAY} counts toward full access later ({UPGRADE_PRICE_DISPLAY} instead of {PRICE_DISPLAY}).
+            {!predictAll.some(r=>r._bucket==="dream") && <span> Tip: turn on "✨ Include Dream seats" above to add stretch options.</span>}
+          </div>
+        </div>
+        <button onClick={buy} disabled={busy} className="shrink-0 rounded-xl px-4 py-2.5 text-sm font-bold text-white" style={{background:'#7c3aed', opacity:busy?0.6:1}}>
+          {busy ? "Preparing…" : `Get my report · ${REPORT_PRICE_DISPLAY}`}
+        </button>
+      </div>
+      {saved && (
+        <div className="text-[11px] text-dim mt-2">You bought a report on {new Date(saved.at).toLocaleDateString('en-IN')}. <button className="underline" onClick={()=>makePdf(saved.seats, saved.meta)}>Download my report again</button></div>
+      )}
+      {msg && <div className="text-[11px] font-semibold mt-2" style={{color: msg.bad ? 'var(--bad)' : 'var(--good)'}}>{msg.text}</div>}
+    </div>
+  );
 }
 
 function ChoiceListPanel({ list, setList, onClose, rankLine }){
@@ -2513,6 +2677,14 @@ function App(){
         )}
         {predictResults && !authState.paid && predictResults.length>3 && (
           <div className="mt-4" id="predict-paywall"><PaywallCard authState={authState} contextLabel={`the other ${(predictResults.length-3).toLocaleString('en-IN')} reachable branches${userLoc&&pRadiusKm?` within ${pRadiusKm} km of ${userLoc.label}`:""}`} /></div>
+        )}
+        {predictAll && !authState.paid && (
+          <SeatReportCard authState={authState} predictAll={predictAll} meta={{
+            rankLine: `NEET PG rank ${Number(pRank).toLocaleString('en-IN')} (${pCat==="GN"?"General":pCat}) | Quotas: ${[...pQuotas].map(q=>QNAMES[q]||q).join(', ')}`,
+            filterLine: [pSpecialty?`Specialty: ${pSpecialty}`:null, pState?`State: ${pState}`:null, pCourseType!=="All"?pCourseType:null, userLoc?`Near ${userLoc.label}${pRadiusKm?` (within ${pRadiusKm} km)`:""}`:null].filter(Boolean).join(" | ") || "All specialties, all states",
+            student: authState.user ? authState.user.email : "",
+            fileTag: String(pRank),
+          }} />
         )}
         {predictResults && authState.paid && predictResults.length>pVisible && (
           <div className="text-center mt-6">
