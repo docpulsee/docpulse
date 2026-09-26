@@ -941,41 +941,39 @@ document.getElementById('aboutUsModal')?.addEventListener('click', function(e){
 <div class="text-[11px] font-black text-emerald-800 mb-1">✨ Auto-filled from your search — we'll send this with your request</div>
 <div id="consultContextText" class="text-[11px] text-slate-700 leading-snug whitespace-pre-line"></div>
 </div>
-<p class="text-xs text-slate-500 mb-4 leading-relaxed">Pick a time that suits you — this opens your email app with everything filled in. Send it, and we'll reply with payment details to confirm your slot.</p>
+<p class="text-xs text-slate-500 mb-4 leading-relaxed">Pick an open time, pay securely, and your slot is locked instantly. The Google Meet link comes to your email before the call.</p>
 
 <div id="consultBody">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-<div>
-<label class="block text-[10px] font-bold text-slate-500 mb-1">Preferred date</label>
-<input id="consultDate" type="date" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<label class="text-[11px] font-black text-slate-700">1. Pick a time</label>
+<div class="flex items-center gap-3 text-[10px] text-slate-500"><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-violet-500"></span>Free</span><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-slate-300"></span>Booked</span></div>
 </div>
-<div>
-<label class="block text-[10px] font-bold text-slate-500 mb-1">Preferred time</label>
-<input id="consultTime" type="time" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
-</div>
-</div>
+<div id="slotBoard" class="max-h-56 overflow-y-auto border border-slate-200 rounded-2xl p-3 bg-slate-50/60 text-xs text-slate-500">Loading available times…</div>
+<div id="slotChosen" class="hidden mt-2 text-xs font-bold text-violet-700 bg-violet-50 border border-violet-200 rounded-xl px-3 py-2"></div>
 
-<div class="grid grid-cols-1 gap-2.5 mt-2.5">
+<label class="block text-[11px] font-black text-slate-700 mt-4 mb-1.5">2. Your details</label>
+<div class="grid grid-cols-1 gap-2.5">
 <input id="consultName" type="text" placeholder="Your full name" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
-<input id="consultEmail" type="email" placeholder="you@email.com (we reply here)" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
-<input id="consultPhone" type="tel" placeholder="Phone number (optional)" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
+<input id="consultEmail" type="email" placeholder="you@email.com (Meet link is sent here)" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
+<input id="consultPhone" type="tel" placeholder="Phone / WhatsApp (optional)" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm">
 <textarea id="consultNote" placeholder="Anything specific you want to discuss? (optional)" rows="2" class="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm w-full focus:outline-none focus:border-violet-500 shadow-sm resize-none"></textarea>
 </div>
 
 <div id="consultError" class="hidden mt-3 text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-3 py-2"></div>
 
-<button id="consultSendBtn" onclick="sendConsultationBookingEmail()" class="w-full mt-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white font-black px-4 py-3 rounded-xl text-sm transition shadow-lg shadow-violet-500/20 flex items-center justify-center gap-2">
-<i class="fa-solid fa-envelope"></i> Send Booking Request
+<button id="consultPayBtn" onclick="payAndBookConsultation()" class="w-full mt-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white font-black px-4 py-3 rounded-xl text-sm transition shadow-lg shadow-violet-500/20 flex items-center justify-center gap-2">
+<i class="fa-solid fa-lock"></i> <span id="consultPayLabel">Pick a time above</span>
 </button>
-<div id="counselPriceFooter" class="text-[10px] text-slate-400 text-center mt-2">₹2,000 for the session — members pay just ₹799. We'll share payment details in our reply email.</div>
+<div id="counselPriceFooter" class="text-[10px] text-slate-400 text-center mt-2">₹2,000 for the session — members pay just ₹799.</div>
+<div class="text-[10px] text-slate-400 text-center mt-1">No time that suits you? <button onclick="sendConsultationBookingEmail()" class="underline">Email us a preferred time</button></div>
 </div>
 
 <div id="consultSuccess" class="hidden text-center py-4">
 <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-3"><i class="fa-solid fa-check"></i></div>
-<div class="font-black text-slate-900 mb-1">Almost done!</div>
-<div class="text-xs text-slate-500 mb-3 px-2">Your email app should have opened with everything filled in — just hit <b>Send</b>. If it didn't open, copy this and email it to <b>docpulsee@gmail.com</b>:</div>
-<div id="consultSuccessBody" class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-3 text-left text-[11px] text-slate-700 whitespace-pre-wrap"></div>
+<div class="font-black text-slate-900 mb-1">Booked! 🎉</div>
+<div id="consultSuccessBody" class="text-xs text-slate-600 mb-4 px-2 whitespace-pre-wrap"></div>
 <button onclick="closeConsultationModal()" class="px-6 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs">Done</button>
+</div>
 </div>
 </div>
 </div>
@@ -1000,7 +998,8 @@ window.dpUpdateCounselPricing = function(){
   var m = !!window.__dpIsPaid;
   var b = document.getElementById('counselBtnLabel'); if(b) b.innerHTML = m ? '1:1 Counselling · <s style="opacity:.7">₹2,000</s> ₹799 for you' : '1:1 Counselling - ₹2,000';
   var t = document.getElementById('counselPriceTag'); if(t) t.innerHTML = m ? '<s style="opacity:.6">₹2,000</s> ₹799 member price' : '₹2,000 (₹799 for members)';
-  var f = document.getElementById('counselPriceFooter'); if(f) f.textContent = m ? 'Member price ₹799 (normally ₹2,000) — we\'ll share payment details in our reply email.' : '₹2,000 for the session — members pay just ₹799. We\'ll share payment details in our reply email.';
+  var f = document.getElementById('counselPriceFooter'); if(f) f.textContent = m ? 'Member price ₹799 (normally ₹2,000). Secure payment via Razorpay.' : '₹2,000 for the session — full-access members pay just ₹799. Secure payment via Razorpay.';
+  updateConsultPayLabel();
 };
 window.openConsultationModal = function(){
   window.dpUpdateCounselPricing();
@@ -1014,6 +1013,10 @@ window.openConsultationModal = function(){
   const em = document.getElementById('consultEmail');
   if(c && c.email && !em.value) em.value = c.email;
   document.getElementById('consultModal').classList.remove('hidden');
+  dpSelectedSlot = null; var ch=document.getElementById('slotChosen'); if(ch) ch.classList.add('hidden');
+  var nm=document.getElementById('consultName'); if(nm && !nm.value && window.__dpUser && window.__dpUser.name) nm.value = window.__dpUser.name;
+  var em2=document.getElementById('consultEmail'); if(em2 && !em2.value && window.__dpUser && window.__dpUser.email) em2.value = window.__dpUser.email;
+  updateConsultPayLabel(); window.dpLoadSlots();
   document.getElementById('consultBody').classList.remove('hidden');
   document.getElementById('consultSuccess').classList.add('hidden');
   document.body.style.overflow='hidden';
@@ -1035,60 +1038,111 @@ function consultClearError(){
   document.getElementById('consultError').classList.add('hidden');
 }
 
-window.sendConsultationBookingEmail = function(){
-  consultClearError();
-  const dateVal = document.getElementById('consultDate').value;
-  const timeVal = document.getElementById('consultTime').value;
-  const name = document.getElementById('consultName').value.trim();
-  const email = document.getElementById('consultEmail').value.trim();
-  const phone = document.getElementById('consultPhone').value.trim();
-  const note = document.getElementById('consultNote').value.trim();
-
-  if(!dateVal){ consultShowError('Please pick a preferred date.'); return; }
-  if(!timeVal){ consultShowError('Please pick a preferred time.'); return; }
-  if(!name){ consultShowError('Please enter your name.'); return; }
-  if(!email || !email.includes('@')){ consultShowError('Please enter a valid email — we reply here.'); return; }
-
-  const dateObj = new Date(dateVal + 'T' + timeVal);
-  const niceDateTime = dateObj.toLocaleString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric', hour:'numeric', minute:'2-digit', hour12:true });
-
-  const subject = 'Choice-Filling List Booking — ' + name + ' — ' + niceDateTime;
-  const bodyLines = [
-    'Hi DocPulse team,',
-    '',
-    'I would like to book a 1:1 personal counselling session.',
-    '',
-    'Name: ' + name,
-    'Email: ' + email,
-    'Phone: ' + (phone || '(not provided)'),
-    'Preferred date & time: ' + niceDateTime,
-    'Note: ' + (note || '(none)'),
-    ''
-  ];
-  const ctx = window.__dpConsultCtx;
-  const ctxLines = consultContextLines(ctx);
-  if(ctxLines.length){
-    bodyLines.push('--- My search on DocPulse ---');
-    ctxLines.forEach(l=>bodyLines.push(l));
-    if(ctx.top && ctx.top.length){
-      bodyLines.push('Top options it showed me:');
-      ctx.top.slice(0,10).forEach((t,i)=>bodyLines.push('  ' + (i+1) + '. ' + t));
-    }
-    bodyLines.push('');
+// ---- Slot board: live Free/Booked times from Supabase; pay with Razorpay; the
+// book-consultation function checks the payment and locks the slot. ----
+var DP_SUPA_URL = "https://uwrwtttkqywsmehexmbf.supabase.co", DP_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+var dpSelectedSlot = null;
+function consultPricePaise(){ return window.__dpIsPaid ? 79900 : 200000; }
+function istLabel(iso, opts){ return new Date(iso).toLocaleString('en-IN', Object.assign({ timeZone:'Asia/Kolkata' }, opts)); }
+function updateConsultPayLabel(){
+  var el = document.getElementById('consultPayLabel'); if(!el) return;
+  var price = '₹' + (consultPricePaise()/100).toLocaleString('en-IN');
+  el.textContent = dpSelectedSlot ? ('Pay ' + price + ' & book ' + istLabel(dpSelectedSlot.slot_time, { weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit', hour12:true })) : 'Pick a time above';
+}
+window.dpLoadSlots = async function(){
+  var board = document.getElementById('slotBoard'); if(!board) return;
+  try {
+    var q = DP_SUPA_URL + '/rest/v1/consultation_slots?select=id,slot_time,duration_minutes,is_booked&slot_time=gte.' + encodeURIComponent(new Date().toISOString()) + '&order=slot_time.asc&limit=300';
+    var res = await fetch(q, { headers: { apikey: DP_ANON, Authorization: 'Bearer ' + DP_ANON } });
+    if(!res.ok) throw new Error(res.status);
+    var slots = await res.json();
+    if(!slots.length){ board.innerHTML = '<div class="text-center py-4">No times are open right now — <b>email us a preferred time</b> below and we\'ll fit you in.</div>'; return; }
+    var byDay = {}, order = [];
+    slots.forEach(function(s){ var d = istLabel(s.slot_time, { weekday:'long', day:'numeric', month:'short' }); if(!byDay[d]){ byDay[d]=[]; order.push(d); } byDay[d].push(s); });
+    var free = slots.filter(function(s){ return !s.is_booked; }).length;
+    var html = '<div class="text-[10px] text-slate-500 mb-2">' + free + ' open · ' + (slots.length-free) + ' booked · times in IST</div>';
+    order.forEach(function(d){
+      html += '<div class="mb-2.5"><div class="text-[11px] font-black text-slate-700 mb-1.5">' + d + '</div><div class="flex flex-wrap gap-1.5">';
+      byDay[d].forEach(function(s){
+        var t = istLabel(s.slot_time, { hour:'numeric', minute:'2-digit', hour12:true });
+        if(s.is_booked) html += '<span class="px-2.5 py-1.5 rounded-lg bg-slate-200 text-slate-400 line-through text-[11px] font-semibold cursor-not-allowed" title="Booked">' + t + '</span>';
+        else html += '<button type="button" data-slot="' + s.id + '" class="dp-slot px-2.5 py-1.5 rounded-lg border border-violet-300 bg-white text-violet-700 text-[11px] font-bold hover:bg-violet-50">' + t + '</button>';
+      });
+      html += '</div></div>';
+    });
+    board.innerHTML = html;
+    board.querySelectorAll('.dp-slot').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        dpSelectedSlot = slots.find(function(s){ return String(s.id) === btn.getAttribute('data-slot'); });
+        board.querySelectorAll('.dp-slot').forEach(function(b){ b.classList.remove('bg-violet-600','text-white'); b.classList.add('bg-white','text-violet-700'); });
+        btn.classList.remove('bg-white','text-violet-700'); btn.classList.add('bg-violet-600','text-white');
+        var ch = document.getElementById('slotChosen');
+        ch.textContent = '📅 ' + istLabel(dpSelectedSlot.slot_time, { weekday:'long', day:'numeric', month:'long', hour:'numeric', minute:'2-digit', hour12:true }) + ' · ' + dpSelectedSlot.duration_minutes + ' min · Google Meet';
+        ch.classList.remove('hidden'); consultClearError(); updateConsultPayLabel();
+      });
+    });
+  } catch(e){
+    board.innerHTML = '<div class="text-center py-4">Couldn\'t load times right now — please try again, or email us a preferred time below.</div>';
   }
-  bodyLines.push(
-    (window.__dpIsPaid ? 'I am a DocPulse member, so the choice-filling list + call is ₹799 (member price) — please share payment details to confirm this slot.' : 'I understand the choice-filling list + call costs ₹2,000 — please share payment details to confirm this slot.'),
-    '',
-    'Thanks!'
-  );
-  const body = bodyLines.join('\n');
-  const mailtoLink = 'mailto:docpulsee@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-  document.getElementById('consultBody').classList.add('hidden');
-  document.getElementById('consultSuccess').classList.remove('hidden');
-  document.getElementById('consultSuccessBody').textContent = 'To: docpulsee@gmail.com\nSubject: ' + subject + '\n\n' + body;
-
-  window.location.href = mailtoLink;
+};
+function consultContextForBooking(){
+  var c = window.__dpConsultCtx; if(!c) return null;
+  var o = {};
+  if(c.rank) o['NEET PG rank'] = Number(c.rank).toLocaleString('en-IN') + (c.category ? ' (' + c.category + ')' : '');
+  if(c.location) o['Location'] = c.location + (c.radiusKm ? ' — within ' + c.radiusKm + ' km' : '');
+  if(c.specialty) o['Specialty filter'] = c.specialty;
+  if(c.state) o['State filter'] = c.state;
+  if(c.quotas) o['Quotas'] = c.quotas;
+  if(c.reachable != null) o['Reachable options'] = c.reachable;
+  if(c.top && c.top.length) o['Top options'] = c.top;
+  return Object.keys(o).length ? o : null;
+}
+window.payAndBookConsultation = function(){
+  consultClearError();
+  var name = document.getElementById('consultName').value.trim();
+  var email = document.getElementById('consultEmail').value.trim();
+  var phone = document.getElementById('consultPhone').value.trim();
+  var note = document.getElementById('consultNote').value.trim();
+  if(!dpSelectedSlot){ consultShowError('Please pick a time first.'); return; }
+  if(!name){ consultShowError('Please enter your name.'); return; }
+  if(!email || email.indexOf('@') < 1){ consultShowError('Please enter a valid email — the Meet link is sent there.'); return; }
+  if(!window.Razorpay){ consultShowError('The payment window could not load — check your connection and try again.'); return; }
+  var slot = dpSelectedSlot, amount = consultPricePaise();
+  var when = istLabel(slot.slot_time, { weekday:'long', day:'numeric', month:'long', hour:'numeric', minute:'2-digit', hour12:true });
+  var rzp = new window.Razorpay({
+    key: 'rzp_live_TfrVp5WBEyPS7y', amount: amount, currency: 'INR', name: 'DocPulse',
+    description: '1:1 counselling — ' + when, prefill: { name: name, email: email, contact: phone }, theme: { color: '#7c3aed' },
+    handler: async function(resp){
+      var btn = document.getElementById('consultPayBtn'); btn.disabled = true; document.getElementById('consultPayLabel').textContent = 'Confirming your slot…';
+      try {
+        var r = await fetch(DP_SUPA_URL + '/functions/v1/book-consultation', {
+          method: 'POST', headers: { 'Content-Type':'application/json', apikey: DP_ANON, Authorization: 'Bearer ' + DP_ANON },
+          body: JSON.stringify({ slot_id: slot.id, payment_id: resp.razorpay_payment_id, user_id: (window.__dpUser && window.__dpUser.id) || null,
+            name: name, email: email, phone: phone, note: note, context: consultContextForBooking() })
+        });
+        var data = await r.json();
+        if(!r.ok || !data.ok) throw new Error(data.error || 'Could not confirm the booking.');
+        document.getElementById('consultBody').classList.add('hidden');
+        document.getElementById('consultSuccess').classList.remove('hidden');
+        document.getElementById('consultSuccessBody').textContent = when + ' (' + slot.duration_minutes + ' min)\n\nA confirmation email is on its way to ' + email + '. You\'ll get the Google Meet link and calendar invite by email before the call.\n\nPayment ID: ' + resp.razorpay_payment_id;
+      } catch(e){
+        consultShowError((e && e.message ? e.message : 'Something went wrong.') + ' Payment ID: ' + resp.razorpay_payment_id + ' — email docpulsee@gmail.com if this doesn\'t resolve.');
+        window.dpLoadSlots();
+      }
+      btn.disabled = false; updateConsultPayLabel();
+    }
+  });
+  rzp.on('payment.failed', function(r){ consultShowError('Payment failed: ' + ((r && r.error && r.error.description) || 'unknown reason')); });
+  rzp.open();
+};
+// Fallback: ask for a different time by email (no payment).
+window.sendConsultationBookingEmail = function(){
+  var name = document.getElementById('consultName').value.trim();
+  var email = document.getElementById('consultEmail').value.trim();
+  var note = document.getElementById('consultNote').value.trim();
+  var subject = 'Counselling — request for a different time' + (name ? ' — ' + name : '');
+  var body = 'Hi DocPulse team,\n\nNone of the open times suit me. My preferred times are:\n- \n- \n\nName: ' + (name||'') + '\nEmail: ' + (email||'') + '\nNote: ' + (note||'-') + '\n\nThanks!';
+  window.location.href = 'mailto:docpulsee@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 };
 </script>
 
@@ -1571,7 +1625,7 @@ function PaywallCard({ authState, contextLabel }){
 
 // A prominent, always-visible sign-in box for the header -- so signing in
 // isn't hidden behind having to open a locked institute first.
-function HeaderSignIn({ authState, onRefer }){
+function HeaderSignIn({ authState, onRefer, onSlots }){
   const [err, setErr] = React.useState(null);
   const [googleLoading, setGoogleLoading] = React.useState(false);
 
@@ -1581,6 +1635,9 @@ function HeaderSignIn({ authState, onRefer }){
         <span className="text-dim">Signed in as <b className="text-tok">{authState.user.email}</b>{authState.paid && <span style={{color:'var(--good)'}}> · unlocked</span>}</span>
         {authState.paid && onRefer && (
           <button onClick={onRefer} className="rounded-lg px-3 py-1.5 text-xs font-bold text-white" style={{background:'#16a34a'}}>🎁 Refer & earn ₹{REFERRAL_REWARD_RUPEES}</button>
+        )}
+        {onSlots && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && (
+          <button onClick={onSlots} className="rounded-lg px-3 py-1.5 text-xs font-bold text-white" style={{background:'#0f766e'}}>🗓️ Manage slots</button>
         )}
         <button onClick={()=>authState.signOut()} className="btn-solid px-3 py-1.5 rounded-lg text-xs font-medium">Sign out</button>
       </div>
@@ -2156,6 +2213,105 @@ function referralCodeFor(userId, extra){
   const n = parseInt(hex.slice(0, extra ? 12 : 10), 16);
   return "DP" + (isNaN(n) ? Math.random().toString(36).slice(2,10) : n.toString(36)).toUpperCase();
 }
+const OWNER_EMAILS = ["goyalakshya13@gmail.com","docpulsee@gmail.com"];
+const SLOT_TIMES = ["09:00","10:00","11:00","12:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
+function slotTimeLabel(t){ const [h,m]=t.split(":").map(Number); const hh=((h+11)%12)+1; return hh + (m?":"+String(m).padStart(2,"0"):"") + (h<12?" am":" pm"); }
+function istDateStr(d){ return new Date(d.getTime()+5.5*3600e3).toISOString().slice(0,10); }
+function ManageSlotsPanel({ onClose }){
+  const [date, setDate] = React.useState(()=>istDateStr(new Date(Date.now()+86400e3)));
+  const [picked, setPicked] = React.useState([]);
+  const [duration, setDuration] = React.useState(30);
+  const [slots, setSlots] = React.useState(null);
+  const [msg, setMsg] = React.useState(null);
+  const [busy, setBusy] = React.useState(false);
+  const [confirmDel, setConfirmDel] = React.useState(null);
+  async function load(){
+    const { data, error } = await sb.from('consultation_slots').select('id,slot_time,duration_minutes,is_booked')
+      .gte('slot_time', new Date().toISOString()).order('slot_time', { ascending:true });
+    if(error){ setMsg({ bad:true, text:"Couldn't load slots — have you run the consultation SQL? (" + error.message + ")" }); setSlots([]); return; }
+    setSlots(data || []);
+  }
+  React.useEffect(()=>{ if(sb) load(); }, []);
+  const existing = new Set((slots||[]).map(s=>new Date(s.slot_time).getTime()));
+  const isoFor = t => `${date}T${t}:00+05:30`;
+  function toggle(t){ setPicked(p => p.includes(t) ? p.filter(x=>x!==t) : [...p, t]); }
+  async function add(){
+    const rows = picked.map(t=>({ slot_time: isoFor(t), duration_minutes: duration }))
+      .filter(r => Date.parse(r.slot_time) > Date.now() && !existing.has(Date.parse(r.slot_time)));
+    if(!rows.length){ setMsg({ bad:true, text:"Pick at least one future time that isn't already added." }); return; }
+    setBusy(true); setMsg(null);
+    const { error } = await sb.from('consultation_slots').insert(rows);
+    setBusy(false);
+    if(error){ setMsg({ bad:true, text:"Couldn't add: " + error.message }); return; }
+    setPicked([]); setMsg({ bad:false, text:`Added ${rows.length} slot${rows.length>1?"s":""}. Students can book them now.` });
+    load();
+  }
+  async function remove(id){
+    setConfirmDel(null);
+    const { error } = await sb.from('consultation_slots').delete().eq('id', id).eq('is_booked', false);
+    if(error){ setMsg({ bad:true, text:"Couldn't remove: " + error.message }); return; }
+    load();
+  }
+  const fmt = iso => new Date(iso).toLocaleString('en-IN', { timeZone:'Asia/Kolkata', weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit', hour12:true });
+  const free = (slots||[]).filter(s=>!s.is_booked).length, booked = (slots||[]).filter(s=>s.is_booked).length;
+  return (
+    <div className="overlay fixed inset-0 flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="modal rounded-3xl max-w-md w-full overflow-hidden flex flex-col" style={{maxHeight:'90vh'}} onClick={e=>e.stopPropagation()}>
+        <div className="p-5 border-b border-tok flex justify-between items-start gap-3">
+          <div>
+            <h2 className="font-semibold text-tok">🗓️ Manage counselling slots</h2>
+            <p className="text-xs text-dim mt-1">Only you see this. Times are India time (IST). {slots && <span><b>{free}</b> free · <b>{booked}</b> booked</span>}</p>
+          </div>
+          <button onClick={onClose} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
+        </div>
+        <div className="p-5 flex flex-col gap-3 overflow-y-auto">
+          <div className="flex gap-2 items-end flex-wrap">
+            <label className="flex-1 min-w-[140px]"><div className="text-[11px] font-semibold text-dim mb-1">Date</div>
+              <input type="date" value={date} min={istDateStr(new Date())} onChange={e=>{ setDate(e.target.value); setPicked([]); }} className="input-tok rounded-xl px-3 py-2 text-sm w-full"/></label>
+            <label><div className="text-[11px] font-semibold text-dim mb-1">Length</div>
+              <select value={duration} onChange={e=>setDuration(Number(e.target.value))} className="input-tok rounded-xl px-3 py-2 text-sm">
+                <option value={30}>30 min</option><option value={45}>45 min</option><option value={60}>60 min</option></select></label>
+          </div>
+          <div>
+            <div className="text-[11px] font-semibold text-dim mb-1">Tap the times you're free</div>
+            <div className="grid grid-cols-4 gap-1.5">
+              {SLOT_TIMES.map(t=>{
+                const ms = Date.parse(isoFor(t)); const already = existing.has(ms); const past = ms <= Date.now(); const on = picked.includes(t);
+                return <button key={t} disabled={already||past} onClick={()=>toggle(t)} data-slot-time={t}
+                  className="rounded-lg py-2 text-xs font-semibold border"
+                  style={{ borderColor: on ? '#0f766e' : 'var(--border)', background: on ? '#0f766e' : 'var(--surface)', color: on ? '#fff' : 'var(--text)', opacity: (already||past) ? .35 : 1 }}>
+                  {slotTimeLabel(t)}{already ? " ✓" : ""}</button>;
+              })}
+            </div>
+          </div>
+          <button onClick={add} disabled={busy || !picked.length} id="dp-add-slots"
+            className="rounded-xl px-4 py-2.5 text-sm font-bold text-white" style={{background:'#0f766e', opacity:(busy||!picked.length)?.5:1}}>
+            {busy ? "Adding…" : picked.length ? `Add ${picked.length} slot${picked.length>1?"s":""}` : "Pick times above"}</button>
+          {msg && <div className="text-xs font-semibold" style={{color: msg.bad ? 'var(--bad)' : 'var(--good)'}}>{msg.text}</div>}
+          <div className="border-t border-tok pt-3">
+            <div className="text-[11px] font-semibold text-dim mb-2">Upcoming slots</div>
+            {slots===null && <div className="text-xs text-dim">Loading…</div>}
+            {slots && !slots.length && <div className="text-xs text-dim">None yet — add some above.</div>}
+            <div className="flex flex-col gap-1.5">
+              {(slots||[]).map(s=>(
+                <div key={s.id} className="flex items-center gap-2 text-xs rounded-lg px-3 py-2" style={{background:'var(--surface-alt)'}}>
+                  <span className="flex-1 text-tok">{fmt(s.slot_time)} · {s.duration_minutes}m</span>
+                  {s.is_booked ? <span className="font-bold" style={{color:'var(--good)'}}>Booked — see email</span>
+                   : confirmDel===s.id ? (<>
+                      <button onClick={()=>remove(s.id)} className="font-bold" style={{color:'var(--bad)'}}>Yes, remove</button>
+                      <button onClick={()=>setConfirmDel(null)} className="text-dim">Keep</button></>)
+                   : <button onClick={()=>setConfirmDel(s.id)} className="text-dim underline">Remove</button>}
+                </div>
+              ))}
+            </div>
+            <p className="text-[11px] text-dim mt-2">When someone books, you get an email with their details. Create a Google Meet for that time in Google Calendar and add their email as a guest.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ReferralPanel({ authState, onClose }){
   const [code, setCode] = React.useState(null);
   const [upi, setUpi] = React.useState("");
@@ -2472,8 +2628,13 @@ function App(){
   const setChoiceList = (v)=>{ setChoiceListRaw(v); try { localStorage.setItem('dp_choice_list', JSON.stringify(v)); } catch(_e){} };
   const [listOpen, setListOpen] = React.useState(false);
   const [referOpen, setReferOpen] = React.useState(false);
+  const [slotsOpen, setSlotsOpen] = React.useState(false);
   // Tell the plain-HTML parts of the page (counselling button/popup) whether this is a paying member.
-  React.useEffect(()=>{ window.__dpIsPaid = !!authState.paid; if(window.dpUpdateCounselPricing) window.dpUpdateCounselPricing(); }, [authState.paid]);
+  React.useEffect(()=>{
+    window.__dpIsPaid = !!authState.paid;
+    const u = authState.user; window.__dpUser = u ? { id: u.id, email: u.email, name: (u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || "" } : null;
+    if(window.dpUpdateCounselPricing) window.dpUpdateCounselPricing();
+  }, [authState.paid, authState.user]);
   const [compareKeys, setCompareKeysRaw] = React.useState(()=>{
     try { const s = localStorage.getItem('dp_compare'); return s ? JSON.parse(s) : []; } catch(_e){ return []; }
   });
@@ -2690,7 +2851,7 @@ function App(){
           </div>
         </div>
         <div className="max-w-6xl mx-auto px-4 pb-3 -mt-2 flex items-center justify-end">
-          <HeaderSignIn authState={authState} onRefer={()=>setReferOpen(true)} />
+          <HeaderSignIn authState={authState} onRefer={()=>setReferOpen(true)} onSlots={()=>setSlotsOpen(true)} />
         </div>
       </header>
 
@@ -2996,6 +3157,7 @@ function App(){
       </div>
       )}
 
+      {slotsOpen && authState.user && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && <ManageSlotsPanel onClose={()=>setSlotsOpen(false)} />}
       {referOpen && authState.paid && <ReferralPanel authState={authState} onClose={()=>setReferOpen(false)} />}
       {reportTarget && (
         <ReportErrorModal target={reportTarget} userEmail={authState.user ? authState.user.email : ""} onClose={()=>setReportTarget(null)} />
