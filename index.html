@@ -285,7 +285,7 @@ animation: vibrantPulse 3s infinite;
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
 <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
 </span>
-<span><strong class="text-teal-300 font-bold">Coming Soon:</strong> Direct 1-on-1 Connect with Senior Residents of Your Dream College</span>
+<a href="#senior-connect" class="hover:underline"><strong class="text-teal-300 font-bold">New:</strong> Talk directly to a senior who got your dream seat →</a>
 </div>
 </div>
 
@@ -377,14 +377,14 @@ Scoring: <span class="text-sky-600 font-mono font-bold">(Correct × 4) - (Wrong 
 </div>
 </section>
 
-<section class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
+<section id="senior-connect" class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
 <div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
 <div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
 
 <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
 <div class="flex-1 flex flex-col items-start text-left">
 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider mb-5 shadow-sm">
-<span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span> Senior Direct Connect — Coming Soon
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span> Senior Direct Connect — Now Live
 </div>
 
 <h3 class="text-2xl sm:text-4xl font-black text-slate-900 leading-tight mb-4">
@@ -398,13 +398,12 @@ The White Coat Waits. <br>
 
 <div class="p-4 rounded-2xl bg-white border border-amber-300/80 flex items-center gap-3 text-xs text-amber-900 shadow-sm mb-6">
 <i class="fa-solid fa-mug-hot text-amber-500 text-xl flex-shrink-0"></i>
-<span>We are building direct connections to real senior residents across medical colleges in India so you never step into counseling alone.</span>
+<span>Pick a rank and seat from last year's counselling — we personally ask that senior if they'll talk to you. <b>You pay only if they say yes.</b></span>
 </div>
 
-<a href="mailto:docpulsee@gmail.com?subject=NEET%20PG%20Mentorship%20%26%20Counseling%20Updates&body=Dear%20DocPulse%20Team%2C%0A%0AI%20would%20like%20to%20get%20notified%20as%20soon%20as%20the%20DocPulse%20Verified%20Senior%20Resident%20Directory%20and%20Counseling%20Mentorship%20Portal%20go%20live.%0A%0AThank%20you%20for%20building%20this%20platform%20to%20help%20aspirants%20connect%20with%20seniors."
-class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg shadow-sky-500/25 flex items-center gap-2.5 hover:scale-105 transform border border-sky-300">
-<i class="fa-solid fa-envelope-open-text text-base"></i>
-<span>Get Notified Via Email (docpulsee@gmail.com)</span>
+<a href="#senior-connect-root" class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:opacity-95 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg flex items-center gap-2">
+<i class="fa-solid fa-user-doctor text-base"></i>
+<span>Find my senior ↓</span>
 </a>
 </div>
 
@@ -428,6 +427,7 @@ class="bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 hover:from-sky-
 </div>
 </div>
 </div>
+<div id="senior-connect-root" class="relative z-10 mt-8 scroll-mt-24"></div>
 </section>
 
 </main>
@@ -1625,7 +1625,7 @@ function PaywallCard({ authState, contextLabel }){
 
 // A prominent, always-visible sign-in box for the header -- so signing in
 // isn't hidden behind having to open a locked institute first.
-function HeaderSignIn({ authState, onRefer, onSlots }){
+function HeaderSignIn({ authState, onRefer, onSlots, onSeniors }){
   const [err, setErr] = React.useState(null);
   const [googleLoading, setGoogleLoading] = React.useState(false);
 
@@ -1638,6 +1638,9 @@ function HeaderSignIn({ authState, onRefer, onSlots }){
         )}
         {onSlots && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && (
           <button onClick={onSlots} className="rounded-lg px-3 py-1.5 text-xs font-bold text-white" style={{background:'#0f766e'}}>🗓️ Manage slots</button>
+        )}
+        {onSeniors && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && (
+          <button onClick={onSeniors} className="rounded-lg px-3 py-1.5 text-xs font-bold text-white" style={{background:'#b45309'}}>👥 Senior requests</button>
         )}
         <button onClick={()=>authState.signOut()} className="btn-solid px-3 py-1.5 rounded-lg text-xs font-medium">Sign out</button>
       </div>
@@ -2214,6 +2217,332 @@ function referralCodeFor(userId, extra){
   return "DP" + (isNaN(n) ? Math.random().toString(36).slice(2,10) : n.toString(36)).toUpperCase();
 }
 const OWNER_EMAILS = ["goyalakshya13@gmail.com","docpulsee@gmail.com"];
+// ---------------- Senior Connect ----------------
+const SENIOR_PRICE_PAISE = 200000;           // ₹2,000 per unlock (senior gets ₹600)
+const SC_QUOTA = { AIQ:"All India", DNB:"DNB", PS:"Deemed / Paid", NRI:"NRI", DU:"Delhi Univ.", IP:"IP Univ.", AFMS:"Armed Forces", AMU:"AMU", BHU:"BHU", JM:"Jamia", MM:"Minority" };
+const SC_ROUND = { R1:"Round 1", R2:"Round 2", R3:"Round 3", ST:"Stray" };
+let __scData = null;
+function loadSeniorData(){
+  if(!__scData) __scData = fetch('seniors.json').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).catch(e=>{ __scData = null; throw e; });
+  return __scData;
+}
+async function scCall(body){
+  if(!sb) throw new Error("Sign-in isn't set up.");
+  const { data, error } = await sb.functions.invoke('senior-connect', { body });
+  if(error){
+    let msg = error.message || String(error);
+    try { const j = await error.context.json(); if(j && j.error) msg = j.error; } catch(_e){}
+    throw new Error(msg);
+  }
+  if(data && data.error) throw new Error(data.error);
+  return data || {};
+}
+function scSeatText(d, row){ const inst = d.i[row[1]]; return `${d.sp[row[2]]} — ${scTitle(inst[0])}, ${inst[1]} (${SC_QUOTA[row[3]]||row[3]}, ${SC_ROUND[row[5]]||row[5]})`; }
+function scTitle(s){ return String(s||"").toLowerCase().replace(/\b([a-z])/g, m=>m.toUpperCase()).replace(/\b(Md|Ms|Dnb|Aiims|Pgimer|Esic|Govt)\b/g, m=>m.toUpperCase()); }
+function scWaAsk(seniorName, seat){
+  const first = String(seniorName||"").trim().split(/\s+/)[0] || "";
+  return `Hi Dr. ${first}, this is DocPulse (NEET PG counselling help). A NEET PG 2026 aspirant would like 15–20 min of guidance from you about ${seat || "your college and branch"} — work culture, stipend, what it's really like.\n\nIf you're okay with it, we'll share your number with just this one student and pay you ₹600 by UPI once they've paid. Would that be okay? (Reply yes/no — no pressure at all.)`;
+}
+function scWaLink(mobile, text){ const d = String(mobile||"").replace(/\D/g,""); return "https://wa.me/" + (d.length===10 ? "91"+d : d) + (text ? "?text=" + encodeURIComponent(text) : ""); }
+
+function SeniorConnect({ authState, defaultRank }){
+  const [data, setData] = React.useState(null);
+  const [loadErr, setLoadErr] = React.useState(null);
+  const [rank, setRank] = React.useState(defaultRank || "");
+  const [spec, setSpec] = React.useState("");
+  const [st, setSt] = React.useState("");
+  const [shown, setShown] = React.useState(12);
+  const [target, setTarget] = React.useState(null);
+  const [mine, setMine] = React.useState([]);
+  const [mineMsg, setMineMsg] = React.useState(null);
+  const [payingId, setPayingId] = React.useState(null);
+  const user = authState.user;
+  const wrapRef = React.useRef(null);
+
+  React.useEffect(()=>{ if(defaultRank && !rank) setRank(defaultRank); }, [defaultRank]);
+  // Load the (public, contact-free) senior list when the section comes near the screen.
+  React.useEffect(()=>{
+    let done = false;
+    const go = ()=>{ if(done) return; done = true; loadSeniorData().then(setData).catch(()=>setLoadErr("Couldn't load the senior list — please refresh.")); };
+    const el = wrapRef.current;
+    if(!el || !('IntersectionObserver' in window)){ go(); return; }
+    const io = new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ go(); io.disconnect(); } }, { rootMargin:'600px' });
+    io.observe(el);
+    return ()=>io.disconnect();
+  }, []);
+  React.useEffect(()=>{
+    try { if(new URLSearchParams(location.search).get('sc')) setTimeout(()=>{ const s=document.getElementById('senior-connect'); if(s) s.scrollIntoView({behavior:'smooth'}); }, 600); } catch(_e){}
+  }, []);
+  async function refreshMine(){
+    if(!user) { setMine([]); return; }
+    try { const r = await scCall({ action:'mine' }); setMine(r.requests || []); } catch(_e){}
+  }
+  React.useEffect(()=>{ refreshMine(); }, [user && user.id]);
+  // After Google sign-in, reopen the request the student had started.
+  React.useEffect(()=>{
+    if(!user || !data) return;
+    let pend = null; try { pend = localStorage.getItem('dp_sc_pending'); localStorage.removeItem('dp_sc_pending'); } catch(_e){}
+    const r = pend ? data.r.find(x=>x[0]===parseInt(pend,10)) : null;
+    if(r){ setTarget(r); const s=document.getElementById('senior-connect'); if(s) s.scrollIntoView(); }
+  }, [user && user.id, data]);
+
+  const states = React.useMemo(()=> data ? [...new Set(data.i.map(x=>x[1]))].filter(Boolean).sort() : [], [data]);
+  const specs = React.useMemo(()=> data ? data.sp.map((s,i)=>[s,i]).sort((a,b)=>a[0].replace(/^\S+\s/,'').localeCompare(b[0].replace(/^\S+\s/,''))) : [], [data]);
+  const results = React.useMemo(()=>{
+    if(!data) return [];
+    const n = parseInt(rank,10);
+    let rows = data.r;
+    if(spec !== "") rows = rows.filter(r=>r[2]===Number(spec));
+    if(st) rows = rows.filter(r=>data.i[r[1]][1]===st);
+    if(n>0) rows = rows.slice().sort((a,b)=>Math.abs(a[0]-n)-Math.abs(b[0]-n));
+    else if(spec==="" && !st) return [];
+    return rows;
+  }, [data, rank, spec, st]);
+  React.useEffect(()=>{ setShown(12); }, [rank, spec, st]);
+  const byRank = React.useMemo(()=>{ const m={}; mine.forEach(q=>{ if(!m[q.senior_rank] || q.status!=='declined') m[q.senior_rank]=q; }); return m; }, [mine]);
+
+  function payUnlock(req){
+    setMineMsg(null);
+    if(!window.Razorpay){ setMineMsg({ bad:true, text:"The payment window couldn't load — check your connection and try again." }); return; }
+    const rzp = new window.Razorpay({
+      key: RAZORPAY_KEY_ID, amount: SENIOR_PRICE_PAISE, currency:'INR', name:'DocPulse',
+      description: 'Senior Connect — Rank ' + req.senior_rank, prefill:{ email: user && user.email }, theme:{ color:'#0d9488' },
+      handler: async (resp)=>{
+        setPayingId(req.id);
+        try { await scCall({ action:'unlock', id:req.id, payment_id:resp.razorpay_payment_id }); await refreshMine(); setMineMsg({ bad:false, text:"Unlocked! The number is below and in your email." }); }
+        catch(e){ setMineMsg({ bad:true, text:(e.message||"Something went wrong.") + " Payment ID: " + resp.razorpay_payment_id + " — email docpulsee@gmail.com if this doesn't resolve." }); }
+        setPayingId(null);
+      }
+    });
+    rzp.on('payment.failed', r=>setMineMsg({ bad:true, text:'Payment failed: ' + ((r && r.error && r.error.description) || 'unknown reason') }));
+    rzp.open();
+  }
+
+  const statusChip = q => {
+    if(!q) return null;
+    const map = { pending:["⏳ Requested","bg-amber-100 text-amber-800"], approved:["✅ Agreed — pay to reveal","bg-emerald-100 text-emerald-800"], paid:["📞 Unlocked","bg-teal-100 text-teal-800"], declined:["Not available","bg-slate-100 text-slate-500"] };
+    const [t,c] = map[q.status] || [q.status,""];
+    return <span className={"text-[11px] font-bold px-2.5 py-1 rounded-lg " + c}>{t}</span>;
+  };
+
+  return (
+    <div ref={wrapRef} className="bg-white/90 border border-amber-200 rounded-3xl p-4 sm:p-6 shadow-sm text-slate-800">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div>
+          <h4 className="text-lg sm:text-xl font-black text-slate-900">Talk to the senior who got the seat you want</h4>
+          <p className="text-xs text-slate-500 mt-1 max-w-xl">Enter a rank and see where people with that rank got in last year. Request a senior — we ask them personally. <b className="text-slate-700">You pay ₹2,000 only if they agree</b>, and their name and number are revealed instantly.</p>
+        </div>
+        <div className="flex gap-2 text-[11px] text-slate-600 flex-wrap">
+          <span className="bg-slate-100 rounded-lg px-2.5 py-1">1 · Request free</span>
+          <span className="bg-slate-100 rounded-lg px-2.5 py-1">2 · Senior says yes</span>
+          <span className="bg-slate-100 rounded-lg px-2.5 py-1">3 · Pay & get number</span>
+        </div>
+      </div>
+
+      {user && mine.length>0 && (
+        <div className="mb-4 border border-teal-200 bg-teal-50/60 rounded-2xl p-3 sm:p-4" id="sc-mine">
+          <div className="text-xs font-black text-teal-900 mb-2">My requests</div>
+          {mineMsg && <div className={"text-xs font-semibold mb-2 " + (mineMsg.bad ? "text-rose-600" : "text-emerald-700")}>{mineMsg.text}</div>}
+          <div className="flex flex-col gap-2">
+            {mine.map(q=>(
+              <div key={q.id} className="bg-white rounded-xl border border-slate-200 px-3 py-2.5 flex flex-wrap items-center gap-2 justify-between">
+                <div className="min-w-0 flex-1">
+                  <div className="text-[12px] font-bold text-slate-800 truncate">Rank {Number(q.senior_rank).toLocaleString('en-IN')} · {q.seat || ""}</div>
+                  {q.status==='pending' && <div className="text-[11px] text-slate-500">We're asking the senior — you'll get an email within 24 hrs. Nothing to pay yet.</div>}
+                  {q.status==='declined' && <div className="text-[11px] text-slate-500">This senior isn't available — you weren't charged. Try someone with a nearby rank below.</div>}
+                  {q.status==='approved' && <div className="text-[11px] text-emerald-700 font-semibold">The senior agreed to talk to you.</div>}
+                  {q.status==='paid' && q.senior_mobile && (
+                    <div className="text-[13px] mt-0.5"><b>Dr. {q.senior_name}</b> · <a className="text-teal-700 font-bold" href={"tel:" + q.senior_mobile}>📞 {q.senior_mobile}</a></div>
+                  )}
+                </div>
+                {q.status==='approved' && (
+                  <button onClick={()=>payUnlock(q)} disabled={payingId===q.id} className="rounded-xl px-4 py-2 text-xs font-black text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow">
+                    {payingId===q.id ? "Unlocking…" : "Pay ₹2,000 & reveal number"}</button>
+                )}
+                {q.status==='paid' && q.senior_mobile && (
+                  <a href={scWaLink(q.senior_mobile, "Hi Dr. " + String(q.senior_name||"").split(" ")[0] + ", I'm the NEET PG aspirant from DocPulse. Thank you for agreeing to talk! When would be a good time for a 15–20 min call?")}
+                    target="_blank" rel="noopener" className="rounded-xl px-3 py-2 text-xs font-bold text-white" style={{background:'#16a34a'}}>WhatsApp</a>
+                )}
+                {q.status!=='approved' && q.status!=='paid' && statusChip(q)}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
+        <label className="block"><span className="text-[11px] font-black text-slate-600">Rank (yours or target)</span>
+          <input type="number" min="1" value={rank} onChange={e=>setRank(e.target.value)} placeholder="e.g. 25000" id="sc-rank"
+            className="mt-1 w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-500"/></label>
+        <label className="block"><span className="text-[11px] font-black text-slate-600">Branch</span>
+          <select value={spec} onChange={e=>setSpec(e.target.value)} className="mt-1 w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm">
+            <option value="">Any branch</option>
+            {specs.map(([s,i])=><option key={i} value={i}>{s}</option>)}
+          </select></label>
+        <label className="block"><span className="text-[11px] font-black text-slate-600">State</span>
+          <select value={st} onChange={e=>setSt(e.target.value)} className="mt-1 w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm">
+            <option value="">Any state</option>
+            {states.map(s=><option key={s} value={s}>{s}</option>)}
+          </select></label>
+      </div>
+
+      {loadErr && <div className="text-xs text-rose-600 font-semibold py-4 text-center">{loadErr}</div>}
+      {!data && !loadErr && <div className="text-xs text-slate-500 py-6 text-center">Loading seniors…</div>}
+      {data && !results.length && (
+        <div className="text-xs text-slate-500 py-6 text-center">{(parseInt(rank,10)>0 || spec!=="" || st) ? "No seniors match these filters — try another branch or state." : `Enter a rank, or pick a branch or state, to see ${data.r.length.toLocaleString('en-IN')} seniors from 2025 counselling.`}</div>
+      )}
+      {data && results.length>0 && (<>
+        <div className="text-[11px] text-slate-500 mb-2">{results.length.toLocaleString('en-IN')} seniors{parseInt(rank,10)>0 ? " · closest ranks first" : ""} · seats from MCC 2025 allotment results</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+          {results.slice(0, shown).map(r=>{
+            const inst = data.i[r[1]]; const q = byRank[r[0]];
+            return (
+              <div key={r[0]} className="sc-card bg-white border border-slate-200 rounded-2xl p-3.5 flex flex-col gap-1.5 hover:border-teal-300 transition">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-black text-slate-500">2025 RANK <span className="text-slate-900 text-sm">{r[0].toLocaleString('en-IN')}</span></span>
+                  <span className="text-[10px] font-bold text-teal-800 bg-teal-50 border border-teal-200 rounded-md px-1.5 py-0.5">{SC_QUOTA[r[3]]||r[3]} · {r[4]} · {SC_ROUND[r[5]]||r[5]}</span>
+                </div>
+                <div className="text-sm font-black text-slate-900 leading-snug">{data.sp[r[2]]}</div>
+                <div className="text-[12px] text-slate-600 leading-snug">{scTitle(inst[0])}, {inst[1]}</div>
+                <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+                  <span>👤 Dr. ••••••</span><span>📞 +91 ••••• •••••</span>
+                </div>
+                <div className="mt-1.5 flex items-center justify-between gap-2">
+                  {q && q.status!=='declined' ? statusChip(q) : (
+                    <button onClick={()=>setTarget(r)} className="rounded-xl px-3.5 py-2 text-xs font-black text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-sm">Request to talk</button>
+                  )}
+                  <span className="text-[10px] text-slate-400">Pay only if they agree</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {results.length>shown && <div className="text-center mt-3"><button onClick={()=>setShown(s=>s+12)} className="text-xs font-bold text-teal-700 underline">Show more seniors</button></div>}
+      </>)}
+      <p className="text-[10px] text-slate-400 mt-4">Seats are last year's final allotment in MCC counselling. We only share a senior's number after they've personally agreed. If a senior doesn't respond within 48 hours of your payment, we'll connect you with another or refund you in full.</p>
+
+      {target && data && ReactDOM.createPortal(
+        <SeniorRequestModal authState={authState} row={target} seat={scSeatText(data, target)} onClose={()=>setTarget(null)}
+          onDone={()=>{ refreshMine(); }} />, document.body)}
+    </div>
+  );
+}
+
+function SeniorRequestModal({ authState, row, seat, onClose, onDone }){
+  const user = authState.user;
+  const meta = user && user.user_metadata || {};
+  const [name, setName] = React.useState(meta.full_name || meta.name || "");
+  const [email, setEmail] = React.useState(user ? user.email : "");
+  const [phone, setPhone] = React.useState("");
+  const [note, setNote] = React.useState("");
+  const [busy, setBusy] = React.useState(false);
+  const [err, setErr] = React.useState(null);
+  const [done, setDone] = React.useState(false);
+  async function submit(){
+    setErr(null);
+    if(!name.trim()){ setErr("Please enter your name."); return; }
+    if(!email.includes("@")){ setErr("Please enter a valid email — we'll write to you there."); return; }
+    setBusy(true);
+    try { await scCall({ action:'request', rank:row[0], seat, name:name.trim(), email:email.trim(), phone:phone.trim(), note:note.trim() }); setDone(true); onDone && onDone(); }
+    catch(e){ setErr(e.message || "Something went wrong — please try again."); }
+    setBusy(false);
+  }
+  function signIn(){ try { localStorage.setItem('dp_sc_pending', String(row[0])); } catch(_e){} authState.signInWithGoogle(); }
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" style={{background:'rgba(15,23,42,.55)'}} onClick={onClose}>
+      <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden text-slate-800" onClick={e=>e.stopPropagation()} id="sc-modal">
+        <div className="p-5 border-b border-slate-200 flex justify-between items-start gap-3">
+          <div>
+            <div className="text-[11px] font-black text-amber-700 uppercase tracking-wide">Request a senior</div>
+            <div className="text-sm font-black text-slate-900 mt-1">Rank {row[0].toLocaleString('en-IN')} · {seat}</div>
+          </div>
+          <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 shrink-0" aria-label="Close">✕</button>
+        </div>
+        <div className="p-5 flex flex-col gap-2.5">
+          {done ? (<>
+            <div className="text-3xl text-center">📨</div>
+            <div className="text-center font-black text-slate-900">Request sent!</div>
+            <p className="text-xs text-slate-600 text-center">We're asking this senior personally. You'll get an email at <b>{email}</b> within 24 hours. If they agree, you pay ₹2,000 and their number is revealed. If not, you pay nothing.</p>
+            <button onClick={onClose} className="mt-2 rounded-xl py-2.5 text-sm font-bold bg-slate-900 text-white">Done</button>
+          </>) : !user ? (<>
+            <p className="text-xs text-slate-600">Sign in so we can send you updates and show your requests here. It's free to request — you pay only if the senior agrees.</p>
+            <button onClick={signIn} className="rounded-xl py-2.5 text-sm font-bold border border-slate-300 bg-white">Continue with Google</button>
+          </>) : (<>
+            <input value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" className="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm"/>
+            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="you@email.com" className="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm"/>
+            <input value={phone} onChange={e=>setPhone(e.target.value)} type="tel" placeholder="Your phone / WhatsApp (optional)" className="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm"/>
+            <textarea value={note} onChange={e=>setNote(e.target.value)} rows="2" placeholder="What do you want to ask? (optional — e.g. work hours, stipend, bond)" className="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm resize-none"/>
+            {err && <div className="text-xs font-bold text-rose-600">{err}</div>}
+            <button onClick={submit} disabled={busy} id="sc-submit" className="rounded-xl py-3 text-sm font-black text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow" style={{opacity:busy?.6:1}}>{busy ? "Sending…" : "Send request — free"}</button>
+            <p className="text-[10px] text-slate-400 text-center">₹2,000 only after the senior agrees · secure payment via Razorpay</p>
+          </>)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OwnerSeniorPanel({ onClose }){
+  const [rows, setRows] = React.useState(null);
+  const [tab, setTab] = React.useState("pending");
+  const [msg, setMsg] = React.useState(null);
+  const [busy, setBusy] = React.useState(null);
+  async function load(){ try { const r = await scCall({ action:'owner_list' }); setRows(r.requests || []); } catch(e){ setMsg({ bad:true, text:"Couldn't load: " + e.message }); setRows([]); } }
+  React.useEffect(()=>{ load(); }, []);
+  async function act(body, key){ setBusy(key); setMsg(null); try { await scCall(body); await load(); } catch(e){ setMsg({ bad:true, text:e.message }); } setBusy(null); }
+  const list = (rows||[]).filter(r => tab==="all" ? true : tab==="owed" ? (r.status==="paid" && !r.senior_paid_out) : r.status===tab);
+  const count = s => (rows||[]).filter(r=> s==="owed" ? (r.status==="paid" && !r.senior_paid_out) : r.status===s).length;
+  const tabs = [["pending","To ask"],["approved","Waiting for payment"],["owed","Pay senior ₹600"],["paid","Paid"],["all","All"]];
+  return (
+    <div className="overlay fixed inset-0 flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="modal rounded-3xl max-w-2xl w-full overflow-hidden flex flex-col" style={{maxHeight:'90vh'}} onClick={e=>e.stopPropagation()}>
+        <div className="p-5 border-b border-tok flex justify-between items-start gap-3">
+          <div>
+            <h2 className="font-semibold text-tok">👥 Senior Connect requests</h2>
+            <p className="text-xs text-dim mt-1">Only you see this. Ask the senior on WhatsApp, then Approve or Decline — the student is emailed automatically.</p>
+          </div>
+          <button onClick={onClose} className="badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0" aria-label="Close">✕</button>
+        </div>
+        <div className="px-5 pt-3 flex gap-1.5 flex-wrap">
+          {tabs.map(([k,l])=>(
+            <button key={k} onClick={()=>setTab(k)} className="rounded-lg px-2.5 py-1.5 text-xs font-semibold border"
+              style={{ borderColor: tab===k ? 'var(--accent)' : 'var(--border)', background: tab===k ? 'var(--accent)' : 'var(--surface)', color: tab===k ? '#fff' : 'var(--text)' }}>
+              {l}{k!=="all" && rows ? ` (${count(k)})` : ""}</button>
+          ))}
+        </div>
+        <div className="p-5 flex flex-col gap-2 overflow-y-auto">
+          {msg && <div className="text-xs font-semibold" style={{color: msg.bad ? 'var(--bad)' : 'var(--good)'}}>{msg.text}</div>}
+          {rows===null && <div className="text-xs text-dim">Loading…</div>}
+          {rows && !list.length && <div className="text-xs text-dim">Nothing here.</div>}
+          {list.map(r=>(
+            <div key={r.id} className="rounded-xl p-3 text-xs flex flex-col gap-1.5" style={{background:'var(--surface-alt)'}}>
+              <div className="flex justify-between gap-2 flex-wrap">
+                <b className="text-tok">#{r.id} · Rank {Number(r.senior_rank).toLocaleString('en-IN')}</b>
+                <span className="text-dim">{new Date(r.created_at).toLocaleString('en-IN',{timeZone:'Asia/Kolkata',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',hour12:true})} · {r.status}</span>
+              </div>
+              <div className="text-dim">{r.seat}</div>
+              <div><span className="text-dim">Senior:</span> <b className="text-tok">{r.senior_name || "?"}</b> · <a className="underline" href={"tel:"+r.senior_mobile}>{r.senior_mobile}</a></div>
+              <div><span className="text-dim">Student:</span> {r.student_name} · {r.student_email}{r.student_phone ? " · " + r.student_phone : ""}</div>
+              {r.note && <div className="text-dim">“{r.note}”</div>}
+              <div className="flex gap-2 flex-wrap mt-1">
+                {r.status==="pending" && (<>
+                  <a href={scWaLink(r.senior_mobile, scWaAsk(r.senior_name, r.seat))} target="_blank" rel="noopener" className="rounded-lg px-3 py-1.5 font-bold text-white" style={{background:'#16a34a'}}>Ask on WhatsApp</a>
+                  <button disabled={!!busy} onClick={()=>act({action:'decide',id:r.id,approve:true},'a'+r.id)} className="rounded-lg px-3 py-1.5 font-bold text-white" style={{background:'#0f766e'}}>{busy==='a'+r.id?"…":"Senior said yes ✓"}</button>
+                  <button disabled={!!busy} onClick={()=>act({action:'decide',id:r.id,approve:false},'d'+r.id)} className="rounded-lg px-3 py-1.5 font-bold" style={{color:'var(--bad)',border:'1px solid var(--bad)'}}>{busy==='d'+r.id?"…":"Declined / no reply"}</button>
+                </>)}
+                {r.status==="approved" && <span className="text-dim">Student emailed — waiting for their payment.</span>}
+                {r.status==="paid" && (r.senior_paid_out
+                  ? <span style={{color:'var(--good)'}} className="font-bold">✓ Paid ₹{r.amount_paid/100} · senior paid ₹600</span>
+                  : <button disabled={!!busy} onClick={()=>act({action:'payout',id:r.id},'p'+r.id)} className="rounded-lg px-3 py-1.5 font-bold text-white" style={{background:'#b45309'}}>{busy==='p'+r.id?"…":"I've sent the senior ₹600 ✓"}</button>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const SLOT_TIMES = ["09:00","10:00","11:00","12:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
 function slotTimeLabel(t){ const [h,m]=t.split(":").map(Number); const hh=((h+11)%12)+1; return hh + (m?":"+String(m).padStart(2,"0"):"") + (h<12?" am":" pm"); }
 function istDateStr(d){ return new Date(d.getTime()+5.5*3600e3).toISOString().slice(0,10); }
@@ -2629,6 +2958,8 @@ function App(){
   const [listOpen, setListOpen] = React.useState(false);
   const [referOpen, setReferOpen] = React.useState(false);
   const [slotsOpen, setSlotsOpen] = React.useState(false);
+  const [seniorsOpen, setSeniorsOpen] = React.useState(false);
+  const scRoot = React.useMemo(()=>document.getElementById('senior-connect-root'), []);
   // Tell the plain-HTML parts of the page (counselling button/popup) whether this is a paying member.
   React.useEffect(()=>{
     window.__dpIsPaid = !!authState.paid;
@@ -2851,7 +3182,7 @@ function App(){
           </div>
         </div>
         <div className="max-w-6xl mx-auto px-4 pb-3 -mt-2 flex items-center justify-end">
-          <HeaderSignIn authState={authState} onRefer={()=>setReferOpen(true)} onSlots={()=>setSlotsOpen(true)} />
+          <HeaderSignIn authState={authState} onRefer={()=>setReferOpen(true)} onSlots={()=>setSlotsOpen(true)} onSeniors={()=>setSeniorsOpen(true)} />
         </div>
       </header>
 
@@ -3157,6 +3488,8 @@ function App(){
       </div>
       )}
 
+      {scRoot && ReactDOM.createPortal(<SeniorConnect authState={authState} defaultRank={pRank} />, scRoot)}
+      {seniorsOpen && authState.user && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && <OwnerSeniorPanel onClose={()=>setSeniorsOpen(false)} />}
       {slotsOpen && authState.user && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && <ManageSlotsPanel onClose={()=>setSlotsOpen(false)} />}
       {referOpen && authState.paid && <ReferralPanel authState={authState} onClose={()=>setReferOpen(false)} />}
       {reportTarget && (
