@@ -398,7 +398,7 @@ The White Coat Waits. <br>
 
 <div class="p-4 rounded-2xl bg-white border border-amber-300/80 flex items-center gap-3 text-xs text-amber-900 shadow-sm mb-6">
 <i class="fa-solid fa-mug-hot text-amber-500 text-xl flex-shrink-0"></i>
-<span>Pick a rank and seat from last year's counselling — we personally ask that senior if they'll talk to you. <b>You pay only if they say yes.</b></span>
+<span>Pick a college or branch, choose a senior who joined there last year — we personally ask that senior if they'll talk to you. <b>You pay only if they say yes.</b></span>
 </div>
 
 <a href="#senior-connect-root" class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:opacity-95 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg flex items-center gap-2">
@@ -2218,7 +2218,7 @@ function referralCodeFor(userId, extra){
 }
 const OWNER_EMAILS = ["goyalakshya13@gmail.com","docpulsee@gmail.com"];
 // ---------------- Senior Connect ----------------
-const SENIOR_PRICE_PAISE = 200000;           // ₹2,000 per unlock (senior gets ₹600)
+const SENIOR_PRICE_PAISE = 99900;            // ₹999 per unlock (senior gets ₹600)
 const SC_QUOTA = { AIQ:"All India", DNB:"DNB", PS:"Deemed / Paid", NRI:"NRI", DU:"Delhi Univ.", IP:"IP Univ.", AFMS:"Armed Forces", AMU:"AMU", BHU:"BHU", JM:"Jamia", MM:"Minority" };
 const SC_ROUND = { R1:"Round 1", R2:"Round 2", R3:"Round 3", ST:"Stray" };
 let __scData = null;
@@ -2245,10 +2245,10 @@ function scWaAsk(seniorName, seat){
 }
 function scWaLink(mobile, text){ const d = String(mobile||"").replace(/\D/g,""); return "https://wa.me/" + (d.length===10 ? "91"+d : d) + (text ? "?text=" + encodeURIComponent(text) : ""); }
 
-function SeniorConnect({ authState, defaultRank }){
+function SeniorConnect({ authState }){
   const [data, setData] = React.useState(null);
   const [loadErr, setLoadErr] = React.useState(null);
-  const [rank, setRank] = React.useState(defaultRank || "");
+  const [college, setCollege] = React.useState("");
   const [spec, setSpec] = React.useState("");
   const [st, setSt] = React.useState("");
   const [shown, setShown] = React.useState(12);
@@ -2259,7 +2259,6 @@ function SeniorConnect({ authState, defaultRank }){
   const user = authState.user;
   const wrapRef = React.useRef(null);
 
-  React.useEffect(()=>{ if(defaultRank && !rank) setRank(defaultRank); }, [defaultRank]);
   // Load the (public, contact-free) senior list when the section comes near the screen.
   React.useEffect(()=>{
     let done = false;
@@ -2282,31 +2281,31 @@ function SeniorConnect({ authState, defaultRank }){
   React.useEffect(()=>{
     if(!user || !data) return;
     let pend = null; try { pend = localStorage.getItem('dp_sc_pending'); localStorage.removeItem('dp_sc_pending'); } catch(_e){}
-    const r = pend ? data.r.find(x=>x[0]===parseInt(pend,10)) : null;
+    const r = pend ? data.r.find(x=>x[0]===parseInt(pend,10)) : null;  // x[0] = senior id
     if(r){ setTarget(r); const s=document.getElementById('senior-connect'); if(s) s.scrollIntoView(); }
   }, [user && user.id, data]);
 
   const states = React.useMemo(()=> data ? [...new Set(data.i.map(x=>x[1]))].filter(Boolean).sort() : [], [data]);
   const specs = React.useMemo(()=> data ? data.sp.map((s,i)=>[s,i]).sort((a,b)=>a[0].replace(/^\S+\s/,'').localeCompare(b[0].replace(/^\S+\s/,''))) : [], [data]);
+  const cq = college.trim().toLowerCase();
   const results = React.useMemo(()=>{
     if(!data) return [];
-    const n = parseInt(rank,10);
+    if(spec==="" && !st && cq.length<3) return [];
     let rows = data.r;
     if(spec !== "") rows = rows.filter(r=>r[2]===Number(spec));
     if(st) rows = rows.filter(r=>data.i[r[1]][1]===st);
-    if(n>0) rows = rows.slice().sort((a,b)=>Math.abs(a[0]-n)-Math.abs(b[0]-n));
-    else if(spec==="" && !st) return [];
+    if(cq.length>=3) rows = rows.filter(r=>data.i[r[1]][0].toLowerCase().includes(cq));
     return rows;
-  }, [data, rank, spec, st]);
-  React.useEffect(()=>{ setShown(12); }, [rank, spec, st]);
-  const byRank = React.useMemo(()=>{ const m={}; mine.forEach(q=>{ if(!m[q.senior_rank] || q.status!=='declined') m[q.senior_rank]=q; }); return m; }, [mine]);
+  }, [data, cq, spec, st]);
+  React.useEffect(()=>{ setShown(12); }, [cq, spec, st]);
+  const bySid = React.useMemo(()=>{ const m={}; mine.forEach(q=>{ if(!m[q.sid] || q.status!=='declined') m[q.sid]=q; }); return m; }, [mine]);
 
   function payUnlock(req){
     setMineMsg(null);
     if(!window.Razorpay){ setMineMsg({ bad:true, text:"The payment window couldn't load — check your connection and try again." }); return; }
     const rzp = new window.Razorpay({
       key: RAZORPAY_KEY_ID, amount: SENIOR_PRICE_PAISE, currency:'INR', name:'DocPulse',
-      description: 'Senior Connect — Rank ' + req.senior_rank, prefill:{ email: user && user.email }, theme:{ color:'#0d9488' },
+      description: 'Senior Connect', prefill:{ email: user && user.email }, theme:{ color:'#0d9488' },
       handler: async (resp)=>{
         setPayingId(req.id);
         try { await scCall({ action:'unlock', id:req.id, payment_id:resp.razorpay_payment_id }); await refreshMine(); setMineMsg({ bad:false, text:"Unlocked! The number is below and in your email." }); }
@@ -2330,7 +2329,7 @@ function SeniorConnect({ authState, defaultRank }){
       <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
         <div>
           <h4 className="text-lg sm:text-xl font-black text-slate-900">Talk to the senior who got the seat you want</h4>
-          <p className="text-xs text-slate-500 mt-1 max-w-xl">Enter a rank and see where people with that rank got in last year. Request a senior — we ask them personally. <b className="text-slate-700">You pay ₹2,000 only if they agree</b>, and their name and number are revealed instantly.</p>
+          <p className="text-xs text-slate-500 mt-1 max-w-xl">Search a college or branch and see the seniors who joined there in 2025 counselling. Request one — we ask them personally. <b className="text-slate-700">You pay ₹999 only if they agree</b>, and their name and number are revealed instantly.</p>
         </div>
         <div className="flex gap-2 text-[11px] text-slate-600 flex-wrap">
           <span className="bg-slate-100 rounded-lg px-2.5 py-1">1 · Request free</span>
@@ -2347,9 +2346,9 @@ function SeniorConnect({ authState, defaultRank }){
             {mine.map(q=>(
               <div key={q.id} className="bg-white rounded-xl border border-slate-200 px-3 py-2.5 flex flex-wrap items-center gap-2 justify-between">
                 <div className="min-w-0 flex-1">
-                  <div className="text-[12px] font-bold text-slate-800 truncate">Rank {Number(q.senior_rank).toLocaleString('en-IN')} · {q.seat || ""}</div>
+                  <div className="text-[12px] font-bold text-slate-800 truncate">{q.seat || "Senior"}</div>
                   {q.status==='pending' && <div className="text-[11px] text-slate-500">We're asking the senior — you'll get an email within 24 hrs. Nothing to pay yet.</div>}
-                  {q.status==='declined' && <div className="text-[11px] text-slate-500">This senior isn't available — you weren't charged. Try someone with a nearby rank below.</div>}
+                  {q.status==='declined' && <div className="text-[11px] text-slate-500">This senior isn't available — you weren't charged. Try another senior at the same college or branch below.</div>}
                   {q.status==='approved' && <div className="text-[11px] text-emerald-700 font-semibold">The senior agreed to talk to you.</div>}
                   {q.status==='paid' && q.senior_mobile && (
                     <div className="text-[13px] mt-0.5"><b>Dr. {q.senior_name}</b> · <a className="text-teal-700 font-bold" href={"tel:" + q.senior_mobile}>📞 {q.senior_mobile}</a></div>
@@ -2357,7 +2356,7 @@ function SeniorConnect({ authState, defaultRank }){
                 </div>
                 {q.status==='approved' && (
                   <button onClick={()=>payUnlock(q)} disabled={payingId===q.id} className="rounded-xl px-4 py-2 text-xs font-black text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow">
-                    {payingId===q.id ? "Unlocking…" : "Pay ₹2,000 & reveal number"}</button>
+                    {payingId===q.id ? "Unlocking…" : "Pay ₹999 & reveal number"}</button>
                 )}
                 {q.status==='paid' && q.senior_mobile && (
                   <a href={scWaLink(q.senior_mobile, "Hi Dr. " + String(q.senior_name||"").split(" ")[0] + ", I'm the NEET PG aspirant from DocPulse. Thank you for agreeing to talk! When would be a good time for a 15–20 min call?")}
@@ -2371,8 +2370,8 @@ function SeniorConnect({ authState, defaultRank }){
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
-        <label className="block"><span className="text-[11px] font-black text-slate-600">Rank (yours or target)</span>
-          <input type="number" min="1" value={rank} onChange={e=>setRank(e.target.value)} placeholder="e.g. 25000" id="sc-rank"
+        <label className="block"><span className="text-[11px] font-black text-slate-600">College</span>
+          <input type="text" value={college} onChange={e=>setCollege(e.target.value)} placeholder="e.g. Maulana Azad, SMS, KEM" id="sc-college"
             className="mt-1 w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-500"/></label>
         <label className="block"><span className="text-[11px] font-black text-slate-600">Branch</span>
           <select value={spec} onChange={e=>setSpec(e.target.value)} className="mt-1 w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm">
@@ -2389,17 +2388,17 @@ function SeniorConnect({ authState, defaultRank }){
       {loadErr && <div className="text-xs text-rose-600 font-semibold py-4 text-center">{loadErr}</div>}
       {!data && !loadErr && <div className="text-xs text-slate-500 py-6 text-center">Loading seniors…</div>}
       {data && !results.length && (
-        <div className="text-xs text-slate-500 py-6 text-center">{(parseInt(rank,10)>0 || spec!=="" || st) ? "No seniors match these filters — try another branch or state." : `Enter a rank, or pick a branch or state, to see ${data.r.length.toLocaleString('en-IN')} seniors from 2025 counselling.`}</div>
+        <div className="text-xs text-slate-500 py-6 text-center">{(cq.length>=3 || spec!=="" || st) ? "No seniors match these filters — try another college, branch or state." : `Type a college, or pick a branch or state, to find seniors among ${data.r.length.toLocaleString('en-IN')} doctors who joined in 2025.`}</div>
       )}
       {data && results.length>0 && (<>
-        <div className="text-[11px] text-slate-500 mb-2">{results.length.toLocaleString('en-IN')} seniors{parseInt(rank,10)>0 ? " · closest ranks first" : ""} · seats from MCC 2025 allotment results</div>
+        <div className="text-[11px] text-slate-500 mb-2">{results.length.toLocaleString('en-IN')} seniors · seats from MCC 2025 allotment results</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
           {results.slice(0, shown).map(r=>{
-            const inst = data.i[r[1]]; const q = byRank[r[0]];
+            const inst = data.i[r[1]]; const q = bySid[r[0]];
             return (
               <div key={r[0]} className="sc-card bg-white border border-slate-200 rounded-2xl p-3.5 flex flex-col gap-1.5 hover:border-teal-300 transition">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-black text-slate-500">2025 RANK <span className="text-slate-900 text-sm">{r[0].toLocaleString('en-IN')}</span></span>
+                  <span className="text-[11px] font-black text-slate-500">JOINED 2025</span>
                   <span className="text-[10px] font-bold text-teal-800 bg-teal-50 border border-teal-200 rounded-md px-1.5 py-0.5">{SC_QUOTA[r[3]]||r[3]} · {r[4]} · {SC_ROUND[r[5]]||r[5]}</span>
                 </div>
                 <div className="text-sm font-black text-slate-900 leading-snug">{data.sp[r[2]]}</div>
@@ -2419,7 +2418,7 @@ function SeniorConnect({ authState, defaultRank }){
         </div>
         {results.length>shown && <div className="text-center mt-3"><button onClick={()=>setShown(s=>s+12)} className="text-xs font-bold text-teal-700 underline">Show more seniors</button></div>}
       </>)}
-      <p className="text-[10px] text-slate-400 mt-4">Seats are last year's final allotment in MCC counselling. We only share a senior's number after they've personally agreed. If a senior doesn't respond within 48 hours of your payment, we'll connect you with another or refund you in full.</p>
+      <p className="text-[10px] text-slate-400 mt-4">Seats are from last year's MCC counselling allotments. Ranks and cutoffs are in the full directory above. We only share a senior's number after they've personally agreed. If a senior doesn't respond within 48 hours of your payment, we'll connect you with another or refund you in full.</p>
 
       {target && data && ReactDOM.createPortal(
         <SeniorRequestModal authState={authState} row={target} seat={scSeatText(data, target)} onClose={()=>setTarget(null)}
@@ -2443,7 +2442,7 @@ function SeniorRequestModal({ authState, row, seat, onClose, onDone }){
     if(!name.trim()){ setErr("Please enter your name."); return; }
     if(!email.includes("@")){ setErr("Please enter a valid email — we'll write to you there."); return; }
     setBusy(true);
-    try { await scCall({ action:'request', rank:row[0], seat, name:name.trim(), email:email.trim(), phone:phone.trim(), note:note.trim() }); setDone(true); onDone && onDone(); }
+    try { await scCall({ action:'request', sid:row[0], seat, name:name.trim(), email:email.trim(), phone:phone.trim(), note:note.trim() }); setDone(true); onDone && onDone(); }
     catch(e){ setErr(e.message || "Something went wrong — please try again."); }
     setBusy(false);
   }
@@ -2454,7 +2453,7 @@ function SeniorRequestModal({ authState, row, seat, onClose, onDone }){
         <div className="p-5 border-b border-slate-200 flex justify-between items-start gap-3">
           <div>
             <div className="text-[11px] font-black text-amber-700 uppercase tracking-wide">Request a senior</div>
-            <div className="text-sm font-black text-slate-900 mt-1">Rank {row[0].toLocaleString('en-IN')} · {seat}</div>
+            <div className="text-sm font-black text-slate-900 mt-1">{seat}</div>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 shrink-0" aria-label="Close">✕</button>
         </div>
@@ -2462,7 +2461,7 @@ function SeniorRequestModal({ authState, row, seat, onClose, onDone }){
           {done ? (<>
             <div className="text-3xl text-center">📨</div>
             <div className="text-center font-black text-slate-900">Request sent!</div>
-            <p className="text-xs text-slate-600 text-center">We're asking this senior personally. You'll get an email at <b>{email}</b> within 24 hours. If they agree, you pay ₹2,000 and their number is revealed. If not, you pay nothing.</p>
+            <p className="text-xs text-slate-600 text-center">We're asking this senior personally. You'll get an email at <b>{email}</b> within 24 hours. If they agree, you pay ₹999 and their number is revealed. If not, you pay nothing.</p>
             <button onClick={onClose} className="mt-2 rounded-xl py-2.5 text-sm font-bold bg-slate-900 text-white">Done</button>
           </>) : !user ? (<>
             <p className="text-xs text-slate-600">Sign in so we can send you updates and show your requests here. It's free to request — you pay only if the senior agrees.</p>
@@ -2474,7 +2473,7 @@ function SeniorRequestModal({ authState, row, seat, onClose, onDone }){
             <textarea value={note} onChange={e=>setNote(e.target.value)} rows="2" placeholder="What do you want to ask? (optional — e.g. work hours, stipend, bond)" className="bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm resize-none"/>
             {err && <div className="text-xs font-bold text-rose-600">{err}</div>}
             <button onClick={submit} disabled={busy} id="sc-submit" className="rounded-xl py-3 text-sm font-black text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow" style={{opacity:busy?.6:1}}>{busy ? "Sending…" : "Send request — free"}</button>
-            <p className="text-[10px] text-slate-400 text-center">₹2,000 only after the senior agrees · secure payment via Razorpay</p>
+            <p className="text-[10px] text-slate-400 text-center">₹999 only after the senior agrees · secure payment via Razorpay</p>
           </>)}
         </div>
       </div>
@@ -3488,7 +3487,7 @@ function App(){
       </div>
       )}
 
-      {scRoot && ReactDOM.createPortal(<SeniorConnect authState={authState} defaultRank={pRank} />, scRoot)}
+      {scRoot && ReactDOM.createPortal(<SeniorConnect authState={authState} />, scRoot)}
       {seniorsOpen && authState.user && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && <OwnerSeniorPanel onClose={()=>setSeniorsOpen(false)} />}
       {slotsOpen && authState.user && OWNER_EMAILS.includes((authState.user.email||"").toLowerCase()) && <ManageSlotsPanel onClose={()=>setSlotsOpen(false)} />}
       {referOpen && authState.paid && <ReferralPanel authState={authState} onClose={()=>setReferOpen(false)} />}
