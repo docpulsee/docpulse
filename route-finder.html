@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Route Finder · DocPulse</title>
+<meta name="description" content="For MBBS students, graduates and doctors: India PG, USA, UK, Germany, Australia, the Gulf, government service, public health or a non-clinical career? Answer 14 questions and find the route that fits you. Built on 2026 rules.">
+<meta property="og:title" content="Where should your MBBS take you? · DocPulse Route Finder">
+<meta property="og:description" content="14 honest questions, 9 routes after MBBS. See which one actually fits you.">
+<meta name="theme-color" content="#0f1a20">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#f3f1e9; --card:#fffdf7; --card-2:#f8f5ec; --line:#e2ddcd; --line-2:#d3cdb9;
+  --ink:#13212a; --ink-2:#4b5b61; --ink-3:#7c898c;
+  --teal:#0f6e5c; --teal-2:#12917a; --teal-soft:#e3f1eb;
+  --gold:#e3a72f; --gold-soft:#fbf1da; --red:#a2273a; --red-soft:#fbe8eb;
+  --board:#0f1a20; --board-2:#16252d; --flap:#f4c152; --flap-dim:#7f93a0;
+  --display:"Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:18px;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font:15px/1.55 var(--body); -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 1px 1px, rgba(19,33,42,.06) 1px, transparent 0); background-size:22px 22px;}
+a{color:var(--teal)}
+button{font:inherit; color:inherit; cursor:pointer}
+[hidden]{display:none!important}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:16px}
+.mono{font-family:var(--mono)}
+.eyebrow{font:600 11px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+h1,h2,h3{font-family:var(--display); letter-spacing:-.02em; text-wrap:balance; margin:0}
+
+/* top bar */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:rgba(243,241,233,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; gap:12px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font:800 17px var(--display)}
+.brand i{width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg,#0ea5c6,#0f6e5c 60%,#34c38f); display:grid; place-items:center; color:#fff; font-style:normal; font-size:15px}
+.pill{font:600 11px var(--mono); letter-spacing:.1em; text-transform:uppercase; padding:6px 10px; border-radius:99px; background:var(--board); color:var(--flap)}
+
+/* screens */
+.screen{animation:in .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:.001; transform:translateY(10px)} to{opacity:1; transform:none}}
+
+/* ---------- intro ---------- */
+.hero{display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; padding-block:48px 28px}
+.hero h1{font-size:clamp(34px,5.4vw,58px); line-height:1.02; font-weight:800}
+.hero h1 em{font-style:normal; color:var(--teal); position:relative; white-space:nowrap}
+.hero h1 em::after{content:""; position:absolute; left:0; right:0; bottom:.04em; height:.16em; background:var(--gold); opacity:.55; border-radius:3px; z-index:-1}
+.lead{font-size:17px; color:var(--ink-2); max-width:34em; margin:18px 0 26px}
+.cta{display:inline-flex; align-items:center; gap:12px; border:0; border-radius:14px; padding:16px 22px 16px 24px; background:var(--teal); color:#fff; font:700 17px var(--display);
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset, 0 12px 28px -12px rgba(15,110,92,.7); transition:transform .15s, box-shadow .15s}
+.cta:hover{transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,.25) inset, 0 18px 34px -14px rgba(15,110,92,.8)}
+.cta svg{transition:transform .2s} .cta:hover svg{transform:translateX(4px)}
+.cta.gold{background:linear-gradient(180deg,#f0b93f,#e0a027); color:#231a05; box-shadow:0 1px 0 rgba(255,255,255,.4) inset, 0 12px 28px -12px rgba(190,130,20,.8)}
+.meta{margin-top:12px; font-size:13px; color:var(--ink-3)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:26px}
+.chip{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--ink-2); background:var(--card); border:1px solid var(--line); padding:7px 11px; border-radius:99px}
+.chip b{width:7px; height:7px; border-radius:50%; background:var(--teal-2)}
+.saved{margin-top:18px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--teal-soft); border:1px solid #bfe0d3; border-radius:12px; padding:10px 14px; font-size:14px}
+.saved button{border:0; background:var(--teal); color:#fff; border-radius:9px; padding:7px 12px; font-weight:700; font-size:13px}
+
+/* departure board */
+.board{background:var(--board); border-radius:20px; padding:18px 16px 14px; color:#dfe7ea; box-shadow:0 30px 60px -30px rgba(15,26,32,.65), 0 0 0 1px #22343d inset; position:relative; overflow:hidden}
+.board::before{content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 2px, transparent 2px 4px); pointer-events:none}
+.board-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font:600 11px var(--mono); letter-spacing:.14em; color:var(--flap-dim)}
+.board-head strong{color:var(--flap); font-size:13px; letter-spacing:.18em}
+.brow{display:grid; grid-template-columns:48px 1fr auto; gap:10px; align-items:center; padding:7px 4px; border-top:1px solid #1f3039}
+.brow .code{font:600 13px var(--mono); color:#0f1a20; background:var(--flap); border-radius:5px; text-align:center; padding:4px 0}
+.brow .nm{font:600 14px var(--body); color:#eef3f5; min-width:0}
+.brow .nm small{display:block; font:500 11px var(--mono); color:var(--flap-dim); letter-spacing:.06em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.flaps{display:flex; gap:2px}
+.flaps span{display:inline-grid; place-items:center; width:13px; height:21px; background:var(--board-2); border-radius:3px; font:600 12px var(--mono); color:var(--flap); position:relative; box-shadow:0 1px 0 #000 inset}
+.flaps span::after{content:""; position:absolute; left:0; right:0; top:50%; height:1px; background:rgba(0,0,0,.55)}
+.board-foot{margin-top:10px; display:flex; justify-content:space-between; font:500 11px var(--mono); color:var(--flap-dim); letter-spacing:.08em}
+.blink{animation:blink 1.2s steps(2) infinite} @keyframes blink{50%{opacity:.25}}
+
+.how{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding-block:18px 56px}
+.how div{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px}
+.how .n{font:600 12px var(--mono); color:var(--teal)}
+.how h3{font-size:17px; margin:6px 0 4px}
+.how p{margin:0; font-size:14px; color:var(--ink-2)}
+
+/* ---------- quiz ---------- */
+.quiz{max-width:760px; margin:0 auto; padding-block:26px 60px}
+.path{position:relative; height:44px; margin-bottom:22px}
+.path svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.path .from,.path .to{position:absolute; top:50%; transform:translateY(-50%); font:600 11px var(--mono); letter-spacing:.1em; background:var(--card); border:1px solid var(--line); padding:4px 7px; border-radius:6px}
+.path .from{left:0} .path .to{right:0}
+.plane{position:absolute; top:50%; width:30px; height:30px; margin:-15px 0 0 -15px; transition:left .6s cubic-bezier(.3,.9,.3,1); color:var(--teal)}
+.qhead{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px}
+.qnum{font:600 13px var(--mono); color:var(--teal)}
+.qcount{font:500 12px var(--mono); color:var(--ink-3)}
+.qtitle{font-size:clamp(25px,3.6vw,34px); font-weight:700; line-height:1.12}
+.qsub{color:var(--ink-2); margin:10px 0 22px}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.opt{text-align:left; display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:16px; transition:border-color .15s, transform .15s, box-shadow .15s, background .15s}
+.opt:hover{border-color:var(--line-2); transform:translateY(-2px); box-shadow:0 10px 24px -18px rgba(19,33,42,.5)}
+.opt .k{width:34px; height:34px; border-radius:10px; border:1.5px solid var(--line-2); display:grid; place-items:center; font:600 13px var(--mono); color:var(--ink-2); background:var(--card-2); transition:.15s}
+.opt .l{display:block; font-weight:700; font-size:15.5px; line-height:1.3}
+.opt .h{display:block; font-size:13px; color:var(--ink-3); margin-top:3px}
+.opt.sel{border-color:var(--teal); background:#f1f8f4; box-shadow:0 0 0 4px rgba(15,110,92,.12)}
+.opt.sel .k{background:var(--teal); border-color:var(--teal); color:#fff}
+.qnav{display:flex; justify-content:space-between; align-items:center; margin-top:22px}
+.ghost{border:0; background:none; color:var(--ink-2); font-weight:600; padding:8px 4px; display:inline-flex; gap:6px; align-items:center}
+.ghost:disabled{opacity:.35; cursor:default}
+.kbd{font:500 12px var(--mono); color:var(--ink-3)}
+.slide-out{animation:out .22s ease forwards} @keyframes out{to{opacity:0; transform:translateX(-18px)}}
+
+/* ---------- calculating ---------- */
+.calc{max-width:520px; margin:0 auto; padding-block:64px}
+.calc h2{text-align:center; font-size:26px; margin-bottom:6px}
+.calc p{text-align:center; color:var(--ink-2); margin:0 0 22px}
+
+/* ---------- boarding pass ---------- */
+.pass{display:grid; grid-template-columns:1fr 210px; background:var(--card); border-radius:22px; overflow:hidden; box-shadow:0 30px 60px -34px rgba(19,33,42,.55), 0 0 0 1px var(--line); position:relative}
+.pass-main{padding:22px 24px; position:relative}
+.pass-band{display:flex; justify-content:space-between; align-items:center; margin:-22px -24px 18px; padding:12px 24px; background:var(--board); color:var(--flap); font:600 11px var(--mono); letter-spacing:.16em}
+.pass-band span:last-child{color:var(--flap-dim)}
+.fly{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px}
+.fly .c{font:800 clamp(34px,5.2vw,56px)/1 var(--display); letter-spacing:-.03em}
+.fly .c.to{color:var(--route,var(--teal))}
+.fly small{display:block; font:600 11px var(--mono); letter-spacing:.1em; color:var(--ink-3); margin-bottom:4px}
+.fly .n{font-size:13px; color:var(--ink-2); margin-top:4px}
+.fly .line{min-width:48px; height:2px; background:repeating-linear-gradient(90deg,var(--line-2) 0 6px,transparent 6px 11px); position:relative}
+.fly .line svg{position:absolute; left:50%; top:50%; width:26px; height:26px; transform:translate(-50%,-50%); color:var(--route,var(--teal)); background:var(--card); padding:2px}
+.fields{display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:12px; margin-top:20px; padding-top:16px; border-top:1px dashed var(--line-2)}
+.fields small{display:block; font:600 10px var(--mono); letter-spacing:.12em; color:var(--ink-3)}
+.fields b{font:700 15px var(--display)}
+.stub{border-left:2px dashed var(--line-2); padding:22px 18px; background:var(--card-2); display:flex; flex-direction:column; justify-content:space-between; position:relative}
+.stub::before,.stub::after{content:""; position:absolute; left:-12px; width:22px; height:22px; border-radius:50%; background:var(--bg)}
+.stub::before{top:-11px} .stub::after{bottom:-11px}
+.stub .big{font:800 46px/1 var(--display); color:var(--route,var(--teal))}
+.stub .big sup{font-size:18px}
+.stub .mini{font:600 10.5px/1.7 var(--mono); letter-spacing:.1em; color:var(--ink-3); margin-top:10px}
+.stub .mini b{color:var(--ink)}
+.mbar{position:fixed; left:0; right:0; bottom:0; z-index:30; display:none; align-items:center; gap:12px; padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px)); background:var(--board); color:#fff; box-shadow:0 -10px 30px -12px rgba(0,0,0,.5); transform:translateY(0); transition:transform .25s}
+.mbar.off{transform:translateY(110%)}
+.mbar div{flex:1; font-size:13px; line-height:1.3; color:#a9bac2}
+.mbar div b{display:block; color:#fff; font:700 15px var(--display)}
+.mbar button{border:0; border-radius:11px; padding:11px 16px; background:linear-gradient(180deg,#f0b93f,#e0a027); color:#231a05; font-weight:800; white-space:nowrap}
+.barcode{height:46px; margin-top:14px; background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px); opacity:.85; border-radius:2px}
+
+/* result */
+.res{display:grid; grid-template-columns:1.25fr 1fr; gap:22px; padding-block:30px 60px; align-items:start}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:20px}
+.why{margin-top:16px; border-left:3px solid var(--route,var(--teal)); background:var(--card); border-radius:0 14px 14px 0; padding:14px 16px; font-size:15.5px}
+.why .eyebrow{display:block; margin-bottom:6px}
+.ranks h3{font-size:18px; margin-bottom:12px}
+.rk{display:grid; grid-template-columns:44px 1fr 46px; gap:10px; align-items:center; padding:9px 0; border-top:1px solid var(--line)}
+.rk:first-of-type{border-top:0}
+.rk .code{font:600 12px var(--mono); text-align:center; padding:5px 0; border-radius:6px; color:#fff}
+.rk .nm{font-weight:700; font-size:14.5px}
+.rk .nm small{font-weight:500; color:var(--ink-3); font-size:12px; margin-left:6px}
+.bar{height:8px; border-radius:99px; background:#ece8dc; overflow:hidden; margin-top:6px}
+.bar i{display:block; height:100%; width:0; border-radius:99px; transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.rk .p{font:600 14px var(--mono); text-align:right; font-variant-numeric:tabular-nums}
+
+.lock{position:sticky; top:72px; background:var(--board); color:#e7eef1; border-radius:22px; padding:22px; box-shadow:0 30px 60px -30px rgba(15,26,32,.7)}
+.lock h3{font-size:24px; color:#fff; line-height:1.15}
+.lock p{color:#a9bac2; font-size:14px; margin:8px 0 16px}
+.inside{list-style:none; padding:0; margin:0 0 18px; display:grid; gap:9px}
+.inside li{display:grid; grid-template-columns:22px 1fr; gap:8px; font-size:14px; color:#dbe5e9}
+.inside li svg{color:var(--flap); margin-top:2px}
+.ghostlines{position:relative; background:var(--board-2); border-radius:12px; padding:12px; margin-bottom:18px; overflow:hidden}
+.ghostlines div{height:9px; border-radius:6px; background:#2a3d47; margin:8px 0}
+.ghostlines::after{content:"🔒  Your personal roadmap"; position:absolute; inset:0; display:grid; place-items:center; font:600 12px var(--mono); letter-spacing:.08em; color:var(--flap); background:linear-gradient(180deg,rgba(22,37,45,.2),rgba(22,37,45,.85))}
+.price{display:flex; align-items:baseline; gap:10px; margin-bottom:12px}
+.price b{font:800 38px var(--display); color:#fff}
+.price s{color:#7f93a0}
+.price span{font:600 11px var(--mono); letter-spacing:.1em; color:var(--flap)}
+.lock .cta{width:100%; justify-content:center}
+.trust{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:12px; font-size:12px; color:#8fa3ac}
+.restore{margin-top:14px; font-size:13px; color:#a9bac2}
+.restore button.linkish{border:0; background:none; color:var(--flap); padding:0; font-weight:600; text-decoration:underline}
+.restore form{display:flex; gap:8px; margin-top:8px}
+.restore input{flex:1; min-width:0; background:#0b1418; border:1px solid #2a3d47; color:#fff; border-radius:9px; padding:9px 10px; font:500 13px var(--mono)}
+.restore form button{border:0; background:var(--flap); color:#1b1400; border-radius:9px; padding:0 12px; font-weight:700}
+.err{background:var(--red-soft); color:var(--red); border-radius:10px; padding:10px 12px; font-size:13.5px; margin-top:12px}
+.lock .err{background:#3a1820; color:#ffb9c4}
+.row-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+.btn2{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line-2); background:var(--card); border-radius:11px; padding:9px 13px; font-weight:600; font-size:13.5px; text-decoration:none; color:var(--ink)}
+.btn2:hover{border-color:var(--ink-3)}
+.fine{font-size:12px; color:var(--ink-3); margin-top:14px}
+
+/* ---------- report ---------- */
+.rep{padding-block:26px 70px}
+.rep-bar{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin:16px 0 26px}
+.rep-bar .eyebrow b{color:var(--ink)}
+.tabs{display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:18px}
+.tab{flex:0 0 auto; display:flex; align-items:center; gap:10px; border:1.5px solid var(--line); background:var(--card); border-radius:14px; padding:10px 14px; font-weight:700}
+.tab .code{font:600 11px var(--mono); color:#fff; border-radius:5px; padding:3px 6px}
+.tab .p{font:600 12px var(--mono); color:var(--ink-3)}
+.tab.on{border-color:var(--ink); background:var(--ink); color:#fff}
+.tab.on .p{color:var(--flap)}
+.panel h2{font-size:clamp(24px,3.4vw,32px); line-height:1.1; margin:6px 0 18px}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.list li{display:grid; grid-template-columns:22px 1fr; gap:8px; font-size:14.5px}
+.ic{width:20px; height:20px; border-radius:6px; display:grid; place-items:center; font:700 12px var(--mono); margin-top:1px}
+.ic.ok{background:var(--teal-soft); color:var(--teal)}
+.ic.no{background:var(--gold-soft); color:#8a5a00}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:14px 0}
+.stat{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 16px}
+.stat small{font:600 10.5px var(--mono); letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase}
+.stat b{display:block; font:700 17px/1.3 var(--display); margin-top:6px}
+.sec-title{display:flex; align-items:center; gap:10px; margin:26px 0 12px; font-size:20px}
+.sec-title .eyebrow{margin-left:auto}
+.timeline{list-style:none; margin:0; padding:0; position:relative}
+.timeline::before{content:""; position:absolute; left:17px; top:8px; bottom:8px; width:2px; background:repeating-linear-gradient(180deg,var(--line-2) 0 5px,transparent 5px 9px)}
+.timeline li{display:grid; grid-template-columns:36px 1fr; gap:14px; padding:0 0 16px}
+.timeline .dot{width:36px; height:36px; border-radius:50%; background:var(--card); border:2px solid var(--route,var(--teal)); display:grid; place-items:center; font:600 13px var(--mono); color:var(--route,var(--teal)); position:relative; z-index:1}
+.timeline .body{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px}
+.timeline .body b{font-size:15.5px}
+.timeline .body p{margin:4px 0 0; font-size:14px; color:var(--ink-2)}
+.when{display:inline-flex; align-items:center; gap:6px; margin-top:8px; font:600 11.5px var(--mono); color:var(--teal); background:var(--teal-soft); border-radius:6px; padding:3px 8px}
+.costs{width:100%; border-collapse:collapse; font-size:14px}
+.costs td{padding:9px 0; border-bottom:1px solid var(--line); vertical-align:top}
+.costs td:last-child{text-align:right; font-family:var(--mono); font-size:13px; padding-left:12px; white-space:nowrap}
+.costs tr.tot td{border-bottom:0; font-weight:700; padding-top:12px}
+.costs tr.tot td:last-child{font:700 15px var(--display); color:var(--teal); white-space:normal}
+.reality{border:1.5px solid #ecd49a; background:var(--gold-soft); border-radius:16px; padding:14px 16px; margin-top:16px; font-size:14.5px}
+.reality .eyebrow{color:#8a5a00; display:block; margin-bottom:6px}
+.links{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.months{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.month h4{margin:0 0 10px; font:700 15px var(--display)}
+.check{display:grid; grid-template-columns:20px 1fr; gap:8px; font-size:14px; padding:6px 0; cursor:pointer}
+.check input{accent-color:var(--teal); width:16px; height:16px; margin-top:3px}
+.check input:checked + span{text-decoration:line-through; color:var(--ink-3)}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:16px; background:var(--card)}
+.cmp{border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px}
+.cmp th{font:600 10.5px var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); background:var(--card-2)}
+.cmp td{padding:11px 14px; border-bottom:1px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp tr.me td{background:#f1f8f4; font-weight:600}
+.cmp .code{font:600 11px var(--mono); color:#fff; border-radius:5px; padding:3px 6px; margin-right:6px}
+.doc{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:20px 22px; margin-top:18px}
+.doc-meta{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; padding-bottom:14px; margin-bottom:14px; border-bottom:1px dashed var(--line-2)}
+.doc-meta small{display:block; font:600 10px var(--mono); letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase}
+.doc-meta b{font:600 13.5px var(--body)}
+.glance{font-size:16px; line-height:1.6; margin:0}
+.snum{font:600 12px var(--mono); color:var(--ink-3); letter-spacing:.06em}
+.stage{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:start; background:var(--teal-soft); border:1px solid #bfe0d3; border-radius:14px; padding:12px 14px; margin:0 0 14px; font-size:14.5px}
+.stage b{font:600 11px var(--mono); letter-spacing:.1em; color:var(--teal); text-transform:uppercase; padding-top:3px}
+.ic.x{background:var(--red-soft); color:var(--red)}
+.elig{margin-top:14px}
+.elig h3{font-size:17px; margin-bottom:12px}
+.abroad{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px}
+.door-card{background:var(--card); border:1px solid var(--line); border-top:4px solid var(--c); border-radius:16px; padding:16px}
+.door-card .hd{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+.door-card .hd .code{font:600 11px var(--mono); color:#fff; border-radius:5px; padding:3px 6px; background:var(--c)}
+.door-card .hd b{font:700 16px var(--display)}
+.door-card .hd .p{margin-left:auto; font:600 13px var(--mono)}
+.door{display:inline-block; font:600 11px var(--mono); letter-spacing:.06em; border-radius:99px; padding:3px 9px; margin-bottom:10px}
+.door.open{background:var(--teal-soft); color:var(--teal)}
+.door.effort{background:var(--gold-soft); color:#8a5a00}
+.door.hard{background:var(--red-soft); color:var(--red)}
+.door-card p{margin:0 0 10px; font-size:14px; color:var(--ink-2)}
+.door-card .list li{font-size:13.5px}
+.door-card .foot{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line-2); font-size:13px; display:grid; gap:4px}
+.door-card .foot span b{font-weight:600}
+.teaser{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; background:var(--card); border:1px dashed var(--line-2); border-radius:14px; padding:12px 14px; font-size:14px}
+.teaser .code{font:600 11px var(--mono); color:#fff; border-radius:5px; padding:3px 6px}
+.guide{display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; background:var(--board); color:#e7eef1; border-radius:20px; padding:22px; margin-top:28px}
+.guide h3{color:#fff; font-size:21px}
+.guide p{margin:6px 0 0; color:#a9bac2; font-size:14px}
+.toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--ink); color:#fff; padding:10px 16px; border-radius:12px; font-size:14px; z-index:50; box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.spinner{width:18px; height:18px; border:2.5px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (max-width: 860px){
+  .hero{grid-template-columns:1fr; gap:28px; padding-top:28px}
+  .res{grid-template-columns:1fr}
+  .lock{position:static}
+  .how{grid-template-columns:1fr}
+  .months{grid-template-columns:1fr}
+}
+@media (max-width: 620px){
+  .opts{grid-template-columns:1fr}
+  .pass{grid-template-columns:1fr}
+  .stub{border-left:0; border-top:2px dashed var(--line-2); flex-direction:row; align-items:center; gap:16px}
+  .stub::before,.stub::after{top:-12px; left:auto}
+  .stub::before{left:-11px} .stub::after{right:-11px; bottom:auto}
+  .stub .barcode{flex:1; margin:0}
+  .stub .mini{display:none}
+  .mbar{display:flex}
+  .res{padding-bottom:110px}
+  .fields{grid-template-columns:1fr 1fr}
+  .two,.stats{grid-template-columns:1fr}
+  .guide{grid-template-columns:1fr}
+  .board .brow{grid-template-columns:44px 1fr}
+  .board .flaps{grid-column:2}
+}
+@media print{
+  body{background:#fff}
+  .top,.tabs,.rep-bar button,.guide,.row-actions,.no-print{display:none!important}
+  .panel{display:block!important; break-inside:avoid-page; margin-bottom:24px}
+  .check input{display:none}
+}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><i>✚</i>DocPulse</a>
+    <span class="pill">Route Finder</span>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+<script>
+// ===== DocPulse Route Finder — shared engine (public: runs in the page AND on the server) =====
+// Questions, weights and scoring. The paid report content lives only in route_content.js (server).
+
+const RF_ROUTES = {
+  india: { code: "IN",  name: "India PG",        long: "MD / MS / DNB in India",        gate: "NEET PG",      accent: "#d9622b" },
+  usa:   { code: "US",  name: "USA",             long: "Residency in the United States", gate: "USMLE",        accent: "#2f5bd3" },
+  uk:    { code: "UK",  name: "United Kingdom",  long: "NHS jobs & UK training",         gate: "PLAB",         accent: "#b3263b" },
+  de:    { code: "DE",  name: "Germany",         long: "Paid Facharzt training",         gate: "German C1",    accent: "#1d2a33" },
+  au:    { code: "AU",  name: "Australia",       long: "AMC pathway (and NZ)",           gate: "AMC",          accent: "#0a7ea4" },
+  gulf:  { code: "GCC", name: "Gulf",            long: "UAE · Saudi · Qatar · Oman",     gate: "Prometric",    accent: "#a36a0d" },
+  govt:  { code: "GOV", name: "Govt service",    long: "UPSC CMS · state PSC · MO posts", gate: "UPSC CMS",    accent: "#4b3fb0" },
+  mph:   { code: "PH",  name: "Public health",   long: "MPH · programmes · WHO / NGOs",  gate: "MPH",          accent: "#2c7a3f" },
+  industry: { code: "BIZ", name: "Non-clinical",  long: "Pharma · health-tech · MBA",     gate: "Skills + CV",  accent: "#7a3d9e" },
+};
+const RF_ORDER = ["india", "usa", "uk", "de", "au", "gulf", "govt", "mph", "industry"];
+
+// Each option: w = weight per route (-3..+3), why/risk = the reason shown when that weight counts.
+const RF_QUESTIONS = [
+  { id: "year", q: "Where are you right now?", sub: "Timing changes which doors are still wide open.",
+    options: [
+      { id: "y12", label: "1st or 2nd year", hint: "Lots of runway ahead",
+        w: { usa: 2, de: 2, au: 1, uk: 1, india: 1 },
+        why: { usa: "You're early enough to clear USMLE Step 1 during college, which is how most successful Indian applicants do it.", de: "You have years to reach German C1 slowly, 1 hour a day, instead of cramming it after internship." } },
+      { id: "y3f", label: "3rd year or final year", hint: "Exams + big decisions",
+        w: { india: 2, usa: 1, uk: 1, de: 1, au: 1 },
+        why: { india: "Final-year concepts overlap heavily with NEET PG, so prep now pays off twice." } },
+      { id: "intern", label: "Doing internship", hint: "Almost a doctor",
+        w: { india: 2, uk: 2, au: 1, de: 1 },
+        why: { uk: "Your internship counts towards GMC registration, and PLAB 1 can be taken as soon as you're ready.", india: "Internship year is the classic NEET PG prep year." } },
+      { id: "grad", label: "Finished MBBS, not in PG yet", hint: "Preparing, or just started working",
+        w: { india: 2, uk: 2, gulf: 1, de: 1, au: 1, usa: -1 },
+        why: { uk: "You already meet the internship requirement for full GMC registration.", india: "You can prepare full-time for the next NEET PG." },
+        risk: { usa: "US programs often prefer recent graduates. Every year after graduation makes the Match a little harder." } },
+      { id: "pg", label: "Doing or done MD / MS / DNB", hint: "Specialist track",
+        w: { gulf: 3, uk: 1, au: 1, de: 1, india: 1, usa: -1 },
+        why: { gulf: "An Indian MD/MS/DNB is exactly what unlocks the well-paid specialist jobs in the Gulf." },
+        risk: { usa: "In the USA you would redo residency from scratch, and graduation year matters." } },
+    ] },
+  { id: "budget", q: "How much could you spend on exams, prep and travel over the next 2–3 years?", sub: "Include family support. Be honest, it decides a lot.",
+    options: [
+      { id: "b1", label: "Under ₹3 lakh", hint: "Tight budget",
+        w: { india: 3, gulf: 2, de: 0, uk: -1, au: -2, usa: -3 }, flag: "budgetLow",
+        why: { india: "India PG is the lowest-cost route. Coaching is the main expense.", gulf: "Gulf licensing costs very little compared with Western exams." },
+        risk: { usa: "The USMLE route usually costs ₹20–30 lakh in total. Under ₹3 lakh it is not realistic without a sponsor.", au: "AMC fees alone are about ₹4 lakh before travel and living costs." } },
+      { id: "b2", label: "₹3–10 lakh", hint: "Moderate",
+        w: { india: 1, gulf: 1, de: 2, uk: 2, au: 1, usa: -2 },
+        why: { de: "Germany fits this budget. The big cost is language courses, and residency is a paid job.", uk: "PLAB 1 + 2, GMC and travel fit inside this range." },
+        risk: { usa: "The US route typically needs ₹20 lakh+, so this budget would be stretched." } },
+      { id: "b3", label: "₹10–25 lakh", hint: "Comfortable",
+        w: { uk: 1, au: 2, de: 1, usa: 1 },
+        why: { au: "You can cover AMC exams plus the months of job-hunting in Australia." } },
+      { id: "b4", label: "₹25 lakh or more", hint: "Money isn't the blocker",
+        w: { usa: 3, au: 2, uk: 1 },
+        why: { usa: "You can afford the full USMLE journey, including US clinical experience, which strongly improves Match chances." } },
+    ] },
+  { id: "future", q: "Ten years from now, where do you want to be living?", sub: "Pick the one that feels most true.",
+    options: [
+      { id: "home", label: "In India, near my family", hint: "Roots matter",
+        w: { india: 3, gulf: 1, usa: -2, uk: -2, au: -2, de: -2 },
+        why: { india: "You want to build your life in India, so an Indian PG gives you the strongest local career.", gulf: "The Gulf is a few hours from home, and many doctors do a few years there and return." } },
+      { id: "settle", label: "Settled abroad permanently", hint: "New country, new life",
+        w: { usa: 2, uk: 2, au: 3, de: 2, india: -2, gulf: -1 },
+        why: { au: "Australia offers a clear path to permanent residency for doctors.", de: "Germany offers permanent residency to working doctors, and Approbation is valid for life.", uk: "UK doctors can move towards settlement (indefinite leave to remain) after years of work.", usa: "The US offers the highest long-term earnings if you want to settle there." },
+        risk: { gulf: "Gulf countries don't offer citizenship. It is a contract life, not a permanent one." } },
+      { id: "fewyears", label: "Abroad for a few years, then back", hint: "Earn, learn, return",
+        w: { gulf: 3, uk: 1, india: 1 },
+        why: { gulf: "The Gulf is built for exactly this: tax-free savings, close to home, easy to return.", uk: "A few years in the NHS gives experience that is valued when you come back." } },
+      { id: "anywhere", label: "Anywhere, best career wins", hint: "Open to all",
+        w: { usa: 2, au: 1, uk: 1, de: 1 },
+        why: { usa: "If only the career matters, the US still offers the biggest ceiling for doctors." } },
+    ] },
+  { id: "spec", q: "How set are you on a specific specialty?", sub: "E.g. derma, radiology, ortho, cardio.",
+    options: [
+      { id: "fixed", label: "I want one specific competitive branch", hint: "Dream branch",
+        w: { india: 2, de: 1, usa: -1, uk: -1, au: -1 },
+        why: { india: "In India your rank decides your branch directly, so a strong rank gets you your exact specialty.", de: "In Germany you apply directly to hospitals, and most specialties are reachable without a ranking exam." },
+        risk: { usa: "Competitive US specialties (derma, radiology, ortho) are very hard to match into as an IMG.", uk: "Since the 2026 UK law, competitive UK training posts go to UK graduates first." } },
+      { id: "anyclin", label: "Any good clinical specialty", hint: "Flexible",
+        w: { de: 2, usa: 1, uk: 1, au: 1, india: 1 },
+        why: { de: "Germany has many open training posts in medicine, surgery, anaesthesia and more.", usa: "IMGs match most often in internal medicine, family medicine, paediatrics and psychiatry." } },
+      { id: "gp", label: "GP / family practice is fine", hint: "Broad practice",
+        w: { au: 2, uk: 2, gulf: 2, de: 1 },
+        why: { au: "Australia has strong demand for GPs, especially in regional areas.", uk: "NHS general practice and non-training jobs are the most accessible UK entry.", gulf: "GP licences in the Gulf are relatively quick to get once you have experience." } },
+      { id: "unsure", label: "Honestly not sure yet", hint: "Still exploring",
+        w: { india: 1, de: 1 },
+        why: { india: "India lets you decide after seeing your rank, with no commitment needed now." } },
+    ] },
+  { id: "lang", q: "Would you learn a new language to fluent medical level?", sub: "Germany needs German at C1, fluent enough to talk to patients.",
+    options: [
+      { id: "love", label: "Yes, I'd enjoy that", hint: "Languages excite me",
+        w: { de: 3 },
+        why: { de: "You're willing to learn German, which is the one big gate. After that, Germany is surprisingly open." } },
+      { id: "maybe", label: "Maybe, if the payoff is big", hint: "Open to it",
+        w: { de: 1 } },
+      { id: "english", label: "No, English only", hint: "Keep it English",
+        w: { de: -3, uk: 1, au: 1, usa: 1 }, flag: "noGerman",
+        risk: { de: "Germany is almost impossible without fluent German. Every patient conversation and exam is in German." } },
+    ] },
+  { id: "exam", q: "What kind of exam are you strongest at?", sub: "Different routes test different skills.",
+    options: [
+      { id: "mcq", label: "MCQs, I can grind question banks", hint: "Recall & speed",
+        w: { usa: 2, india: 2, au: 1 },
+        why: { usa: "USMLE Step 1 and Step 2 CK are long MCQ exams, which is your strength.", india: "NEET PG is pure MCQ speed and recall, which suits you." } },
+      { id: "clinical", label: "Clinical, talking to patients, OSCEs", hint: "People skills",
+        w: { uk: 2, au: 1, de: 1 },
+        why: { uk: "PLAB 2 is a practical OSCE that rewards communication, exactly your strength.", de: "Germany's Kenntnisprüfung is an oral, clinical exam, not an MCQ test." } },
+      { id: "both", label: "Both, about equally", hint: "All-rounder",
+        w: { usa: 1, uk: 1, au: 1 } },
+      { id: "neither", label: "I struggle with MCQs", hint: "Hard to admit, useful to know",
+        w: { de: 2, uk: 1, gulf: 1, india: -1, usa: -2 },
+        why: { de: "Germany's main exams are oral and clinical, so an MCQ weakness hurts you least here." },
+        risk: { usa: "USMLE Step 2 CK scores decide interviews. Weak MCQ skills make the US route very hard.", india: "NEET PG is MCQ-only, so it will need serious practice." } },
+    ] },
+  { id: "time", q: "How soon do you need to start earning a real salary?", sub: "Not a stipend in prep mode, a doctor's pay.",
+    options: [
+      { id: "asap", label: "As soon as possible, within a year", hint: "Urgent",
+        w: { gulf: 2, india: 1, de: -1, usa: -2, au: -1 },
+        why: { gulf: "A Gulf licence can come through in 3–5 months once you're eligible." },
+        risk: { usa: "The US route usually takes 2–4 years before your first residency paycheck." } },
+      { id: "two", label: "About 2 years is okay", hint: "Can wait a bit",
+        w: { uk: 2, de: 2, india: 1 },
+        why: { uk: "The UK can get you into a paid NHS job in 12–24 months.", de: "In Germany you can often work on a temporary permit while finishing the last exam." } },
+      { id: "long", label: "3–4 years is fine if it's worth it", hint: "Long game",
+        w: { usa: 2, au: 1 },
+        why: { usa: "You can afford the long US timeline, which is what it usually takes." } },
+    ] },
+  { id: "risk", q: "How do you feel about uncertainty?", sub: "Some routes have a real chance of not working out.",
+    options: [
+      { id: "safe", label: "I want the surest path", hint: "Low risk",
+        w: { india: 2, gulf: 1, de: 1, usa: -2 },
+        why: { india: "India gives a seat every year to people who prepare well. The outcome is in your hands.", de: "In Germany, once you pass the language and knowledge exams, jobs are genuinely available." },
+        risk: { usa: "Only 58% of non-US IMGs matched to first-year posts in 2025, so there's a real chance of not matching." } },
+      { id: "some", label: "Some uncertainty is okay", hint: "Balanced",
+        w: { uk: 1, de: 1, au: 1 } },
+      { id: "bold", label: "High risk, high reward", hint: "Go big",
+        w: { usa: 3, au: 1 },
+        why: { usa: "You're comfortable with risk. The US is the highest-risk, highest-reward route." } },
+    ] },
+  { id: "family", q: "Do you need to support your family financially soon?", sub: "No judgement, it's a real factor.",
+    options: [
+      { id: "yes", label: "Yes, fairly soon", hint: "Responsibilities",
+        w: { gulf: 2, india: 1, de: 1, usa: -2 },
+        why: { gulf: "Gulf salaries are tax-free, which helps if money needs to go home.", de: "German residents are paid a full salary (about €5,600/month gross in year 1) from day one of training." },
+        risk: { usa: "The US route drains savings for years before it pays." } },
+      { id: "some", label: "A little", hint: "Manageable", w: {} },
+      { id: "no", label: "No, I'm free to invest in myself", hint: "Supported",
+        w: { usa: 1, au: 1 } },
+    ] },
+  { id: "acad", q: "Academically, where do you usually stand?", sub: "In class tests, mocks, or university exams.",
+    options: [
+      { id: "top", label: "Near the top", hint: "Consistent scorer",
+        w: { usa: 2, india: 2 },
+        why: { usa: "A high Step 2 CK score is the IMG's biggest weapon, and you're built for it.", india: "Top scorers get the best NEET PG ranks, and in India the rank is everything." } },
+      { id: "mid", label: "Somewhere in the middle", hint: "Steady",
+        w: { uk: 1, de: 1, gulf: 1, au: 1 } },
+      { id: "low", label: "Below average, but I work hard", hint: "Grinder",
+        w: { de: 2, uk: 1, gulf: 1, india: -1, usa: -2 },
+        why: { de: "Germany rewards persistence (language and oral exams) more than ranking against thousands." },
+        risk: { usa: "The US Match is very score-driven for IMGs, so this route is an uphill climb.", india: "Top NEET PG branches need top-percentile scores." } },
+    ] },
+  { id: "life", q: "How important is work–life balance during training?", sub: "Duty hours differ a lot between countries.",
+    options: [
+      { id: "high", label: "Very important", hint: "I want a life",
+        w: { de: 2, au: 2, uk: 1, gulf: 1, usa: -1 },
+        why: { de: "German hospitals follow EU working-time rules and pay for overtime.", au: "Australian junior doctors have regulated hours and strong leave entitlements." },
+        risk: { usa: "US residency often runs up to 80 hours a week." } },
+      { id: "medium", label: "Matters, but career first", hint: "Balanced", w: {} },
+      { id: "grind", label: "I'll grind for a few years", hint: "No problem",
+        w: { usa: 2, india: 1 },
+        why: { usa: "You're ready for US residency hours, which is the price of that career." } },
+    ] },
+  { id: "abroadexp", q: "Would you spend 6–12 months doing observerships or research abroad?", sub: "Clinical experience in the country helps a lot for some routes.",
+    options: [
+      { id: "yes", label: "Yes, I'd do it", hint: "All in",
+        w: { usa: 3, uk: 1 },
+        why: { usa: "US clinical experience and US letters of recommendation are what get IMGs interviews, and you're willing." } },
+      { id: "short", label: "Maybe short stints", hint: "A few weeks", w: { usa: 1, au: 1 } },
+      { id: "no", label: "No, not possible for me", hint: "Stay put",
+        w: { usa: -2, india: 1, gulf: 1 },
+        risk: { usa: "Without US clinical experience or US letters, getting interviews as an IMG is much harder." } },
+    ] },
+];
+
+// ---------- Post-MBBS routes: government service, public health, non-clinical industry ----------
+// Extra weights merged into the questions above, plus two questions that separate clinical
+// from non-clinical paths. Kept together so these routes are easy to tune.
+(function addPostMbbsRoutes(){
+  const year = RF_QUESTIONS.find(q => q.id === "year");
+  year.options.splice(4, 0, { id: "mo", label: "Working as a doctor for 2+ years", hint: "MO, casualty, clinic",
+    w: { gulf: 2, govt: 2, mph: 2, industry: 2, uk: 2, au: 1, india: 1, de: 1, usa: -2 },
+    why: { gulf: "Your years as a working doctor count as the clinical experience Gulf GP licences ask for.",
+           govt: "Your experience helps in state medical officer recruitment, and UPSC CMS only needs an MBBS (within the age limit).",
+           mph: "Real-world clinical years make you a stronger public health candidate than a fresh graduate.",
+           industry: "Pharma, clinical research and health-tech value doctors with hands-on clinical experience.",
+           uk: "Post-internship experience makes NHS jobs easier to get after PLAB." },
+    risk: { usa: "US programs strongly prefer recent graduates, so several years after MBBS makes the Match much harder." } });
+  const X = {
+    year: { y3f: { w: { govt: 1 } },
+      intern: { w: { govt: 1, mph: 1, industry: 1 } },
+      grad: { w: { govt: 2, mph: 2, industry: 2 }, why: { govt: "UPSC CMS needs only an MBBS, so you can sit it this year.", industry: "Right after MBBS is the easiest time to switch lanes if clinical work isn't for you." } },
+      pg: { w: { govt: 1, mph: 1, industry: 1 }, why: { industry: "An MD opens the better-paid pharma roles, like medical affairs and medical science liaison." } } },
+    budget: { b1: { w: { govt: 3, mph: 1, industry: 2 }, why: { govt: "UPSC CMS costs almost nothing to attempt (a ₹200 fee for general category).", industry: "Entry non-clinical jobs need short courses, not big fees." } },
+      b2: { w: { mph: 2, industry: 1, govt: 1 }, why: { mph: "An MPH in India (about ₹2–6 lakh) fits this budget." } },
+      b3: { w: { industry: 1, mph: 1 } }, b4: { w: { industry: 1, mph: 1 } } },
+    future: { home: { w: { govt: 3, industry: 2, mph: 1 }, why: { govt: "A government doctor's job gives a secure career in India.", industry: "India's pharma and health-tech hubs (Bengaluru, Hyderabad, Mumbai, NCR) hire doctors." } },
+      settle: { w: { mph: 1, govt: -3 }, risk: { govt: "Government service ties your career to India." } },
+      fewyears: { w: { mph: 1 } }, anywhere: { w: { industry: 1, mph: 1 } } },
+    spec: { fixed: { w: { govt: -1, mph: -1, industry: -2 }, risk: { industry: "You want a specific specialty, and non-clinical work moves you away from specialist practice." } },
+      anyclin: { w: { govt: 1 } }, gp: { w: { govt: 2 }, why: { govt: "Government medical officer posts are general-duty roles, which suits you." } },
+      unsure: { w: { industry: 1, mph: 1, govt: 1 } } },
+    exam: { mcq: { w: { govt: 2 }, why: { govt: "UPSC CMS is two MCQ papers, and it overlaps with NEET PG prep." } },
+      both: { w: { govt: 1 } }, neither: { w: { industry: 2, mph: 1, govt: -1 }, why: { industry: "Non-clinical jobs are won with skills and interviews, not ranks." } } },
+    time: { asap: { w: { industry: 2, govt: 1, mph: -1 }, why: { industry: "With a sharp CV, entry non-clinical jobs can come through in 1–4 months." } },
+      two: { w: { mph: 2, govt: 1 } } },
+    risk: { safe: { w: { govt: 3, industry: -1 }, why: { govt: "Government service is the most secure path for a doctor in India." } },
+      some: { w: { mph: 1, industry: 1 } }, bold: { w: { industry: 1 } } },
+    family: { yes: { w: { govt: 1, industry: 1, mph: -1 } }, no: { w: { mph: 1 } } },
+    acad: { top: { w: { govt: 1 } }, mid: { w: { mph: 1, industry: 1 } }, low: { w: { industry: 1 } } },
+    life: { high: { w: { govt: 1, industry: 2, mph: 1 }, why: { industry: "Most corporate roles run on office hours, with no night duties." } } },
+    abroadexp: { yes: { w: { mph: 1 } }, no: { w: { govt: 1, industry: 1 } } },
+  };
+  RF_QUESTIONS.forEach(q => (q.options || []).forEach(o => {
+    const x = X[q.id] && X[q.id][o.id]; if (!x) return;
+    o.w = Object.assign({}, o.w, x.w);
+    if (x.why) o.why = Object.assign({}, o.why, x.why);
+    if (x.risk) o.risk = Object.assign({}, o.risk, x.risk);
+  }));
+  const CLIN = ["india", "usa", "uk", "de", "au", "gulf"];
+  const clin = (v) => Object.fromEntries(CLIN.map(r => [r, v]));
+  RF_QUESTIONS.splice(4, 0, { id: "clinic", q: "How do you feel about clinical work for the next 20 years?", sub: "Wards, OPDs, night duties, patients. Be honest.",
+    options: [
+      { id: "love", label: "I want to treat patients, that's why I did MBBS", hint: "Clinical at heart",
+        w: Object.assign(clin(2), { govt: 1, mph: -2, industry: -3 }),
+        risk: { industry: "You love clinical work, and non-clinical roles would take you away from patients.", mph: "Public health is mostly programme and desk work, with little direct patient care." } },
+      { id: "ok", label: "It's fine, but it isn't my whole identity", hint: "Open-minded",
+        w: { govt: 1, mph: 1, industry: 1 } },
+      { id: "away", label: "I'd rather work away from the bedside", hint: "Ready for something different",
+        w: Object.assign(clin(-2), { india: -1, industry: 3, mph: 3 }),
+        why: { industry: "You want to move away from the bedside, and pharma, research and health-tech need doctors who think clinically.", mph: "Public health uses your medical training without daily ward work." },
+        risk: Object.fromEntries(CLIN.map(r => [r, "You'd rather work away from the bedside, and this route means years of full-time clinical training."])) },
+    ] });
+  RF_QUESTIONS.splice(8, 0, { id: "value", q: "What matters most to you in a job?", sub: "Pick the one you'd protect first.",
+    options: [
+      { id: "secure", label: "Job security and a stable life", hint: "Peace of mind",
+        w: { govt: 3, india: 1, de: 1, industry: -1 }, why: { govt: "A permanent government post gives the job security you value most." } },
+      { id: "growth", label: "Fast growth and high pay", hint: "Ambition first",
+        w: { usa: 2, industry: 2, gulf: 1, govt: -2 }, why: { industry: "Non-clinical careers can grow fast, especially with an MBA or an MD for medical affairs.", usa: "The US has the highest pay ceiling for doctors anywhere." },
+        risk: { govt: "Government pay is steady but grows slowly compared with private or abroad options." } },
+      { id: "impact", label: "Improving health for many people", hint: "Big picture",
+        w: { mph: 3, govt: 1 }, why: { mph: "Public health lets you improve health for whole populations, which is what you care about." } },
+      { id: "calm", label: "Predictable hours and a calm life", hint: "Balance",
+        w: { govt: 1, industry: 2, de: 1, au: 1 }, why: { industry: "Non-clinical roles mostly keep regular office hours." } },
+    ] });
+})();
+
+function rfValidate(answers) {
+  if (!answers || typeof answers !== "object") return false;
+  return RF_QUESTIONS.every(q => q.options.some(o => o.id === answers[q.id]));
+}
+
+function rfScore(answers) {
+  const raw = {}, min = {}, max = {}, reasons = {}, risks = {}, flags = {};
+  RF_ORDER.forEach(r => { raw[r] = 0; min[r] = 0; max[r] = 0; reasons[r] = []; risks[r] = []; });
+  RF_QUESTIONS.forEach(q => {
+    RF_ORDER.forEach(r => {
+      const ws = q.options.map(o => (o.w && o.w[r]) || 0);
+      min[r] += Math.min(...ws); max[r] += Math.max(...ws);
+    });
+    const o = q.options.find(x => x.id === answers[q.id]);
+    if (!o) return;
+    if (o.flag) flags[o.flag] = true;
+    RF_ORDER.forEach(r => {
+      const w = (o.w && o.w[r]) || 0;
+      raw[r] += w;
+      if (w > 0 && o.why && o.why[r]) reasons[r].push({ w, text: o.why[r] });
+      if (w < 0 && o.risk && o.risk[r]) risks[r].push({ w, text: o.risk[r] });
+    });
+  });
+  const pct = {};
+  RF_ORDER.forEach(r => {
+    const span = max[r] - min[r] || 1;
+    let p = Math.round(12 + 86 * (raw[r] - min[r]) / span);   // 12..98, never a fake 0 or 100
+    if (r === "usa" && flags.budgetLow) p = Math.min(p, 30);
+    if (r === "au" && flags.budgetLow) p = Math.min(p, 45);
+    if (r === "de" && flags.noGerman) p = Math.min(p, 20);
+    pct[r] = p;
+    reasons[r].sort((a, b) => b.w - a.w); risks[r].sort((a, b) => a.w - b.w);
+  });
+  const ranked = RF_ORDER.slice().sort((a, b) => pct[b] - pct[a] || raw[b] - raw[a]);
+  return { pct, ranked, reasons, risks, flags };
+}
+
+// What anyone sees for free.
+function rfFreeResult(answers) {
+  const s = rfScore(answers);
+  const top = s.ranked[0];
+  return { pct: s.pct, ranked: s.ranked, top, why: (s.reasons[top][0] || {}).text || "", nReasons: s.reasons[top].length, nRisks: s.risks[top].length };
+}
+
+
+</script>
+<script>
+(function(){
+const PRICE = 550;                       // keep in sync with PRICE_PAISE in the route-report function
+const RZP_KEY = "rzp_live_TfrVp5WBEyPS7y";
+const SUPABASE_URL = "https://uwrwtttkqywsmehexmbf.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+const FN = SUPABASE_URL + "/functions/v1/route-report";
+const SITE = "https://docpulsee.github.io/docpulse";
+
+const $app = document.getElementById("app");
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem("dp_rf_" + k)); }catch(e){ return null; } },
+  set(k, v){ try{ localStorage.setItem("dp_rf_" + k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem("dp_rf_" + k); }catch(e){} },
+};
+const PLANE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/></svg>';
+const ARROW = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+const TICK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>';
+const YEAR_LABEL = { y12:"MBBS 1st/2nd yr", y3f:"MBBS 3rd/final yr", intern:"Intern", grad:"MBBS graduate", mo:"Working doctor", pg:"PG doctor" };
+const R = RF_ROUTES;
+
+let answers = store.get("answers") || {};
+let qi = 0;
+let lastReport = null;
+
+function toast(msg){ const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
+function show(html){ $app.innerHTML = '<section class="screen">' + html + '</section>'; window.scrollTo({ top:0, behavior:"smooth" }); }
+
+// ---------- split-flap text ----------
+const FLAP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%?-";
+function flapHTML(text, len){ const t = (text || "").toUpperCase().padEnd(len, " ").slice(0, len); return '<span class="flaps" data-len="' + len + '">' + [...t].map(c => "<span>" + (c === " " ? "&nbsp;" : esc(c)) + "</span>").join("") + "</span>"; }
+function flipTo(el, text){
+  const cells = el.children, len = cells.length, target = (text || "").toUpperCase().padEnd(len, " ").slice(0, len);
+  [...cells].forEach((cell, i) => {
+    let n = 5 + Math.floor(Math.random() * 6) + i;
+    const tick = () => {
+      if (n-- <= 0){ cell.innerHTML = target[i] === " " ? "&nbsp;" : esc(target[i]); return; }
+      cell.textContent = FLAP_CHARS[Math.floor(Math.random() * FLAP_CHARS.length)];
+      setTimeout(tick, 38);
+    };
+    tick();
+  });
+}
+
+// ---------- intro ----------
+const BOARD = [
+  ["india", "NEET PG",   "BOARDING"],
+  ["usa",   "USMLE",     "HIGH RISK"],
+  ["uk",    "PLAB",      "RULES NEW"],
+  ["de",    "GERMAN C1", "LANG CHECK"],
+  ["au",    "AMC",       "FIRST JOB?"],
+  ["gulf",  "PROMETRIC", "TAX FREE"],
+  ["govt",  "UPSC CMS",  "SECURE"],
+  ["mph",   "MPH",       "IMPACT"],
+  ["industry", "SKILLS+CV", "NO NEET"],
+];
+let boardTimer = null;
+function intro(){
+  const pay = store.get("pay");
+  const done = rfValidate(answers);
+  show(`
+  <div class="hero">
+    <div>
+      <div class="eyebrow">For MBBS students, graduates &amp; working doctors</div>
+      <h1 style="margin-top:14px">Where should your MBBS <em>take you?</em></h1>
+      <p class="lead">Nine real paths: India PG, USA, UK, Germany, Australia, the Gulf, government service, public health or a non-clinical career. Answer 14 honest questions and see which fits your budget, your family and your goals, checked against 2026 rules.</p>
+      <button class="cta" id="start">Find my route ${ARROW}</button>
+      <div class="meta">14 questions · about 4 minutes · free result</div>
+      ${pay ? `<div class="saved">Your full report is saved on this device. <button id="openRep">Open my report</button></div>`
+            : (done ? `<div class="saved">You finished the quiz earlier. <button id="lastRes">See my result</button></div>` : "")}
+      <div class="chips">
+        <span class="chip"><b></b>Includes the UK's new 2026 training law</span>
+        <span class="chip"><b></b>Real exam fees, in ₹</span>
+        <span class="chip"><b></b>A 90-day plan for your year</span>
+      </div>
+    </div>
+    <div class="board" aria-label="Nine routes after MBBS">
+      <div class="board-head"><strong>DEPARTURES</strong><span>FROM: MBBS · INDIA</span></div>
+      ${BOARD.map(([r, gate, st], i) => `
+        <div class="brow">
+          <span class="code">${R[r].code}</span>
+          <span class="nm">${esc(R[r].name)}<small>VIA ${esc(gate)}</small></span>
+          ${flapHTML(st, 10).replace('class="flaps"', 'class="flaps" id="fl' + i + '"')}
+        </div>`).join("")}
+      <div class="board-foot"><span>YOUR GATE: <span class="blink">???</span></span><span id="clock"></span></div>
+    </div>
+  </div>
+  <div class="how">
+    <div><span class="n">01 · QUIZ</span><h3>14 real-life questions</h3><p>Budget, family, clinical appetite, language, exam style, how soon you need to earn. No trick questions.</p></div>
+    <div><span class="n">02 · RESULT</span><h3>Your routes, ranked</h3><p>See how all nine routes score for you, and the main reason your top route fits. Free.</p></div>
+    <div><span class="n">03 · REPORT</span><h3>A roadmap for your year</h3><p>Steps timed to where you are now, full costs in ₹, honest watch-outs and your first 90 days.</p></div>
+  </div>`);
+  document.getElementById("start").onclick = () => { answers = {}; store.set("answers", answers); qi = 0; quiz(); };
+  const o = document.getElementById("openRep"); if (o) o.onclick = () => openReport(pay);
+  const l = document.getElementById("lastRes"); if (l) l.onclick = () => result();
+  clearInterval(boardTimer);
+  const alt = ["ON TIME", "BOARDING", "GATE OPEN", "DELAYED", "CHECK-IN"];
+  let k = 0;
+  const tickClock = () => { const c = document.getElementById("clock"); if (!c) return clearInterval(boardTimer); const d = new Date(); c.textContent = d.toLocaleTimeString("en-IN", { hour:"2-digit", minute:"2-digit", hour12:false }) + " IST"; };
+  tickClock();
+  boardTimer = setInterval(() => {
+    tickClock();
+    const i = k % BOARD.length, el = document.getElementById("fl" + i); if (!el) return;
+    flipTo(el, (k / BOARD.length | 0) % 2 ? alt[(k * 7) % alt.length] : BOARD[i][2]);
+    k++;
+  }, 1400);
+}
+
+// ---------- quiz ----------
+function quiz(){
+  clearInterval(boardTimer);
+  const q = RF_QUESTIONS[qi], n = RF_QUESTIONS.length;
+  const pct = (qi / n) * 100;
+  show(`
+  <div class="quiz">
+    <div class="path">
+      <svg preserveAspectRatio="none" viewBox="0 0 100 44"><path d="M8 22 H92" stroke="#d3cdb9" stroke-width="1.4" stroke-dasharray="2 2.4" vector-effect="non-scaling-stroke" fill="none"/></svg>
+      <span class="from">MBBS</span><span class="to">???</span>
+      <span class="plane" id="plane" style="left:calc(52px + (100% - 104px) * ${Math.max(0, (qi - 1) / n)})">${PLANE}</span>
+    </div>
+    <div class="qhead"><span class="qnum">Q${String(qi + 1).padStart(2, "0")}</span><span class="qcount">${qi + 1} of ${n}</span></div>
+    <h2 class="qtitle">${esc(q.q)}</h2>
+    <p class="qsub">${esc(q.sub)}</p>
+    <div class="opts" role="radiogroup" aria-label="${esc(q.q)}">
+      ${q.options.map((o, i) => `
+        <button class="opt ${answers[q.id] === o.id ? "sel" : ""}" role="radio" aria-checked="${answers[q.id] === o.id}" data-id="${o.id}">
+          <span class="k">${"ABCDE"[i]}</span>
+          <span><span class="l">${esc(o.label)}</span><span class="h">${esc(o.hint || "")}</span></span>
+        </button>`).join("")}
+    </div>
+    <div class="qnav">
+      <button class="ghost" id="back" ${qi === 0 ? "" : ""}>← ${qi === 0 ? "Start page" : "Back"}</button>
+      <span class="kbd">Tip: press A–${"ABCDE"[q.options.length - 1]}</span>
+    </div>
+  </div>`);
+  requestAnimationFrame(() => { const p = document.getElementById("plane"); if (p) p.style.left = `calc(52px + (100% - 104px) * ${pct / 100})`; });
+  document.querySelectorAll(".opt").forEach(b => b.onclick = () => pick(b.dataset.id));
+  document.getElementById("back").onclick = () => { if (qi === 0) intro(); else { qi--; quiz(); } };
+}
+let picking = false;
+function pick(id){
+  if (picking) return; picking = true;
+  const q = RF_QUESTIONS[qi];
+  answers[q.id] = id; store.set("answers", answers);
+  document.querySelectorAll(".opt").forEach(b => { const on = b.dataset.id === id; b.classList.toggle("sel", on); b.setAttribute("aria-checked", on); });
+  setTimeout(() => {
+    picking = false;
+    if (qi < RF_QUESTIONS.length - 1){ qi++; quiz(); }
+    else calculating();
+  }, 260);
+}
+document.addEventListener("keydown", e => {
+  if (!document.querySelector(".opts") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const i = "abcde".indexOf(e.key.toLowerCase()); const n = "12345".indexOf(e.key);
+  const idx = i >= 0 ? i : n; const q = RF_QUESTIONS[qi];
+  if (idx >= 0 && q.options[idx]) pick(q.options[idx].id);
+});
+
+// ---------- calculating ----------
+function calculating(){
+  const fr = rfFreeResult(answers);
+  show(`
+  <div class="calc">
+    <h2>Checking nine routes against your answers</h2>
+    <p>Budget, timing, language, risk…</p>
+    <div class="board">
+      <div class="board-head"><strong>MATCHING</strong><span class="blink">● LIVE</span></div>
+      ${RF_ORDER.map(r => `<div class="brow"><span class="code">${R[r].code}</span><span class="nm">${esc(R[r].name)}<small>VIA ${esc(R[r].gate.toUpperCase())}</small></span>${flapHTML("----", 5).replace('class="flaps"', 'class="flaps" data-r="' + r + '"')}</div>`).join("")}
+    </div>
+  </div>`);
+  RF_ORDER.forEach((r, i) => setTimeout(() => { const el = document.querySelector('[data-r="' + r + '"]'); if (el) flipTo(el, (fr.pct[r] + "%").padStart(5, " ")); }, 250 + i * 220));
+  setTimeout(result, 2300);
+}
+
+// ---------- boarding pass ----------
+function passHTML(top, pct, year){
+  const r = R[top];
+  return `
+  <div class="pass" style="--route:${r.accent}">
+    <div class="pass-main">
+      <div class="pass-band"><span>BOARDING PASS · DOCPULSE</span><span>${new Date().toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" }).toUpperCase()}</span></div>
+      <div class="fly">
+        <div><small>FROM</small><div class="c">MBBS</div><div class="n">India</div></div>
+        <div class="line">${PLANE}</div>
+        <div style="text-align:right"><small>TO</small><div class="c to">${r.code}</div><div class="n">${esc(r.name)}</div></div>
+      </div>
+      <div class="fields">
+        <div><small>PASSENGER</small><b>${esc(YEAR_LABEL[year || answers.year] || "You")}</b></div>
+        <div><small>ROUTE</small><b>${esc(r.long)}</b></div>
+        <div><small>GATE</small><b>${esc(r.gate)}</b></div>
+        <div><small>CLASS</small><b>Best fit</b></div>
+      </div>
+    </div>
+    <div class="stub">
+      <div><div class="eyebrow">MATCH</div><div class="big">${pct}<sup>%</sup></div><div class="mini">DEST <b>${r.code}</b><br>GATE <b>${esc(r.gate.toUpperCase())}</b><br>SEQ <b>001</b></div></div>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </div>`;
+}
+function ranksHTML(fr){
+  return `<div class="card ranks"><h3>Your nine routes, ranked</h3>
+    ${fr.ranked.map((r, i) => `
+      <div class="rk">
+        <span class="code" style="background:${R[r].accent}">${R[r].code}</span>
+        <div><div class="nm">${esc(R[r].name)}<small>${i < 3 ? "#" + (i + 1) : ""}</small></div><div class="bar"><i data-w="${fr.pct[r]}" style="background:${R[r].accent}"></i></div></div>
+        <span class="p">${fr.pct[r]}%</span>
+      </div>`).join("")}
+  </div>`;
+}
+function animateBars(){ requestAnimationFrame(() => setTimeout(() => document.querySelectorAll(".bar i").forEach(b => b.style.width = b.dataset.w + "%"), 60)); }
+
+function abroadTeaser(fr){
+  const F = ["usa", "uk", "de", "au", "gulf"];
+  if (F.includes(fr.top)) return "";
+  const b = F.slice().sort((x, y) => fr.pct[y] - fr.pct[x])[0];
+  return `<div class="teaser"><span>✈️ Thinking of going abroad? Your best foreign door right now:</span><span class="code" style="background:${R[b].accent}">${R[b].code}</span><b>${esc(R[b].name)} · ${fr.pct[b]}%</b><span style="color:var(--ink-3)">Full abroad check for all 5 countries in the report.</span></div>`;
+}
+// ---------- free result ----------
+function result(){
+  if (!rfValidate(answers)){ intro(); return; }
+  const fr = rfFreeResult(answers), top = fr.top, r = R[top];
+  const share = `I just found my best route after MBBS on DocPulse Route Finder: ${r.name}, ${fr.pct[top]}% match. Try yours (free): ${SITE}/route-finder.html`;
+  show(`
+  <div class="res" style="--route:${r.accent}">
+    <div>
+      <div class="eyebrow" style="margin-bottom:12px">Your result</div>
+      ${passHTML(top, fr.pct[top])}
+      ${fr.why ? `<div class="why"><span class="eyebrow">Why ${esc(r.name)} fits you</span>${esc(fr.why)}</div>` : ""}
+      ${abroadTeaser(fr)}
+      <div style="margin-top:18px">${ranksHTML(fr)}</div>
+      <div class="row-actions no-print">
+        <a class="btn2" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(share)}">Share on WhatsApp</a>
+        <button class="btn2" id="copy">Copy link</button>
+        <button class="btn2" id="retake">Retake quiz</button>
+      </div>
+      <p class="fine">A guide based on your answers, not a guarantee. Rules and fees checked September 2026. Always confirm on the official sites.</p>
+    </div>
+    <aside class="lock no-print">
+      <div class="eyebrow" style="color:var(--flap)">Full route report</div>
+      <h3 style="margin-top:8px">Your step-by-step plan to ${esc(r.name)}, and your top 3 routes</h3>
+      <p>Built from your 14 answers. Opens instantly and is emailed to you.</p>
+      <div class="ghostlines" aria-hidden="true"><div style="width:82%"></div><div style="width:64%"></div><div style="width:90%"></div><div style="width:55%"></div></div>
+      <ul class="inside">
+        ${[
+          "Why each of your top 3 routes fits you, plus honest watch-outs",
+          "A roadmap for your top 3 routes, with each step timed to where you are now (" + (YEAR_LABEL[answers.year] || "your stage") + ")",
+          "Abroad check: USA, UK, Germany, Australia and the Gulf. Is each door open for you at your stage, and what's your first step?",
+          "Full cost breakdown: every exam fee and a realistic total in ₹",
+          "Time to your first paycheck, and what doctors actually earn",
+          "The 2026 reality check (e.g. the new UK training law, the US match rate, UPSC CMS vacancies)",
+          "Your first 90 days, month by month, as a checklist",
+          "Your backup plan, plus all 9 routes compared side by side",
+        ].map(t => `<li>${TICK}<span>${esc(t)}</span></li>`).join("")}
+      </ul>
+      <div class="price"><b>₹${PRICE}</b><span>ONE-TIME</span></div>
+      <p style="margin:-4px 0 14px; font-size:13px">One wrong exam form can cost ₹25,000+ (PLAB 1 alone is £283). Know your route before you pay for any of them.</p>
+      <button class="cta gold" id="pay">Unlock my full report ${ARROW}</button>
+      <div class="trust"><span>🔒 Secure payment via Razorpay</span><span>⚡ Instant access</span><span>✉️ Emailed to you</span></div>
+      <div id="payErr"></div>
+      <div class="restore">Already paid? <button class="linkish" id="rst">Open with your payment ID</button>
+        <form id="rstForm" hidden><input id="rstId" placeholder="pay_XXXXXXXXXXXXXX" autocomplete="off"><button type="submit">Open</button></form>
+      </div>
+    </aside>
+  </div>`);
+  animateBars();
+  const mb = document.createElement("div"); mb.className = "mbar"; mb.id = "mbar";
+  mb.innerHTML = `<div><b>Your full plan to ${esc(r.name)}</b>Roadmap, costs, 90-day plan</div><button id="mpay">Unlock ₹${PRICE}</button>`;
+  document.querySelector(".screen").appendChild(mb);
+  document.getElementById("mpay").onclick = () => { document.querySelector(".lock").scrollIntoView({ behavior:"smooth", block:"start" }); };
+  const lk = document.querySelector(".lock");
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => mb.classList.toggle("off", es[0].isIntersecting), { threshold:.15 }).observe(lk);
+  document.getElementById("retake").onclick = () => { answers = {}; store.set("answers", answers); qi = 0; quiz(); };
+  document.getElementById("copy").onclick = () => {
+    const url = SITE + "/route-finder.html";
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("Link copied"), () => toast(url));
+  };
+  document.getElementById("pay").onclick = pay;
+  document.getElementById("rst").onclick = () => { document.getElementById("rstForm").hidden = false; document.getElementById("rstId").focus(); };
+  document.getElementById("rstForm").onsubmit = e => { e.preventDefault(); openReport(document.getElementById("rstId").value.trim()); };
+}
+
+function payErr(msg){ const el = document.getElementById("payErr"); if (el) el.innerHTML = msg ? '<div class="err">' + msg + "</div>" : ""; }
+function busy(on){ const b = document.getElementById("pay"); if (!b) return; b.disabled = on; b.innerHTML = on ? '<span class="spinner"></span> Preparing your report…' : "Unlock my full report " + ARROW; }
+
+function pay(){
+  payErr("");
+  if (!window.Razorpay){ payErr("The payment window is still loading. Please try again in a few seconds."); return; }
+  const fr = rfFreeResult(answers);
+  const rzp = new window.Razorpay({
+    key: RZP_KEY, amount: PRICE * 100, currency: "INR",
+    name: "DocPulse", description: "Route Finder · full report",
+    notes: { product: "route_finder", top: fr.top, year: answers.year },
+    theme: { color: "#0f6e5c" },
+    handler: r => unlock(r.razorpay_payment_id),
+    modal: { ondismiss: () => busy(false) },
+  });
+  rzp.on("payment.failed", r => payErr("Payment failed: " + esc((r && r.error && r.error.description) || "unknown reason") + ". No money was taken. Please try again."));
+  busy(true);
+  rzp.open();
+}
+
+async function callFn(body){
+  const res = await fetch(FN, { method:"POST", headers:{ "Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON }, body: JSON.stringify(body) });
+  let data = {}; try { data = await res.json(); } catch(e){}
+  if (!res.ok || !data.ok){ const e = new Error(data.error || "Something went wrong (" + res.status + ")."); e.status = res.status; throw e; }
+  return data;
+}
+
+async function unlock(paymentId, tries){
+  tries = tries || 0;
+  store.set("pay", paymentId);
+  busy(true);
+  try {
+    const data = await callFn({ action:"unlock", payment_id: paymentId, answers });
+    lastReport = data.report;
+    history.replaceState(null, "", "?r=" + encodeURIComponent(paymentId));
+    report(data.report, paymentId);
+  } catch(e){
+    if (tries < 2 && !(e.status >= 400 && e.status < 500)){ setTimeout(() => unlock(paymentId, tries + 1), 1500); return; }
+    busy(false);
+    payErr("Your payment went through (ID <b>" + esc(paymentId) + "</b>), but the report didn't load: " + esc(e.message) +
+      ' <br><button class="btn2" style="margin-top:8px" id="retryUnlock">Try again</button>');
+    const b = document.getElementById("retryUnlock"); if (b) b.onclick = () => unlock(paymentId);
+  }
+}
+
+async function openReport(paymentId){
+  if (!paymentId) return;
+  show(`<div class="calc"><h2>Opening your report…</h2><p class="mono">${esc(paymentId)}</p></div>`);
+  try {
+    const data = await callFn({ action:"fetch", payment_id: paymentId });
+    store.set("pay", paymentId);
+    history.replaceState(null, "", "?r=" + encodeURIComponent(paymentId));
+    report(data.report, paymentId);
+  } catch(e){
+    show(`<div class="calc"><h2>We couldn't open that report</h2><p>${esc(e.message)}</p>
+      <div style="text-align:center"><button class="cta" id="home">Back to Route Finder</button></div>
+      <p class="fine" style="text-align:center">Paid but stuck? Email docpulsee@gmail.com with your payment ID and we'll sort it out.</p></div>`);
+    document.getElementById("home").onclick = () => { history.replaceState(null, "", location.pathname); intro(); };
+  }
+}
+
+// ---------- full report ----------
+function report(rep, paymentId){
+  lastReport = rep;
+  const top = rep.ranked[0], checks = store.get("checks_" + paymentId) || {};
+  const fr = { ranked: rep.ranked, pct: rep.pct };
+  show(`
+  <div class="rep" style="--route:${R[top].accent}">
+    ${passHTML(top, rep.pct[top], rep.year)}
+    <div class="doc">
+      <div class="doc-meta">
+        <div><small>Report</small><b>DocPulse Route Report</b></div>
+        <div><small>Prepared for</small><b>${esc(YEAR_LABEL[rep.year] || "You")}</b></div>
+        <div><small>Based on</small><b>${RF_QUESTIONS.length} answers · 9 routes</b></div>
+        <div><small>Rules &amp; fees checked</small><b>${esc(rep.checked)}</b></div>
+      </div>
+      <div class="snum" style="margin-bottom:6px">01 · AT A GLANCE</div>
+      <p class="glance">${esc(rep.summary || "")}</p>
+    </div>
+    <div class="rep-bar">
+      <span class="eyebrow">Report <b class="mono">${esc(paymentId)}</b> · saved on this device</span>
+      <span style="display:flex; gap:8px; flex-wrap:wrap">
+        <button class="btn2" id="pdf">Save as PDF</button>
+        <button class="btn2" id="new">Take quiz again</button>
+      </span>
+    </div>
+
+    <h3 class="sec-title"><span class="snum">02</span> Your top 3 routes</h3>
+    <div class="tabs" role="tablist">
+      ${rep.top3.map((t, i) => `<button class="tab ${i === 0 ? "on" : ""}" role="tab" data-i="${i}"><span class="code" style="background:${R[t.route].accent}">${R[t.route].code}</span>${i + 1}. ${esc(R[t.route].name)} <span class="p">${t.pct}%</span></button>`).join("")}
+    </div>
+    ${rep.top3.map((t, i) => panelHTML(t, i, rep.year)).join("")}
+
+    <h3 class="sec-title"><span class="snum">03</span> Can you go abroad? Your 5 foreign doors <span class="eyebrow">at your stage</span></h3>
+    <p style="margin:-4px 0 14px; color:var(--ink-2); font-size:14.5px">Whatever your top route, here is how each country looks for you as ${esc(({ y12:"a 1st/2nd-year MBBS student", y3f:"a 3rd/final-year MBBS student", intern:"an intern", grad:"an MBBS graduate", mo:"a working doctor", pg:"a PG doctor" })[rep.year] || "you")}, what's in your favour, and what's in the way.</p>
+    <div class="abroad">${(rep.abroad || []).map(doorHTML).join("")}</div>
+
+    <h3 class="sec-title"><span class="snum">04</span> Your first 90 days <span class="eyebrow">${esc(R[top].name)} · tick as you go</span></h3>
+    <div class="months">
+      ${rep.plan90.map((m, mi) => `<div class="card month"><h4>${esc(m.m)}</h4>
+        ${m.items.map((it, ii) => { const id = mi + "_" + ii; return `<label class="check"><input type="checkbox" data-c="${id}" ${checks[id] ? "checked" : ""}><span>${esc(it)}</span></label>`; }).join("")}
+      </div>`).join("")}
+    </div>
+
+    <h3 class="sec-title"><span class="snum">05</span> Your backup plan</h3>
+    <div class="card" style="font-size:15px">${esc(rep.backup)}</div>
+
+    <h3 class="sec-title"><span class="snum">06</span> All nine routes, side by side</h3>
+    <div class="tablewrap"><table class="cmp">
+      <thead><tr><th>Route</th><th>Your match</th><th>Total cost</th><th>Time to earning</th><th>Language</th><th>Settle for good?</th><th>Difficulty</th></tr></thead>
+      <tbody>${rep.compare.map(c => `<tr class="${c.r === top ? "me" : ""}"><td><span class="code" style="background:${R[c.r].accent}">${R[c.r].code}</span>${esc(R[c.r].name)}</td><td class="mono">${rep.pct[c.r]}%</td><td>${esc(c.cost)}</td><td>${esc(c.time)}</td><td>${esc(c.lang)}</td><td>${esc(c.settle)}</td><td>${esc(c.hard)}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <p class="fine">*Gulf: once you have the required experience. Costs are realistic ranges at September 2026 exchange rates and change over time.</p>
+
+    <div class="guide">
+      <div><h3>Want a doctor to go through this with you?</h3><p>Book a 1:1 guidance call with a current resident. Bring this report and we'll talk about your options honestly.</p></div>
+      <a class="cta" href="${SITE}/#counselling">Book 1:1 guidance ${ARROW}</a>
+    </div>
+    <p class="fine">This report is a guide based on your answers, not a guarantee of admission, registration or a job. Rules and fees were checked in ${esc(rep.checked)}; always confirm on the official links before paying for any exam.</p>
+  </div>`);
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach(tb => tb.onclick = () => {
+    tabs.forEach(x => x.classList.toggle("on", x === tb));
+    document.querySelectorAll(".panel").forEach(p => p.hidden = p.dataset.i !== tb.dataset.i);
+    const rr = rep.top3[+tb.dataset.i].route; document.querySelector(".rep").style.setProperty("--route", R[rr].accent);
+  });
+  document.querySelectorAll("[data-c]").forEach(cb => cb.onchange = () => { checks[cb.dataset.c] = cb.checked; store.set("checks_" + paymentId, checks); });
+  document.getElementById("pdf").onclick = () => { document.querySelectorAll(".panel").forEach(p => p.hidden = false); window.print(); document.querySelectorAll(".panel").forEach(p => p.hidden = p.dataset.i !== document.querySelector(".tab.on").dataset.i); };
+  document.getElementById("new").onclick = () => { history.replaceState(null, "", location.pathname); answers = {}; store.set("answers", answers); qi = 0; quiz(); };
+}
+
+function checkLI(k){ const m = { yes:["ok","✓"], maybe:["no","!"], no:["x","✗"] }[k.ok] || ["no","!"]; return `<li><span class="ic ${m[0]}">${m[1]}</span><span>${esc(k.t)}</span></li>`; }
+function doorHTML(d){
+  const r = R[d.route], cls = d.door === "Wide open" ? "open" : d.door === "Open with effort" ? "effort" : "hard";
+  return `<div class="door-card" style="--c:${r.accent}">
+    <div class="hd"><span class="code">${r.code}</span><b>${esc(r.name)}</b><span class="p">${d.pct}%</span></div>
+    <span class="door ${cls}">${esc(d.door.toUpperCase())}</span>
+    <p>${esc(d.note)}</p>
+    <ul class="list">${d.checks.map(checkLI).join("")}</ul>
+    <div class="foot"><span><b>First step:</b> ${esc(d.firstStep)}</span><span><b>Cost:</b> ${esc(d.total)}</span><span><b>Time to earning:</b> ${esc(d.time)}</span></div>
+  </div>`;
+}
+function panelHTML(t, i, year){
+  const r = R[t.route];
+  return `
+  <section class="panel" data-i="${i}" ${i ? "hidden" : ""} style="--route:${r.accent}">
+    <div class="eyebrow">Route ${i + 1} · ${esc(r.long)} · ${t.pct}% match</div>
+    <h2>${esc(t.headline)}</h2>
+    ${t.stageNote ? `<div class="stage"><b>For you</b><span>${esc(t.stageNote)}</span></div>` : ""}
+    <div class="two">
+      <div class="card"><h3 style="font-size:17px; margin-bottom:12px">Why it fits you</h3>
+        <ul class="list">${(t.reasons.length ? t.reasons : ["It scored well across your answers overall."]).map(x => `<li><span class="ic ok">✓</span><span>${esc(x)}</span></li>`).join("")}</ul></div>
+      <div class="card"><h3 style="font-size:17px; margin-bottom:12px">Watch out for</h3>
+        <ul class="list">${t.risks.map(x => `<li><span class="ic no">!</span><span>${esc(x)}</span></li>`).join("")}</ul></div>
+    </div>
+    ${t.checks && t.checks.length ? `<div class="card elig"><h3>Eligibility check</h3><ul class="list">${t.checks.map(checkLI).join("")}</ul></div>` : ""}
+    <div class="stats">
+      <div class="stat"><small>Total cost</small><b>${esc(t.total)}</b></div>
+      <div class="stat"><small>First paycheck</small><b>${esc(t.timeToEarn)}</b></div>
+      <div class="stat"><small>What you earn</small><b style="font-size:14.5px; font-family:var(--body); font-weight:600">${esc(t.earnings)}</b></div>
+    </div>
+    <h3 class="sec-title">Your roadmap <span class="eyebrow">timed for ${esc(YEAR_LABEL[year] || "you")}</span></h3>
+    <ol class="timeline">
+      ${t.steps.map((s, si) => `<li><span class="dot">${si + 1}</span><div class="body"><b>${esc(s.t)}</b><p>${esc(s.d)}</p>${s.when ? `<span class="when">⏱ ${esc(s.when)}</span>` : ""}</div></li>`).join("")}
+    </ol>
+    <h3 class="sec-title">What it costs</h3>
+    <div class="card"><table class="costs">
+      ${t.costs.map(c => `<tr><td>${esc(c.label)}</td><td>${esc(c.amt)}</td></tr>`).join("")}
+      <tr class="tot"><td>Realistic total</td><td>${esc(t.total)}</td></tr>
+    </table></div>
+    <div class="reality"><span class="eyebrow">2026 reality check</span>${esc(t.reality)}</div>
+    <div class="links">${t.links.map(l => `<a class="btn2" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)} ↗</a>`).join("")}</div>
+  </section>`;
+}
+
+// ---------- boot ----------
+const qs = new URLSearchParams(location.search);
+if (qs.get("r")) openReport(qs.get("r"));
+else intro();
+})();
+</script>
+</body>
+</html>
