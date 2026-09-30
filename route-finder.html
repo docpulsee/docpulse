@@ -873,11 +873,15 @@ function result(){
           "Your backup plan, plus all 9 routes compared side by side",
         ].map(t => `<li>${TICK}<span>${esc(t)}</span></li>`).join("")}
       </ul>
-      <div class="price"><b>₹${PRICE}</b><span>ONE-TIME</span></div>
+      <div class="price"><b id="priceNow">₹${PRICE}</b><s id="priceWas" hidden>₹${PRICE}</s><span>ONE-TIME</span></div>
       <p style="margin:-4px 0 14px; font-size:13px">One wrong exam form can cost ₹25,000+ (PLAB 1 alone is £283). Know your route before you pay for any of them.</p>
       <button class="cta gold" id="pay">Unlock my full report ${ARROW}</button>
       <div class="trust"><span>🔒 Secure payment via Razorpay</span><span>⚡ Instant access</span><span>✉️ Emailed to you</span></div>
       <div id="payErr"></div>
+      <div class="restore" id="cpnBox"><button class="linkish" id="cpnOpen">Have a coupon code?</button>
+        <form id="cpnForm" hidden><input id="cpnCode" placeholder="COUPON CODE" autocomplete="off" style="text-transform:uppercase"><button type="submit">Apply</button></form>
+        <form id="cpnEmailForm" hidden style="margin-top:6px"><input id="cpnEmail" type="email" placeholder="Your email (this coupon is for one email)"><button type="submit">Check</button></form>
+        <div id="cpnMsg" style="margin-top:6px"></div></div>
       <div class="restore">Already paid? <button class="linkish" id="rst">Open with your payment ID</button>
         <form id="rstForm" hidden><input id="rstId" placeholder="pay_XXXXXXXXXXXXXX" autocomplete="off"><button type="submit">Open</button></form>
       </div>
@@ -896,10 +900,41 @@ function result(){
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("Link copied"), () => toast(url));
   };
   document.getElementById("pay").onclick = pay;
+  document.getElementById("cpnOpen").onclick = () => { document.getElementById("cpnForm").hidden = false; document.getElementById("cpnCode").focus(); };
+  const cpnCheck = async (e) => {
+    e.preventDefault();
+    const code = document.getElementById("cpnCode").value.trim().toUpperCase();
+    const email = document.getElementById("cpnEmail").value.trim();
+    const msg = document.getElementById("cpnMsg");
+    if (!code){ msg.innerHTML = '<span style="color:#ffb9c4">Enter a coupon code.</span>'; return; }
+    try {
+      const r = await fetch(SUPABASE_URL + "/functions/v1/coupon-admin", { method:"POST", headers:{ "Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON },
+        body: JSON.stringify({ action:"check", product:"route_finder", code, email }) });
+      const d = await r.json().catch(() => ({}));
+      if (!d.valid){
+        coupon = null; refreshPrice();
+        if (/email/i.test(d.reason || "") && !email){ document.getElementById("cpnEmailForm").hidden = false; msg.innerHTML = '<span style="color:#f4c152">This coupon is for a specific email. Enter it to check.</span>'; return; }
+        msg.innerHTML = '<span style="color:#ffb9c4">' + esc(d.reason || "This coupon code isn't valid.") + '</span>'; return;
+      }
+      coupon = { code: d.code, discount: d.discount_paise, email };
+      msg.innerHTML = '<span style="color:#7ee0bf">Coupon ' + esc(d.code) + ' applied: ₹' + (d.discount_paise/100) + ' off</span>';
+      refreshPrice();
+    } catch(_e){ msg.innerHTML = '<span style="color:#ffb9c4">Could not check the coupon. Please try again.</span>'; }
+  };
+  document.getElementById("cpnForm").onsubmit = cpnCheck;
+  document.getElementById("cpnEmailForm").onsubmit = cpnCheck;
+  refreshPrice();
   document.getElementById("rst").onclick = () => { document.getElementById("rstForm").hidden = false; document.getElementById("rstId").focus(); };
   document.getElementById("rstForm").onsubmit = e => { e.preventDefault(); openReport(document.getElementById("rstId").value.trim()); };
 }
 
+let coupon = null; // {code, discount, email} once the server confirms it
+function priceNowPaise(){ return Math.max(100, PRICE * 100 - (coupon ? coupon.discount : 0)); }
+function refreshPrice(){
+  const now = document.getElementById("priceNow"), was = document.getElementById("priceWas"); if (!now) return;
+  now.textContent = "₹" + (priceNowPaise() / 100).toLocaleString("en-IN");
+  was.hidden = !coupon;
+}
 function payErr(msg){ const el = document.getElementById("payErr"); if (el) el.innerHTML = msg ? '<div class="err">' + msg + "</div>" : ""; }
 function busy(on){ const b = document.getElementById("pay"); if (!b) return; b.disabled = on; b.innerHTML = on ? '<span class="spinner"></span> Preparing your report…' : "Unlock my full report " + ARROW; }
 
@@ -908,9 +943,10 @@ function pay(){
   if (!window.Razorpay){ payErr("The payment window is still loading. Please try again in a few seconds."); return; }
   const fr = rfFreeResult(answers);
   const rzp = new window.Razorpay({
-    key: RZP_KEY, amount: PRICE * 100, currency: "INR",
+    key: RZP_KEY, amount: priceNowPaise(), currency: "INR",
+    prefill: coupon && coupon.email ? { email: coupon.email } : undefined,
     name: "DocPulse", description: "Route Finder · full report",
-    notes: { product: "route_finder", top: fr.top, year: answers.year },
+    notes: { product: "route_finder", top: fr.top, year: answers.year, coupon: coupon ? coupon.code : "", email: coupon && coupon.email ? coupon.email : "" },
     theme: { color: "#0f6e5c" },
     handler: r => unlock(r.razorpay_payment_id),
     modal: { ondismiss: () => busy(false) },
@@ -932,7 +968,7 @@ async function unlock(paymentId, tries){
   store.set("pay", paymentId);
   busy(true);
   try {
-    const data = await callFn({ action:"unlock", payment_id: paymentId, answers });
+    const data = await callFn({ action:"unlock", payment_id: paymentId, answers, coupon: coupon ? coupon.code : undefined });
     lastReport = data.report;
     history.replaceState(null, "", "?r=" + encodeURIComponent(paymentId));
     report(data.report, paymentId);
