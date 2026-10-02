@@ -900,6 +900,15 @@ function result(){
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("Link copied"), () => toast(url));
   };
   document.getElementById("pay").onclick = pay;
+  if (proPass){
+    // Pro: no payment. The price shows ₹0 and the button unlocks straight away.
+    const pb = document.getElementById("pay"); pb.innerHTML = "Open my full report (free with Pro) " + ARROW; pb.onclick = unlockPro;
+    const pn = document.getElementById("priceNow"), pw = document.getElementById("priceWas"); pn.textContent = "₹0"; pw.hidden = false;
+    const cb = document.getElementById("cpnBox"); if (cb) cb.hidden = true;
+    const note = document.createElement("p"); note.id = "proNote"; note.style.cssText = "margin:-6px 0 12px;font-size:13px;color:#f4c152;font-weight:700"; note.textContent = "👑 Included in your DocPulse Pro plan";
+    pb.parentNode.insertBefore(note, pb);
+    const mp = document.getElementById("mpay"); if (mp) mp.textContent = "Open free";
+  }
   document.getElementById("cpnOpen").onclick = () => { document.getElementById("cpnForm").hidden = false; document.getElementById("cpnCode").focus(); };
   const cpnCheck = async (e) => {
     e.preventDefault();
@@ -928,15 +937,33 @@ function result(){
   document.getElementById("rstForm").onsubmit = e => { e.preventDefault(); openReport(document.getElementById("rstId").value.trim()); };
 }
 
+// DocPulse Pro members open this page as route-finder.html?pro=<their pass>: the full report is free, once.
+let proPass = (() => { const q = new URLSearchParams(location.search).get("pro"); if (q && /^[A-Za-z0-9]{16,40}$/.test(q)){ store.set("pro", q); return q; } return store.get("pro") || null; })();
+async function unlockPro(){
+  payErr(""); busy(true);
+  try {
+    const data = await callFn({ action:"unlock_pro", pass: proPass, answers });
+    proPass = null; store.del("pro");   // the free report is used; a retake goes back to the normal price
+    store.set("pay", data.payment_id);
+    history.replaceState(null, "", "?r=" + encodeURIComponent(data.payment_id));
+    report(data.report, data.payment_id);
+  } catch(e){
+    busy(false);
+    if (e.status === 404 || e.status === 400){ proPass = null; store.del("pro"); }
+    payErr(esc(e.message) + (e.status === 409 ? " You can still unlock this report by paying below." : ""));
+    if (e.status === 409 || e.status === 404){ proPass = null; store.del("pro"); const b = document.getElementById("pay"); if (b){ b.innerHTML = "Unlock my full report " + ARROW; b.onclick = pay; } refreshPrice(); const n = document.getElementById("proNote"); if (n) n.remove(); }
+  }
+}
 let coupon = null; // {code, discount, email} once the server confirms it
 function priceNowPaise(){ return Math.max(100, PRICE * 100 - (coupon ? coupon.discount : 0)); }
 function refreshPrice(){
   const now = document.getElementById("priceNow"), was = document.getElementById("priceWas"); if (!now) return;
+  if (proPass){ now.textContent = "₹0"; was.hidden = false; return; }
   now.textContent = "₹" + (priceNowPaise() / 100).toLocaleString("en-IN");
   was.hidden = !coupon;
 }
 function payErr(msg){ const el = document.getElementById("payErr"); if (el) el.innerHTML = msg ? '<div class="err">' + msg + "</div>" : ""; }
-function busy(on){ const b = document.getElementById("pay"); if (!b) return; b.disabled = on; b.innerHTML = on ? '<span class="spinner"></span> Preparing your report…' : "Unlock my full report " + ARROW; }
+function busy(on){ const b = document.getElementById("pay"); if (!b) return; b.disabled = on; b.innerHTML = on ? '<span class="spinner"></span> Preparing your report…' : (proPass ? "Open my full report (free with Pro) " : "Unlock my full report ") + ARROW; }
 
 function pay(){
   payErr("");
@@ -1114,6 +1141,14 @@ function panelHTML(t, i, year){
 // ---------- boot ----------
 const qs = new URLSearchParams(location.search);
 if (qs.get("r")) openReport(qs.get("r"));
+else if (qs.get("pro") && proPass){
+  // Pro link: if this member already made their free report, open it; otherwise start the quiz.
+  show(`<div class="calc"><h2>Opening Route Finder…</h2></div>`);
+  callFn({ action:"unlock_pro", pass: proPass, check: true }).then(d => {
+    if (d.report){ proPass = null; store.del("pro"); store.set("pay", d.payment_id); history.replaceState(null, "", "?r=" + encodeURIComponent(d.payment_id)); report(d.report, d.payment_id); }
+    else { history.replaceState(null, "", location.pathname); intro(); }
+  }).catch(() => { proPass = null; store.del("pro"); history.replaceState(null, "", location.pathname); intro(); });
+}
 else intro();
 })();
 </script>
