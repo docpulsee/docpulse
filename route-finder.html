@@ -620,10 +620,13 @@ function rfFreeResult(answers) {
 </script>
 <script>
 (function(){
-const PRICE = 550;                       // keep in sync with PRICE_PAISE in the route-report function
+let PRICE = 550;                         // fallback; the live price comes from the owner's settings below
 const RZP_KEY = "rzp_live_TfrVp5WBEyPS7y";
 const SUPABASE_URL = "https://uwrwtttkqywsmehexmbf.supabase.co";
 const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+// Live Route Finder price from the owner panel (same settings the payment check uses).
+fetch(SUPABASE_URL + "/functions/v1/verify-payment", { method:"POST", headers:{ "Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON }, body: JSON.stringify({ action:"pro_prices" }) })
+  .then(r => r.json()).then(j => { const v = j && j.prices && j.prices.price_route_paise; if (v >= 100) { PRICE = Math.round(v / 100); document.querySelectorAll("#priceNow").forEach(e => { e.textContent = "₹" + PRICE.toLocaleString("en-IN"); }); } }).catch(() => {});
 const FN = SUPABASE_URL + "/functions/v1/route-report";
 const SITE = "https://docpulsee.github.io/docpulse";
 
