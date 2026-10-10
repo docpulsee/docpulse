@@ -1600,7 +1600,47 @@ animation: vibrantPulse 3s infinite;
 @media (prefers-reduced-motion:reduce){.rb-card,.rb-item,.rb-overlay,.rb-sheet,.rb-profile,.rb-lock-ic,.rb-lock-btn::after,.rb-shimmer{animation:none!important}}
 </style>
 <style id="hn-css">
-.dp-hdr-btns>*:not(.hn-nav):not(#dp-mp-slot){display:none!important}
+.hn-about{display:none!important}
+.hn-pills{display:inline-flex;gap:8px}
+.hn-pill{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12.5px;font-weight:800;padding:9px 13px;border-radius:12px;border:1px solid #cfe3dc;background:#fff;color:#0f3d34;cursor:pointer;text-decoration:none;box-shadow:0 2px 6px rgba(15,110,92,.08);transition:transform .15s,box-shadow .15s}
+.hn-pill:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,110,92,.16)}
+.hn-p-pred{background:linear-gradient(90deg,#0f6e5c,#14937b);color:#fff;border-color:transparent;animation:hnGlow 2.6s ease-in-out infinite}
+.hn-p-plan{background:linear-gradient(90deg,#fff7e6,#fff);border-color:#f6d58f;color:#8a5a00}
+@keyframes hnGlow{0%,100%{box-shadow:0 0 0 0 rgba(20,147,123,.45)}50%{box-shadow:0 0 0 7px rgba(20,147,123,0)}}
+.hn-e{display:inline-block;transition:transform .2s}
+.hn-pill:hover .hn-e,.hn-chips>*:hover .hn-e,.hn-tab button:active .hn-e{transform:scale(1.25) rotate(-8deg)}
+.hn-p-col .hn-e{animation:hnBob 3s ease-in-out infinite}
+@keyframes hnBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.branch-auto-tooltip{top:calc(100% + 12px)!important;bottom:auto!important}
+.branch-auto-tooltip::after,.branch-auto-tooltip::before{display:none!important}
+.hn-need{margin-top:2px}.hn-need>b{display:block;font-size:14px;color:#0f2a24;margin:0 0 8px 2px}
+.hn-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hn-chips::-webkit-scrollbar{display:none}
+.hn-chips>*{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #d9e7e2;border-radius:999px;padding:9px 14px;font:inherit;font-size:13.5px;font-weight:700;color:#1f2624;cursor:pointer;text-decoration:none;animation:hnIn .35s ease both}
+.hn-chips>*:nth-child(2){animation-delay:.04s}.hn-chips>*:nth-child(3){animation-delay:.08s}.hn-chips>*:nth-child(4){animation-delay:.12s}.hn-chips>*:nth-child(5){animation-delay:.16s}.hn-chips>*:nth-child(6){animation-delay:.2s}.hn-chips>*:nth-child(7){animation-delay:.24s}.hn-chips>*:nth-child(8){animation-delay:.28s}
+.hn-tab{display:none}
+@media (min-width:761px){
+ .dp-hdr-btns{flex-wrap:nowrap!important;width:100%;order:3;gap:7px!important;justify-content:flex-start}
+ .dp-hdr-btns>*{flex:0 0 auto}
+ .dp-hdr-btns .block.text-\[9\.5px\]{display:none!important}
+ .dp-hdr-btns a,.dp-hdr-btns button{padding-top:8px!important;padding-bottom:8px!important}
+ .hn-pill{padding:8px 11px}
+}
+@media (max-width:760px){
+ .dp-hdr-btns{flex-wrap:nowrap!important;overflow-x:auto!important;width:100%;padding:6px 2px 10px;margin:0 -2px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+ .dp-hdr-btns::-webkit-scrollbar{display:none}
+ .dp-hdr-btns>*{flex:0 0 auto}
+ .branch-auto-tooltip{display:none!important}
+ .hn-tab{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid #e3ebe8;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 24px rgba(8,30,25,.08)}
+ .hn-tab button{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:0;font:inherit;color:#2b3431;padding:4px 0;cursor:pointer}
+ .hn-tab .hn-e{font-size:21px}.hn-tab small{font-size:10.5px;font-weight:700}
+ .hn-tab-doc .hn-dot{position:absolute;top:3px;right:calc(50% - 16px);width:8px;height:8px;border-radius:50%;background:#10b981;animation:dptlPulse 1.8s infinite}
+ .hn-tab-list .hn-e{animation:hnBob 3s ease-in-out infinite}
+ body{padding-bottom:70px}
+ [style*="safe-area-inset-bottom"]{transform:translateY(-62px)}
+ #dp-tl-peek{bottom:84px!important}
+ .mp-fab{bottom:84px!important}
+}
 .hn-nav{display:flex;align-items:center;gap:6px}
 .hn-link,.hn-help{font:inherit;font-size:14px;font-weight:700;color:#0f3d34;background:transparent;border:0;padding:9px 12px;border-radius:12px;cursor:pointer;text-decoration:none}
 .hn-link:hover,.hn-help:hover{background:#eef6f3}
@@ -1655,6 +1695,8 @@ function hnSetRank(v){var i=document.querySelector('input[data-fs-rank]');if(!i|
 function hnPredict(skipRank){var v=skipRank?'':(document.getElementById('hn-rank')||{}).value;hnMode('predict');var tries=0;(function go(){if(hnSetRank(v)||skipRank||++tries>20){var t=document.querySelector('input[data-fs-rank]');hnGo(t?'neetpg-app-wrap':'neetpg-app-wrap');if(!v&&t)setTimeout(function(){t.focus();},500);return;}setTimeout(go,150);})();}
 function hnBrowse(){hnMode('browse');hnGo('neetpg-app-wrap');}
 function hnBuyDirectory(){var b=document.querySelector('[data-open-plans]')||[].slice.call(document.querySelectorAll('button')).find(function(x){return /unlock full|get full access|unlock all|buy full access/i.test(x.innerText||'');});if(b){b.click();return;}hnPredict(true);}
+function hnOpenId(){var b=document.querySelector('[data-idc-open]');if(b){b.click();setTimeout(function(){var f=document.querySelector('[data-idc-ffbtn]');if(f)f.click();},700);}else{window.dispatchEvent(new CustomEvent('dp-rulebook',{detail:{jur:'MCC'}}));}}
+function hnMe(){var c=document.querySelector('#dp-acct-slot button, #dp-acct-slot [role=button]');if(c){c.click();return;}hnGo('neetpg-app-wrap');}
 window.addEventListener('scroll',function(){document.body.classList.toggle('hn-scrolled',window.scrollY>500);},{passive:true});
 </script></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -1723,20 +1765,9 @@ Pre-counselling price: College Directory access <s><span data-price="full">₹3,
 <!-- Signed-in account chip is placed here by the app (stays visible while scrolling) -->
 <div id="dp-acct-slot" class="dp-acct-slot"></div>
 
-<div class="flex items-center gap-2.5 flex-wrap dp-hdr-btns" style="overflow: visible;"><nav class="hn-nav" aria-label="Main">
-<a href="#plans" class="hn-link" onclick="event.preventDefault();hnGo('plans')">Plans</a>
-<div class="hn-dd"><button type="button" class="hn-help" aria-haspopup="true" aria-expanded="false" onclick="hnMenu(this)">Get help <span aria-hidden="true">▾</span></button>
-<div class="hn-menu" role="menu">
-<button role="menuitem" onclick="hnClose();openConsultationModal()"><span>🩺</span><b>1:1 counselling</b><small>A doctor builds your list with you</small></button>
-<button role="menuitem" onclick="hnClose();hnGo('senior-connect')"><span>🎓</span><b>Talk to a senior</b><small>Hear it from someone inside</small></button>
-<button role="menuitem" onclick="hnClose();window.dpOpenMaker&&window.dpOpenMaker()"><span>🗂️</span><b>Choice List Maker</b><small>Your list, round by round</small></button>
-<a role="menuitem" href="route-finder.html"><span>✈️</span><b>Route Finder</b><small>After MBBS: India and abroad</small></a>
-<button role="menuitem" onclick="hnClose();openBranchPayment()"><span>🧬</span><b>Doctor DNA test</b><small>Find the branch that fits you</small></button>
-<button role="menuitem" onclick="hnClose();openAboutUsModal()"><span>💚</span><b>About us</b><small>Who builds DocPulse</small></button>
-</div></div>
-</nav>
+<div class="flex items-center gap-2.5 flex-wrap dp-hdr-btns" style="overflow: visible;"><span class="hn-pills"><button type="button" class="hn-pill hn-p-pred" onclick="hnPredict(true)"><span class="hn-e">🎯</span> Predict</button><button type="button" class="hn-pill hn-p-col" onclick="hnBrowse()"><span class="hn-e">🏥</span> Colleges</button><a href="#plans" class="hn-pill hn-p-plan" onclick="event.preventDefault();hnGo('plans')"><span class="hn-e">💎</span> Plans</a></span>
 <!-- ABOUT US BUTTON -->
-<div class="relative flex items-center gap-2">
+<div class="relative flex items-center gap-2 hn-about">
 <!-- Blinking red dot / heart -->
 <div class="relative flex items-center justify-center">
 <span class="absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75 animate-ping"></span>
@@ -1801,6 +1832,16 @@ Pre-counselling price: College Directory access <s><span data-price="full">₹3,
 <button type="button" onclick="window.dispatchEvent(new CustomEvent('dp-rulebook',{detail:{}}))"><span>📘</span><b>Rule Book 2026</b><small>Official rules, Freeze/Float, What-if</small></button>
 <button type="button" onclick="window.dpOpenMaker&&window.dpOpenMaker()"><span>🗂️</span><b>Choice List Maker</b><small>One list, with your chance for every seat</small></button>
 </div>
+<div class="hn-need"><b>What do you need today?</b><div class="hn-chips">
+<button type="button" onclick="hnBrowse()"><span class="hn-e">📊</span> Check cutoffs</button>
+<button type="button" onclick="window.dpOpenMaker&&window.dpOpenMaker()"><span class="hn-e">🗂️</span> Make my list</button>
+<button type="button" onclick="hnOpenId()"><span class="hn-e">❄️</span> Freeze or Float?</button>
+<button type="button" onclick="openConsultationModal()"><span class="hn-e">🩺</span> Talk to a doctor</button>
+<button type="button" onclick="hnGo('senior-connect')"><span class="hn-e">🎓</span> Ask a senior</button>
+<button type="button" onclick="openBranchPayment()"><span class="hn-e">🧬</span> Branch DNA</button>
+<a href="route-finder.html"><span class="hn-e">✈️</span> Abroad pathway</a>
+<button type="button" onclick="window.dispatchEvent(new CustomEvent('dp-timeline',{detail:{}}))"><span class="hn-e">📅</span> Counselling dates</button>
+</div></div>
 </section>
 
 <section id="neetpg-app-wrap" class="rounded-3xl overflow-hidden shadow-xl border border-slate-200">
@@ -3121,5 +3162,11 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 })();
 </script>
 
-</body>
+<nav class="hn-tab" aria-label="Quick">
+<button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
+<button type="button" onclick="hnBrowse()"><span class="hn-e">🏥</span><small>Colleges</small></button>
+<button type="button" class="hn-tab-list" onclick="window.dpOpenMaker&&window.dpOpenMaker()"><span class="hn-e">🗂️</span><small>My list</small></button>
+<button type="button" class="hn-tab-doc" onclick="openConsultationModal()"><span class="hn-e">🩺</span><small>Counselling</small><i class="hn-dot"></i></button>
+<button type="button" onclick="hnMe()"><span class="hn-e">👤</span><small>Me</small></button>
+</nav></body>
 </html>
