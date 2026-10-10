@@ -628,7 +628,7 @@ const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 fetch(SUPABASE_URL + "/functions/v1/verify-payment", { method:"POST", headers:{ "Content-Type":"application/json", apikey:SUPABASE_ANON, Authorization:"Bearer " + SUPABASE_ANON }, body: JSON.stringify({ action:"pro_prices" }) })
   .then(r => r.json()).then(j => { const v = j && j.prices && j.prices.price_route_paise; if (v >= 100) { PRICE = Math.round(v / 100); document.querySelectorAll("#priceNow").forEach(e => { e.textContent = "₹" + PRICE.toLocaleString("en-IN"); }); } }).catch(() => {});
 const FN = SUPABASE_URL + "/functions/v1/route-report";
-const SITE = "https://docpulsee.in";
+const SITE = "https://docpulsee.github.io/docpulse";
 
 const $app = document.getElementById("app");
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
