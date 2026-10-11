@@ -1623,6 +1623,9 @@ animation: vibrantPulse 3s infinite;
 .hn-p-col .hn-e{animation:hnBob 3s ease-in-out infinite}
 @keyframes hnBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .branch-auto-tooltip{z-index:120}
+.branch-auto-tooltip.hn-below{bottom:auto!important;top:calc(100% + 12px)!important}
+.branch-auto-tooltip.hn-below::after{top:auto!important;bottom:100%!important;border-top-color:transparent!important;border-bottom-color:#fff!important}
+.branch-auto-tooltip.hn-below::before{top:auto!important;bottom:100%!important;border-top-color:transparent!important;border-bottom-color:#e2e8f0!important}
 #hn-signin{display:none;flex:none;margin-left:auto;align-items:center;gap:9px;min-height:44px;padding:5px 16px 5px 6px;border-radius:999px;background:#fff;border:1px solid #dadce0;color:#1f2624;font:inherit;font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 18px rgba(15,110,92,.10);transition:transform .15s,box-shadow .15s;animation:hnIn .35s ease both}
 #hn-signin:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,.08),0 12px 26px rgba(15,110,92,.18)}
 #hn-signin:active{transform:scale(.97)}
@@ -1720,6 +1723,7 @@ function hnOpenId(){var b=document.querySelector('[data-idc-open]');if(b){b.clic
 function hnMe(){var c=document.querySelector('#dp-acct-slot button, #dp-acct-slot [role=button]');if(c){c.click();return;}hnGo('neetpg-app-wrap');}
 function hnSignIn(){var g=document.querySelector('[data-google-signin]');if(g){g.click();return;}hnPredict(true);}
 setTimeout(function(){document.body.classList.add('hn-ready');},1800);
+document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('branchAutoTip');if(!t||!window.MutationObserver)return;function fit(){t.classList.remove('hn-below');var w=t.parentElement&&t.parentElement.getBoundingClientRect();if(w&&w.top-t.offsetHeight-14<4)t.classList.add('hn-below');}var was=t.classList.contains('show');if(was)fit();new MutationObserver(function(){var on=t.classList.contains('show');if(on&&!was)fit();was=on;}).observe(t,{attributes:true,attributeFilter:['class']});});
 window.addEventListener('scroll',function(){document.body.classList.toggle('hn-scrolled',window.scrollY>500);},{passive:true});
 </script></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
