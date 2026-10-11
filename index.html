@@ -1738,7 +1738,7 @@ window.addEventListener('scroll',function(){document.body.classList.toggle('hn-s
 @keyframes obFlow{to{background-position:200% 0}}
 .offer-bar::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:25%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);animation:obShine 5.5s ease-in-out infinite;pointer-events:none}
 @keyframes obShine{0%,55%{left:-30%}100%{left:130%}}
-.offer-bar .ob-in{position:relative;z-index:1;max-width:72rem;margin:0 auto;padding:8px 40px 8px 16px;text-align:center;line-height:1.5}
+.offer-bar .ob-in{position:relative;z-index:1;max-width:72rem;margin:0 auto;padding:8px 16px;text-align:center;line-height:1.5}
 .offer-bar .ob-emoji{display:inline-block;margin-right:4px;animation:obBob 2.4s ease-in-out infinite}
 @keyframes obBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-8deg)}}
 .offer-bar .gold{color:#fcd34d;font-weight:900}
@@ -1785,7 +1785,7 @@ window.addEventListener('scroll',function(){document.body.classList.toggle('hn-s
     };
     var txt=esc(o.banner_text).replace(/\{(price|was|upgrade|member_counsel|counsel_was|countdown|ends|name)\}/g,function(_,k){return map[k];});
     el.className="offer-bar t-"+esc(o.theme||"emerald")+" text-xs sm:text-sm font-semibold";
-    el.innerHTML='<div class="ob-in"><span class="ob-emoji">'+esc(o.emoji||"🎉")+'</span> '+txt+'</div>'+(el.id==="offerBanner"?'<button type="button" class="ob-x" aria-label="Hide offer">✕</button>':'');
+    el.innerHTML='<div class="ob-in"><span class="ob-emoji">'+esc(o.emoji||"🎉")+'</span> '+txt+'</div>';
     var x=el.querySelector(".ob-x");if(x)x.onclick=function(){try{(ST.bans&&ST.bans.length?ST.bans:[o]).forEach(function(b){sessionStorage.setItem("dp_offer_x_"+b.id,"1");});}catch(e){}el.classList.add("hidden");};
   }
   window.dpRenderOfferBanner=render;
