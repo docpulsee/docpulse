@@ -1988,7 +1988,7 @@ window.addEventListener('scroll',function(){document.body.classList.toggle('hn-s
  .dpt-pop::before{content:"";display:block;width:42px;height:5px;border-radius:5px;background:rgba(120,140,135,.5);margin:0 auto 10px}}
 @keyframes dptUp{from{transform:translateY(100%)}to{transform:none}}
 </style><style id="dpg-css">
-.dpg-catch{position:fixed;inset:0;z-index:2147483190;background:transparent}
+.dpg-catch{position:fixed;inset:0;z-index:2147483190;background:transparent;cursor:default}
 .dpg-dim{position:fixed;inset:0;width:100vw;height:100vh;z-index:2147483191;pointer-events:none}
 .dpg-dim path{fill:rgba(4,14,12,.62)}
 .dpg-hole{position:fixed;z-index:2147483191;border-radius:14px;box-shadow:0 0 0 3px #34d3a6 inset;pointer-events:none}
@@ -4381,7 +4381,7 @@ ff:{ic:"❄️",t:"Freeze or Float?",d:"What to choose after a Round 1 or 2 seat
 idcard:{ic:"🪪",t:"Your counselling ID card",d:"Rank, reach and eligibility stamp",steps:[
  {go:function(){closeAll();closePeek();scrollTo({top:0});},el:function(){return $("[data-idc-open]");},txt:"Tap your initials at the top to open your counselling ID card.",tap:true},
  {el:function(){return $("[data-idc-card]");},txt:"Your ID card: name, rank and where you did MBBS."},
- {el:function(){return $("[data-idc-reach]");},txt:"How many branches are in reach for your rank right now."},
+ {el:function(){var e=$("[data-idc-reach]");return e&&vis(e)?e:$("[data-idc-card]");},txt:"How many branches are in reach for your rank right now. Add your rank on the predictor to see it."},
  {el:function(){return $("[data-idc-flip]");},txt:"Show eligibility flips the card…",tap:true},
  {el:function(){return $("[data-idc-stamp]");},txt:"…to your eligibility stamp: which counsellings you can join, from each state's rules."},
  {el:function(){return $("[data-idc-wibtn]");},txt:"What if…? Try another rank or state and see what changes."},
@@ -4410,18 +4410,19 @@ function tap(e){if(!e)return Promise.resolve();var r=e.getBoundingClientRect();v
 function findEl(st,max){return new Promise(function(res){var n=0;(function f(){var e=null;try{e=st.el();}catch(x){}if(e&&vis(e)){res(e);return;}if(++n>(max||40)){res(null);return;}setTimeout(f,100);})();});}
 function render(){var g=G[cur.id],s=g.steps[cur.i],n=g.steps.length,last=cur.i===n-1;
  cur.u.t.className="dpg-tip"+(cur.auto?" auto":"");
- cur.u.t.innerHTML='<div class="k">'+g.ic+' '+g.t+'<i>'+(cur.i+1)+' / '+n+'</i></div><p>'+s.txt+'</p><div class="bar"><b style="width:'+Math.round((cur.i+1)/n*100)+'%"></b></div><div class="bt"><button type="button" class="sk">'+(last?"":"Skip")+'</button>'+(cur.i?'<button type="button" class="bk">Back</button>':"")+'<button type="button" class="nx">'+(last?"Done ✓":s.tap?"Tap it →":"Next →")+'</button></div>';
+ cur.u.t.innerHTML='<div class="k">'+g.ic+' '+g.t+'<i>'+(cur.i+1)+' / '+n+'</i></div><p>'+s.txt+'</p><div class="bar"><b style="width:'+Math.round((cur.i+1)/n*100)+'%"></b></div><div class="bt"><button type="button" class="sk">'+(last?"":"Skip")+'</button>'+(cur.i?'<button type="button" class="bk">Back</button>':"")+'<button type="button" class="nx">'+(last?"Done ✓":"Next →")+'</button></div>';
  var B=cur.u.t;B.querySelector(".sk").onclick=function(){stop();};var bk=B.querySelector(".bk");if(bk)bk.onclick=function(){show(cur.i-1);};B.querySelector(".nx").onclick=function(){next();};
  var nx=B.querySelector(".nx");if(nx&&!cur.auto)setTimeout(function(){try{nx.focus({preventScroll:true});}catch(e){}},50);}
-function show(i){if(!cur)return;var g=G[cur.id];cur.i=i;var s=g.steps[i];var tok=cur.tok=(cur.tok||0)+1;if(!cur.u.t.innerHTML){cur.el=null;render();}
- Promise.resolve().then(function(){if(s.go)s.go();return wait(s.go?650:120);}).then(function(){if(!s.pre)return;return findEl({el:s.pre},12).then(function(p0){if(!cur||tok!==cur.tok||!p0)return;cur.el=p0;try{p0.scrollIntoView({block:"nearest"});}catch(x){}render();return wait(cur.auto?900:500).then(function(){return tap(p0);});});}).then(function(){return findEl(s);}).then(function(e){if(!cur||tok!==cur.tok)return;
-  cur.el=e;if(e){try{e.scrollIntoView({block:"center",behavior:"smooth"});}catch(x){}}render();
+function show(i){if(!cur)return;var g=G[cur.id];cur.i=i;cur.busy=1;var s=g.steps[i];var tok=cur.tok=(cur.tok||0)+1;if(!cur.u.t.innerHTML){cur.el=null;render();}
+ Promise.resolve().then(function(){if(s.go)s.go();return wait(s.go?650:120);}).then(function(){if(!s.pre)return;return findEl({el:s.pre},12).then(function(p0){if(!cur||tok!==cur.tok||!p0)return;cur.el=p0;try{p0.scrollIntoView({block:"nearest"});}catch(x){}render();return wait(cur.auto?900:500).then(function(){return tap(p0);});});}).then(function(){if(cur&&tok===cur.tok)render();return findEl(s,25);}).then(function(e){if(!cur||tok!==cur.tok)return;
+  cur.el=e;if(e){try{e.scrollIntoView({block:"center",behavior:"smooth"});}catch(x){}}render();cur.busy=0;
   if(e&&s.type&&e.tagName==="INPUT"&&(cur.auto||!e.value))return wait(500).then(function(){return typeIn(e,DEMO);});}).then(function(){if(cur&&cur.auto&&tok===cur.tok){var ms=Math.max(2600,Math.min(5200,s.txt.length*48));cur.timer=setTimeout(function(){if(cur&&tok===cur.tok)next();},ms);}});}
-function next(){if(!cur)return;clearTimeout(cur.timer);var g=G[cur.id],s=g.steps[cur.i];var last=cur.i===g.steps.length-1;
- var p=s.tap&&cur.el?tap(cur.el):Promise.resolve();p.then(function(){if(!cur)return;if(last){var id=cur.id,auto=cur.auto;stop();if(auto)done(id);return;}show(cur.i+1);});}
+function next(){if(!cur||cur.busy)return;clearTimeout(cur.timer);var g=G[cur.id],s=g.steps[cur.i];var last=cur.i===g.steps.length-1;cur.busy=1;
+ var p=s.tap&&cur.el?tap(cur.el):Promise.resolve();p.then(function(){if(!cur)return;cur.busy=0;if(last){var id=cur.id,auto=cur.auto;stop();if(auto)done(id);return;}show(cur.i+1);},function(){if(cur)cur.busy=0;});}
+function catchTap(e){e.stopPropagation();e.preventDefault();if(!cur||cur.auto||cur.busy||!cur.el)return;var r=cur.el.getBoundingClientRect();if(e.clientX>=r.left-8&&e.clientX<=r.right+8&&e.clientY>=r.top-8&&e.clientY<=r.bottom+8)next();}
 function done(id){window.__dpGuideDone=id;}
 function key(e){if(!cur||cur.auto)return;if(e.key==="Escape")stop();else if(e.key==="ArrowRight"||e.key==="Enter"){e.preventDefault();next();}else if(e.key==="ArrowLeft"&&cur.i)show(cur.i-1);}
-function start(id,o){if(!G[id])return;stop();o=o||{};closeList();cur={id:id,i:0,auto:!!o.auto,u:ui()};document.body.classList.add("dpg-on");window.dpSpotBusy=true;document.body.setAttribute("data-dpg",id);cur.u.c.onclick=function(e){e.stopPropagation();};document.addEventListener("keydown",key,true);loop();show(0);try{localStorage.setItem("dp_guide_seen_"+id,"1");}catch(e){}}
+function start(id,o){if(!G[id])return;stop();o=o||{};closeList();cur={id:id,i:0,auto:!!o.auto,u:ui()};document.body.classList.add("dpg-on");window.dpSpotBusy=true;document.body.setAttribute("data-dpg",id);cur.u.c.onclick=catchTap;document.addEventListener("keydown",key,true);loop();show(0);try{localStorage.setItem("dp_guide_seen_"+id,"1");}catch(e){}}
 function stop(){if(!cur)return;clearTimeout(cur.timer);cancelAnimationFrame(cur.raf);var u=cur.u;cur=null;document.body.classList.remove("dpg-on");window.dpSpotBusy=false;document.body.removeAttribute("data-dpg");[u.c,u.h,u.t,u.sv].forEach(function(x){x.remove();});document.removeEventListener("keydown",key,true);}
 /* list of guides */
 var sheetEl=null;function closeList(){if(sheetEl){sheetEl.remove();sheetEl=null;}}
