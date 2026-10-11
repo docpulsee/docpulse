@@ -72,6 +72,99 @@ body{background-color:#f8fafc;background-image:radial-gradient(600px 400px at 20
 </script>
 </head>
 <body class="text-slate-800 antialiased min-h-screen">
+<!-- DNA GATE: the test opens only after a real check (payment ID, College Directory / Pro account, or Pro pass) -->
+<style id="dna-gate-css">
+html.dna-locked #root{display:none}
+#dna-gate,#dna-gate *{box-sizing:border-box}
+#dna-gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(600px 400px at 20% 0%,rgba(14,165,233,.16),transparent 60%),radial-gradient(700px 500px at 90% 70%,rgba(20,184,166,.14),transparent 65%),#f8fafc;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+#dna-gate .card{width:100%;max-width:420px;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:26px 22px;box-shadow:0 24px 60px -24px rgba(15,23,42,.35);text-align:center;color:#0f172a}
+#dna-gate .em{font-size:44px;line-height:1;display:inline-block;animation:dgBob 2.6s ease-in-out infinite}
+@keyframes dgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+#dna-gate h1{font-size:21px;font-weight:900;margin:10px 0 6px}
+#dna-gate p{font-size:14px;color:#475569;margin:0 0 14px;line-height:1.5}
+#dna-gate .spin{width:28px;height:28px;border:3px solid #cbd5e1;border-top-color:#0d9488;border-radius:50%;margin:8px auto;animation:dgSpin .8s linear infinite}
+@keyframes dgSpin{to{transform:rotate(360deg)}}
+#dna-gate .pay{display:block;width:100%;border:0;border-radius:14px;padding:13px;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(90deg,#f59e0b,#f97316);text-decoration:none;margin:4px 0 14px}
+#dna-gate .or{font-size:12px;color:#94a3b8;margin:4px 0 8px}
+#dna-gate form{display:flex;gap:8px}
+#dna-gate input{flex:1;min-width:0;border:1px solid #cbd5e1;border-radius:12px;padding:11px 12px;font-size:14px}
+#dna-gate button{border:0;border-radius:12px;padding:11px 14px;font-weight:800;font-size:14px;background:#0d9488;color:#fff;cursor:pointer}
+#dna-gate button[disabled]{opacity:.6}
+#dna-gate .msg{font-size:13px;margin-top:10px;min-height:18px}
+#dna-gate .msg.bad{color:#b42318}
+#dna-gate .msg.ok{color:#047857}
+#dna-gate .small{font-size:12.5px;color:#64748b;margin-top:14px}
+#dna-gate .small a{color:#0d9488;font-weight:700}
+</style>
+<div id="dna-gate" role="dialog" aria-label="Doctor DNA access">
+  <div class="card">
+    <div class="em">🧬</div>
+    <h1>Doctor DNA branch test</h1>
+    <div id="dg-wait"><p>Checking your access…</p><div class="spin"></div></div>
+    <div id="dg-lock" style="display:none">
+      <p>12 honest questions, 90 seconds, and a report on the branch that truly fits you.</p>
+      <a class="pay" id="dg-pay" href="https://rzp.io/rzp/nfwlr3Q">Unlock for ₹149</a>
+      <div class="or">Already paid? Enter the payment ID from your Razorpay receipt or our email</div>
+      <form id="dg-form"><input id="dg-pid" placeholder="pay_XXXXXXXXXXXX" autocomplete="off" spellcheck="false"><button id="dg-btn" type="submit">Unlock</button></form>
+      <div class="msg" id="dg-msg"></div>
+      <div class="small">College Directory and Pro members: it's included. <a href="https://docpulsee.in/">Sign in on DocPulsee</a>, then tap "Get to know your branch".</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var SB="https://uwrwtttkqywsmehexmbf.supabase.co";
+  var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+  var root=document.documentElement; root.classList.add("dna-locked");
+  var gate=document.getElementById("dna-gate");
+  function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){return null;}}
+  function device(){var d=ls("dp_dna_dev");if(!d){d="d"+Math.random().toString(36).slice(2)+Date.now().toString(36);ls("dp_dna_dev",d);}return d.slice(0,60);}
+  function open(){root.classList.remove("dna-locked");if(gate)gate.remove();}
+  function lock(msg){document.getElementById("dg-wait").style.display="none";document.getElementById("dg-lock").style.display="block";if(msg)say(msg,true);}
+  function say(t,bad){var m=document.getElementById("dg-msg");m.textContent=t||"";m.className="msg "+(bad?"bad":"ok");}
+  function vp(body){return fetch(SB+"/functions/v1/verify-payment",{method:"POST",headers:{"Content-Type":"application/json",apikey:ANON,Authorization:"Bearer "+ANON},body:JSON.stringify(body)}).then(function(r){return r.json();}).catch(function(){return {ok:false,reason:"Network problem. Please check your connection and try again."};});}
+  function byPayment(pid){return vp({action:"dna_unlock",payment_id:pid,device:device()}).then(function(r){if(r&&r.ok){ls("dp_dna_pid",pid);return true;}return r&&r.reason?r.reason:false;});}
+  function session(){
+    var raw=ls("sb-uwrwtttkqywsmehexmbf-auth-token");if(!raw)return Promise.resolve(null);
+    var s;try{s=JSON.parse(raw);}catch(e){return Promise.resolve(null);}
+    if(!s||!s.access_token)return Promise.resolve(null);
+    var fresh=s.expires_at&&s.expires_at*1000>Date.now()+60000;
+    if(fresh||!s.refresh_token)return Promise.resolve(s);
+    return fetch(SB+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{"Content-Type":"application/json",apikey:ANON},body:JSON.stringify({refresh_token:s.refresh_token})})
+      .then(function(r){return r.ok?r.json():null;}).then(function(n){if(!n||!n.access_token)return null;n.expires_at=n.expires_at||Math.floor(Date.now()/1000)+(n.expires_in||3600);ls("sb-uwrwtttkqywsmehexmbf-auth-token",JSON.stringify(n));return n;}).catch(function(){return null;});
+  }
+  function member(){
+    return session().then(function(s){
+      if(!s||!s.user||!s.user.id)return false;
+      return fetch(SB+"/rest/v1/profiles?select=is_paid&id=eq."+encodeURIComponent(s.user.id),{headers:{apikey:ANON,Authorization:"Bearer "+s.access_token}})
+        .then(function(r){return r.ok?r.json():[];}).then(function(rows){return !!(rows&&rows[0]&&rows[0].is_paid);}).catch(function(){return false;});
+    });
+  }
+  var q=new URLSearchParams(location.search);
+  var pid=(q.get("pid")||q.get("razorpay_payment_id")||q.get("payment_id")||"").trim();
+  var pass=(q.get("pro")||"").trim();
+  var saved=ls("dp_dna_pid");
+  var steps=[];
+  if(pass)steps.push(function(){return vp({action:"dna_check",pass:pass}).then(function(r){return !!(r&&r.ok);});});
+  if(/^pay_[A-Za-z0-9]{6,}$/.test(pid))steps.push(function(){return byPayment(pid);});
+  steps.push(member);
+  if(saved&&/^pay_[A-Za-z0-9]{6,}$/.test(saved)&&saved!==pid)steps.push(function(){return byPayment(saved);});
+  var lastReason=null;
+  (function next(i){
+    if(i>=steps.length){lock(lastReason&&typeof lastReason==="string"?lastReason:"");return;}
+    steps[i]().then(function(r){if(r===true){open();return;}if(typeof r==="string")lastReason=r;next(i+1);},function(){next(i+1);});
+  })(0);
+  document.addEventListener("submit",function(e){
+    if(!e.target||e.target.id!=="dg-form")return;e.preventDefault();
+    var v=document.getElementById("dg-pid").value.trim();
+    if(!/^pay_[A-Za-z0-9]{6,}$/.test(v)){say("Please enter the payment ID exactly as on your receipt. It starts with pay_",true);return;}
+    var b=document.getElementById("dg-btn");b.disabled=true;say("Checking with Razorpay…");
+    byPayment(v).then(function(r){b.disabled=false;if(r===true){say("Unlocked! Opening your test…");setTimeout(open,500);}else say(typeof r==="string"?r:"We couldn't verify this payment. Please try again.",true);});
+  });
+})();
+</script>
+<!-- END DNA GATE -->
+
 <div id="root"></div>
 
 <script type="module">
