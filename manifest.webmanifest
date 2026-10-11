@@ -1,0 +1,24 @@
+{
+  "name": "DocPulsee: NEET PG counselling",
+  "short_name": "DocPulsee",
+  "description": "Your NEET PG counselling plan, dates, documents and seat decisions in one app.",
+  "id": "/",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f8f7",
+  "theme_color": "#0f6e5c",
+  "lang": "en-IN",
+  "categories": ["education", "medical"],
+  "icons": [
+    {"src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "My Counselling Plan", "short_name": "My plan", "url": "/?open=plan", "icons": [{"src": "/icons/icon-192.png", "sizes": "192x192"}]},
+    {"name": "Counselling dates", "short_name": "Dates", "url": "/?open=dates", "icons": [{"src": "/icons/icon-192.png", "sizes": "192x192"}]},
+    {"name": "Predict my colleges", "short_name": "Predict", "url": "/?open=predict", "icons": [{"src": "/icons/icon-192.png", "sizes": "192x192"}]}
+  ]
+}
