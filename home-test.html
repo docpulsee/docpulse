@@ -1809,7 +1809,7 @@ window.addEventListener('scroll',function(){document.body.classList.toggle('hn-s
     var changed=(ST.now&&ST.now.id)!==(p.cur&&p.cur.id)||(ST.now&&p.cur&&(ST.now.price_paise!==p.cur.price_paise||ST.now.ends_at!==p.cur.ends_at));
     changed=changed||(ST.pro&&ST.pro.id)!==(p.pro&&p.pro.id);
     ST.now=p.cur?Object.assign({},p.cur,{ends_label:endLabel(p.cur.ends_at)}):null;ST.pro=p.pro?Object.assign({},p.pro,{ends_label:endLabel(p.pro.ends_at)}):null;ST.banner=p.ban;
-    var shown=p.bans.filter(function(o){try{return sessionStorage.getItem("dp_offer_x_"+o.id)!=="1";}catch(e){return true;}});
+    var shown=p.bans;
     ST.bans=shown;if(ST.bi>=shown.length)ST.bi=0;ST.banner=shown[ST.bi||0]||null;
     var el=document.getElementById("offerBanner");
     if(el){if(!ST.banner)el.classList.add("hidden");else{render(ST.banner,el,now);el.classList.remove("hidden");}}
@@ -1827,6 +1827,8 @@ window.addEventListener('scroll',function(){document.body.classList.toggle('hn-s
   var spin=0;
   function rotate(){if(!ST.bans||ST.bans.length<2)return;if(++spin%7)return;var el=document.getElementById("offerBanner");if(!el||el.classList.contains("hidden"))return;ST.bi=((ST.bi||0)+1)%ST.bans.length;ST.banner=ST.bans[ST.bi];el.style.transition="opacity .35s";el.style.opacity="0";setTimeout(function(){render(ST.banner,el,Date.now());el.style.opacity="1";},350);}
   function tick(){rotate();var el=document.getElementById("offerBanner");var cd=el&&el.querySelector("[data-ob-cd]");if(cd&&ST.banner){var c=countdown(ST.banner,Date.now());cd.textContent=c.t;cd.className="days "+c.cls;}}
+  // The banner used to have a close button; forget any old "closed" marks so it always shows.
+  try{Object.keys(sessionStorage).forEach(function(k){if(k.indexOf("dp_offer_x_")===0)sessionStorage.removeItem(k);});}catch(e){}
   function load(){
     return fetch(SB+"/rest/v1/offers?select=id,name,emoji,theme,product,banner_text,price_paise,upgrade_paise,list_paise,starts_at,ends_at,banner_until&active=eq.true&order=starts_at.asc",{headers:{apikey:ANON,Authorization:"Bearer "+ANON}})
       .then(function(r){if(!r.ok)throw new Error("offers "+r.status);return r.json();})
