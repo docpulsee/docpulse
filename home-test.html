@@ -3994,7 +3994,7 @@ function resultBanner(){var t=(function(){var d=new Date(Date.now()+(330+new Dat
  d.querySelector(".go").onclick=function(){d.remove();if(window.dpOpenPlan)dpOpenPlan("seats");};d.querySelector(".x").onclick=function(){ls("dp_res_x",hit.e.round+t);d.remove();};document.body.appendChild(d);}
 window.dpResultBanner=resultBanner;
 /* shortcuts and notification links: ?open=plan|dates|predict|seats */
-function openParam(){var m=/[?&]open=([a-z]+)/.exec(location.search);if(!m)return;var k=m[1];var n=0;(function go(){var ok=false;if(k==="plan"||k==="seats"||k==="dates"||k==="next"||k==="where"){if(window.dpOpenPlan){dpOpenPlan(k==="plan"?null:k);ok=true;}}else if(k==="predict"){if(window.hnPredict){hnPredict(true);ok=true;}}if(!ok&&++n<30)setTimeout(go,400);})();try{history.replaceState(null,"",location.pathname+location.hash);}catch(e){}}
+function openParam(){var m=/[?&]open=([a-z]+)/.exec(location.search);if(!m)return;var k=m[1];var n=0;(function go(){var ok=false;if(k==="plan"||k==="seats"||k==="dates"||k==="next"||k==="where"){if(window.dpOpenPlan&&document.getElementById("dp-plan-root")){dpOpenPlan(k==="plan"?null:k);setTimeout(function(){if(!document.querySelector("[data-plan-hub]")&&++n<30)go();},900);ok=true;}}else if(k==="predict"){if(window.hnPredict){hnPredict(true);ok=true;}}if(!ok&&++n<30)setTimeout(go,400);})();try{history.replaceState(null,"",location.pathname+location.hash);}catch(e){}}
 /* bottom sheets: drag down to close, back button closes (phones) */
 var mob=function(){return window.matchMedia&&matchMedia("(max-width:640px)").matches;};
 var pushed=0;
