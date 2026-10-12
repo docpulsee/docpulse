@@ -4099,7 +4099,9 @@ function App(){const[__pt,__setPt]=React.useState(0);React.useEffect(()=>{const 
 #dp-tl-peek .v:last-child{margin-bottom:0}
 
 
-#dp-tl-peek.dk-open{top:12px!important;width:340px;max-height:calc(100vh - 24px);overflow:auto;cursor:default}
+#dp-tl-peek.dk-open{top:calc(12px + env(safe-area-inset-top,0px))!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 24px));max-height:none;overflow:auto;overscroll-behavior:contain;cursor:default;z-index:2147483100}
+#dp-tl-peek.dk-open .pk-x{position:sticky;top:0;float:right;margin:-4px -24px 0 0;z-index:2;background:#e6f2f0}
+@media (min-width:641px){#dp-tl-peek.dk-open{bottom:12px}}
 #dp-tl-peek .dk{margin-top:8px;border-top:1px dashed rgba(15,118,110,.25);padding-top:8px}
 #dp-tl-peek .dk-t{display:flex;align-items:center;gap:6px;width:100%;border:0;background:rgba(15,118,110,.08);color:#0f766e;font:700 12px system-ui;padding:7px 9px;border-radius:10px;cursor:pointer;text-align:left}
 #dp-tl-peek .dk-t b{background:#0f766e;color:#fff;border-radius:999px;padding:0 7px;font-size:11px}
@@ -4146,6 +4148,7 @@ function docSave(patch){var dp=jget("dp_docs_prof");for(var k in patch)dp[k]=pat
  try{var pl=jget("dp_plan_v1");if(ls("dp_plan_v1")){if(patch.cat!=null)pl.cat=patch.cat;if(patch.pwd!=null)pl.pwd=patch.pwd;if(patch.deemed!=null){pl.open=pl.open||{};pl.open.deemed=patch.deemed;}ls("dp_plan_v1",JSON.stringify(pl));window.dispatchEvent(new Event("dp-plan-change"));}
   if(patch.cat!=null){var rp=jget("dp_rule_profile");rp.cat=patch.cat;ls("dp_rule_profile",JSON.stringify(rp));}}catch(e){}}
 function mccDocs(P){var now=[],up=[],orig=[],ifn=[];var res=P.cat==="SC"||P.cat==="ST";
+ now.push(["Cancelled cheque, bank passbook or online bank statement","Must clearly show your name and account details. MCC asks for it in the document upload at registration, to refund your security deposit. PDF, 20–500 KB."]);
  now.push(["Internship completion certificate","Or a certificate from your Head of Institution that your internship will be completed by 30 September 2026."]);
  if(res)now.push([P.cat+" certificate in the MCC format","Use the format in the MCC bulletin annexure. Your sub-caste must be shown on it."]);
  if(P.cat==="OBC")now.push(["OBC-NCL certificate in the MCC format","Income and status of parents must be for the financial year ending 31 March 2026. Your sub-caste must match the Central OBC list."]);
@@ -4185,7 +4188,7 @@ function docState(box){var el=box.querySelector("[data-dk-st]");if(!el)return;va
   el.innerHTML='<ul>'+L.map(function(it){return '<li><b>'+esc(it.h)+'</b><span>'+esc(it.t)+'</span></li>';}).join("")+'</ul>'+(L[0].u?'<div class="dk-n"><a href="'+esc(L[0].u)+'" target="_blank" rel="noopener">'+esc(st)+' brochure ↗</a> · '+esc(L[0].y||"")+'</div>':'');
  },function(){el.innerHTML='🔒 '+esc(st)+'’s list from its brochure is included with College Directory access.';});}
 function docMount(p){var box=document.createElement("div");box.className="dk";p.appendChild(box);
- function draw(){box.innerHTML=docHtml();var t=box.querySelector(".dk-t");t.onclick=function(e){e.stopPropagation();docOpen=!docOpen;var pk=document.getElementById("dp-tl-peek");if(pk)pk.classList.toggle("dk-open",docOpen);draw();};
+ function draw(){box.innerHTML=docHtml();var t=box.querySelector(".dk-t");t.onclick=function(e){e.stopPropagation();docOpen=!docOpen;var pk=document.getElementById("dp-tl-peek");if(pk){pk.classList.toggle("dk-open",docOpen);pk.scrollTop=0;}draw();};
   box.querySelectorAll("[data-dk]").forEach(function(x){x.onclick=function(e){e.stopPropagation();};x.onchange=function(){var k=x.getAttribute("data-dk");var o={};o[k]=x.type==="checkbox"?x.checked:x.value;docSave(o);draw();};});
   if(docOpen)docState(box);}
  box.onclick=function(e){e.stopPropagation();};draw();window.addEventListener("dp-plan-change",function(){if(document.body.contains(box))draw();});}
