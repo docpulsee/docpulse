@@ -2,11 +2,17 @@
 """Download MCC bond PDFs for every institute, dedupe by md5, OCR the unique ones,
 and write a best-effort summary (years / amount / raw text) to bond-data/."""
 import csv, hashlib, os, re, shutil, subprocess, sys, time
+from concurrent.futures import as_completed
+os.environ["OMP_THREAD_LIMIT"] = "1"
 from concurrent.futures import ThreadPoolExecutor
 import requests
 
 URL = "https://mcc.admissions.nic.in/Counseling/Handler/ViewInstituteProfileDynamic.ashx?boardId=140012521&InstituteId={}&Type=BM"
 OUT = "bond-data"
+def save(msg):
+    subprocess.run(["git","config","user.name","bond-bot"]); subprocess.run(["git","config","user.email","bond-bot@users.noreply.github.com"])
+    subprocess.run(["git","add","-f","bond-data"]); subprocess.run(["git","commit","-qm",msg])
+    subprocess.run(["git","push","-q"])
 PDFS, TEXT = f"{OUT}/unique", f"{OUT}/text"
 os.makedirs(PDFS, exist_ok=True); os.makedirs(TEXT, exist_ok=True)
 LIMIT = int(os.environ.get("LIMIT", "0"))
@@ -47,12 +53,13 @@ with open(f"{OUT}/index.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, ["id", "name", "md5", "status"]); w.writeheader(); w.writerows(index)
 uniq = sorted({i["md5"] for i in index if i["md5"]})
 print(f"{sum(1 for i in index if i['md5'])} PDFs downloaded, {len(uniq)} unique", flush=True)
+save("Bond data: downloaded PDFs + index")
 
 def ocr(md5):
     t = f"{TEXT}/{md5}.txt"
     if os.path.exists(t): return
     tmp = f"/tmp/ocr_{md5}"; os.makedirs(tmp, exist_ok=True)
-    subprocess.run(["pdftoppm", "-r", "200", "-l", "10", "-png", f"{PDFS}/{md5}.pdf", f"{tmp}/p"], check=False)
+    subprocess.run(["pdftoppm", "-r", "150", "-l", "4", "-png", f"{PDFS}/{md5}.pdf", f"{tmp}/p"], check=False)
     parts = []
     for img in sorted(os.listdir(tmp)):
         res = subprocess.run(["tesseract", f"{tmp}/{img}", "-", "-l", "hin+eng", "--psm", "6"],
@@ -62,7 +69,10 @@ def ocr(md5):
     shutil.rmtree(tmp, ignore_errors=True)
 
 with ThreadPoolExecutor(os.cpu_count() or 2) as ex:
-    list(ex.map(ocr, uniq))
+    futs = [ex.submit(ocr, m) for m in uniq]
+    for n, f in enumerate(as_completed(futs), 1):
+        if n % 25 == 0: print("ocr", n, "of", len(uniq), flush=True)
+        if n % 100 == 0: save(f"Bond data: OCR progress {n}")
 print("OCR done", flush=True)
 
 NUM = {"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10}
