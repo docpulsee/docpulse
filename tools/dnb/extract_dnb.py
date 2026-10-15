@@ -20,23 +20,9 @@ def form(html):
         d[sel["name"]] = o["value"] if o else ""
     return soup, d
 
-inst = []
-d = form(s.get(PAGE, timeout=90).text)[1]
-for t in ("DNB", "DNP"):
-    d2 = dict(d); d2[P + "ddlInstType"] = t; d2["__EVENTTARGET"] = P + "ddlInstType"
-    rr = s.post(PAGE, data=d2, timeout=90); print(t, "post:", rr.status_code, len(rr.text), flush=True)
-    open(f"{OUT}/debug_{t}.html", "w", encoding="utf-8").write(rr.text)
-    sp, _ = form(rr.text)
-    sel = sp.find("select", id="ctl00_ContentPlaceHolder1_ddlInstitutes")
-    got = [(o.get("value"), o.text.strip()) for o in sel.find_all("option")] if sel else []
-    got = [(v, n) for v, n in got if v and not v.startswith("--") and v != "All"]
-    print(t, "institutes:", len(got), got[:3], flush=True)
-    inst += [{"id": v, "name": n, "type": t} for v, n in got]
-if not inst:
-    os.system("git config user.name dnb-bot; git config user.email dnb-bot@users.noreply.github.com; git add -f dnb-data; git commit -qm debug; git push -q")
-    sys.exit("no institutes found in dropdown")
-with open(f"{OUT}/institutes.csv", "w", newline="", encoding="utf-8") as f:
-    w = csv.DictWriter(f, ["id", "name", "type"]); w.writeheader(); w.writerows(inst)
+inst = [dict(r, type="") for r in csv.DictReader(open("tools/dnb/institutes.csv", encoding="utf-8"))]
+LIMIT = int(os.environ.get("LIMIT", "0"))
+if LIMIT: inst = inst[:LIMIT]
 
 def fetch(r):
     st = "?"
@@ -82,6 +68,8 @@ def parse(content):
     return d
 
 
+r0, c0, s0 = fetch({"id": "700548", "name": "", "type": ""}); print("smoke 700548:", s0, flush=True)
+if c0 is None: sys.exit("MCC not reachable / PDF not returned: " + s0)
 rows = []
 with ThreadPoolExecutor(8) as ex:
     for n, (r, content, st) in enumerate(ex.map(fetch, inst), 1):
