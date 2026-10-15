@@ -24,13 +24,17 @@ inst = []
 d = form(s.get(PAGE, timeout=90).text)[1]
 for t in ("DNB", "DNP"):
     d2 = dict(d); d2[P + "ddlInstType"] = t; d2["__EVENTTARGET"] = P + "ddlInstType"
-    sp, _ = form(s.post(PAGE, data=d2, timeout=90).text)
+    rr = s.post(PAGE, data=d2, timeout=90); print(t, "post:", rr.status_code, len(rr.text), flush=True)
+    open(f"{OUT}/debug_{t}.html", "w", encoding="utf-8").write(rr.text)
+    sp, _ = form(rr.text)
     sel = sp.find("select", id="ctl00_ContentPlaceHolder1_ddlInstitutes")
     got = [(o.get("value"), o.text.strip()) for o in sel.find_all("option")] if sel else []
     got = [(v, n) for v, n in got if v and not v.startswith("--") and v != "All"]
     print(t, "institutes:", len(got), got[:3], flush=True)
     inst += [{"id": v, "name": n, "type": t} for v, n in got]
-if not inst: sys.exit("no institutes found in dropdown")
+if not inst:
+    os.system("git config user.name dnb-bot; git config user.email dnb-bot@users.noreply.github.com; git add -f dnb-data; git commit -qm debug; git push -q")
+    sys.exit("no institutes found in dropdown")
 with open(f"{OUT}/institutes.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, ["id", "name", "type"]); w.writeheader(); w.writerows(inst)
 
