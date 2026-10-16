@@ -1915,6 +1915,37 @@ body:not(.hn-scrolled) .mp-fab{opacity:0!important;pointer-events:none;transform
 @keyframes hnIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media (max-width:760px){.hn-tiles,.hn-pgrid{grid-template-columns:1fr}.hn-hero-in{padding:24px 18px;border-radius:22px}.hn-form{flex-direction:column}.hn-form button{width:100%}.hn-link{padding:8px}.hn-help{padding:8px 10px}.dp-hdr-brand p{display:none}}
 @media (prefers-reduced-motion:reduce){.hn-tiles button,.hn-dd.open .hn-menu{transition:none;animation:none}}
+
+/* --- clean header (hx) --- */
+.dp-hdr-btns>:not(.hx-nav):not(#dp-mp-slot){display:none!important}
+.hx-nav{display:flex;align-items:center;gap:2px}
+.hx-nav>button,.hx-nav .hx-more{font:inherit;font-size:14px;font-weight:600;color:#24302c;background:transparent;border:0;padding:8px 12px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;line-height:1.2}
+.hx-nav>button:hover,.hx-nav .hx-more:hover,.hx-dd.open .hx-more{background:#eef5f2;color:#0b4f43}
+.hx-nav .hx-more{color:#24302c}
+.hx-nav>button:focus-visible,.hx-nav .hx-more:focus-visible{outline:2px solid #0f6e5c;outline-offset:1px}
+.hx-dd .hn-menu{left:auto;right:0;width:300px}
+.hx-dd .hn-menu b span{font-size:inherit;grid-row:auto;line-height:inherit}
+.hx-nav .hx-cta{margin-left:8px;background:#0f6e5c;color:#fff;font-weight:700;padding:9px 14px;border-radius:12px;box-shadow:0 6px 16px -8px rgba(15,110,92,.7)}
+.hx-nav .hx-cta:hover{background:#0b5a4b;color:#fff}
+.hx-nav .hx-cta span{font-weight:600;opacity:.85;margin-left:2px}
+@media (min-width:761px){
+ header .max-w-6xl{flex-wrap:nowrap!important}
+ .dp-hdr-btns{order:2!important;width:auto!important;flex:1 1 auto!important;justify-content:flex-end!important;padding:0!important}
+ .dp-acct-slot,#hn-signin,.dpt-wrap{order:3}
+ .dpt-wrap{margin-left:10px}
+ #hn-signin{margin-left:6px}
+}
+@media (min-width:761px) and (max-width:1100px){.hx-nav>button:nth-child(4){display:none}.dp-hdr-brand p{display:none}}
+@media (max-width:760px){
+ .hx-nav{display:none}
+ .dp-hdr-btns{padding-top:0!important;gap:0!important}
+ body:not(.hn-scrolled) #dp-tl-peek{display:none!important}
+ .hn-tiles{grid-template-columns:1fr 1fr!important;gap:10px}
+ .hn-tiles button{grid-template-columns:1fr;row-gap:2px;padding:12px;align-items:start}
+ .hn-tiles span{grid-row:auto;font-size:22px;margin-bottom:4px}
+ .hn-tiles b{font-size:14px;line-height:1.25}
+ .hn-tiles small{font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+}
 </style>
 <script id="hn-js">
 function hnClose(){document.querySelectorAll('.hn-dd.open').forEach(function(d){d.classList.remove('open');var b=d.querySelector('.hn-help');if(b)b.setAttribute('aria-expanded','false');});}
@@ -2291,7 +2322,7 @@ body.dpg-on .dpg-pill,body.dpg-on #hjt,body.dpg-on #dpSpot,body.dpg-on .branch-a
 <!-- Signed-in account chip is placed here by the app (stays visible while scrolling) -->
 <div id="dp-acct-slot" class="dp-acct-slot"></div><button type="button" id="hn-signin" onclick="hnSignIn()" aria-label="Sign in with Google"><i class="hn-g"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.94 23.94 0 0 0 0 24c0 3.87.92 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></i><span>Sign in<small>Free · 1 tap with Google</small></span></button>
 
-<div class="flex items-center gap-2.5 flex-wrap dp-hdr-btns" style="overflow: visible;"><span class="hn-pills"><button type="button" class="hn-pill hn-p-pred" onclick="hnPredict(true)"><span class="hn-e">🎯</span> Predict</button><button type="button" class="hn-pill hn-p-col" onclick="hnBrowse()"><span class="hn-e">🏥</span> Colleges</button><a href="#plans" class="hn-pill hn-p-plan" onclick="event.preventDefault();hnGo('plans')"><span class="hn-e">💎</span> Plans</a></span>
+<div class="flex items-center gap-2.5 flex-wrap dp-hdr-btns" style="overflow: visible;"><nav class="hx-nav" aria-label="Main"><button type="button" onclick="hnBrowse()">Colleges</button><button type="button" onclick="window.dpOpenMaker&&dpOpenMaker()">Choice list</button><button type="button" onclick="window.dpOpenPlan&&dpOpenPlan()">My plan</button><button type="button" onclick="hnGo('senior-connect')">Seniors</button><div class="hn-dd hx-dd"><button type="button" class="hn-help hx-more" aria-expanded="false" aria-haspopup="true" onclick="hnMenu(this)">More<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><div class="hn-menu" role="menu"><button type="button" role="menuitem" onclick="hnClose();openBranchPayment()"><span>🧬</span><b>Branch DNA test · <span data-price="dna">₹149</span></b><small>12 questions to find the branch that fits you</small></button><a role="menuitem" data-spot-alt="route" href="route-finder.html"><span>✈️</span><b>Route Finder</b><small>Paths after MBBS, in India and abroad</small></a><button type="button" role="menuitem" onclick="hnClose();window.dispatchEvent(new CustomEvent('dp-rulebook',{detail:{}}))"><span>📘</span><b>Rule Book 2026</b><small>Official rules for MCC and every state</small></button><button type="button" role="menuitem" onclick="hnClose();window.dispatchEvent(new CustomEvent('dp-timeline',{detail:{}}))"><span>📅</span><b>Counselling dates</b><small>Every round, every state</small></button><button type="button" role="menuitem" onclick="hnClose();hnGo('plans')"><span>💎</span><b>Plans and prices</b><small>Pay once for the season</small></button><button type="button" role="menuitem" onclick="hnClose();openAboutUsModal()"><span>🩺</span><b>About us</b><small>The residents behind DocPulsee</small></button></div></div><button type="button" class="hx-cta" onclick="openConsultationModal()">1:1 counselling <span data-price="counsel">₹2,000</span></button></nav>
 <!-- ABOUT US BUTTON -->
 <div class="relative flex items-center gap-2 hn-about">
 <!-- Blinking red dot / heart -->
@@ -2359,9 +2390,7 @@ body.dpg-on .dpg-pill,body.dpg-on #hjt,body.dpg-on #dpSpot,body.dpg-on .branch-a
 <button type="button" onclick="window.dpOpenMaker&&window.dpOpenMaker()"><span>🗂️</span><b>Choice List Maker</b><small>One list, with your chance for every seat</small></button>
 <button type="button" class="hn-tile-plan" onclick="window.dpOpenPlan&&window.dpOpenPlan()" data-home-plan><span>🧭</span><b>My Counselling Plan</b><small>Your dates, seats and what to do next, every round</small></button>
 </div>
-<div class="hn-need"><b>What do you need today?</b><div class="hn-chips">
-<button type="button" onclick="hnBrowse()"><span class="hn-e">📊</span> Check cutoffs</button>
-<button type="button" onclick="window.dpOpenMaker&&window.dpOpenMaker()"><span class="hn-e">🗂️</span> Make my list</button>
+<div class="hn-need"><b>Quick help</b><div class="hn-chips">
 <button type="button" onclick="window.dpOpenPlan&&window.dpOpenPlan('seats')"><span class="hn-e">🧭</span> Join, Float or Skip my seat?</button>
 <button type="button" onclick="hnOpenId()"><span class="hn-e">❄️</span> Freeze or Float?</button>
 <button type="button" onclick="openConsultationModal()"><span class="hn-e">🩺</span> Talk to a doctor</button>
@@ -4537,8 +4566,9 @@ function sheetOf(ov){return ov.querySelector(":scope>.modal, :scope>[data-plan-h
 function closeOv(ov){ov.dispatchEvent(new MouseEvent("click",{bubbles:true,cancelable:true}));}
 function wire(ov){if(ov.__dpa)return;var sh=sheetOf(ov);if(!sh)return;ov.__dpa=1;
  if(mob()){var h=document.createElement("div");h.className="dpa-handle";h.innerHTML="<i></i>";sh.insertBefore(h,sh.firstChild);
-  var y0=null,dy=0,t0=0;function st(e){var tch=e.touches?e.touches[0]:e;if(e.currentTarget!==h&&sh.scrollTop>0)return;var tg=e.target;if(tg&&tg.closest&&tg.closest("input,select,textarea,.dpp-tabs,[data-plan-tab]"))return;y0=tch.clientY;dy=0;t0=Date.now();sh.style.transition="none";}
-  function mv(e){if(y0==null)return;var tch=e.touches?e.touches[0]:e;dy=Math.max(0,tch.clientY-y0);if(dy>0){sh.style.transform="translateY("+dy+"px)";if(e.cancelable&&dy>6)e.preventDefault();}}
+  var y0=null,dy=0,t0=0;function up(t){for(var n=t;n&&n!==ov;n=n.parentElement){if(n.scrollTop>0&&n.scrollHeight>n.clientHeight+1){var oy=getComputedStyle(n).overflowY;if(oy==="auto"||oy==="scroll")return true;}}return false;}
+  function st(e){var tch=e.touches?e.touches[0]:e;y0=null;if(e.currentTarget!==h&&up(e.target))return;var tg=e.target;if(tg&&tg.closest&&tg.closest("input,select,textarea,.dpp-tabs,[data-plan-tab]"))return;y0=tch.clientY;dy=0;t0=Date.now();sh.style.transition="none";}
+  function mv(e){if(y0==null)return;var tch=e.touches?e.touches[0]:e;if(tch.clientY-y0<-4&&dy===0){y0=null;sh.style.transform="";return;}dy=Math.max(0,tch.clientY-y0);if(dy>0){sh.style.transform="translateY("+dy+"px)";if(e.cancelable&&dy>6)e.preventDefault();}}
   function en(){if(y0==null)return;var v=dy/Math.max(1,Date.now()-t0);sh.style.transition="transform .25s ease";if(dy>120||v>0.8){sh.style.transform="translateY(100%)";setTimeout(function(){closeOv(ov);setTimeout(function(){if(document.body.contains(ov)){sh.style.transform="";}},60);},180);}else sh.style.transform="";y0=null;}
   h.addEventListener("touchstart",st,{passive:true});sh.addEventListener("touchstart",st,{passive:true});sh.addEventListener("touchmove",mv,{passive:false});sh.addEventListener("touchend",en);}
  try{history.pushState({dpSheet:1},"");pushed++;ov.__dpaPushed=1;}catch(e){}}
@@ -4710,7 +4740,7 @@ var CTX=[["ff","[data-idc-ffsheet]"],["idcard","[data-idc-card]"],["plan","[data
 var ctx=null;pill.onclick=function(){if(ctx)start(ctx);};
 function track(){if(cur||sheetEl){pill.style.display="none";return;}var hit=null,el=null;for(var i=0;i<CTX.length;i++){var e=$(CTX[i][1]);if(e&&vis(e)){hit=CTX[i][0];el=e;break;}}
  if(!hit){var fs=$("[data-mode-btn=mcc]");if(fs&&vis(fs)){var r0=fs.parentElement.getBoundingClientRect();if(r0.top>60&&r0.top<innerHeight-60){hit="predict";el=fs.parentElement;}}}
- if(!hit){pill.style.display="none";ctx=null;return;}ctx=hit;var r=el.getBoundingClientRect();pill.style.display="inline-flex";pill.classList.toggle("ic",hit==="predict"&&innerWidth<700);
+ if(!hit){pill.style.display="none";ctx=null;return;}ctx=hit;var hd=hit==="maker"?el.closest(".clm")&&el.closest(".clm").querySelector(".clm-top"):null;var r=(hd||el).getBoundingClientRect();if(hd){pill.style.display="inline-flex";pill.classList.remove("ic");pill.style.top=(r.bottom+8)+"px";pill.style.left=Math.max(6,innerWidth-pill.offsetWidth-12)+"px";return;}pill.style.display="inline-flex";pill.classList.toggle("ic",hit==="predict"&&innerWidth<700);
  var top=hit==="predict"?r.top-30:Math.max(6,r.top-30);if(hit!=="predict"&&r.top<40)top=r.top+8;var left=hit==="predict"?r.right-pill.offsetWidth:r.left+r.width/2-pill.offsetWidth/2;
  if(hit!=="predict"&&r.top<40){left=r.left+12;}
  pill.style.top=Math.max(6,top)+"px";pill.style.left=Math.max(6,Math.min(innerWidth-pill.offsetWidth-6,left))+"px";}
