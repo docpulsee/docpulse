@@ -3663,7 +3663,8 @@ window.applyConsultCoupon = async function(){
   function show(t, ok){ msg.textContent = t; msg.style.color = ok ? '#15803d' : '#be123c'; msg.classList.remove('hidden'); }
   if(!code){ show('Enter a coupon code.'); return; }
   try {
-    var r = await fetch(DP_SUPA_URL + '/functions/v1/coupon-admin', { method:'POST', headers:{ 'Content-Type':'application/json', apikey: DP_ANON, Authorization:'Bearer ' + DP_ANON },
+    var ctok = null; try { ctok = window.__dpToken ? await window.__dpToken() : null; } catch(_e){}
+    var r = await fetch(DP_SUPA_URL + '/functions/v1/coupon-admin', { method:'POST', headers:{ 'Content-Type':'application/json', apikey: DP_ANON, Authorization:'Bearer ' + (ctok || DP_ANON) },
       body: JSON.stringify({ action:'check', product:'counselling', code: code, email: email, user_id: (window.__dpUser && window.__dpUser.id) || null }) });
     var d = {}; try { d = await r.json(); } catch(_e){}
     if(!d.valid){ dpConsultCoupon = null; updateConsultPayLabel(); show(d.reason || 'This coupon code isn\'t valid.'); return; }
@@ -3692,8 +3693,9 @@ document.querySelectorAll('#consultPrefChips .dp-pref').forEach(function(btn){
   });
 });
 async function consultCall(body){
+  var tok = null; try { tok = window.__dpToken ? await window.__dpToken() : null; } catch(_e){}
   var r = await fetch(DP_SUPA_URL + '/functions/v1/book-consultation', {
-    method: 'POST', headers: { 'Content-Type':'application/json', apikey: DP_ANON, Authorization: 'Bearer ' + DP_ANON }, body: JSON.stringify(body)
+    method: 'POST', headers: { 'Content-Type':'application/json', apikey: DP_ANON, Authorization: 'Bearer ' + (tok || DP_ANON) }, body: JSON.stringify(body)
   });
   var data = {}; try { data = await r.json(); } catch(_e){}
   if(!r.ok || data.error) throw new Error(data.error || ('Error ' + r.status));
