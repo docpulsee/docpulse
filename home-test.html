@@ -2031,6 +2031,9 @@ animation: vibrantPulse 3s infinite;
 #hn-signin small{display:block;font-size:10.5px;font-weight:600;color:#6b7570;line-height:1.1}
 #hn-signin span{text-align:left;line-height:1.15}
 body.hn-ready .dp-acct-slot:empty+#hn-signin{display:inline-flex}
+body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{display:inline-flex}
+.dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{margin-left:0}
+@media (max-width:760px){.dp-hdr-brand>div:first-child{flex:none!important}body.hn-ready header:has(.dp-acct-slot:empty) .hx-mplans{display:none!important}body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{order:3;margin-left:auto;min-height:40px;padding:3px 12px 3px 3px;gap:7px;font-size:13px}body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin .hn-g{width:32px;height:32px}header .dpt-wrap{order:4}}
 .hn-need{margin-top:2px}.hn-need>b{display:block;font-size:14px;color:#0f2a24;margin:0 0 8px 2px}
 .hn-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .hn-chips::-webkit-scrollbar{display:none}
@@ -2596,6 +2599,8 @@ body.dpg-on .dpg-pill,body.dpg-on #hjt,body.dpg-on #dpSpot,body.dpg-on .branch-a
 .ds-it span{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .ds-it b{flex:none;font-weight:800;color:color-mix(in srgb,var(--c1) 72%,#0f172a)}
 @media (min-width:761px){.ds-now{max-width:196px}}
+/* phone: the live line only takes the space that is left, so Plans, theme and sign-in / account always fit */
+@media (max-width:760px){.dp-hdr-brand{flex:1 1 auto!important;min-width:0!important}.dp-hdr-brand>div:last-child{flex:1 1 auto;min-width:0}.ds-now{max-width:100%;width:100%}.dp-hdr-brand h1{white-space:nowrap}}
 #dp-tl-tab{display:none!important}
 
 /* viewer */
