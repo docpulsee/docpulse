@@ -6251,13 +6251,13 @@ function tabCur(){var nav=$(".hn-tab");if(!nav)return;var w=$("#neetpg-app-wrap"
    Laptop: shows when the pointer reaches the bottom edge (or the handle), hides when it leaves. */
 var dkY=scrollY,dkT=null,dkShown=false,dkOver=false;
 function dkSet(v){dkShown=v;document.body.classList.toggle("dk-hide",!v);}
-function dkShow(ms){dkSet(true);clearTimeout(dkT);if(innerWidth>760)return;dkT=setTimeout(function(){if(!dkOver)dkSet(false);},ms||2500);}
+function dkShow(ms){dkSet(true);clearTimeout(dkT);dkT=setTimeout(function(){if(!dkOver)dkSet(false);},ms||2500);}
 function dkHandle(){if($("#dk-handle"))return;var h=document.createElement("button");h.type="button";h.id="dk-handle";h.setAttribute("aria-label","Show menu");h.innerHTML="<i></i>";h.onclick=function(){dkShow(4000);};
  h.addEventListener("mouseenter",function(){if(innerWidth>760)dkShow();});document.body.appendChild(h);
  var nav=$(".hn-tab");if(nav){nav.addEventListener("mouseenter",function(){dkOver=true;clearTimeout(dkT);});nav.addEventListener("mouseleave",function(){dkOver=false;if(innerWidth>760){dkT=setTimeout(function(){dkSet(false);},500);}});
   nav.addEventListener("touchstart",function(){dkShow(3500);},{passive:true});}}
-function dock(){var y=scrollY,dy=y-dkY;dkY=y;if(innerWidth>760){return;}if(dy>4||dy<-4)dkShow(1500);}
-document.addEventListener("mousemove",function(e){if(innerWidth<=760)return;if(e.clientY>innerHeight-28&&!dkShown){dkShow();}else if(dkShown&&!dkOver&&e.clientY<innerHeight-150){clearTimeout(dkT);dkT=setTimeout(function(){if(!dkOver)dkSet(false);},350);}},{passive:true});
+function dock(){var y=scrollY,dy=y-dkY;dkY=y;if(dy<-8)dkShow();else if(dy>8&&dkShown&&!dkOver){clearTimeout(dkT);dkSet(false);}}
+document.addEventListener("mousemove",function(e){if(innerWidth<=760)return;if(e.clientY>innerHeight-28&&!dkShown){dkShow();}},{passive:true});
 var dkBoot=false;function dkInit(){if(dkBoot||!$(".hn-tab"))return;dkBoot=true;dkHandle();dkSet(true);dkT=setTimeout(function(){dkSet(false);},innerWidth>760?2200:3000);}
 var SYH={you:"👆 Start with You: add your MBBS state and domicile so we show only seats you can take",rules:"👆 Next, open Rules to see which seats are open to you",filters:""};
 function syNeed(){document.querySelectorAll(".sy").forEach(function(sy){var R=sy.querySelectorAll(".sy-row"),done=0,first=null,open="";R.forEach(function(r){var t=r.querySelector(".sy-t"),k=r.getAttribute("data-sy-row");var nd=!!t&&/^Add /.test(t.textContent.trim());
