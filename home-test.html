@@ -6256,7 +6256,7 @@ function dkHandle(){if($("#dk-handle"))return;var h=document.createElement("butt
  h.addEventListener("mouseenter",function(){if(innerWidth>760)dkShow();});document.body.appendChild(h);
  var nav=$(".hn-tab");if(nav){nav.addEventListener("mouseenter",function(){dkOver=true;clearTimeout(dkT);});nav.addEventListener("mouseleave",function(){dkOver=false;if(innerWidth>760){dkT=setTimeout(function(){dkSet(false);},500);}});
   nav.addEventListener("touchstart",function(){dkShow(3500);},{passive:true});}}
-function dock(){var y=scrollY,dy=y-dkY;dkY=y;if(innerWidth>760){return;}if(dy<-8)dkShow();else if(dy>8&&dkShown&&!dkOver){clearTimeout(dkT);dkSet(false);}}
+function dock(){var y=scrollY,dy=y-dkY;dkY=y;if(innerWidth>760){return;}if(dy>4||dy<-4)dkShow(1500);}
 document.addEventListener("mousemove",function(e){if(innerWidth<=760)return;if(e.clientY>innerHeight-28&&!dkShown){dkShow();}else if(dkShown&&!dkOver&&e.clientY<innerHeight-150){clearTimeout(dkT);dkT=setTimeout(function(){if(!dkOver)dkSet(false);},350);}},{passive:true});
 var dkBoot=false;function dkInit(){if(dkBoot||!$(".hn-tab"))return;dkBoot=true;dkHandle();dkSet(true);dkT=setTimeout(function(){dkSet(false);},innerWidth>760?2200:3000);}
 var SYH={you:"👆 Start with You: add your MBBS state and domicile so we show only seats you can take",rules:"👆 Next, open Rules to see which seats are open to you",filters:""};
