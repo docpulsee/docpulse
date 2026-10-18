@@ -3610,6 +3610,51 @@ body:has(.acp) .hn-tab,body:has(.acp) #dk-handle,body:has(.acp) [data-dpfl]{opac
  .fs-pop [data-seat-picker]>.flex.flex-wrap{grid-template-columns:1fr 1fr}
  .fs-pop [data-seat-picker]>.flex.flex-wrap>label{padding-left:38px!important}
  .fs-pop [data-seat-picker]>.flex.flex-wrap>label .text-xs{font-size:13.5px!important}}
+
+/* ---- any animated/transformed parent must not trap the sheet (state "Filters" panel had transform:matrix from its entry animation) ---- */
+#neetpg-app-wrap *:has(.fs-pop){transform:none!important;animation:none!important;filter:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;contain:none!important;will-change:auto!important;perspective:none!important}
+body:has(.fs-pop) header.sticky,body:has(.fs-pop) header{z-index:1!important}
+/* ---- sentence tokens: soft capsules instead of outlined boxes ---- */
+#neetpg-app-wrap .fs-tok{border:0!important;background:#eaf2ef!important;color:#0b5f52!important;font-weight:650!important;letter-spacing:-.015em;border-radius:14px!important;padding:.16em .62em .16em .7em!important;
+ box-shadow:inset 0 0 0 .5px rgba(15,118,110,.14)!important;transition:background .2s,transform .18s cubic-bezier(.32,.72,0,1),box-shadow .2s!important}
+#neetpg-app-wrap .fs-tok:hover{background:#dcebe6!important;transform:none!important;box-shadow:inset 0 0 0 .5px rgba(15,118,110,.22)!important}
+#neetpg-app-wrap .fs-tok:active{transform:scale(.97)!important}
+#neetpg-app-wrap .fs-tok[aria-expanded=true]{background:#0f766e!important;color:#fff!important}
+#neetpg-app-wrap .fs-tok .fs-caret{display:inline-block;width:7px;height:7px;margin:0 3px 0 10px;font-size:0!important;opacity:.6;vertical-align:4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg)}
+#neetpg-app-wrap .fs-tok input{background:transparent!important}
+/* ---- state panel: You · Rules · Filters as calm Apple-style cards ---- */
+html body.v2 .sy{gap:10px!important}
+html body.v2 .sy::before{font-size:17px!important;font-weight:700!important;letter-spacing:-.02em!important;padding-bottom:12px!important;color:#0d1f1a!important;
+ background:linear-gradient(90deg,#14a085 0 var(--dpp,0%),#e3e9e7 var(--dpp,0%) 100%) left bottom/100% 4px no-repeat!important}
+html body.v2 .sy .sy-row{min-height:0!important;padding:14px 14px 14px!important;border-radius:20px!important;color:#0d1f1a!important;background:#fff!important;
+ box-shadow:0 0 0 .5px rgba(13,31,26,.1),0 1px 2px rgba(13,31,26,.04),0 8px 22px rgba(13,31,26,.06)!important;transition:transform .25s cubic-bezier(.32,.72,0,1),box-shadow .25s,background .2s!important;animation:none!important}
+html body.v2 .sy .sy-row:hover{filter:none!important;box-shadow:0 0 0 .5px rgba(13,31,26,.14),0 2px 4px rgba(13,31,26,.05),0 12px 28px rgba(13,31,26,.09)!important}
+html body.v2 .sy .sy-row::before{width:34px!important;height:34px!important;border-radius:10px!important;margin-bottom:10px!important;box-shadow:inset 0 .5px 0 rgba(255,255,255,.35)!important;
+ background:var(--syi) center/18px no-repeat,var(--syg)!important}
+html body.v2 .sy .sy-row .sy-k{color:#0d1f1a!important;font-size:16px!important;font-weight:700!important;letter-spacing:-.02em}
+html body.v2 .sy .sy-row .sy-t{color:#5d6c67!important;font-size:12.5px!important;font-weight:500!important;line-height:1.38!important}
+html body.v2 .sy .sy-row .sy-c{background:#f0f4f2!important;color:#5d6c67!important;font-size:0!important}
+html body.v2 .sy .sy-row .sy-c::before{content:"";width:10px;height:10px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%235d6c67' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+html body.v2 .sy .sy-row::after{content:""!important;top:14px!important;right:14px!important;width:20px;height:20px;padding:0!important;border-radius:50%!important;
+ background:#14a085 no-repeat center/11px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important}
+html body.v2 .sy .sy-row[data-dpneed="1"]::after{content:"Add"!important;width:auto;height:auto;padding:3px 10px!important;border-radius:999px!important;font-size:11.5px!important;font-weight:700!important;letter-spacing:0!important;color:#0f766e!important;background:#e4f4ef!important}
+html body.v2 .sy .sy-row[data-dpnext]{box-shadow:0 0 0 1.5px #14a085,0 8px 22px rgba(20,160,133,.16)!important}
+html body.v2 .sy .sy-row[aria-expanded=true]{transform:none!important;background:#f6faf9!important;box-shadow:0 0 0 2px var(--syc),0 10px 26px rgba(13,31,26,.08)!important}
+html body.v2 .sy .sy-row[aria-expanded=true] .sy-c{transform:rotate(180deg);background:var(--syc)!important}
+html body.v2 .sy .sy-row[aria-expanded=true] .sy-c::before{filter:brightness(0) invert(1)}
+html body.v2 .sy>.sy-row~*:not(.sy-row):not(.sy-reset){border-top:0!important;border-radius:20px!important;background:#f6faf9!important;box-shadow:inset 0 0 0 .5px rgba(13,31,26,.08)!important;animation:fxPan .35s cubic-bezier(.32,.72,0,1)!important}
+@keyframes fxPan{from{opacity:0}to{opacity:1}}
+html body.v2 .sy::after{color:#0f766e!important;font-weight:600!important}
+@media (max-width:640px){html body.v2 .sy .sy-row{padding:12px 11px!important}html body.v2 .sy .sy-row .sy-k{font-size:14.5px!important}html body.v2 .sy .sy-row .sy-t{font-size:11.5px!important}
+ html body.v2 .sy .sy-row::before{width:30px!important;height:30px!important;border-radius:9px!important;background-size:16px,auto!important}}
+/* ---- quick picks in the seat sheet ---- */
+.fx-qp{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px 0 12px;padding:2px}
+.fx-qp::-webkit-scrollbar{display:none}
+.fx-qp button{flex:none;border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:13.5px;font-weight:600;color:#0d1f1a;background:#eef3f1;box-shadow:inset 0 0 0 .5px rgba(13,31,26,.08);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,transform .12s}
+.fx-qp button:active{transform:scale(.96)}
+.fx-qp button.on{background:#0d1f1a;color:#fff}
+@media (max-width:640px){.fx-qp{flex-wrap:wrap;overflow:visible}.fx-qp button{padding:7px 12px;font-size:13px}}
+.fx-qp button em{font-style:normal;font-weight:500;opacity:.6;margin-left:5px;font-variant-numeric:tabular-nums}
 /* short laptop screens: tighter rows so the whole sheet fits without scrolling */
 @media (max-height:820px) and (min-width:641px){
  .fs-pop .fs-pop-h{padding-top:14px;padding-bottom:9px}
@@ -7673,7 +7718,7 @@ var t=null;new MutationObserver(function(){if(t)return;t=setTimeout(function(){t
 function $(s,r){return (r||document).querySelector(s);}function $$(s,r){return [].slice.call((r||document).querySelectorAll(s));}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function fmt(n){return Number(n||0).toLocaleString("en-IN");}
-var TYPES=[["AIQ","Govt","#0f766e"],["DNB","DNB","#2563eb"],["DNBDIP","DNB Diploma","#7c3aed"],["PS","Private & deemed","#ea580c"],["NRI","NRI","#db2777"]];
+var TYPES=[["AIQ","Govt","#0f766e"],["DNB","DNB","#2563eb"],["DNBDIP","DNB Diploma","#7c3aed"],["PS","Deemed","#ea580c"],["NRI","NRI","#db2777"]];
 function g(n){try{return eval(n);}catch(e){return undefined;}}
 function ready(){var D=g("DATA");return Array.isArray(D)&&D.length&&D.some(function(d){return d&&d.R&&Object.keys(d.R).length;})&&typeof g("pred26")==="function";}
 function ctx(){var c=window.__dpConsultCtx||{};var Q=g("QNAMES")||{},rev={};Object.keys(Q).forEach(function(k){rev[Q[k]]=k;});
@@ -7697,8 +7742,25 @@ function barHTML(v,mini){var sum=v.per.filter(function(p){return p.on;}).reduce(
   (mini?'':'<div class="fx-leg">'+v.per.map(function(p){var t=TYPES.find(function(x){return x[0]===p.q;});return '<span class="'+(p.on?"":"off")+'"><i style="background:'+t[2]+'"></i>'+t[1]+' '+fmt(p.n)+'</span>';}).join("")+'</div>');}
 /* the filter sheet */
 function setH(el,h){if(el.__h!==h){el.__h=h;el.innerHTML=h;}}
+
+/* quick picks + clearer names in the seat sheet */
+var QP_M=[["Everything",["AIQ","DNB","DNBDIP","PS"]],["Government only",["AIQ"]],["Deemed only",["PS"]],["DNB only",["DNB","DNBDIP"]],["Govt + DNB",["AIQ","DNB","DNBDIP"]]];
+var QP_S=[["Everything",["GOVT","DNB","DNBDIP","PS"]],["Government only",["GOVT"]],["Private only",["PS"]],["DNB only",["DNB","DNBDIP"]],["Govt + DNB",["GOVT","DNB","DNBDIP"]]];
+function relabel(pop,mcc){if(!mcc)return;var b=$('[data-seat-type="PS"]',pop);if(!b)return;var t=b.querySelector(".text-xs"),h=b.querySelector(":scope>.text-\\[10px\\]");
+ if(t&&t.firstChild&&t.firstChild.nodeType===3&&t.firstChild.nodeValue!=="Deemed universities (paid)")t.firstChild.nodeValue="Deemed universities (paid)";
+ var H="Every MCC paid seat is in a deemed university. Fee shown on each seat.";if(h&&h.textContent!==H)h.textContent=H;}
+function quick(pop){var pk=$("[data-seat-picker]",pop);if(!pk)return;var mcc=!!$('[data-seat-type="AIQ"]',pk);relabel(pop,mcc);var P=mcc?QP_M:QP_S,base=P[0][1];
+ var on={};$$("[data-seat-type]",pk).forEach(function(b){on[b.getAttribute("data-seat-type")]=b.getAttribute("aria-pressed")==="true";});
+ var v=mcc?compute():null,bar=$(".fx-qp",pop);
+ if(!bar){bar=document.createElement("div");bar.className="fx-qp";bar.setAttribute("role","group");bar.setAttribute("aria-label","Quick picks");pk.parentNode.insertBefore(bar,pk);}
+ var h=P.map(function(p,i){var act=base.every(function(q){return !!on[q]===(p[1].indexOf(q)>=0);});var n="";
+  if(v){var qs=new Set(v.c.qs);base.forEach(function(q){qs.delete(q);});p[1].forEach(function(q){qs.add(q);});n='<em>'+fmt(count({rank:v.c.rank,cat:v.c.cat,qs:qs,spec:v.c.spec,state:v.c.state}))+'</em>';}
+  return '<button type="button" data-qp="'+i+'" class="'+(act?"on":"")+'" aria-pressed="'+act+'">'+p[0]+n+'</button>';}).join("");
+ if(bar.__h!==h){setH(bar,h);$$("button",bar).forEach(function(b){b.onclick=function(){var want=P[+b.dataset.qp][1];
+  base.forEach(function(q){var el=$('[data-seat-type="'+q+'"]',pk);if(!el)return;var cur=el.getAttribute("aria-pressed")==="true";if(cur!==(want.indexOf(q)>=0))el.click();});tick();};});}}
 /* every filter sheet: sticky footer with the main action, section labels */
-function foot(){$$(".fs-pop").forEach(function(pop){var f=pop.querySelector(":scope>.fx-foot");
+function untrap(pop){var e=pop.parentElement;while(e&&e!==document.body){var cs=getComputedStyle(e);if(cs.transform!=="none"||cs.filter!=="none"||cs.perspective!=="none"){e.style.setProperty("transform","none","important");e.style.setProperty("animation","none","important");e.style.setProperty("filter","none","important");}e=e.parentElement;}}
+function foot(){$$(".fs-pop").forEach(untrap);$$(".fs-pop").forEach(function(pop){var f=pop.querySelector(":scope>.fx-foot");
  if(!$("[data-seat-picker]",pop)){var own=$$("button",pop).find(function(b){return !b.closest(".fs-pop-h")&&!b.closest(".fx-foot")&&/^(Done|Apply|Show|Save)\b/.test((b.textContent||"").trim());});
   if(own){if(f)f.remove();var row=own.parentElement;if(row&&row!==pop&&!row.classList.contains("fx-own"))row.classList.add("fx-own");return;}}
  if(!f){f=document.createElement("div");f.className="fx-foot";pop.appendChild(f);}
@@ -7733,7 +7795,7 @@ function nz(){var e=$(".fx-mini"),v=compute(),old=$(".fx-nz");if(!e||!v||v.tot>0
  $$("button",box).forEach(function(b){b.onclick=function(){opts[+b.dataset.i].go();};});if(!old)e.parentNode.insertBefore(box,e.nextSibling);}
 function toggleType(q){var tok=$('[data-fs-tok="seats"]');if(!tok)return;tok.click();setTimeout(function(){var b=$('.fs-pop [data-seat-type="'+q+'"]');if(b)b.click();setTimeout(function(){var d=$(".fs-pop .fs-pop-h button");if(d)d.click();},250);},150);}
 function pickOpt(id,re){var tok=$('[data-fs-tok="'+id+'"]');if(!tok)return;tok.click();setTimeout(function(){var b=$$(".fs-pop .fs-opt").find(function(x){return re.test((x.textContent||"").trim());});if(b)b.click();},150);}
-var tm=null;function tick(){if(tm)return;tm=setTimeout(function(){tm=null;try{sheet();}catch(e){}try{foot();}catch(e){}try{mini();nz();}catch(e){}},160);}
+var tm=null;function tick(){if(tm)return;tm=setTimeout(function(){tm=null;try{sheet();}catch(e){}try{var _p=$(".fs-pop");if(_p)quick(_p);}catch(e){}try{foot();}catch(e){}try{mini();nz();}catch(e){}},160);}
 new MutationObserver(tick).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["aria-pressed","aria-selected"]});setInterval(tick,1500);
 /* ===== Your seat pools ===== */
 var CN={GN:"General",EWS:"EWS",OBC:"OBC",SC:"SC",ST:"ST"},COL={GN:"#0f766e",EWS:"#2563eb",OBC:"#7c3aed",SC:"#ea580c",ST:"#db2777"};
@@ -7762,9 +7824,12 @@ function open(){var p=prof(),cat=p.cat;
  var w=document.createElement("div");w.id="a2-sheet";w.innerHTML='<div class="a2-ov"></div><div class="a2-sh" role="dialog" aria-label="Your seat pools"><div class="a2-hd"><b>Your seat pools</b><button type="button" class="a2-x" aria-label="Close">✕</button></div><div data-b></div></div>';document.body.appendChild(w);
  function close(){w.remove();}w.querySelector(".a2-ov").onclick=close;w.querySelector(".a2-x").onclick=close;
  function paint(){var b=w.querySelector("[data-b]");b.innerHTML=body();$$("[data-c]",b).forEach(function(x){x.onclick=function(){cat=x.dataset.c;paint();};});
-  var rb=b.querySelector("[data-rb]");rb.onclick=function(){close();window.dispatchEvent(new CustomEvent("dp-rulebook",{detail:{}}));};
-  var pr=b.querySelector("[data-pr]");pr.onclick=function(){close();if(window.hnPredict)window.hnPredict(true);};}
+  var rb=b.querySelector("[data-rb]");rb.onclick=function(){close();closeId();setTimeout(function(){window.dispatchEvent(new CustomEvent("dp-rulebook",{detail:{}}));},220);};
+  var pr=b.querySelector("[data-pr]");pr.onclick=function(){close();closeId();setTimeout(goSeats,260);};}
  paint();}
+function closeId(){var x=$("[data-idc-close]");if(x)x.click();var a=document.getElementById("a2-sheet");if(a)a.remove();}
+function goSeats(){if(window.hnPredict)try{window.hnPredict(true);}catch(e){}
+ setTimeout(function(){var t=$("#neetpg-app-wrap .fx-mini")||$("#neetpg-app-wrap .fs-sentence")||$("#neetpg-app-wrap .sy")||$("#neetpg-app-wrap");if(t){var y=t.getBoundingClientRect().top+window.scrollY-110;window.scrollTo({top:Math.max(0,y),behavior:"smooth"});}},350);}
 function idc(){var act=$(".idc-act");if(!act||act.querySelector(".fx-spb"))return;var b=document.createElement("button");b.type="button";b.className="idc-btn fx-spb";b.textContent="🎯 Your seat pools";b.onclick=open;act.insertBefore(b,act.firstChild);}
 new MutationObserver(idc).observe(document.body,{childList:true,subtree:true});
 window.dpFX={pools:open,count:count,compute:compute};
