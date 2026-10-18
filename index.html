@@ -2726,6 +2726,16 @@ body.dpg-on .dpg-pill,body.dpg-on #hjt,body.dpg-on #dpSpot,body.dpg-on .branch-a
 .ds-tr.live>span{background:#10b981;color:#fff}
 .ds-src{display:block;margin:12px 0 4px;text-align:center;font:700 12.5px Inter,system-ui;color:#0f766e}
 @media (prefers-reduced-motion:reduce){.ds-logo.ds-unseen .ds-ring,.ds-logo.ds-unseen::after,.ds-aur::before,.ds-aur::after,.ds-dot,.ds-pill i{animation:none!important}.ds-s{animation:none!important}.ds-track{transition:none}}
+
+/* perf (18 Oct): same look, far cheaper on iPad/older phones: no full-screen backdrop blur, no blurred moving blobs, no per-second re-blur */
+.ds-bg{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(3,10,9,.9)!important}
+.ds-aur{filter:none!important}
+.ds-aur::before,.ds-aur::after{filter:none!important;opacity:.6!important;background:radial-gradient(closest-side,var(--c1),transparent)!important;will-change:transform}
+.ds-aur::after{background:radial-gradient(closest-side,var(--c3),transparent)!important}
+.ds-cd div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(255,255,255,.12)!important}
+.ds-acts{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.ds-open body>*:not(.ds){visibility:hidden!important}
+@media (hover:none),(prefers-reduced-motion:reduce){.ds-aur::before,.ds-aur::after{animation:none!important}}
 </style><style id="dp-v2-css">
 .ux{margin:14px 0 0;background:#fff;border:1px solid #e3ebe8;border-radius:24px;padding:16px;box-shadow:0 6px 24px rgba(15,40,35,.06)}
 .ux-h{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 2px 12px}
@@ -6665,7 +6675,7 @@ function open(k,from){if(V)return;var S=stories();
  var el=document.createElement("div");el.className="ds";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","Counselling updates");
  el.innerHTML='<div class="ds-bg"></div><button class="ds-nav p" type="button" aria-label="Previous">'+IC.l+'</button><button class="ds-nav n" type="button" aria-label="Next">'+IC.r+'</button>'
  +'<div class="ds-card"><div class="ds-aur"></div><div class="ds-grain"></div><div class="ds-head"><div class="ds-bars"></div><div class="ds-top"><span class="ds-av"></span><div class="ds-who"><b></b><small></small></div><button class="ds-ib ds-fl" type="button" aria-label="Choose states">'+IC.f+'</button><button class="ds-ib ds-x" type="button" aria-label="Close">'+IC.x+'</button></div><div class="ds-chips" role="tablist"></div></div><div class="ds-stage" aria-live="polite"></div><div class="ds-hint">Tap right for next · hold to pause · swipe down to close</div></div>';
- document.body.appendChild(el);var lock=document.documentElement.style.overflow;document.documentElement.style.overflow="hidden";
+ document.body.appendChild(el);setTimeout(function(){if(el.isConnected)document.documentElement.classList.add("ds-open");},450);var lock=document.documentElement.style.overflow;document.documentElement.style.overflow="hidden";
  V={el:el,S:S,k:Math.min(k||0,S.length-1),t0:0,el0:0,paused:false,raf:0,lock:lock,from:from};
  el.querySelector(".ds-x").onclick=close;el.querySelector(".ds-bg").onclick=close;el.querySelector(".ds-fl").onclick=picker;
  el.querySelector(".ds-nav.p").onclick=function(){go(-1);};el.querySelector(".ds-nav.n").onclick=function(){go(1);};
@@ -6678,7 +6688,7 @@ function open(k,from){if(V)return;var S=stories();
  bars();show(0);var h=el.querySelector(".ds-hint");if(!ls("dp_ds_hint")){h.classList.add("on");setTimeout(function(){h.classList.remove("on");},3200);ls("dp_ds_hint","1");}
  setTimeout(function(){var c=el.querySelector(".ds-x");c&&c.focus({preventScroll:true});},60);}
 function close(){if(!V)return;var v=V;V=null;cancelAnimationFrame(v.raf);clearInterval(v.ci);document.removeEventListener("keydown",key);
- var fin=function(){v.el.remove();document.documentElement.style.overflow=v.lock;if(v.from&&v.from.focus)v.from.focus({preventScroll:true});};
+ var fin=function(){v.el.remove();document.documentElement.classList.remove("ds-open");document.documentElement.style.overflow=v.lock;if(v.from&&v.from.focus)v.from.focus({preventScroll:true});};
  if(!RM&&v.from&&v.el.animate){var r=v.from.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
   var a=v.el.animate([{clipPath:"circle("+R+"px at "+x+"px "+y+"px)"},{clipPath:"circle(0px at "+x+"px "+y+"px)"}],{duration:380,easing:"cubic-bezier(.5,0,.75,0)",fill:"forwards"});a.onfinish=fin;}else fin();}
 function key(e){if(!V)return;if(V.sheet){if(e.key==="Escape")V.sheet.close();return;}if(e.key==="Escape")close();else if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1);else if(e.key===" "&&e.target===document.body){e.preventDefault();pause(!V.paused);}}
