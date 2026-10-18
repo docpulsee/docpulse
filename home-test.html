@@ -7240,9 +7240,7 @@ function dressMenu(acp){var sc=$(".acp-scroll",acp);if(!sc||$(".acs-more",sc))re
 new MutationObserver(function(){var a=$(".acp");if(a)dressMenu(a);var p=$(".dpt-pop");if(p&&!$(".dpa-txt",p))textSection(p);focusHook();idcHook();}).observe(document.body,{childList:true,subtree:true});
 /* =========== 6. Owner Today + payment chime =========== */
 var TD=null,TDt=0;
-function rpc(){var tk=window.dpLock?window.dpLock.token():null;if(!tk)return Promise.reject(new Error("locked"));
- try{if(typeof sb!=="undefined"&&sb&&sb.rpc)return sb.rpc("owner_today",{p_tok:tk}).then(function(r){if(r.error)throw r.error;return r.data;});}catch(e){}
- return Promise.reject(new Error("no client"));}
+function rpc(){try{if(typeof sb!=="undefined"&&sb&&sb.rpc)return sb.rpc("owner_today").then(function(r){if(r.error)throw r.error;return r.data;});}catch(e){}return Promise.reject(new Error("no client"));}
 function spark(a,col){a=a||[];var mx=Math.max(1,Math.max.apply(null,a)),w=100,h=26,st=a.length>1?w/(a.length-1):w;var pts=a.map(function(v,i){return (i*st).toFixed(1)+","+(h-2-(v/mx)*(h-6)).toFixed(1);}).join(" ");
  return '<svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';}
 function inr(p){return "₹"+Math.round((p||0)/100).toLocaleString("en-IN");}
@@ -7454,14 +7452,19 @@ new MutationObserver(function(){var g=$(".acp .acct-grid");if(g&&!$(".cc-entry",
  b.onclick=function(){var x=$(".acp-scrim");if(x)x.click();setTimeout(function(){open("store");},220);};g.parentNode.insertBefore(b,g);}}).observe(document.body,{childList:true,subtree:true});
 })();</script><script id="dp-lock-js">(function(){
 function $(s,r){return (r||document).querySelector(s);}function $$(s,r){return [].slice.call((r||document).querySelectorAll(s));}
-var KEY="dp_own_tok";
+var KEY="dp_own_ok",PK="dp_own_pulse",FK="dp_own_fails";
 function user(){return window.__dpUser||null;}
 function isOwner(){var u=user(),L=["goyalakshya13@gmail.com","docpulsee@gmail.com"];try{if(typeof OWNER_EMAILS!=="undefined")L=OWNER_EMAILS;}catch(e){}return !!(u&&u.email&&L.indexOf(String(u.email).toLowerCase())>=0);}
-function tok(){try{var t=JSON.parse(localStorage.getItem(KEY)||"null");var u=user();if(t&&t.t&&t.exp>Date.now()&&u&&t.e===String(u.email).toLowerCase())return t;}catch(e){}return null;}
+function lsj(k){try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}}
+function lsset(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function tok(){var t=lsj(KEY),u=user();return t&&t.exp>Date.now()&&u&&t.e===String(u.email).toLowerCase()?t:null;}
 function ok(){return !!tok();}
-function saveTok(t,exp){try{localStorage.setItem(KEY,JSON.stringify({t:t,exp:exp?Date.parse(exp):Date.now()+12*36e5,e:String(user().email).toLowerCase()}));}catch(e){}sync();try{window.dispatchEvent(new Event("dp-own-unlock"));}catch(e){}}
-function rpc(n,a){try{if(typeof sb!=="undefined"&&sb&&sb.rpc)return sb.rpc(n,a||{}).then(function(r){if(r.error)throw r.error;return r.data;});}catch(e){}return Promise.reject(new Error("offline"));}
-function lockNow(){var t=tok();try{localStorage.removeItem(KEY);}catch(e){}if(t)rpc("owner_lock_end",{p_tok:t.t}).catch(function(){});sync();}
+function saveTok(){lsset(KEY,{exp:Date.now()+12*36e5,e:String(user().email).toLowerCase()});lsset(FK,{n:0,until:0});sync();try{window.dispatchEvent(new Event("dp-own-unlock"));}catch(e){}}
+function hash(code){var u=String((user()||{}).email||"").toLowerCase(),txt="docpulsee-owner:"+u+":"+code;
+ try{return crypto.subtle.digest("SHA-256",new TextEncoder().encode(txt)).then(function(b){return [].map.call(new Uint8Array(b),function(x){return ("0"+x.toString(16)).slice(-2);}).join("");});}
+ catch(e){var h=0;for(var i=0;i<txt.length;i++)h=(h*31+txt.charCodeAt(i))|0;return Promise.resolve("x"+h);}}
+function stored(){var p=lsj(PK),u=String((user()||{}).email||"").toLowerCase();return p&&p.e===u?p.h:null;}
+function lockNow(){try{localStorage.removeItem(KEY);}catch(e){}sync();}
 function sync(){var lockd=isOwner()&&!ok();document.body.classList.toggle("own-locked",lockd);var t=$(".acp .own-lock");if(t)paintTile(t);}
 setInterval(sync,5000);setTimeout(sync,800);
 /* ---- the lock screen ---- */
@@ -7469,8 +7472,9 @@ var P=[[60,60],[150,60],[240,60],[60,150],[150,150],[240,150],[60,240],[150,240]
 function seg(a,b){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;function at(f,o){return [a[0]+dx*f+nx*o,a[1]+dy*f+ny*o];}
  var pts=[at(.38,0),at(.44,6),at(.5,-26),at(.56,14),at(.62,0)];return pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" L")+" L"+b[0]+","+b[1];}
 var cb=null,mode="unlock",first=null,oldp=null,busy=false,root=null,lockedUntil=0,cdT=null;
-function open(then){if(!isOwner())return;cb=then||null;if(ok()){if(cb)cb();return;}build();msg("Checking…");
- rpc("owner_lock_status").then(function(s){if(s&&s.locked_until){lockedUntil=Date.parse(s.locked_until);locked();}else if(s&&!s.set){mode="set1";title("Set your owner pulse");msg("Connect at least 4 dots. Only you will know it.");}else{mode="unlock";title("Owner access");msg("Draw your pulse");}}).catch(function(){title("Owner access");msg("Can't reach the server right now",1);});}
+function open(then){if(!isOwner())return;cb=then||null;if(ok()){if(cb)cb();return;}build();
+ var f=lsj(FK)||{};if(f.until>Date.now()){lockedUntil=f.until;locked();return;}
+ if(!stored()){mode="set1";title("Set your owner pulse");msg("Connect at least 4 dots. Only you will know it.");}else{mode="unlock";title("Owner access");msg("Draw your pulse");}}
 function change(){if(!isOwner())return;cb=null;build();mode="old";title("Change your pulse");msg("First, draw your current pulse");}
 function build(){close(true);root=document.createElement("div");root.innerHTML='<div class="pl-ov"></div><div class="pl" role="dialog" aria-label="Owner access"><div class="top"><span><i></i>DocPulsee · owner</span><span data-bpm>♥ — bpm</span></div><h3>Owner access</h3><p>Draw your pulse</p>'+
  '<div class="mon"><svg class="pad" viewBox="0 0 300 300" aria-label="Pattern pad"><defs><filter id="plg" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path class="tr" d=""/>'+
@@ -7494,19 +7498,17 @@ function wire(svg){var seq=[],drawing=false,cur=null;var tr=$(".tr",svg);
  function up(){if(!drawing)return;drawing=false;cur=null;paint();if(seq.length)done(seq.slice(),reset);}
  svg.addEventListener("pointerup",up);svg.addEventListener("pointercancel",up);}
 function fail(t,reset){var pl=root&&$(".pl",root);if(!pl)return;pl.classList.add("err");msg(t,1);if(navigator.vibrate)try{navigator.vibrate([50,40,50]);}catch(e){}setTimeout(function(){if(root){reset();}},900);}
-function win(t,token,exp){var pl=$(".pl",root),tr=$(".tr",root);try{tr.style.setProperty("--len",Math.ceil(tr.getTotalLength()));}catch(e){}pl.classList.add("win");msg(t,0,1);var b=$("[data-bpm]",root);if(b)b.textContent="♥ 72 bpm";
- if(navigator.vibrate)try{navigator.vibrate([18,90,28]);}catch(e){}saveTok(token,exp);setTimeout(function(){pl.classList.add("out");setTimeout(function(){var c=cb;close();if(c)c();},420);},650);}
+function win(t){var pl=$(".pl",root),tr=$(".tr",root);try{tr.style.setProperty("--len",Math.ceil(tr.getTotalLength()));}catch(e){}pl.classList.add("win");msg(t,0,1);var b=$("[data-bpm]",root);if(b)b.textContent="♥ 72 bpm";
+ if(navigator.vibrate)try{navigator.vibrate([18,90,28]);}catch(e){}saveTok();setTimeout(function(){pl.classList.add("out");setTimeout(function(){var c=cb;close();if(c)c();},420);},650);}
 function done(seq,reset){if(seq.length<4){fail("Connect at least 4 dots",reset);return;}var code="dp1:"+seq.join("-");
- if(mode==="set1"){first=code;msg("Draw it again to confirm",0,1);setTimeout(reset,500);mode="set2";return;}
- if(mode==="set2"||mode==="new2"){if(code!==first){mode=mode==="set2"?"set1":"new1";first=null;fail("They didn't match. Start again",reset);return;}busy=true;msg("Saving…");
-  rpc("owner_lock_set",{p_new:code,p_old:oldp}).then(function(t){busy=false;win("Pulse saved",t,null);}).catch(function(e){busy=false;mode=oldp?"old":"set1";fail(String(e.message||e).replace(/^.*?(old pattern wrong|locked|pattern too short).*$/,"$1")==="old pattern wrong"?"Current pulse didn't match":"Couldn't save. Try again",reset);});return;}
- if(mode==="old"){oldp=code;mode="new1";title("New pulse");msg("Now draw your new pulse",0,1);setTimeout(reset,500);return;}
- if(mode==="new1"){first=code;mode="new2";msg("Draw it again to confirm",0,1);setTimeout(reset,500);return;}
- busy=true;msg("Checking…");rpc("owner_unlock",{p:code}).then(function(r){busy=false;
-  if(r&&r.ok){win("Welcome back",r.token,r.expires_at);return;}
-  if(r&&r.unset){mode="set1";title("Set your owner pulse");reset();msg("Connect at least 4 dots. Only you will know it.");return;}
-  if(r&&r.locked_until){lockedUntil=Date.parse(r.locked_until);reset();locked();if(navigator.vibrate)try{navigator.vibrate([60,40,60,40,60]);}catch(e){}return;}
-  fail("Not your pulse · "+(r&&r.left!=null?r.left+" tr"+(r.left===1?"y":"ies")+" left":"try again"),reset);}).catch(function(){busy=false;fail("Can't reach the server",reset);});}
+ if(mode==="set1"||mode==="new1"){first=code;mode=mode==="set1"?"set2":"new2";msg("Draw it again to confirm",0,1);setTimeout(reset,500);return;}
+ if(mode==="set2"||mode==="new2"){if(code!==first){mode=mode==="set2"?"set1":"new1";first=null;fail("They didn't match. Start again",reset);return;}
+  hash(code).then(function(h){lsset(PK,{h:h,e:String(user().email).toLowerCase()});win("Pulse saved");});return;}
+ busy=true;hash(code).then(function(h){busy=false;var good=h===stored();
+  if(mode==="old"){if(good){mode="new1";title("New pulse");msg("Now draw your new pulse",0,1);setTimeout(reset,500);}else{bad(reset);}return;}
+  if(good){win("Welcome back");}else{bad(reset);}});}
+function bad(reset){var f=lsj(FK)||{n:0,until:0};f.n=(f.n||0)+1;if(f.n>=5){f.n=0;f.until=Date.now()+15*6e4;lsset(FK,f);lockedUntil=f.until;reset();locked();if(navigator.vibrate)try{navigator.vibrate([60,40,60,40,60]);}catch(e){}return;}
+ lsset(FK,f);var left=5-f.n;fail("Not your pulse · "+left+" tr"+(left===1?"y":"ies")+" left",reset);}
 /* ---- the tile in the account menu ---- */
 var ECG='<svg viewBox="0 0 34 20"><path d="M0 12 H9 L12 12 L14 4 L17 18 L20 9 L22 12 H34"/></svg>';
 function paintTile(t){var k=tok();if(k){var at=new Date(k.exp).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});t.className="own-lock ok";t.innerHTML='<span class="ecg">'+ECG+'</span><span class="t"><b>Owner tools open</b><small>Locks at '+at+'</small></span><span class="ch" role="button" tabindex="0" data-ch>Change pulse</span><span class="lk" role="button" tabindex="0" data-lk>Lock</span>';}
@@ -7519,7 +7521,7 @@ new MutationObserver(function(){if($(".acp"))tile();}).observe(document.body,{ch
 (function(){var t=null;document.addEventListener("pointerdown",function(e){var l=e.target.closest&&e.target.closest(".ds-logo,.dp-hdr-brand img,.dp-hdr-brand .dp-lg");if(!l||!isOwner())return;t=setTimeout(function(){t=null;if(navigator.vibrate)try{navigator.vibrate(12);}catch(x){}open(function(){if(window.dpCC)window.dpCC.open("store");});},1200);},true);
  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){document.addEventListener(ev,function(){if(t){clearTimeout(t);t=null;}},true);});
  document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest(".ds-logo")&&isOwner())e.preventDefault();},true);})();
-window.dpLock={open:open,ok:ok,token:function(){var t=tok();return t?t.t:null;},lock:lockNow,change:change};
+window.dpLock={open:open,ok:ok,lock:lockNow,change:change};
 })();</script><script id="dp-polish-js">(function(){
 function $$(s,r){return [].slice.call((r||document).querySelectorAll(s));}
 var SPK='<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6z"/></svg>';
