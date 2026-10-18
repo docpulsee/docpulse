@@ -3547,6 +3547,68 @@ html body .offer-bar.t-urgent .ob-in::before{animation:obCalm 2s ease-in-out inf
 @media (max-width:760px){.v2 .acp{max-height:calc(100dvh - 24px)!important}}
 body:has(.acp) .hn-tab,body:has(.acp) #dk-handle,body:has(.acp) [data-dpfl]{opacity:0!important;pointer-events:none!important}
 .v2 .acp-foot{position:relative;z-index:5}
+</style><style id="dp-fx-css">
+/* ---- filter sheet: never clipped ---- */
+.fs-scrim{position:fixed!important;inset:0!important;z-index:2147482990!important;background:rgba(8,16,14,.26)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+@media (min-width:641px){
+ .fs-pop{position:fixed!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translate(-50%,-50%);width:min(640px,calc(100vw - 48px))!important;max-width:none!important;margin:0!important;
+  max-height:min(84vh,780px);overflow-y:auto;overscroll-behavior:contain;z-index:2147482991!important;border-radius:26px!important;padding:20px 20px 18px!important;
+  background:rgba(252,253,253,.94)!important;-webkit-backdrop-filter:saturate(1.8) blur(28px)!important;backdrop-filter:saturate(1.8) blur(28px)!important;
+  box-shadow:0 0 0 .5px rgba(13,31,26,.14),0 40px 90px rgba(13,31,26,.3)!important;animation:fxIn .42s cubic-bezier(.32,.72,0,1)}
+}
+@keyframes fxIn{from{opacity:0;transform:translate(-50%,-47%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%)}}
+@media (max-width:640px){.fs-pop{max-height:86dvh!important;overflow-y:auto!important;z-index:2147482991!important}}
+.fs-pop .fs-pop-h{font-size:17px!important;font-weight:700!important;letter-spacing:-.015em;margin-bottom:14px!important}
+.fs-pop .fs-pop-h button{font-size:14px!important;font-weight:600!important;color:#0f766e!important}
+/* seat types as Settings rows with switches */
+.fs-pop [data-seat-picker]>.grid{display:flex!important;flex-direction:column;gap:0!important;border-radius:18px;background:#f1f5f4;overflow:hidden;box-shadow:inset 0 0 0 .5px rgba(13,31,26,.06)}
+.fs-pop [data-seat-type]{position:relative;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:12px 76px 12px 16px!important;min-height:58px;text-align:left}
+.fs-pop [data-seat-type]+[data-seat-type]::before{content:"";position:absolute;top:0;left:16px;right:0;border-top:.5px solid rgba(13,31,26,.1)}
+.fs-pop [data-seat-type] .w-4{display:none!important}
+.fs-pop [data-seat-type] .text-xs{font-size:15px!important;font-weight:600!important;letter-spacing:-.01em;color:#0d1f1a!important}
+.fs-pop [data-seat-type] .text-\[10px\]{font-size:12.5px!important;padding-left:0!important;color:#5d6c67!important;margin-top:2px!important;line-height:1.35}
+.fs-pop [data-seat-type]::after{content:"";position:absolute;right:16px;top:50%;width:46px;height:28px;margin-top:-14px;border-radius:999px;background:#d7dfdc;transition:background .25s;
+ background-image:radial-gradient(circle 12px at 14px 50%,#fff 98%,transparent 100%)}
+.fs-pop [data-seat-type][aria-pressed="true"]::after{background-color:#14a085;background-image:radial-gradient(circle 12px at 32px 50%,#fff 98%,transparent 100%)}
+.fx-n{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums;vertical-align:1px;background:#e7f5f1;color:#0f766e}
+.fx-n.neg{background:#fdecec;color:#b91c1c}.fx-n.z{background:#eef1f0;color:#7a8a85}
+/* seat-pool bar (sheet + under the filter sentence) */
+.fx-pool{margin:0 0 14px;padding:14px;border-radius:18px;background:#0d1210;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.fx-pool .hd{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.fx-pool .hd b{font-size:22px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.fx-pool .hd small{font-size:12px;color:rgba(255,255,255,.6)}
+.fx-bar{display:flex;height:12px;border-radius:999px;overflow:hidden;margin:10px 0 9px;background:rgba(255,255,255,.08);gap:2px}
+.fx-bar i{display:block;height:100%;transition:flex-grow .5s cubic-bezier(.32,.72,0,1)}
+.fx-leg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:rgba(255,255,255,.75)}
+.fx-leg span{display:inline-flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums}.fx-leg span i{width:8px;height:8px;border-radius:3px}
+.fx-leg span.off{opacity:.4;text-decoration:line-through}
+.fx-mini{display:flex;align-items:center;gap:10px;margin:10px 0 2px;padding:9px 12px;border-radius:14px;background:#f1f5f4;box-shadow:inset 0 0 0 .5px rgba(13,31,26,.06);cursor:pointer;border:0;width:100%;text-align:left;font:inherit;color:#0d1f1a}
+.fx-mini b{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.fx-mini .fx-bar{flex:1;margin:0;height:8px;background:#dde5e2}
+.fx-mini small{font-size:12px;color:#5d6c67;white-space:nowrap}
+body:has(.fs-pop) .dpg-pill{display:none!important}
+.fx-mini{flex-wrap:wrap}.fx-mini .fx-bar{order:3;flex:1 1 100%;margin-top:7px}
+.fx-mini small{margin-left:auto}
+/* never zero */
+.fx-nz{margin:12px 0;padding:14px;border-radius:18px;background:#f1f5f4;box-shadow:inset 0 0 0 .5px rgba(13,31,26,.06);text-align:left}
+.fx-nz b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:#0d1f1a}.fx-nz small{display:block;font-size:12.5px;color:#5d6c67;margin:2px 0 10px}
+.fx-nz .row{display:flex;flex-wrap:wrap;gap:8px}
+.fx-nz button{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:12px;font-size:13.5px;font-weight:650;color:#fff;background:linear-gradient(180deg,#14a085,#0f766e);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 14px rgba(15,118,110,.2);border:0;cursor:pointer}
+.fx-nz button em{font-style:normal;font-weight:600;opacity:.8}
+/* seat pools sheet */
+.sp-cats{display:flex;gap:6px;padding:3px;border-radius:12px;background:var(--a2t,#edf2f0);margin-bottom:12px}
+.sp-cats button{flex:1;padding:8px 0;border-radius:9px;font-size:13px;font-weight:600;color:var(--ac-sub,#5d6c67)}
+.sp-cats button.on{background:#fff;color:var(--ac-ink,#0d1f1a);box-shadow:0 1px 3px rgba(13,31,26,.16)}
+.sp-h{display:flex;align-items:baseline;justify-content:space-between;margin:14px 4px 7px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ac-sub,#5d6c67)}
+.sp-h small{text-transform:none;letter-spacing:0;font-weight:500}
+.sp-t{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;margin-bottom:8px;background:var(--a2t,#edf2f0);position:relative}
+.sp-t .ic{flex:none;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.sp-t .tx{flex:1;min-width:0}.sp-t b{display:block;font-size:14.5px;font-weight:650;letter-spacing:-.01em}.sp-t small{display:block;font-size:12.5px;color:var(--ac-sub,#5d6c67);line-height:1.4;margin-top:2px}
+.sp-t .n{flex:none;text-align:right;font:700 18px/1.1 var(--dp-sf,-apple-system,Inter,sans-serif);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.sp-t .n small{font-size:11px;font-weight:600;margin:0}
+.sp-t.yes{box-shadow:inset 0 0 0 1.5px rgba(20,160,133,.55)}.sp-t.no{opacity:.62}
+.sp-t .st{position:absolute;top:10px;right:12px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+.sp-ans{padding:13px 14px;border-radius:16px;background:#0d1210;color:#fff;font-size:14px;line-height:1.45;margin-bottom:4px}
+.sp-ans b{color:#5eead4}
+.sp-ft{font-size:11.5px;color:var(--ac-sub,#5d6c67);line-height:1.45;margin:10px 4px 0}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -7548,5 +7610,92 @@ function run(){
  /* banner link wording */
  var ob=document.getElementById("offerBanner");if(ob){var c=ob.querySelector(".ob-cta");if(c&&!c.getAttribute("data-a2l")){c.textContent=c.textContent.replace("Grab it →","Unlock ›").replace(" →"," ›");mark(c);}}}
 var t=null;new MutationObserver(function(){if(t)return;t=setTimeout(function(){t=null;run();},120);}).observe(document.body,{childList:true,subtree:true,characterData:false});setTimeout(run,600);
+})();</script><script id="dp-fx-js">(function(){
+function $(s,r){return (r||document).querySelector(s);}function $$(s,r){return [].slice.call((r||document).querySelectorAll(s));}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(n){return Number(n||0).toLocaleString("en-IN");}
+var TYPES=[["AIQ","Govt","#0f766e"],["DNB","DNB","#2563eb"],["DNBDIP","DNB Diploma","#7c3aed"],["PS","Private & deemed","#ea580c"],["NRI","NRI","#db2777"]];
+function g(n){try{return eval(n);}catch(e){return undefined;}}
+function ready(){var D=g("DATA");return Array.isArray(D)&&D.length&&D.some(function(d){return d&&d.R&&Object.keys(d.R).length;})&&typeof g("pred26")==="function";}
+function ctx(){var c=window.__dpConsultCtx||{};var Q=g("QNAMES")||{},rev={};Object.keys(Q).forEach(function(k){rev[Q[k]]=k;});
+ var qs=new Set(String(c.quotas||"").split(",").map(function(x){x=x.trim();return rev[x]||x;}).filter(Boolean));
+ var cat=String(c.category||"General");cat=cat==="General"?"GN":cat;
+ var mode="mcc";try{mode=localStorage.getItem("dp_pmode")==="state"?"state":"mcc";}catch(e){}
+ return {rank:parseInt(c.rank,10)||0,cat:cat,qs:qs,spec:c.specialty||"",state:c.state||"",mode:mode};}
+/* exactly the predictor's rule for "in reach" (closing adjusted for 2026 >= rank), counted per college-branch */
+function count(o){var D=g("DATA"),pred=g("pred26"),qon=g("dnbQOn"),sOk=g("specOk");if(!o.rank)return 0;var n=0;
+ for(var i=0;i<D.length;i++){var d=D[i];if(!d||!d.R)continue;if(o.spec&&!sOk(d.Spec_Norm,o.spec))continue;if(o.state&&d.State!==o.state)continue;
+  var R=d.R,ok=false,memo={},cs=o.cats||[o.cat];for(var k in R){var m=k.match(/^([A-Z]+)_([A-Z0-9]+)_Closing_([A-Z]+)$/);if(!m||cs.indexOf(m[3])<0)continue;var q=m[1];if(!qon(o.qs,q,d.Deg))continue;
+   var a=memo[q]||(memo[q]=pred(d,q,m[3]));if(Math.round(R[k]*a.f)>=o.rank){ok=true;break;}}
+  if(ok)n++;}return n;}
+function withQ(qs,q,on){var s=new Set(qs);if(on)s.add(q);else s.delete(q);return s;}
+var cache={sig:"",v:null};
+function compute(){var c=ctx();if(c.mode!=="mcc"||!c.rank||!ready())return null;var sig=JSON.stringify([c.rank,c.cat,[...c.qs].sort(),c.spec,c.state]);if(cache.sig===sig)return cache.v;
+ var tot=count(c),per=TYPES.map(function(t){return {q:t[0],n:count({rank:c.rank,cat:c.cat,qs:new Set([t[0]]),spec:c.spec,state:c.state}),on:c.qs.has(t[0])};});
+ cache={sig:sig,v:{c:c,tot:tot,per:per}};return cache.v;}
+function barHTML(v,mini){var sum=v.per.filter(function(p){return p.on;}).reduce(function(a,p){return a+p.n;},0)||1;
+ return '<div class="fx-bar">'+v.per.filter(function(p){return p.on&&p.n;}).map(function(p){var t=TYPES.find(function(x){return x[0]===p.q;});return '<i style="flex-grow:'+p.n+';background:'+t[2]+'" title="'+t[1]+': '+fmt(p.n)+'"></i>';}).join("")+'</div>'+
+  (mini?'':'<div class="fx-leg">'+v.per.map(function(p){var t=TYPES.find(function(x){return x[0]===p.q;});return '<span class="'+(p.on?"":"off")+'"><i style="background:'+t[2]+'"></i>'+t[1]+' '+fmt(p.n)+'</span>';}).join("")+'</div>');}
+/* the filter sheet */
+function sheet(){var pop=$(".fs-pop");if(!pop||!$("[data-seat-picker]",pop))return;var v=compute();
+ var box=$(".fx-pool",pop);if(v){if(!box){box=document.createElement("div");box.className="fx-pool";var h=$(".fs-pop-h",pop);h.parentNode.insertBefore(box,h.nextSibling);}
+  box.innerHTML='<div class="hd"><b>'+fmt(v.tot)+' seats in reach</b><small>rank '+fmt(v.c.rank)+' · '+(v.c.cat==="GN"?"General":v.c.cat)+'</small></div>'+barHTML(v);}
+ $$("[data-seat-type]",pop).forEach(function(b){var q=b.getAttribute("data-seat-type");var t=b.querySelector(".text-xs");if(!t)return;var bd=t.querySelector(".fx-n");
+  if(!v||!TYPES.some(function(x){return x[0]===q;})){if(bd)bd.remove();return;}
+  var on=v.c.qs.has(q),alt=count({rank:v.c.rank,cat:v.c.cat,qs:withQ(v.c.qs,q,!on),spec:v.c.spec,state:v.c.state}),d=alt-v.tot;
+  if(!bd){bd=document.createElement("span");bd.className="fx-n";t.appendChild(bd);}
+  bd.className="fx-n"+(on?(d<0?" neg":" z"):(d>0?"":" z"));bd.textContent=on?(d<0?"−"+fmt(-d)+" if off":"no change"):(d>0?"+"+fmt(d)+" seats":"+0");});}
+/* mini bar under the filter sentence */
+function mini(){var s=$("#neetpg-app-wrap .fs-sentence");if(!s)return;var v=compute(),m=$(".fx-mini");
+ if(!v){if(m)m.remove();return;}
+ if(!m){m=document.createElement("button");m.type="button";m.className="fx-mini";m.onclick=function(){var t=$('[data-fs-tok="seats"]');if(t)t.click();};s.parentNode.insertBefore(m,s.nextSibling);}
+ m.innerHTML='<b>'+fmt(v.tot)+' seats in reach</b>'+barHTML(v,1)+'<small>'+v.per.filter(function(p){return p.on;}).length+' seat types · tap to tune</small>';}
+/* never zero */
+function nz(){var e=$(".fx-mini"),v=compute(),old=$(".fx-nz");if(!e||!v||v.tot>0){if(old)old.remove();return;}var c=v.c;
+ if(old&&old.__sig===cache.sig)return;var opts=[];
+ TYPES.forEach(function(t){if(!c.qs.has(t[0])){var n=count({rank:c.rank,cat:c.cat,qs:withQ(c.qs,t[0],true),spec:c.spec,state:c.state});if(n)opts.push({n:n,l:"Add "+t[1],go:function(){toggleType(t[0]);}});}});
+ if(c.spec){var n1=count({rank:c.rank,cat:c.cat,qs:c.qs,spec:"",state:c.state});if(n1)opts.push({n:n1,l:"Any branch",go:function(){pickOpt("spec",/^Any branch$/);}});}
+ if(c.state){var n2=count({rank:c.rank,cat:c.cat,qs:c.qs,spec:c.spec,state:""});if(n2)opts.push({n:n2,l:"Anywhere in India",go:function(){pickOpt("state",/^Anywhere in India$/);}});}
+ opts.sort(function(a,b){return a.n-b.n;});opts=opts.slice(0,3);
+ var box=old||document.createElement("div");box.className="fx-nz";box.__sig=cache.sig;
+ box.innerHTML=opts.length?'<b>Nothing here yet. One change brings seats back:</b><small>The smallest change first, so your choices stay close to what you picked.</small><div class="row">'+opts.map(function(o,i){return '<button type="button" data-i="'+i+'">'+esc(o.l)+' <em>→ '+fmt(o.n)+'</em></button>';}).join("")+'</div>':'<b>No seat is in reach with these filters.</b><small>Try a later round, Dream picks, or talk to us for a plan.</small>';
+ $$("button",box).forEach(function(b){b.onclick=function(){opts[+b.dataset.i].go();};});if(!old)e.parentNode.insertBefore(box,e.nextSibling);}
+function toggleType(q){var tok=$('[data-fs-tok="seats"]');if(!tok)return;tok.click();setTimeout(function(){var b=$('.fs-pop [data-seat-type="'+q+'"]');if(b)b.click();setTimeout(function(){var d=$(".fs-pop .fs-pop-h button");if(d)d.click();},250);},150);}
+function pickOpt(id,re){var tok=$('[data-fs-tok="'+id+'"]');if(!tok)return;tok.click();setTimeout(function(){var b=$$(".fs-pop .fs-opt").find(function(x){return re.test((x.textContent||"").trim());});if(b)b.click();},150);}
+var tm=null;function tick(){if(tm)return;tm=setTimeout(function(){tm=null;try{sheet();mini();nz();}catch(e){}},160);}
+new MutationObserver(tick).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["aria-pressed","aria-selected"]});setInterval(tick,1500);
+/* ===== Your seat pools ===== */
+var CN={GN:"General",EWS:"EWS",OBC:"OBC",SC:"SC",ST:"ST"},COL={GN:"#0f766e",EWS:"#2563eb",OBC:"#7c3aed",SC:"#ea580c",ST:"#db2777"};
+function prof(){var w={},rp={},pl={};try{w=JSON.parse(localStorage.getItem("dp_wca_v1")||"{}")||{};rp=JSON.parse(localStorage.getItem("dp_rule_profile")||"{}")||{};pl=JSON.parse(localStorage.getItem("dp_plan_v1")||"{}")||{};}catch(e){}
+ var c=ctx(),cat=String(pl.cat||rp.cat||c.cat||"GN").toUpperCase();if(!CN[cat])cat="GN";return {cat:cat,dom:w.dom||rp.dom||"",mbbs:w.mbbs||rp.mbbs||"",rank:c.rank||parseInt(pl.rank,10)||0,pwd:!!(pl.pwd)};}
+function open(){var p=prof(),cat=p.cat;
+ function body(){var rd=ready()&&p.rank,all=new Set(["AIQ","DNB","DNBDIP","PS"]),open=rd?count({rank:p.rank,cat:"GN",qs:new Set(["AIQ","DNB","DNBDIP"]),spec:"",state:""}):null,mine=rd&&cat!=="GN"?count({rank:p.rank,cat:cat,cats:["GN",cat],qs:new Set(["AIQ","DNB","DNBDIP"]),spec:"",state:""}):null,paid=rd?count({rank:p.rank,cat:"GN",qs:new Set(["PS"]),spec:"",state:""}):null;
+  var extra=mine!=null&&open!=null?Math.max(0,mine-open):null,nm=CN[cat];
+  var ans=cat==="GN"?'As <b>General</b>, you compete for <b>open seats</b> on rank alone. Deemed and private paid seats are open to everyone too.':
+   'As <b>'+nm+'</b>, you are considered for <b>open seats first</b>, on rank alone, exactly like a General candidate. Only if your rank does not reach an open seat do your <b>'+nm+' seats</b> come in. So you never lose open seats by being '+nm+'.'+(extra!=null?' At rank '+fmt(p.rank)+': <b>'+fmt(open)+'</b> government and DNB seats on merit, and <b>'+nm+' adds '+fmt(extra)+' more</b>.':'');
+  function tile(cls,ic,col,t,s,n){return '<div class="sp-t '+cls+'"><span class="ic" style="background:'+col+'">'+ic+'</span><span class="tx"><b>'+t+'</b><small>'+s+'</small></span>'+(n!=null?'<span class="n">'+n+'</span>':'')+'</div>';}
+  var h='<div class="sp-cats" role="radiogroup" aria-label="Category">'+Object.keys(CN).map(function(k){return '<button type="button" data-c="'+k+'" class="'+(k===cat?"on":"")+'">'+CN[k]+'</button>';}).join("")+'</div><div class="sp-ans">'+ans+'</div>'+
+  '<div class="sp-h">All India · MCC<small>'+(rd?"your numbers at rank "+fmt(p.rank):"add your rank to see your numbers")+'</small></div>'+
+  tile("yes","✓","#0f766e","Open seats · on merit","Everyone competes here by rank, whatever the category.",open!=null?fmt(open)+'<small>in reach</small>':null)+
+  (cat!=="GN"?tile("yes","+",COL[cat],nm+" reserved seats",(cat==="OBC"?"OBC (non-creamy layer, central list). ":cat==="EWS"?"Needs a valid EWS certificate. ":"")+"Used only if your rank does not reach an open seat.",extra!=null?'+'+fmt(extra)+'<small>extra</small>':null):"")+
+  tile("yes","♿","#475569","PwD seats","A separate 5% across every category, for candidates with a benchmark disability and a valid certificate.",null)+
+  tile("yes","₹","#ea580c","Deemed & private paid seats","No category reservation: everyone on merit. Your category does not add seats here.",paid!=null?fmt(paid)+'<small>in reach</small>':null)+
+  tile("yes","D","#2563eb","DNB · government hospitals","Category reservation applies, like government colleges.",null)+
+  tile("","D","#64748b","DNB · private hospitals","No category reservation: merit only.",null)+
+  '<div class="sp-h">State quota'+(p.dom?' · '+esc(p.dom):'')+'</div>'+
+  tile("","S","#0d9488",p.dom?esc(p.dom)+" state quota":"Your state quota","Category seats here follow the state's own category list and certificate, which differ by state. Your counselling ID shows whether you can apply; the state's rules give the details.",null)+
+  '<div class="a2-btns" style="margin-top:6px"><button type="button" class="a2-b" data-rb>Open '+(p.dom?esc(p.dom)+' rules':'the Rule Book')+'</button><button type="button" class="a2-b pri" data-pr>See my seats</button></div>'+
+  '<div class="sp-ft">Numbers use the same 2026 estimate as the predictor (last year\'s closing ranks, adjusted for 2026 seats), government + DNB for merit and category, paid seats separately. Always confirm with the official MCC and state bulletins.</div>';
+  return h;}
+ if(!window.dpA2)return;var s=document.getElementById("a2-sheet");if(s)s.remove();
+ var w=document.createElement("div");w.id="a2-sheet";w.innerHTML='<div class="a2-ov"></div><div class="a2-sh" role="dialog" aria-label="Your seat pools"><div class="a2-hd"><b>Your seat pools</b><button type="button" class="a2-x" aria-label="Close">✕</button></div><div data-b></div></div>';document.body.appendChild(w);
+ function close(){w.remove();}w.querySelector(".a2-ov").onclick=close;w.querySelector(".a2-x").onclick=close;
+ function paint(){var b=w.querySelector("[data-b]");b.innerHTML=body();$$("[data-c]",b).forEach(function(x){x.onclick=function(){cat=x.dataset.c;paint();};});
+  var rb=b.querySelector("[data-rb]");rb.onclick=function(){close();window.dispatchEvent(new CustomEvent("dp-rulebook",{detail:{}}));};
+  var pr=b.querySelector("[data-pr]");pr.onclick=function(){close();if(window.hnPredict)window.hnPredict(true);};}
+ paint();}
+function idc(){var act=$(".idc-act");if(!act||act.querySelector(".fx-spb"))return;var b=document.createElement("button");b.type="button";b.className="idc-btn fx-spb";b.textContent="🎯 Your seat pools";b.onclick=open;act.insertBefore(b,act.firstChild);}
+new MutationObserver(idc).observe(document.body,{childList:true,subtree:true});
+window.dpFX={pools:open,count:count,compute:compute};
 })();</script></body>
 </html>
