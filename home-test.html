@@ -3861,6 +3861,79 @@ html.dpdark .lr-felt{background:radial-gradient(120% 90% at 50% 0%,#1d2a26 0%,#1
 html.dpdark .lr-res{background:rgba(0,0,0,.15)}
 html.dpdark .lr-h em,html.dpdark .lr-eye{color:#34d399}
 @media (prefers-reduced-motion:reduce){.lr-ov,.lr-card,.lr-hop,.lr-die,.lr-fab .lr-m{transition:none!important;animation:none!important}}
+</style><style id="dp-me-css">
+.dpme-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 2px;animation:dpmeIn .45s cubic-bezier(.32,.72,0,1) both}
+.dpme-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 8px 7px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+ color:#fff;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.dpme-pill b{font-weight:800;letter-spacing:.01em}
+.dpme-pill button{border:0;border-radius:999px;padding:4px 10px;background:#fff;color:#0f6e5c;font:700 12px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;cursor:pointer}
+.dpme-pill .dpme-k{opacity:.75;font-weight:600}
+@keyframes dpmeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.dpme-card{--ink:#0d1f1a;--sub:#5d6c67;--line:rgba(13,31,26,.09);margin-top:12px;border-radius:18px;padding:14px 14px 12px;background:linear-gradient(180deg,#f6fbf9,#eef7f3);
+ border:1px solid var(--line);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+ animation:dpmeIn .5s cubic-bezier(.32,.72,0,1) both;max-width:560px}
+.dpme-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dpme-top .ctx{font-size:11px;font-weight:650;color:var(--sub);text-align:right}
+.dpme-hl{margin-top:9px}.dpme-hl b{display:block;font-size:16px;font-weight:780;letter-spacing:-.01em;line-height:1.25}.dpme-hl small{display:block;font-size:12.5px;color:var(--sub);margin-top:3px;line-height:1.4}
+.dpme-v{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font:800 12px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;color:#fff;letter-spacing:.01em}
+.dpme-v.ok{background:linear-gradient(135deg,#10b981,#0f6e5c);box-shadow:0 6px 16px rgba(16,185,129,.28)}
+.dpme-v.mid{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 6px 16px rgba(217,119,6,.25)}
+.dpme-v.low{background:linear-gradient(135deg,#fb7185,#e11d48);box-shadow:0 6px 16px rgba(225,29,72,.22)}
+.dpme-v.out{background:#64748b}
+.dpme-v.na{background:#94a3b8}
+.dpme-h{min-width:0}
+.dpme-h b{display:block;font-size:14px;font-weight:750;line-height:1.25}
+.dpme-h small{display:block;font-size:12px;color:var(--sub);margin-top:2px;line-height:1.35}
+.dpme-bar{position:relative;height:22px;margin:12px 6px 0}
+.dpme-lg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:11px;color:var(--sub);font-weight:600}
+.dpme-lg span{display:inline-flex;align-items:center;gap:5px}.dpme-lg i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dpme-lg .g{background:#10b981}.dpme-lg .a{background:#f59e0b}.dpme-lg .y{background:#fff;border:2.5px solid #0f6e5c;width:9px;height:9px}.dpme-lg b{color:var(--ink);font-weight:750}
+.dpme-bar .tr{position:absolute;left:0;right:0;top:8px;height:6px;border-radius:6px;background:linear-gradient(90deg,#10b981 0%,#10b981 var(--a),#f59e0b var(--a),#f59e0b var(--b),#e5e7eb var(--b))}
+.dpme-bar .mk{position:absolute;top:4px;width:2px;height:14px;background:#0d1f1a;opacity:.35;border-radius:2px}
+.dpme-bar .mk i{position:absolute;top:20px;left:50%;transform:translateX(-50%);font:600 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;font-style:normal;color:var(--sub);white-space:nowrap}
+.dpme-bar .me{position:absolute;top:1px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:#fff;border:3px solid #0f6e5c;box-shadow:0 3px 10px rgba(15,110,92,.35);transition:left .9s cubic-bezier(.32,.72,0,1)}
+.dpme-bar .me i{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font:800 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;font-style:normal;color:#0f6e5c;white-space:nowrap;background:#fff;padding:3px 6px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.dpme-q{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.dpme-q span{font:600 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;padding:5px 9px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--sub)}
+.dpme-q span b{color:var(--ink);font-weight:750}
+.dpme-q span.ok b{color:#047857}.dpme-q span.mid b{color:#b45309}.dpme-q span.low b{color:#be123c}
+.dpme-ft{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;font-size:11px;color:var(--sub)}
+.dpme-ft button,.dpme-btn{border:0;background:none;color:#0f6e5c;font:700 12px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;cursor:pointer;padding:4px 0}
+.dpme-btn.sol{flex:none;background:linear-gradient(135deg,#14937b,#0f6e5c);color:#fff;padding:9px 14px;border-radius:12px;box-shadow:0 6px 16px rgba(15,110,92,.25)}
+.dpme-lock .dpme-v{filter:blur(5px);user-select:none}
+.dpme-form{display:flex;gap:8px;margin-top:10px}
+.dpme-form input{flex:1;min-width:0;height:40px;border-radius:12px;border:1px solid var(--line);padding:0 12px;font:600 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;background:#fff;color:var(--ink);outline:none}
+.dpme-form input:focus{border-color:#14937b;box-shadow:0 0 0 3px rgba(20,147,123,.15)}
+.dpme-form select{flex:none;width:96px;height:40px;border-radius:12px;border:1px solid var(--line);padding:0 10px;font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;background:#fff;color:var(--ink)}
+.dpme-dot{flex:none;font:700 9px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;padding:3px 6px;border-radius:999px;color:#fff;letter-spacing:.02em}
+.dpme-dot.ok{background:#10b981}.dpme-dot.mid{background:#f59e0b}.dpme-dot.low{background:#fb7185}.dpme-dot.out{background:#94a3b8}
+.dpme-ov{position:fixed;inset:0;z-index:2147483100;display:flex;align-items:flex-end;justify-content:center;background:rgba(6,18,15,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity .25s}
+.dpme-ov.in{opacity:1}
+.dpme-sh{width:min(440px,100%);background:#fff;border-radius:26px 26px 0 0;padding:10px 20px calc(20px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .45s cubic-bezier(.32,.72,0,1);
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;color:#0d1f1a}
+.dpme-ov.in .dpme-sh{transform:none}
+@media(min-width:641px){.dpme-ov{align-items:center}.dpme-sh{border-radius:26px;transform:translateY(24px) scale(.98)}.dpme-ov.in .dpme-sh{transform:none}}
+.dpme-sh .hd{width:38px;height:5px;border-radius:5px;background:#d6dedb;margin:0 auto 14px}
+.dpme-sh h3{font-size:22px;font-weight:800;margin:0 0 4px;letter-spacing:-.01em}
+.dpme-sh p{font-size:13px;color:#5d6c67;margin:0 0 14px}
+.dpme-sh label{display:block;font-size:12px;font-weight:700;color:#5d6c67;margin:12px 0 6px}
+.dpme-sh .rk{width:100%;height:52px;border-radius:14px;border:1px solid rgba(13,31,26,.12);padding:0 16px;font:750 22px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;letter-spacing:.01em;outline:none}
+.dpme-sh .rk:focus{border-color:#14937b;box-shadow:0 0 0 4px rgba(20,147,123,.14)}
+.dpme-cats{display:flex;gap:6px;flex-wrap:wrap}
+.dpme-cats button{flex:1;min-width:56px;height:40px;border-radius:12px;border:1px solid rgba(13,31,26,.12);background:#fff;font:700 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;color:#0d1f1a;cursor:pointer;transition:all .2s}
+.dpme-cats button.on{background:#0f6e5c;border-color:#0f6e5c;color:#fff;box-shadow:0 6px 14px rgba(15,110,92,.25)}
+.dpme-tg{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px;font-weight:600}
+.dpme-tg input{width:18px;height:18px;accent-color:#0f6e5c}
+.dpme-sh .go{width:100%;height:50px;margin-top:18px;border:0;border-radius:14px;background:linear-gradient(135deg,#14937b,#0f6e5c);color:#fff;font:750 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(15,110,92,.28)}
+.dpme-sh .clr{width:100%;margin-top:10px;border:0;background:none;color:#be123c;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;cursor:pointer;padding:8px}
+.dpme-sh .note{font-size:11px;color:#8a9893;margin-top:10px;text-align:center}
+html.dpdark .dpme-card{--ink:#e7f2ee;--sub:#9fb3ac;--line:rgba(255,255,255,.09);background:linear-gradient(180deg,#15211e,#111a18)}
+html.dpdark .dpme-q span,html.dpdark .dpme-form input,html.dpdark .dpme-form select,html.dpdark .dpme-bar .me i{background:#1b2a26;color:var(--ink)}
+html.dpdark .dpme-bar .mk{background:#e7f2ee}html.dpdark .dpme-bar .tr{background:linear-gradient(90deg,#10b981 0%,#10b981 var(--a),#f59e0b var(--a),#f59e0b var(--b),#33413d var(--b))}
+html.dpdark .dpme-bar .me{background:#111a18}
+html.dpdark .dpme-sh{background:#141d1b;color:#e7f2ee}html.dpdark .dpme-sh .rk,html.dpdark .dpme-cats button{background:#1b2a26;color:#e7f2ee;border-color:rgba(255,255,255,.1)}
+html.dpdark .dpme-cats button.on{background:#14937b;border-color:#14937b}
+@media (prefers-reduced-motion:reduce){.dpme-line,.dpme-card{animation:none}.dpme-bar .me{transition:none}.dpme-sh{transition:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -8145,5 +8218,84 @@ addEventListener("dp-lucky-admin",adminOpen);
 window.dpLucky={open:function(o){o=o||{};if(o.demo)open({demo:true});else openReal();},admin:adminOpen};
 if(DEMO&&Q.get("luckydemo"))setTimeout(function(){open({demo:true});},900);
 setTimeout(function(){check(false);},3000);
+})();</script><script id="dp-me">(function(){
+var K="dp_me_v1",CN={GN:"General",EWS:"EWS",OBC:"OBC",SC:"SC",ST:"ST"},QN={AIQ:"All India",PS:"Deemed / private",DNB:"DNB",DU:"Delhi Univ.",IP:"IP Univ.",BHU:"BHU",AMU:"AMU",AFMS:"AFMS",JM:"Jamia",MM:"Muslim minority",NRI:"NRI"};
+function $(s,r){return (r||document).querySelector(s);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function lg(k){try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}}
+function ls(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function me(){var m=lg(K)||{};if(!m.c){var sp=lg("dp_sp_v1")||{};m.c=CN[sp.c]?sp.c:"GN";}return m;}
+function save(m){m.at=Date.now();ls(K,m);var sp=lg("dp_sp_v1")||{};if(m.c&&sp.c!==m.c){sp.c=m.c;ls("dp_sp_v1",sp);}paintAll(true);}
+function parseRank(s){var m=String(s||"").replace(/[, ]/g,"").match(/^(\d{1,6})(k)?$/i);if(!m)return 0;var r=parseInt(m[1],10)*(m[2]?1000:1);return r>0&&r<300000?r:0;}
+function fmt(n){return Number(n).toLocaleString("en-IN");}
+function vib(){try{navigator.vibrate&&navigator.vibrate(8);}catch(e){}}
+/* ---- remember the rank wherever it is typed ---- */
+var tT=null;document.addEventListener("input",function(e){var t=e.target;if(!t||!t.matches)return;if(!t.matches("#dpsp-q,#hn-rank,input[data-fs-rank],#ux-q"))return;var r=parseRank(t.value);if(!r)return;clearTimeout(tT);tT=setTimeout(function(){var m=me();if(m.r!==r){m.r=r;save(m);}},700);},true);
+document.addEventListener("click",function(e){var b=e.target&&e.target.closest&&e.target.closest(".dpsp-cats [data-c]");if(b){var m=me();m.c=b.getAttribute("data-c");save(m);}},true);
+/* ---- Cmd/Ctrl+K or / : jump to search ---- */
+document.addEventListener("keydown",function(e){var a=document.activeElement,typing=a&&(/INPUT|TEXTAREA|SELECT/.test(a.tagName)||a.isContentEditable);
+ if(((e.metaKey||e.ctrlKey)&&(e.key==="k"||e.key==="K"))||(e.key==="/"&&!typing)){var q=$("#dpsp-q");if(!q)return;e.preventDefault();var box=$("#dpsp");var y=box.getBoundingClientRect().top+scrollY-110;window.scrollTo({top:Math.max(0,y),behavior:"smooth"});setTimeout(function(){q.focus({preventScroll:true});},380);}});
+/* ---- edit sheet ---- */
+function sheet(after){var m=me(),c=m.c||"GN",pwd=!!m.pwd;var o=document.createElement("div");o.className="dpme-ov";
+ o.innerHTML='<div class="dpme-sh" role="dialog" aria-modal="true" aria-label="Your rank"><div class="hd"></div><h3>Your rank</h3><p>We use it to show your chance on every college page. It stays on this device.</p>'
+ +'<label for="dpme-rk">NEET PG 2026 rank</label><input id="dpme-rk" class="rk" inputmode="numeric" autocomplete="off" placeholder="e.g. 18500" value="'+(m.r?m.r:"")+'">'
+ +'<label>Category</label><div class="dpme-cats">'+Object.keys(CN).map(function(k){return '<button type="button" data-c="'+k+'" class="'+(k===c?"on":"")+'">'+CN[k]+'</button>';}).join("")+'</div>'
+ +'<label class="dpme-tg"><input type="checkbox" '+(pwd?"checked":"")+'> I have a PwD certificate</label>'
+ +'<button type="button" class="go">Save</button>'+(m.r?'<button type="button" class="clr">Forget my rank</button>':'')+'<div class="note">Chances use last year\'s MCC allotments (all rounds). Cut-offs move every year.</div></div>';
+ document.body.appendChild(o);requestAnimationFrame(function(){requestAnimationFrame(function(){o.classList.add("in");});});
+ var rk=o.querySelector(".rk");setTimeout(function(){rk.focus();},420);
+ function close(){o.classList.remove("in");setTimeout(function(){o.remove();},350);}
+ o.addEventListener("click",function(e){if(e.target===o)close();});
+ o.querySelectorAll(".dpme-cats button").forEach(function(b){b.onclick=function(){c=b.getAttribute("data-c");o.querySelectorAll(".dpme-cats button").forEach(function(x){x.classList.toggle("on",x===b);});};});
+ function go(){var r=parseRank(rk.value);if(!r){rk.focus();rk.style.borderColor="#e11d48";return;}var mm=me();mm.r=r;mm.c=c;mm.pwd=o.querySelector(".dpme-tg input").checked;save(mm);vib();close();after&&after();}
+ o.querySelector(".go").onclick=go;rk.addEventListener("keydown",function(e){if(e.key==="Enter")go();if(e.key==="Escape")close();});
+ var cl=o.querySelector(".clr");if(cl)cl.onclick=function(){var mm=me();delete mm.r;save(mm);close();};}
+window.dpMe={get:me,edit:sheet};
+/* ---- hero line ---- */
+function hero(){var w=$("#dpsp");if(!w)return;var m=me(),ln=$(".dpme-line",w);if(!m.r){if(ln)ln.remove();return;}
+ var key=m.r+"|"+m.c+"|"+(m.pwd?1:0);if(ln&&ln.getAttribute("data-k")===key)return;
+ var html='<span class="dpme-pill">🎯 <span>Your rank <b>'+fmt(m.r)+'</b> <span class="dpme-k">· '+CN[m.c]+(m.pwd?" PwD":"")+'</span></span><button type="button" data-me-edit>Edit</button></span>';
+ if(!ln){ln=document.createElement("div");ln.className="dpme-line";var h=$(".dpsp-hint",w);(h||w).parentNode===w?w.insertBefore(ln,h.nextSibling):w.appendChild(ln);}
+ ln.setAttribute("data-k",key);ln.innerHTML=html;ln.querySelector("[data-me-edit]").onclick=function(){sheet();};}
+/* ---- college page ---- */
+function hasR(r){return r&&r.R&&typeof r.R==="object"&&Object.keys(r.R).length>0;}
+function rowFor(hd){var h2=$("h2",hd),p=$("p",hd);if(!h2||!p)return null;var name=h2.textContent.trim(),parts=p.textContent.split("·").map(function(x){return x.trim();});var deg=parts[1],spec=parts[2];
+ var D=window.DATA||[];for(var i=0;i<D.length;i++){var d=D[i];if(d.Display_Name===name&&d.Deg===deg&&d.Spec_Norm===spec)return d;}return null;}
+function verdict(r,m){var p={cat:m.c||"GN",pwd:!!m.pwd,open:{dnb:true,deemed:true}};var ck=window.planCatKey(p);var qs=window.planQuotaOpts(r,p).filter(function(q){return window.planClosing(r,q,ck,3);});
+ var main=window.planDefaultQuota(r,p);if(qs.indexOf(main)<0)main=qs[0];
+ var all=qs.map(function(q){var c=window.planClosing(r,q,ck,3),c1=window.planClosing(r,q,ck,0)||c,ch=window.planChance(m.r,c);return {q:q,c:c,c1:c1,ch:ch?ch:["Out of reach","out"]};});
+ return {ck:ck,main:all.filter(function(x){return x.q===main;})[0]||null,all:all};}
+function line(v,rank){var c=v.c,c1=v.c1,h="Closed at "+fmt(c)+" last year";
+ if(rank<=c1)return [h,"You're inside Round 1's last rank ("+fmt(c1)+"), so last year you'd have got it in Round 1."+(v.ch[1]==="mid"?" Only just, so keep a backup.":"")];
+ if(rank<=c)return [h,"Round 1 closed at "+fmt(c1)+"; seats at your rank went in a later round."+(v.ch[1]==="mid"?" Only just inside, so keep a backup.":"")];
+ var d=Math.round((rank-c)/c*100);if(v.ch[1]==="low")return [h,"The last seat went "+d+"% above your rank. Possible only if cut-offs move."];
+ return [h,"The last seat went well above your rank in every round."];}
+function bar(v,rank){var lo=Math.min(v.c1,v.c,rank)*0.85,hi=Math.max(v.c,rank)*1.12,pc=function(x){return Math.max(2,Math.min(98,(x-lo)/(hi-lo)*100));};
+ var a=pc(v.c1),b=pc(v.c);var two=v.c1!==v.c;
+ return '<div class="dpme-bar" style="--a:'+a+'%;--b:'+b+'%" aria-hidden="true"><span class="tr"></span>'+(two?'<span class="mk" style="left:'+a+'%"></span>':'')+'<span class="mk" style="left:'+b+'%"></span><span class="me" style="left:2%" data-to="'+pc(rank)+'"></span></div>'
+  +'<div class="dpme-lg">'+(two?'<span><i class="g"></i>Round 1 till <b>'+fmt(v.c1)+'</b></span><span><i class="a"></i>Later rounds till <b>'+fmt(v.c)+'</b></span>':'<span><i class="g"></i>Got a seat till <b>'+fmt(v.c)+'</b></span>')+'<span><i class="y"></i>You <b>'+fmt(rank)+'</b></span></div>';}
+function card(hd,r){var m=me(),old=$(".dpme-card",hd),paid=hasR(r);var key=(r?r.Display_Name+r.Spec_Norm+r.Deg:"")+"|"+m.r+"|"+m.c+"|"+(m.pwd?1:0)+"|"+(paid?1:0);
+ if(old&&old.getAttribute("data-k")===key)return;var el=document.createElement("div");el.className="dpme-card";el.setAttribute("data-k",key);
+ var host=hd.firstElementChild||hd;
+ if(!m.r){el.innerHTML='<div class="dpme-top"><span class="dpme-v na">🎯</span><div class="dpme-h"><b>See your chance at this seat</b><small>Add your rank once. Every college page will show it.</small></div></div>'
+   +'<div class="dpme-form"><input inputmode="numeric" placeholder="Your rank, e.g. 18500" aria-label="Your rank"><select aria-label="Category">'+Object.keys(CN).map(function(k){return '<option value="'+k+'"'+(k===m.c?" selected":"")+'>'+CN[k]+'</option>';}).join("")+'</select><button type="button" class="dpme-btn sol">Show</button></div>';
+   var inp=$("input",el),sel=$("select",el);var go=function(){var rr=parseRank(inp.value);if(!rr){inp.focus();return;}var mm=me();mm.r=rr;mm.c=sel.value;save(mm);vib();};$("button",el).onclick=go;inp.addEventListener("keydown",function(e){if(e.key==="Enter")go();});}
+ else if(!paid){el.className+=" dpme-lock";el.innerHTML='<div class="dpme-top"><span class="dpme-v ok">Likely</span><div class="dpme-h"><b>Your chance with rank '+fmt(m.r)+'</b><small>Last year\'s closing ranks for every round and quota are in College Directory and Pro.</small></div></div>'
+   +'<div class="dpme-ft"><span>'+CN[m.c]+(m.pwd?" PwD":"")+' · MCC 2025</span><button type="button" class="dpme-btn sol" data-me-unlock>Unlock my chances</button></div>';
+   $("[data-me-unlock]",el).onclick=function(){var t=$("[data-open-plans]");if(t)t.click();};}
+ else{var V=verdict(r,m),v=V.main;
+   if(!v){el.innerHTML='<div class="dpme-top"><span class="dpme-v na">New</span><div class="dpme-h"><b>No 2025 closing rank for '+CN[m.c]+(m.pwd?" PwD":"")+' here</b><small>The seat is new or wasn\'t allotted in this category last year, so there\'s no honest number yet.</small></div></div><div class="dpme-ft"><span>Rank '+fmt(m.r)+'</span><button type="button" data-me-edit>Change</button></div>';}
+   else{var L=line(v,m.r);el.innerHTML='<div class="dpme-top"><span class="dpme-v '+v.ch[1]+'">'+esc(v.ch[0])+'</span><span class="ctx">Your chance · '+esc(QN[v.q]||v.q)+'</span></div><div class="dpme-hl"><b>'+esc(L[0])+'</b><small>'+esc(L[1])+'</small></div>'+bar(v,m.r)
+    +(V.all.length>1?'<div class="dpme-q">'+V.all.map(function(x){return '<span class="'+x.ch[1]+'">'+esc(QN[x.q]||x.q)+' · <b>'+esc(x.ch[0])+'</b></span>';}).join("")+'</div>':'')
+    +'<div class="dpme-ft"><span>'+CN[m.c]+(m.pwd?" PwD":"")+' · MCC 2025</span><button type="button" data-me-edit>Edit rank</button></div>';}}
+ if(old)old.replaceWith(el);else host.appendChild(el);
+ var e2=$("[data-me-edit]",el);if(e2)e2.onclick=function(){sheet();};
+ var dot=$(".me",el);if(dot)requestAnimationFrame(function(){requestAnimationFrame(function(){dot.style.left=dot.getAttribute("data-to")+"%";});});}
+function branches(sh,r){var br=$(".col-br",sh);if(!br||!r)return;var m=me();var rows=(window.DATA||[]).filter(function(d){return d.I===r.I;});var items=[].slice.call(br.children).filter(function(x){return x.classList.contains("rounded-xl");});
+ items.forEach(function(it,i){var d=rows[i],ex=$(".dpme-dot",it);if(!m.r||!d||!hasR(d)){if(ex)ex.remove();return;}var V=verdict(d,m),v=V.main;var lab=v?v.ch:null;var k=lab?lab[1]:"";
+  if(ex&&ex.getAttribute("data-k")===k+m.r)return;if(ex)ex.remove();if(!lab)return;var s=document.createElement("span");s.className="dpme-dot "+lab[1];s.setAttribute("data-k",k+m.r);s.textContent=lab[1]==="out"?"Out":lab[0];var top=it.firstElementChild;if(top)top.appendChild(s);});}
+function college(force){var sh=$(".col-sheet");if(!sh)return;var hd=$(".col-hd",sh);if(!hd)return;var r=rowFor(hd);if(!r)return;if(force){var o=$(".dpme-card",hd);if(o)o.removeAttribute("data-k");}card(hd,r);branches(sh,r);}
+function paintAll(force){hero();college(force);}
+setInterval(function(){if(document.hidden)return;paintAll(false);},500);
 })();</script></body>
 </html>
