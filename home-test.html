@@ -3822,11 +3822,18 @@ html.fx-open .dpg-pill{display:none!important}
 .lr-card.win{box-shadow:0 0 0 1.5px rgba(212,166,74,.9),0 0 60px -8px rgba(231,198,107,.75),0 40px 90px -20px rgba(0,0,0,.45)}
 .lr-card.win .lr-f{background:radial-gradient(circle at 30% 22%,#fffdf6 0,#fbf2da 45%,#ead7a4 100%)}
 .lr-cf{position:absolute;inset:0;pointer-events:none;border-radius:34px;overflow:hidden}
-.lr-pill{position:fixed;left:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:2147483100;display:flex;align-items:center;gap:8px;
- padding:10px 16px 10px 12px;border-radius:999px;border:0;cursor:pointer;color:#1d1d1f;font:600 14px/1 -apple-system,"Inter",sans-serif;
- background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
- box-shadow:0 0 0 .5px rgba(0,0,0,.08),0 12px 30px -10px rgba(0,0,0,.35);animation:lrPop .6s cubic-bezier(.16,1,.3,1)}
-.lr-pill b{display:inline-flex;width:26px;height:26px;border-radius:8px;align-items:center;justify-content:center;background:#1d1d1f;color:#fff;font-size:15px}
+.lr-fab{position:fixed;left:16px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:2147483100;width:52px;height:52px;border-radius:18px;border:0;cursor:pointer;padding:0;
+ background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+ box-shadow:0 0 0 .5px rgba(0,0,0,.08),0 14px 30px -12px rgba(0,0,0,.4);perspective:200px;animation:lrPop .6s cubic-bezier(.16,1,.3,1)}
+.lr-fab .lr-m{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;transform-style:preserve-3d;animation:lrSpin 6s cubic-bezier(.45,0,.2,1) infinite}
+.lr-fab .lr-m i{position:absolute;inset:0;border-radius:7px;background:radial-gradient(circle at 30% 22%,#fff,#ecebe5);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08);display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:4px}
+.lr-fab .lr-m b{width:4.5px;height:4.5px;border-radius:50%;background:#1d1d1f;align-self:center;justify-self:center}
+.lr-fab .lr-m b.r{background:#c1121f;width:6px;height:6px}
+.lr-fab:after{content:"";position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,#e7c66b,#b8862b);box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.lr-fab:active{transform:scale(.94)}
+@keyframes lrSpin{0%,62%{transform:rotateX(-20deg) rotateY(25deg)}80%{transform:rotateX(340deg) rotateY(385deg) translateY(-6px)}100%{transform:rotateX(340deg) rotateY(385deg)}}
+html.dpdark .lr-fab{background:rgba(40,42,44,.82)}
+@media (min-width:900px){.lr-fab{left:24px;bottom:28px}}
 @keyframes lrPop{from{transform:translateY(20px) scale(.9);opacity:0}to{transform:none;opacity:1}}
 @keyframes lrHop{0%{transform:translateY(0)}18%{transform:translateY(-70px)}46%{transform:translateY(0)}60%{transform:translateY(-16px)}74%{transform:translateY(0)}84%{transform:translateY(-4px)}100%{transform:translateY(0)}}
 @keyframes lrIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
@@ -3836,7 +3843,6 @@ html.dpdark .lr-card{color:#f5f5f7;background:linear-gradient(180deg,rgba(38,40,
 html.dpdark .lr-sub,html.dpdark .lr-hint,html.dpdark .lr-fine,html.dpdark .lr-eye{color:#a1a1a6}
 html.dpdark .lr-btn{background:#f5f5f7;color:#1d1d1f}
 html.dpdark .lr-ghost,html.dpdark .lr-x{background:rgba(255,255,255,.1);color:#f5f5f7}
-html.dpdark .lr-pill{background:rgba(40,42,44,.85);color:#f5f5f7}
 @media (prefers-reduced-motion:reduce){.lr-ov,.lr-card,.lr-hop,.lr-die{transition:none!important;animation:none!important}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -8004,7 +8010,7 @@ function idc(){var act=$(".idc-act");if(!act||act.querySelector(".fx-spb"))retur
 var idcT=0;new MutationObserver(function(){if(idcT)return;idcT=setTimeout(function(){idcT=0;idc();},300);}).observe(document.body,{childList:true});(function(){var w=document.getElementById("neetpg-app-wrap");if(w)new MutationObserver(function(){if(idcT)return;idcT=setTimeout(function(){idcT=0;idc();},300);}).observe(w,{childList:true});})();
 window.dpFX={pools:open,count:count,compute:compute};
 })();</script><script id="dp-lucky">(function(){
-var Q=new URLSearchParams(location.search),DEMO=Q.has("luckydemo"),FORCE=Q.get("luckydemo")==="666";
+var PCT=10,Q=new URLSearchParams(location.search),DEMO=Q.has("luckydemo"),FORCE=Q.get("luckydemo")==="666";
 var PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
 // face -> rotation that brings it to the front
 var ROT={1:[0,0],6:[0,180],3:[0,-90],4:[0,90],5:[-90,0],2:[90,0]};
@@ -8020,13 +8026,13 @@ function close(){if(!ov)return;ov.classList.remove("in");var o=ov;ov=null;setTim
 function open(opts){if(ov)return;state=opts||{};
  ov=document.createElement("div");ov.className="lr-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lucky Roll");
  ov.innerHTML='<div class="lr-card"><canvas class="lr-cf"></canvas><button class="lr-x" aria-label="Close">✕</button>'
-  +(state.demo?'<div class="lr-demo">Preview · not a real roll</div>':'')
-  +'<div class="lr-eye">DocPulsee · Lucky Roll</div><h2 class="lr-h">Roll three sixes.<br><em>Get everything back.</em></h2>'
-  +'<p class="lr-sub">A thank-you for joining. One roll per account. Three sixes and we refund your full payment.</p>'
+  +(state.demo?'<div class="lr-demo">Practice roll · not saved</div>':'')
+  +'<div class="lr-eye">DocPulsee · Lucky Roll</div><h2 class="lr-h">Roll three sixes.<br><em>Get '+PCT+'% back.</em></h2>'
+  +'<p class="lr-sub">'+(state.demo?"A practice roll, just for fun. Every Pro member gets one real roll.":"A thank-you for joining Pro. One roll per account. Three sixes and "+PCT+"% of what you paid comes back to you.")+'</p>'
   +'<div class="lr-stage">'+dieHTML()+dieHTML()+dieHTML()+'</div>'
   +'<div class="lr-res" aria-live="polite"></div>'
   +'<button class="lr-btn" data-roll>Roll the dice</button><div class="lr-hint">or shake your phone</div>'
-  +'<p class="lr-fine">Odds of three sixes: 1 in 216. Each roll is made and saved on our server, one per account, and can\'t be repeated. Winners get a full refund to their original payment method within 7 days.</p></div>';
+  +'<p class="lr-fine">Odds of three sixes: 1 in 216. Each roll is made and saved on our server, one per account, and can\'t be repeated. Winners get '+PCT+'% of their payment back to the original payment method within 7 days.</p></div>';
  document.body.appendChild(ov);requestAnimationFrame(function(){ov.classList.add("in");});
  ov.querySelector(".lr-x").onclick=close;ov.addEventListener("click",function(e){if(e.target===ov)close();});
  ov.querySelector("[data-roll]").onclick=go;
@@ -8053,24 +8059,30 @@ function land(roll){var dice=roll.dice;ov.querySelectorAll(".lr-slot").forEach(f
 function show(roll,instant){state.done=true;busy=false;var card=ov.querySelector(".lr-card"),res=ov.querySelector(".lr-res"),b=ov.querySelector("[data-roll]"),hint=ov.querySelector(".lr-hint");
  if(instant)ov.querySelectorAll(".lr-slot").forEach(function(s,i){s.classList.remove("idle");var r=ROT[roll.dice[i]];s.querySelector(".lr-die").style.transform="rotateX(-16deg) rotateY("+(i-1)*14+"deg) rotateX("+r[0]+"deg) rotateY("+r[1]+"deg)";});
  var win=roll.win||(roll.dice[0]===6&&roll.dice[1]===6&&roll.dice[2]===6);
- if(win){card.classList.add("win");ov.querySelector(".lr-h").innerHTML='Three sixes.<br><em>It\'s on us.</em>';
-  ov.querySelector(".lr-sub").textContent=(roll.amount_paise?inr(roll.amount_paise)+" is":"Your full payment is")+" coming back to your original payment method within 7 days.";
-  res.textContent="6 · 6 · 6";b.className="lr-btn gold";b.textContent="Share my win";b.disabled=false;b.onclick=share;hint.textContent="";if(!instant){vib([30,40,30,40,80]);confetti();}}
- else{res.textContent="You rolled "+roll.dice.join(" · ");ov.querySelector(".lr-sub").textContent=(roll.dice.filter(function(x){return x===6;}).length===2?"Two sixes. So close! ":"Not this time. ")+"Thanks for joining DocPulsee, and good luck with your seat.";
-  b.textContent="Share my roll";b.disabled=false;b.onclick=share;hint.innerHTML='<button class="lr-ghost" data-done>Done</button>';hint.querySelector("[data-done]").onclick=close;}
- try{localStorage.setItem("dp_lr_done","1");}catch(e){}var p=document.querySelector(".lr-pill");if(p&&!state.demo)p.remove();}
-function share(){var t=ov&&ov.querySelector(".lr-card").classList.contains("win")?"I rolled three sixes on DocPulsee and got my subscription free 🎲🎲🎲":"I just took my Lucky Roll on DocPulsee 🎲 Three sixes = full refund. Find your PG seat:";
+ if(win){card.classList.add("win");ov.querySelector(".lr-h").innerHTML='Three sixes.<br><em>'+PCT+'% is coming back.</em>';
+  ov.querySelector(".lr-sub").textContent=state.demo?"That's what a win looks like. Pro members get one real roll.":(roll.amount_paise?inr(roll.amount_paise*PCT/100)+" ("+PCT+"% of your payment) is":PCT+"% of your payment is")+" coming back to your original payment method within 7 days.";
+  res.textContent="6 · 6 · 6";b.className="lr-btn gold";if(state.demo){b.textContent="See DocPulsee Pro";b.onclick=join;}else{b.textContent="Share my win";b.onclick=share;}b.disabled=false;hint.textContent="";if(!instant){vib([30,40,30,40,80]);confetti();}}
+ else{res.textContent="You rolled "+roll.dice.join(" · ");ov.querySelector(".lr-sub").textContent=(roll.dice.filter(function(x){return x===6;}).length===2?"Two sixes. So close! ":"Not this time. ")+(state.demo?"Every Pro member gets one real roll.":"Thanks for being Pro, and good luck with your seat.");
+  if(state.demo){b.textContent="See DocPulsee Pro";b.disabled=false;b.onclick=join;}else{b.textContent="Share my roll";b.disabled=false;b.onclick=share;}hint.innerHTML='<button class="lr-ghost" data-done>Done</button>';hint.querySelector("[data-done]").onclick=close;}
+ try{localStorage.setItem("dp_lr_done","1");}catch(e){}var p=document.querySelector(".lr-fab");if(p&&!state.demo)p.remove();}
+function join(){close();setTimeout(function(){var t=null;if(window.dpOpenPro){window.dpOpenPro();return;}t=document.querySelector("[data-open-plans]")||document.querySelector("[data-paywall-card]");if(t){if(t.matches("[data-open-plans]"))t.click();else t.scrollIntoView({behavior:"smooth",block:"center"});}else if(window.hnBrowse)hnBrowse();},450);}
+function share(){var t=ov&&ov.querySelector(".lr-card").classList.contains("win")?"I rolled three sixes on DocPulsee and got "+PCT+"% back 🎲🎲🎲":"I just took my DocPulsee Pro Lucky Roll 🎲 Three sixes = "+PCT+"% back. Find your PG seat:";
  var u="https://docpulsee.in/";if(navigator.share)navigator.share({text:t,url:u}).catch(function(){});else{try{navigator.clipboard.writeText(t+" "+u);ov.querySelector(".lr-res").textContent="Copied. Paste it anywhere.";}catch(e){}}}
 function confetti(){var c=ov.querySelector(".lr-cf"),r=c.getBoundingClientRect(),x=c.getContext("2d");c.width=r.width*2;c.height=r.height*2;x.scale(2,2);
  var col=["#d4a64a","#e7c66b","#f5e3b0","#1d1d1f","#0f6e5c"],P=[];for(var i=0;i<140;i++)P.push({x:r.width/2,y:r.height*.42,vx:(Math.random()-.5)*9,vy:-Math.random()*9-3,s:3+Math.random()*4,r:Math.random()*6,c:col[i%5],a:1});
  var t0=performance.now();(function f(t){x.clearRect(0,0,r.width,r.height);P.forEach(function(p){p.vy+=.22;p.x+=p.vx;p.y+=p.vy;p.r+=.1;p.a=Math.max(0,1-(t-t0)/2600);x.save();x.globalAlpha=p.a;x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore();});if(t-t0<2700&&ov)requestAnimationFrame(f);})(t0);}
-function pill(){if(document.querySelector(".lr-pill"))return;var p=document.createElement("button");p.className="lr-pill";p.innerHTML="<b>🎲</b>Your Lucky Roll is waiting";p.onclick=function(){openReal();};document.body.appendChild(p);}
-function openReal(){if(typeof sb==="undefined"||!sb){open({demo:true});return;}sb.functions.invoke("lucky-roll",{body:{action:"status"}}).then(function(r){var d=r.data||{};if(d.rolled&&d.roll)open({roll:d.roll});else if(d.enabled&&d.eligible)open({});else open({demo:true});}).catch(function(){});}
-function check(){if(typeof sb==="undefined"||!sb)return;sb.auth.getSession().then(function(s){if(!s||!s.data||!s.data.session)return;
- sb.functions.invoke("lucky-roll",{body:{action:"status"}}).then(function(r){var d=r.data||{};if(d.enabled&&d.eligible&&!d.rolled){pill();var seen=null;try{seen=localStorage.getItem("dp_lr_auto");}catch(e){}if(!seen){try{localStorage.setItem("dp_lr_auto","1");}catch(e){}open({});}}else if(d.enabled&&!d.eligible&&++tries<20)setTimeout(check,45000);}).catch(function(){});});}
+function fab(demo){if(document.querySelector(".lr-fab"))return;var p=document.createElement("button");p.className="lr-fab";p.type="button";p.setAttribute("aria-label","Your Lucky Roll");p.title="Your Lucky Roll";
+ var F=[[1,"translateZ(13px)"],[6,"rotateY(180deg) translateZ(13px)"],[3,"rotateY(90deg) translateZ(13px)"],[4,"rotateY(-90deg) translateZ(13px)"],[5,"rotateX(90deg) translateZ(13px)"],[2,"rotateX(-90deg) translateZ(13px)"]],h='<span class="lr-m">';
+ F.forEach(function(f){h+='<i style="transform:'+f[1]+'">';for(var k=0;k<9;k++)h+=PIPS[f[0]].indexOf(k)>=0?'<b class="'+(f[0]===1?"r":"")+'" style="grid-area:'+(Math.floor(k/3)+1)+'/'+(k%3+1)+'"></b>':'';h+='</i>';});
+ p.innerHTML=h+'</span>';p.onclick=function(){if(demo)open({demo:true});else openReal();};document.body.appendChild(p);}
+function openReal(){if(typeof sb==="undefined"||!sb){open({demo:true});return;}sb.functions.invoke("lucky-roll",{body:{action:"status"}}).then(function(r){var d=r.data||{};if(d.pct)PCT=d.pct;if(d.rolled&&d.roll)open({roll:d.roll});else if(d.enabled&&d.eligible)open({});else open({demo:true});}).catch(function(){});}
+function check(){if(typeof sb==="undefined"||!sb)return testFab();sb.auth.getSession().then(function(s){if(!s||!s.data||!s.data.session)return testFab();
+ sb.functions.invoke("lucky-roll",{body:{action:"status"}}).then(function(r){var d=r.data||{};if(d.pct)PCT=d.pct;if(d.enabled&&d.eligible&&!d.rolled)fab(false);else if(d.enabled&&!d.eligible&&++tries<20)setTimeout(check,45000);else testFab();}).catch(testFab);}).catch(testFab);}
+function testFab(){if(/home-test/.test(location.pathname)||DEMO)fab(true);}
 var tries=0;
+
 window.dpLucky={open:function(o){o=o||{};if(o.demo)open({demo:true});else openReal();}};
-if(DEMO)setTimeout(function(){open({demo:true});},900);
+if(DEMO&&Q.get("luckydemo"))setTimeout(function(){open({demo:true});},900);
 setTimeout(check,3500);
 try{addEventListener("dp-paid",function(){setTimeout(check,1500);});}catch(e){}
 })();</script></body>
