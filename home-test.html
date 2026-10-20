@@ -4476,6 +4476,14 @@ html.chc .col-hd .dpme-card:not(.open) .dpme-hl b::after{content:" \203A";color:
 html.chc .col-hd .dpme-card:not(.open) .dpme-ft{margin:0!important;padding:0!important;border:0!important}
 html.chc .col-hd .dpme-card:not(.open) .dpme-ft button{font-size:12px!important;padding:4px 8px!important}
 html.chc .col-hd .dpme-card.open{cursor:pointer}
+/* soft Apple-style glow */
+html.chc .col-sheet{box-shadow:0 0 0 1px rgba(255,255,255,.7),0 40px 90px -30px rgba(13,31,26,.55),0 0 120px -20px rgba(52,211,153,.45),0 0 60px -30px rgba(15,110,92,.6)!important}
+html.chc .col-sheet::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:60;
+ background:radial-gradient(600px 160px at 15% 0%,rgba(110,231,183,.22),transparent 70%),radial-gradient(500px 160px at 95% 0%,rgba(167,243,208,.16),transparent 70%)}
+html.chc .col-hd .dpme-card:has(.dpme-hl):not(.open){box-shadow:0 0 0 1px rgba(16,185,129,.22),0 8px 22px -12px rgba(16,185,129,.55)!important}
+html.chc .col-hd .dpme-card:not(.open) .dpme-v.ok{box-shadow:0 0 14px -2px rgba(16,185,129,.75)!important}
+html.chc .col-hd .dpme-card:not(.open) .dpme-v.mid{box-shadow:0 0 14px -2px rgba(245,158,11,.7)!important}
+html.chc .col-br .rounded-xl[style*="accent"],html.chc .col-br .rounded-xl.active{box-shadow:0 0 0 1px rgba(16,185,129,.35),0 10px 26px -14px rgba(16,185,129,.7)}
 @media (max-width:640px){html.chc .col-hd .dpme-card:has(.dpme-hl):not(.open){max-width:none}html.chc .col-hd .dpme-card:not(.open) .dpme-hl b{white-space:normal;font-size:13px!important}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
