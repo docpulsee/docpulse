@@ -4477,31 +4477,35 @@ html.chc .col-hd .dpme-card:not(.open) .dpme-ft{margin:0!important;padding:0!imp
 html.chc .col-hd .dpme-card:not(.open) .dpme-ft button{font-size:12px!important;padding:4px 8px!important}
 html.chc .col-hd .dpme-card.open{cursor:pointer}
 /* soft Apple-style glow */
-html.chc .col-sheet{box-shadow:0 0 0 1px rgba(255,255,255,.7),0 40px 90px -30px rgba(13,31,26,.55),0 0 120px -20px rgba(52,211,153,.45),0 0 60px -30px rgba(15,110,92,.6)!important}
-html.chc .col-sheet::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:60;
- background:radial-gradient(600px 160px at 15% 0%,rgba(110,231,183,.22),transparent 70%),radial-gradient(500px 160px at 95% 0%,rgba(167,243,208,.16),transparent 70%)}
+html.chc .col-sheet{box-shadow:0 0 0 1px rgba(255,255,255,.7),0 30px 60px -30px rgba(13,31,26,.55),0 0 50px -18px rgba(52,211,153,.5)!important;background-image:radial-gradient(600px 160px at 15% 0%,rgba(110,231,183,.22),transparent 70%),radial-gradient(500px 160px at 95% 0%,rgba(167,243,208,.16),transparent 70%)!important}
 html.chc .col-hd .dpme-card:has(.dpme-hl):not(.open){box-shadow:0 0 0 1px rgba(16,185,129,.22),0 8px 22px -12px rgba(16,185,129,.55)!important}
 html.chc .col-hd .dpme-card:not(.open) .dpme-v.ok{box-shadow:0 0 14px -2px rgba(16,185,129,.75)!important}
 html.chc .col-hd .dpme-card:not(.open) .dpme-v.mid{box-shadow:0 0 14px -2px rgba(245,158,11,.7)!important}
 html.chc .col-br .rounded-xl[style*="accent"],html.chc .col-br .rounded-xl.active{box-shadow:0 0 0 1px rgba(16,185,129,.35),0 10px 26px -14px rgba(16,185,129,.7)}
 @media (max-width:640px){html.chc .col-hd .dpme-card:has(.dpme-hl):not(.open){max-width:none}html.chc .col-hd .dpme-card:not(.open) .dpme-hl b{white-space:normal;font-size:13px!important}}
 </style><script>document.documentElement.classList.add("csx");
-(function(){function tick(){var sh=document.querySelector(".col-sheet");if(!sh)return;var nav=sh.querySelector(".cp-nav"),det=sh.querySelector(".col-det");if(!nav||!det)return;
+(function(){var raf=0,bound=null;function tick(){raf=0;var sh=document.querySelector(".col-sheet");if(!sh)return;var nav=sh.querySelector(".cp-nav"),det=sh.querySelector(".col-det");if(!nav||!det)return;
  var th=nav.querySelector(".csx-th");if(!th){th=document.createElement("i");th.className="csx-th";th.setAttribute("aria-hidden","true");nav.insertBefore(th,nav.firstChild);}
  var bs=[].slice.call(nav.querySelectorAll(".cp-nav-b"));var T=["cp-ov","cp-fee","cp-stip","cp-bond","cp-nodal","cp-cut","cp-trend","cp-rev"];if(bs.length===T.length)bs.forEach(function(x,i){x.setAttribute("data-t",T[i]);});var nb=nav.querySelector("[data-t=cp-nodal]");if(nb){var has=!!document.getElementById("cp-nodal");if(nb.hidden===has)nb.hidden=!has;}bs=bs.filter(function(x){return !x.hidden;});var ids=bs.map(function(x){return x.getAttribute("data-t")||"";});
  var sc=getComputedStyle(det).overflowY!=="visible"?det:sh;var top=sc.getBoundingClientRect().top+(nav.offsetHeight||40)+24,cur=0;
  ids.forEach(function(id,i){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top-top<=0)cur=i;});
  if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4)cur=ids.length-1;if(sc.scrollTop<8)cur=0;
- var b=bs[cur];if(!b)return;bs.forEach(function(x,i){x.classList.toggle("on",i===cur);});
+ var b=bs[cur];if(!b)return;bs.forEach(function(x,i){if(x.classList.contains("on")!==(i===cur))x.classList.toggle("on",i===cur);});
  var l=b.offsetLeft,w=b.offsetWidth;if(th._l!==l||th._w!==w){th._l=l;th._w=w;th.style.transform="translateX("+l+"px)";th.style.width=w+"px";}
  if(nav._c!==cur){nav._c=cur;var nl=nav.scrollLeft,nr=nl+nav.clientWidth;if(l<nl+8||l+w>nr-8)nav.scrollTo({left:Math.max(0,l-40),behavior:"smooth"});}}
- setInterval(function(){if(!document.hidden)tick();},120);})();</script><style id="dp-csx-css">
+ function req(){if(!raf)raf=requestAnimationFrame(tick);}
+ document.addEventListener("scroll",function(e){var t=e.target;if(t&&t.closest&&t.closest(".col-sheet"))req();},true);
+ document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest(".col-sheet,.col-br"))setTimeout(req,60);},true);
+ addEventListener("resize",req);
+ /* cheap check (no layout reads) for a newly opened sheet */
+ var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><style id="dp-csx-css">
 html.csx .col-sheet{--g-ink:#0d1f1a;--g-sub:#5d6c67;--g-line:rgba(13,31,26,.08);--g-acc:#0f6e5c;
  border-radius:30px!important;corner-shape:squircle;border:0!important;background:#fbfdfc!important;
  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
- animation:csxIn .55s cubic-bezier(.22,1,.36,1) both}
+ animation:csxIn .3s cubic-bezier(.22,1,.36,1) both}
 @supports (corner-shape:squircle){html.csx .col-sheet{border-radius:56px!important}}
-@keyframes csxIn{from{opacity:0;transform:translateY(18px) scale(.975)}to{opacity:1;transform:none}}
+@keyframes csxIn{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
 html.csx .col-sheet .col-hd{border:0!important;box-shadow:none!important}
 html.csx .col-sheet .col-hd h2{font-size:23px!important;line-height:1.12!important;font-weight:800!important;letter-spacing:-.032em!important;color:var(--g-ink)!important;text-wrap:balance}
 html.csx .col-sheet .col-hd h2+p{font-size:12.5px!important;color:var(--g-sub)!important;margin-top:6px!important;letter-spacing:-.005em}
@@ -4525,7 +4529,7 @@ html.csx .col-sheet .cp-card-h{font-size:17.5px!important;font-weight:750!import
 html.csx .col-sheet .mono,html.csx .col-sheet .cp-row-v,html.csx .col-sheet .cp-bar-v{font-variant-numeric:tabular-nums}
 /* section bar: sliding segmented control */
 html.csx .col-sheet .cp-nav{position:sticky;top:0;z-index:7;display:flex;gap:2px;padding:4px!important;margin:0 0 18px!important;border-radius:16px;
- background:rgba(236,242,239,.82)!important;-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+ background:#ecf2ef!important;
  box-shadow:inset 0 0 0 1px rgba(13,31,26,.05),0 10px 24px -20px rgba(13,31,26,.5)!important;isolation:isolate}
 html.csx .col-sheet .cp-nav-b{position:relative;z-index:1;border:0!important;background:transparent!important;color:var(--g-sub)!important;font-weight:650!important;font-size:12.5px!important;padding:8px 11px!important;border-radius:12px!important;white-space:nowrap;transition:color .3s,transform .15s!important}
 html.csx .col-sheet .cp-nav-b.on{color:var(--g-ink)!important}
@@ -4533,6 +4537,9 @@ html.csx .col-sheet .cp-nav-b:active{transform:scale(.95)}
 html.csx .col-sheet .csx-th{position:absolute;left:0;top:4px;bottom:4px;z-index:0;border-radius:12px;background:#fff;pointer-events:none;
  box-shadow:0 3px 10px -3px rgba(13,31,26,.22),0 0 0 .5px rgba(13,31,26,.06);transition:transform .5s cubic-bezier(.32,.72,0,1),width .5s cubic-bezier(.32,.72,0,1)}
 #cp-nodal{scroll-margin-top:var(--cp-off,72px)}
+/* speed: skip rendering of off-screen blocks (college list behind, long card content) */
+.bx-post{content-visibility:auto;contain-intrinsic-size:auto 640px}
+.col-sheet .cp-card,.col-sheet .dp-nodal,.col-sheet .col-det>div>div:nth-child(n+4){content-visibility:auto;contain-intrinsic-size:auto 260px}
 /* branches */
 html.csx .col-sheet .col-br>div[class*="cursor-pointer"]{border-radius:18px!important;border:1px solid rgba(255,255,255,.95)!important;background:rgba(255,255,255,.7)!important;box-shadow:0 8px 18px -16px rgba(13,31,26,.5)}
 html.csx .col-sheet .col-br>div.row-ring{background:linear-gradient(135deg,rgba(231,242,238,.98),rgba(255,255,255,.85))!important;box-shadow:0 0 0 1.5px rgba(15,110,92,.55),0 14px 28px -18px rgba(15,110,92,.7)!important}
