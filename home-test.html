@@ -4595,7 +4595,8 @@ html.csx .col-sheet .col-br>div[class*="cursor-pointer"] .text-xs{font-size:13px
 }
 @media (prefers-reduced-motion:reduce){html.csx .col-sheet{animation:none}html.csx .col-sheet .csx-th{transition:none}}
 </style><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><style id="dp-fin-css">
-html.dp-fin .acp .acct-grid,html.dp-fin .acp :has(+ .acct-grid){display:none!important}
+html.dp-fin .acp .acct-grid,html.dp-fin .acp .cc-entry,html.dp-fin .acs-today .g>.c:nth-child(2),html.dp-fin .acs-today .p,html.dp-fin .acp :has(+ .acct-grid){display:none!important}
+html.dp-fin .acs-today .g{grid-template-columns:1fr}
 .cc-nv.ln{opacity:.86}.cc-nv.ln::after{content:"↗";margin-left:auto;font-size:11px;color:#8a9893}
 .fx-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
 .fx-seg{display:flex;gap:2px;padding:3px;border-radius:12px;background:#e8eeec;overflow-x:auto;scrollbar-width:none;max-width:100%}
@@ -8827,17 +8828,18 @@ function check(v){if(busy||!root)return;busy=true;var oc=$(".oc",root);oc.classL
  go();}
 /* attach the code to owner requests (server checks it; nothing secret lives in the page) */
 (function(){function patch(){try{if(typeof sb==="undefined"||!sb||!sb.functions||sb.__dpOwn)return;sb.__dpOwn=1;
- var fi=sb.functions.invoke.bind(sb.functions);sb.functions.invoke=function(n,o){var c=code();if(c&&o&&o.body&&typeof o.body==="object"&&!(typeof FormData!=="undefined"&&o.body instanceof FormData))o=Object.assign({},o,{body:Object.assign({},o.body,{owner_code:c})});return fi(n,o);};
+ var FP=Object.getPrototypeOf(sb.functions);if(FP&&FP.invoke&&!FP.__dpOwn){FP.__dpOwn=1;var fi=FP.invoke;FP.invoke=function(n,o){var c=code();if(c&&o&&o.body&&typeof o.body==="object"&&!(typeof FormData!=="undefined"&&o.body instanceof FormData))o=Object.assign({},o,{body:Object.assign({},o.body,{owner_code:c})});return fi.call(this,n,o);};}
  var rp=sb.rpc.bind(sb);sb.rpc=function(n,a,opt){var c=code();if(c&&/^(owner_today|cf_)/.test(n))a=Object.assign({},a||{},{p_code:c});return rp(n,a,opt);};}catch(e){}}
+ try{var of=window.fetch;if(of&&!of.__dpOwn){var nf=function(u,o){try{var c=code(),url=typeof u==="string"?u:(u&&u.url)||"";if(c&&/\/functions\/v1\//.test(url)&&o&&typeof o.body==="string"&&o.body.charAt(0)==="{"){var j=JSON.parse(o.body);if(j&&typeof j==="object"&&!j.owner_code){j.owner_code=c;o=Object.assign({},o,{body:JSON.stringify(j)});}}}catch(e){}return of.call(this,u,o);};nf.__dpOwn=1;window.fetch=nf;}}catch(e){}
  patch();var k=setInterval(function(){patch();if(typeof sb!=="undefined"&&sb&&sb.__dpOwn)clearInterval(k);},400);})();
 window.dpOwnCode=function(){return code();};
 /* ---- the tile in the account menu ---- */
 var ECG='<svg viewBox="0 0 34 20"><path d="M0 12 H9 L12 12 L14 4 L17 18 L20 9 L22 12 H34"/></svg>';
-function paintTile(t){var k=tok();if(k){var at=new Date(k.exp).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});t.className="own-lock ok";t.innerHTML='<span class="ecg">'+ECG+'</span><span class="t"><b>Owner tools open</b><small>Locks at '+at+'</small></span><span class="lk" role="button" tabindex="0" data-lk>Lock</span>';}
- else{t.className="own-lock";t.innerHTML='<span class="ecg">'+ECG+'</span><span class="t"><b>Owner tools</b><small>Enter the owner code to open</small></span><em>›</em>';}}
+function paintTile(t){var k=tok();if(k){var at=new Date(k.exp).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});t.className="own-lock ok";t.innerHTML='<span class="ecg">'+ECG+'</span><span class="t"><b>'+(window.DP_FIN?"Control Center":"Owner tools open")+'</b><small>'+(window.DP_FIN?"Money, prices, offers, bookings · locks "+at:"Locks at "+at)+'</small></span><span class="lk" role="button" tabindex="0" data-lk>Lock</span>';}
+ else{t.className="own-lock";t.innerHTML='<span class="ecg">'+ECG+'</span><span class="t"><b>'+(window.DP_FIN?"Control Center":"Owner tools")+'</b><small>Enter the owner code to open</small></span><em>›</em>';}}
 function tile(){var sc=$(".acp .acp-scroll");if(!sc||!isOwner()||$(".own-lock",sc))return;var t=document.createElement("button");t.type="button";paintTile(t);
  t.style.order="7";sc.appendChild(t);
- t.addEventListener("click",function(e){if(e.target.closest("[data-lk]")){lockNow();return;}if(e.target.closest("[data-ch]")){change();return;}if(!ok())open(function(){var x=$(".acp .acs-today");if(x)x.scrollIntoView({behavior:"smooth",block:"start"});});});}
+ t.addEventListener("click",function(e){if(e.target.closest("[data-lk]")){lockNow();return;}if(e.target.closest("[data-ch]")){change();return;}if(window.DP_FIN){var go=function(){var x=$(".acp-scrim");if(x)x.click();setTimeout(function(){if(window.dpCC)window.dpCC.open();},220);};if(ok())go();else open(go);return;}if(!ok())open(function(){var x=$(".acp .acs-today");if(x)x.scrollIntoView({behavior:"smooth",block:"start"});});});}
 new MutationObserver(function(){if($(".acp"))tile();}).observe(document.body,{childList:true,subtree:true});
 /* secret door: long-press the logo for 1.2 s */
 (function(){var t=null;document.addEventListener("pointerdown",function(e){var l=e.target.closest&&e.target.closest(".ds-logo,.dp-hdr-brand img,.dp-hdr-brand .dp-lg");if(!l||!isOwner())return;t=setTimeout(function(){t=null;if(navigator.vibrate)try{navigator.vibrate(12);}catch(x){}open(function(){if(window.dpCC)window.dpCC.open("store");});},1200);},true);
