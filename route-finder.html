@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Route Finder · DocPulse</title>
+<title>Route Finder · DocPulsee</title>
 <meta name="description" content="For MBBS students, graduates and doctors: India PG, USA, UK, Germany, Australia, the Gulf, government service, public health or a non-clinical career? Answer 14 questions and find the route that fits you. Built on 2026 rules.">
-<meta property="og:title" content="Where should your MBBS take you? · DocPulse Route Finder">
+<meta property="og:title" content="Where should your MBBS take you? · DocPulsee Route Finder">
 <meta property="og:description" content="14 honest questions, 9 routes after MBBS. See which one actually fits you.">
 <meta name="theme-color" content="#0f1a20">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -308,7 +308,7 @@ h1,h2,h3{font-family:var(--display); letter-spacing:-.02em; text-wrap:balance; m
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="./"><i>✚</i>DocPulse</a>
+    <a class="brand" href="./"><i>✚</i>DocPulsee</a>
     <span class="pill">Route Finder</span>
   </div>
 </header>
@@ -317,7 +317,7 @@ h1,h2,h3{font-family:var(--display); letter-spacing:-.02em; text-wrap:balance; m
 
 <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
 <script>
-// ===== DocPulse Route Finder — shared engine (public: runs in the page AND on the server) =====
+// ===== DocPulsee Route Finder — shared engine (public: runs in the page AND on the server) =====
 // Questions, weights and scoring. The paid report content lives only in route_content.js (server).
 
 const RF_ROUTES = {
@@ -802,7 +802,7 @@ function passHTML(top, pct, year){
   return `
   <div class="pass" style="--route:${r.accent}">
     <div class="pass-main">
-      <div class="pass-band"><span>BOARDING PASS · DOCPULSE</span><span>${new Date().toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" }).toUpperCase()}</span></div>
+      <div class="pass-band"><span>BOARDING PASS · DOCPULSEE</span><span>${new Date().toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" }).toUpperCase()}</span></div>
       <div class="fly">
         <div><small>FROM</small><div class="c">MBBS</div><div class="n">India</div></div>
         <div class="line">${PLANE}</div>
@@ -843,7 +843,7 @@ function abroadTeaser(fr){
 function result(){
   if (!rfValidate(answers)){ intro(); return; }
   const fr = rfFreeResult(answers), top = fr.top, r = R[top];
-  const share = `I just found my best route after MBBS on DocPulse Route Finder: ${r.name}, ${fr.pct[top]}% match. Try yours (free): ${SITE}/route-finder.html`;
+  const share = `I just found my best route after MBBS on DocPulsee Route Finder: ${r.name}, ${fr.pct[top]}% match. Try yours (free): ${SITE}/route-finder.html`;
   show(`
   <div class="res" style="--route:${r.accent}">
     <div>
@@ -908,7 +908,7 @@ function result(){
     const pb = document.getElementById("pay"); pb.innerHTML = "Open my full report (free with Pro) " + ARROW; pb.onclick = unlockPro;
     const pn = document.getElementById("priceNow"), pw = document.getElementById("priceWas"); pn.textContent = "₹0"; pw.hidden = false;
     const cb = document.getElementById("cpnBox"); if (cb) cb.hidden = true;
-    const note = document.createElement("p"); note.id = "proNote"; note.style.cssText = "margin:-6px 0 12px;font-size:13px;color:#f4c152;font-weight:700"; note.textContent = "👑 Included in your DocPulse Pro plan";
+    const note = document.createElement("p"); note.id = "proNote"; note.style.cssText = "margin:-6px 0 12px;font-size:13px;color:#f4c152;font-weight:700"; note.textContent = "👑 Included in your DocPulsee Pro plan";
     pb.parentNode.insertBefore(note, pb);
     const mp = document.getElementById("mpay"); if (mp) mp.textContent = "Open free";
   }
@@ -940,7 +940,7 @@ function result(){
   document.getElementById("rstForm").onsubmit = e => { e.preventDefault(); openReport(document.getElementById("rstId").value.trim()); };
 }
 
-// DocPulse Pro members open this page as route-finder.html?pro=<their pass>: the full report is free, once.
+// DocPulsee Pro members open this page as route-finder.html?pro=<their pass>: the full report is free, once.
 let proPass = (() => { const q = new URLSearchParams(location.search).get("pro"); if (q && /^[A-Za-z0-9]{16,40}$/.test(q)){ store.set("pro", q); return q; } return store.get("pro") || null; })();
 async function unlockPro(){
   payErr(""); busy(true);
@@ -975,7 +975,7 @@ function pay(){
   const rzp = new window.Razorpay({
     key: RZP_KEY, amount: priceNowPaise(), currency: "INR",
     prefill: coupon && coupon.email ? { email: coupon.email } : undefined,
-    name: "DocPulse", description: "Route Finder · full report",
+    name: "DocPulsee", description: "Route Finder · full report",
     notes: { product: "route_finder", top: fr.top, year: answers.year, coupon: coupon ? coupon.code : "", email: coupon && coupon.email ? coupon.email : "" },
     theme: { color: "#0f6e5c" },
     handler: r => unlock(r.razorpay_payment_id),
@@ -1037,7 +1037,7 @@ function report(rep, paymentId){
     ${passHTML(top, rep.pct[top], rep.year)}
     <div class="doc">
       <div class="doc-meta">
-        <div><small>Report</small><b>DocPulse Route Report</b></div>
+        <div><small>Report</small><b>DocPulsee Route Report</b></div>
         <div><small>Prepared for</small><b>${esc(YEAR_LABEL[rep.year] || "You")}</b></div>
         <div><small>Based on</small><b>${RF_QUESTIONS.length} answers · 9 routes</b></div>
         <div><small>Rules &amp; fees checked</small><b>${esc(rep.checked)}</b></div>

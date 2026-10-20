@@ -24,7 +24,7 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DocPulse | Doctor DNA - One Time Report</title>
+<title>DocPulsee | Doctor DNA - One Time Report</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -153,7 +153,7 @@ html.dna-locked #root{display:none}
   function dnaPrice(){return fetch(SB+"/rest/v1/app_settings?select=value&key=eq.price_dna_paise",{headers:{apikey:ANON,Authorization:"Bearer "+ANON}}).then(function(r){return r.ok?r.json():[];}).then(function(x){var n=Number(x&&x[0]&&x[0].value);return n>=100?Math.round(n):14900;}).catch(function(){return 14900;});}
   function checkout(){var btn=document.getElementById("dg-pay");if(btn){btn.style.opacity=".7";btn.textContent="Opening secure payment…";}
     Promise.all([loadRzp(),dnaPrice(),session().catch(function(){return null;})]).then(function(v){var amt=v[1],s=v[2],em=s&&s.user&&s.user.email||"";
-      var rz=new window.Razorpay({key:"rzp_live_TfrVp5WBEyPS7y",amount:amt,currency:"INR",name:"DocPulse",description:"Doctor DNA branch test",prefill:em?{email:em}:{},notes:{product:"doctor_dna"},theme:{color:"#0d9488"},
+      var rz=new window.Razorpay({key:"rzp_live_TfrVp5WBEyPS7y",amount:amt,currency:"INR",name:"DocPulsee",description:"Doctor DNA branch test",prefill:em?{email:em}:{},notes:{product:"doctor_dna"},theme:{color:"#0d9488"},
         modal:{ondismiss:function(){if(btn){btn.style.opacity="";btn.textContent="Unlock for ₹"+Math.round(amt/100);}}},
         handler:function(resp){say("Payment received ✓ Unlocking your test…");byPayment(resp.razorpay_payment_id).then(function(r){if(r===true){open();return;}say((typeof r==="string"?r:"We couldn't unlock it automatically.")+" Your payment ID: "+resp.razorpay_payment_id+" (paste it above, or email docpulsee@gmail.com).",true);if(btn){btn.style.opacity="";btn.textContent="Unlock for ₹"+Math.round(amt/100);}var f=document.getElementById("dg-pid");if(f)f.value=resp.razorpay_payment_id;});}});
       rz.open();}).catch(function(){location.href="https://rzp.io/rzp/nfwlr3Q";});}
@@ -301,7 +301,7 @@ function App(){
     ctx.fillStyle="rgba(20,184,166,0.12)"; ctx.beginPath(); ctx.arc(900,800,280,0,Math.PI*2); ctx.fill();
     ctx.fillStyle="#ffffff"; ctx.shadowColor="rgba(0,0,0,0.08)"; ctx.shadowBlur=40;
     ctx.beginPath(); ctx.roundRect(60,60,W-120,H-120,48); ctx.fill(); ctx.shadowBlur=0;
-    ctx.fillStyle="#0f172a"; ctx.font="700 36px Inter, system-ui"; ctx.fillText("DocPulse • Doctor DNA",110,170);
+    ctx.fillStyle="#0f172a"; ctx.font="700 36px Inter, system-ui"; ctx.fillText("DocPulsee • Doctor DNA",110,170);
     ctx.fillStyle="#64748b"; ctx.font="500 26px Inter"; ctx.fillText(`Archetype: ${O[top.key].archetype}`,110,215);
     ctx.fillStyle=O[top.key].color; ctx.beginPath(); ctx.arc(860,190,82,0,Math.PI*2); ctx.fill();
     ctx.fillStyle="#fff"; ctx.font="800 68px Inter"; ctx.textAlign="center"; ctx.fillText(`${top.percent}%`,860,215); ctx.font="600 20px Inter"; ctx.fillText("MATCH",860,245); ctx.textAlign="left";
@@ -314,8 +314,8 @@ function App(){
     ctx.fillStyle="#0f172a"; ctx.font="700 28px Inter"; ctx.fillText(`Data-backed: ${O[top.key].label}`,150,y+50);
     ctx.font="500 24px Inter"; ctx.fillStyle="#334155";
     [`Lifestyle: ${data.lifestyle}/10 • Stress: ${data.stress}/10 • Family Time: ${data.familyTime}/10`,`Income: ${data.income}/10 • Demand: ${data.demand}/10`,`Burnout: ${data.burnout}/10 • Satisfaction: ${data.satisfaction}/10`].forEach((t,i)=>ctx.fillText(t,150,y+90+i*38,W-300));
-    y+=360; ctx.fillStyle="#94a3b8"; ctx.font="500 20px Inter"; ctx.fillText("DocPulse • docpulsee.in • One-time report",110,H-110);
-    const url=canvas.toDataURL("image/png"); const a=document.createElement("a"); a.href=url; a.download=`DocPulse-${O[top.key].short}-${top.percent}.png`; a.click();
+    y+=360; ctx.fillStyle="#94a3b8"; ctx.font="500 20px Inter"; ctx.fillText("DocPulsee • docpulsee.in • One-time report",110,H-110);
+    const url=canvas.toDataURL("image/png"); const a=document.createElement("a"); a.href=url; a.download=`DocPulsee-${O[top.key].short}-${top.percent}.png`; a.click();
   };
 
   // Redirect function - ANY retake attempt goes to main site
@@ -335,7 +335,7 @@ function App(){
         React.createElement('div',{className:"flex items-center gap-2.5"},
           React.createElement('div',{className:"w-9 h-9 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center"},React.createElement('i',{className:"fa-solid fa-user-doctor text-sky-500"})),
           React.createElement('div',{className:"leading-tight"},
-            React.createElement('div',{className:"font-semibold tracking-tight text-[15px]"},"DocPulse"),
+            React.createElement('div',{className:"font-semibold tracking-tight text-[15px]"},"DocPulsee"),
             React.createElement('div',{className:"text-[11px] text-slate-500 -mt-0.5"},"Doctor DNA • One-time Report • No Retake")
           )
         ),

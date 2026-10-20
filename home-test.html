@@ -4093,6 +4093,14 @@ html.dpdark .hn-addons button{background:#111a18!important;color:#e7f2ee!importa
  html.dpdark .hn-free{background:#0f1715!important}html.dpdark .sc2-steps{background:#18231f}}
 @media (min-width:761px) and (max-width:1100px){.hn-pro ul{grid-template-columns:1fr}.hn-pro .hn-pp{font-size:48px!important}.sc2-top{grid-template-columns:minmax(0,1fr) 300px}}
 @media (prefers-reduced-motion:reduce){.hn-plan,.sc2-media{transform:none!important}}
+
+/* ---------- wordmark A ---------- */
+.dp-hdr-brand h1.dpwm{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#0d1f1a!important;-webkit-text-fill-color:#0d1f1a;
+ font-family:"Inter Display","Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif!important;font-weight:800!important;letter-spacing:-.045em!important;font-size:22px;line-height:1!important}
+.dp-hdr-brand h1.dpwm em{font-style:normal;color:#14937b;-webkit-text-fill-color:#14937b}
+html.dpdark .dp-hdr-brand h1.dpwm{color:#fff!important;-webkit-text-fill-color:#fff}html.dpdark .dp-hdr-brand h1.dpwm em{color:#5eead4;-webkit-text-fill-color:#5eead4}
+.dpwm-mark{width:30px;height:30px;display:block}
+@media (max-width:760px){.dp-hdr-brand h1.dpwm{font-size:19px!important}.dpwm-mark{width:27px;height:27px}}
 @media (prefers-reduced-motion:reduce){.sc2-live i{animation:none}.sc2-media img,.hn-plan{transition:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -4291,10 +4299,10 @@ html.dpdark .hn-addons button{background:#111a18!important;color:#e7f2ee!importa
 <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3" style="overflow: visible;">
 <div class="flex items-center gap-3.5 dp-hdr-brand">
 <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-400 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-sky-500/20">
-<i class="fa-solid fa-user-doctor"></i>
+<svg class="dpwm-mark" viewBox="0 0 60 60" aria-hidden="true"><path d="M15 14h13a16 16 0 0 1 0 32H15z" fill="none" stroke="#fff" stroke-width="4.6" stroke-linejoin="round"/><path d="M8 30h12l4-8 6 16 4-10 3 2h15" fill="none" stroke="#fff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div>
-<h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 leading-tight">DocPulsee</h1>
+<h1 class="text-xl font-black leading-tight dpwm" aria-label="DocPulsee">docpuls<em>ee</em></h1>
 <p class="text-xs text-slate-500 font-medium">NEET PG counselling, made clear</p>
 </div>
 </div>
