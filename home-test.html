@@ -3934,6 +3934,78 @@ html.dpdark .dpme-bar .me{background:#111a18}
 html.dpdark .dpme-sh{background:#141d1b;color:#e7f2ee}html.dpdark .dpme-sh .rk,html.dpdark .dpme-cats button{background:#1b2a26;color:#e7f2ee;border-color:rgba(255,255,255,.1)}
 html.dpdark .dpme-cats button.on{background:#14937b;border-color:#14937b}
 @media (prefers-reduced-motion:reduce){.dpme-line,.dpme-card{animation:none}.dpme-bar .me{transition:none}.dpme-sh{transition:none}}
+</style><style id="dp-sp-css">
+#senior-connect.sc2{position:relative;background:#fff;border:1px solid rgba(13,31,26,.07);border-radius:30px;padding:28px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 24px 60px -36px rgba(15,60,50,.35);overflow:hidden;
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;color:#0d1f1a;-webkit-font-smoothing:antialiased}
+.sc2-top{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:32px;align-items:center}
+.sc2-media{position:relative;order:2;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:#0d1f1a}
+.sc2-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+#senior-connect.sc2:hover .sc2-media img{transform:scale(1.06)}
+.sc2-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45))}
+.sc2-live{position:absolute;left:14px;top:14px;z-index:1;display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:12px;font-weight:700;color:#0d1f1a}
+.sc2-live i{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 0 rgba(16,185,129,.6);animation:sc2Pulse 2s infinite}
+@keyframes sc2Pulse{70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.sc2-cap{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#fff;font-size:13px;font-weight:600;opacity:.95}
+.sc2-eye{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#d97706}
+.sc2-copy h3{font-size:clamp(26px,3.4vw,40px);line-height:1.08;font-weight:800;letter-spacing:-.025em;margin:8px 0 10px}
+.sc2-copy h3 em{font-style:normal;background:linear-gradient(90deg,#0f6e5c,#14937b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sc2-copy p{font-size:15.5px;line-height:1.5;color:#5d6c67;margin:0;max-width:52ch}
+.sc2-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0 0;padding:0}
+.sc2-steps li{display:flex;align-items:center;gap:10px;padding:12px;border-radius:16px;background:#f5f8f7}
+.sc2-steps b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#0f6e5c;color:#fff;font-size:14px}
+.sc2-steps li:last-child b{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.sc2-steps span{font-size:13.5px;font-weight:700;line-height:1.2}
+.sc2-steps small{display:block;font-size:12px;font-weight:600;color:#5d6c67;margin-top:2px}
+.sc2-pro{margin-top:12px;font-size:13px;color:#5d6c67}.sc2-pro b{color:#0f6e5c}
+#senior-connect.sc2 #senior-connect-root{margin-top:26px;padding-top:24px;border-top:1px solid rgba(13,31,26,.07)}
+#senior-connect-root>div{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+#senior-connect-root>div>div:first-child:not([id]){display:none!important}
+#senior-connect-root input,#senior-connect-root select{height:50px!important;border-radius:14px!important;border:1px solid transparent!important;background-color:#f2f5f4!important;font-size:15px!important;color:#0d1f1a!important;box-shadow:none!important;transition:background-color .2s,border-color .2s,box-shadow .2s}
+#senior-connect-root input:focus,#senior-connect-root select:focus{background-color:#fff!important;border-color:#14937b!important;box-shadow:0 0 0 4px rgba(20,147,123,.14)!important;outline:none!important}
+#senior-connect-root label{font-size:12px!important;font-weight:700!important;color:#5d6c67!important}
+@media (max-width:860px){#senior-connect.sc2{padding:14px 14px 18px;border-radius:26px}.sc2-top{grid-template-columns:1fr;gap:18px}.sc2-media{order:0;aspect-ratio:16/10;border-radius:18px}.sc2-copy{padding:0 4px}
+ .sc2-steps{grid-template-columns:1fr;gap:8px}.sc2-steps li{padding:10px 12px}#senior-connect.sc2 #senior-connect-root{margin-top:18px;padding:18px 4px 0}}
+html.dpdark #senior-connect.sc2{background:#111a18;border-color:rgba(255,255,255,.07);color:#e7f2ee}
+html.dpdark .sc2-copy p,html.dpdark .sc2-steps small,html.dpdark .sc2-pro{color:#9fb3ac}html.dpdark .sc2-steps li{background:#18231f}
+html.dpdark #senior-connect-root input,html.dpdark #senior-connect-root select{background-color:#18231f!important;color:#e7f2ee!important}
+/* ---------- Plans ---------- */
+.hn-plans{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.hn-plans h2{font-size:clamp(30px,4vw,44px)!important;font-weight:800!important;letter-spacing:-.03em;color:#0d1f1a!important}
+.hn-plans .hn-sub{font-size:16px;color:#5d6c67!important;margin:8px 0 26px!important}
+.hn-pgrid{gap:18px!important;align-items:stretch}
+.hn-plan{border:1px solid rgba(13,31,26,.07)!important;border-radius:28px!important;padding:28px 24px 24px!important;background:#fff!important;
+ box-shadow:0 1px 2px rgba(0,0,0,.04),0 18px 44px -30px rgba(15,60,50,.35);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+@media (hover:hover){.hn-plan:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(0,0,0,.04),0 30px 60px -32px rgba(15,60,50,.45)}}
+.hn-pn{font-size:13px!important;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#5d6c67!important}
+.hn-pp{font-size:44px!important;font-weight:800!important;letter-spacing:-.03em;color:#0d1f1a!important;margin:10px 0 2px!important;font-variant-numeric:tabular-nums}
+.hn-pp s{font-size:18px!important;font-weight:600!important;letter-spacing:0}
+.hn-pnote{font-size:13px!important;font-weight:650!important;color:#0f6e5c!important}
+.hn-plan ul{gap:11px!important;margin:20px 0 24px!important;padding-top:20px!important;border-top:1px solid rgba(13,31,26,.07)}
+.hn-plan li{font-size:14.5px!important;line-height:1.4;color:#24312d!important;padding-left:30px!important}
+.hn-plan li::before{content:"✓"!important;top:1px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px!important;background:#e7f5f0;color:#0f6e5c!important}
+.hn-pb{height:50px;padding:0 20px!important;border-radius:999px!important;font-size:15.5px!important;font-weight:700!important;letter-spacing:.005em;background:#0f6e5c!important;box-shadow:0 10px 22px -12px rgba(15,110,92,.7)}
+.hn-pb.ghost{background:#f1f5f4!important;color:#0d1f1a!important;box-shadow:none}
+.hn-plan.hn-pro{background:radial-gradient(120% 70% at 100% 0%,rgba(20,147,123,.35),transparent 60%),linear-gradient(165deg,#0d2a24,#061411)!important;border-color:rgba(255,255,255,.08)!important;
+ box-shadow:0 40px 80px -40px rgba(5,40,33,.9),inset 0 1px 0 rgba(255,255,255,.08)}
+.hn-pro .hn-pn{color:#fcd34d!important}.hn-pro .hn-pp{color:#fff!important}.hn-pro .hn-pp s{color:rgba(255,255,255,.5)!important}.hn-pro .hn-pnote{color:#99f6e4!important}
+.hn-pro ul{border-top-color:rgba(255,255,255,.1)!important}.hn-pro li{color:rgba(255,255,255,.88)!important}.hn-pro li b{color:#fff}
+.hn-pro li::before{background:rgba(252,211,77,.16)!important;color:#fcd34d!important}
+.hn-pb.gold{background:linear-gradient(135deg,#fde68a,#f59e0b)!important;color:#3a2600!important;box-shadow:0 12px 28px -12px rgba(245,158,11,.8)}
+.hn-pop{left:50%!important;transform:translateX(-50%);top:-13px!important;white-space:nowrap;padding:6px 14px!important;font-size:12px!important;background:linear-gradient(135deg,#fde68a,#f59e0b)!important;color:#3a2600!important;box-shadow:0 8px 18px -8px rgba(245,158,11,.8)}
+.hn-tg{background:linear-gradient(135deg,#f3fbf8,#e6f5ef)!important;color:#0d1f1a!important;border:1px solid rgba(15,110,92,.12);border-radius:28px!important;padding:22px 24px!important;box-shadow:0 18px 44px -32px rgba(15,60,50,.35)!important}
+.hn-tg-l b{font-size:20px!important;letter-spacing:-.01em}.hn-tg-l em{background:#0f6e5c!important;color:#fff!important}.hn-tg-l small{color:#4d5d58!important;opacity:1!important}
+.hn-tg-p{color:#0d1f1a;font-size:34px!important;font-weight:800!important;letter-spacing:-.03em}.hn-tg-e{color:#4d5d58;opacity:1!important}.hn-tg-e b{color:#0f6e5c!important}.hn-tg .hn-pnote{color:#b45309!important}
+.hn-tg .hn-pb{background:#0f6e5c!important;color:#fff!important}
+.hn-addons{gap:10px!important;margin-top:22px!important;color:#5d6c67}.hn-addons b{color:#0d1f1a}
+.hn-addons button{border:0!important;background:#f1f5f4!important;padding:10px 16px!important;font-weight:650!important;transition:background .2s,transform .2s}
+.hn-addons button:hover{background:#e6eeeb!important}
+@media (max-width:760px){.hn-pgrid .hn-pro{order:-1;margin-top:10px}.hn-plan{padding:26px 20px 20px!important}.hn-pp{font-size:40px!important}}
+html.dpdark .hn-plan:not(.hn-pro){background:#111a18!important;border-color:rgba(255,255,255,.07)!important}
+html.dpdark .hn-plan:not(.hn-pro) .hn-pp,html.dpdark .hn-plans h2{color:#e7f2ee!important}html.dpdark .hn-plan:not(.hn-pro) li{color:#cddbd6!important}
+html.dpdark .hn-plan ul{border-top-color:rgba(255,255,255,.08)}html.dpdark .hn-plan li::before{background:rgba(20,147,123,.2)}
+html.dpdark .hn-pb.ghost,html.dpdark .hn-addons button{background:#18231f!important;color:#e7f2ee!important}
+html.dpdark .hn-tg{background:linear-gradient(135deg,#13201c,#0f1a17)!important;color:#e7f2ee!important;border-color:rgba(255,255,255,.07)}html.dpdark .hn-tg-p{color:#e7f2ee}
+@media (prefers-reduced-motion:reduce){.sc2-live i{animation:none}.sc2-media img,.hn-plan{transition:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -4282,54 +4354,19 @@ Scoring: <span class="text-sky-600 font-mono font-bold">(Correct × 4) - (Wrong 
 </div>
 </section>
 
-<section id="senior-connect" class="relative bg-gradient-to-r from-amber-50 via-teal-50/50 to-sky-50 border-2 border-amber-300/80 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-xl">
-<div class="absolute right-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl pointer-events-none animate-gate-aura"></div>
-<div class="absolute left-10 top-1/2 -translate-y-1/2 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
-
-<div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-<div class="flex-1 flex flex-col items-start text-left">
-<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider mb-5 shadow-sm">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span> Senior Direct Connect — Now Live
-</div>
-
-<h3 class="text-2xl sm:text-4xl font-black text-slate-900 leading-tight mb-4">
-The White Coat Waits. <br>
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-teal-600 to-sky-600">A Senior is Already Holding the Door Open.</span>
-</h3>
-
-<p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-6">
-“They told you numbers define a seat. They lied. Numbers only unlock the gate. Inside are the 3 AM emergency room chais, the senior doctor who steps in right when your hands tremble on your first central line, and the moment you stop feeling like an aspirant and become someone’s lifeline.”
-</p>
-
-<div class="p-4 rounded-2xl bg-white border border-amber-300/80 flex items-center gap-3 text-xs text-amber-900 shadow-sm mb-6">
-<i class="fa-solid fa-mug-hot text-amber-500 text-xl flex-shrink-0"></i>
-<span>Pick a college or branch, choose a senior who joined there last year — we personally ask that senior if they'll talk to you. <b>You pay only if they say yes.</b></span>
-</div>
-
-<a href="#senior-connect-root" class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:opacity-95 text-white font-black px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition shadow-lg flex items-center gap-2">
-<i class="fa-solid fa-user-doctor text-base"></i>
-<span>Find my senior ↓</span>
-</a>
-</div>
-
-<div class="flex-shrink-0 w-full lg:w-96 flex flex-col items-center justify-center">
-<div class="relative w-full h-80 rounded-3xl bg-slate-900 border-2 border-amber-400 overflow-hidden shadow-2xl flex items-center justify-center">
-<picture>
-  <source srcset="medical_hospital_image.webp 600w, medical_hospital_image.webp 1200w" type="image/webp">
-  <img
-    src="medical_hospital_image.webp"
-    alt="Senior Doctor holding Junior Doctor hand and sharing tea - Step Inside You Belong Here"
-    class="w-full h-full object-cover"
-    loading="lazy"
-    decoding="async"
-  />
-</picture>
-<div class="absolute bottom-3 inset-x-4 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 rounded-xl py-2 px-3 text-center z-10 shadow-lg">
-<span class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1.5">
-<i class="fa-solid fa-heart text-rose-500"></i> Step Inside. You Belong Here.
-</span>
-</div>
-</div>
+<section id="senior-connect" class="sc2" aria-labelledby="sc2-h">
+<div class="sc2-top">
+<div class="sc2-media"><img src="medical_hospital_image.webp" alt="A senior doctor sharing tea with a junior doctor" loading="lazy" decoding="async" width="1200" height="900"><span class="sc2-live"><i></i>Live now</span><span class="sc2-cap">Step inside. You belong here.</span></div>
+<div class="sc2-copy">
+<div class="sc2-eye">Senior Connect</div>
+<h3 id="sc2-h">Talk to the senior who <em>got the seat you want.</em></h3>
+<p>Pick a college or branch. We personally ask a senior who joined there in 2025 counselling if they'll talk to you.</p>
+<ol class="sc2-steps">
+<li><b>1</b><span>Request<small>Free</small></span></li>
+<li><b>2</b><span>Senior says yes<small>You pay only then</small></span></li>
+<li><b>3</b><span>Get their number<small><span data-price="senior">₹999</span> · instantly</small></span></li>
+</ol>
+<div class="sc2-pro"><b>2 Senior Connects are included</b> in DocPulse Pro.</div>
 </div>
 </div>
 <div id="senior-connect-root" class="relative z-10 mt-8 scroll-mt-24"></div>
