@@ -4695,7 +4695,9 @@ html.dp-pyr div:has(>[data-counselling-switch]){margin-bottom:10px!important;pad
 .cf-count:active{transform:scale(.99)}
 .cf-bell{font-size:17px;display:inline-block;transform-origin:50% 10%}
 .cf-bell.ring{animation:pyrRing .7s ease}
-.cf-num{font-size:14.5px;font-weight:800;animation:pyrBump .35s ease}
+.cf-num{font-size:14.5px;font-weight:800;animation:pyrBump .35s ease;white-space:nowrap}
+.cf-count:focus{outline:none}.cf-count:focus-visible{outline:2px solid var(--pa);outline-offset:2px}
+@media (max-width:420px){.cf-mini{font-size:12px}.cf-count{gap:6px;padding:9px 10px}}
 .cf-mini{color:#4c6a62;font-weight:600;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .cf-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:4px}.cf-dot.s{background:#16a34a}.cf-dot.t{background:#d97706}
 .cf-see{margin-left:auto;font-weight:750;color:var(--pa);white-space:nowrap}
