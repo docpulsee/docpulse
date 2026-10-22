@@ -3297,6 +3297,21 @@ html.dp-sf ::selection{background:rgba(20,160,133,.22)}
 .acs-today .hd{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 10px}
 .acs-today .hd b{font-size:15px;font-weight:700;letter-spacing:-.01em}.acs-today .hd small{font-size:11px;color:rgba(255,255,255,.55)}
 .acs-today .g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acs-today .sl{margin-top:8px;border-radius:14px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08);overflow:hidden}
+.acs-today .sl summary{list-style:none;display:flex;align-items:center;gap:8px;padding:9px 10px;cursor:pointer;font-size:12px;font-weight:600}
+.acs-today .sl summary::-webkit-details-marker{display:none}
+.acs-today .sl summary em{margin-left:auto;font-style:normal;font-size:11px;color:rgba(255,255,255,.55);font-weight:500}
+.acs-today .sl summary svg{width:12px;height:12px;color:rgba(255,255,255,.6);transition:transform .2s}
+.acs-today .sl[open] summary svg{transform:rotate(180deg)}
+.acs-today .slb{max-height:260px;overflow:auto;padding:0 6px 6px;-webkit-overflow-scrolling:touch}
+.acs-today .slh{position:sticky;top:0;padding:6px 4px 4px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);background:#10231f}
+.acs-today .slh b{color:#5eead4;font-weight:700}
+.acs-today .slr{display:flex;align-items:center;gap:8px;padding:7px 6px;border-radius:9px;color:#fff;text-decoration:none;font-size:12px}
+.acs-today .slr:hover{background:rgba(255,255,255,.07)}
+.acs-today .sle{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acs-today .slr time{flex:none;font-size:11px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums}
+.acs-today .slp{flex:none;font-style:normal;font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;background:rgba(74,222,128,.18);color:#86efac}
+.acs-today .sl0{padding:6px;font-size:11.5px;color:rgba(255,255,255,.45)}
 .acs-today .c{border-radius:14px;padding:10px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08);min-width:0}
 .acs-today .c small{display:block;font-size:11px;color:rgba(255,255,255,.6);font-weight:600}
 .acs-today .c .n{font:700 24px/1.1 var(--dp-sf);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:2px 0}
@@ -8740,6 +8755,10 @@ function spark(a,col){a=a||[];var mx=Math.max(1,Math.max.apply(null,a)),w=100,h=
  return '<svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';}
 function inr(p){return "₹"+Math.round((p||0)/100).toLocaleString("en-IN");}
 function vs(a,b,word){var d=a-b;return (d>0?"▲ ":d<0?"▼ ":"")+b+" "+word;}
+function slHTML(d){var T=d.signup_list_today,Y=d.signup_list_yday;if(!T&&!Y)return "";T=T||[];Y=Y||[];
+ function row(x){var t=new Date(x.t);return '<a class="slr" href="mailto:'+esc(x.e||"")+'"><span class="sle">'+esc(x.e||"(no email)")+'</span>'+(x.p?'<i class="slp">paid</i>':'')+'<time>'+t.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})+'</time></a>';}
+ function grp(lbl,a){return '<div class="slg"><div class="slh">'+lbl+' <b>'+a.length+'</b></div>'+(a.length?a.map(row).join(""):'<div class="sl0">No sign-ups</div>')+'</div>';}
+ return '<details class="sl"'+(lsr("dp_own_sl")==="1"?" open":"")+'><summary><span>Who signed up</span><em>'+T.length+' today · '+Y.length+' yesterday</em><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="slb">'+grp("Today",T)+grp("Yesterday",Y)+'</div></details>';}
 function todayHTML(d){if(!d)return '<div class="hd"><b>Today</b><small>loading…</small></div>';if(d.err)return '<div class="hd"><b>Today</b></div><div class="err">Couldn\'t load numbers right now.</div>';
  var p=d.payments||{},dirT=p.dir_today||0,dirY=p.dir_yday||0;
  var revT=inr(p.rev_today)+(dirT?" + "+dirT+" directory":""),revY=inr(p.rev_yday)+(dirY?" + "+dirY+" dir.":"");
@@ -8748,10 +8767,12 @@ function todayHTML(d){if(!d)return '<div class="hd"><b>Today</b><small>loading�
  return '<div class="hd"><b>Today</b><small>'+t.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})+'</small></div><div class="g">'+
   '<div class="c"><small>Sign-ups</small><div class="n">'+(d.signups_today||0)+'</div><div class="s">'+vs(d.signups_today||0,d.signups_yday||0,"yesterday")+'</div>'+spark(d.signups_week,"#5eead4")+'</div>'+
   '<div class="c"><small>Payments</small><div class="n">'+(p.today||0)+'</div><div class="s" title="'+esc(revT)+'">'+esc(p.today?revT:"yesterday "+(p.yday||0)+" · "+revY)+'</div>'+spark(p.week,"#4ade80")+'</div></div>'+
+  slHTML(d)+
   '<div class="p">'+pend.map(function(x,i){return '<button type="button" data-pi="'+i+'">'+x[0]+' <i class="'+(x[1]?"":"z")+'">'+x[1]+'</i></button>';}).join("")+'</div>'+
   '<div class="ft"><span>'+(d.users_total||0).toLocaleString("en-IN")+' accounts in all</span><button type="button" data-snd>'+(lsr("dp_own_snd")==="off"?"🔕 Payment sound off":"🔔 Payment sound on")+'</button></div>';}
 function today(sc){var b=document.createElement("div");b.className="acs-today";b.innerHTML=todayHTML(TD&&Date.now()-TDt<60000?TD:null);sc.appendChild(b);
  function wire(){b.querySelectorAll("[data-pi]").forEach(function(btn){btn.onclick=function(){var re=[/^Counselling bookings$/,/Senior requests/,/Senior requests/][+btn.dataset.pi];var g=$$(".acct-grid button").find(function(x){return re.test((x.textContent||"").trim());});if(g){document.body.classList.add("own-panel");g.click();}};});
+  var sl=b.querySelector("details.sl");if(sl)sl.addEventListener("toggle",function(){lsw("dp_own_sl",sl.open?"1":"0");});
   var s=b.querySelector("[data-snd]");if(s)s.onclick=function(){lsw("dp_own_snd",lsr("dp_own_snd")==="off"?"on":"off");if(lsr("dp_own_snd")!=="off")chime();b.innerHTML=todayHTML(TD);wire();};}
  function load(){rpc().then(function(d){TD=d;TDt=Date.now();seen(d);b.innerHTML=todayHTML(d);wire();}).catch(function(){b.innerHTML=todayHTML({err:1});});}
  window.addEventListener("dp-own-unlock",function(){if(document.body.contains(b))load();});
