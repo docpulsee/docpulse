@@ -4857,7 +4857,7 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
 .insx-b i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10.5px;font-weight:700;font-family:Georgia,"Times New Roman",serif;color:#fff;background:linear-gradient(180deg,#2997ff,#0071e3)}
 .insx-b:hover,.insx-b.on{background:#e8e8ed}
 .insx-b.on{box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08),0 0 0 3px rgba(0,113,227,.18)}
-.insx-p{position:absolute;z-index:60;top:calc(100% + 8px);left:0;width:min(292px,84vw);display:flex;flex-direction:column;gap:9px;padding:13px 14px 12px;border-radius:16px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 0 0 .5px rgba(0,0,0,.1),0 12px 32px -8px rgba(0,0,0,.22);color:#1d1d1f;text-align:left;animation:insxIn .22s cubic-bezier(.32,.72,0,1)}
+.insx-p{position:absolute;z-index:9990;top:calc(100% + 8px);left:0;width:min(292px,84vw);display:flex;flex-direction:column;gap:9px;padding:13px 14px 12px;border-radius:16px;background:rgba(255,255,255,.97);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);box-shadow:0 0 0 .5px rgba(0,0,0,.1),0 12px 32px -8px rgba(0,0,0,.22);color:#1d1d1f;text-align:left;animation:insxIn .22s cubic-bezier(.32,.72,0,1)}
 .insx-p::before{content:"";position:absolute;top:-5px;left:var(--ax,50%);width:10px;height:10px;margin-left:-5px;transform:rotate(45deg);background:inherit;box-shadow:-.5px -.5px 0 rgba(0,0,0,.08)}
 .insx-r{display:flex;flex-direction:column;gap:1px}
 .insx-r b{font-size:13px;font-weight:600;letter-spacing:-.01em;color:#1d1d1f}
@@ -4865,6 +4865,7 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
 .insx-n{font-size:11px;line-height:1.4;color:#86868b}
 .insx-go{align-self:flex-start;border:0;background:none;padding:0;font:inherit;font-size:12.5px;font-weight:600;color:#0071e3;cursor:pointer}
 @keyframes insxIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+@media (max-width:520px){.insx-b{height:24px;padding:0 8px 0 3px;gap:4px;font-size:11px}.insx-b i{width:17px;height:17px;font-size:10px}.insx{margin-left:-2px}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
