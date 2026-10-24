@@ -9801,6 +9801,7 @@ setInterval(scan,3000);
 .sc2-msg{font-size:12.5px;color:#6e6e73;min-height:16px}.sc2-msg.ok{color:#1a7f37}.sc2-msg.bad{color:#d70015}
 .sc2-th{display:flex;gap:10px}.sc2-th button{width:44px;height:44px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}.sc2-th button.on{border-color:#0071e3}
 .sc2-note{font-size:11.5px;color:#86868b;text-align:center}
+html.sc2-open #noticeBanner,html.sc2-open .lr-fab,html.sc2-open .sc2-pill{display:none!important}
 </style>
 <script>
 (function(){
@@ -9886,12 +9887,12 @@ function open(rank){if(root)return;track("seatcard_open");try{localStorage.setIt
    el("div",{class:"sc2-g"},[el("label",null,["You"]),nm,phBtn,file,el("div",{class:"sc2-note"},["Your photo stays on your phone. Nothing is uploaded."])]),
    el("div",{class:"sc2-g"},[el("label",null,["Style"]),th]),
    share,dl])]);
- root=el("div",{class:"sc2-bg",onclick:shut},[box]);document.body.appendChild(root);document.documentElement.style.overflow="hidden";
+ root=el("div",{class:"sc2-bg",onclick:shut},[box]);document.body.appendChild(root);document.documentElement.style.overflow="hidden";document.documentElement.classList.add("sc2-open");
  document.addEventListener("keydown",esc);
  var go=function(){draw(cv);if(rk.value)lookup();};if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load("700 40px Inter"),document.fonts.load("500 30px Inter"),document.fonts.load("600 30px Inter")]).then(go,go);}else go();
 }
 function esc(e){if(e.key==="Escape")shut();}
-function shut(){if(!root)return;root.remove();root=null;document.documentElement.style.overflow="";document.removeEventListener("keydown",esc);}
+function shut(){if(!root)return;root.remove();root=null;document.documentElement.style.overflow="";document.documentElement.classList.remove("sc2-open");document.removeEventListener("keydown",esc);}
 function caption(){var c=cleanCourse(st.course),i=titleCase(st.inst);return (c&&i?"🎉 I got "+c+" at "+i+" in NEET PG 2026 Round 1!":"🎉 My NEET PG 2026 seat!")+"\n\nMake your seat card and find your batchmates on DocPulsee 👉 https://docpulsee.in/?card=1";}
 function blobOf(cv){return new Promise(function(res){cv.toBlob(function(b){res(b);},"image/png");});}
 function download(cv){track("seatcard_save");blobOf(cv).then(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="docpulsee-seat-card.png";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);});}
