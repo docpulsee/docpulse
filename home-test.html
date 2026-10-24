@@ -9026,6 +9026,12 @@ function slHTML(d){var S=d.signin_list_today,T=d.signup_list_today,Y=d.signup_li
  function row(x){var t=new Date(x.t);return '<a class="slr" href="mailto:'+esc(x.e||"")+'"><span class="sle">'+esc(x.e||"(no email)")+'</span>'+(x.n?'<i class="sln">new</i>':'')+(x.p?'<i class="slp">paid</i>':'')+'<time>'+t.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})+'</time></a>';}
  function grp(lbl,a,empty){return '<div class="slg"><div class="slh">'+lbl+' <b>'+a.length+'</b></div>'+(a.length?a.map(row).join(""):'<div class="sl0">'+empty+'</div>')+'</div>';}
  return '<details class="sl"'+(lsr("dp_own_sl")==="0"?"":" open")+'><summary><span>Who signed in today</span><em>'+S.length+' signed in · '+T.length+' new</em><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="slb">'+grp("Signed in today",S,"No one yet today")+grp("New sign-ups yesterday",Y,"No sign-ups")+'</div></details>';}
+function scHTML(d){var S=d.seatcard;if(!S)return "";var T=S.today||{},A=S.total||{},L=S.list||[];
+ function n(o,k){return o[k]||0;}
+ function row(x){var t=new Date(x.t),ev={found:"made",share:"shared",save:"saved"}[x.ev]||x.ev;return '<div class="slr"><span class="sle">'+esc(x.e||"guest")+' · '+(x.r?"AIR "+Number(x.r).toLocaleString("en-IN"):"")+(x.c?" · "+esc(x.c):"")+'</span><i class="'+(x.ev==="share"?"slp":"sln")+'">'+ev+'</i><time>'+t.toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})+'</time></div>';}
+ return '<details class="sl" data-own-seatcard'+(lsr("dp_own_sc")==="1"?" open":"")+'><summary><span>Seat cards</span><em>today '+n(T,"open")+' opened · '+n(T,"found")+' made · '+n(T,"share")+' shared · '+(S.people_today||0)+' people</em><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>'+
+  '<div class="slg"><div class="slh">All time <b>'+(S.people_total||0)+'</b> people · '+n(A,"found")+' made · '+n(A,"share")+' shared · '+n(A,"save")+' saved · '+n(A,"photo")+' with photo</div>'+
+  (L.length?L.map(row).join(""):'<div class="sl0">No seat cards yet.</div>')+'</div></details>';}
 function todayHTML(d){if(!d)return '<div class="hd"><b>Today</b><small>loading…</small></div>';if(d.err)return '<div class="hd"><b>Today</b></div><div class="err">Couldn\'t load numbers right now.</div>';
  var p=d.payments||{},dirT=p.dir_today||0,dirY=p.dir_yday||0;
  var revT=inr(p.rev_today)+(dirT?" + "+dirT+" directory":""),revY=inr(p.rev_yday)+(dirY?" + "+dirY+" dir.":"");
@@ -9034,12 +9040,12 @@ function todayHTML(d){if(!d)return '<div class="hd"><b>Today</b><small>loading�
  return '<div class="hd"><b>Today</b><small>'+t.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})+'</small></div><div class="g">'+
   '<div class="c"><small>Sign-ups</small><div class="n">'+(d.signups_today||0)+'</div><div class="s">'+vs(d.signups_today||0,d.signups_yday||0,"yesterday")+'</div>'+spark(d.signups_week,"#5eead4")+'</div>'+
   '<div class="c"><small>Payments</small><div class="n">'+(p.today||0)+'</div><div class="s" title="'+esc(revT)+'">'+esc(p.today?revT:"yesterday "+(p.yday||0)+" · "+revY)+'</div>'+spark(p.week,"#4ade80")+'</div></div>'+
-  slHTML(d)+
+  slHTML(d)+scHTML(d)+
   '<div class="p">'+pend.map(function(x,i){return '<button type="button" data-pi="'+i+'">'+x[0]+' <i class="'+(x[1]?"":"z")+'">'+x[1]+'</i></button>';}).join("")+'</div>'+
   '<div class="ft"><span>'+(d.users_total||0).toLocaleString("en-IN")+' accounts in all</span><button type="button" data-snd>'+(lsr("dp_own_snd")==="off"?"🔕 Payment sound off":"🔔 Payment sound on")+'</button></div>';}
 function today(sc){var b=document.createElement("div");b.className="acs-today";b.innerHTML=todayHTML(TD&&Date.now()-TDt<60000?TD:null);sc.appendChild(b);
  function wire(){b.querySelectorAll("[data-pi]").forEach(function(btn){btn.onclick=function(){var re=[/^Counselling bookings$/,/Senior requests/,/Senior requests/][+btn.dataset.pi];var g=$$(".acct-grid button").find(function(x){return re.test((x.textContent||"").trim());});if(g){document.body.classList.add("own-panel");g.click();}};});
-  var sl=b.querySelector("details.sl");if(sl)sl.addEventListener("toggle",function(){lsw("dp_own_sl",sl.open?"1":"0");});
+  var sl=b.querySelector("details.sl:not([data-own-seatcard])");if(sl)sl.addEventListener("toggle",function(){lsw("dp_own_sl",sl.open?"1":"0");});var scd=b.querySelector("[data-own-seatcard]");if(scd)scd.addEventListener("toggle",function(){lsw("dp_own_sc",scd.open?"1":"0");});
   var s=b.querySelector("[data-snd]");if(s)s.onclick=function(){lsw("dp_own_snd",lsr("dp_own_snd")==="off"?"on":"off");if(lsr("dp_own_snd")!=="off")chime();b.innerHTML=todayHTML(TD);wire();};}
  function load(){rpc().then(function(d){TD=d;TDt=Date.now();seen(d);b.innerHTML=todayHTML(d);wire();}).catch(function(){b.innerHTML=todayHTML({err:1});});}
  window.addEventListener("dp-own-unlock",function(){if(document.body.contains(b))load();});
