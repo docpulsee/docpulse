@@ -9803,15 +9803,15 @@ setInterval(scan,3000);
 .sc2-note{font-size:11.5px;color:#86868b;text-align:center}
  .sc2-pv{perspective:1100px}.sc2-hang{position:relative;transform-origin:50% -40px;display:flex;justify-content:center;width:100%}.sc2-hang.swing{animation:sc2sw 4.2s ease-in-out infinite}
 @keyframes sc2sw{0%,100%{transform:rotate(-1.8deg)}50%{transform:rotate(1.8deg)}}
-.sc2-tilt{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;transform-style:preserve-3d;width:100%;max-width:400px;display:flex;justify-content:center}
-.sc2-tilt canvas{width:100%}.sc2-tilt.story{max-width:300px}
+.sc2-tilt{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;transform-style:preserve-3d;width:100%;max-width:400px;display:block;margin:0 auto}
+.sc2-tilt canvas{display:block;width:100%!important;height:auto!important;max-width:none!important}.sc2-tilt.story{max-width:300px}
 .sc2-glare{position:absolute;inset:0;border-radius:22px;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.28),rgba(255,255,255,0) 45%);mix-blend-mode:soft-light}
 .sc2-seg{display:flex;background:#e8e8ed;border-radius:10px;padding:3px;gap:3px}.sc2-seg button{flex:1;border:0;background:transparent;border-radius:8px;padding:8px;font:600 13px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;cursor:pointer}.sc2-seg button.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12)}
 .sc2-tg{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500}.sc2-tg input{appearance:none;-webkit-appearance:none;width:46px;height:28px;border-radius:999px;background:#d1d1d6;position:relative;cursor:pointer;transition:background .2s;flex:none}.sc2-tg input:after{content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .2s}.sc2-tg input:checked{background:#34c759}.sc2-tg input:checked:after{left:20px}
 .sc2-cf{position:absolute;top:-10px;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:sc2cf 2.4s cubic-bezier(.2,.6,.4,1) forwards;z-index:3}
 @keyframes sc2cf{to{transform:translateY(560px) rotate(720deg);opacity:0}}
 @media (prefers-reduced-motion:reduce){.sc2-hang.swing{animation:none}}
-html.sc2-open #noticeBanner,html.sc2-open .lr-fab,html.sc2-open .sc2-pill{display:none!important}
+html.sc2-open #noticeBanner,html.sc2-open .dpa-res,html.sc2-open .lr-fab,html.sc2-open .sc2-pill{display:none!important}
 </style>
 <script>
 (function(){
