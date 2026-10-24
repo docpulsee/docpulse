@@ -9780,5 +9780,127 @@ addEventListener("load",function(){soon(600);});
 addEventListener("scroll",function(){soon(250);},{passive:true});
 try{var rt=document.getElementById("root")||document.body;new MutationObserver(function(){soon(700);}).observe(rt,{childList:true,subtree:true});}catch(_e){}
 setInterval(scan,3000);
-})();</script></body>
+})();</script><style>
+.sc2-pill{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(env(safe-area-inset-bottom,0px) + 104px);z-index:70;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 16px;border-radius:999px;background:rgba(20,20,24,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);color:#fff;font:600 13.5px/1.2 Inter,-apple-system,system-ui,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.28);opacity:0;transition:opacity .35s,transform .35s;max-width:calc(100vw - 32px)}
+.sc2-pill.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.sc2-pill button{border:0;cursor:pointer;font:inherit}.sc2-pill .go{background:#fff;color:#111;border-radius:999px;padding:8px 14px;font-weight:700;white-space:nowrap}.sc2-pill .x{background:transparent;color:rgba(255,255,255,.7);font-size:16px;padding:4px 6px}
+@media(min-width:900px){.sc2-pill{bottom:28px}}
+.sc2-bg{position:fixed;inset:0;z-index:90;background:rgba(10,10,14,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);display:flex;align-items:flex-end;justify-content:center;animation:sc2f .25s ease}
+@keyframes sc2f{from{opacity:0}to{opacity:1}}@keyframes sc2u{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.sc2{width:100%;max-width:980px;max-height:94vh;overflow:auto;background:#f5f5f7;color:#1d1d1f;border-radius:28px 28px 0 0;padding:18px 18px 28px;font-family:Inter,-apple-system,system-ui,sans-serif;animation:sc2u .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,0,0,.3)}
+@media(min-width:760px){.sc2-bg{align-items:center}.sc2{border-radius:28px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;padding:26px}}
+.sc2-h{display:flex;align-items:center;justify-content:space-between;grid-column:1/-1}.sc2-h b{font-size:20px;letter-spacing:-.02em}.sc2-h button{border:0;background:#e5e5ea;border-radius:999px;width:32px;height:32px;font-size:15px;cursor:pointer;color:#1d1d1f}
+.sc2-pv{display:flex;justify-content:center;margin:12px 0}.sc2-pv canvas{width:100%;max-width:400px;height:auto;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.sc2-f{display:flex;flex-direction:column;gap:12px}
+.sc2-g{background:#fff;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:9px}
+.sc2-g label{font-size:12px;font-weight:600;color:#6e6e73}
+.sc2-row{display:flex;gap:8px}.sc2 input[type=text],.sc2 input[inputmode]{flex:1;min-width:0;border:1px solid #d2d2d7;background:#fff;border-radius:12px;padding:11px 12px;font:500 15px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;outline:none}
+.sc2 input:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.18)}
+.sc2-b{border:0;border-radius:12px;padding:11px 16px;font:600 15px Inter,-apple-system,system-ui,sans-serif;cursor:pointer;background:#0071e3;color:#fff;white-space:nowrap}
+.sc2-b.s{background:#e8e8ed;color:#1d1d1f}.sc2-b.w{background:#25d366;color:#fff;width:100%;padding:14px;font-size:16px}.sc2-b:disabled{opacity:.5}
+.sc2-msg{font-size:12.5px;color:#6e6e73;min-height:16px}.sc2-msg.ok{color:#1a7f37}.sc2-msg.bad{color:#d70015}
+.sc2-th{display:flex;gap:10px}.sc2-th button{width:44px;height:44px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}.sc2-th button.on{border-color:#0071e3}
+.sc2-note{font-size:11.5px;color:#86868b;text-align:center}
+</style>
+<script>
+(function(){
+var SEAT_URL="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/tg-bot?seat=";
+var F="Inter,-apple-system,'SF Pro Display',system-ui,sans-serif";
+var THEMES={
+ midnight:{bg:"#07080d",blobs:[["#2563eb",.18,.12,.62],["#9333ea",.88,.30,.55],["#0d9488",.30,.95,.60],["#db2777",.95,.92,.40]],glass:"rgba(255,255,255,0.08)",edge:"rgba(255,255,255,0.20)",text:"#ffffff",sub:"rgba(255,255,255,0.72)",acc:"#7dd3fc",chip:"rgba(255,255,255,0.12)",sw:"linear-gradient(135deg,#1e3a8a,#6b21a8)"},
+ aurora:{bg:"#f5f5f7",blobs:[["#a5b4fc",.12,.10,.60],["#f9a8d4",.92,.28,.55],["#6ee7b7",.20,.92,.60],["#fde68a",.95,.95,.45]],glass:"rgba(255,255,255,0.62)",edge:"rgba(255,255,255,0.95)",text:"#1d1d1f",sub:"rgba(29,29,31,0.66)",acc:"#0071e3",chip:"rgba(0,0,0,0.06)",sw:"linear-gradient(135deg,#c7d2fe,#fbcfe8)"},
+ gold:{bg:"#0c0a09",blobs:[["#f59e0b",.15,.10,.60],["#ef4444",.92,.35,.50],["#a16207",.25,.92,.60],["#fb923c",.95,.95,.40]],glass:"rgba(255,255,255,0.07)",edge:"rgba(253,230,138,0.35)",text:"#fffbeb",sub:"rgba(255,251,235,0.70)",acc:"#fcd34d",chip:"rgba(255,255,255,0.10)",sw:"linear-gradient(135deg,#78350f,#f59e0b)"}
+};
+var st={rank:"",name:"",course:"",inst:"",quota:"",cat:"",theme:"midnight",img:null};
+function cleanCourse(c){return String(c||"").replace(/\bM\.\s?D\.?/g,"MD").replace(/\bM\.\s?S\.?/g,"MS").replace(/\bD\.?N\.?B\.?/g,"DNB").replace(/\s+/g," ").trim();}
+function titleCase(s){s=String(s||"");if(s!==s.toUpperCase())return s;return s.toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();}).replace(/\b(And|Of|The|For|In|At)\b/g,function(w){return w.toLowerCase();});}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath();}
+function wrap(x,t,maxW,maxL){var w=String(t||"").split(/\s+/),ls=[],cur="";for(var i=0;i<w.length;i++){var tr=cur?cur+" "+w[i]:w[i];if(x.measureText(tr).width<=maxW||!cur)cur=tr;else{ls.push(cur);cur=w[i];}}if(cur)ls.push(cur);if(ls.length>maxL){ls=ls.slice(0,maxL);var l=ls[maxL-1];while(l.length>1&&x.measureText(l+"…").width>maxW)l=l.slice(0,-1);ls[maxL-1]=l.replace(/[\s,]+$/,"")+"…";}return ls;}
+function fit(x,t,weight,size,minSize,maxW,maxL){var s=size;for(;s>minSize;s-=2){x.font=weight+" "+s+"px "+F;var l=wrap(x,t,maxW,99);if(l.length<=maxL)return{s:s,l:l};}x.font=weight+" "+minSize+"px "+F;return{s:minSize,l:wrap(x,t,maxW,maxL)};}
+function draw(cv){var W=1080,H=1350,x=cv.getContext("2d"),T=THEMES[st.theme];cv.width=W;cv.height=H;
+ x.fillStyle=T.bg;x.fillRect(0,0,W,H);
+ T.blobs.forEach(function(b){var g=x.createRadialGradient(b[1]*W,b[2]*H,0,b[1]*W,b[2]*H,b[3]*W);g.addColorStop(0,b[0]+"cc");g.addColorStop(.45,b[0]+"55");g.addColorStop(1,b[0]+"00");x.fillStyle=g;x.fillRect(0,0,W,H);});
+ // fine grain
+ x.globalAlpha=.035;for(var i=0;i<2200;i++){x.fillStyle=Math.random()<.5?"#fff":"#000";x.fillRect(Math.random()*W,Math.random()*H,2,2);}x.globalAlpha=1;
+ // header
+ x.textBaseline="alphabetic";x.fillStyle=T.text;x.font="700 40px "+F;x.textAlign="left";
+ x.beginPath();x.arc(92,96,11,0,7);x.fillStyle=T.acc;x.fill();x.fillStyle=T.text;x.fillText("DocPulsee",116,110);
+ var pill="NEET PG 2026";x.font="600 28px "+F;var pw=x.measureText(pill).width+44;rr(x,W-70-pw,68,pw,58,29);x.fillStyle=T.chip;x.fill();x.fillStyle=T.text;x.textAlign="center";x.fillText(pill,W-70-pw/2,107);
+ // glass card
+ var cx=64,cy=170,cw=W-128,ch=1010;x.save();x.shadowColor="rgba(0,0,0,0.25)";x.shadowBlur=60;x.shadowOffsetY=20;rr(x,cx,cy,cw,ch,64);x.fillStyle=T.glass;x.fill();x.restore();
+ rr(x,cx,cy,cw,ch,64);x.lineWidth=2;x.strokeStyle=T.edge;x.stroke();
+ var sheen=x.createLinearGradient(0,cy,0,cy+300);sheen.addColorStop(0,"rgba(255,255,255,0.14)");sheen.addColorStop(1,"rgba(255,255,255,0)");rr(x,cx,cy,cw,ch,64);x.fillStyle=sheen;x.fill();
+ // photo
+ var px=W/2,py=cy+190,pr=138;var ring=x.createLinearGradient(px-pr,py-pr,px+pr,py+pr);ring.addColorStop(0,T.acc);ring.addColorStop(1,"#ffffff");x.beginPath();x.arc(px,py,pr+10,0,7);x.fillStyle=ring;x.fill();
+ x.save();x.beginPath();x.arc(px,py,pr,0,7);x.clip();
+ if(st.img){var iw=st.img.naturalWidth||st.img.width,ih=st.img.naturalHeight||st.img.height,s=Math.max(2*pr/iw,2*pr/ih);x.drawImage(st.img,px-iw*s/2,py-ih*s/2.2,iw*s,ih*s);}
+ else{var g2=x.createLinearGradient(px-pr,py-pr,px+pr,py+pr);g2.addColorStop(0,"#6366f1");g2.addColorStop(1,"#14b8a6");x.fillStyle=g2;x.fillRect(px-pr,py-pr,2*pr,2*pr);x.fillStyle="#fff";x.textAlign="center";var ini=(st.name||"").trim().split(/\s+/).filter(Boolean).slice(0,2).map(function(w){return w[0].toUpperCase();}).join("");x.font=(ini?"700 104px ":"400 120px ")+F;x.fillText(ini||"🎓",px,py+(ini?36:42));}
+ x.restore();
+ var y=py+pr+92;x.textAlign="center";
+ if(st.name.trim()){x.fillStyle=T.text;var nm=fit(x,st.name.trim(),"700",54,40,cw-120,1);x.font="700 "+nm.s+"px "+F;x.fillText(nm.l[0],W/2,y);y+=64;}else y+=6;
+ x.fillStyle=T.acc;x.font="700 26px "+F;var lab="A L L O T T E D";x.fillText(lab,W/2,y);y+=78;
+ var crs=cleanCourse(st.course)||"Your course";var cf=fit(x,crs,"700",78,52,cw-110,2);x.fillStyle=T.text;x.font="700 "+cf.s+"px "+F;cf.l.forEach(function(l){x.fillText(l,W/2,y);y+=cf.s*1.12;});
+ y+=10;var inst=titleCase(st.inst)||"Your college";var inf=fit(x,inst,"500",38,30,cw-130,3);x.fillStyle=T.sub;x.font="500 "+inf.s+"px "+F;inf.l.forEach(function(l){x.fillText(l,W/2,y);y+=inf.s*1.3;});
+ // chips
+ var chips=[];if(st.rank)chips.push("AIR "+Number(st.rank).toLocaleString("en-IN"));var qc=[st.quota,st.cat].filter(Boolean).join(" · ");if(qc)chips.push(qc);chips.push("Round 1");
+ x.font="600 30px "+F;var gap=16,ws=chips.map(function(c){return x.measureText(c).width+52;}),tot=ws.reduce(function(a,b){return a+b;},0)+gap*(chips.length-1),sx=W/2-tot/2,cyy=cy+ch-120;
+ chips.forEach(function(c,i){rr(x,sx,cyy,ws[i],66,33);x.fillStyle=T.chip;x.fill();x.strokeStyle=T.edge;x.lineWidth=1.5;x.stroke();x.fillStyle=T.text;x.fillText(c,sx+ws[i]/2,cyy+44);sx+=ws[i]+gap;});
+ // footer
+ x.textAlign="left";x.fillStyle=T.sub;x.font="500 28px "+F;x.fillText("Find your seat & batchmates",80,H-78);
+ x.textAlign="right";x.fillStyle=T.text;x.font="700 34px "+F;x.fillText("docpulsee.in",W-80,H-76);
+}
+function el(t,a,c){var e=document.createElement(t);if(a)for(var k in a){if(k==="class")e.className=a[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k]);}(c||[]).forEach(function(ch){if(ch!=null)e.appendChild(typeof ch==="string"?document.createTextNode(ch):ch);});return e;}
+function track(n){try{if(window.gtag)gtag("event",n);}catch(e){}}
+var root=null;
+function open(rank){if(root)return;track("seatcard_open");try{localStorage.setItem("dp_sc2_seen","1");}catch(e){}hidePill();
+ var cv=el("canvas",{"aria-label":"Your seat card preview"});var msg=el("div",{class:"sc2-msg"});
+ var rk=el("input",{inputmode:"numeric",placeholder:"Your NEET PG rank (AIR)",value:rank||st.rank||"","data-sc2-rank":"1"});
+ var nm=el("input",{type:"text",placeholder:"Your name (optional)",value:st.name,maxlength:"40"});
+ var co=el("input",{type:"text",placeholder:"Course, e.g. MD Radio-Diagnosis",value:st.course});
+ var ins=el("input",{type:"text",placeholder:"College",value:st.inst});
+ var file=el("input",{type:"file",accept:"image/*",style:"display:none"});
+ var re=function(){st.name=nm.value;st.course=co.value;st.inst=ins.value;draw(cv);};
+ [nm,co,ins].forEach(function(i){i.addEventListener("input",re);});
+ var find=el("button",{class:"sc2-b","data-sc2-find":"1",onclick:function(){lookup();}},["Find my seat"]);
+ function lookup(){var r=parseInt(String(rk.value).replace(/\D/g,""),10);if(!r){msg.className="sc2-msg bad";msg.textContent="Type your rank first.";return;}st.rank=String(r);find.disabled=true;msg.className="sc2-msg";msg.textContent="Looking up the MCC Round 1 result…";
+  fetch(SEAT_URL+r).then(function(x){return x.json();}).then(function(d){find.disabled=false;if(d&&d.ok){st.course=d.course;st.inst=d.inst;st.quota=d.quota==="AIQ"?"All India":d.quota;st.cat=d.cat;co.value=cleanCourse(d.course);ins.value=titleCase(d.inst);st.course=co.value;st.inst=ins.value;msg.className="sc2-msg ok";msg.textContent="✓ Found: Round 1 allotment. You can edit anything below.";track("seatcard_found");}else{st.quota="";st.cat="";msg.className="sc2-msg bad";msg.textContent="This rank isn't in the MCC Round 1 list. Type your course and college below (state seats work too).";}draw(cv);}).catch(function(){find.disabled=false;msg.className="sc2-msg bad";msg.textContent="Couldn't reach the server. Type your course and college below.";draw(cv);});}
+ rk.addEventListener("keydown",function(e){if(e.key==="Enter")lookup();});
+ var phBtn=el("button",{class:"sc2-b s",onclick:function(){file.click();}},[st.img?"Change photo":"📷 Add your photo"]);
+ file.addEventListener("change",function(){var f=file.files&&file.files[0];if(!f)return;var u=URL.createObjectURL(f);var im=new Image();im.onload=function(){st.img=im;phBtn.textContent="Change photo";draw(cv);track("seatcard_photo");};im.src=u;});
+ var th=el("div",{class:"sc2-th"});Object.keys(THEMES).forEach(function(k){var b=el("button",{class:k===st.theme?"on":"","aria-label":k+" style",style:"background:"+THEMES[k].sw,onclick:function(){st.theme=k;[].forEach.call(th.children,function(c){c.className="";});b.className="on";draw(cv);}});th.appendChild(b);});
+ var share=el("button",{class:"sc2-b w","data-sc2-share":"1",onclick:function(){doShare(cv);}},["Share on WhatsApp"]);
+ var dl=el("button",{class:"sc2-b s",style:"width:100%",onclick:function(){download(cv);}},["Save image"]);
+ var close=el("button",{"aria-label":"Close",onclick:shut},["✕"]);
+ var box=el("div",{class:"sc2",role:"dialog","aria-modal":"true","aria-label":"My seat card",onclick:function(e){e.stopPropagation();}},[
+  el("div",{class:"sc2-h"},[el("b",null,["🎉 My seat card"]),close]),
+  el("div",{class:"sc2-pv"},[cv]),
+  el("div",{class:"sc2-f"},[
+   el("div",{class:"sc2-g"},[el("label",null,["Your rank"]),el("div",{class:"sc2-row"},[rk,find]),msg]),
+   el("div",{class:"sc2-g"},[el("label",null,["Course and college"]),co,ins]),
+   el("div",{class:"sc2-g"},[el("label",null,["You"]),nm,phBtn,file,el("div",{class:"sc2-note"},["Your photo stays on your phone. Nothing is uploaded."])]),
+   el("div",{class:"sc2-g"},[el("label",null,["Style"]),th]),
+   share,dl])]);
+ root=el("div",{class:"sc2-bg",onclick:shut},[box]);document.body.appendChild(root);document.documentElement.style.overflow="hidden";
+ document.addEventListener("keydown",esc);
+ var go=function(){draw(cv);if(rk.value)lookup();};if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load("700 40px Inter"),document.fonts.load("500 30px Inter"),document.fonts.load("600 30px Inter")]).then(go,go);}else go();
+}
+function esc(e){if(e.key==="Escape")shut();}
+function shut(){if(!root)return;root.remove();root=null;document.documentElement.style.overflow="";document.removeEventListener("keydown",esc);}
+function caption(){var c=cleanCourse(st.course),i=titleCase(st.inst);return (c&&i?"🎉 I got "+c+" at "+i+" in NEET PG 2026 Round 1!":"🎉 My NEET PG 2026 seat!")+"\n\nMake your seat card and find your batchmates on DocPulsee 👉 https://docpulsee.in/?card=1";}
+function blobOf(cv){return new Promise(function(res){cv.toBlob(function(b){res(b);},"image/png");});}
+function download(cv){track("seatcard_save");blobOf(cv).then(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="docpulsee-seat-card.png";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);});}
+function doShare(cv){track("seatcard_share");blobOf(cv).then(function(b){var f=null;try{f=new File([b],"docpulsee-seat-card.png",{type:"image/png"});}catch(e){}
+ if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:caption()}).catch(function(){});}
+ else{download(cv);setTimeout(function(){window.open("https://wa.me/?text="+encodeURIComponent(caption()),"_blank");},600);}});}
+// floating capsule
+var pill=null;function hidePill(){if(pill){pill.classList.remove("on");var p=pill;setTimeout(function(){p.remove();},400);pill=null;}}
+function showPill(){try{if(localStorage.getItem("dp_sc2_seen")||Number(localStorage.getItem("dp_sc2_x")||0)>Date.now())return;}catch(e){}
+ pill=el("div",{class:"sc2-pill",role:"status"},["🎉 Got your Round 1 seat?",el("button",{class:"go","data-sc2-pill":"1",onclick:function(){open();}},["Make your card"]),el("button",{class:"x","aria-label":"Dismiss",onclick:function(){try{localStorage.setItem("dp_sc2_x",String(Date.now()+3*86400000));}catch(e){}hidePill();}},["✕"])]);
+ document.body.appendChild(pill);requestAnimationFrame(function(){requestAnimationFrame(function(){if(pill)pill.classList.add("on");});});}
+window.dpOpenSeatCard=open;
+function boot(){var m=location.search.match(/[?&]card=(\d*)/);if(m){setTimeout(function(){open(m[1]||"");},900);return;}setTimeout(showPill,5000);}
+if(document.readyState==="complete")boot();else window.addEventListener("load",boot);
+})();
+</script>
+</body>
 </html>
