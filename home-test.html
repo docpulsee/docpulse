@@ -4926,7 +4926,7 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
 .ssc-lock{margin:0;font-size:12.5px;color:#3a3a3c}
 @keyframes sscF{from{opacity:0}to{opacity:1}}
 @keyframes sscU{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
-</style></head>
+</style><style>@media (max-width:640px){.offer-bar .ob-in{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:left;font-size:11.5px;line-height:1.4;padding:6px 108px 6px 12px!important;cursor:pointer}.offer-bar.ob-open .ob-in{display:block;-webkit-line-clamp:unset}.offer-bar .ob-tag{display:none}.offer-bar .ob-emoji{animation:none}.offer-bar .ob-cta{position:absolute;right:38px;top:50%;transform:translateY(-50%);margin:0;padding:4px 10px;font-size:11.5px;animation:none}.offer-bar .ob-x{right:6px;width:24px;height:24px;line-height:24px}.dpa-res{top:8px;left:8px;right:8px;padding:7px 8px 7px 12px;border-radius:14px;gap:8px}.dpa-res b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dpa-res span{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dpa-res div{min-width:0}.dpa-res button{font-size:11.5px;padding:6px 10px}.dpa-res .x{padding:6px 8px}}</style><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
 <style id="dp-offer-css">
@@ -6562,7 +6562,7 @@ function bxInfo(inst){const b=inst.branches||[];const fees=b.map(x=>Number(x.Ann
  const tr=b.map(d=>typeof trendOf==="function"?trendOf(d):null).filter(Boolean);const easier=tr.filter(t=>t.pct>=10).length,tougher=tr.filter(t=>t.pct<=-10).length;
  const mg=(b.find(x=>x.Management)||{}).Management||null;const bond=Math.max(0,...b.map(x=>Number(x.Bond_Years)||0));const pen=Math.max(0,...b.map(x=>Number(x.Bond_Penalty_INR)||0));
  return{n:b.length,fMin:fees.length?Math.min(...fees):null,fMax:fees.length?Math.max(...fees):null,sMax:stips.length?Math.max(...stips):null,seats,br,best,last,easier,tougher,trN:tr.length,mg,bond,pen,uni:(b.find(x=>x.University_Name)||{}).University_Name||null,feeOk:b.some(x=>x.Fees_Badge==="OFFICIAL"),stipOk:b.some(x=>x.Stipend_Badge==="OFFICIAL")};}
-function bxK(v){return v>=10000?(Math.round(v/100)/10).toString().replace(/\.0$/,"")+"k":fmtNum(v);}
+function bxK(v){return v>=100000?Math.round(v/1000)+"k":v>=10000?(Math.round(v/100)/10).toString().replace(/\.0$/,"")+"k":fmtNum(v);}
 function bxTone(mg){return mg==="Government"?"bx-g-gov":mg==="Trust"?"bx-g-trust":mg==="Private"?"bx-g-pvt":"bx-g-dnb";}
 function bxFavs(){try{return JSON.parse(localStorage.getItem("dp_fav_inst")||"[]");}catch(_e){return[];}}
 
