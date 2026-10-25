@@ -7093,7 +7093,7 @@ function askRules(q,S,rx,rules){const ql=askNorm(q);if(!ql.trim())return{S,list:
  let list=run(askCands(S,rx,rules)).slice(0,5);let wide=false;
  if(!list.length&&!named){const all=["MCC"].concat(rx&&rx.st?Object.keys(rx.st):[]);let L=[];all.forEach(x=>{if(x!==S)L=L.concat(askCands(x,rx,rules));});list=run(L).slice(0,5);wide=list.length>0;}
  return{S,list,wide,words};}
-function askHl(t,words){const ws=(words||[]).filter(w=>w.length>=3).map(w=>w.slice(0,Math.min(w.length,6)).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));if(!ws.length)return t;const re=new RegExp("("+ws.join("|")+")","ig");return String(t).split(re).map((x,i)=>i%2?rmH("mark",{key:i},x):x);}
+function askHl(t,words){const ws=(words||[]).filter(w=>w.length>=3).map(w=>w.slice(0,Math.min(w.length,6)).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));if(!ws.length)return t;const re=new RegExp("(\\b(?:"+ws.join("|")+")[a-z]*)","ig");return String(t).split(re).map((x,i)=>i%2?rmH("mark",{key:i},x):x);}
 function IdcAsk({state,rx,paid,onDone}){const rules=useRuleData(paid,null);const[q,setQ]=React.useState("");const[st,setSt]=React.useState(state||"MCC");
  const states=rx&&rx.st?Object.keys(rx.st).sort():[];const res=React.useMemo(()=>askRules(q,st,rx,rules),[q,st,rx,rules]);
  React.useEffect(()=>{if(res.S&&res.S!==st)setSt(res.S);},[res.S]);
@@ -7104,7 +7104,7 @@ function IdcAsk({state,rx,paid,onDone}){const rules=useRuleData(paid,null);const
   !paid?rmH("div",{className:"idc-ask-b"},rmH("p",null,"Ask anything about counselling rules for your state or MCC: registration, leaving a seat, deposit, bond, upgrade. Answers are quoted only from the official 2026 documents, with the page."),rmH("button",{type:"button",className:"idc-btn",onClick:()=>(onDone(),ruleUnlock())},"Unlock to ask"))
   :rmH("div",{className:"idc-ask-b"},
    rmH("div",{className:"idc-ask-in"},rmH("select",{value:st,onChange:e=>setSt(e.target.value),"aria-label":"Counselling"},rmH("option",{value:"MCC"},"MCC (All India)"),states.map(x=>rmH("option",{key:x,value:x},x))),
-    rmH("label",{className:"idc-ask-s"},rmH("span",{"aria-hidden":"true"},"⌕"),rmH("input",{type:"search",value:q,onChange:e=>setQ(e.target.value),placeholder:"Search any rule: fresh registration, resign, deposit, bond…","aria-label":"Search rules","data-idc-ask-q":true,autoFocus:true}),q?rmH("button",{type:"button",onClick:e=>{e.preventDefault();setQ("");},"aria-label":"Clear"},"×"):null)),
+    rmH("label",{className:"idc-ask-s"},rmH("span",{"aria-hidden":"true"},"⌕"),rmH("input",{type:"text",enterKeyHint:"search",value:q,onChange:e=>setQ(e.target.value),placeholder:"Search any rule: fresh registration, resign, deposit, bond…","aria-label":"Search rules","data-idc-ask-q":true,autoFocus:true}),q?rmH("button",{type:"button",onClick:e=>{e.preventDefault();setQ("");},"aria-label":"Clear"},"×"):null)),
    !q.trim()?rmH("div",{className:"idc-ask-sg"},sugg.map(x=>rmH("button",{key:x,type:"button",onClick:()=>setQ(x)},x))):null,
    q.trim()?(res.list.length?[res.wide?rmH("p",{key:"w",className:"idc-wi-note"},"Nothing for "+res.S+", so here is what matches in other states and MCC:"):null].concat(res.list.map((a,i)=>rmH("div",{key:i,className:"idc-ask-a","data-idc-ask-a":true},rmH("small",null,a.h+" · "+(a.st||res.S)),rmH("p",null,askHl(a.t,res.words)),a.src?rmH("em",null,"Source: "+a.src):null)))
     :rmH("p",{className:"idc-wi-note"},"Nothing in the official "+(res.S==="MCC"?"MCC":res.S)+" documents we hold matches that. Try words like registration, resign, deposit, bond or upgrade, or ask us on a 1:1 call.")):null,
