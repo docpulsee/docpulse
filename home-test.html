@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
+<head><script>window.DP_LCR=true;</script><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
 T.add=function(){for(var i=0;i<arguments.length;i++){if(!this.contains(arguments[i]))return A.apply(this,arguments);}};
 T.remove=function(){for(var i=0;i<arguments.length;i++){if(this.contains(arguments[i]))return R.apply(this,arguments);}};
 E.setAttribute=function(n,v){if(n!=="src"&&n!=="href"&&n!=="value"&&this.getAttribute(n)===String(v))return;return S.call(this,n,v);};}catch(e){}})();</script><meta name="robots" content="noindex"><script id="dp-theme-boot">(function(){
@@ -6558,10 +6558,11 @@ const BX_STORY_ORDER=["General Medicine","Radio Diagnosis","Dermatology","Paedia
 const BX_Q=["AIQ","DNB","DU","IP","BHU","AMU","PS","AFMS","NRI","JM","MM"],BX_R=["ST","R3","R2","R1"];
 function bxClose(d){const R=d.R||{};for(const q of BX_Q)for(const r of BX_R){const v=R[q+"_"+r+"_Closing_GN"];if(typeof v==="number"&&v>0)return{tag:q+"_"+r,q,r,rank:v,label:((typeof SC_QUOTA!=="undefined"&&SC_QUOTA[q])||q)+" · "+(RNAMES[r]||r)};}return null;}
 function bxInfo(inst){const b=inst.branches||[];const fees=b.map(x=>Number(x.Annual_Fees_INR)).filter(x=>x>0),stips=b.map(x=>Number(x.Stipend_Y1_INR)).filter(x=>x>0);const seats=b.reduce((a,x)=>a+(Number(x.Total_Seats)||Number(x.NMC_Seats)||0),0);
- const br=b.map(d=>({d,c:bxClose(d)})).sort((x,y)=>(x.c?x.c.rank:1e9)-(y.c?y.c.rank:1e9));const best=br.find(x=>x.c);
+ const br=b.map(d=>({d,c:bxClose(d)})).sort((x,y)=>(x.c?x.c.rank:1e9)-(y.c?y.c.rank:1e9));const best=br.find(x=>x.c);const last=br.filter(x=>x.c).slice(-1)[0]||null;
  const tr=b.map(d=>typeof trendOf==="function"?trendOf(d):null).filter(Boolean);const easier=tr.filter(t=>t.pct>=10).length,tougher=tr.filter(t=>t.pct<=-10).length;
  const mg=(b.find(x=>x.Management)||{}).Management||null;const bond=Math.max(0,...b.map(x=>Number(x.Bond_Years)||0));const pen=Math.max(0,...b.map(x=>Number(x.Bond_Penalty_INR)||0));
- return{n:b.length,fMin:fees.length?Math.min(...fees):null,fMax:fees.length?Math.max(...fees):null,sMax:stips.length?Math.max(...stips):null,seats,br,best,easier,tougher,trN:tr.length,mg,bond,pen,uni:(b.find(x=>x.University_Name)||{}).University_Name||null,feeOk:b.some(x=>x.Fees_Badge==="OFFICIAL"),stipOk:b.some(x=>x.Stipend_Badge==="OFFICIAL")};}
+ return{n:b.length,fMin:fees.length?Math.min(...fees):null,fMax:fees.length?Math.max(...fees):null,sMax:stips.length?Math.max(...stips):null,seats,br,best,last,easier,tougher,trN:tr.length,mg,bond,pen,uni:(b.find(x=>x.University_Name)||{}).University_Name||null,feeOk:b.some(x=>x.Fees_Badge==="OFFICIAL"),stipOk:b.some(x=>x.Stipend_Badge==="OFFICIAL")};}
+function bxK(v){return v>=10000?(Math.round(v/100)/10).toString().replace(/\.0$/,"")+"k":fmtNum(v);}
 function bxTone(mg){return mg==="Government"?"bx-g-gov":mg==="Trust"?"bx-g-trust":mg==="Private"?"bx-g-pvt":"bx-g-dnb";}
 function bxFavs(){try{return JSON.parse(localStorage.getItem("dp_fav_inst")||"[]");}catch(_e){return[];}}
 
@@ -6584,7 +6585,7 @@ function InstPost({inst,i,fav,onFav,onOpen,onOpenBranch,onReport,onSenior,dpi}){
   H("span",{className:"bx-tapopen","aria-hidden":"true"},"Tap to open ›"),H("div",{className:"bx-stats"},
    H("div",null,H("b",null,I.n),H("small",null,"branch"+(I.n===1?"":"es"))),
    H("div",null,H("b",null,I.seats||"—"),H("small",null,"seats")),
-   H("div",null,H("b",null,I.best?fmtNum(I.best.c.rank):"—"),H("small",null,"lowest close"))));
+   window.DP_LCR?H("div",{title:I.best&&I.last?"2025 General closing: toughest branch "+fmtNum(I.best.c.rank)+", last seat "+fmtNum(I.last.c.rank):""},H("b",null,I.best?(I.last&&I.last.c.rank!==I.best.c.rank?bxK(I.best.c.rank)+"–"+bxK(I.last.c.rank):fmtNum(I.best.c.rank)):"—"),H("small",null,"2025 close")):H("div",null,H("b",null,I.best?fmtNum(I.best.c.rank):"—"),H("small",null,"lowest close"))));
  const s2=H("div",{className:"bx-slide bx-g-br"},
   H("div",{className:"bx-st"},"🎓 Final closing rank · tap a branch"),
   H("div",{className:"bx-brs"},I.br.slice(0,5).map(({d,c},k)=>H("button",{key:k,type:"button",className:"bx-br",onClick:e=>{e.stopPropagation();onOpenBranch?onOpenBranch(d):onOpen(inst);},"data-inst-branch":d.Spec_Norm},H("span",{className:"e"},BX_EMOJI[d.Spec_Norm]||"🎓"),H("span",{className:"n"},d.Spec_Norm,H("small",null,d.Deg,c?" · "+c.label:"")),H("b",null,c?fmtNum(c.rank):"—"),H("i",{className:"chev","aria-hidden":"true"},"›"))),I.n>5&&H("div",{className:"bx-more"},"+",I.n-5," more · tap Open college")));
