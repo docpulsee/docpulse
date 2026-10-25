@@ -9082,7 +9082,7 @@ function todayHTML(d){if(!d)return '<div class="hd"><b>Today</b><small>loading�
  return '<div class="hd"><b>Today</b><small>'+t.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})+'</small></div><div class="g">'+
   '<div class="c"><small>Sign-ups</small><div class="n">'+(d.signups_today||0)+'</div><div class="s">'+vs(d.signups_today||0,d.signups_yday||0,"yesterday")+'</div>'+spark(d.signups_week,"#5eead4")+'</div>'+
   '<div class="c"><small>Payments</small><div class="n">'+(p.today||0)+'</div><div class="s" title="'+esc(revT)+'">'+esc(p.today?revT:"yesterday "+(p.yday||0)+" · "+revY)+'</div>'+spark(p.week,"#4ade80")+'</div></div>'+
-  slHTML(d)+scHTML(d)+
+  slHTML(d)+
   '<div class="p">'+pend.map(function(x,i){return '<button type="button" data-pi="'+i+'">'+x[0]+' <i class="'+(x[1]?"":"z")+'">'+x[1]+'</i></button>';}).join("")+'</div>'+
   '<div class="ft"><span>'+(d.users_total||0).toLocaleString("en-IN")+' accounts in all</span><button type="button" data-snd>'+(lsr("dp_own_snd")==="off"?"🔕 Payment sound off":"🔔 Payment sound on")+'</button></div>';}
 function today(sc){var b=document.createElement("div");b.className="acs-today";b.innerHTML=todayHTML(TD&&Date.now()-TDt<60000?TD:null);sc.appendChild(b);
@@ -9160,7 +9160,7 @@ var I={store:P+'<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M
  people:P+'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg>',
  dice:P+'<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.5" cy="8.5" r="1.1"/><circle cx="15.5" cy="15.5" r="1.1"/><circle cx="12" cy="12" r="1.1"/></svg>',
  bot:P+'<rect x="4" y="8" width="16" height="12" rx="4"/><path d="M12 4v4M9 13.5h.01M15 13.5h.01M9.5 17h5"/></svg>',
- sliders:P+'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>'};
+ sliders:P+'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',phone:P+'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',party:P+'<path d="M4 20l4-12 8 8-12 4z"/><path d="M14 4l1 2M19 5l-2 2M20 10l-2-1"/></svg>'};
 function ic(n,g){return '<span class="ac-ic s ac-g'+g+'" aria-hidden="true">'+I[n]+'</span>';}
 function R(p){return "₹"+Math.round((p||0)/100).toLocaleString("en-IN");}
 function call(kind,body){try{if(kind==="pro"&&typeof proCall==="function")return proCall(body);if(kind==="offer"&&typeof offerCall==="function")return offerCall(body);if(kind==="coupon"&&typeof couponAdminCall==="function")return couponAdminCall(body);}catch(e){return Promise.reject(e);}return Promise.reject(new Error("Not available"));}
@@ -9185,7 +9185,7 @@ function load(){
  finLoad();
  if(window.dpA2&&window.dpA2.poll)window.dpA2.poll().then(function(d){S.today=d;render();}).catch(function(){});}
 var NAV=[["store","Storefront","store",1],["prices","Prices","tag",8],["offers","Offers & banner","mega",3],["coupons","Coupons","ticket",4],["pro","Pro","crown",6]];
-function finNavs(){if(!window.DP_FIN)return NAV;return [["finance","Finance","chart",2]].concat(NAV).concat([["bookings","Bookings","cal",4,1],["seniors","Senior requests","people",2,1],["lucky","Lucky Roll","dice",5,1],["copilot","Copilot","bot",7,1]]);}
+function finNavs(){if(!window.DP_FIN)return NAV;return [["finance","Finance","chart",2]].concat(NAV).concat([["bookings","Bookings","cal",4,1],["seniors","Senior requests","people",2,1],["lucky","Lucky Roll","dice",5,1],["copilot","Copilot","bot",7,1]].concat(window.DP_SNUM?[["snum","Senior numbers","phone",3,1],["seatcards","Seat cards","party",6,1]]:[]));}
 function finLoad(){if(!window.DP_FIN)return;S.fin=null;S.finErr=null;try{sb.functions.invoke("owner-finance",{body:{action:"list"}}).then(function(r){if(r.error||!r.data||r.data.error){var m=(r.data&&r.data.error)||(r.error&&r.error.message)||"Couldn't load";if(r.error&&r.error.context&&r.error.context.json)r.error.context.json().then(function(j){S.finErr=j&&j.error||m;render();}).catch(function(){S.finErr=m;render();});else{S.finErr=m;render();}return;}S.fin=r.data;render();}).catch(function(e){S.finErr=e.message;render();});}catch(e){S.finErr=e.message;}}
 function finRange(){var now=new Date(),p=S.fp||"month",day=864e5;function d0(t){var d=new Date(t);d.setHours(0,0,0,0);return d.getTime();}
  if(p==="today")return [d0(now),Date.now()+1];if(p==="7d")return [d0(now)-6*day,Date.now()+1];if(p==="30d")return [d0(now)-29*day,Date.now()+1];
@@ -9238,7 +9238,7 @@ function finWire(w){if(!window.DP_FIN)return;
  var m=$("[data-fmore]",w);if(m)m.onclick=function(){S.fn=(S.fn||40)+80;render();};
  var c=$("[data-fcsv]",w);if(c)c.onclick=finCsv;
  $$("[data-freload]",w).forEach(function(b){b.onclick=function(){finLoad();render();};});
- $$("[data-launch]",w).forEach(function(b){b.onclick=function(){var k=b.dataset.launch;close();setTimeout(function(){if(k==="lucky")window.dispatchEvent(new CustomEvent("dp-lucky-admin"));else viaGrid({bookings:/Counselling bookings$/,seniors:/Senior requests$/,copilot:/Copilot$/}[k]);},160);};});}
+ $$("[data-launch]",w).forEach(function(b){b.onclick=function(){var k=b.dataset.launch;close();setTimeout(function(){if(k==="lucky")window.dispatchEvent(new CustomEvent("dp-lucky-admin"));else if(k==="snum"){if(window.dpSeniorNums)window.dpSeniorNums();}else if(k==="seatcards"){if(window.dpSeatStats)window.dpSeatStats(S.today&&S.today.seatcard);}else viaGrid({bookings:/Counselling bookings$/,seniors:/Senior requests$/,copilot:/Copilot$/}[k]);},160);};});}
 function liveOffers(){var now=Date.now();return (S.offers||[]).filter(function(o){return o.active!==false&&Date.parse(o.starts_at)<=now&&Date.parse(o.ends_at)>now;});}
 function soonOffers(){var now=Date.now();return (S.offers||[]).filter(function(o){return o.active!==false&&Date.parse(o.starts_at)>now;});}
 function render(){if(!root)return;var w=$(".cc",root),v=S.view,sc=$(".cc-bd",w),top=sc?sc.scrollTop:0;
@@ -9249,7 +9249,7 @@ function render(){if(!root)return;var w=$(".cc",root),v=S.view,sc=$(".cc-bd",w),
   '<div class="ft">Changes go live on the site and in the payment check straight away.</div></aside>'+
   '<section class="cc-mn"><div class="cc-tabs">'+finNavs().map(function(n){return '<button type="button" class="'+(v===n[0]?"on":"")+'" '+(n[4]?'data-launch':'data-v')+'="'+n[0]+'">'+n[1]+(badge[n[0]]?" · "+badge[n[0]]:"")+'</button>';}).join("")+'</div>'+
   '<div class="cc-hd"><div><h2>'+titles[v][0]+'</h2><small>'+titles[v][1]+'</small></div><button type="button" class="x" data-x aria-label="Close">✕</button></div>'+
-  '<div class="cc-bd">'+(S.msg?'<div class="cc-msg'+(S.msg.bad?" bad":"")+'">'+(S.msg.bad?"⚠️ ":"✓ ")+esc(S.msg.t)+'</div>':'')+(v==="finance"||v==="store"?ccQuick():"")+VIEW[v]()+'</div>'+
+  '<div class="cc-bd">'+(S.msg?'<div class="cc-msg'+(S.msg.bad?" bad":"")+'">'+(S.msg.bad?"⚠️ ":"✓ ")+esc(S.msg.t)+'</div>':'')+VIEW[v]()+'</div>'+
   '<div class="cc-bar'+(nedit?" on":"")+'"><span class="t"><b>'+nedit+' price change'+(nedit===1?"":"s")+'</b><small>Not live yet. Review to publish.</small></span><button type="button" class="u" data-undo>Undo</button><button type="button" class="rv" data-review>Review</button></div></section>';
  var nsc=$(".cc-bd",w);if(nsc)nsc.scrollTop=top;wire(w);}
 function priceVal(k){var p=S.prices||{};return Math.round(((p["price_"+k+"_paise"])||0)/100);}
@@ -9259,7 +9259,6 @@ function banHTML(){var lv=liveOffers()[0],so=soonOffers()[0];
  if(lv)return '<div class="cc-ban"><div class="k">Live on the site · '+(lv.product==="pro"?"Pro":lv.product==="together"?"Together":"College Directory")+'</div><div class="nm">'+esc((lv.emoji||"")+" "+lv.name)+'</div><div class="tx">'+esc(lv.banner_text||"")+'</div><div class="row"><span class="cd" data-cd="'+Date.parse(lv.ends_at)+'">'+left(Date.parse(lv.ends_at))+'</span><button type="button" class="b" data-go="offers">Manage</button><button type="button" class="b d" data-end="'+lv.id+'">End now</button></div></div>';
  if(so)return '<div class="cc-ban none"><div class="k">Next offer · starts in</div><div class="nm">'+esc((so.emoji||"")+" "+so.name)+'</div><div class="tx">'+esc(so.banner_text||"")+'</div><div class="row"><span class="cd" data-cd="'+Date.parse(so.starts_at)+'">'+left(Date.parse(so.starts_at))+'</span><button type="button" class="b" data-go="offers">Manage</button></div></div>';
  return '<div class="cc-ban none"><div class="k">No offer running</div><div class="nm">Normal prices are live</div><div class="tx">Start a time-limited offer and the banner, site prices and payment check switch by themselves.</div><div class="row"><button type="button" class="b" data-neweditor>+ New offer</button></div></div>';}
-function ccQuick(){window.__ccSeat=S.today&&S.today.seatcard;return (window.DP_SNUM?'<div class="cc-quick" data-cc-quick><button type="button" data-cc-snum onclick="window.dpSeniorNums&&window.dpSeniorNums()"><span>📞</span><b>Senior numbers</b><small>Find any senior, call or WhatsApp</small></button><button type="button" data-cc-seat onclick="window.dpSeatStats&&window.dpSeatStats(window.__ccSeat)"><span>🎉</span><b>Seat cards</b><small>Who made and shared, or make one</small></button></div>':'');}
 var VIEW={
  finance:function(){return finView();},
  store:function(){var lv=S.live,full=priceVal("full")*100,lof=liveOffers().filter(function(o){return (o.product||"full_access")==="full_access";})[0],st={now:lof||((window.DP_OFFER_STATE||{}).now)},fo=st.now?Math.min(st.now.price_paise,full||st.now.price_paise):0,t=S.today&&S.today.payments;
@@ -9272,8 +9271,6 @@ var VIEW={
   return '<div class="cc-hero">'+banHTML()+'<div class="cc-tiles">'+
    '<div class="cc-tile"><small>This month</small><b>'+(t&&t.rev_month!=null?R(t.rev_month):"—")+'</b><span>'+(t&&t.count_month!=null?t.count_month+" payments":t?"":"loading…")+'</span></div>'+
    '<div class="cc-tile"><small>Today</small><b>'+(t?t.today:"—")+'</b><span>'+(t?"payments · "+R(t.rev_today):"")+'</span></div>'+
-   (function(){var sc=S.today&&S.today.seatcard;if(!sc)return "";var T=sc.today||{},A=sc.total||{};return '<div class="cc-tile" data-cc-seatcard><small>🎉 Seat cards today</small><b>'+(T.found||0)+'</b><span>made · '+(T.share||0)+' shared · '+(T.open||0)+' opened</span></div>'+
-    '<div class="cc-tile"><small>🎉 Seat cards all time</small><b>'+(A.found||0)+'</b><span>made · '+(A.share||0)+' shared · '+(sc.people_total||0)+' people</span></div>';})()+
    '<div class="cc-tile" style="grid-column:1/-1;flex-direction:row;align-items:center;gap:12px"><div class="cc-ring"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="#e7eeeb" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#d97706" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="'+(138.2*(1-fr)).toFixed(1)+'"/></svg><b>'+sold+'</b></div><div style="display:flex;flex-direction:column;gap:2px"><small>Pro slots</small><b style="font-size:17px">'+sold+' of '+cap+' sold</b><span>'+(lv?(lv.open?"Open for buyers":"Sold out"):"")+'</span></div></div></div></div>'+
    '<div class="cc-gh"><span>What students pay now</span><button type="button" data-go="prices">Edit prices</button></div>'+
    (S.prices?'<div class="cc-g">'+rows.map(function(r){return '<button type="button" class="cc-r" data-jump="'+r[4]+'">'+ic(r[4]==="full"?"store":r[4]==="fresh"||r[4]==="upgrade"?"crown":"tag",r[5])+'<span class="t"><b>'+r[0]+'</b>'+(r[3]?'<small><span class="cc-pill"><i></i>'+esc(r[3])+'</span></small>':'')+'</span><span class="p'+(r[2]>r[1]?" off":"")+'">'+(r[2]>r[1]?'<s>'+R(r[2])+'</s>':'')+R(r[1])+'</span></button>';}).join("")+'</div>':sk(6));},
