@@ -9272,6 +9272,7 @@ var VIEW={
    '<div class="cc-tile"><small>Today</small><b>'+(t?t.today:"—")+'</b><span>'+(t?"payments · "+R(t.rev_today):"")+'</span></div>'+
    (function(){var sc=S.today&&S.today.seatcard;if(!sc)return "";var T=sc.today||{},A=sc.total||{};return '<div class="cc-tile" data-cc-seatcard><small>🎉 Seat cards today</small><b>'+(T.found||0)+'</b><span>made · '+(T.share||0)+' shared · '+(T.open||0)+' opened</span></div>'+
     '<div class="cc-tile"><small>🎉 Seat cards all time</small><b>'+(A.found||0)+'</b><span>made · '+(A.share||0)+' shared · '+(sc.people_total||0)+' people</span></div>';})()+
+   (window.DP_SNUM?'<div class="cc-tile" data-cc-snum role="button" tabindex="0" style="grid-column:1/-1;cursor:pointer" onclick="window.dpSeniorNums&&window.dpSeniorNums()"><small>📞 Senior numbers</small><b style="font-size:16px">Find any senior\'s number</b><span>Search a college, pick a branch, call or WhatsApp</span></div>':'')+
    '<div class="cc-tile" style="grid-column:1/-1;flex-direction:row;align-items:center;gap:12px"><div class="cc-ring"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="#e7eeeb" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#d97706" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="'+(138.2*(1-fr)).toFixed(1)+'"/></svg><b>'+sold+'</b></div><div style="display:flex;flex-direction:column;gap:2px"><small>Pro slots</small><b style="font-size:17px">'+sold+' of '+cap+' sold</b><span>'+(lv?(lv.open?"Open for buyers":"Sold out"):"")+'</span></div></div></div></div>'+
    '<div class="cc-gh"><span>What students pay now</span><button type="button" data-go="prices">Edit prices</button></div>'+
    (S.prices?'<div class="cc-g">'+rows.map(function(r){return '<button type="button" class="cc-r" data-jump="'+r[4]+'">'+ic(r[4]==="full"?"store":r[4]==="fresh"||r[4]==="upgrade"?"crown":"tag",r[5])+'<span class="t"><b>'+r[0]+'</b>'+(r[3]?'<small><span class="cc-pill"><i></i>'+esc(r[3])+'</span></small>':'')+'</span><span class="p'+(r[2]>r[1]?" off":"")+'">'+(r[2]>r[1]?'<s>'+R(r[2])+'</s>':'')+R(r[1])+'</span></button>';}).join("")+'</div>':sk(6));},
@@ -9830,42 +9831,42 @@ addEventListener("scroll",function(){soon(250);},{passive:true});
 try{var rt=document.getElementById("root")||document.body;new MutationObserver(function(){soon(700);}).observe(rt,{childList:true,subtree:true});}catch(_e){}
 setInterval(scan,3000);
 })();</script><style>
-.sc2-pill{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(env(safe-area-inset-bottom,0px) + 104px);z-index:9990;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 16px;border-radius:999px;background:rgba(20,20,24,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);color:#fff;font:600 13.5px/1.2 Inter,-apple-system,system-ui,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.28);opacity:0;transition:opacity .35s,transform .35s;max-width:calc(100vw - 32px)}
-.sc2-pill.on{opacity:1;transform:translateX(-50%) translateY(0)}
-.sc2-pill button{border:0;cursor:pointer;font:inherit}.sc2-pill .go{background:#fff;color:#111;border-radius:999px;padding:8px 14px;font-weight:700;white-space:nowrap}.sc2-pill .x{background:transparent;color:rgba(255,255,255,.7);font-size:16px;padding:4px 6px}
-@media(min-width:900px){.sc2-pill{bottom:28px}}
-.sc2-bg{position:fixed;inset:0;z-index:2147483000;background:rgba(10,10,14,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);display:flex;align-items:flex-end;justify-content:center;animation:sc2f .25s ease}
-@keyframes sc2f{from{opacity:0}to{opacity:1}}@keyframes sc2u{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
-.sc2{width:100%;max-width:980px;max-height:94vh;overflow:auto;background:#f5f5f7;color:#1d1d1f;border-radius:28px 28px 0 0;padding:18px 18px 28px;font-family:Inter,-apple-system,system-ui,sans-serif;animation:sc2u .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,0,0,.3)}
-@media(min-width:760px){.sc2-bg{align-items:center}.sc2{border-radius:28px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;padding:26px}}
-.sc2-h{display:flex;align-items:center;justify-content:space-between;grid-column:1/-1}.sc2-h b{font-size:20px;letter-spacing:-.02em}.sc2-h button{border:0;background:#e5e5ea;border-radius:999px;width:32px;height:32px;font-size:15px;cursor:pointer;color:#1d1d1f}
-.sc2-pv{display:flex;justify-content:center;margin:12px 0}.sc2-pv canvas{width:100%;max-width:400px;height:auto;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
-.sc2-f{display:flex;flex-direction:column;gap:12px}
-.sc2-g{background:#fff;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:9px}
-.sc2-g label{font-size:12px;font-weight:600;color:#6e6e73}
-.sc2-row{display:flex;gap:8px}.sc2 input[type=text],.sc2 input[inputmode]{flex:1;min-width:0;border:1px solid #d2d2d7;background:#fff;border-radius:12px;padding:11px 12px;font:500 15px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;outline:none}
-.sc2 input:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.18)}
-.sc2-b{border:0;border-radius:12px;padding:11px 16px;font:600 15px Inter,-apple-system,system-ui,sans-serif;cursor:pointer;background:#0071e3;color:#fff;white-space:nowrap}
-.sc2-b.s{background:#e8e8ed;color:#1d1d1f}.sc2-b.w{background:#25d366;color:#fff;width:100%;padding:14px;font-size:16px}.sc2-b:disabled{opacity:.5}
-.sc2-msg{font-size:12.5px;color:#6e6e73;min-height:16px}.sc2-msg.ok{color:#1a7f37}.sc2-msg.bad{color:#d70015}
-.sc2-th{display:flex;gap:10px}.sc2-th button{width:44px;height:44px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}.sc2-th button.on{border-color:#0071e3}
-.sc2-note{font-size:11.5px;color:#86868b;text-align:center}
- .sc2-pv{perspective:1100px}.sc2-hang{position:relative;transform-origin:50% -40px;display:flex;justify-content:center;width:100%}.sc2-hang.swing{animation:sc2sw 4.2s ease-in-out infinite}
-@keyframes sc2sw{0%,100%{transform:rotate(-1.8deg)}50%{transform:rotate(1.8deg)}}
-.sc2-tilt{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;transform-style:preserve-3d;width:100%;max-width:400px;display:block;margin:0 auto}
-.sc2-tilt canvas{display:block;width:100%!important;height:auto!important;max-width:none!important}.sc2-tilt.story{max-width:300px}
-.sc2-glare{position:absolute;inset:0;border-radius:22px;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.28),rgba(255,255,255,0) 45%);mix-blend-mode:soft-light}
-.sc2-seg{display:flex;background:#e8e8ed;border-radius:10px;padding:3px;gap:3px}.sc2-seg button{flex:1;border:0;background:transparent;border-radius:8px;padding:8px;font:600 13px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;cursor:pointer}.sc2-seg button.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12)}
-.sc2-tg{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500}.sc2-tg input{appearance:none;-webkit-appearance:none;width:46px;height:28px;border-radius:999px;background:#d1d1d6;position:relative;cursor:pointer;transition:background .2s;flex:none}.sc2-tg input:after{content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .2s}.sc2-tg input:checked{background:#34c759}.sc2-tg input:checked:after{left:20px}
-.sc2-cf{position:absolute;top:-10px;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:sc2cf 2.4s cubic-bezier(.2,.6,.4,1) forwards;z-index:3}
-@keyframes sc2cf{to{transform:translateY(560px) rotate(720deg);opacity:0}}
-@media (prefers-reduced-motion:reduce){.sc2-hang.swing{animation:none}}
-html.sc2-open #noticeBanner,html.sc2-open .dpa-res,html.sc2-open .lr-fab,html.sc2-open .sc2-pill{display:none!important}
+.scd2-pill{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(env(safe-area-inset-bottom,0px) + 104px);z-index:9990;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 16px;border-radius:999px;background:rgba(20,20,24,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);color:#fff;font:600 13.5px/1.2 Inter,-apple-system,system-ui,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.28);opacity:0;transition:opacity .35s,transform .35s;max-width:calc(100vw - 32px)}
+.scd2-pill.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.scd2-pill button{border:0;cursor:pointer;font:inherit}.scd2-pill .go{background:#fff;color:#111;border-radius:999px;padding:8px 14px;font-weight:700;white-space:nowrap}.scd2-pill .x{background:transparent;color:rgba(255,255,255,.7);font-size:16px;padding:4px 6px}
+@media(min-width:900px){.scd2-pill{bottom:28px}}
+.scd2-bg{position:fixed;inset:0;z-index:2147483000;background:rgba(10,10,14,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);display:flex;align-items:flex-end;justify-content:center;animation:scd2f .25s ease}
+@keyframes scd2f{from{opacity:0}to{opacity:1}}@keyframes scd2u{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.scd2{width:100%;max-width:980px;max-height:94vh;overflow:auto;background:#f5f5f7;color:#1d1d1f;border-radius:28px 28px 0 0;padding:18px 18px 28px;font-family:Inter,-apple-system,system-ui,sans-serif;animation:scd2u .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,0,0,.3)}
+@media(min-width:760px){.scd2-bg{align-items:center}.scd2{border-radius:28px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;padding:26px}}
+.scd2-h{display:flex;align-items:center;justify-content:space-between;grid-column:1/-1}.scd2-h b{font-size:20px;letter-spacing:-.02em}.scd2-h button{border:0;background:#e5e5ea;border-radius:999px;width:32px;height:32px;font-size:15px;cursor:pointer;color:#1d1d1f}
+.scd2-pv{display:flex;justify-content:center;margin:12px 0}.scd2-pv canvas{width:100%;max-width:400px;height:auto;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.scd2-f{display:flex;flex-direction:column;gap:12px}
+.scd2-g{background:#fff;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:9px}
+.scd2-g label{font-size:12px;font-weight:600;color:#6e6e73}
+.scd2-row{display:flex;gap:8px}.scd2 input[type=text],.scd2 input[inputmode]{flex:1;min-width:0;border:1px solid #d2d2d7;background:#fff;border-radius:12px;padding:11px 12px;font:500 15px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;outline:none}
+.scd2 input:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.18)}
+.scd2-b{border:0;border-radius:12px;padding:11px 16px;font:600 15px Inter,-apple-system,system-ui,sans-serif;cursor:pointer;background:#0071e3;color:#fff;white-space:nowrap}
+.scd2-b.s{background:#e8e8ed;color:#1d1d1f}.scd2-b.w{background:#25d366;color:#fff;width:100%;padding:14px;font-size:16px}.scd2-b:disabled{opacity:.5}
+.scd2-msg{font-size:12.5px;color:#6e6e73;min-height:16px}.scd2-msg.ok{color:#1a7f37}.scd2-msg.bad{color:#d70015}
+.scd2-th{display:flex;gap:10px}.scd2-th button{width:44px;height:44px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}.scd2-th button.on{border-color:#0071e3}
+.scd2-note{font-size:11.5px;color:#86868b;text-align:center}
+ .scd2-pv{perspective:1100px}.scd2-hang{position:relative;transform-origin:50% -40px;display:flex;justify-content:center;width:100%}.scd2-hang.swing{animation:scd2sw 4.2s ease-in-out infinite}
+@keyframes scd2sw{0%,100%{transform:rotate(-1.8deg)}50%{transform:rotate(1.8deg)}}
+.scd2-tilt{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;transform-style:preserve-3d;width:100%;max-width:400px;display:block;margin:0 auto}
+.scd2-tilt canvas{display:block;width:100%!important;height:auto!important;max-width:none!important}.scd2-tilt.story{max-width:300px}
+.scd2-glare{position:absolute;inset:0;border-radius:22px;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.28),rgba(255,255,255,0) 45%);mix-blend-mode:soft-light}
+.scd2-seg{display:flex;background:#e8e8ed;border-radius:10px;padding:3px;gap:3px}.scd2-seg button{flex:1;border:0;background:transparent;border-radius:8px;padding:8px;font:600 13px Inter,-apple-system,system-ui,sans-serif;color:#1d1d1f;cursor:pointer}.scd2-seg button.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.scd2-tg{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500}.scd2-tg input{appearance:none;-webkit-appearance:none;width:46px;height:28px;border-radius:999px;background:#d1d1d6;position:relative;cursor:pointer;transition:background .2s;flex:none}.scd2-tg input:after{content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .2s}.scd2-tg input:checked{background:#34c759}.scd2-tg input:checked:after{left:20px}
+.scd2-cf{position:absolute;top:-10px;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:scd2cf 2.4s cubic-bezier(.2,.6,.4,1) forwards;z-index:3}
+@keyframes scd2cf{to{transform:translateY(560px) rotate(720deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.scd2-hang.swing{animation:none}}
+html.scd2-open #noticeBanner,html.scd2-open .dpa-res,html.scd2-open .lr-fab,html.scd2-open .scd2-pill{display:none!important}
 </style>
 <script>
 (function(){
 var SBU="https://uwrwtttkqywsmehexmbf.supabase.co",SBK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
-var SID=(function(){try{var x=sessionStorage.getItem("dp_sc2_sid");if(!x){x=Math.random().toString(36).slice(2,12);sessionStorage.setItem("dp_sc2_sid",x);}return x;}catch(e){return "";}})();
+var SID=(function(){try{var x=sessionStorage.getItem("dp_scd2_sid");if(!x){x=Math.random().toString(36).slice(2,12);sessionStorage.setItem("dp_scd2_sid",x);}return x;}catch(e){return "";}})();
 function log(ev,ex){try{var tok=null;try{var t=JSON.parse(localStorage.getItem("sb-uwrwtttkqywsmehexmbf-auth-token")||"null");if(t&&t.expires_at*1000>Date.now())tok=t.access_token;}catch(e){}
  var body=JSON.stringify(Object.assign({event:ev,sid:SID,theme:st.theme,size:st.size},ex||{}));
  var send=function(k){return fetch(SBU+"/rest/v1/seatcard_events",{method:"POST",keepalive:true,headers:{apikey:SBK,Authorization:"Bearer "+k,"Content-Type":"application/json",Prefer:"return=minimal"},body:body});};
@@ -9935,44 +9936,44 @@ function draw(cv){var story=st.size==="story",W=1080,H=story?1920:1350,x=cv.getC
 function el(t,a,c){var e=document.createElement(t);if(a)for(var k in a){if(k==="class")e.className=a[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k]);}(c||[]).forEach(function(ch){if(ch!=null)e.appendChild(typeof ch==="string"?document.createTextNode(ch):ch);});return e;}
 function track(n){try{if(window.gtag)gtag("event",n);}catch(e){}}
 var root=null;
-function open(rank){if(root)return;setTimeout(function(){log("open");},0);if(rank&&typeof rank==="object"){if(rank.course)st.course=cleanCourse(rank.course);if(rank.inst)st.inst=titleCase(rank.inst);if(rank.name&&!st.name)st.name=String(rank.name).slice(0,40);rank="";}track("seatcard_open");try{localStorage.setItem("dp_sc2_seen","1");}catch(e){}hidePill();
- var cv=el("canvas",{"aria-label":"Your seat card preview"});var glare=el("div",{class:"sc2-glare"});var tilt=el("div",{class:"sc2-tilt"},[cv,glare]);var hang=el("div",{class:"sc2-hang"},[tilt]);var pv=el("div",{class:"sc2-pv"},[hang]);function fx(){hang.className="sc2-hang"+(st.lan?" swing":"");tilt.className="sc2-tilt"+(st.size==="story"?" story":"");}fx();
+function open(rank){if(root)return;setTimeout(function(){log("open");},0);if(rank&&typeof rank==="object"){if(rank.course)st.course=cleanCourse(rank.course);if(rank.inst)st.inst=titleCase(rank.inst);if(rank.name&&!st.name)st.name=String(rank.name).slice(0,40);rank="";}track("seatcard_open");try{localStorage.setItem("dp_scd2_seen","1");}catch(e){}hidePill();
+ var cv=el("canvas",{"aria-label":"Your seat card preview"});var glare=el("div",{class:"scd2-glare"});var tilt=el("div",{class:"scd2-tilt"},[cv,glare]);var hang=el("div",{class:"scd2-hang"},[tilt]);var pv=el("div",{class:"scd2-pv"},[hang]);function fx(){hang.className="scd2-hang"+(st.lan?" swing":"");tilt.className="scd2-tilt"+(st.size==="story"?" story":"");}fx();
  pv.addEventListener("pointermove",function(e){var r=tilt.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;tilt.style.setProperty("--ry",(dx*14).toFixed(2)+"deg");tilt.style.setProperty("--rx",(-dy*10).toFixed(2)+"deg");tilt.style.setProperty("--gx",((dx+.5)*100).toFixed(0)+"%");tilt.style.setProperty("--gy",((dy+.5)*100).toFixed(0)+"%");});pv.addEventListener("pointerleave",function(){tilt.style.setProperty("--ry","0deg");tilt.style.setProperty("--rx","0deg");});
- function confetti(){var C=["#f43f5e","#f59e0b","#10b981","#3b82f6","#a855f7","#fde047"];for(var i=0;i<70;i++){var d=el("i",{class:"sc2-cf",style:"left:"+(Math.random()*100)+"%;background:"+C[i%C.length]+";animation-delay:"+(Math.random()*.4).toFixed(2)+"s;transform:rotate("+(Math.random()*180|0)+"deg)"});hang.appendChild(d);setTimeout(function(n){return function(){n.remove();};}(d),3000);}}var msg=el("div",{class:"sc2-msg"});
- var rk=el("input",{inputmode:"numeric",placeholder:"Your NEET PG rank (AIR)",value:rank||st.rank||"","data-sc2-rank":"1"});
+ function confetti(){var C=["#f43f5e","#f59e0b","#10b981","#3b82f6","#a855f7","#fde047"];for(var i=0;i<70;i++){var d=el("i",{class:"scd2-cf",style:"left:"+(Math.random()*100)+"%;background:"+C[i%C.length]+";animation-delay:"+(Math.random()*.4).toFixed(2)+"s;transform:rotate("+(Math.random()*180|0)+"deg)"});hang.appendChild(d);setTimeout(function(n){return function(){n.remove();};}(d),3000);}}var msg=el("div",{class:"scd2-msg"});
+ var rk=el("input",{inputmode:"numeric",placeholder:"Your NEET PG rank (AIR)",value:rank||st.rank||"","data-scd2-rank":"1"});
  var nm=el("input",{type:"text",placeholder:"Your name (optional)",value:st.name,maxlength:"40"});
  var co=el("input",{type:"text",placeholder:"Course, e.g. MD Radio-Diagnosis",value:st.course});
  var ins=el("input",{type:"text",placeholder:"College",value:st.inst});
  var file=el("input",{type:"file",accept:"image/*",style:"display:none"});
  var re=function(){st.name=nm.value;st.course=co.value;st.inst=ins.value;draw(cv);};
  [nm,co,ins].forEach(function(i){i.addEventListener("input",re);});
- var find=el("button",{class:"sc2-b","data-sc2-find":"1",onclick:function(){lookup();}},["Find my seat"]);
- function lookup(){var r=parseInt(String(rk.value).replace(/\D/g,""),10);if(!r){msg.className="sc2-msg bad";msg.textContent="Type your rank first.";return;}st.rank=String(r);find.disabled=true;msg.className="sc2-msg";msg.textContent="Looking up the MCC Round 1 result…";
-  fetch(SEAT_URL+r).then(function(x){return x.json();}).then(function(d){find.disabled=false;if(d&&d.ok){st.course=d.course;st.inst=d.inst;st.quota=d.quota==="AIQ"?"All India":d.quota;st.cat=d.cat;co.value=cleanCourse(d.course);ins.value=titleCase(d.inst);st.course=co.value;st.inst=ins.value;msg.className="sc2-msg ok";msg.textContent="✓ Found: Round 1 allotment. You can edit anything below.";track("seatcard_found");log("found",seatEx());confetti();}else{st.quota="";st.cat="";log("notfound",{rank:r});msg.className="sc2-msg bad";msg.textContent="This rank isn't in the MCC Round 1 list. Type your course and college below (state seats work too).";}draw(cv);}).catch(function(){find.disabled=false;msg.className="sc2-msg bad";msg.textContent="Couldn't reach the server. Type your course and college below.";draw(cv);});}
+ var find=el("button",{class:"scd2-b","data-scd2-find":"1",onclick:function(){lookup();}},["Find my seat"]);
+ function lookup(){var r=parseInt(String(rk.value).replace(/\D/g,""),10);if(!r){msg.className="scd2-msg bad";msg.textContent="Type your rank first.";return;}st.rank=String(r);find.disabled=true;msg.className="scd2-msg";msg.textContent="Looking up the MCC Round 1 result…";
+  fetch(SEAT_URL+r).then(function(x){return x.json();}).then(function(d){find.disabled=false;if(d&&d.ok){st.course=d.course;st.inst=d.inst;st.quota=d.quota==="AIQ"?"All India":d.quota;st.cat=d.cat;co.value=cleanCourse(d.course);ins.value=titleCase(d.inst);st.course=co.value;st.inst=ins.value;msg.className="scd2-msg ok";msg.textContent="✓ Found: Round 1 allotment. You can edit anything below.";track("seatcard_found");log("found",seatEx());confetti();}else{st.quota="";st.cat="";log("notfound",{rank:r});msg.className="scd2-msg bad";msg.textContent="This rank isn't in the MCC Round 1 list. Type your course and college below (state seats work too).";}draw(cv);}).catch(function(){find.disabled=false;msg.className="scd2-msg bad";msg.textContent="Couldn't reach the server. Type your course and college below.";draw(cv);});}
  rk.addEventListener("keydown",function(e){if(e.key==="Enter")lookup();});
- var phBtn=el("button",{class:"sc2-b s",onclick:function(){file.click();}},[st.img?"Change photo":"📷 Add your photo"]);
+ var phBtn=el("button",{class:"scd2-b s",onclick:function(){file.click();}},[st.img?"Change photo":"📷 Add your photo"]);
  file.addEventListener("change",function(){var f=file.files&&file.files[0];if(!f)return;var u=URL.createObjectURL(f);var im=new Image();im.onload=function(){st.img=im;phBtn.textContent="Change photo";draw(cv);track("seatcard_photo");log("photo");};im.src=u;});
- var th=el("div",{class:"sc2-th"});Object.keys(THEMES).forEach(function(k){var b=el("button",{class:k===st.theme?"on":"","aria-label":k+" style",style:"background:"+THEMES[k].sw,onclick:function(){st.theme=k;[].forEach.call(th.children,function(c){c.className="";});b.className="on";draw(cv);}});th.appendChild(b);});
- var seg=el("div",{class:"sc2-seg"});[["post","Post 4:5"],["story","Status 9:16"]].forEach(function(o){var b=el("button",{class:st.size===o[0]?"on":"",onclick:function(){st.size=o[0];[].forEach.call(seg.children,function(c){c.className="";});b.className="on";fx();draw(cv);}},[o[1]]);seg.appendChild(b);});
- function tgl(label,key){var i=el("input",{type:"checkbox"});i.checked=!!st[key];i.addEventListener("change",function(){st[key]=i.checked;fx();draw(cv);});return el("label",{class:"sc2-tg"},[label,i]);}
- var share=el("button",{class:"sc2-b w","data-sc2-share":"1",onclick:function(){doShare(cv);}},["Share on WhatsApp"]);
- var dl=el("button",{class:"sc2-b s",style:"width:100%",onclick:function(){download(cv);}},["Save image"]);
+ var th=el("div",{class:"scd2-th"});Object.keys(THEMES).forEach(function(k){var b=el("button",{class:k===st.theme?"on":"","aria-label":k+" style",style:"background:"+THEMES[k].sw,onclick:function(){st.theme=k;[].forEach.call(th.children,function(c){c.className="";});b.className="on";draw(cv);}});th.appendChild(b);});
+ var seg=el("div",{class:"scd2-seg"});[["post","Post 4:5"],["story","Status 9:16"]].forEach(function(o){var b=el("button",{class:st.size===o[0]?"on":"",onclick:function(){st.size=o[0];[].forEach.call(seg.children,function(c){c.className="";});b.className="on";fx();draw(cv);}},[o[1]]);seg.appendChild(b);});
+ function tgl(label,key){var i=el("input",{type:"checkbox"});i.checked=!!st[key];i.addEventListener("change",function(){st[key]=i.checked;fx();draw(cv);});return el("label",{class:"scd2-tg"},[label,i]);}
+ var share=el("button",{class:"scd2-b w","data-scd2-share":"1",onclick:function(){doShare(cv);}},["Share on WhatsApp"]);
+ var dl=el("button",{class:"scd2-b s",style:"width:100%",onclick:function(){download(cv);}},["Save image"]);
  var close=el("button",{"aria-label":"Close",onclick:shut},["✕"]);
- var box=el("div",{class:"sc2",role:"dialog","aria-modal":"true","aria-label":"My seat card",onclick:function(e){e.stopPropagation();}},[
-  el("div",{class:"sc2-h"},[el("b",null,["🎉 My seat card"]),close]),
+ var box=el("div",{class:"scd2",role:"dialog","aria-modal":"true","aria-label":"My seat card",onclick:function(e){e.stopPropagation();}},[
+  el("div",{class:"scd2-h"},[el("b",null,["🎉 My seat card"]),close]),
   pv,
-  el("div",{class:"sc2-f"},[
-   el("div",{class:"sc2-g"},[el("label",null,["Your rank"]),el("div",{class:"sc2-row"},[rk,find]),msg]),
-   el("div",{class:"sc2-g"},[el("label",null,["Course and college"]),co,ins]),
-   el("div",{class:"sc2-g"},[el("label",null,["You"]),nm,phBtn,file,el("div",{class:"sc2-note"},["Your photo stays on your phone. Nothing is uploaded."])]),
-   el("div",{class:"sc2-g"},[el("label",null,["Style"]),th,seg,tgl("Hanging lanyard","lan"),tgl("Add Dr. before my name","dr")]),
+  el("div",{class:"scd2-f"},[
+   el("div",{class:"scd2-g"},[el("label",null,["Your rank"]),el("div",{class:"scd2-row"},[rk,find]),msg]),
+   el("div",{class:"scd2-g"},[el("label",null,["Course and college"]),co,ins]),
+   el("div",{class:"scd2-g"},[el("label",null,["You"]),nm,phBtn,file,el("div",{class:"scd2-note"},["Your photo stays on your phone. Nothing is uploaded."])]),
+   el("div",{class:"scd2-g"},[el("label",null,["Style"]),th,seg,tgl("Hanging lanyard","lan"),tgl("Add Dr. before my name","dr")]),
    share,dl])]);
- root=el("div",{class:"sc2-bg",onclick:shut},[box]);document.body.appendChild(root);document.documentElement.style.overflow="hidden";document.documentElement.classList.add("sc2-open");
+ root=el("div",{class:"scd2-bg",onclick:shut},[box]);document.body.appendChild(root);document.documentElement.style.overflow="hidden";document.documentElement.classList.add("scd2-open");
  document.addEventListener("keydown",esc);
  var go=function(){draw(cv);if(rk.value)lookup();};if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load("700 40px Inter"),document.fonts.load("500 30px Inter"),document.fonts.load("600 30px Inter")]).then(go,go);}else go();
 }
 function esc(e){if(e.key==="Escape")shut();}
-function shut(){if(!root)return;root.remove();root=null;document.documentElement.style.overflow="";document.documentElement.classList.remove("sc2-open");document.removeEventListener("keydown",esc);}
+function shut(){if(!root)return;root.remove();root=null;document.documentElement.style.overflow="";document.documentElement.classList.remove("scd2-open");document.removeEventListener("keydown",esc);}
 function caption(){var c=cleanCourse(st.course),i=titleCase(st.inst);return (c&&i?"🎉 I got "+c+" at "+i+" in NEET PG 2026 Round 1!":"🎉 My NEET PG 2026 seat!")+"\n\nMake your seat card and find your batchmates on DocPulsee 👉 https://docpulsee.in/?card=1";}
 function blobOf(cv){return new Promise(function(res){cv.toBlob(function(b){res(b);},"image/png");});}
 function download(cv){track("seatcard_save");log("save",seatEx());blobOf(cv).then(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="docpulsee-seat-card.png";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);});}
@@ -9981,8 +9982,8 @@ function doShare(cv){track("seatcard_share");log("share",seatEx());blobOf(cv).th
  else{download(cv);setTimeout(function(){window.open("https://wa.me/?text="+encodeURIComponent(caption()),"_blank");},600);}});}
 // floating capsule
 var pill=null;function hidePill(){if(pill){pill.classList.remove("on");var p=pill;setTimeout(function(){p.remove();},400);pill=null;}}
-function showPill(){try{if(localStorage.getItem("dp_sc2_seen")||Number(localStorage.getItem("dp_sc2_x")||0)>Date.now())return;}catch(e){}
- pill=el("div",{class:"sc2-pill",role:"status"},["🎉 Got your Round 1 seat?",el("button",{class:"go","data-sc2-pill":"1",onclick:function(){open();}},["Make your card"]),el("button",{class:"x","aria-label":"Dismiss",onclick:function(){try{localStorage.setItem("dp_sc2_x",String(Date.now()+3*86400000));}catch(e){}hidePill();}},["✕"])]);
+function showPill(){try{if(localStorage.getItem("dp_scd2_seen")||Number(localStorage.getItem("dp_scd2_x")||0)>Date.now())return;}catch(e){}
+ pill=el("div",{class:"scd2-pill",role:"status"},["🎉 Got your Round 1 seat?",el("button",{class:"go","data-scd2-pill":"1",onclick:function(){open();}},["Make your card"]),el("button",{class:"x","aria-label":"Dismiss",onclick:function(){try{localStorage.setItem("dp_scd2_x",String(Date.now()+3*86400000));}catch(e){}hidePill();}},["✕"])]);
  document.body.appendChild(pill);requestAnimationFrame(function(){requestAnimationFrame(function(){if(pill)pill.classList.add("on");});});}
 window.dpOpenSeatCard=open;
 function boot(){var m=location.search.match(/[?&]card=(\d*)/);if(m){setTimeout(function(){open(m[1]||"");},900);return;}}  /* no floating capsule (owner): entry = account menu + ?card=1 */
