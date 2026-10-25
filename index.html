@@ -7500,6 +7500,9 @@ function DocFixer({title,initial,saveKey,onClose,onSaved}){const[preset,setPrese
     pH("div",{className:"dpf-acts"},pH("a",{href:res.url,download:fname,className:"dpf-btn pri","data-dpf-download":true},"⬇ Download"),pH("button",{type:"button",className:"dpf-btn",onClick:share},"Share"),saveKey?pH("button",{type:"button",className:"dpf-btn",onClick:save,disabled:saved},saved?"✓ Saved":"Save in my docs"):null),pH("small",{className:"dpf-dim"},"File name: "+fname)):null,
    pH("button",{type:"button",className:"dpf-go",onClick:make,disabled:!!busy||!pages.length,"data-dpf-make":true},res?"Make it again":"Make my file"),
    pH("p",{className:"dpf-foot"},"Everything happens on your phone. Your documents are never uploaded to DocPulsee."))));}
+function PlanDocDel({k,name,ver,onDone}){const[has,setHas]=React.useState(false);const[ask,setAsk]=React.useState(false);React.useEffect(()=>{let dead=false;Promise.all([walletGet(k).catch(()=>null),walletGet(k+"|ready").catch(()=>null)]).then(([a,b])=>{if(!dead)setHas(!!(a||b));});return()=>{dead=true;};},[k,ver]);
+ React.useEffect(()=>{if(!ask)return;const t=setTimeout(()=>setAsk(false),3500);return()=>clearTimeout(t);},[ask]);
+ if(!has)return null;return pH("button",{type:"button",className:"dpw-del"+(ask?" ask":""),onClick:async()=>{if(!ask){setAsk(true);return;}await walletDel(k).catch(()=>{});await walletDel(k+"|ready").catch(()=>{});setAsk(false);setHas(false);onDone&&onDone();},"aria-label":(ask?"Tap again to delete saved files of ":"Delete saved files of ")+name,"data-dpw-del":name},ask?"Delete?":"\uD83D\uDDD1");}
 function PlanReadyBtn({k,name,ver,onOpen}){const[has,setHas]=React.useState(false);React.useEffect(()=>{let dead=false;walletGet(k+"|ready").then(b=>{if(!dead)setHas(!!b);}).catch(()=>{});return()=>{dead=true;};},[k,ver]);return pH("button",{type:"button",className:"dpw-up"+(has?" on":""),onClick:onOpen,"aria-label":(has?"Upload-ready file saved for ":"Make upload-ready file for ")+name,"data-dpw-ready":name},has?"✓ PDF":"PDF");}
 
 function PlanDocThumb({k,ver,onView}){const[url,setUrl]=React.useState(null);React.useEffect(()=>{let u=null,dead=false;walletGet(k).then(b=>{if(b&&!dead){u=URL.createObjectURL(b);setUrl(b.type==="application/pdf"?"pdf:"+u:u);}else setUrl(null);}).catch(()=>{});return()=>{dead=true;if(u)URL.revokeObjectURL(u);};},[k,ver]);return url?(url.indexOf("pdf:")===0?pH("a",{className:"dpw-th dpw-thp",href:url.slice(4),target:"_blank",rel:"noopener","aria-label":"Open saved PDF"},"PDF"):pH("button",{type:"button",className:"dpw-th",onClick:()=>onView(url),"aria-label":"View photo"},pH("img",{src:url,alt:""}))):null;}
@@ -7523,9 +7526,10 @@ function PlanDocs({p,set}){const[rep,setRep]=React.useState(false);const prof0=w
    pH("div",{className:"dpw-tx",onClick:()=>tog(k)},pH("b",null,it[0]),it[1]?pH("small",null,it[1]):null),
    pH(PlanDocThumb,{k,ver:ver[k]||0,onView:setView}),
    pH("button",{type:"button",className:"dpw-cam",onClick:()=>pick(k),"aria-label":"Add photo of "+it[0]},"📷"),
-   pH(PlanReadyBtn,{k,name:it[0],ver:ver[k]||0,onOpen:async()=>{const b=await walletGet(k).catch(()=>null);setFix({title:it[0],initial:b||null,saveKey:k+"|ready",k});}}));}))),
+   pH(PlanReadyBtn,{k,name:it[0],ver:ver[k]||0,onOpen:async()=>{const b=await walletGet(k).catch(()=>null);setFix({title:it[0],initial:b||null,saveKey:k+"|ready",k});}}),
+   pH(PlanDocDel,{k,name:it[0],ver:ver[k]||0,onDone:()=>setVer(v=>({...v,[k]:(v[k]||0)+1}))}));}))),
   scope==="st"&&SD&&SD.src?pH("p",{className:"dpp-foot"},"From "+SD.src+(SD.y?" ("+SD.y+")":"")+". States add documents by notice, so check the latest one.",SD.u?pH("a",{href:SD.u,target:"_blank",rel:"noopener"}," Official site \u2197"):null):null,
-  pH("p",{className:"dpp-foot"},"Photos and PDFs are stored only on this phone, never uploaded. Ticks are saved to your plan so you see them on any device. Always carry the originals."),
+  pH("p",{className:"dpp-foot"},"Photos and PDFs are stored only on this phone, never uploaded. Tap \uD83D\uDDD1 to delete a saved file. Ticks are saved to your plan so you see them on any device. Always carry the originals."),
   view?pH("div",{className:"dpw-view",onClick:()=>setView(null)},pH("img",{src:view,alt:"Document photo"}),pH("span",null,"Tap to close")):null,
   fix?pH(DocFixer,{title:fix.title,initial:fix.initial,saveKey:fix.saveKey,onClose:()=>setFix(null),onSaved:()=>{if(fix.k){const kk=fix.k;setVer(v=>({...v,[kk]:(v[kk]||0)+1}));if(!ticks[kk])set({docs:{...ticks,[kk]:true}});}}}):null);}
 function PlanHub({onClose,start}){const[p,set]=usePlan();const[tab,setTab]=React.useState(start||(Number(p.rank)>0&&(p.branches||[]).length?"seats":"me"));const paid=!!window.__dpIsPaid;const rx=useRuleRx(paid);
@@ -7648,6 +7652,7 @@ function App(){const[__pt,__setPt]=React.useState(0);React.useEffect(()=>{const 
 .dpw-it.on .dpw-tx b{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--good) 60%,transparent)}
 .dpw-cam{border:1px solid var(--border);background:var(--surface);border-radius:10px;width:34px;height:34px;cursor:pointer;flex-shrink:0}
 .dpw-th{border:0;padding:0;background:none;cursor:pointer;flex-shrink:0}.dpw-th img{width:34px;height:34px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.dpw-del{border:1px solid var(--border);background:var(--surface);border-radius:10px;min-width:34px;height:34px;padding:0 6px;cursor:pointer;flex-shrink:0;font:inherit;font-size:13px;color:#b42318}.dpw-del.ask{background:#b42318;color:#fff;border-color:#b42318;font-size:10.5px;font-weight:900}
 .dpw-up{border:1px solid var(--border);background:var(--surface);border-radius:10px;min-width:40px;height:34px;padding:0 6px;cursor:pointer;flex-shrink:0;font:inherit;font-size:10.5px;font-weight:900;color:var(--accent)}
 .dpw-up.on{background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 45%,var(--border));color:var(--good)}
 .dpw-thp{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:1px solid var(--border);font-size:10px;font-weight:900;color:#b42318;background:var(--surface);text-decoration:none}
