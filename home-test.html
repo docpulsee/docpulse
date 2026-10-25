@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>window.DP_LCR=true;</script><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
+<head><script>window.DP_SNUM=true;</script><script>window.DP_LCR=true;</script><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
 T.add=function(){for(var i=0;i<arguments.length;i++){if(!this.contains(arguments[i]))return A.apply(this,arguments);}};
 T.remove=function(){for(var i=0;i<arguments.length;i++){if(this.contains(arguments[i]))return R.apply(this,arguments);}};
 E.setAttribute=function(n,v){if(n!=="src"&&n!=="href"&&n!=="value"&&this.getAttribute(n)===String(v))return;return S.call(this,n,v);};}catch(e){}})();</script><meta name="robots" content="noindex"><script id="dp-theme-boot">(function(){
@@ -9272,6 +9272,7 @@ var VIEW={
    '<div class="cc-tile"><small>Today</small><b>'+(t?t.today:"—")+'</b><span>'+(t?"payments · "+R(t.rev_today):"")+'</span></div>'+
    (function(){var sc=S.today&&S.today.seatcard;if(!sc)return "";var T=sc.today||{},A=sc.total||{};return '<div class="cc-tile" data-cc-seatcard><small>🎉 Seat cards today</small><b>'+(T.found||0)+'</b><span>made · '+(T.share||0)+' shared · '+(T.open||0)+' opened</span></div>'+
     '<div class="cc-tile"><small>🎉 Seat cards all time</small><b>'+(A.found||0)+'</b><span>made · '+(A.share||0)+' shared · '+(sc.people_total||0)+' people</span></div>';})()+
+   (window.DP_SNUM?'<div class="cc-tile" data-cc-snum role="button" tabindex="0" style="grid-column:1/-1;cursor:pointer" onclick="window.dpSeniorNums&&window.dpSeniorNums()"><small>📞 Senior numbers</small><b style="font-size:16px">Find any senior\'s number</b><span>Search a college, pick a branch, call or WhatsApp</span></div>':'')+
    '<div class="cc-tile" style="grid-column:1/-1;flex-direction:row;align-items:center;gap:12px"><div class="cc-ring"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="#e7eeeb" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#d97706" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="'+(138.2*(1-fr)).toFixed(1)+'"/></svg><b>'+sold+'</b></div><div style="display:flex;flex-direction:column;gap:2px"><small>Pro slots</small><b style="font-size:17px">'+sold+' of '+cap+' sold</b><span>'+(lv?(lv.open?"Open for buyers":"Sold out"):"")+'</span></div></div></div></div>'+
    '<div class="cc-gh"><span>What students pay now</span><button type="button" data-go="prices">Edit prices</button></div>'+
    (S.prices?'<div class="cc-g">'+rows.map(function(r){return '<button type="button" class="cc-r" data-jump="'+r[4]+'">'+ic(r[4]==="full"?"store":r[4]==="fresh"||r[4]==="upgrade"?"crown":"tag",r[5])+'<span class="t"><b>'+r[0]+'</b>'+(r[3]?'<small><span class="cc-pill"><i></i>'+esc(r[3])+'</span></small>':'')+'</span><span class="p'+(r[2]>r[1]?" off":"")+'">'+(r[2]>r[1]?'<s>'+R(r[2])+'</s>':'')+R(r[1])+'</span></button>';}).join("")+'</div>':sk(6));},
@@ -9989,5 +9990,53 @@ function boot(){var m=location.search.match(/[?&]card=(\d*)/);if(m){setTimeout(f
 if(document.readyState==="complete")boot();else window.addEventListener("load",boot);
 })();
 </script>
-</body>
+<style>
+.snm-bg{position:fixed;inset:0;z-index:2147483200;background:rgba(10,20,18,.45);display:flex;align-items:flex-end;justify-content:center}
+.snm{background:var(--surface,#fff);color:var(--text,#0f172a);width:100%;max-width:640px;max-height:92vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;font:14px Inter,system-ui,sans-serif;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+@media(min-width:700px){.snm-bg{align-items:center}.snm{border-radius:20px}}
+.snm-h{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid var(--border,#e2e8e5)}.snm-h b{flex:1;font-size:16px}
+.snm-h button{border:0;background:#0f6e5c;color:#fff;font-weight:800;border-radius:999px;padding:8px 14px;cursor:pointer}
+.snm-f{display:flex;flex-direction:column;gap:8px;padding:12px 16px}
+.snm-f input,.snm-f select{border:1px solid var(--border,#d6ddd9);border-radius:12px;padding:10px 12px;font:600 14px Inter,system-ui,sans-serif;background:var(--surface,#fff);color:inherit}
+.snm-b{overflow:auto;padding:0 16px 16px;display:flex;flex-direction:column;gap:8px}
+.snm-c{border:1px solid var(--border,#e2e8e5);border-radius:14px;padding:10px 12px;cursor:pointer;background:transparent;color:inherit;text-align:left;font:inherit}
+.snm-c small{display:block;opacity:.65;font-size:12px}
+.snm-r{border:1px solid var(--border,#e2e8e5);border-radius:14px;padding:10px 12px}
+.snm-r .t{font-weight:800}.snm-r .m{font-size:12px;opacity:.7}
+.snm-r .ph{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.snm-r a{text-decoration:none;font-weight:800;font-size:12.5px;border-radius:999px;padding:5px 10px;background:rgba(15,110,92,.1);color:#0f6e5c}
+.snm-r a.wa{background:rgba(37,211,102,.14);color:#128c4a}
+.snm-go{border:0;background:#0f6e5c;color:#fff;font-weight:800;border-radius:12px;padding:11px;cursor:pointer;font:800 14px Inter,system-ui,sans-serif}
+.snm-note{font-size:12px;opacity:.7;margin:0}
+.snm-back{border:0;background:none;color:#0f6e5c;font-weight:800;cursor:pointer;padding:0;text-align:left}
+</style><script>(function(){
+var D=null,P=null;function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function load(){if(P)return P;P=fetch("/seniors.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){D=d;return d;});return P;}
+function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
+function open(q0){var bg=document.createElement("div");bg.className="snm-bg";bg.setAttribute("data-snum",1);
+ bg.innerHTML='<div class="snm" role="dialog" aria-label="Senior numbers"><div class="snm-h"><b>📞 Senior numbers</b><button type="button" class="x">Done</button></div><div class="snm-f"><input class="q" placeholder="College or hospital, e.g. Pushpanjali Agra" autocomplete="off"><p class="snm-note">2025 allottees (MCC). Owner only: numbers come from the server after your owner code is checked.</p></div><div class="snm-b"></div></div>';
+ document.body.appendChild(bg);var B=bg.querySelector(".snm-b"),Q=bg.querySelector(".q");
+ bg.querySelector(".x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
+ function list(){var q=norm(Q.value);if(q.length<3){B.innerHTML='<p class="snm-note">Type at least 3 letters.</p>';return;}
+  var ws=q.split(" ");var cnt={};D.r.forEach(function(r){cnt[r[1]]=(cnt[r[1]]||0)+1;});
+  var hits=[];D.i.forEach(function(x,k){var t=norm(x[0]+" "+x[1]);if(ws.every(function(w){return t.indexOf(w)>=0;})&&cnt[k])hits.push(k);});
+  if(!hits.length){B.innerHTML='<p class="snm-note">No 2025 allottees found for that. Try one word of the name, e.g. "pushpanjali".</p>';return;}
+  B.innerHTML=hits.slice(0,40).map(function(k){return '<button type="button" class="snm-c" data-k="'+k+'"><b>'+esc(D.i[k][0])+'</b><small>'+esc(D.i[k][1])+' · '+cnt[k]+' seniors</small></button>';}).join("");
+  Array.prototype.forEach.call(B.querySelectorAll(".snm-c"),function(b){b.onclick=function(){inst(+b.getAttribute("data-k"));};});}
+ function inst(k){var rows=D.r.filter(function(r){return r[1]===k;});var sps={};rows.forEach(function(r){sps[r[2]]=1;});
+  var opts=Object.keys(sps).map(Number).sort(function(a,b){return D.sp[a]<D.sp[b]?-1:1;});
+  B.innerHTML='<button type="button" class="snm-back">‹ Back</button><div><b>'+esc(D.i[k][0])+'</b><div class="snm-note">'+esc(D.i[k][1])+' · '+rows.length+' seniors (2025)</div></div><select class="sp"><option value="">All branches</option>'+opts.map(function(s){return '<option value="'+s+'">'+esc(D.sp[s])+'</option>';}).join("")+'</select><button type="button" class="snm-go">Show numbers</button><div class="out"></div>';
+  B.querySelector(".snm-back").onclick=list;var S=B.querySelector(".sp"),O=B.querySelector(".out"),G=B.querySelector(".snm-go");
+  function rs(){var v=S.value;return rows.filter(function(r){return v===""||r[2]===+v;}).sort(function(a,b){return a[0]-b[0];}).slice(0,200);}
+  S.onchange=function(){O.innerHTML="";};
+  G.onclick=function(){var R=rs();G.disabled=true;G.textContent="Loading…";
+   if(typeof sb==="undefined"||!sb||!sb.rpc){O.innerHTML='<p class="snm-note">Not connected. Reload and try again.</p>';G.disabled=false;G.textContent="Show numbers";return;}
+   sb.rpc("owner_today_seniors",{p_ranks:R.map(function(r){return r[0];})}).then(function(res){G.disabled=false;G.textContent="Show numbers";
+    if(res.error){O.innerHTML='<p class="snm-note">'+(/not allowed/i.test(res.error.message)?"Unlock the owner panel with your owner code first.":esc(res.error.message))+'</p>';return;}
+    var M={};(res.data||[]).forEach(function(x){M[x.rank]=x;});
+    O.innerHTML='<p class="snm-note">'+R.length+' seniors · '+Object.keys(M).length+' with contact details</p>'+R.map(function(r){var c=M[r[0]]||{};var mob=String(c.mobile||"").replace(/\D/g,"");var wa=mob.length===10?"91"+mob:mob;
+     return '<div class="snm-r" data-snum-row><div class="t">'+esc(c.name||"Name not on file")+'</div><div class="m">'+esc(D.sp[r[2]])+' · Rank '+r[0]+' · '+esc(r[3])+' '+esc(r[4])+' · '+esc(r[5])+'</div><div class="ph">'+(mob?'<a href="tel:+'+esc(wa)+'">📞 '+esc(c.mobile)+'</a><a class="wa" href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="snm-note">No number</span>')+(c.email?'<a href="mailto:'+esc(c.email)+'">✉️ '+esc(c.email)+'</a>':'')+'</div></div>';}).join("");
+   });};}
+ Q.oninput=function(){if(D)list();};B.innerHTML='<p class="snm-note">Loading list…</p>';load().then(function(){if(q0){Q.value=q0;}list();Q.focus();}).catch(function(){B.innerHTML='<p class="snm-note">Could not load the seniors list.</p>';});}
+window.dpSeniorNums=open;})();</script></body>
 </html>
