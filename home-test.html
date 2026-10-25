@@ -7078,7 +7078,7 @@ function askRules(q,S,rx,rules){const ql=" "+String(q||"").toLowerCase()+" ";if(
  const src=it=>{const x=rx&&rx.src&&rx.src[it.s];return[(x&&x.t)||"",it.p||""].filter(Boolean).join(", ")+(it.y?" ("+it.y+")":"");};
  const cand=[];if(S!=="MCC"&&rx&&rx.st&&rx.st[S]){const o=rx.st[S];for(const k in o){const it=o[k];if(it&&it.t)cand.push({h:(RME_ITEM[k]||k),t:it.t,key:k,src:src(it)});}}
  (rules||[]).forEach(r=>{if(r&&r[0]===S&&r[3])cand.push({h:r[2]||"Rule",t:r[3],key:"",src:[r[6]||"",r[5]?String(r[5]):""].filter(Boolean).join(" · ")});});
- cand.forEach(c=>{const tl=(" "+c.h+" "+c.t+" ").toLowerCase();let sc=0;qg.forEach(g=>{if(ASK_G[g].some(w=>tl.includes(w)))sc+=(g[0]==="r"&&g.length===2?2:3);if(ASK_K[c.key]&&ASK_K[c.key].includes(g))sc+=4;});words.forEach(w=>{if(tl.includes(w))sc+=1;});c.sc=sc;});
+ cand.forEach(c=>{const tl=(" "+c.h+" "+c.t+" ").toLowerCase();let sc=0;qg.forEach(g=>{if(ASK_G[g].some(w=>tl.includes(w)))sc+=(g[0]==="r"&&g.length===2?2:3);if(ASK_K[c.key]&&ASK_K[c.key].includes(g))sc+=(g[0]==="r"&&g.length===2?2:6);});words.forEach(w=>{if(tl.includes(w))sc+=1;});c.sc=sc;});
  return{S,list:cand.filter(c=>c.sc>=4).sort((a,b)=>b.sc-a.sc).slice(0,3)};}
 function IdcAsk({state,rx,paid,onDone}){const rules=useRuleData(paid,null);const[q,setQ]=React.useState("");const[st,setSt]=React.useState(state||"MCC");
  const states=rx&&rx.st?Object.keys(rx.st).sort():[];const res=React.useMemo(()=>askRules(q,st,rx,rules),[q,st,rx,rules]);
