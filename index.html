@@ -7449,12 +7449,14 @@ function dpfJpeg(c,q){return new Promise(res=>c.toBlob(b=>{b.arrayBuffer().then(
 function dpfPdf(imgs,pad){const enc=new TextEncoder();const parts=[];let len=0;const offs=[];const push=x=>{const b=typeof x==="string"?enc.encode(x):x;parts.push(b);len+=b.length;};
  push("%PDF-1.4\n");push(new Uint8Array([37,226,227,207,211,10]));const obj=(id,body)=>{offs[id]=len;push(id+" 0 obj\n");body.forEach(push);push("\nendobj\n");};
  const n=imgs.length;obj(1,["<< /Type /Catalog /Pages 2 0 R >>"]);obj(2,["<< /Type /Pages /Kids ["+imgs.map((_,i)=>(3+i*3)+" 0 R").join(" ")+"] /Count "+n+" >>"]);
- imgs.forEach((im,i)=>{const pid=3+i*3,sc=842/Math.max(im.w,im.h),pw=(im.w*sc).toFixed(2),ph=(im.h*sc).toFixed(2),cs="q "+pw+" 0 0 "+ph+" 0 0 cm /Im0 Do Q";
+ imgs.forEach((im,i)=>{const pid=3+i*3,land=im.w>im.h,PW=land?841.89:595.28,PH=land?595.28:841.89,sc=Math.min(PW/im.w,PH/im.h),iw=im.w*sc,ih=im.h*sc,ox=((PW-iw)/2).toFixed(2),oy=((PH-ih)/2).toFixed(2),pw=PW.toFixed(2),ph=PH.toFixed(2),cs="q "+iw.toFixed(2)+" 0 0 "+ih.toFixed(2)+" "+ox+" "+oy+" cm /Im0 Do Q";
   obj(pid,["<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+pw+" "+ph+"] /Resources << /XObject << /Im0 "+(pid+1)+" 0 R >> >> /Contents "+(pid+2)+" 0 R >>"]);
   obj(pid+1,["<< /Type /XObject /Subtype /Image /Width "+im.w+" /Height "+im.h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+im.bytes.length+" >>\nstream\n",im.bytes,"\nendstream"]);
   obj(pid+2,["<< /Length "+cs.length+" >>\nstream\n"+cs+"\nendstream"]);});
  let size=3+n*3;if(pad>0){const p=Math.ceil(pad);obj(size,["<< /Length "+p+" >>\nstream\n"+" ".repeat(p)+"\nendstream"]);size++;}
- const xref=len;push("xref\n0 "+size+"\n0000000000 65535 f \n");for(let i=1;i<size;i++)push(String(offs[i]).padStart(10,"0")+" 00000 n \n");push("trailer\n<< /Size "+size+" /Root 1 0 R >>\nstartxref\n"+xref+"\n%%EOF\n");
+ const dt=new Date(),z=x=>String(x).padStart(2,"0"),D="D:"+dt.getFullYear()+z(dt.getMonth()+1)+z(dt.getDate())+z(dt.getHours())+z(dt.getMinutes())+z(dt.getSeconds());const info=size;obj(info,["<< /Title (Document) /Producer (DocPulsee) /Creator (DocPulsee) /CreationDate ("+D+") /ModDate ("+D+") >>"]);size++;
+ const hx=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,"0")).join("");
+ const xref=len;push("xref\n0 "+size+"\n0000000000 65535 f \n");for(let i=1;i<size;i++)push(String(offs[i]).padStart(10,"0")+" 00000 n \n");push("trailer\n<< /Size "+size+" /Root 1 0 R /Info "+info+" 0 R /ID [<"+hx+"> <"+hx+">] >>\nstartxref\n"+xref+"\n%%EOF\n");
  return new Blob(parts,{type:"application/pdf"});}
 async function dpfBuild(pages,opt,onStep){const many=pages.length>3;const steps=[[2000,.82],[2000,.7],[1700,.7],[1700,.6],[1450,.6],[1450,.5],[1250,.5],[1100,.45],[950,.42],[850,.38],[750,.34],[650,.3]].filter(s=>!many||s[0]<=1700);const cache={};let last=null;
  for(const[L,q]of steps){if(!cache[L])cache[L]=pages.map(pg=>dpfDraw(pg,L,opt.clean));const imgs=[];for(const c of cache[L])imgs.push(await dpfJpeg(c,q));const blob=opt.fmt==="jpg"?new Blob([imgs[0].bytes],{type:"image/jpeg"}):dpfPdf(imgs,0);last={blob,imgs,L,q};if(onStep)onStep(blob.size);if(blob.size<=opt.maxB)break;}
