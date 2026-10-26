@@ -10236,10 +10236,11 @@ function TokenEditor(p){var h=React.createElement,ref=React.useRef(null),last=Re
   if(ref.current.contains(r.startContainer))rng.current=r.cloneRange();}
   document.addEventListener("selectionchange",sc);return function(){document.removeEventListener("selectionchange",sc);};},[]);
  function emit(){var v=serialize(ref.current);last.current=v;p.onChange(v);}
+ function tidy(){var v=serialize(ref.current),t=v.replace(/ {2,}/g," ").replace(/ +([,.:;!?])/g,"$1").trim();if(t!==v){p.onChange(t);}}
  function insert(t){var el=ref.current;if(!el)return;var node=pill(t,labels[t]||"Offer name",V(t)),r=rng.current;
   if(!r||!el.contains(r.startContainer)){r=document.createRange();r.selectNodeContents(el);r.collapse(false);}
   r.deleteContents();var before=r.startContainer.nodeType===3?r.startContainer.nodeValue.slice(0,r.startOffset):"";
-  var sp1=document.createTextNode(before&&!/\s$/.test(before)?" ":"");var sp2=document.createTextNode(" ");
+  var after=r.startContainer.nodeType===3?r.startContainer.nodeValue.slice(r.startOffset):(r.startContainer.childNodes[r.startOffset]&&r.startContainer.childNodes[r.startOffset].nodeType===3?r.startContainer.childNodes[r.startOffset].nodeValue:"");var sp1=document.createTextNode(before&&!/\s$/.test(before)?" ":"");var sp2=document.createTextNode(/^\s/.test(after)?"":" ");
   r.insertNode(sp2);r.insertNode(node);r.insertNode(sp1);
   var nr=document.createRange();nr.setStartAfter(sp2);nr.collapse(true);var s=window.getSelection();el.focus();s.removeAllRanges();s.addRange(nr);rng.current=nr.cloneRange();
   emit();}
@@ -10250,13 +10251,13 @@ function TokenEditor(p){var h=React.createElement,ref=React.useRef(null),last=Re
    if(e.key==="Backspace"){if(c.nodeType===3&&o===0)tgt=c.previousSibling;else if(c.nodeType===1&&o>0)tgt=c.childNodes[o-1];
     else if(c.nodeType===3&&o===1&&c.nodeValue[0]===" "&&c.previousSibling&&c.previousSibling.getAttribute&&c.previousSibling.getAttribute("data-tok")){c.nodeValue=c.nodeValue.slice(1);tgt=c.previousSibling;}}
    else{if(c.nodeType===3&&o===c.nodeValue.length)tgt=c.nextSibling;else if(c.nodeType===1)tgt=c.childNodes[o];}
-   if(tgt&&tgt.getAttribute&&tgt.getAttribute("data-tok")){e.preventDefault();tgt.remove();emit();}}}
+   if(tgt&&tgt.getAttribute&&tgt.getAttribute("data-tok")){e.preventDefault();var nx=tgt.nextSibling,pv=tgt.previousSibling;if(nx&&nx.nodeType===3&&/^ /.test(nx.nodeValue)&&(!pv||pv.nodeType!==3||/ $/.test(pv.nodeValue)))nx.nodeValue=nx.nodeValue.slice(1);tgt.remove();emit();}}}
  function onPaste(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData("text/plain").replace(/[\r\n]+/g," ");document.execCommand("insertText",false,t);}
  var avail=GROUPS.map(function(g){return[g[0],g[1].filter(function(t){return labels[t]||t==="{name}";})];}).filter(function(g){return g[1].length;});
  var cur=avail[Math.min(grp,avail.length-1)]||["",[]];
  return h("div",{className:"tke","data-tke":true},
   h("div",{ref:ref,className:"tke-f",contentEditable:true,suppressContentEditableWarning:true,role:"textbox","aria-label":"Banner text","data-ph":"Type your banner. Add prices and timers from below.",
-   onInput:emit,onKeyDown:onKey,onClick:onClick,onPaste:onPaste,"data-offer-text":true}),
+   onInput:emit,onBlur:tidy,onKeyDown:onKey,onClick:onClick,onPaste:onPaste,"data-offer-text":true}),
   h("div",{className:"tke-h"},h("span",null,"Tap to add at your cursor. Tap × to remove."),
    h("div",{className:"tke-seg",role:"tablist"},avail.map(function(g,i){return h("button",{key:g[0],type:"button",className:cur===g?"on":"",onMouseDown:function(e){e.preventDefault();},onClick:function(){setGrp(i);}},g[0]);}))),
   h("div",{className:"tke-pal"},cur[1].map(function(t){var v=V(t);return h("button",{key:t,type:"button",className:"tke-c","data-offer-tok":t,onMouseDown:function(e){e.preventDefault();},onClick:function(){insert(t);}},labels[t]||"Offer name",v?h("span",null,v):null);})));
