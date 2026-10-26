@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>window.DP_SNUM=true;</script><script>window.DP_LCR=true;</script><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
+<head><script>window.DP_MOCK=true;</script><script>window.DP_SNUM=true;</script><script>window.DP_LCR=true;</script><script>window.DP_ASK=true;</script><script>window.DP_CARD=true;</script><script>window.DP_BXF=true;</script><script>window.DP_SCX=true;</script><script>window.DP_T26=true;</script><script>window.DP_P26=true;</script><script id="dp-nowrite">(function(){try{var T=DOMTokenList.prototype,A=T.add,R=T.remove,E=Element.prototype,S=E.setAttribute;
 T.add=function(){for(var i=0;i<arguments.length;i++){if(!this.contains(arguments[i]))return A.apply(this,arguments);}};
 T.remove=function(){for(var i=0;i<arguments.length;i++){if(this.contains(arguments[i]))return R.apply(this,arguments);}};
 E.setAttribute=function(n,v){if(n!=="src"&&n!=="href"&&n!=="value"&&this.getAttribute(n)===String(v))return;return S.call(this,n,v);};}catch(e){}})();</script><meta name="robots" content="noindex"><script id="dp-theme-boot">(function(){
@@ -9194,7 +9194,7 @@ function load(){
  finLoad();
  if(window.dpA2&&window.dpA2.poll)window.dpA2.poll().then(function(d){S.today=d;render();}).catch(function(){});}
 var NAV=[["store","Storefront","store",1],["prices","Prices","tag",8],["offers","Offers & banner","mega",3],["coupons","Coupons","ticket",4],["pro","Pro","crown",6]];
-function finNavs(){if(!window.DP_FIN)return NAV;return [["finance","Finance","chart",2]].concat(NAV).concat([["bookings","Bookings","cal",4,1],["seniors","Senior requests","people",2,1],["lucky","Lucky Roll","dice",5,1],["copilot","Copilot","bot",7,1]].concat(window.DP_SNUM?[["snum","Senior numbers","phone",3,1],["seatcards","Seat cards","party",6,1]]:[]));}
+function finNavs(){if(!window.DP_FIN)return NAV;return [["finance","Finance","chart",2]].concat(NAV).concat([["bookings","Bookings","cal",4,1],["seniors","Senior requests","people",2,1],["lucky","Lucky Roll","dice",5,1],["copilot","Copilot","bot",7,1]].concat(window.DP_SNUM?[["snum","Senior numbers","phone",3,1],["seatcards","Seat cards","party",6,1]]:[]).concat(window.DP_MOCK?[["invites","Invites","people",4,1]]:[]));}
 function finLoad(){if(!window.DP_FIN)return;S.fin=null;S.finErr=null;try{sb.functions.invoke("owner-finance",{body:{action:"list"}}).then(function(r){if(r.error||!r.data||r.data.error){var m=(r.data&&r.data.error)||(r.error&&r.error.message)||"Couldn't load";if(r.error&&r.error.context&&r.error.context.json)r.error.context.json().then(function(j){S.finErr=j&&j.error||m;render();}).catch(function(){S.finErr=m;render();});else{S.finErr=m;render();}return;}S.fin=r.data;render();}).catch(function(e){S.finErr=e.message;render();});}catch(e){S.finErr=e.message;}}
 function finRange(){var now=new Date(),p=S.fp||"month",day=864e5;function d0(t){var d=new Date(t);d.setHours(0,0,0,0);return d.getTime();}
  if(p==="today")return [d0(now),Date.now()+1];if(p==="7d")return [d0(now)-6*day,Date.now()+1];if(p==="30d")return [d0(now)-29*day,Date.now()+1];
@@ -9247,7 +9247,7 @@ function finWire(w){if(!window.DP_FIN)return;
  var m=$("[data-fmore]",w);if(m)m.onclick=function(){S.fn=(S.fn||40)+80;render();};
  var c=$("[data-fcsv]",w);if(c)c.onclick=finCsv;
  $$("[data-freload]",w).forEach(function(b){b.onclick=function(){finLoad();render();};});
- $$("[data-launch]",w).forEach(function(b){b.onclick=function(){var k=b.dataset.launch;close();setTimeout(function(){if(k==="lucky")window.dispatchEvent(new CustomEvent("dp-lucky-admin"));else if(k==="snum"){if(window.dpSeniorNums)window.dpSeniorNums();}else if(k==="seatcards"){if(window.dpSeatStats)window.dpSeatStats(S.today&&S.today.seatcard);}else viaGrid({bookings:/Counselling bookings$/,seniors:/Senior requests$/,copilot:/Copilot$/}[k]);},160);};});}
+ $$("[data-launch]",w).forEach(function(b){b.onclick=function(){var k=b.dataset.launch;close();setTimeout(function(){if(k==="lucky")window.dispatchEvent(new CustomEvent("dp-lucky-admin"));else if(k==="snum"){if(window.dpSeniorNums)window.dpSeniorNums();}else if(k==="invites"){if(window.dpInvStats)window.dpInvStats();}else if(k==="seatcards"){if(window.dpSeatStats)window.dpSeatStats(S.today&&S.today.seatcard);}else viaGrid({bookings:/Counselling bookings$/,seniors:/Senior requests$/,copilot:/Copilot$/}[k]);},160);};});}
 function liveOffers(){var now=Date.now();return (S.offers||[]).filter(function(o){return o.active!==false&&Date.parse(o.starts_at)<=now&&Date.parse(o.ends_at)>now;});}
 function soonOffers(){var now=Date.now();return (S.offers||[]).filter(function(o){return o.active!==false&&Date.parse(o.starts_at)>now;});}
 function render(){if(!root)return;var w=$(".cc",root),v=S.view,sc=$(".cc-bd",w),top=sc?sc.scrollTop:0;
@@ -10051,5 +10051,130 @@ function stats(S){var bg=document.createElement("div");bg.className="snm-bg";bg.
  bg.innerHTML='<div class="snm" role="dialog" aria-label="Seat cards"><div class="snm-h"><b>🎉 Seat cards</b><button type="button" class="x">Done</button></div><div class="snm-f"><p class="snm-note"><b>Today:</b> '+n(T,"open")+' opened · '+n(T,"found")+' made · '+n(T,"share")+' shared · '+(S.people_today||0)+' people<br><b>All time:</b> '+(S.people_total||0)+' people · '+n(A,"found")+' made · '+n(A,"share")+' shared · '+n(A,"save")+' saved · '+n(A,"photo")+' with photo</p><button type="button" class="snm-go mk">Make a seat card</button></div><div class="snm-b">'+(rows||'<p class="snm-note">No seat cards yet.</p>')+'</div></div>';
  document.body.appendChild(bg);bg.querySelector(".x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  bg.querySelector(".mk").onclick=function(){bg.remove();if(window.dpOpenSeatCard)window.dpOpenSeatCard();};}
-window.dpSeatStats=stats;})();</script></body>
+window.dpSeatStats=stats;})();</script><style>
+.mrk-chip{background:linear-gradient(135deg,#fde68a,#f59e0b)!important;color:#3b2300!important;border-color:transparent!important;font-weight:800!important;position:relative}
+.mrk-chip i{position:absolute;top:-8px;right:-6px;font-style:normal;font-size:9px;font-weight:900;background:#e11d48;color:#fff;border-radius:999px;padding:1px 6px;letter-spacing:.04em}
+.mrk-bg{position:fixed;inset:0;z-index:2147483200;background:rgba(3,8,12,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;align-items:flex-end;justify-content:center;animation:mrkF .25s ease}
+@keyframes mrkF{from{opacity:0}to{opacity:1}}@keyframes mrkU{from{transform:translateY(40px);opacity:.5}to{transform:none;opacity:1}}
+.mrk{width:100%;max-width:560px;max-height:94vh;overflow:auto;border-radius:28px 28px 0 0;background:radial-gradient(120% 70% at 10% 0%,#134e4a 0%,#0b1f24 45%,#070d14 100%);color:#e8fff7;font-family:Inter,-apple-system,system-ui,sans-serif;animation:mrkU .32s cubic-bezier(.2,.8,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.4)}
+@media(min-width:700px){.mrk-bg{align-items:center}.mrk{border-radius:28px}}
+.mrk-h{display:flex;align-items:center;gap:10px;padding:18px 18px 6px}.mrk-h b{flex:1;font-size:19px;letter-spacing:-.01em}.mrk-x{border:0;background:rgba(255,255,255,.1);color:#fff;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer}
+.mrk-b{padding:6px 18px 22px}.mrk-sub{margin:0 0 14px;font-size:13.5px;line-height:1.45;color:#a7d8c9}
+.mrk-l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7dd3b8;margin:14px 0 8px}
+.mrk-chips{display:flex;flex-wrap:wrap;gap:7px}.mrk-chips button{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#e8fff7;border-radius:999px;padding:8px 13px;font:700 13px Inter,system-ui,sans-serif;cursor:pointer}
+.mrk-chips button.on{background:#5eead4;color:#06201b;border-color:#5eead4}
+.mrk-rank{width:100%;box-sizing:border-box;border:2px solid rgba(94,234,212,.4);background:rgba(0,0,0,.25);color:#fff;border-radius:20px;padding:14px 18px;font:900 44px Inter,system-ui,sans-serif;letter-spacing:.02em;text-align:center;outline:0}
+.mrk-rank:focus{border-color:#5eead4;box-shadow:0 0 0 5px rgba(94,234,212,.15)}.mrk-rank::placeholder{color:rgba(255,255,255,.25)}
+.mrk-go{width:100%;margin-top:16px;border:0;border-radius:18px;padding:15px;font:900 17px Inter,system-ui,sans-serif;color:#06201b;background:linear-gradient(135deg,#5eead4,#a7f3d0);cursor:pointer;box-shadow:0 10px 30px rgba(94,234,212,.25)}
+.mrk-go:disabled{opacity:.4}.mrk-go:active{transform:scale(.98)}
+.mrk-hero{border-radius:22px;padding:16px;background:linear-gradient(135deg,rgba(94,234,212,.18),rgba(250,204,21,.12));border:1px solid rgba(94,234,212,.25);margin-bottom:12px}
+.mrk-hero small{display:block;color:#a7d8c9;font-size:12.5px}.mrk-hero b{display:block;font-size:24px;line-height:1.15;margin:4px 0;color:#fff}.mrk-hero span{font-size:13px;color:#fde68a;font-weight:700}
+.mrk-climb{border-radius:16px;padding:11px 14px;background:rgba(250,204,21,.12);border:1px dashed rgba(250,204,21,.5);color:#fde68a;font-size:13.5px;font-weight:700;margin-bottom:12px}
+.mrk-lad{display:flex;flex-direction:column;gap:7px}
+.mrk-r{display:flex;align-items:center;gap:10px;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.mrk-r .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:15px;flex:none}
+.mrk-r.ok .ic{background:#16a34a}.mrk-r.near .ic{background:#ca8a04}.mrk-r.lock .ic{background:rgba(255,255,255,.1)}
+.mrk-r .t{flex:1;min-width:0}.mrk-r .t b{display:block;font-size:14px;color:#fff}.mrk-r .t small{font-size:11.5px;color:#a7d8c9}
+.mrk-r.lock .t b{color:#cbd5e1}.mrk-r .n{font-weight:900;font-size:14px;color:#5eead4;white-space:nowrap}.mrk-r.lock .n{color:#fde68a;font-size:12px}
+.mrk-more{border:0;background:none;color:#7dd3b8;font:700 13px Inter,system-ui,sans-serif;cursor:pointer;padding:10px 0}
+.mrk-acts{display:flex;gap:8px;margin-top:14px}.mrk-acts button{flex:1}
+.mrk-sec{border:1px solid rgba(255,255,255,.2)!important;background:rgba(255,255,255,.06)!important;color:#e8fff7!important;box-shadow:none!important}
+.mrk-fine{font-size:11px;color:#6fa597;margin:12px 0 0;line-height:1.4}
+.mrk-gift{border-radius:20px;padding:14px;margin-top:14px;background:linear-gradient(135deg,rgba(244,114,182,.18),rgba(250,204,21,.14));border:1px solid rgba(250,204,21,.35)}
+.mrk-gift b{display:block;font-size:15.5px;color:#fff}.mrk-gift p{margin:4px 0 10px;font-size:12.5px;color:#fde68a;line-height:1.4}
+.mrk-dots{display:flex;gap:6px;margin:8px 0 10px}.mrk-dots i{flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.15)}.mrk-dots i.on{background:#facc15}
+.mrk-wa{width:100%;border:0;border-radius:14px;padding:12px;font:800 14.5px Inter,system-ui,sans-serif;background:#25d366;color:#05351a;cursor:pointer}
+.mrk-cp{width:100%;margin-top:7px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#e8fff7;border-radius:14px;padding:10px;font:700 13px Inter,system-ui,sans-serif;cursor:pointer}
+</style><script>(function(){
+var LAD=null,LP=null,ST={test:"Marrow GT",cat:"GN",rank:""},INV=null;
+var TESTS=["Marrow GT","PrepLadder","DAMS","Cerebellum","Other mock","Real NEET PG"],CATS=["GN","EWS","OBC","SC","ST"];
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(n){return Number(n).toLocaleString("en-IN");}
+function load(){if(LP)return LP;LP=fetch("/rank_ladder.json",{cache:"force-cache"}).then(function(r){return r.json();}).then(function(d){LAD=d.b;return LAD;});return LP;}
+function user(){return window.__dpUser||null;}
+function sbok(){return typeof sb!=="undefined"&&sb&&sb.rpc;}
+/* ---------- invites ---------- */
+try{var m=/[?&]inv=([A-Za-z0-9]{4,12})/.exec(location.search);if(m)localStorage.setItem("dp_inv",JSON.stringify({c:m[1].toUpperCase(),at:Date.now()}));}catch(e){}
+function myInv(){if(!user()||!sbok())return Promise.resolve(null);return sb.rpc("inv_my").then(function(r){if(r.error)return null;INV=r.data;window.__dpInvUnlocked=!!(INV&&INV.unlocked);return INV;},function(){return null;});}
+function link(){return "https://docpulsee.in/"+(INV&&INV.code?"?inv="+INV.code:"");}
+function claim(){var s=null;try{s=JSON.parse(localStorage.getItem("dp_inv")||"null");}catch(e){}if(!s||!user()||!sbok())return;try{if(localStorage.getItem("dp_inv_done")===user().id)return;}catch(e){}
+ sb.rpc("inv_claim",{p_code:s.c}).then(function(r){try{localStorage.setItem("dp_inv_done",user().id);}catch(e){}});}
+function waText(extra){return (extra?extra+"\n\n":"")+"Planning NEET PG? DocPulsee shows the PG seat your rank can get, from real MCC closing ranks. Try your mock rank too 👉 "+link();}
+function share(extra,file){var t=waText(extra);
+ if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],text:t}).catch(function(){});return;}
+ window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank");}
+function giftHTML(){var n=INV?Math.min(3,INV.joined||0):0;
+ if(INV&&INV.unlocked)return '<div class="mrk-gift"><b>🎉 Branch DNA unlocked — free!</b><p>3 friends joined through your link. Your Branch DNA test is ready.</p><button type="button" class="mrk-wa" data-dna>Take my Branch DNA test →</button></div>';
+ return '<div class="mrk-gift" data-gift><b>🎁 Get Branch DNA free</b><p>Share with 3 friends or your college WhatsApp group. When 3 friends sign in through your link, your Branch DNA test unlocks free.</p>'+
+  (user()?'<div class="mrk-dots">'+[0,1,2].map(function(i){return '<i class="'+(i<n?"on":"")+'"></i>';}).join("")+'</div><p style="margin:0 0 10px">'+n+' of 3 friends joined</p>':'')+
+  '<button type="button" class="mrk-wa" data-wa>Share on WhatsApp</button>'+(user()?'<button type="button" class="mrk-cp" data-cp>Copy my link</button>':'<button type="button" class="mrk-cp" data-sign>Sign in to get your link</button>')+'</div>';}
+function wireGift(root,extra,fileFn){var w=root.querySelector("[data-wa]");if(w)w.onclick=function(){Promise.resolve(fileFn?fileFn():null).then(function(f){share(extra,f);});};
+ var c=root.querySelector("[data-cp]");if(c)c.onclick=function(){try{navigator.clipboard.writeText(link());c.textContent="Copied ✓";}catch(e){}};
+ var s=root.querySelector("[data-sign]");if(s)s.onclick=function(){if(window.dpOpenSignIn)window.dpOpenSignIn();};
+ var d=root.querySelector("[data-dna]");if(d)d.onclick=function(){location.href="https://docpulsee.in/branch-dna.html?paid=1";};}
+/* ---------- ladder ---------- */
+function calc(rank,cat){var out=[];for(var b in LAD){var o=LAD[b],a=o[cat]||o.GN;if(!a||a.length<3)continue;
+  var lo=0,hi=a.length;while(lo<hi){var md=(lo+hi)>>1;if(a[md]<rank)lo=md+1;else hi=md;}var cnt=a.length-lo;
+  var top=a[a.length-Math.max(1,Math.ceil(a.length*0.03))];var med=(o.GN||a)[Math.floor((o.GN||a).length/2)];
+  out.push({b:b,n:cnt,total:a.length,climb:cnt>0?0:Math.max(1,rank-top),med:med});}
+ out.sort(function(x,y){return x.med-y.med;});return out;}
+function render(el){var rank=parseInt(ST.rank,10);var L=calc(rank,ST.cat);var pop=L.filter(function(x){return x.total>=10;});
+ var best=pop.find(function(x){return x.n>=2;})||L.find(function(x){return x.n>=1;});var bi=best?pop.indexOf(best):pop.length;
+ var nextL=pop.slice(0,Math.max(0,bi)).filter(function(x){return x.n===0;}).sort(function(a,b){return a.climb-b.climb;})[0];
+ var show=pop.slice(0,14);function row(x){var cl=x.n>=5?"ok":x.n>=1?"near":"lock";
+  return '<div class="mrk-r '+cl+'"><span class="ic">'+(cl==="ok"?"✅":cl==="near"?"🟡":"🔒")+'</span><span class="t"><b>'+esc(x.b)+'</b><small>'+(cl==="lock"?"Locked at this rank":(cl==="ok"?"In reach":"Just in reach")+" · 2025 final round")+'</small></span><span class="n">'+(cl==="lock"?"Climb "+fmt(x.climb):x.n+" college"+(x.n>1?"s":""))+'</span></div>';}
+ el.innerHTML='<div class="mrk-hero"><small>'+esc(ST.test)+' rank '+fmt(rank)+' · '+ST.cat+'</small><b>'+(best?esc(best.b):"Keep climbing 💪")+'</b><span>'+(best?"🎯 In reach at "+best.n+" college"+(best.n>1?"s":"")+" (2025 cut-offs)":"Every rank you gain opens new seats")+'</span></div>'+
+  (nextL?'<div class="mrk-climb">🔓 Climb '+fmt(nextL.climb)+' ranks → '+esc(nextL.b)+' unlocks</div>':'')+
+  '<div class="mrk-l">Your Branch Ladder</div><div class="mrk-lad">'+show.map(row).join("")+'</div>'+
+  (pop.length>14?'<button type="button" class="mrk-more" data-more>Show all '+pop.length+' branches ▾</button>':'')+
+  '<div class="mrk-acts"><button type="button" class="mrk-go" data-card>📸 My seat card</button><button type="button" class="mrk-go mrk-sec" data-again>New rank</button></div>'+
+  giftHTML()+'<p class="mrk-fine">Based on real MCC 2025 final-round closing ranks (All India Quota MD/MS and DNB quota), for the category you chose. Mock-test ranks are only an estimate of your NEET PG rank. For real counselling, use the DocPulsee predictor.</p>';
+ var mo=el.querySelector("[data-more]");if(mo)mo.onclick=function(){mo.remove();el.querySelector(".mrk-lad").innerHTML=pop.map(row).join("");};
+ el.querySelector("[data-again]").onclick=function(){step1(el);};
+ var cardFn=function(){return card(rank,best,nextL);};
+ el.querySelector("[data-card]").onclick=function(){Promise.resolve(cardFn()).then(function(f){share((best?"My "+ST.test+" rank "+fmt(rank)+" = "+best.b+" 🎯":"My "+ST.test+" rank "+fmt(rank)),f);});};
+ wireGift(el,best?"My "+ST.test+" rank "+fmt(rank)+" = "+best.b+" 🎯":"",cardFn);}
+function card(rank,best,nextL){return new Promise(function(res){try{var c=document.createElement("canvas");c.width=1080;c.height=1350;var x=c.getContext("2d");
+ var g=x.createLinearGradient(0,0,1080,1350);g.addColorStop(0,"#134e4a");g.addColorStop(.55,"#0b1f24");g.addColorStop(1,"#070d14");x.fillStyle=g;x.fillRect(0,0,1080,1350);
+ var r=x.createRadialGradient(880,180,0,880,180,520);r.addColorStop(0,"rgba(94,234,212,.35)");r.addColorStop(1,"rgba(94,234,212,0)");x.fillStyle=r;x.fillRect(0,0,1080,1350);
+ var F="Inter,-apple-system,system-ui,sans-serif";x.textAlign="center";x.fillStyle="#7dd3b8";x.font="800 40px "+F;x.fillText(("MY "+ST.test+" RANK").toUpperCase(),540,200);
+ x.fillStyle="#fff";x.font="900 190px "+F;x.fillText(fmt(rank),540,400);
+ x.fillStyle="#fde68a";x.font="800 54px "+F;x.fillText("= PG seat in reach",540,520);
+ x.fillStyle="#fff";x.font="900 "+(best&&best.b.length>22?60:76)+"px "+F;x.fillText(best?best.b:"Keep climbing!",540,640);
+ if(best){x.fillStyle="#5eead4";x.font="700 44px "+F;x.fillText("🎯 at "+best.n+" college"+(best.n>1?"s":"")+" (2025 cut-offs)",540,720);}
+ if(nextL){x.fillStyle="rgba(250,204,21,.15)";x.beginPath();if(x.roundRect)x.roundRect(110,800,860,130,40);else x.rect(110,800,860,130);x.fill();x.fillStyle="#fde68a";x.font="800 42px "+F;x.fillText("🔓 "+fmt(nextL.climb)+" more ranks → "+(nextL.b.length>24?nextL.b.slice(0,23)+"…":nextL.b),540,880);}
+ x.fillStyle="#a7d8c9";x.font="600 36px "+F;x.fillText("Check yours free",540,1120);x.fillStyle="#fff";x.font="900 64px "+F;x.fillText("docpulsee.in",540,1200);
+ x.fillStyle="#6fa597";x.font="500 26px "+F;x.fillText("Real MCC 2025 closing ranks · "+ST.cat,540,1270);
+ c.toBlob(function(b){try{res(b?new File([b],"my-pg-seat.png",{type:"image/png"}):null);}catch(e){res(null);}},"image/png");}catch(e){res(null);}});}
+function step1(el){el.innerHTML='<p class="mrk-sub">Type your grand-test rank and see which PG seat it gets, from real MCC 2025 closing ranks. Do it after every mock and watch your ladder climb. 🚀</p>'+
+ '<div class="mrk-l">Which test?</div><div class="mrk-chips" data-t>'+TESTS.map(function(t){return '<button type="button" class="'+(t===ST.test?"on":"")+'">'+t+'</button>';}).join("")+'</div>'+
+ '<div class="mrk-l">Your rank</div><input class="mrk-rank" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 3240" value="'+esc(ST.rank)+'" data-r>'+
+ '<div class="mrk-l">Category</div><div class="mrk-chips" data-c>'+CATS.map(function(t){return '<button type="button" class="'+(t===ST.cat?"on":"")+'">'+t+'</button>';}).join("")+'</div>'+
+ '<button type="button" class="mrk-go" data-go>Show my PG seat ⚡</button>'+giftHTML();
+ [["[data-t]","test"],["[data-c]","cat"]].forEach(function(p){var g=el.querySelector(p[0]);g.querySelectorAll("button").forEach(function(b){b.onclick=function(){ST[p[1]]=b.textContent;g.querySelectorAll("button").forEach(function(z){z.classList.toggle("on",z===b);});};});});
+ var r=el.querySelector("[data-r]"),go=el.querySelector("[data-go]");function ck(){ST.rank=r.value.replace(/\D/g,"").slice(0,6);r.value=ST.rank;go.disabled=!(parseInt(ST.rank,10)>0);}r.oninput=ck;ck();
+ r.onkeydown=function(e){if(e.key==="Enter"&&!go.disabled)go.click();};
+ go.onclick=function(){go.textContent="Finding your seat…";load().then(function(){render(el);el.parentNode.scrollTop=0;try{localStorage.setItem("dp_mock_last",JSON.stringify(ST));}catch(e){}}).catch(function(){go.textContent="Couldn't load. Try again";});};
+ wireGift(el,"",null);}
+function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null");if(s)ST=s;}catch(e){}
+ var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-mock",1);
+ bg.innerHTML='<div class="mrk" role="dialog" aria-label="Mock rank to PG seat"><div class="mrk-h"><span style="font-size:24px">🩺</span><b>Mock rank → PG seat</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"></div></div>';
+ document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
+ var el=bg.querySelector(".mrk-b");step1(el);load();myInv().then(function(){var g=el.querySelector("[data-gift]");if(g&&INV){var t=document.createElement("div");t.innerHTML=giftHTML();g.replaceWith(t.firstChild);wireGift(el,"",null);}});}
+window.dpOpenMock=open;
+/* invite popup for signed-in counselling students (not for members who already have DNA) */
+function invPop(){if(document.querySelector("[data-mock],[data-invpop]"))return;var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-invpop",1);
+ bg.innerHTML='<div class="mrk" role="dialog" aria-label="Branch DNA free"><div class="mrk-h"><span style="font-size:24px">🎁</span><b>Your Branch DNA, free</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"><p class="mrk-sub">Not sure which branch fits you? Branch DNA tells you. Get it free: share DocPulsee with 3 friends or your college group.</p>'+giftHTML()+'</div></div>';
+ document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};wireGift(bg,"",null);}
+var tries=0;(function tick(){tries++;
+ var h=document.querySelector(".dpsp-hint");if(h&&!h.querySelector(".mrk-chip")){var b=document.createElement("button");b.type="button";b.className="mrk-chip";b.setAttribute("data-mock-chip",1);b.innerHTML="🎯 Mock rank → PG seat<i>NEW</i>";b.onclick=function(e){e.preventDefault();e.stopPropagation();open();};h.insertBefore(b,h.firstChild);}
+ if(user()&&sbok()&&!tick.done){tick.done=1;claim();myInv().then(function(v){if(!v)return;var paid=window.__dpIsPaid||(window.__dpPro&&window.__dpPro.active);var last=0;try{last=+localStorage.getItem("dp_invpop_at")||0;}catch(e){}
+   if(!paid&&!v.unlocked&&Date.now()-last>3*864e5)setTimeout(function(){if(document.querySelector(".modal,.overlay.fixed,[data-plan-hub],.cc-ov"))return;try{localStorage.setItem("dp_invpop_at",String(Date.now()));}catch(e){}invPop();},25000);});}
+ if(tries<240)setTimeout(tick,500);})();
+(function(){var ob=window.openBranchPayment;if(typeof ob!=="function"||ob.__inv)return;var w=function(){if(window.__dpInvUnlocked){location.href="https://docpulsee.in/branch-dna.html?paid=1";return;}return ob.apply(this,arguments);};w.__inv=1;try{window.openBranchPayment=w;}catch(e){}})();
+/* owner: Control Center side item "Invites" */
+window.dpInvStats=function(){if(!sbok())return;var bg=document.createElement("div");bg.className="mrk-bg";bg.innerHTML='<div class="mrk" role="dialog"><div class="mrk-h"><span style="font-size:22px">🎁</span><b>Invites</b><button type="button" class="mrk-x">✕</button></div><div class="mrk-b"><p class="mrk-sub">Loading…</p></div></div>';document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};
+ sb.rpc("owner_today_invites",{}).then(function(r){var b=bg.querySelector(".mrk-b");if(r.error){b.innerHTML='<p class="mrk-sub">'+(/not allowed/i.test(r.error.message)?"Unlock the owner panel first.":esc(r.error.message))+'</p>';return;}var d=r.data||{};
+  b.innerHTML='<div class="mrk-hero"><small>Invite links made · friends joined · free DNAs earned</small><b>'+(d.codes||0)+' · '+(d.joins||0)+' · '+(d.unlocked||0)+'</b></div><div class="mrk-l">Top inviters</div><div class="mrk-lad">'+((d.top||[]).map(function(t){return '<div class="mrk-r '+(t.n>=3?"ok":"near")+'"><span class="ic">'+(t.n>=3?"🎉":"👥")+'</span><span class="t"><b>'+esc(t.e)+'</b><small>last '+new Date(t.last).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})+'</small></span><span class="n">'+t.n+'</span></div>';}).join("")||'<p class="mrk-sub">No friends joined yet.</p>')+'</div>';});};
+})();</script></body>
 </html>
