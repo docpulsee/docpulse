@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "in.docpulsee.app",
+    "sha256_cert_fingerprints": ["97:D7:73:53:95:3C:38:13:70:72:EB:E0:12:35:43:69:FE:38:26:7D:22:D1:C3:F8:57:AA:C7:A3:0E:B4:8C:15"]
+  }
+}]
