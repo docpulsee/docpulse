@@ -10086,8 +10086,8 @@ window.dpSeatStats=stats;})();</script><style>
 .mrk-wa{width:100%;border:0;border-radius:14px;padding:12px;font:800 14.5px Inter,system-ui,sans-serif;background:#25d366;color:#05351a;cursor:pointer}
 .mrk-cp{width:100%;margin-top:7px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#e8fff7;border-radius:14px;padding:10px;font:700 13px Inter,system-ui,sans-serif;cursor:pointer}
 </style><script>(function(){
-var LAD=null,LP=null,ST={test:"Marrow GT",cat:"GN",rank:""},INV=null;
-var TESTS=["Marrow GT","PrepLadder","DAMS","Cerebellum","Other mock","Real NEET PG"],CATS=["GN","EWS","OBC","SC","ST"];
+var LAD=null,LP=null,ST={test:"Grand Test",cat:"GN",rank:""},INV=null;
+var TESTS=["Grand Test","Subject test","Mock test","Real NEET PG","Other"],CATS=["GN","EWS","OBC","SC","ST"];
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function fmt(n){return Number(n).toLocaleString("en-IN");}
 function load(){if(LP)return LP;LP=fetch("/rank_ladder.json",{cache:"force-cache"}).then(function(r){return r.json();}).then(function(d){LAD=d.b;return LAD;});return LP;}
@@ -10156,7 +10156,7 @@ function step1(el){el.innerHTML='<p class="mrk-sub">Type your grand-test rank an
  r.onkeydown=function(e){if(e.key==="Enter"&&!go.disabled)go.click();};
  go.onclick=function(){go.textContent="Finding your seat…";load().then(function(){render(el);el.parentNode.scrollTop=0;try{localStorage.setItem("dp_mock_last",JSON.stringify(ST));}catch(e){}}).catch(function(){go.textContent="Couldn't load. Try again";});};
  wireGift(el,"",null);}
-function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null");if(s)ST=s;}catch(e){}
+function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null");if(s)ST=s;if(TESTS.indexOf(ST.test)<0)ST.test="Grand Test";}catch(e){}
  var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-mock",1);
  bg.innerHTML='<div class="mrk" role="dialog" aria-label="Your GT rank to PG seat"><div class="mrk-h"><span style="font-size:24px">🩺</span><b>Your GT rank → PG seat</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"></div></div>';
  document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
