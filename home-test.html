@@ -10158,7 +10158,7 @@ function step1(el){el.innerHTML='<p class="mrk-sub">Type your grand-test rank an
  wireGift(el,"",null);}
 function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null");if(s)ST=s;}catch(e){}
  var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-mock",1);
- bg.innerHTML='<div class="mrk" role="dialog" aria-label="Mock rank to PG seat"><div class="mrk-h"><span style="font-size:24px">🩺</span><b>Mock rank → PG seat</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"></div></div>';
+ bg.innerHTML='<div class="mrk" role="dialog" aria-label="Your GT rank to PG seat"><div class="mrk-h"><span style="font-size:24px">🩺</span><b>Your GT rank → PG seat</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"></div></div>';
  document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  var el=bg.querySelector(".mrk-b");step1(el);load();myInv().then(function(){var g=el.querySelector("[data-gift]");if(g&&INV){var t=document.createElement("div");t.innerHTML=giftHTML();g.replaceWith(t.firstChild);wireGift(el,"",null);}});}
 window.dpOpenMock=open;
@@ -10167,7 +10167,7 @@ function invPop(){if(document.querySelector("[data-mock],[data-invpop]"))return;
  bg.innerHTML='<div class="mrk" role="dialog" aria-label="Branch DNA free"><div class="mrk-h"><span style="font-size:24px">🎁</span><b>Your Branch DNA, free</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"><p class="mrk-sub">Not sure which branch fits you? Branch DNA tells you. Get it free: share DocPulsee with 3 friends or your college group.</p>'+giftHTML()+'</div></div>';
  document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};wireGift(bg,"",null);}
 var tries=0;(function tick(){tries++;
- var h=document.querySelector(".dpsp-hint");if(h&&!h.querySelector(".mrk-chip")){var b=document.createElement("button");b.type="button";b.className="mrk-chip";b.setAttribute("data-mock-chip",1);b.innerHTML="🎯 Mock rank → PG seat<i>NEW</i>";b.onclick=function(e){e.preventDefault();e.stopPropagation();open();};h.insertBefore(b,h.firstChild);}
+ var h=document.querySelector(".dpsp-hint");if(h&&!h.querySelector(".mrk-chip")){var b=document.createElement("button");b.type="button";b.className="mrk-chip";b.setAttribute("data-mock-chip",1);b.innerHTML="🎯 Your GT rank → PG seat<i>NEW</i>";b.onclick=function(e){e.preventDefault();e.stopPropagation();open();};h.insertBefore(b,h.firstChild);}
  if(user()&&sbok()&&!tick.done){tick.done=1;claim();myInv().then(function(v){if(!v)return;var paid=window.__dpIsPaid||(window.__dpPro&&window.__dpPro.active);var last=0;try{last=+localStorage.getItem("dp_invpop_at")||0;}catch(e){}
    if(!paid&&!v.unlocked&&Date.now()-last>3*864e5)setTimeout(function(){if(document.querySelector(".modal,.overlay.fixed,[data-plan-hub],.cc-ov"))return;try{localStorage.setItem("dp_invpop_at",String(Date.now()));}catch(e){}invPop();},25000);});}
  if(tries<240)setTimeout(tick,500);})();
