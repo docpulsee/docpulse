@@ -10357,7 +10357,10 @@ function hero(){var h=document.querySelector(".hn-hero-in");if(!h||h.__hd||!IO)r
 function vt(){if(!document.startViewTransition||window.__dpVT)return;["hnMode"].forEach(function(k){var f=window[k];if(typeof f!=="function")return;window.__dpVT=1;
   window[k]=function(){var a=arguments,self=this,r;document.startViewTransition(function(){r=f.apply(self,a);});return r;};});}
 function all(root){try{var n=root.getElementsByTagName("*").length;if(n>300){if(root.matches&&root.matches(SEL))revealOne(root);return;}reveal(root);scanBars(root);scanShim(root);scanCount(root);}catch(e){}}
-function boot(){reveal(document.body);var hh=document.querySelector(".hn-hero-in");if(hh)scanCount(hh);scanShim(document.body);hero();vt();var q=[],pend=false;
+function splitNums(root){/* wrap numbers like "2,153" inside sentences so they can count up */
+ var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,L=[];while((n=w.nextNode())){if(/\d{1,3}(,\d{2,3})+/.test(n.nodeValue||"")&&n.parentElement&&!n.parentElement.closest("input,button,select,textarea"))L.push(n);}
+ L.forEach(function(t){var m=/(\d{1,3}(?:,\d{2,3})+)/.exec(t.nodeValue);if(!m)return;var a=t.splitText(m.index);a.splitText(m[1].length);var sp=document.createElement("span");sp.className="dp-num";sp.style.fontVariantNumeric="tabular-nums";a.parentNode.insertBefore(sp,a);sp.appendChild(a);if(cio){sp.__ct=1;cio.observe(sp);}});}
+function boot(){reveal(document.body);var hh=document.querySelector(".hn-hero-in");if(hh){splitNums(hh);scanCount(hh);}scanShim(document.body);hero();vt();var q=[],pend=false;
  new MutationObserver(function(m){m.forEach(function(r){r.addedNodes.forEach(function(x){if(x.nodeType===1)q.push(x);});});if(!pend){pend=true;requestAnimationFrame(function(){pend=false;var Q=q.splice(0);if(document.hidden)return;Q.slice(0,25).forEach(function(x){if(x.isConnected)all(x);});hero();});}}).observe(document.body,{childList:true,subtree:true});}
 function later(){var ric=window.requestIdleCallback||function(f){return setTimeout(f,1200);};ric(boot,{timeout:2500});}
 if(document.readyState==="complete")later();else addEventListener("load",later);
