@@ -1,40 +1,7 @@
 {
 "v": "2026-10-27",
-"n": 28,
+"n": 18,
 "items": [
-{
-"i": "357",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Tripura CM directs officials to act as AGMC resident doctors threaten pen-down strike",
-"src": "India Today NE",
-"d": "Oct 2026",
-"u": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNOFZIVEZpck1UVncybzB2Y0xZT0ZBam9HVHR3bE1IaGM0Q3hOUHJJREpzNFNrbVpHMF9XaktiaU90dUh2dHZDaHNReVVoN3FRQTJ1NHE5M1hscWdJQXBpeFN2QV90SzVPWkFMeTRfYTJYakJ2ZVVnMHByU3BjTXkyTllFU1lMeDl5ODRGZEJMaUk0NGJ5cDU3QVExSEVwY2JqZXk3NVhmam56Sm1qRW1lSW5BMnBHZ2VZbVNLMzVwcFN1OVNnNU9HMDM1bW5CTkZoTUxQNmRHamVka1Z2Y0dj0gHkAUFVX3lxTE5wYjYwZTZQM2NpSWxaRWZQTFpvcGJKUS1zVDRVWExEa3NsYVIwOFZ0aC1nZTlBYTRhcGUzbHExMmhhbW5ENzNxY0YySjlfdkdZd2M1OGdkOTNySTZWamxGRnBlcVM3cWgzUk9nNDhaWHlMVDFaNVNJR1pBajJWeFltM21HZmc3VGNKSWhNWjVXa1p5NnhRTUhBMzNuajk0MHgwMXVaMHhvZlRxYWRXYldoQmtpNExiZ2FBbGNGTGJ",
-"id": "news_9a1c84953a9320b3"
-},
-{
-"i": "357",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "AGMC Resident Doctors Threaten Pen-Down Strike in Agartala Over Social Media Content",
-"src": "Borok Times",
-"d": "Oct 2026",
-"u": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNNWpjUnVCSGFUeVNEZWI3aTJJSUVLTEF0bllSWndDeVFMbVF1Rm5oVU1xNXFQbG53blpXbVZXd3pRdFFjQzZKMjJaOWt1S3NRckg2d2ZyWnB1ZHB3WndPcng4VERMN0xsXy1yZ0NTQ25uYXBtQWtNQWlFRzczaXAtNlVab2hBMHRrb1dHa216NWU3bDkwYWd3RlFaZXJjRjlQMXpkXzBPNkJldHZm0gG0AUFVX3lxTE5MdFJfR293cjlKandmdTMtTTFGNi15Mkg0NThOSEFULTBPWWZNejlhNV9laFdjN0ZpSE82NjMyQmZYMHlnVG5yLXU3dS1IT0xCdGlmY3U1RlJjUjFZOUVBN05FU1BFUFJRNVlhSGV5U0YyZWg4Z0o1Rmd1SHhrYmdHN3NIOVFRZF9NOEJhQkk1dU4taGROcnpCY1owTzJiVWhacld5b1Nia19rMnRLaVZ6Y3hkNQ?oc=5",
-"id": "news_3749082bfdac830d"
-},
-{
-"i": "357",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Tripura: AGMC Resident Doctors Threaten Pen-Down Strike Over Video Circulation",
-"src": "Northeast Today",
-"d": "Oct 2026",
-"u": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQSWFubWpSZHhTZUlPRE80VEx3U3BSV2J4TmxtSXMxZHZtSVhtdW5BcmVSUEFQZUw2VTVLS29hY0diVVNaSDdBMER3Y25oUzQ0NUlXVEhTRVpnQzUtMGpVNW91TTV3VHZ6OGxjdHF1OHJHdEF3OGljY0FpYTdGanFkdHBPdk5ZZ0RkdEhtalNvbTlhUjB0Vk5Jc3NURzYxLVF6a0xXSUJNcGpqVzNabVFDRFRmdm0?oc=5",
-"id": "news_e1ed659ed9a4f56c"
-},
 {
 "i": "396",
 "b": null,
@@ -45,6 +12,17 @@
 "d": "Jun 2026",
 "u": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPVUNha0JXWFQ5TTZra2FRYlQ0MzBDR09Kd2ZMUHlqLWpoLXhkS0ppR3BPeFlMRi1WSTFKYTRHTy1BUHdISzJYZmowRUhHTFQ3ZFF5MWdTV2t5MEh6a1dYQnlNbVN1b0loVVRxck11TmJwQW5KeUpHOFljTk4teXRaZHhhT05LdlpJQi1Gd19pRkZUS1VmYmdhYlc0UjhVOUlyMWpkRUxaeE0zZDB5c2RsaXhHQXI5S3JUYTFKa2RtWXlxZk0tR09XQUpkY2hRRl9ORWk4WlF6MlBySzFu0gHiAUFVX3lxTE02dTNzNW9HU2RJQnUwVnFmS3UxY1ZaMlZtYTlTMHRKblcyZWNQbDk5NVpVb0xJelI3V2ZPSDBGbmpxRU42MGpOTVVYMVcydEE3cFgtNG5FZEtaekwwNTNpQ25UZXllUzE1Wmk0clhMRkJzUGZ6b1pRckt5N2U3VWZyU3otQmg2MEVPSjNUMkdGbG5jZHRBQVF4Znh2SklReVphWlo3NFhuVDcyN0tUUXNhQ1laZ2RhTlh4SjBVNE1BbGl",
 "id": "news_610fe6c70358457b"
+},
+{
+"i": "459",
+"b": null,
+"dim": "hours",
+"v": 5,
+"h": "Prolonged Duty Hours Causing Burnout Among Residents at AIIMS, JIPMER, AFMC: RTI Findings",
+"src": "Medical Dialogues",
+"d": "Apr 2026",
+"u": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQcUE3VUtZNWhWYnVsU1VROVBBYkNmQzA5UmdpcS1YRlBhY19IN01KMUtKanJ0NHl1OUJhTFM5bllKeF9yVmpxTVBwd2NjRUdLM2VYZnRnNTBrdnNCa3VGdDZaRUF3MENzUDY1ODZPTnA3VjZLcENEOE1tRFhJdmZUbmE0cmtTZ3NNNU1LaTQ2RHFNa3IwRFBLcHVjV0FtMEplbWtfbVJPcTBUQUM3VU9nM0NYMjA3bExNYllhVUNGZjdvYnh4QTZmaC1GMExTZXUzdTVfTnFB0gHbAUFVX3lxTE5JWGZoR1JtSG1CSFkzdUU1d0F1aEFRTWdrNWlPS3RRV3RWbDV6N1FqSjhwaHVQR3gxek1jTWxnZndkWVZtblhORW5keURPMFdWX1V2a3BzUmM4MTBCbXNXd0tEeEdFRVNTR2tuOW91VE1Db0NKWlBESXpFRzBMNlRSNDdJLVVrNWVEc3NsNEdwakg5QTdFN2hrS1laanZHNk1QOUF1UUlzUDVnY2pHUVlSUWhjNnZpVDZNR2tSMHo0SEZySFVTNmt",
+"id": "news_81380b293037d691"
 },
 {
 "i": "490",
@@ -135,17 +113,6 @@
 "id": "news_eb3ff0a4967dbf8a"
 },
 {
-"i": "808",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "'Assessors Did not Identify Any Deficiencies!'- DY Patil Medical College Pune says after NMC Letter",
-"src": "Medical Dialogues",
-"d": "Mar 2025",
-"u": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOd1NBNVJSRklpMGl0RTJsMmZQY2t5YkNFTlZBQ0NsaXpoTExPVlBIcGtVV1FGNlgtUkxZZURpcjM0SVp2XzJ6QWJsZWd1TXdOWXo1WnpMdnhNbjd4cmxBSGRjYk1NMENodzJvclc2R1VkUHk5ZmtpNFhpNm1FRXY1cXlmTndIQW9uYUhqMHg2aWpWdlMwX0NmWExnaVlWcEFTckFFcXZnamFWYjE1TXYxSHR2SDNTNUxMNlBST2RWU3M3V1ZKTUNyS3FZaHhNMWI5dlc4eXF2dmZLdkhJN1R0eGFYc0hQc3BNemJhalFyYWk0MWxa0gH6AUFVX3lxTE9FczFrWFNHWGJTbm1neG1ydnNZTEZBRnJtSjRYQlFWYnZuY0ZSQWRQMnIxdE5PY21NY1FUZWpGSnVubVIzQ1VsMHZEWUFtenk0ZTFyMEtuNkJjTmE3UDh0WDBZaHZPZnIwQW1jRW9jcUxjNDVpSzBfLTZCQURwei1ZYkxuMWFvWi14T1RNTVYwY2dtWUhHcVFMbzExZUpFYWVVSjJHTDZHSFR",
-"id": "news_85665cd81a8f529f"
-},
-{
 "i": "1016",
 "b": null,
 "dim": "toxicity",
@@ -155,28 +122,6 @@
 "d": "Jul 2025",
 "u": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPMldPTnI4SFdxSEVCNEoxV3YtNkZERW5yTGIzRzJ6THE5WGI3anNCdllJVUxaTlpoU0dpeXFaWFVCbFl0R1YxSGVwRHFjV3h3dVhKS3N3RDN4OWNCMDdpNjF3TVJiU2ttUG9yNW9yLW51WTZuMlpwdWdjMWpiemNzZ2RHTnRTbHNyOGd1YjZzZl9IQkQ3TkNvTTZWeXdrV0piekxWc0pNY1FLc2x3Ml9CTGdJN0pZQkJ1WjIzeG1FRDNEdk5tTmo4RNIBzgFBVV95cUxNdHJmQzZaNmR4UkJHbDIwZVhEVTAyamc5Ym1oenB5NGRJLWlnNkFSbzRwaXNjUWpidmh6VzZFNTNtbjB4YkdUbmQ5TnRwaHd4WTd5UnBNYjBnMGpRTUdmSXdHdzU0b3MwRWFDY3dKRk13NlZnQ3g1bzZRMllfdjI3ekppb0FVTGM3VE5GY2dqV29mQk9XZWcwUG9WNGpVRTdZWW84NEl5V09jaGR1NkZrWm5xWWNCWnh4QzlKbm5jU3gwUnRUQ3dKY0xCT2c3Zw?oc=5",
 "id": "news_17229757784a166e"
-},
-{
-"i": "1038",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "NMC issues show-cause notice to 26 Telangana government medical colleges",
-"src": "The Hindu",
-"d": "Jun 2025",
-"u": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQM2NSS20wQjRsRzdIazFWTHFzUF9rV0UxdzNNLUgxUF9JTk4tZDhTVmZIQUJWR3J2aWEwY0R5RmpPcDJ0bTVLUjhqQ1hZX3luZnFnNGl5YkF4Ql9aWk5GdFVRUnZ1dkxUTzE2SFU1MnlRc1ZmQ0toajNsU0JmR2RVdnVRTnBrNUtxckI3RWw2T3ZwLS02QklQRFBoRmUtLUxsbXZNcWVzVHI0MGdpTFp6Qk9tMnFYNF9aN3Q3OVl4QmhGYjJCTGVhbFZMTXNrVGdiTkRON2JhbDHSAd8BQVVfeXFMTXltNUJQMm5SV1lHSFY0N1htNEdhMkQ1ZXR5V0U2a2xJMmtvaGdQX2FSWUFvcFhWUERxTW5IVzFYZXRGYXBRSm1yR0w5eTliZnNrclNXVE0xYzM4bDVYbU1DLXJlTnRvTXo1b1Z3Z0puVDZLZVlfRXhtdDBFWGhMSm8xV0p1VWM3TTl4MklyZm1XUUdpRVpzblNXbVJYTTRyN1ViMjQ2c1BGbXktSDY4bERrTkxSRWllbGFHdGphWE9kRFBmaGl",
-"id": "news_4407ffba24c1f1cc"
-},
-{
-"i": "1040",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "State's only government medical college suffers poor facilities: UG classes face deficiencies at Unani medi...",
-"src": "Bhaskar English",
-"d": "Jan 2025",
-"u": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPYWI5S1pxc3BYck9QSmpyT2VIQkdUR0tSYXJoc2U5QnFrYUdhR1lVaENpMWhXUUViTWZOUTdYZ19aR0g4NGcwdVFOSzZOZzFIVWloTG1EcXZ2T0Q3MUpaUEZ3ejlnb3YyM05raGV6aExwRDhyMEd3anU2NWp2UmNUMmduYm1Yb0pxSmhQa3NQMkRkay1pdVBJc1BGZ2xwVldXWFpiYUYxYzR2Wi1SZDNzSXV0TjFWVWVSZHNNeVFzZ9IBxAFBVV95cUxQWk40U2ZITVR5ckF5b1diaFZBX3BZTHJ4dXJ0eEFPN0M1WXhWd29Hc2pOcVZYbTBFSUtKOVR5T09YTDNTczVwTUdFVHV4dDNKNF9INVkxY1JDRWU3SlJTWl84dmQ4QjV6clpWbm45eGJtX21Qak5GOWZlREFjakJOdmNSSUliUXNldVNxWXRHSFJBbV9CRFpBaVJFNTYxME1SSFdUcVhrZ0tpaF96Ump6YV9VZTEydnhZbXVPWkotRUNQQjls?oc=5",
-"id": "news_61b0baa891baf3a0"
 },
 {
 "i": "1052",
@@ -223,17 +168,6 @@
 "id": "news_9aff196a0169e464"
 },
 {
-"i": "1111",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "Academic paralysis at HIMSR; MBBS, PG seats withdrawn, 37 faculty resign leaving students in limbo",
-"src": "Careers360",
-"d": "Feb 2026",
-"u": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPWEdsSmd3NS1PeUJJM1ktdm56dU9ubXFmbnJxOVAtd0psRmxUOG5SNFhOb0NSX25pWEpCdFhrODRkNnZvWEp0QWN2MlQ2NWs5djhyNWN4TzhoMVhOMVNPLVRqLVRrN3dkVDdpemdMUWFicXNPdlozajVpZWJNWXBFVDRuTWt3OWduUHpESVM1S0p0U2M5bXdEQzJNbExzRXpfamUxal9Nc3l2dnZtcER1RVdGalNlV0F0c21PMk40NmRfdVNOcHB4bHljN0JoWXFuVWIzUkoyNmVuQdIB3wFBVV95cUxOZW1ONkYzLVBLWThHS2pkZW51YnVTeTBTa0JUVVZYNXFvNWNHSGk3QjRwR3hqcWF5OFNUU3FuUVZscG1FS0lnV2NqdVUxT3Mxb2gwX0FJQ2xTUUFaMkgzbDZwZmNoaUFBVGNIeWVsZTBiR3RTaWFUZDFHYjE1TDdHOGlUSTNZRzdvNkkzN3otX2FYYThzV3ZJMG1fQ0tJN2lGY3RkMTJMSHlSX21WT1VwbnZGal9YT3dERUhCV19YaklqM0V",
-"id": "news_4c87fdae495a99d5"
-},
-{
 "i": "1440",
 "b": null,
 "dim": "toxicity",
@@ -243,28 +177,6 @@
 "d": "Mar 2026",
 "u": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQT0I0aUdVbnhScXZJWHBKRlp3TDBzRzRhc3V1VnJsejFEWTFPSnBsX3ZScWpnOHluT28xYUpMeFhhVGRRTS1VeV95R2wzdmtTcmItM3ZJNnlzLVNNQ1R0U3dGdVNwMkZiUDRwOEEwWmlHOVdIYUpvaVVlR1ROQ2F5YklSREI1dExyUmh0aEp5LW12b19YY3V2N18ybGMxZVUyY0lIUzN2TmNQWU94ZDlTM0syRTFHQm53czcxSk13Tllnb3BQS3RYcHZ6blBvbkFqd3EzSDVFTEx5SjBOeHo3cG41dHFSb2E3Rm5qWUFB0gHzAUFVX3lxTE1hNXFkdVBJUTNCTGV6M1dNQ0tWZVNQMXNPVWVsbTZ2dVQ3Yk9QeTdKZldhOWhUSGhOY3Fwb1pTcWtWMWNkU3RvdnJVMUx6YXdhMnJiODJ6Qk9UMFZTSlp2aVlyNFU1anhNUTE0UjZrSFkyeFRFS2lZM0JkS2hydmpiWjNjdWJhdThGMUFVWXJrbVdCRHphQmRuTFphYzJzbGU4TkcxMlZObGdGRkhFMzJ",
 "id": "news_3347bd684bbee6da"
-},
-{
-"i": "1456",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "NMC Issues 71 Show Cause Notices To Government And Private Medical Colleges In West Bengal",
-"src": "ETV Bharat",
-"d": "Jul 2025",
-"u": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPazBXZEZvR3l5WjJ0N0ZWOW55cDJSS003ZExrLXRKX0UwZzRfX0Q3TmdYdWJnOWpIdFd0cDlsWGMtT3RtbGwycE5ScDBrOHNJYS1waWVXUEZNTVVFYlFuUUw3bjVrQWFLTWQ3a3RvZEtxLV9heVpOWGNtUHJYaUd3aXhpVTlkLS1YcmRXYkJPUjg4V3Z2N3lNREhrWVlnZ1IyMkoxMUNyYU1YVDRkTHlMYmVZbzVwMXpCbmJHM3Atbk8tZWRFdjhvMWt4eE9lTjF1Wk1uNGJUeE7SAd4BQVVfeXFMTUllWG9QYjRZWF9kdExoRGY5UDVkcHU4NzFOV291bUdHdDJwTk5XZTB3bU11VktKMU9reHVOaG0wWUZuWGF6S0Vxa1BialNfejhuSnhDZk1SNWdWUXJEdVY2T1lXOGN1Y3BkSUFEM3hvRmVVcVJERE9IM29wNFp1eEFDeXY1Znd0a2phblNSc1pMYmtldWN4WkVTNF9mVDVnT2VNUl9jdVl1amxpVXRra3dWX19YNTQzenlQdW9WT2pDeUN1bGk",
-"id": "news_d44873f7fbcede9e"
-},
-{
-"i": "1456",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "NMC sends attendance show-cause notices to Bengal medical colleges over 'irregular' faculty members",
-"src": "Telegraph India",
-"d": "May 2025",
-"u": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQN2xoTG15cXEzRGFpQkxPck5lYkE1VWQ1VVYtYng0X3k4SkdaQy1YSDQyRDRBMXZRdjN5QjRmVlZWR1JYci1pNzZLNUF1WFhNRk5zVHlya2NraXVPWVh5VGFLVzUyOTNNazI4QkpQS1dzYm1IMkZ3bHZ6VjdtOWQtQnowUTcyaGk1QnRmWXhJN2t5a2tNZXd4eXZTX3gwUE1CZkhkbXlfU3llelNtSU5yYjRzdDlWQzRMWWQxdUU2aEhzZ3o2LWcwVkVxQmZXRGR2bjFreGdxUzhPMGNlUGpuOG5YeXBwME81WklxYWd6QdIB9AFBVV95cUxNZG42R0tGWnZkdF9vWXZKZ0M4dVFMRFVpX1QtR2tTcEk4d3pldXlNWHlmRXA2eVpQa3lyMlRWb3owWVlLTXVRTW0yNFR1WEpuMHlEQ0UxNGhMZGY3eFlWVlh5eTVBUC1QRXVtSWRQWW5CQ1pjdTgzVTE3a3UzN0ZvRGFySEV0ZHdVNzZvb3lYZ0JqUFpMTGh2NVlTY2ozRWpUY1ZEbk9iY1ZsR3M4SGh",
-"id": "news_92112f6f52b5022d"
 },
 {
 "i": "1486",
@@ -278,17 +190,6 @@
 "id": "news_5917376a4c932331"
 },
 {
-"i": "1490",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "5 doctors at Midnapore Medical College Hospital issued show-cause notices over expired saline",
-"src": "Medical Dialogues",
-"d": "Jul 2026",
-"u": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQU0k5ang5NlFyTC1iQVk4dDdUX0tvZGJNR1RqUjZwUXJsckZhaVJoSkJkWHRadjRMZy1IM0hGUUw0eUo5Nk4zdEtnNUc2eHpNM1ZXdU16MWF5bnpCLXJmT2t5YloyNkVZTjF0TW5YcndVUDdULTZXTWZkbmdBRjdkbXNJVXd3VGZBdGpoY3VGOFdxSnVFbFItNHRwRUxWb3FUN2VydThhbXFJWHZtUUtzbURyeVJWZUU0cTBsM1prb2FacTVNRFJySmJZNmVsYjZkemlGNnFlT3RuUnVTOHRLVzE2XzFYQndsaWI2TFVrRXhxMmPSAfgBQVVfeXFMTngxMmRwNWZYXzVWM1NxaFQtNGVRZWZMRjFPYjdLb2o2LWJxaWFLNk1zN2I4OXZ0eW5tRmt3MTlBOW54eTFaa3VSTTNTa1FGSjBvclYtT2JWdDFRNy1hbUZKUzkwem1zSzZBcUE4VUFmRkh4LVVscUZWSTFFc1ljbldGT211c2pqRjB0aENfN3RPY1hlWDZfdzg1UVM4b0VFcFBfLVJlaXhtOVd",
-"id": "news_17960d03e0221f58"
-},
-{
 "i": "1561",
 "b": null,
 "dim": "hands_on",
@@ -298,17 +199,6 @@
 "d": "May 2025",
 "u": "https://news.google.com/rss/articles/CBMijgJBVV95cUxQVER5VTR6SkdMNzFiQk04ejdncnhyNFpVVVphTndvMmo1N3VtNW14Mk1fajYwdWZVQkpCR2RoRENtdDM3Mk9keGdZbVlHZVBHNklhMzB0c1o4WklaYTRmTC1JY3dNM3dCU1Q0ZTdNM084MjAtMjhGTFl2ZUNNSTk3ODJMdnRVOTFUTTRlM1lTT0xqRS1BN2ZhRnAwQi03TWJFdlpOQW5Wb280Y0YwUXhiYWw0Y09kLWFFWGpXa3JLTmU4VExNRE1Za3FabGFzbEU5YnVuR2ZpSnZ1NGNsQXcwbTZKb05iV3RTdE5aSjRzWlBnX3lDUE9zcFlIYTdrdGx4bFY5YUJ4emcyY3d5S3fSAZMCQVVfeXFMUGpSUkY2UmhyQjU3bmU1dk9PUk1tbjVxcmNndlVjTUl0Vl9tVk51MFI3bmFNQWxpeWJTRlp3Wmh0ejh5ZzhkeFJ0S09lcWE4ZUpJdktBaTBuSEV6Y1B5VWFKdnBLVlBfNE5la0JyOWR5UjhVckpSbUxKQ29MWFZYQmg0SVpVVGo5V09fNVdKa3R",
 "id": "news_5e6d8cceb50f48c8"
-},
-{
-"i": "1980",
-"b": null,
-"dim": "hands_on",
-"v": 2,
-"h": "Stanley, Omandurar among TN medical colleges to get NMC show-cause notice",
-"src": "The Federal",
-"d": "May 2025",
-"u": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNNFJoZWZPOHhZWTNEZDN2cFVGT2hONTNvTWZXX3Q1MWV6OTdXSXk1RzVza2thTjNYWHVqYjVmbnctNkx6THFuTnFka19VY3YtWDlEV2FBUTM1M0U0QjRyaGhSS1BlQjl5d2hseGE1eGY2S2RTbWlERUcwN0ZUcHlSZ0piZE1jQWNFXzQ0VjNvTlE5eXdMVGUtNHNGTUN2TFNiYUVZSFNrVEU?oc=5",
-"id": "news_83888556a2da6f30"
 }
 ]
 }
