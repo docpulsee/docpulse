@@ -13,7 +13,7 @@ concurrency: { group: culture-news, cancel-in-progress: false }
 jobs:
   go:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 85
     steps:
       - uses: actions/checkout@v4
       - name: collect
@@ -23,5 +23,5 @@ jobs:
       - name: save
         run: |
           git config user.name DocPulsee; git config user.email docpulsee@gmail.com
-          git add culture_news.json tools/culture/debug.json 2>/dev/null; git add culture_news.json; git commit -m "culture news signals [skip ci]" || echo nothing
+          git add culture_news.json tools/culture/state.json 2>/dev/null; git add culture_news.json; git commit -m "culture news signals [skip ci]" || echo nothing
           git pull --rebase -X theirs && git push || (sleep 20; git pull --rebase -X theirs && git push)

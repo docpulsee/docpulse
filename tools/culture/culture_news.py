@@ -8,7 +8,7 @@ headline names the college and talks about residents/PG doctors, and turn each i
 Writes culture_news.json at the site root (public: headlines + links only). Supabase pulls it weekly
 (sync_culture_news) and stores each item as a 'news' rating (seed=true, note=headline, source=link).
 Run: python3 tools/culture/culture_news.py [limit]"""
-import json, re, sys, time, hashlib, urllib.request, urllib.parse, html, datetime, email.utils
+import json, re, sys, time, hashlib, urllib.request, urllib.error, urllib.parse, html, datetime, email.utils
 import xml.etree.ElementTree as ET
 
 ROOT = __file__.rsplit('/tools/', 1)[0]
@@ -79,14 +79,19 @@ DEPT = [('Anaesthesiology', r'anaesthe|anesthe'), ('General Medicine', r'medicin
         ('Obstetrics And Gynaecology', r'gyn|obstet|obg'), ('Paediatrics', r'paediatric|pediatric'), ('Orthopaedics', r'ortho'), ('Radio Diagnosis', r'radiolog'),
         ('Psychiatry', r'psychiatr'), ('Dermatology', r'dermatolog'), ('ENT', r'\bent\b'), ('Ophthalmology', r'ophthalm|eye dep')]
 
+BLOCKED = {'n': 0}
 def rss(q):
     u = 'https://news.google.com/rss/search?' + urllib.parse.urlencode({'q': q, 'hl': 'en-IN', 'gl': 'IN', 'ceid': 'IN:en'})
-    for t in range(3):
+    for t in range(2):
         try:
-            r = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0 (DocPulsee culture bot)'}), timeout=20)
+            r = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0 (DocPulsee culture bot)'}), timeout=15)
+            BLOCKED['n'] = 0
             return ET.fromstring(r.read())
-        except Exception as e:
-            time.sleep(4 * (t + 1))
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 503): BLOCKED['n'] += 1; time.sleep(30)
+            else: return None
+        except Exception:
+            time.sleep(3)
     return None
 
 def bkey(i, deg, sp): return re.sub(r'[^a-zA-Z0-9_.-]', '_', f'{i}__{deg}__{sp}')[:180]
@@ -95,7 +100,21 @@ def main(limit=None, debug=False):
     dbg = []
     cut = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=730)
     out, seen = [], set(); ids = sorted(inst)[:limit] if limit else sorted(inst)
-    for k, i in enumerate(ids):
+    SP = ROOT + '/tools/culture/state.json'; st = {}
+    try: st = json.load(open(SP))
+    except Exception: pass
+    start = st.get('next', 0) if not limit and not debug else 0
+    if start >= len(ids): start = 0
+    prev = {}
+    try:
+        for it in json.load(open(ROOT + '/culture_news.json')).get('items', []): prev.setdefault(it['i'], []).append(it)
+    except Exception: pass
+    done_ids = set(); t_end = time.time() + 70 * 60; k = start
+    order = ids[start:] + ids[:start]
+    for k0, i in enumerate(order):
+        k = (start + k0) % len(ids)
+        if time.time() > t_end or BLOCKED['n'] >= 4: break
+        done_ids.add(str(i))
         x = inst[i]; a, w, ac = keys(x['n'])
         if not w and not ac: continue
         q = '"' + short(x['n']) + '"' + (' ' + a.replace(short(x['n']), '').strip() if a != short(x['n']) else '') + ' (resident OR residents OR PG OR stipend OR ragging OR strike OR NMC)'
@@ -135,10 +154,15 @@ def main(limit=None, debug=False):
                             'id': 'news_' + hashlib.sha1(link.encode()).hexdigest()[:16]})
                 seen.add(link); got += 1; break
             if got >= 3: break
-        if k % 50 == 0: print(k, len(ids), len(out), flush=True)
+        if k0 % 50 == 0: print(k, len(ids), len(out), flush=True)
+    # keep earlier items for colleges not checked in this run (still within 24 months)
+    for ii, L in prev.items():
+        if ii not in done_ids: out.extend(L)
+    nxt = (start + len(done_ids)) % len(ids) if len(done_ids) < len(ids) else 0
+    if not limit and not debug: json.dump({'next': nxt, 'at': datetime.datetime.now().isoformat(), 'checked': len(done_ids), 'blocked': BLOCKED['n']}, open(SP, 'w'))
     json.dump({'v': datetime.date.today().isoformat(), 'n': len(out), 'items': out}, open(ROOT + '/culture_news.json', 'w'), ensure_ascii=False, indent=0)
     if debug: json.dump(dbg, open(ROOT + '/tools/culture/debug.json', 'w'), ensure_ascii=False, indent=1)
-    print('done', len(out), 'items from', len(ids), 'colleges')
+    print('done', len(out), 'items;', len(done_ids), 'colleges checked this run; blocked', BLOCKED['n'])
 
 if __name__ == '__main__':
     a = sys.argv[1:]
