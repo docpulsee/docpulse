@@ -68,11 +68,11 @@ for _x in inst.values(): _x['stem'] = stem(_x['n']); _st[_x['stem']] = _st.get(_
 STEMS = [k for k in _st if k]
 SHORTS = sorted({norm(short(x['n'])) for x in inst.values()}, key=len)
 
-CTX = re.compile(r"\b(residents?|resident doctors?|pg (students?|doctors?|residents?)|post ?graduate|junior doctors?|jrs?|interns?|medicos?|students?)\b", re.I)
+CTX = re.compile(r"\b(residents?|resident doctors?|pg (students?|doctors?|residents?|medicos?)|post ?graduates?|junior doctors?|jrs?|medicos|pgs)\b", re.I)
 RULES = [
-    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|died by suicide|toxic|bully|casteis|caste discrimin|punish|forced to pay|murga|exploit|threaten", re.I)),
-    ('toxicity', 4, re.compile(r"strike|protest|stipend (not|unpaid|delay|pending|withheld|cut)|unpaid stipend|stipend.*(months|delay)|without stipend|boycott", re.I)),
-    ('hours', 5, re.compile(r"duty hours?|work(ing)? hours?|\b(24|36|48|72)[- ]hour|overwork|long hours|sleep deprived|no rest", re.I)),
+    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|toxic|bully|caste discrimin|casteis|punish|forced to pay|murga|exploit|threaten", re.I)),
+    ('toxicity', 4, re.compile(r"stipend.{0,40}(not paid|unpaid|delay|pending|withheld|months|protest|strike|cut)|(unpaid|delayed|pending|no|without) stipend|(protest|strike|agitat)\w*.{0,40}stipend", re.I)),
+    ('hours', 5, re.compile(r"duty hours?|work(ing)? hours?|\b(24|36|48|72)[- ]hours?|overwork|long hours|sleep[- ]deprived|no rest", re.I)),
     ('hands_on', 2, re.compile(r"show[- ]cause|deficien|seats? (cut|reduced|withdrawn|derecogn)|derecogni|faculty shortage|nmc (penal|fine|notice)", re.I)),
 ]
 DEPT = [('Anaesthesiology', r'anaesthe|anesthe'), ('General Medicine', r'medicine dep|department of medicine'), ('General Surgery', r'surgery dep|department of surgery'),
