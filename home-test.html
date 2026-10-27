@@ -10321,6 +10321,7 @@ html:not(.dp-noanim) .hn-hero-in.dp-off::before{animation-play-state:paused}
 </style><script>(function(){
 var H=document.documentElement,mq=window.matchMedia;
 var slow=(mq&&mq("(prefers-reduced-motion: reduce)").matches)||(navigator.connection&&navigator.connection.saveData)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
+var force=false;try{force=localStorage.getItem("dp_anim")==="1"||/[?&]anim=1/.test(location.search);}catch(e){}if(force)slow=false;
 if(slow){H.classList.add("dp-noanim");}
 var IO="IntersectionObserver" in window;
 /* 6 shimmer: works even in no-anim mode (it is a placeholder, not motion-heavy) */
