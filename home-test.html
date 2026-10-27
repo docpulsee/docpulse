@@ -10263,20 +10263,20 @@ function TokenEditor(p){var h=React.createElement,ref=React.useRef(null),last=Re
   h("div",{className:"tke-pal"},cur[1].map(function(t){var v=V(t);return h("button",{key:t,type:"button",className:"tke-c","data-offer-tok":t,onMouseDown:function(e){e.preventDefault();},onClick:function(){insert(t);}},labels[t]||"Offer name",v?h("span",null,v):null);})));
 }
 window.DPTokenEditor=TokenEditor;})();</script><style>
-#dptb .dptb-acts.sc4{grid-template-columns:repeat(2,1fr)}
-@media(min-width:640px){#dptb .dptb-acts.sc4{grid-template-columns:repeat(4,1fr)}}
-#dptb .dptb-act[data-sc4]{--tb:#fff3e6;--tc:#ea580c;box-shadow:inset 0 0 0 1.5px rgba(234,88,12,.35)}
-#dptb .dptb-act[data-sc4] small{display:block;font-size:11.5px;line-height:1.3;font-weight:500;opacity:.75;margin-top:-4px}
-#dptb .dptb-act[data-sc4] .n{opacity:1;background:#ea580c;color:#fff;border-radius:999px;padding:2px 7px;font-size:9.5px;letter-spacing:.04em;top:9px;right:9px}
-[data-theme="dark"] #dptb .dptb-act[data-sc4]{box-shadow:inset 0 0 0 1.5px rgba(251,146,60,.45)}
+.v2 .hn-tab [data-k=senior]{--ig:linear-gradient(160deg,#c4b5fd,#7c3aed)}
+@media (max-width:760px){.v2 .hn-tab.sc6 button,.v2 .hn-tab.sc6 a{width:50px}.v2 .hn-tab.sc6 [data-k=senior]{width:62px}.v2 .hn-tab.sc6{gap:3px}}
+@media (max-width:360px){.v2 .hn-tab.sc6 .hn-e{width:38px;height:38px}.v2 .hn-tab.sc6 button,.v2 .hn-tab.sc6 a{width:46px}.v2 .hn-tab.sc6 [data-k=senior]{width:58px}}
 </style><script>(function(){
 var SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
 function go(){if(window.hnGo){hnGo("senior-connect");}else{var s=document.getElementById("senior-connect");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});}
  setTimeout(function(){var c=document.getElementById("sc-college");if(c&&!c.value)c.focus({preventScroll:true});},700);}
-function add(){var a=document.querySelector("#dptb .dptb-acts");if(!a||a.querySelector("[data-sc4]"))return;
- var b=document.createElement("button");b.type="button";b.className="dptb-act";b.setAttribute("data-sc4","");
- b.innerHTML='<span class="n">SENIORS</span><span class="ic">'+SVG+'</span><b>Talk to a senior</b><small>A resident at your college answers you</small>';
- b.onclick=go;a.appendChild(b);a.classList.add("sc4");}
-setInterval(add,800);if(document.readyState!=="loading")add();else document.addEventListener("DOMContentLoaded",add);
+function rename(){document.querySelectorAll('[data-sec="senior-connect"],#hx-rail button,#hx-rail a').forEach(function(b){
+  for(var n=b.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&/^\s*Seniors\s*$/.test(n.nodeValue)){n.nodeValue="Talk to a senior";}}});}
+function dock(){var nav=document.querySelector(".hn-tab");if(!nav||!nav.__v2||nav.querySelector("[data-k=senior]"))return;
+ var b=document.createElement("button");b.type="button";b.setAttribute("data-k","senior");b.setAttribute("aria-label","Ask a senior: talk to a resident from your college");
+ b.innerHTML='<span class="hn-e">'+SVG+'</span><small>Ask a senior</small>';b.onclick=go;
+ var sep=nav.querySelector(".dk-sep");nav.insertBefore(b,sep||null);nav.classList.add("sc6");}
+function tick(){rename();dock();}
+setInterval(tick,800);if(document.readyState!=="loading")tick();else document.addEventListener("DOMContentLoaded",tick);
 })();</script></body>
 </html>
