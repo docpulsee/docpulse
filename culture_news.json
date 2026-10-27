@@ -1,7 +1,62 @@
 {
 "v": "2026-10-27",
-"n": 5,
+"n": 11,
 "items": [
+{
+"i": "516",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Interns protest absence of stipends, basic facilities at BMCRI",
+"src": "The Hindu",
+"d": "Feb 2026",
+"u": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQQzdNZng4c0c5WkFmVEhhbExqSDZ3R29WWm9WWHhFUEZTR2dFNERRZ1AwWmx3UDdlWTNnYTVyaVF5Rm1XbDM4b1hpajBtcjRfUVR2LW84M3ZySkVSM3FTR0JDcG9rQmdVYXBnRnRHY3hVdjlQUWNLaHplNVdsMVRQRHVxUXJ4WFR6aVo2T21KRWc5Q3U3QzZOTXFCZTg2UXp3Um9IRl9LaDdLVHkyTFgtSDRRNU9iLVpJd3AwSllLMld2UjdtVnJz0gHOAUFVX3lxTFA0N1lIMDNxWjdaOUZXaEFFTmtoWV8wOHVSV1d5YmFENzJ5SlE4ZHdOYXhFUlNMdUhwTFd1VTJ2R0xrVENBdFl3MUVZT3MtVUh1dzdoTnY2MElVOTNfMTgyTGxNajJTanRPR01kSGhuMXBUQXY0bmxpdzBkLURFd2s0d0FKcUVReDIyMlprOFNCdDBSSXZkdkdtWnZ4WFJ5VzIyS2diTUQ3T2J3WVBHREM5MDB4aGRwbV9uQ0hqOHJVQVo5a0wxRzRMYUVtd1JB?oc=5",
+"id": "news_a91eab58c40a715b"
+},
+{
+"i": "516",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "BMCRI allied health students protest, seek stipend",
+"src": "The New Indian Express",
+"d": "Feb 2026",
+"u": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPWlBZeW1EcW1PTFRWaDFMMW5VRUdtQ2lYb01MYlNJdmY1RDlzcWI0eGtNQk1YRl9FS3RWMFZZN3JjZERVbU1rdE84c0NxcTd3MnBVLS1teE5SRE9LRkZrYWkyTmlWdFRGNmJwWld3YXNUZDhPQldWdW5wby10alRmMFctY3dkNzVZRUtWZGM1UGZ1LV84WXlQQ3ZrME1LZFQ3QzAyaG5oc3E1MF9sVzExVNIBvgFBVV95cUxNUUtxaEVkTEZocDBGSmp5S3kxR2tsWkNKTVVaUVdxSlhrc0VqOUlmY0tFYUkyWndHbzU3QWR0ZVFTWExOWk4xcDVQdGJPSjJCZFEwTU9QT09UeVUyNC12eHl1WnJ3Y2dDOVpCbDZEeko0U1N0OWRzbko3T0Z2MUZoc0NlTDhtWDJsVUJXU2pFQ3ota1h2ZkNwbVdsU1JmS3A5MnNoTE1DdWdDYXo2bkVrV1A5WnNUSGxmdWV6aDhB?oc=5",
+"id": "news_aa201c51acc60801"
+},
+{
+"i": "516",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "BMCRI Allied Health interns strike over unpaid stipends, poor infrastructure",
+"src": "Deccan Herald",
+"d": "Feb 2026",
+"u": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQX3JRZ21pWGg1OTgwaW92cndKc0g4WVQ0bEkyVGlyYk5FdTBrN3VWRTViYTl1di1LeXBTWF9RUnhUUk1IZmgtazNBcHNXSjBxeGRwSF9seDBZNzZidEJTckFGaXdtY0p4LTcycEZzdzFkMTRMd096MjhUNEFWS3kzM3FHbngtNlpvYVpGeVcwbGFTSDR6RGVGNlNxVEl6aGZDdGFpQzI5OVVWUDY3Y2gtOUlBTzFVU3ZPNUdndlFrMkJZY19sSk01UlJ6VHZRdnZ5Ri1FZw?oc=5",
+"id": "news_c36e21a108c0282a"
+},
+{
+"i": "906",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "GMC Bhopal intern doctors continue protest for higher stipend as agitation enters Day 3",
+"src": "India Today",
+"d": "Sep 2026",
+"u": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOeDdPNDFLNDdjZ0tSbkdqREd4U3o4Z2FueG82QmpqMWVJZEdOamxBUEVseDJxckMxRW9xUUIzcmNJMWdMTGZmTm5rY1dVTW1SYnB6bE4wNmEtakZMTzRPLXlYN2t4NUl5NFdUZk9YMEtVbGF2enUxTy1wd0JRa1pleUstNGtQdzlQNkZzUGUxSnA0aU42d2NrWmtfcHAwUENycW8zNWprUUh1NDNWM0U4UG4tX3VLd1oyZUtaTlZTQmFocmtZeDd2WGM4eVJlbXdaUTBxNVZKMA?oc=5",
+"id": "news_e8ec7c1970e3e9ea"
+},
+{
+"i": "906",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Bhopal: GMC Students Protest Over Stipend #Gallery",
+"src": "Social News XYZ",
+"d": "Sep 2026",
+"u": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZHdhaThHNmMweXhWbzlfdnEzeTRSSFlxYndOWkdfaEJKbm5ab0h2ZXIwOURobzdnck5QU3AyZXZXUmtRcnJobXNUSTZFRlVEYTVaYUNHdnFBMXlnRloxSnJ3NTBmWkNTZXl4ZDBpT2Z3dW5kbHpEcU42R0hDN0tHVTRFaXlUb25TYWNNalFkNUFaUGM?oc=5",
+"id": "news_9f2a1509bb13acb1"
+},
 {
 "i": "906",
 "b": null,
@@ -12,17 +67,6 @@
 "d": "Dec 2025",
 "u": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNbUkwWG1DWTl6S3ROdk9udkdsazhYNEY5R2swQVM2VnhyTnVpODlRSi1zVHV0OElFa29FTTJKXzhUNkR1Rm03UnpBUzFvMFpQOUtUV3ozMHBLR1dIRTViVUFQMmU4N2NlVlBOWktBbi1XeFFCOVpoamN3S1FRaktreUUydTI3SS1hSE1Kc2xRNmpzaWhFYVB3Q185RFpyQ3R5aW0wS0FPVGRSMS1zNDlTZ1JkME1OdzhiMGZLUm9LNHdtV1JhY0FwVTNIZjNfRTM0WEItNm5sa3lQVnlfRWfSAeMBQVVfeXFMUGJvb1lYcWh1TlUwYjlWYmZPd1lVS0ZibmVJZlZtdktKUjYwYTBBYXV4dU5YaE5fMmZVQ3B5M0pKbE9rN2tVUjFMU1A1TWpMVUxtSXhibmVDcTJFU0J5RVlPRm5hUkNSdV9yenNBYWZfTDJGMnBDaTBKWWhHak1WQjJSdUJWaVFwR2FRSl9lMnFfanBrRGx3SjRIaDd1N2FCa3Zoa0tXMFJ5RmZ0aXVUZy1oLVlsaEFjZzlmQjdoTUx",
 "id": "news_ccd4cb34bc9040da"
-},
-{
-"i": "906",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Bhopal News: MBBS Students Clash In Gandhi Medical College; Anti-Ragging Committee Meeting Put Off",
-"src": "Free Press Journal",
-"d": "Dec 2025",
-"u": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOT2Yzb0lmSDJnQ3dQVzkxX3BVXzNMZWZjQVlOOUhTRzVjZkVnY1JqS01UQjRJQ2V4VDByVHBpbDVRcmIzSzdUOE9IU2pOMHU2Mnd0MkFxbUJUQktmcFprWl80ai1zLXhUeEY4UjRiM2I1bDJXcVlqMHR5cnNwc2JFV1VOeF8yMXpRYVREODQ1NjRDaFF5UFFaV09wWU91OGhKbGdickl6N0huTGdVOUIzXzlNRWpOc2M0Ym1tYW1RZTZKelIteTJnRXFqQkxkMW9Y0gHWAUFVX3lxTE5vclVlVlBhS2JWTjBlbWVwQlZQTmFtUlpUdDNvVUhWRzloQWVSTE94emswVjBXM3JsRHdLQzZBcF9mVGJKZFpTakk1eFc3X0NpVnY3dm1nY05BTVlfcGdTOHJrNGtPNzBtSVdfMU93YzVQWVkxc1k2Rm9Wa3pZQ08xemQ4MGVhaFhMMVN0eGZ5cFA3Wkg5d0NCZkZhdnVPZHNDdnhUQThPQlI2akVqRkhmMVdnODlHSmg3MjBGZFl0aTRPS3hVUU94RTNDbWZ",
-"id": "news_a82d6e3fb14be00f"
 },
 {
 "i": "1330",
@@ -56,6 +100,28 @@
 "d": "Feb 2025",
 "u": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQbGdJT3N6Q1ZoZ2piU1Fnc1RETi1YdnFWZ1FuRjcwOF9xWUR5NlZXU1JSOWcwN0traE8xT3ZINUNmd1lIc3JYbm9CRTY0UFRWTzVQd0dZM2J0VXFUU0pYSEl1TlVKUU55R0JGV08taEVoWGlBRDVNYUMwSWtZbXNEZ1BIMlU0VXFrNWY1RHZpYXNSZ1JPdjU3bU04UEQ5Uk5ZVVlOZXVuZFEtX0lHakHSAbsBQVVfeXFMTy1pZGJLSVpTUXVlcW0yN0t0Q1dNYVRqMkxfX0ZoVXVXT0VjbTdDeFNKdUxxa0Uxckl1OHREOFZDUHduUXJQSnRwc0EwbXBMaEo3blNuOXIyd0VyZU9oRGs4MnUwdnF6MFBTeWFabkFWUHlUVmlxNkdNd2stbXhWLWVpa0UzY1VHcW50UTJvZnEtUzk2QUJiblROX1F4VjVMalVOcjJKbHI4UldVNUQtaU4wUHMyeWk2MnpVYw?oc=5",
 "id": "news_c3c193c1ce68d39e"
+},
+{
+"i": "1389",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "No Stipend for 6 Months! MGMCRI MBBS Interns file complaint",
+"src": "Medical Dialogues",
+"d": "Nov 2024",
+"u": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbDNpWjI3MVBFXzRiUWZFSFZrUmtnbmZxS2pLU1B3WUtWN2tkeGttZmhBTm9YR1Z5dWFnMlF0dFhVMlp0d05mSWI5NTdXMTVFR0hyUzduQ2x0UDZjUXRWVkRfQm85NU9IMXdNNW93a1puME05R1JIa05FQVAyb05xMnltNks4aW5TX0tpM2tQdUhXTDNVdnlOQ3pseWJTblpzWnZuMW51d0dEd1g4aWdkQXhXVTdPWnUwWDlRT1IzZGhIVjDSAcgBQVVfeXFMT0p5cDZFb1l0OWhZQ2lhNWJocTVjUlFiQUhwV2htR293dTZhSzZyNXRoN21HTDAwWms2WnJGZ3k3R3p0c2E1bGpIekpDWV9YOXpURWZTT3pHTk10X1Rvc21PdkUwTk1CQWx3cDJGamd3ekJzcC02ZDh3SkVWSUhGLU1MbE5BU2J2RndmaDE3VmJhOEFCdjE3Skk1Sjh4TjJkZjRKRnhmbHBCa2dmM0NnR2g5bWg5NTlneDlxQ09GZW5hV29LendwejQ?oc=5",
+"id": "news_279c07cd9bd05540"
+},
+{
+"i": "1734",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "RG Kar Medical College protest face Aniket Mahato to be engaged as senior resident at same hospital, says Calcutta HC",
+"src": "The Hindu",
+"d": "Sep 2025",
+"u": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxOc1lxdDlfUEZ6RUN2bW9ab3VFTTVMSkpGblhiYmZpQk5sUGRBYmRRU0VBNmZOSmw2R2NPMGhVX0VZdUhjTTNEN190dU1ZbS0tZ2tYSXg3bXhfZXhFZEI3NkYwYkdWaHZ2Ni1mQnBVYUhPRWZGMUdsaGRFaUs3bjh5RVRmanlNTVdUVXI5YTUweDY1aktFZkk0TFJiYWN0dU1IN3JqNUc3dDB5SldOR3k2ZnUxb2ozeXBIelVac1puQ19Vd19idWhUalZuZkJ0ajl4RG5Gci01eGZQSW54OUZzc3hEU3U3SGJXNW84VnFIT213Vko1VW5FSlhCYzJ4cURxSFJLakxCdkdSVXpBQTE5bnhVN3dfa3NHaHF4MXBqUDZIRDU4ZTFFVNIBrwJBVV95cUxNb2JvMW5LUU1BU1dDUlpDSmJwUk9TOUdzampKaHkzd2tDN0FBRHFvejdCYjZxd0lrVWt6NmZUMUw5bHVGMm5CUkxmbnR4QlByRWloUjhJbl9LQ09Lb2FLc3VHRUlhdlprWmhpSl9TWnNkMWNQUjJ",
+"id": "news_803e1cc5950fd87d"
 }
 ]
 }
