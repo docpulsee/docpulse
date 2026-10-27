@@ -1,0 +1,27 @@
+name: culture-news
+# Weekly work-culture news signals for every MD/MS college -> culture_news.json (headlines + links only).
+# Supabase (sync_culture_news, pg_cron) pulls the file and stores each item as a 'news' rating.
+# Manual run: edit tools/culture/run.txt (first line = how many colleges, or "all").
+on:
+  schedule: [{cron: '20 19 * * 5'}]
+  push:
+    paths: ['tools/culture/run.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: culture-news, cancel-in-progress: false }
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: collect
+        run: |
+          L=$(head -1 tools/culture/run.txt 2>/dev/null | tr -dc '0-9a-z')
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "$L" = "all" ] || [ -z "$L" ]; then python3 tools/culture/culture_news.py; else python3 tools/culture/culture_news.py "$L"; fi
+      - name: save
+        run: |
+          git config user.name DocPulsee; git config user.email docpulsee@gmail.com
+          git add culture_news.json; git commit -m "culture news signals [skip ci]" || echo nothing
+          git pull --rebase -X theirs && git push || (sleep 20; git pull --rebase -X theirs && git push)
