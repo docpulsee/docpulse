@@ -1,5 +1,61 @@
 {
 "v": "2026-10-27",
-"n": 0,
-"items": []
+"n": 5,
+"items": [
+{
+"i": "906",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "Bhopal News: MBBS Students’ Dispute; Gandhi Medical College Submits Report To National Anti-Ragging",
+"src": "Free Press Journal",
+"d": "Dec 2025",
+"u": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNbUkwWG1DWTl6S3ROdk9udkdsazhYNEY5R2swQVM2VnhyTnVpODlRSi1zVHV0OElFa29FTTJKXzhUNkR1Rm03UnpBUzFvMFpQOUtUV3ozMHBLR1dIRTViVUFQMmU4N2NlVlBOWktBbi1XeFFCOVpoamN3S1FRaktreUUydTI3SS1hSE1Kc2xRNmpzaWhFYVB3Q185RFpyQ3R5aW0wS0FPVGRSMS1zNDlTZ1JkME1OdzhiMGZLUm9LNHdtV1JhY0FwVTNIZjNfRTM0WEItNm5sa3lQVnlfRWfSAeMBQVVfeXFMUGJvb1lYcWh1TlUwYjlWYmZPd1lVS0ZibmVJZlZtdktKUjYwYTBBYXV4dU5YaE5fMmZVQ3B5M0pKbE9rN2tVUjFMU1A1TWpMVUxtSXhibmVDcTJFU0J5RVlPRm5hUkNSdV9yenNBYWZfTDJGMnBDaTBKWWhHak1WQjJSdUJWaVFwR2FRSl9lMnFfanBrRGx3SjRIaDd1N2FCa3Zoa0tXMFJ5RmZ0aXVUZy1oLVlsaEFjZzlmQjdoTUx",
+"id": "news_ccd4cb34bc9040da"
+},
+{
+"i": "906",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "Bhopal News: MBBS Students Clash In Gandhi Medical College; Anti-Ragging Committee Meeting Put Off",
+"src": "Free Press Journal",
+"d": "Dec 2025",
+"u": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOT2Yzb0lmSDJnQ3dQVzkxX3BVXzNMZWZjQVlOOUhTRzVjZkVnY1JqS01UQjRJQ2V4VDByVHBpbDVRcmIzSzdUOE9IU2pOMHU2Mnd0MkFxbUJUQktmcFprWl80ai1zLXhUeEY4UjRiM2I1bDJXcVlqMHR5cnNwc2JFV1VOeF8yMXpRYVREODQ1NjRDaFF5UFFaV09wWU91OGhKbGdickl6N0huTGdVOUIzXzlNRWpOc2M0Ym1tYW1RZTZKelIteTJnRXFqQkxkMW9Y0gHWAUFVX3lxTE5vclVlVlBhS2JWTjBlbWVwQlZQTmFtUlpUdDNvVUhWRzloQWVSTE94emswVjBXM3JsRHdLQzZBcF9mVGJKZFpTakk1eFc3X0NpVnY3dm1nY05BTVlfcGdTOHJrNGtPNzBtSVdfMU93YzVQWVkxc1k2Rm9Wa3pZQ08xemQ4MGVhaFhMMVN0eGZ5cFA3Wkg5d0NCZkZhdnVPZHNDdnhUQThPQlI2akVqRkhmMVdnODlHSmg3MjBGZFl0aTRPS3hVUU94RTNDbWZ",
+"id": "news_a82d6e3fb14be00f"
+},
+{
+"i": "1330",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Delhi's Lady Hardinge Medical College issues clarification after student protests over hostel conditions",
+"src": "The New Indian Express",
+"d": "Apr 2026",
+"u": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxPWDJwM2ZhOEdHTEMxMDBXaUI2Y2NmSEVHSEhRWDRrQVgxY1c1R1JpcUpscjY1eWxyUUxMbkkzREtzdnFYQjFnRG5jV0kwRnFTR1BzMkNwejZWZWZRS2ZVVkI0VV8xVlNEb3FaY1NGaTMxc19FY1dRT2tsakNDSTF6VkNlQTRUU24tSmlhbHdIcTkzcHhpZmlyQ3JZdEpraFQyYXFfMEtNZENnTE5lUnh6STNNRGFodUdDQ0IxOHhCX29yVFBwRG01eTVHN1pZckdpWVB4Znc5X2Q3YmJJc0xjUmpfMkQ3Z0tYRElra0dRS3ZpUEw0Z3fSAYMCQVVfeXFMTThNeVNSU3NDQWhpd3R6QUxsN0lfNTVxQ2tXNk1oVTZwRjh6dEcyZmZyMWZzbm8xWHFRaXNISnpHOWpmOUJQdEVvWjZFMDVacW9KZGlZVnZnWE9rbVZQczFHcndJTUZRSUlPbDh2V01VOTFqV2RzVEZuUWp0MzJEV0tfbVJ4dDZtZ2Qzekk3OWZfaG1DcTAyRW9CSE9CWUdlUlE3X2VXVkx",
+"id": "news_1fdb1d6b37b6db2d"
+},
+{
+"i": "1330",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Lady Hardinge Medical College resident doctors call off strike after safety assurances",
+"src": "Medical Dialogues",
+"d": "Aug 2025",
+"u": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOemNoWlJiTzlOeTdaaUJ3a2lkS25rbFAyR1Q0ZlkzLXFBeFB6STE4M1IyMkstNWEtVUF4UktodGptOVdITUoxR0VGOFVzcEZJd3R3aXZSUEFndDRFSnBhX1NzbnM2LWR4Y0lSRE9KemhvcVNMcmdtektLOF9WRmQ5dTdzT1VFVUtQQm9ZQ0Y2MERTMVpVQzVGUXBIdnhzSUtZRHpOVjVBOHVjS1RyUXNRXzJTaDJzdXV6SmZlZ2VwVXpWbFJSTkhYZnhvRGlTYlR3OW5hSGI4YVLSAd4BQVVfeXFMTTAwc2ZkM2k3NjJ3cENkcmZsWHBwcEZiRXZKNTYyVVZ0eUtITG1kcmozaXc5THlDZjEwbEUtM1QtWHdIWEJZNkJhV0Z5RDBVMlN1WmpkcFVIRFo0bVpuX0FTWGdtTlVKbk95N0lVaWE1UURNcWZzRW5VV3V2dHJUOWIzcEotNDVyZG9DOGx0Z205ajZOSTBkZ3JpTk9fckhic0kyRVFEUVFpcHVYYzZqVTU3TWRPdmhsNnQwMDByZE42ZjN1bzJ",
+"id": "news_32f4d874d8edf08b"
+},
+{
+"i": "1330",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Lady Hardinge Medical College interns face three-month stipend delay, share woes",
+"src": "EdexLive",
+"d": "Feb 2025",
+"u": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQbGdJT3N6Q1ZoZ2piU1Fnc1RETi1YdnFWZ1FuRjcwOF9xWUR5NlZXU1JSOWcwN0traE8xT3ZINUNmd1lIc3JYbm9CRTY0UFRWTzVQd0dZM2J0VXFUU0pYSEl1TlVKUU55R0JGV08taEVoWGlBRDVNYUMwSWtZbXNEZ1BIMlU0VXFrNWY1RHZpYXNSZ1JPdjU3bU04UEQ5Uk5ZVVlOZXVuZFEtX0lHakHSAbsBQVVfeXFMTy1pZGJLSVpTUXVlcW0yN0t0Q1dNYVRqMkxfX0ZoVXVXT0VjbTdDeFNKdUxxa0Uxckl1OHREOFZDUHduUXJQSnRwc0EwbXBMaEo3blNuOXIyd0VyZU9oRGs4MnUwdnF6MFBTeWFabkFWUHlUVmlxNkdNd2stbXhWLWVpa0UzY1VHcW50UTJvZnEtUzk2QUJiblROX1F4VjVMalVOcjJKbHI4UldVNUQtaU4wUHMyeWk2MnpVYw?oc=5",
+"id": "news_c3c193c1ce68d39e"
+}
+]
 }
