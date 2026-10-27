@@ -4931,7 +4931,7 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
 <style id="dp-offer-css">
-.offer-bar{position:relative;overflow:hidden;color:#ecfdf5;border-bottom:1px solid rgba(251,191,36,.35);background:linear-gradient(90deg,#053f35 0%,#0f6e5c 50%,#053f35 100%);background-size:200% 100%;animation:obFlow 14s linear infinite}
+.offer-bar .ob-tg{color:inherit;text-decoration:underline;text-underline-offset:2px;font-weight:800;white-space:nowrap}.offer-bar{position:relative;overflow:hidden;color:#ecfdf5;border-bottom:1px solid rgba(251,191,36,.35);background:linear-gradient(90deg,#053f35 0%,#0f6e5c 50%,#053f35 100%);background-size:200% 100%;animation:obFlow 14s linear infinite}
 .offer-bar.t-saffron{background-image:linear-gradient(90deg,#7c2d12 0%,#ea580c 45%,#f59e0b 55%,#7c2d12 100%);color:#fff7ed}
 .offer-bar.t-rose{background-image:linear-gradient(90deg,#4c0519 0%,#be123c 50%,#4c0519 100%);color:#fff1f2}
 .offer-bar.t-indigo{background-image:linear-gradient(90deg,#1e1b4b 0%,#4338ca 50%,#1e1b4b 100%);color:#eef2ff}
@@ -5032,10 +5032,10 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
       ends:esc(endLabel(o.ends_at)),name:esc(o.name),product:(o.product==="pro"?"DocPulsee Pro":o.product==="together"?"DocPulsee Together":"College Directory access"),each:'<span class="gold">'+esc(rs(Math.round((o.product==="together"?o.price_paise:Math.min(o.together_paise||1e12,(window.DP_NORMALS||{}).together_new_paise||999900))/2)))+'</span>',
       upgrade:'<span class="gold">'+esc(rs(Math.min(o.upgrade_paise||1e12,window.DP_PRO_UPGRADE_NORMAL||449900,o.price_paise)))+'</span>',
       together:'<span class="gold">'+esc(rs(o.product==="together"?o.price_paise:Math.min(o.together_paise||1e12,(window.DP_NORMALS||{}).together_new_paise||999900)))+'</span>',
-      partner:'<span class="gold">'+esc(rs(Math.min(o.partner_paise||1e12,(window.DP_NORMALS||{}).partner_new_paise||449900)))+'</span>',seats_left:'<span class="gold" data-ob-seats>'+(window.DP_PRO_LEFT!=null?esc(String(window.DP_PRO_LEFT)):"a few")+'</span>',lock:'<span class="ob-lock" data-ob-lock>'+esc(lockText(now))+'</span>',hours_left:'<span class="gold" data-ob-hrs>'+esc(hoursLeft(o,now))+'</span>'
+      partner:'<span class="gold">'+esc(rs(Math.min(o.partner_paise||1e12,(window.DP_NORMALS||{}).partner_new_paise||449900)))+'</span>',seats_left:'<span class="gold" data-ob-seats>'+(window.DP_PRO_LEFT!=null?esc(String(window.DP_PRO_LEFT)):"a few")+'</span>',lock:'<span class="ob-lock" data-ob-lock>'+esc(lockText(now))+'</span>',hours_left:'<span class="gold" data-ob-hrs>'+esc(hoursLeft(o,now))+'</span>',telegram:'<a class="ob-tg" href="https://t.me/neetpgcouncelling2026" target="_blank" rel="noopener" data-ob-tg data-tg-join="banner">✈️ Telegram</a>'
     };
     var raw=esc(o.banner_text);if(o.product==="pro")raw=raw.replace(/College Directory access/g,"DocPulsee Pro");if(o.product==="together")raw=raw.replace(/College Directory access|DocPulsee Pro/g,"DocPulsee Together");
-    var txt=raw.replace(/\{(price|was|upgrade|together|partner|each|seats_left|lock|hours_left|member_counsel|counsel_was|countdown|ends|name|product)\}/g,function(_,k){return map[k];});
+    var txt=raw.replace(/\{(price|was|upgrade|together|partner|each|seats_left|lock|hours_left|member_counsel|counsel_was|countdown|ends|name|product|telegram)\}/g,function(_,k){return map[k];});
     el.className="offer-bar t-"+esc(o.theme||"emerald")+" text-xs sm:text-sm font-semibold";
     var tag=o.product==="pro"?'<span class="ob-tag">👑 PRO</span> ':o.product==="together"?'<span class="ob-tag">👫 TOGETHER</span> ':'';
     var ctaT=o.product==="pro"?"Get Pro →":o.product==="together"?"Get Together →":"Grab it →";var cta=o.id==="preview"?'<span class="ob-cta">'+ctaT+'</span>':'<a class="ob-cta" href="#plans" data-ob-cta>'+ctaT+'</a>';
@@ -6707,9 +6707,9 @@ function dpSyncOffer(fromApply){const o=window.DP_OFFER_STATE;if(!o||!o.loaded)r
 function dpOfferTitle(){const o=window.DP_OFFER_STATE;return o&&o.now?(o.now.emoji||"🎉")+" "+o.now.name:"🎉 Pre-counselling price";}
 window.addEventListener("dp-offer",()=>{try{dpSyncOffer();}catch(_e){}});
 const OFFER_THEMES=[["emerald","Emerald","linear-gradient(90deg,#053f35,#0f6e5c)"],["saffron","Saffron","linear-gradient(90deg,#7c2d12,#f59e0b)"],["festive","Festive","linear-gradient(90deg,#831843,#c2410c,#ca8a04,#15803d)"],["rose","Rose","linear-gradient(90deg,#4c0519,#be123c)"],["indigo","Indigo","linear-gradient(90deg,#1e1b4b,#4338ca)"],["gold","Gold","linear-gradient(90deg,#3a2a00,#ca8a04)"],["urgent","🚨 Urgent","linear-gradient(90deg,#1a0000,#7f1d1d,#dc2626)"]];
-const OFFER_TOKENS=[["{product}","Product name"],["{price}","Offer price"],["{together}","Together price"],["{each}","Together price per person"],["{partner}","Partner add-on price"],["{was}","Crossed-out price"],["{countdown}","Live countdown"],["{hours_left}","Hours left"],["{lock}","Choice locking starts"],["{seats_left}","Pro seats left (live)"],["{ends}","End date"],["{member_counsel}","Members' 1:1 price"],["{counsel_was}","Normal 1:1 price"]];
+const OFFER_TOKENS=[["{product}","Product name"],["{price}","Offer price"],["{together}","Together price"],["{each}","Together price per person"],["{partner}","Partner add-on price"],["{was}","Crossed-out price"],["{countdown}","Live countdown"],["{hours_left}","Hours left"],["{lock}","Choice locking starts"],["{seats_left}","Pro seats left (live)"],["{ends}","End date"],["{member_counsel}","Members' 1:1 price"],["{counsel_was}","Normal 1:1 price"],["{telegram}","Telegram group link"]];
 const OFFER_URGENT={full_access:"🚨 LAST CALL · {name} {countdown} · {product} {was} {price} · MCC choice locking starts {lock}. Don't fill your list blind",pro:"🚨 LAST CALL · {name} {countdown} · only {seats_left} Pro seats left · {product} {was} {price} · MCC choice locking starts {lock}",together:"🚨 LAST CALL · {name} {countdown} · {product} {was} {price} for two · only {seats_left} Pro seats left · choice locking starts {lock}"};
-const OFFER_TEXT={together:"{name}: {product}, Pro for two at {price} {was} (just {each} each) · already Pro? add your partner for {partner} · {countdown}",full_access:"{name}: {product} {was} {price} · {countdown}",pro:"{name}: {product} — 2 counselling calls, 2 Senior Connects, your own Choice List & full College Directory for {price} {was} · members upgrade for {upgrade} · {countdown}"};
+const OFFER_TEXT={together:"{name}: {product}, Pro for two at {price} {was} (just {each} each) · already Pro? add your partner for {partner} · {countdown} · {telegram}",full_access:"{name}: {product} {was} {price} · {countdown} · {telegram}",pro:"{name}: {product} — 2 counselling calls, 2 Senior Connects, your own Choice List & full College Directory for {price} {was} · members upgrade for {upgrade} · {countdown} · {telegram}"};
 const OFFER_PRESETS=[
  {k:"navratri",l:"🪔 Navratri",emoji:"🪔",theme:"festive",name:"Navratri offer",days:9,text:"{name}: {product} {was} {price} for all 9 nights · 1:1 counselling for members at {member_counsel} · {countdown}",textPro:"{name}: {product} for all 9 nights — 2 counselling calls, 2 Senior Connects & your own Choice List for {price} {was} · members upgrade for {upgrade} · {countdown}",textTg:"{name}: {product} for all 9 nights. Pro for you and your partner for {price} {was}, just {each} each · {countdown}"},
  {k:"diwali",l:"🪔 Diwali",emoji:"✨",theme:"gold",name:"Diwali offer",days:5,text:"{name}: light up your PG seat — {product} {was} {price} · {countdown}",textPro:"{name}: light up your PG seat — {product} with 2 counselling calls, 2 Senior Connects & your Choice List for {price} {was} · members upgrade for {upgrade} · {countdown}",textTg:"{name}: light up two PG seats. {product} gives both of you full Pro for {price} {was} · already Pro? add your partner for {partner} · {countdown}"},
@@ -6900,7 +6900,7 @@ function OwnerOffersPanel({onClose,startPreset}){
  async function save(){setBusy(true);setMsg(null);try{const toIso=v=>v?new Date(v).toISOString():"";const r=await offerCall({action:"save",offer:{...f,starts_at:toIso(f.starts_at),ends_at:toIso(f.ends_at),banner_until:f.banner_until?toIso(f.banner_until):""}});take(r);setF(null);setMsg({bad:false,text:"Saved ✓ The website and the payment check follow this offer automatically."});if(window.dpReloadOffers)window.dpReloadOffers();}catch(e){setMsg({bad:true,text:e.message});}setBusy(false);}
  async function act(action,id){setBusy(true);setMsg(null);try{take(await offerCall({action,id}));setConfirm(null);setMsg({bad:false,text:action==="end_now"?"Offer ended. Normal price is live now.":"Offer switched off."});if(window.dpReloadOffers)window.dpReloadOffers();}catch(e){setMsg({bad:true,text:e.message});}setBusy(false);}
  const inp="input-tok rounded-xl px-3 py-2 text-sm w-full";const lab=t=>React.createElement("span",{className:"text-[11px] font-bold text-dim block mb-1"},t);
- const isPro=!!(f&&f.product==="pro"),isTg=!!(f&&f.product==="together");const normal=isPro?norm.pro_new_paise:isTg?norm.together_new_paise:full;const pr=f?Math.round(Number(f.price_rupees||0)):0,lp=f?Math.round(Number(f.list_rupees||normal/100)):0;const off=lp>0&&pr>0?Math.round((1-pr/lp)*100):0;const R$=n=>"\u20B9"+Math.round(Number(n)||0).toLocaleString("en-IN");const DPp=typeof DP_PRICES!=="undefined"?DP_PRICES:{};const tokVal=t=>{if(!f)return"";const e=Date.parse(f.ends_at),ms=e-Date.now(),d=Math.floor(ms/864e5),hh=Math.floor(ms/36e5)%24;switch(t){case"{name}":return f.name||"";case"{product}":return isPro?"DocPulsee Pro":isTg?"DocPulsee Together":"College Directory access";case"{price}":return pr?R$(pr):"";case"{was}":return lp?R$(lp):"";case"{upgrade}":return R$(f.upgrade_rupees||norm.pro_upgrade_paise/100);case"{together}":return R$(f.together_rupees||norm.together_new_paise/100);case"{each}":return pr?R$(pr/2):"";case"{partner}":return R$(f.partner_rupees||norm.partner_new_paise/100);case"{member_counsel}":return DPp.price_counsel_member_paise?R$(DPp.price_counsel_member_paise/100):"";case"{counsel_was}":return DPp.price_counsel_paise?R$(DPp.price_counsel_paise/100):"";case"{countdown}":return ms>0?(d>0?d+"d "+hh+"h left":hh+"h left"):"";case"{hours_left}":return ms>0?Math.ceil(ms/36e5)+" hrs":"";case"{ends}":return Number.isFinite(e)?new Date(e).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";case"{lock}":return window.DP_LOCK&&window.DP_LOCK.start?new Date(window.DP_LOCK.start).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";case"{seats_left}":return"live";}return"";};
+ const isPro=!!(f&&f.product==="pro"),isTg=!!(f&&f.product==="together");const normal=isPro?norm.pro_new_paise:isTg?norm.together_new_paise:full;const pr=f?Math.round(Number(f.price_rupees||0)):0,lp=f?Math.round(Number(f.list_rupees||normal/100)):0;const off=lp>0&&pr>0?Math.round((1-pr/lp)*100):0;const R$=n=>"\u20B9"+Math.round(Number(n)||0).toLocaleString("en-IN");const DPp=typeof DP_PRICES!=="undefined"?DP_PRICES:{};const tokVal=t=>{if(!f)return"";const e=Date.parse(f.ends_at),ms=e-Date.now(),d=Math.floor(ms/864e5),hh=Math.floor(ms/36e5)%24;switch(t){case"{name}":return f.name||"";case"{product}":return isPro?"DocPulsee Pro":isTg?"DocPulsee Together":"College Directory access";case"{price}":return pr?R$(pr):"";case"{was}":return lp?R$(lp):"";case"{upgrade}":return R$(f.upgrade_rupees||norm.pro_upgrade_paise/100);case"{together}":return R$(f.together_rupees||norm.together_new_paise/100);case"{each}":return pr?R$(pr/2):"";case"{partner}":return R$(f.partner_rupees||norm.partner_new_paise/100);case"{member_counsel}":return DPp.price_counsel_member_paise?R$(DPp.price_counsel_member_paise/100):"";case"{counsel_was}":return DPp.price_counsel_paise?R$(DPp.price_counsel_paise/100):"";case"{countdown}":return ms>0?(d>0?d+"d "+hh+"h left":hh+"h left"):"";case"{hours_left}":return ms>0?Math.ceil(ms/36e5)+" hrs":"";case"{ends}":return Number.isFinite(e)?new Date(e).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";case"{lock}":return window.DP_LOCK&&window.DP_LOCK.start?new Date(window.DP_LOCK.start).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";case"{seats_left}":return"live";case"{telegram}":return"t.me/neetpgcouncelling2026";}return"";};
  return React.createElement("div",{className:"overlay fixed inset-0 flex items-center justify-center p-4 z-50",onClick:onClose},React.createElement("div",{className:"modal rounded-3xl max-w-2xl w-full overflow-hidden flex flex-col",style:{maxHeight:"92vh"},onClick:e=>e.stopPropagation(),"data-offers-panel":true},
   React.createElement("div",{className:"p-5 border-b border-tok flex justify-between items-start gap-3"},React.createElement("div",null,React.createElement("h2",{className:"font-semibold text-tok"},"🎉 Offers & banner"),React.createElement("p",{className:"text-xs text-dim mt-1"},"Set an offer price with a start and end time. The banner, the price on the site and the payment check all switch on and off by themselves.")),React.createElement("button",{onClick:onClose,className:"badge-close rounded-full w-8 h-8 flex items-center justify-center shrink-0","aria-label":"Close"},"✕")),
   React.createElement("div",{className:"p-5 flex flex-col gap-4 overflow-y-auto"},
@@ -10212,7 +10212,7 @@ window.dpInvStats=function(){if(!sbok())return;var bg=document.createElement("di
 @media(max-width:520px){.tke-kind{grid-template-columns:1fr}}
 </style><script>(function(){
 var GROUPS=[["Prices",["{price}","{was}","{upgrade}","{member_counsel}","{counsel_was}","{together}","{each}","{partner}"]],
- ["Time",["{countdown}","{hours_left}","{ends}","{lock}"]],["Other",["{name}","{product}","{seats_left}"]]];
+ ["Time",["{countdown}","{hours_left}","{ends}","{lock}"]],["Other",["{telegram}","{name}","{product}","{seats_left}"]]];
 var RX=/\{[a-z_]+\}/g;
 function pill(t,label,val){var s=document.createElement("span");s.className="tke-t";s.contentEditable="false";s.setAttribute("data-tok",t);
  s.innerHTML='<i></i><b></b><u role="button" aria-label="Remove">×</u>';s.firstChild.textContent=label;s.children[1].textContent=val||"";
@@ -10279,5 +10279,78 @@ function dock(){var nav=document.querySelector(".hn-tab");if(!nav||!nav.__v2||na
  var sep=nav.querySelector(".dk-sep");nav.insertBefore(b,sep||null);nav.classList.add("sc6");}
 function tick(){rename();dock();}
 setInterval(tick,800);if(document.readyState!=="loading")tick();else document.addEventListener("DOMContentLoaded",tick);
+})();</script><style>
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}
+html:not(.dp-noanim) .dp-rv{opacity:0;translate:0 14px}
+html:not(.dp-noanim) .dp-rv.dp-in{opacity:1;translate:0 0;transition:opacity .5s ease,translate .65s cubic-bezier(.22,1,.36,1);transition-delay:var(--rd,0ms)}
+@keyframes dpBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+html:not(.dp-noanim) .dp-bar{transform-origin:left center;animation:dpBar .8s cubic-bezier(.22,1,.36,1) both;animation-delay:var(--bd,0ms)}
+@keyframes dpFadeBg{from{opacity:0}to{opacity:1}}
+@keyframes dpUp{from{translate:0 40px;opacity:.4}to{translate:0 0;opacity:1}}
+@keyframes dpPop{from{scale:.96;opacity:0}to{scale:1;opacity:1}}
+html:not(.dp-noanim) :is(.overlay.fixed.inset-0,.snm-bg,.dpa-sheet,.ux-sh,.mrk-bg,.scd2-bg){animation:dpFadeBg .22s ease both}
+@media(max-width:640px){html:not(.dp-noanim) :is(.overlay.fixed.inset-0>.modal,.overlay.fixed.inset-0>div>.modal,.snm-bg>.snm,.dpa-sheet>[role=dialog]){animation:dpUp .42s cubic-bezier(.32,.72,0,1) both}}
+@media(min-width:641px){html:not(.dp-noanim) :is(.overlay.fixed.inset-0>.modal,.snm-bg>.snm){animation:dpPop .28s cubic-bezier(.32,.72,0,1) both}}
+html:not(.dp-noanim) :where(button,[role=button],a.btn-solid,a.rounded-xl,a.rounded-full,.dptb-c,.dptb-act,.sc-card,.hj-tool){transition:scale .14s cubic-bezier(.32,.72,0,1),translate .2s ease,box-shadow .2s ease}
+html:not(.dp-noanim) :where(button,[role=button],a.btn-solid,a.rounded-xl,a.rounded-full):not(:disabled):active{scale:.97}
+html:not(.dp-noanim) .hn-tab :where(button,a):active{scale:1}
+@media(hover:hover) and (pointer:fine){html:not(.dp-noanim) :where(.dptb-c,.sc-card,.hj-tool,.dptb-act):hover{translate:0 -2px;box-shadow:0 10px 26px -12px rgba(13,31,26,.28)}}
+@keyframes dpShim{from{background-position:120% 0}to{background-position:-20% 0}}
+.dp-shim{color:transparent!important;display:inline-block;min-width:110px;min-height:.9em;border-radius:7px;vertical-align:middle;
+ background:linear-gradient(90deg,rgba(148,163,184,.18) 25%,rgba(148,163,184,.38) 50%,rgba(148,163,184,.18) 75%);background-size:220% 100%;animation:dpShim 1.2s linear infinite}
+.dp-shim *{visibility:hidden}
+html:not(.dp-noanim) .hn-hero-in{position:relative;isolation:isolate;overflow:hidden}
+html:not(.dp-noanim) .hn-hero-in::before{content:"";position:absolute;z-index:-1;width:70%;aspect-ratio:1;left:-15%;top:-40%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle,rgba(110,231,183,.28),transparent 62%);animation:dpDrift 20s ease-in-out infinite alternate}
+html:not(.dp-noanim) .hn-hero-in.dp-off::before{animation-play-state:paused}
+@keyframes dpDrift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(70%,30%) scale(1.25)}100%{transform:translate(120%,70%) scale(.9)}}
+@media (prefers-reduced-motion:reduce){.dp-rv{opacity:1!important;translate:none!important}.dp-bar,.dp-shim{animation:none!important}}
+</style><script>(function(){
+var H=document.documentElement,mq=window.matchMedia;
+var slow=(mq&&mq("(prefers-reduced-motion: reduce)").matches)||(navigator.connection&&navigator.connection.saveData)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
+var force=false;try{force=localStorage.getItem("dp_anim")==="1"||/[?&]anim=1/.test(location.search);}catch(e){}if(force)slow=false;
+if(slow){H.classList.add("dp-noanim");}
+var IO="IntersectionObserver" in window;
+/* 6 shimmer: works even in no-anim mode (it is a placeholder, not motion-heavy) */
+function shim(el){if(el.__sh)return;el.__sh=1;el.classList.add("dp-shim");var mo=new MutationObserver(function(){if(!/^\s*Loading/.test(el.textContent||"")){el.classList.remove("dp-shim");mo.disconnect();el.__sh=0;}});mo.observe(el,{childList:true,characterData:true,subtree:true});}
+function scanShim(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,L=[];while((n=w.nextNode())){var t=n.nodeValue;if(t&&t.length<40&&/^\s*Loading/.test(t)){var p=n.parentElement;if(p&&p.childElementCount===0&&!p.closest("button,input,select,textarea,option"))L.push(p);}}L.forEach(shim);}
+if(slow){var mo0=new MutationObserver(function(m){m.forEach(function(r){r.addedNodes.forEach(function(x){if(x.nodeType===1)scanShim(x);});});});mo0.observe(document.body||H,{childList:true,subtree:true});return;}
+/* 1 reveal on scroll */
+var SEL="main section,section.hn-sec,#dptb .dptb-g,#dptb .dptb-acts,.sc-card,.hj-tool,.pro-teaser,#senior-connect,#plans .rounded-3xl,#plans>div>div,.surface.rounded-2xl,.surface.rounded-3xl";
+var rio=IO?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)show(e.target);});},{rootMargin:"0px 0px -6% 0px",threshold:.08}):null;
+var PEND=new Set();function show(el){if(!PEND.has(el))return;PEND.delete(el);if(rio)rio.unobserve(el);el.classList.add("dp-in");setTimeout(function(){el.classList.remove("dp-rv","dp-in");el.style.removeProperty("--rd");},900);}
+var sT=0;addEventListener("scroll",function(){if(sT||!PEND.size)return;sT=setTimeout(function(){sT=0;var vh=innerHeight;PEND.forEach(function(el){if(!el.isConnected){PEND.delete(el);return;}if(el.getBoundingClientRect().top<vh*.95)show(el);});},160);},{passive:true});
+function revealOne(el){reveal(el,true);}
+function reveal(root,only){if(!rio)return;var vh=innerHeight,k=0;(root.matches&&root.matches(SEL)?[root]:[]).concat(only?[]:[].slice.call(root.querySelectorAll?root.querySelectorAll(SEL):[])).forEach(function(el){
+  if(el.__rv||el.closest(".overlay,.fixed,[role=dialog],.ux-sh,.dpa-sheet,.snm-bg,#offerBanner"))return;el.__rv=1;var r=el.getBoundingClientRect();
+  if(r.top<vh*.92||r.height>vh*1.6||r.height<20)return;el.classList.add("dp-rv");el.style.setProperty("--rd",Math.min(k++,4)*55+"ms");PEND.add(el);rio.observe(el);});}
+/* 2 count-up */
+var cio=IO?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){cio.unobserve(e.target);count(e.target);}});},{threshold:.4}):null;
+function count(el){var fin=el.textContent,m=/^(\D{0,3})([\d,]{1,9})(\D{0,3})$/.exec(fin.trim());if(!m)return;var to=parseInt(m[2].replace(/,/g,""),10);if(!(to>0)||to>5e6)return;
+  var t0=performance.now(),dur=to<100?650:900,comma=m[2].indexOf(",")>=0,last=fin;
+  function f(t){if(el.textContent!==last)return; /* the app changed it: stop */
+   var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3),v=Math.round(to*e),s=comma?v.toLocaleString("en-IN"):String(v);last=p<1?m[1]+s+m[3]:fin;el.textContent=last;if(p<1)requestAnimationFrame(f);}
+  last=m[1]+"0"+m[3];el.textContent=last;requestAnimationFrame(f);}
+function scanCount(root){if(!cio)return;var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n;while((n=w.nextNode())){var p=n.parentElement;if(!p||p.__ct||p.childElementCount)continue;
+  var t=(n.nodeValue||"").trim();if(!/^(\d{1,3}%|[\d]{1,3}(,\d{2,3})+|\d{4,6})$/.test(t))continue;if(p.closest("input,textarea,select,option,button,.hn-tab,#offerBanner,.dpa-res,.cc-sh,[data-offers-panel],.tke"))continue;
+  if(/^(19|20)\d\d$/.test(t))continue;if(!/%$/.test(t)){var fs=parseFloat(getComputedStyle(p).fontSize)||0;if(fs<17)continue;}
+  p.__ct=1;cio.observe(p);}}
+/* 3 bars fill */
+function scanBars(root){var L=[].slice.call(root.querySelectorAll?root.querySelectorAll('[style*="width"]'):[]);var k=0;L.forEach(function(el){if(el.__br)return;var w=el.style.width||"";if(!/%$/.test(w))return;
+  var r=el.getBoundingClientRect();if(!r.height||r.height>16||el.childElementCount)return;el.__br=1;el.style.setProperty("--bd",Math.min(k++,10)*60+"ms");el.classList.add("dp-bar");setTimeout(function(){el.classList.remove("dp-bar");},1600);});}
+/* 7 hero drift pauses off screen */
+function hero(){var h=document.querySelector(".hn-hero-in");if(!h||h.__hd||!IO)return;h.__hd=1;new IntersectionObserver(function(es){es.forEach(function(e){h.classList.toggle("dp-off",!e.isIntersecting);});}).observe(h);}
+/* 8 smooth in-page mode switch */
+function vt(){if(!document.startViewTransition||window.__dpVT)return;["hnMode"].forEach(function(k){var f=window[k];if(typeof f!=="function")return;window.__dpVT=1;
+  window[k]=function(){var a=arguments,self=this,r;document.startViewTransition(function(){r=f.apply(self,a);});return r;};});}
+function all(root){try{var n=root.getElementsByTagName("*").length;if(n>300){if(root.matches&&root.matches(SEL))revealOne(root);return;}reveal(root);scanBars(root);scanShim(root);scanCount(root);}catch(e){}}
+function splitNums(root){/* wrap numbers like "2,153" inside sentences so they can count up */
+ var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,L=[];while((n=w.nextNode())){if(/\d{1,3}(,\d{2,3})+/.test(n.nodeValue||"")&&n.parentElement&&!n.parentElement.closest("input,button,select,textarea"))L.push(n);}
+ L.forEach(function(t){var m=/(\d{1,3}(?:,\d{2,3})+)/.exec(t.nodeValue);if(!m)return;var a=t.splitText(m.index);a.splitText(m[1].length);var sp=document.createElement("span");sp.className="dp-num";sp.style.fontVariantNumeric="tabular-nums";a.parentNode.insertBefore(sp,a);sp.appendChild(a);if(cio){sp.__ct=1;cio.observe(sp);}});}
+function boot(){reveal(document.body);var hh=document.querySelector(".hn-hero-in");if(hh){splitNums(hh);scanCount(hh);}scanShim(document.body);hero();vt();var q=[],pend=false;
+ new MutationObserver(function(m){m.forEach(function(r){r.addedNodes.forEach(function(x){if(x.nodeType===1)q.push(x);});});if(!pend){pend=true;requestAnimationFrame(function(){pend=false;var Q=q.splice(0);if(document.hidden)return;Q.slice(0,25).forEach(function(x){if(x.isConnected)all(x);});hero();});}}).observe(document.body,{childList:true,subtree:true});}
+function later(){var ric=window.requestIdleCallback||function(f){return setTimeout(f,1200);};ric(boot,{timeout:2500});}
+if(document.readyState==="complete")later();else addEventListener("load",later);
 })();</script></body>
 </html>
