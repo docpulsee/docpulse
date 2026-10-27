@@ -23,6 +23,7 @@ for n, i, g, sp, st in zip(N, I, G, SP, ST):
     if g in ('MD', 'MS'): x['b'].add((g, sp))
 inst = {i: x for i, x in inst.items() if x['b']}
 
+
 STOP = {'post', 'graduate', 'postgraduate', 'employees', 'state', 'insurance', 'corporation', 'sri', 'shri', 'shree', 'memorial', 'government', 'govt', 'medical', 'college', 'institute', 'of', 'and', 'hospital', 'sciences', 'science', 'the', '&', 'research', 'health', 'centre', 'center', 'pvt', 'ltd', 'university'}
 def short(n):
     a = re.split(r',', n)[0]
@@ -40,11 +41,38 @@ def keys(n):
     q = a + (' ' + city if city and city.lower() not in a.lower() and len(w) <= 2 else '')
     return q, w, ac
 
+SMALL = {'of', 'and', 'the', '&', 'for', 'in'}
+def acr(n):
+    w = [x for x in re.findall(r"[A-Za-z]+", short(n)) if x.lower() not in SMALL]
+    full = ''.join(x[0] for x in w).upper()
+    pre = []
+    for k, x in enumerate(w):
+        if x.lower() in ('medical', 'institute', 'college', 'university'): break
+        pre.append(x[0].upper())
+    return full, ''.join(pre)
+_ac = {}
+for i, x in inst.items():
+    f, p = acr(x['n']); x['acr'] = f; x['pre'] = p; _ac[f] = _ac.get(f, 0) + 1
+def norm(t):
+    t = re.sub(r"[.'’]", ' ', t.lower()); t = re.sub(r'\s+', ' ', t)
+    for _ in range(3): t = re.sub(r'\b([a-z]) (?=[a-z]\b)', r'\1', t)
+    return t.strip()
+def stem(n):
+    w = re.findall(r"[A-Za-z.]+", short(n)); out = []
+    for x in w:
+        if x.lower() in ('medical', 'institute', 'college', 'university', 'hospital', 'government', 'govt'): break
+        out.append(x)
+    return norm(' '.join(out))
+_st = {}
+for _x in inst.values(): _x['stem'] = stem(_x['n']); _st[_x['stem']] = _st.get(_x['stem'], 0) + 1
+STEMS = [k for k in _st if k]
+SHORTS = sorted({norm(short(x['n'])) for x in inst.values()}, key=len)
+
 CTX = re.compile(r"\b(residents?|resident doctors?|pg (students?|doctors?|residents?)|post ?graduate|junior doctors?|jrs?|interns?|medicos?|students?)\b", re.I)
 RULES = [
-    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|died by suicide|toxic|bully|casteis|caste discrimin", re.I)),
+    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|died by suicide|toxic|bully|casteis|caste discrimin|punish|forced to pay|murga|exploit|threaten", re.I)),
     ('toxicity', 4, re.compile(r"strike|protest|stipend (not|unpaid|delay|pending|withheld|cut)|unpaid stipend|stipend.*(months|delay)|without stipend|boycott", re.I)),
-    ('hours', 5, re.compile(r"duty hours|work(ing)? hours|\b(24|36|48|72)[- ]hour|overwork|long hours|sleep deprived|no rest", re.I)),
+    ('hours', 5, re.compile(r"duty hours?|work(ing)? hours?|\b(24|36|48|72)[- ]hour|overwork|long hours|sleep deprived|no rest", re.I)),
     ('hands_on', 2, re.compile(r"show[- ]cause|deficien|seats? (cut|reduced|withdrawn|derecogn)|derecogni|faculty shortage|nmc (penal|fine|notice)", re.I)),
 ]
 DEPT = [('Anaesthesiology', r'anaesthe|anesthe'), ('General Medicine', r'medicine dep|department of medicine'), ('General Surgery', r'surgery dep|department of surgery'),
@@ -83,7 +111,17 @@ def main(limit=None, debug=False):
             head = re.sub(r'\s+-\s+[^-]+$', '', t)  # drop " - Outlet"
             hl = head.lower()
             # the headline must name this college: all distinctive words, or its acronym
-            named = (len(w) >= 2 and all(v.lower() in hl for v in w[:3])) or (len(w) == 1 and re.search(r'\b' + w[0].lower() + r'\b', hl) and re.search(r'medical college|\bgmc\b|institute of medical|medical sciences', hl)) or any(re.search(r'\b' + c + r'\b', head) for c in ac)
+            sn = norm(short(x['n'])); nh = norm(head)
+            longer = any(sn in o and o != sn and o in nh for o in SHORTS)
+            named = False
+            if sn in nh and not longer: named = True
+            elif len(w) >= 2 and all(v.lower() in hl for v in w[:3]) and not longer: named = True
+            elif len(x['stem']) >= 6 and _st.get(x['stem']) == 1 and re.search(r'\b' + re.escape(x['stem']) + r'\b', nh) and not any(x['stem'] in o and o != x['stem'] and o in nh for o in STEMS): named = True
+            elif len(x['acr']) >= 4 and re.search(r'\b' + x['acr'] + r'\b', head) and (_ac.get(x['acr']) == 1 or (x['st'] and x['st'].split()[0].lower() in hl)): named = True
+            elif len(x['pre']) >= 2 and re.search(r'\b' + x['pre'] + r'\b\s+(medical|hospital)', head): named = True
+            elif any(re.search(r'\b' + c + r'\b', head) for c in ac): named = True
+            elif len(w) == 1 and re.search(r'\b' + re.escape(w[0].lower()) + r'\b', hl) and re.search(r'medical college|\bgmc\b|institute of medical|medical sciences', hl): named = True
+            elif x['st'] and len(w) >= 1 and re.search(r'\bgmc\b', hl) and any(re.search(r'\b' + re.escape(v.lower()) + r'\b', hl) for v in w[-1:]): named = True
             if not named: continue
             for dim, val, rx in RULES:
                 if not rx.search(head): continue
