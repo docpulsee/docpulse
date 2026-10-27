@@ -70,7 +70,7 @@ SHORTS = sorted({norm(short(x['n'])) for x in inst.values()}, key=len)
 
 CTX = re.compile(r"\b(residents?|resident doctors?|pg (students?|doctors?|residents?|medicos?)|post ?graduates?|junior doctors?|jrs?|medicos|pgs)\b", re.I)
 RULES = [
-    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|toxic|bully|caste discrimin|casteis|punish|forced to pay|murga|exploit|threaten", re.I)),
+    ('toxicity', 5, re.compile(r"ragg|harass|abus|humiliat|suicide|toxic|bully|caste discrimin|casteis|punish|forced to pay|murga|exploit", re.I)),
     ('toxicity', 4, re.compile(r"stipend.{0,40}(not paid|unpaid|delay|pending|withheld|months|protest|strike|cut)|(unpaid|delayed|pending|no|without) stipend|(protest|strike|agitat)\w*.{0,40}stipend", re.I)),
     ('hours', 5, re.compile(r"duty hours?|work(ing)? hours?|\b(24|36|48|72)[- ]hours?|overwork|long hours|sleep[- ]deprived|no rest", re.I)),
     ('hands_on', 2, re.compile(r"show[- ]cause|deficien|seats? (cut|reduced|withdrawn|derecogn)|derecogni|faculty shortage|nmc (penal|fine|notice)", re.I)),
@@ -145,6 +145,8 @@ def main(limit=None, debug=False):
             for dim, val, rx in RULES:
                 if not rx.search(head): continue
                 if dim != 'hands_on' and not CTX.search(head): continue
+                if dim == 'hands_on' and (not re.search(r'\bNMC\b|National Medical Commission|FAIMA', head) or re.search(r'colleges|did not|no deficienc|not identify|among|unani|ayush|\bUG\b|doctors over', head, re.I)): continue
+                if re.search(r'colleges\b', head, re.I) and not re.search(r'medical college\b', hl): continue
                 br = None
                 for sp, rr in DEPT:
                     if re.search(rr, hl):
