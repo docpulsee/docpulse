@@ -18,10 +18,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: collect
         run: |
-          L=$(head -1 tools/culture/run.txt 2>/dev/null | tr -dc '0-9a-z')
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "$L" = "all" ] || [ -z "$L" ]; then python3 tools/culture/culture_news.py; else python3 tools/culture/culture_news.py "$L"; fi
+          L=$(head -1 tools/culture/run.txt 2>/dev/null | tr -dc "0-9a-z")
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "$L" = "all" ] || [ -z "$L" ]; then python3 tools/culture/culture_news.py; else python3 tools/culture/culture_news.py "$L"; fi; curl -sS -o /dev/null -w "rss http %{http_code}\n" "https://news.google.com/rss/search?q=AIIMS+resident&hl=en-IN&gl=IN&ceid=IN:en" || true
       - name: save
         run: |
           git config user.name DocPulsee; git config user.email docpulsee@gmail.com
-          git add culture_news.json; git commit -m "culture news signals [skip ci]" || echo nothing
+          git add culture_news.json tools/culture/debug.json 2>/dev/null; git add culture_news.json; git commit -m "culture news signals [skip ci]" || echo nothing
           git pull --rebase -X theirs && git push || (sleep 20; git pull --rebase -X theirs && git push)

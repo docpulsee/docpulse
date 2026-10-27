@@ -63,7 +63,8 @@ def rss(q):
 
 def bkey(i, deg, sp): return re.sub(r'[^a-zA-Z0-9_.-]', '_', f'{i}__{deg}__{sp}')[:180]
 
-def main(limit=None):
+def main(limit=None, debug=False):
+    dbg = []
     cut = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=730)
     out, seen = [], set(); ids = sorted(inst)[:limit] if limit else sorted(inst)
     for k, i in enumerate(ids):
@@ -71,6 +72,7 @@ def main(limit=None):
         if not w and not ac: continue
         q = '"' + short(x['n']) + '"' + (' ' + a.replace(short(x['n']), '').strip() if a != short(x['n']) else '') + ' (resident OR residents OR PG OR stipend OR ragging OR strike OR NMC)'
         root = rss(q); time.sleep(1.2)
+        if debug: dbg.append({'n': x['n'], 'q': q, 'ok': root is not None, 'titles': [html.unescape(t.findtext('title') or '')[:140] for t in (root.iter('item') if root is not None else [])][:8]})
         if root is None: continue
         got = 0
         for it in root.iter('item'):
@@ -97,7 +99,14 @@ def main(limit=None):
             if got >= 3: break
         if k % 50 == 0: print(k, len(ids), len(out), flush=True)
     json.dump({'v': datetime.date.today().isoformat(), 'n': len(out), 'items': out}, open(ROOT + '/culture_news.json', 'w'), ensure_ascii=False, indent=0)
+    if debug: json.dump(dbg, open(ROOT + '/tools/culture/debug.json', 'w'), ensure_ascii=False, indent=1)
     print('done', len(out), 'items from', len(ids), 'colleges')
 
 if __name__ == '__main__':
-    main(int(sys.argv[1]) if len(sys.argv) > 1 else None)
+    a = sys.argv[1:]
+    if a and a[0] == 'debug':
+        names = ['Maulana Azad', 'King George', 'Grant Government', 'Seth G S', 'Lokmanya Tilak', 'Madras Medical', 'Gandhi Medical College', 'Sawai Man Singh', 'Lady Hardinge', 'R G Kar', 'Bangalore Medical', 'Osmania', 'Topiwala', 'Government Medical College, Kota', 'Indira Gandhi Medical College Shimla']
+        sel = [i for i, x in inst.items() if any(nm.lower() in x['n'].lower() for nm in names)]
+        inst = {i: inst[i] for i in sel}; print(len(inst), [inst[i]['n'][:40] for i in inst]); main(None, True)
+    else:
+        main(int(a[0]) if a else None)
