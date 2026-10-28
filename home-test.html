@@ -10475,6 +10475,22 @@ button.ini-il{border:0;background:none;padding:0;font-family:inherit;cursor:poin
 .ini-tl div{background:#f5f5ff;border:1px solid #e0e7ff;border-radius:14px;padding:10px}
 .ini-tl small{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#6b7280}
 .ini-tl b{display:block;font-size:19px;font-weight:800;color:#1e1b4b;margin-top:2px}.ini-tl em{font-style:normal;font-size:11.5px;color:#4b5563}
+#ini-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:linear-gradient(90deg,#1e1b4b,#4338ca 55%,#6d28d9);color:#e0e7ff;font-size:13.5px;line-height:1.3;position:relative;z-index:41}
+#ini-bar .ini-bar-t{flex:1;min-width:0;max-width:1100px;margin:0 auto}
+#ini-bar b{color:#fff}#ini-bar s{opacity:.7;margin-right:2px}#ini-bar [data-ini-price] b{color:#fde68a}
+#ini-bar em{font-style:normal;font-size:11px;font-weight:800;background:#f43f5e;color:#fff;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+#ini-bar [data-ini-go]{flex:0 0 auto;border:0;background:#fbbf24;color:#1e1b4b;font-weight:800;font-size:13px;font-family:inherit;border-radius:999px;padding:7px 14px;cursor:pointer}
+#ini-bar .ini-bar-c{flex:0 0 auto;border:0;background:rgba(255,255,255,.15);color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:12px}
+@media (max-width:640px){#ini-bar{font-size:12.5px;padding:7px 10px;gap:8px}#ini-bar .ini-bar-x{display:none}#ini-bar [data-ini-go]{padding:7px 11px;font-size:12px}}
+body.dp-ini #offerBanner{display:none!important}
+.ini-plan{display:flex;gap:18px;align-items:center;justify-content:space-between;margin:18px auto 0;max-width:980px;padding:18px 20px;border-radius:22px;background:linear-gradient(135deg,#1e1b4b,#312e81 60%,#4338ca);color:#e0e7ff;box-shadow:0 14px 40px rgba(49,46,129,.25)}
+.ini-plan-l b{display:block;color:#fff;font-size:18px;font-weight:800}.ini-plan-l em{font-style:normal;font-size:11px;font-weight:800;background:#f43f5e;color:#fff;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
+.ini-plan-l small{display:block;font-size:13.5px;line-height:1.5;margin-top:4px;color:#c7d2fe}
+.ini-plan-r{flex:0 0 auto;text-align:right}.ini-plan-p{font-size:15px}.ini-plan-p s{opacity:.7}.ini-plan-p b{font-size:28px;font-weight:800;color:#fff}
+.ini-plan-n{font-size:12px;color:#c7d2fe;margin:2px 0 8px}
+.ini-plan-b{border:0;background:#fbbf24;color:#1e1b4b;font-weight:800;font-size:14.5px;font-family:inherit;border-radius:12px;padding:11px 18px;cursor:pointer}
+@media (max-width:640px){.ini-plan{flex-direction:column;align-items:stretch;text-align:left}.ini-plan-r{text-align:left}.ini-plan-b{width:100%}}
+.ini-pw-p{margin:0 0 10px;font-size:16px;color:#6b7280}.ini-pw-p b{font-size:30px;font-weight:800;color:#1e1b4b}.ini-pw-p em{display:block;font-style:normal;font-size:12.5px;font-weight:800;color:#be123c;margin-top:2px}
 .ini-lock{position:relative}
 .ini-sk{display:grid;gap:10px;filter:blur(3px);opacity:.75;pointer-events:none;user-select:none}
 .ini-sk div{height:64px;border-radius:16px;background:linear-gradient(90deg,#eef2ff,#f5f5ff,#eef2ff);border:1px solid #e0e7ff}
@@ -10501,7 +10517,7 @@ button.ini-il{border:0;background:none;padding:0;font-family:inherit;cursor:poin
 var FN="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/dp-inicet";
 var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
 var RZP_KEY="rzp_live_TfrVp5WBEyPS7y";
-var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:"",vw:"seat"};
+var ST={price:129900,list:249900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:"",vw:"seat"};
 try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course","mb","vw"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
 function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course,mb:ST.mb,vw:ST.vw}));}catch(e){}}
 function SB(){try{return typeof sb!=="undefined"&&sb?sb:null;}catch(e){return null;}}
@@ -10511,7 +10527,7 @@ function num(n){return Number(n).toLocaleString("en-IN");}
 function exam(){try{var q=new URLSearchParams(location.search).get("exam");if(q)return q==="inicet"?"inicet":"neetpg";return localStorage.getItem("dp_exam")==="inicet"?"inicet":"neetpg";}catch(e){return "neetpg";}}
 function setExam(x,scroll){var ini=x==="inicet";document.body.classList.toggle("dp-ini",ini);try{localStorage.setItem("dp_exam",ini?"inicet":"neetpg");}catch(e){}
  try{var u=new URL(location.href);if(ini)u.searchParams.set("exam","inicet");else u.searchParams.delete("exam");history.replaceState(history.state,"",u.toString());}catch(e){}
- document.querySelectorAll(".ini-sw").forEach(paintSw);
+ document.querySelectorAll(".ini-sw").forEach(paintSw);paintPromos();
  document.querySelectorAll(".hx-nav [data-ini]").forEach(function(b){b.setAttribute("aria-current",ini?"page":"false");});
  if(ini){status();render();if(scroll)window.scrollTo({top:0,behavior:"smooth"});}
  try{if(window.gtag)gtag("event","exam_switch",{exam:x});}catch(e){}}
@@ -10532,7 +10548,7 @@ function mkHero(){var d=document.createElement("div");d.id="ini-hero";
  var f=d.querySelector("form");f.addEventListener("submit",function(){var r=d.querySelector("#ini-hr").value;ST.rank=r?String(Math.max(1,parseInt(r,10)||0)):"";ST.cat=d.querySelector("#ini-hc").value;ST.tab="me";ST.lim=40;save();render();
   var s=document.getElementById("ini-sec");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});});
  if(ST.rank)d.querySelector("#ini-hr").value=ST.rank;return d;}
-function mount(){var hero=document.querySelector(".hn-hero"),left=hero&&hero.querySelector(".hx-left");if(!left)return false;
+function mount(){var hero=document.querySelector(".hn-hero"),left=hero&&hero.querySelector(".hx-left");if(!left)return false;mkPromos();
  if(!left.querySelector(".ini-sw")){left.insertBefore(mkSw(),left.firstChild);left.insertBefore(mkHero(),left.children[1]);}
  if(!document.getElementById("ini-sec")){var s=document.createElement("section");s.id="ini-sec";s.setAttribute("aria-label","INI-CET closing ranks");hero.parentNode.insertBefore(s,hero.nextSibling);}
  var nav=document.querySelector(".hx-nav");if(nav&&!nav.querySelector("[data-ini]")){var b=document.createElement("button");b.type="button";b.setAttribute("data-ini","1");
@@ -10544,7 +10560,7 @@ function call(body){var S=SB();if(S&&S.functions)return S.functions.invoke("dp-i
  return fetch(FN,{method:"POST",headers:{"Content-Type":"application/json",apikey:ANON,Authorization:"Bearer "+ANON},body:JSON.stringify(body||{})}).then(function(r){return r.json();});}
 var stP=null;
 function status(force){if(stP&&!force)return stP;ST.loading=true;
- stP=call({}).then(function(d){if(d.price_paise)ST.price=d.price_paise;ST.signed=!!d.signed_in;ST.unlocked=!!d.unlocked;if(d.unlocked&&d.url&&!ST.data)return load(d.url);}).catch(function(e){ST.err="";}).then(function(){ST.loading=false;render();var f=0;try{f=sessionStorage.getItem("dp_ini_buy");}catch(e){}
+ stP=call({}).then(function(d){if(d.price_paise)ST.price=d.price_paise;if(d.list_paise!=null)ST.list=d.list_paise;paintPromos();ST.signed=!!d.signed_in;ST.unlocked=!!d.unlocked;if(d.unlocked&&d.url&&!ST.data)return load(d.url);}).catch(function(e){ST.err="";}).then(function(){ST.loading=false;render();var f=0;try{f=sessionStorage.getItem("dp_ini_buy");}catch(e){}
   if(f&&ST.signed&&!ST.unlocked){try{sessionStorage.removeItem("dp_ini_buy");}catch(e){}var b=document.querySelector("#ini-sec [data-buy]");if(b){b.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(function(){buy(b);},600);}}});return stP;}
 function load(url){return fetch(url).then(function(r){if(!r.ok)throw new Error("load");return r.json();}).then(function(d){ST.data=prep(d);}).catch(function(){ST.err="Couldn't open the INI-CET data just now. Please refresh the page.";});}
 function prep(d){var I=d.info||{};d.iname=d.inst.map(function(k){var x=I[k];return x&&x.name?x.name:k.replace(/\B\w+/g,function(w){return w.toLowerCase();}).replace(/^Aiims/,"AIIMS");});d.I=I;return d;}
@@ -10555,13 +10571,29 @@ function buy(btn){var S=SB();ST.err="";
    prefill:{email:user.email||""},notes:{product:"inicet",user_id:user.id},theme:{color:"#4338ca"},
    modal:{ondismiss:function(){btn.disabled=false;paintBuy(btn);}},
    handler:function(resp){btn.disabled=true;btn.textContent="Unlocking your pass…";
-    call({payment_id:resp.razorpay_payment_id}).then(function(d){if(!d.unlocked)throw new Error(d.error||"Couldn't unlock");ST.unlocked=true;return d.url?load(d.url):null;})
+    call({payment_id:resp.razorpay_payment_id}).then(function(d){if(!d.unlocked)throw new Error(d.error||"Couldn't unlock");ST.unlocked=true;paintPromos();return d.url?load(d.url):null;})
     .then(function(){try{if(window.gtag)gtag("event","purchase",{value:ST.price/100,currency:"INR",items:[{item_id:"inicet",item_name:"INI-CET Pass"}]});}catch(e){}render();})
     .catch(function(e){ST.err="Your payment went through, but the unlock didn't finish ("+(e&&e.message||"error")+"). Refresh the page, or email docpulsee@gmail.com with Payment ID "+resp.razorpay_payment_id+".";render();});}});
    rz.on("payment.failed",function(r){ST.err="Payment failed: "+((r&&r.error&&r.error.description)||"unknown reason")+". No money was taken.";render();});rz.open();})
   .catch(function(e){ST.err=e.message;btn.disabled=false;render();});};
  if(!S||!S.auth){ST.err="Please wait a second for the page to load, then try again.";render();return;}
  S.auth.getSession().then(function(r){var u=r&&r.data&&r.data.session&&r.data.session.user;if(!u){try{sessionStorage.setItem("dp_ini_buy","1");}catch(e){}if(window.hnSignIn)hnSignIn();else ST.err="Please sign in first (top right), then tap the button again.";render();return;}go(u);});}
+function pHtml(){return (ST.list>ST.price?"<s>"+inr(ST.list)+"</s> ":"")+"<b>"+inr(ST.price)+"</b>";}
+function off(){return ST.list>ST.price?Math.round(100*(1-ST.price/ST.list)):0;}
+function paintPromos(){document.querySelectorAll("[data-ini-price]").forEach(function(e){e.innerHTML=pHtml();});document.querySelectorAll("[data-ini-off]").forEach(function(e){var o=off();e.textContent=o?o+"% off":"";e.style.display=o?"":"none";});
+ var bar=document.getElementById("ini-bar");if(bar){var ini=document.body.classList.contains("dp-ini");bar.style.display=(ST.unlocked||bar.__x)?"none":"";var c=bar.querySelector("[data-ini-go]");if(c)c.textContent=ini?"Get the pass":"Open INI-CET";}}
+function mkPromos(){if(!document.getElementById("ini-bar")){var ob=document.getElementById("offerBanner"),hd=document.querySelector("header");var host=ob||hd;if(host){var b=document.createElement("div");b.id="ini-bar";b.setAttribute("role","region");b.setAttribute("aria-label","INI-CET offer");
+  b.innerHTML='<span class="ini-bar-t"><b>🎯 INI-CET pre-paper offer</b><span class="ini-bar-x"> · INI-CET Pass</span> <span data-ini-price>'+pHtml()+'</span><em data-ini-off></em><span class="ini-bar-x"> · every AIIMS, JIPMER, PGIMER closing rank</span></span><button type="button" data-ini-go>Open INI-CET</button><button type="button" class="ini-bar-c" aria-label="Hide">✕</button>';
+  b.querySelector("[data-ini-go]").onclick=function(){var ini=document.body.classList.contains("dp-ini");if(!ini)setExam("inicet");var t=ini?document.querySelector("#ini-sec [data-buy]")||document.getElementById("ini-sec"):null;if(t)t.scrollIntoView({behavior:"smooth",block:"center"});else window.scrollTo({top:0,behavior:"smooth"});try{if(window.gtag)gtag("event","inicet_banner",{mode:ini?"inicet":"neetpg"});}catch(e){}};
+  b.querySelector(".ini-bar-c").onclick=function(){b.__x=1;b.style.display="none";try{sessionStorage.setItem("dp_ini_bar_x","1");}catch(e){}};
+  try{if(sessionStorage.getItem("dp_ini_bar_x"))b.__x=1;}catch(e){}
+  host.parentNode.insertBefore(b,ob?ob.nextSibling:hd);}}
+ var pl=document.getElementById("plans");if(pl&&!pl.querySelector(".ini-plan")){var c=document.createElement("div");c.className="ini-plan";
+  c.innerHTML='<div class="ini-plan-l"><b>INI-CET Pass <em>Pre-paper offer</em></b><small>Separate from the NEET PG plans. Every INI-CET seat from the official AIIMS results (Jan 2024 to Jul 2026, 23 institutes), your % chance for each, college cards with fees, stipend and leaving penalty.</small></div>'+
+  '<div class="ini-plan-r"><div class="ini-plan-p" data-ini-price>'+pHtml()+'</div><div class="ini-plan-n"><span data-ini-off></span> · one-time</div><button type="button" class="ini-plan-b">Open INI-CET</button></div>';
+  c.querySelector(".ini-plan-b").onclick=function(){setExam("inicet",true);};
+  var after=pl.querySelector(".hn-dots")||pl.querySelector(".hn-pgrid");if(after)after.parentNode.insertBefore(c,after.nextSibling);else pl.appendChild(c);}
+ paintPromos();}
 function paintBuy(b){b.textContent="Get INI-CET Pass · "+inr(ST.price);}
 // ---------- data helpers ----------
 var RN={R1:"Round 1",R2:"Round 2",Open:"Open round"};
@@ -10667,7 +10699,7 @@ function viewLock(){var signed=ST.signed;
  '<div class="ini-pw"><h3>INI-CET Pass</h3><p>Every INI-CET seat allotment from the official AIIMS results, so you know exactly where your rank lands before you fill choices.</p>'+
  '<div class="ini-st"><div><b>6</b><small>sessions · Jan 2024→Jul 2026</small></div><div><b>11</b><small>rounds incl. open rounds</small></div><div><b>23</b><small>institutes</small></div><div><b>10,770</b><small>opening & closing ranks</small></div></div>'+
  '<ul class="ini-ul"><li>Your safe, likely and borderline seats for your rank and category</li><li>Every branch at every AIIMS, JIPMER, PGIMER, NIMHANS and SCTIMST, round by round</li><li>PwBD, AIIMS Delhi and JIPMER institutional seats, MDS, 6-year MCh and DM</li><li>Fees, stipend and seat-leaving penalty for each institute</li></ul>'+
- '<button type="button" class="ini-buy" data-buy="1">'+(signed?"":"Sign in & ")+"Get INI-CET Pass · "+inr(ST.price)+'</button>'+
+ '<div class="ini-pw-p"><span data-ini-price>'+pHtml()+'</span>'+(off()?'<em>'+off()+'% off · pre-paper offer</em>':'')+'</div><button type="button" class="ini-buy" data-buy="1">'+(signed?"":"Sign in & ")+"Get INI-CET Pass · "+inr(ST.price)+'</button>'+
  '<div class="ini-fine">One-time payment · separate from NEET PG plans · UPI, cards, netbanking</div>'+(ST.err?'<div class="ini-err">'+esc(ST.err)+"</div>":"")+"</div></div>";}
 function render(){var s=document.getElementById("ini-sec");if(!s||!document.body.classList.contains("dp-ini"))return;var h;
  if(ST.unlocked&&ST.data){var T=[["me","My chances"],["all","All cutoffs"],["inst","Institutes"]];
