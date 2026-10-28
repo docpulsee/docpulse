@@ -10364,5 +10364,252 @@ function boot(){reveal(document.body);var hh=document.querySelector(".hn-hero-in
  new MutationObserver(function(m){m.forEach(function(r){r.addedNodes.forEach(function(x){if(x.nodeType===1)q.push(x);});});if(!pend){pend=true;requestAnimationFrame(function(){pend=false;var Q=q.splice(0);if(document.hidden)return;Q.slice(0,25).forEach(function(x){if(x.isConnected)all(x);});hero();});}}).observe(document.body,{childList:true,subtree:true});}
 function later(){var ric=window.requestIdleCallback||function(f){return setTimeout(f,1200);};ric(boot,{timeout:2500});}
 if(document.readyState==="complete")later();else addEventListener("load",later);
+})();</script><style id="dp-ini-css">
+.ini-sw{display:inline-flex;position:relative;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:3px;margin:0 0 14px;gap:2px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ini-sw button{line-height:1;position:relative;z-index:1;border:0;background:none;color:rgba(255,255,255,.82);font-weight:700;font-size:13.5px;font-family:inherit;padding:9px 16px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;letter-spacing:.01em;transition:color .2s}
+.ini-sw button[aria-pressed=true]{color:#0b3d33}
+body.dp-ini .ini-sw button[aria-pressed=true]{color:#312e81}
+.ini-sw i{position:absolute;z-index:0;top:3px;bottom:3px;left:3px;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .32s cubic-bezier(.3,1.3,.5,1),width .32s}
+.ini-sw em{font-style:normal;font-size:9.5px;font-weight:800;background:#f43f5e;color:#fff;border-radius:6px;padding:2px 5px;letter-spacing:.04em}
+.ini-sw button[aria-pressed=true] em{background:#4f46e5}
+#ini-hero{display:none}
+body.dp-ini #ini-hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:44px;align-items:center}
+@media (max-width:980px){body.dp-ini #ini-hero{display:block}.ini-pv{display:none}}
+.ini-pv{background:rgba(255,255,255,.96);border-radius:20px;padding:16px 16px 12px;box-shadow:0 24px 50px rgba(15,10,60,.35);transform:rotate(2deg);color:#1e1b4b}
+.ini-pv .t{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#6b7280;border-bottom:1px dashed #e0e7ff;padding-bottom:8px;margin-bottom:6px}
+.ini-pv .t span:first-child{background:#eef2ff;color:#4338ca;border-radius:999px;padding:3px 9px}
+.ini-pv .r{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f3f4f6}
+.ini-pv .r:last-of-type{border:0}
+.ini-pv .bar{height:10px;border-radius:6px;background:#c7d2fe;margin:3px 0}
+.ini-pv .bar.s{background:#e5e7eb;height:8px}
+.ini-pv small{display:block;font-size:11px;color:#6b7280;margin-top:6px;text-align:center}
+body.dp-ini .hn-hero-in{background:radial-gradient(circle at 85% 10%,rgba(165,180,252,.35),transparent 45%),linear-gradient(135deg,#1e1b4b,#312e81 58%,#4338ca)!important}
+body.dp-ini .hn-hero-in>:not(.hx-left),body.dp-ini .hn-hero>:not(.hn-hero-in){display:none!important}
+body.dp-ini .hx-left>:not(.ini-sw):not(#ini-hero){display:none!important}
+body.dp-ini .hn-hero-in{grid-template-columns:minmax(0,1fr)!important}
+body.dp-ini .hx-left{max-width:none!important;flex:1 1 auto!important;width:100%;grid-column:1/-1!important}
+body.dp-ini main>section:not(.hn-hero):not(#ini-sec),body.dp-ini .hn-tab,body.dp-ini #hx-rail,body.dp-ini #dp-tl-tab,body.dp-ini #dp-tl,body.dp-ini .dpg-pill,body.dp-ini #dk-handle,body.dp-ini .dpa-res,body.dp-ini #dpSpot,body.dp-ini .lr-fab,body.dp-ini .lr-fab-tip{display:none!important}
+#ini-sec{display:none}
+body.dp-ini #ini-sec{display:block}
+.ini-k{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e0e7ff;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;margin-bottom:12px}
+#ini-hero h2{color:#fff;font-size:clamp(30px,4.6vw,44px);line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+#ini-hero p.ini-s{color:#c7d2fe;font-size:15.5px;line-height:1.5;margin:0 0 18px;max-width:640px}
+.ini-f{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;max-width:720px}
+.ini-f input,.ini-f select{height:50px;border-radius:14px;border:0;background:#fff;color:#1e1b4b;font-weight:600;font-size:16px;font-family:inherit;padding:0 14px;min-width:0}
+.ini-f input{flex:1 1 150px}.ini-f select{flex:0 1 150px}
+.ini-f button{height:50px;border:0;border-radius:14px;background:#fbbf24;color:#1e1b4b;font-weight:800;font-size:15.5px;font-family:inherit;padding:0 20px;cursor:pointer;flex:1 0 auto;box-shadow:0 6px 18px rgba(251,191,36,.35)}
+.ini-t{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;color:#e0e7ff;font-size:13px;font-weight:600}
+.ini-t b{color:#fff}
+#ini-sec{scroll-margin-top:96px;background:#fff;border:1px solid #e0e7ff;border-radius:28px;box-shadow:0 10px 40px rgba(49,46,129,.08);padding:22px;color:#1e1b4b}
+@media (max-width:640px){#ini-sec{padding:16px 12px;border-radius:22px}}
+.ini-tabs{display:flex;gap:6px;background:#eef2ff;border-radius:14px;padding:4px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
+.ini-tabs button{flex:1 0 auto;border:0;background:none;border-radius:11px;padding:10px 14px;font-weight:700;font-size:14px;font-family:inherit;color:#4338ca;cursor:pointer;white-space:nowrap}
+.ini-tabs button[aria-selected=true]{background:#fff;color:#1e1b4b;box-shadow:0 1px 6px rgba(49,46,129,.15)}
+.ini-c{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.ini-c input,.ini-c select{height:42px;border:1px solid #c7d2fe;border-radius:12px;background:#fff;color:#1e1b4b;font-weight:600;font-size:15px;font-family:inherit;padding:0 10px;min-width:0}
+.ini-c input[type=number]{width:130px}
+.ini-c select{flex:1 1 150px;max-width:100%}
+.ini-c label{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#3730a3;background:#eef2ff;border-radius:10px;padding:0 10px;height:42px;cursor:pointer}
+.ini-seg{display:inline-flex;background:#eef2ff;border-radius:12px;padding:3px;gap:2px}
+.ini-seg button{border:0;background:none;border-radius:9px;padding:0 11px;height:36px;font-weight:700;font-size:13px;font-family:inherit;color:#4338ca;cursor:pointer}
+.ini-seg button[aria-pressed=true]{background:#4338ca;color:#fff}
+.ini-sum{font-size:13.5px;color:#4b5563;margin:4px 0 12px}
+.ini-l{display:grid;gap:10px}
+.ini-r{border:1px solid #e5e7eb;border-radius:16px;padding:13px 14px;background:#fff;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.ini-r:hover{border-color:#a5b4fc;box-shadow:0 4px 16px rgba(67,56,202,.08)}
+.ini-r .h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ini-r .b{font-weight:800;font-size:15.5px;line-height:1.25}
+.ini-r .i{font-size:13px;color:#4b5563;margin-top:2px}
+.ini-p{font-size:11.5px;font-weight:800;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.ini-p.s{background:#dcfce7;color:#166534}.ini-p.l{background:#ccfbf1;color:#115e59}.ini-p.m{background:#fef3c7;color:#92400e}.ini-p.x{background:#ffe4e6;color:#9f1239}
+.ini-ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.ini-ch span{font-size:12px;background:#f5f5ff;border:1px solid #e0e7ff;border-radius:8px;padding:3px 7px;color:#3730a3}
+.ini-ch span b{color:#1e1b4b}
+.ini-d{display:none;margin-top:10px;border-top:1px dashed #e0e7ff;padding-top:10px}
+.ini-r.open .ini-d{display:block}
+.ini-tb{width:100%;border-collapse:collapse;font-size:13px}
+.ini-tb th{text-align:left;color:#6b7280;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;padding:6px 6px;border-bottom:1px solid #e5e7eb;position:sticky;top:0;background:#fff}
+.ini-tb td{padding:7px 6px;border-bottom:1px solid #f3f4f6;vertical-align:top}
+.ini-tb td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+@media (max-width:520px){.ini-tb{font-size:12.5px}.ini-tb th{font-size:10.5px}.ini-tb .op{display:none}.ini-tb td,.ini-tb th{padding-left:4px;padding-right:4px}}
+.ini-tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ini-facts{display:grid;gap:6px;font-size:13px;color:#374151;margin-top:10px}
+.ini-facts b{color:#1e1b4b}
+.ini-ic{border:1px solid #e5e7eb;border-radius:16px;padding:14px}
+.ini-ic h4{margin:0 0 2px;font-size:16px;font-weight:800}
+.ini-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
+.ini-badge.o{background:#dcfce7;color:#166534}.ini-badge.v{background:#fef3c7;color:#92400e}
+.ini-more{display:block;margin:12px auto 0;border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:12px;padding:10px 16px;font-weight:700;font-size:14px;font-family:inherit;cursor:pointer}
+.ini-lock{position:relative}
+.ini-sk{display:grid;gap:10px;filter:blur(3px);opacity:.75;pointer-events:none;user-select:none}
+.ini-sk div{height:64px;border-radius:16px;background:linear-gradient(90deg,#eef2ff,#f5f5ff,#eef2ff);border:1px solid #e0e7ff}
+.ini-pw{position:relative;margin:-150px auto 0;max-width:520px;background:#fff;border:1px solid #c7d2fe;border-radius:22px;padding:22px;box-shadow:0 20px 50px rgba(49,46,129,.18);text-align:center}
+.ini-pw h3{margin:0 0 6px;font-size:21px;font-weight:800;color:#1e1b4b}
+.ini-pw p{margin:0 0 14px;color:#4b5563;font-size:14px;line-height:1.5}
+.ini-st{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 14px}
+.ini-st div{background:#eef2ff;border-radius:12px;padding:10px 6px}
+.ini-st b{display:block;font-size:20px;font-weight:800;color:#312e81}
+.ini-st small{font-size:12px;color:#4338ca;font-weight:600}
+.ini-ul{text-align:left;margin:0 0 16px;padding:0;list-style:none;display:grid;gap:7px;font-size:14px;color:#1f2937}
+.ini-ul li{display:flex;gap:8px}.ini-ul li:before{content:"\2713";color:#4f46e5;font-weight:900}
+.ini-buy{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;font-weight:800;font-size:16.5px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(67,56,202,.35)}
+.ini-buy[disabled]{opacity:.6;cursor:wait}
+.ini-fine{font-size:12px;color:#6b7280;margin-top:10px}
+.ini-err{color:#b91c1c;font-size:13.5px;margin-top:10px}
+.ini-src{font-size:12px;color:#6b7280;margin-top:16px;line-height:1.5}
+.ini-empty{padding:26px 10px;text-align:center;color:#6b7280;font-size:14px}
+.hx-nav [data-ini]{position:relative}
+.hx-nav [data-ini] em{font-style:normal;font-size:9px;font-weight:800;background:#4f46e5;color:#fff;border-radius:5px;padding:1px 4px;margin-left:5px;vertical-align:2px}
+@media (max-width:480px){.ini-k{display:none}.ini-f input{flex:1 1 120px}}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) #ini-sec{background:#111827;border-color:#312e81;color:#e0e7ff}}
+</style><script id="dp-ini-js">(function(){
+var FN="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/dp-inicet";
+var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
+var RZP_KEY="rzp_live_TfrVp5WBEyPS7y";
+var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:""};
+try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
+function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course}));}catch(e){}}
+function SB(){try{return typeof sb!=="undefined"&&sb?sb:null;}catch(e){return null;}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function inr(p){return "₹"+Math.round(p/100).toLocaleString("en-IN");}
+function num(n){return Number(n).toLocaleString("en-IN");}
+function exam(){try{var q=new URLSearchParams(location.search).get("exam");if(q)return q==="inicet"?"inicet":"neetpg";return localStorage.getItem("dp_exam")==="inicet"?"inicet":"neetpg";}catch(e){return "neetpg";}}
+function setExam(x,scroll){var ini=x==="inicet";document.body.classList.toggle("dp-ini",ini);try{localStorage.setItem("dp_exam",ini?"inicet":"neetpg");}catch(e){}
+ try{var u=new URL(location.href);if(ini)u.searchParams.set("exam","inicet");else u.searchParams.delete("exam");history.replaceState(history.state,"",u.toString());}catch(e){}
+ document.querySelectorAll(".ini-sw").forEach(paintSw);
+ document.querySelectorAll(".hx-nav [data-ini]").forEach(function(b){b.setAttribute("aria-current",ini?"page":"false");});
+ if(ini){status();render();if(scroll)window.scrollTo({top:0,behavior:"smooth"});}
+ try{if(window.gtag)gtag("event","exam_switch",{exam:x});}catch(e){}}
+window.dpSetExam=setExam;
+function paintSw(sw){var ini=document.body.classList.contains("dp-ini");var bs=sw.querySelectorAll("button"),i=sw.querySelector("i");bs[0].setAttribute("aria-pressed",!ini);bs[1].setAttribute("aria-pressed",ini);var on=bs[ini?1:0];if(on.offsetWidth){i.style.width=on.offsetWidth+"px";i.style.transform="translateX("+(on.offsetLeft-3)+"px)";}}
+function mkSw(){var d=document.createElement("div");d.className="ini-sw";d.setAttribute("role","group");d.setAttribute("aria-label","Choose your exam");
+ d.innerHTML='<i></i><button type="button" data-x="neetpg">NEET PG</button><button type="button" data-x="inicet">INI-CET <em>NEW</em></button>';
+ d.addEventListener("click",function(e){var b=e.target.closest("button");if(b)setExam(b.getAttribute("data-x"));});return d;}
+function catOpts(sel){return [["UR","General"],["OBC","OBC"],["EWS","EWS"],["SC","SC"],["ST","ST"]].map(function(c){return '<option value="'+c[0]+'"'+(c[0]===sel?" selected":"")+'>'+c[1]+'</option>';}).join("");}
+function mkHero(){var d=document.createElement("div");d.id="ini-hero";
+ d.innerHTML='<div class="ini-tx"><span class="ini-k">INI-CET · AIIMS · JIPMER · PGIMER · NIMHANS · SCTIMST</span><h2>Which INI-CET seat can your rank get?</h2>'+
+ '<p class="ini-s">Real opening and closing ranks from the official AIIMS seat-allocation results, every round from Jan 2024 to Jul 2026, with fees, stipend and leaving penalty for each institute.</p>'+
+ '<form class="ini-f" onsubmit="return false"><input type="number" inputmode="numeric" min="1" placeholder="Your rank" aria-label="Your INI-CET rank" id="ini-hr"><select id="ini-hc" aria-label="Category">'+catOpts(ST.cat)+'</select><button type="submit">Show my seats</button></form>'+
+ '<div class="ini-t"><span>✅ <b>Official</b> AIIMS results</span><span>🏥 <b>23</b> institutes</span><span>📊 <b>6</b> sessions · <b>11</b> rounds</span></div></div>'+
+ '<div class="ini-pv" aria-hidden="true"><div class="t"><span>INI-CET Pass</span><span>Your rank · your category</span></div>'+
+ [["Safe","s",68],["Likely","l",54],["Borderline","m",76]].map(function(x){return '<div class="r"><div style="flex:1;margin-right:12px"><div class="bar" style="width:'+x[2]+'%"></div><div class="bar s" style="width:'+(x[2]-18)+'%"></div></div><span class="ini-p '+x[1]+'">'+x[0]+'</span></div>';}).join("")+
+ '<small>Closing ranks for every round · Jan 2024 → Jul 2026</small></div>';
+ var f=d.querySelector("form");f.addEventListener("submit",function(){var r=d.querySelector("#ini-hr").value;ST.rank=r?String(Math.max(1,parseInt(r,10)||0)):"";ST.cat=d.querySelector("#ini-hc").value;ST.tab="me";ST.lim=40;save();render();
+  var s=document.getElementById("ini-sec");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});});
+ if(ST.rank)d.querySelector("#ini-hr").value=ST.rank;return d;}
+function mount(){var hero=document.querySelector(".hn-hero"),left=hero&&hero.querySelector(".hx-left");if(!left)return false;
+ if(!left.querySelector(".ini-sw")){left.insertBefore(mkSw(),left.firstChild);left.insertBefore(mkHero(),left.children[1]);}
+ if(!document.getElementById("ini-sec")){var s=document.createElement("section");s.id="ini-sec";s.setAttribute("aria-label","INI-CET closing ranks");hero.parentNode.insertBefore(s,hero.nextSibling);}
+ var nav=document.querySelector(".hx-nav");if(nav&&!nav.querySelector("[data-ini]")){var b=document.createElement("button");b.type="button";b.setAttribute("data-ini","1");
+  b.innerHTML='<svg class="hx-ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/></svg>INI-CET<em>NEW</em>';
+  b.onclick=function(){setExam(document.body.classList.contains("dp-ini")?"neetpg":"inicet",true);};var first=nav.querySelector("[data-sec]");nav.insertBefore(b,first?first.nextSibling:null);}
+ return true;}
+// ---------- server ----------
+function call(body){var S=SB();if(S&&S.functions)return S.functions.invoke("dp-inicet",{body:body||{}}).then(function(r){if(r.error&&!r.data){var c=r.error.context;if(c&&c.json)return c.json().then(function(j){throw new Error(j.error||"Error");});throw r.error;}return r.data||{};});
+ return fetch(FN,{method:"POST",headers:{"Content-Type":"application/json",apikey:ANON,Authorization:"Bearer "+ANON},body:JSON.stringify(body||{})}).then(function(r){return r.json();});}
+var stP=null;
+function status(force){if(stP&&!force)return stP;ST.loading=true;
+ stP=call({}).then(function(d){if(d.price_paise)ST.price=d.price_paise;ST.signed=!!d.signed_in;ST.unlocked=!!d.unlocked;if(d.unlocked&&d.url&&!ST.data)return load(d.url);}).catch(function(e){ST.err="";}).then(function(){ST.loading=false;render();var f=0;try{f=sessionStorage.getItem("dp_ini_buy");}catch(e){}
+  if(f&&ST.signed&&!ST.unlocked){try{sessionStorage.removeItem("dp_ini_buy");}catch(e){}var b=document.querySelector("#ini-sec [data-buy]");if(b){b.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(function(){buy(b);},600);}}});return stP;}
+function load(url){return fetch(url).then(function(r){if(!r.ok)throw new Error("load");return r.json();}).then(function(d){ST.data=prep(d);}).catch(function(){ST.err="Couldn't open the INI-CET data just now. Please refresh the page.";});}
+function prep(d){var I=d.info||{};d.iname=d.inst.map(function(k){var x=I[k];return x&&x.name?x.name:k.replace(/\B\w+/g,function(w){return w.toLowerCase();}).replace(/^Aiims/,"AIIMS");});d.I=I;return d;}
+function loadRzp(){return new Promise(function(res,rej){if(window.Razorpay)return res();var s=document.createElement("script");s.src="https://checkout.razorpay.com/v1/checkout.js";s.onload=function(){res();};s.onerror=function(){rej(new Error("Couldn't load the payment window. Check your internet and try again."));};document.head.appendChild(s);});}
+function buy(btn){var S=SB();ST.err="";
+ var go=function(user){btn.disabled=true;btn.textContent="Opening secure payment…";
+  loadRzp().then(function(){var rz=new window.Razorpay({key:RZP_KEY,amount:ST.price,currency:"INR",name:"DocPulsee",description:"INI-CET Pass: all closing ranks + institute details",
+   prefill:{email:user.email||""},notes:{product:"inicet",user_id:user.id},theme:{color:"#4338ca"},
+   modal:{ondismiss:function(){btn.disabled=false;paintBuy(btn);}},
+   handler:function(resp){btn.disabled=true;btn.textContent="Unlocking your pass…";
+    call({payment_id:resp.razorpay_payment_id}).then(function(d){if(!d.unlocked)throw new Error(d.error||"Couldn't unlock");ST.unlocked=true;return d.url?load(d.url):null;})
+    .then(function(){try{if(window.gtag)gtag("event","purchase",{value:ST.price/100,currency:"INR",items:[{item_id:"inicet",item_name:"INI-CET Pass"}]});}catch(e){}render();})
+    .catch(function(e){ST.err="Your payment went through, but the unlock didn't finish ("+(e&&e.message||"error")+"). Refresh the page, or email docpulsee@gmail.com with Payment ID "+resp.razorpay_payment_id+".";render();});}});
+   rz.on("payment.failed",function(r){ST.err="Payment failed: "+((r&&r.error&&r.error.description)||"unknown reason")+". No money was taken.";render();});rz.open();})
+  .catch(function(e){ST.err=e.message;btn.disabled=false;render();});};
+ if(!S||!S.auth){ST.err="Please wait a second for the page to load, then try again.";render();return;}
+ S.auth.getSession().then(function(r){var u=r&&r.data&&r.data.session&&r.data.session.user;if(!u){try{sessionStorage.setItem("dp_ini_buy","1");}catch(e){}if(window.hnSignIn)hnSignIn();else ST.err="Please sign in first (top right), then tap the button again.";render();return;}go(u);});}
+function paintBuy(b){b.textContent="Get INI-CET Pass · "+inr(ST.price);}
+// ---------- data helpers ----------
+var RN={R1:"Round 1",R2:"Round 2",Open:"Open round"};
+function sShort(s){return s.slice(0,3)+" ’"+s.slice(-2);}
+function cats(){var c={UR:1,OCS:1};c[ST.cat]=1;if(ST.ip)c.IP=1;if(ST.inst)c.INST=1;return c;}
+function chances(){var D=ST.data,C=cats(),g={},rank=parseInt(ST.rank,10)||0;
+ D.rows.forEach(function(r){if(r[2]!==ST.course||!C[r[5]])return;if(r[6]&&!ST.pw)return;var k=r[3]+"|"+r[4];var x=g[k]||(g[k]={i:r[3],b:r[4],s:{},rows:[]});x.rows.push(r);if(!(r[0] in x.s)||r[8]>x.s[r[0]])x.s[r[0]]=r[8];});
+ var out=[];Object.keys(g).forEach(function(k){var x=g[k],ss=Object.keys(x.s).map(Number).sort(function(a,b){return b-a;});x.ss=ss;var rec=ss.slice(0,4).map(function(s){return x.s[s];});
+  var mx=Math.max.apply(null,rec),mn=Math.min.apply(null,rec),srt=rec.slice().sort(function(a,b){return a-b;}),md=srt[Math.floor((srt.length-1)/2)];x.last=x.s[ss[0]];x.mx=mx;
+  if(rank){if(rec.length>1){if(rank<=mn*0.97)x.ch="s";else if(rank<=md)x.ch="l";else if(rank<=mx)x.ch="m";else if(rank<=mx*1.12+50)x.ch="x";else return;}
+   else{if(rank<=mx*0.9)x.ch="l";else if(rank<=mx)x.ch="m";else if(rank<=mx*1.12+50)x.ch="x";else return;}}
+  out.push(x);});
+ var O={s:0,l:1,m:2,x:3};out.sort(function(a,b){return rank?(O[a.ch]-O[b.ch])||(a.mx-b.mx):(a.last-b.last);});return out;}
+var CH={s:["Safe","s"],l:["Likely","l"],m:["Borderline","m"],x:["Stretch","x"]};
+function instFacts(i){var D=ST.data,x=D.I[D.inst[i]];if(!x)return "";var f=[];
+ if(x.fees_note)f.push("<div><b>Fees:</b> "+esc(x.fees_note)+"</div>");if(x.pay_note)f.push("<div><b>Stipend:</b> "+esc(x.pay_note)+"</div>");
+ if(x.leaving_note)f.push("<div><b>If you leave:</b> "+esc(x.leaving_note)+"</div>");if(x.ip_note)f.push("<div><b>Institutional preference:</b> "+esc(x.ip_note)+"</div>");
+ if(x.hostel_note)f.push("<div><b>Hostel:</b> "+esc(x.hostel_note)+"</div>");if(x.seats_note)f.push("<div><b>Seats:</b> "+esc(x.seats_note)+"</div>");
+ return f.length?'<div class="ini-facts">'+f.join("")+"</div>":"";}
+function rowTable(rows){var D=ST.data;rows=rows.slice().sort(function(a,b){return b[0]-a[0]||a[1].localeCompare(b[1])||a[5].localeCompare(b[5]);});
+ return '<div class="ini-tw"><table class="ini-tb"><thead><tr><th>Session</th><th>Round</th><th>Seat</th><th class="op" style="text-align:right">Opening</th><th style="text-align:right">Closing</th><th style="text-align:right">Seats</th></tr></thead><tbody>'+
+ rows.map(function(r){return "<tr><td>"+D.sessions[r[0]]+"</td><td>"+(RN[r[1]]||r[1])+"</td><td>"+esc(r[5])+(r[6]?" PwBD":"")+'</td><td class="n op">'+num(r[7])+'</td><td class="n">'+num(r[8])+'</td><td class="n">'+r[9]+"</td></tr>";}).join("")+"</tbody></table></div>";}
+// ---------- views ----------
+function controls(){return '<div class="ini-c"><input type="number" inputmode="numeric" min="1" id="ini-rk" placeholder="Your rank" value="'+esc(ST.rank)+'" aria-label="Your INI-CET rank">'+
+ '<select id="ini-ct" aria-label="Category">'+catOpts(ST.cat)+'</select>'+
+ '<div class="ini-seg" role="group" aria-label="Course">'+["MD/MS","MDS","MCh 6-yr","DM 6-yr"].map(function(n,i){return '<button type="button" data-co="'+i+'" aria-pressed="'+(ST.course===i)+'">'+n+"</button>";}).join("")+"</div>"+
+ '<label><input type="checkbox" id="ini-pw"'+(ST.pw?" checked":"")+'> PwBD</label><label title="MBBS from AIIMS New Delhi"><input type="checkbox" id="ini-ip"'+(ST.ip?" checked":"")+'> AIIMS Delhi MBBS</label><label title="MBBS from JIPMER"><input type="checkbox" id="ini-in"'+(ST.inst?" checked":"")+'> JIPMER MBBS</label></div>';}
+function viewMe(){var D=ST.data,L=chances(),rank=parseInt(ST.rank,10)||0,cnt={s:0,l:0,m:0,x:0};L.forEach(function(x){if(x.ch)cnt[x.ch]++;});
+ var h=controls()+'<div class="ini-sum">'+(rank?"Rank <b>"+num(rank)+"</b> · "+L.length+" seats in reach: <b>"+cnt.s+"</b> safe, <b>"+cnt.l+"</b> likely, <b>"+cnt.m+"</b> borderline, <b>"+cnt.x+"</b> stretch. Based on the final closing rank in up to 4 recent sessions (your category + open seats). Tap a seat for every round.":"Enter your rank to see your chances. Showing all "+L.length+" seats, lowest closing rank first.")+"</div>";
+ if(!L.length)return h+'<div class="ini-empty">No seats closed near this rank in recent sessions for this course and category. Try another course, or check All cutoffs.</div>';
+ h+='<div class="ini-l">'+L.slice(0,ST.lim).map(function(x){var p=x.ch?CH[x.ch]:null;
+  return '<div class="ini-r" tabindex="0"><div class="h"><div><div class="b">'+esc(D.br[x.b])+'</div><div class="i">'+esc(D.iname[x.i])+"</div></div>"+(p?'<span class="ini-p '+p[1]+'">'+p[0]+"</span>":"")+"</div>"+
+  '<div class="ini-ch">'+x.ss.slice(0,4).map(function(s){return "<span>"+sShort(D.sessions[s])+" · <b>"+num(x.s[s])+"</b></span>";}).join("")+"</div>"+
+  '<div class="ini-d">'+rowTable(x.rows)+instFacts(x.i)+"</div></div>";}).join("")+"</div>";
+ if(L.length>ST.lim)h+='<button type="button" class="ini-more" data-more="1">Show '+Math.min(40,L.length-ST.lim)+" more</button>";return h;}
+function viewAll(){var D=ST.data;function opt(arr,sel,all,lab){return '<select data-f="'+all+'" aria-label="'+lab+'"><option value="">'+lab+"</option>"+arr.map(function(n,i){return '<option value="'+i+'"'+(String(i)===sel?" selected":"")+">"+esc(n)+"</option>";}).join("")+"</select>";}
+ var used={};D.rows.forEach(function(r){if(r[2]===ST.course)used[r[4]]=1;});var brs=D.br.map(function(n,i){return used[i]?n:null;});
+ var h='<div class="ini-c"><div class="ini-seg" role="group" aria-label="Course">'+["MD/MS","MDS","MCh 6-yr","DM 6-yr"].map(function(n,i){return '<button type="button" data-co="'+i+'" aria-pressed="'+(ST.course===i)+'">'+n+"</button>";}).join("")+"</div>"+
+  '<select data-f="fB" aria-label="Branch"><option value="">All branches</option>'+brs.map(function(n,i){return n?'<option value="'+i+'"'+(String(i)===ST.fB?" selected":"")+">"+esc(n)+"</option>":"";}).join("")+"</select>"+
+  opt(D.iname,ST.fI,"fI","All institutes")+opt(D.sessions,ST.fS,"fS","All sessions")+
+  '<select data-f="fC" aria-label="Seat category"><option value="">All categories</option>'+Object.keys(D.cats).map(function(k){return '<option value="'+k+'"'+(k===ST.fC?" selected":"")+">"+esc(D.cats[k])+"</option>";}).join("")+"</select></div>";
+ var R=D.rows.filter(function(r){return r[2]===ST.course&&(ST.fB===""||r[4]===+ST.fB)&&(ST.fI===""||r[3]===+ST.fI)&&(ST.fS===""||r[0]===+ST.fS)&&(ST.fC===""||r[5]===ST.fC);})
+  .sort(function(a,b){return b[0]-a[0]||a[8]-b[8];});
+ h+='<div class="ini-sum">'+num(R.length)+" rows · newest session first, then lowest closing rank. Pick a branch or institute to narrow it down.</div>";
+ if(!R.length)return h+'<div class="ini-empty">Nothing matches these filters.</div>';
+ var cS=ST.fS==="",cI=ST.fI==="",cB=ST.fB==="",RS={R1:"R1",R2:"R2",Open:"Open"};
+ h+='<div class="ini-tw"><table class="ini-tb"><thead><tr>'+(cS?"<th>Session</th>":"")+"<th>Round</th>"+(cI?"<th>Institute</th>":"")+(cB?"<th>Branch</th>":"")+'<th>Seat</th><th class="op" style="text-align:right">Open</th><th style="text-align:right">Close</th><th style="text-align:right">Seats</th></tr></thead><tbody>'+
+  R.slice(0,ST.lim*5).map(function(r){return "<tr>"+(cS?"<td>"+sShort(D.sessions[r[0]])+"</td>":"")+"<td>"+(RS[r[1]]||r[1])+"</td>"+(cI?"<td>"+esc(D.iname[r[3]])+"</td>":"")+(cB?"<td>"+esc(D.br[r[4]])+"</td>":"")+"<td>"+esc(r[5])+(r[6]?" PwBD":"")+'</td><td class="n op">'+num(r[7])+'</td><td class="n">'+num(r[8])+'</td><td class="n">'+r[9]+"</td></tr>";}).join("")+"</tbody></table></div>";
+ if(R.length>ST.lim*5)h+='<button type="button" class="ini-more" data-more="1">Show more rows</button>';return h;}
+function viewInst(){var D=ST.data,n={};D.rows.forEach(function(r){if(r[0]===D.sessions.length-1)n[r[3]]=(n[r[3]]||0)+r[9];});
+ return '<div class="ini-sum">Fees, stipend and leaving penalty from each institute’s INI-CET prospectus. <span class="ini-badge o">Official</span> = from the prospectus; <span class="ini-badge v">Verify</span> = from a secondary source, check the latest prospectus.</div><div class="ini-l">'+
+ D.inst.map(function(k,i){var x=D.I[k]||{};var off=/^official/i.test(x.conf||"");return '<div class="ini-ic"><h4>'+esc(D.iname[i])+'<span class="ini-badge '+(off?"o":"v")+'">'+(off?"Official":"Verify")+"</span></h4>"+
+  '<div class="i" style="font-size:13px;color:#6b7280">'+esc([x.city,x.state].filter(Boolean).join(", "))+"</div>"+instFacts(i)+
+  (x.reservation?'<div class="ini-facts"><div><b>Reservation:</b> '+esc(x.reservation)+"</div></div>":"")+(x.src?'<div class="ini-src">Source: '+esc(x.src)+"</div>":"")+"</div>";}).join("")+"</div>";}
+function viewLock(){var signed=ST.signed;
+ return '<div class="ini-lock"><div class="ini-sk" aria-hidden="true"><div></div><div></div><div></div></div>'+
+ '<div class="ini-pw"><h3>INI-CET Pass</h3><p>Every INI-CET seat allotment from the official AIIMS results, so you know exactly where your rank lands before you fill choices.</p>'+
+ '<div class="ini-st"><div><b>6</b><small>sessions · Jan 2024→Jul 2026</small></div><div><b>11</b><small>rounds incl. open rounds</small></div><div><b>23</b><small>institutes</small></div><div><b>10,770</b><small>opening & closing ranks</small></div></div>'+
+ '<ul class="ini-ul"><li>Your safe, likely and borderline seats for your rank and category</li><li>Every branch at every AIIMS, JIPMER, PGIMER, NIMHANS and SCTIMST, round by round</li><li>PwBD, AIIMS Delhi and JIPMER institutional seats, MDS, 6-year MCh and DM</li><li>Fees, stipend and seat-leaving penalty for each institute</li></ul>'+
+ '<button type="button" class="ini-buy" data-buy="1">'+(signed?"":"Sign in & ")+"Get INI-CET Pass · "+inr(ST.price)+'</button>'+
+ '<div class="ini-fine">One-time payment · separate from NEET PG plans · UPI, cards, netbanking</div>'+(ST.err?'<div class="ini-err">'+esc(ST.err)+"</div>":"")+"</div></div>";}
+function render(){var s=document.getElementById("ini-sec");if(!s||!document.body.classList.contains("dp-ini"))return;var h;
+ if(ST.unlocked&&ST.data){var T=[["me","My chances"],["all","All cutoffs"],["inst","Institutes"]];
+  h='<div class="ini-tabs" role="tablist">'+T.map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(ST.tab===t[0])+'">'+t[1]+"</button>";}).join("")+"</div>"+
+   (ST.tab==="all"?viewAll():ST.tab==="inst"?viewInst():viewMe())+(ST.err?'<div class="ini-err">'+esc(ST.err)+"</div>":"")+
+   '<div class="ini-src">Source: '+esc(ST.data.src)+". Sponsored and foreign-national seats are left out. Closing rank = the last rank allotted in that round. Data updated "+esc(ST.data.v)+".</div>";}
+ else if(ST.unlocked||ST.loading&&!stP)h='<div class="ini-empty">Opening your INI-CET Pass…</div>';
+ else h=viewLock();
+ var y=window.scrollY;s.innerHTML=h;window.scrollTo(0,y);var b=s.querySelector("[data-buy]");if(b&&ST.loading){b.disabled=true;}}
+document.addEventListener("click",function(e){var s=document.getElementById("ini-sec");if(!s||!s.contains(e.target))return;var t;
+ if((t=e.target.closest("[data-buy]"))){buy(t);return;}
+ if((t=e.target.closest("[data-tab]"))){ST.tab=t.getAttribute("data-tab");ST.lim=40;render();return;}
+ if((t=e.target.closest("[data-co]"))){ST.course=+t.getAttribute("data-co");ST.lim=40;ST.fB="";save();render();return;}
+ if((t=e.target.closest("[data-more]"))){ST.lim+=40;render();return;}
+ if((t=e.target.closest(".ini-r"))&&!e.target.closest(".ini-d")){t.classList.toggle("open");}});
+document.addEventListener("keydown",function(e){var r=e.target.closest&&e.target.closest(".ini-r");if(r&&(e.key==="Enter"||e.key===" ")&&e.target===r){e.preventDefault();r.classList.toggle("open");}});
+document.addEventListener("change",function(e){var s=document.getElementById("ini-sec");if(!s||!s.contains(e.target))return;var t=e.target;
+ if(t.id==="ini-rk"){ST.rank=t.value?String(Math.max(1,parseInt(t.value,10)||0)):"";}else if(t.id==="ini-ct")ST.cat=t.value;else if(t.id==="ini-pw")ST.pw=t.checked;else if(t.id==="ini-ip")ST.ip=t.checked;else if(t.id==="ini-in")ST.inst=t.checked;
+ else if(t.getAttribute("data-f"))ST[t.getAttribute("data-f")]=t.value;else return;ST.lim=40;save();render();});
+// re-check after sign in (Google sign-in may come back to this page)
+function watchAuth(){var S=SB();if(!S||!S.auth||watchAuth.on)return;watchAuth.on=1;S.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="SIGNED_OUT"){if(ev==="SIGNED_OUT"){ST.data=null;ST.unlocked=false;}stP=null;if(document.body.classList.contains("dp-ini"))status(true);}});}
+function boot(){if(!mount())return false;setExam(exam());window.addEventListener("resize",function(){document.querySelectorAll(".ini-sw").forEach(paintSw);});
+ var t=0,iv=setInterval(function(){t++;mount();document.querySelectorAll(".ini-sw").forEach(paintSw);if(SB()&&!watchAuth.on){watchAuth();if(document.body.classList.contains("dp-ini")&&!ST.unlocked)status(true);}if(t>20)clearInterval(iv);},700);return true;}
+if(!boot()){var n=0,iv=setInterval(function(){if(boot()||++n>40)clearInterval(iv);},250);}
 })();</script></body>
 </html>
