@@ -10444,6 +10444,37 @@ body.dp-ini #ini-sec{display:block}
 .ini-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
 .ini-badge.o{background:#dcfce7;color:#166534}.ini-badge.v{background:#fef3c7;color:#92400e}
 .ini-more{display:block;margin:12px auto 0;border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:12px;padding:10px 16px;font-weight:700;font-size:14px;font-family:inherit;cursor:pointer}
+.ini-vw{display:inline-flex;background:#eef2ff;border-radius:12px;padding:3px;gap:2px;margin:2px 0 8px}
+.ini-vw button{border:0;background:none;border-radius:9px;padding:0 14px;height:34px;font-weight:700;font-size:13.5px;font-family:inherit;color:#4338ca;cursor:pointer}
+.ini-vw button[aria-pressed=true]{background:#fff;color:#1e1b4b;box-shadow:0 1px 5px rgba(49,46,129,.15)}
+button.ini-il{border:0;background:none;padding:0;font-family:inherit;cursor:pointer;color:#4338ca;font-weight:600;text-align:left}
+.ini-cc,.ini-ic{cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s}
+.ini-cc{border:1px solid #e5e7eb;border-radius:18px;padding:14px;background:#fff}
+.ini-cc:hover,.ini-ic:hover{border-color:#a5b4fc;box-shadow:0 6px 20px rgba(67,56,202,.1)}
+.ini-cc:active,.ini-ic:active{transform:scale(.99)}
+.ini-cc-h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ini-cc-h .b{font-weight:800;font-size:16.5px}.ini-cc-h .i{font-size:13px;color:#6b7280;margin-top:2px}
+.ini-cc-n{font-size:12.5px;font-weight:800;color:#4338ca;background:#eef2ff;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.ini-cc-q{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.ini-cc-q span{font-size:12px;font-weight:700;color:#065f46;background:#ecfdf5;border-radius:8px;padding:3px 8px}
+.ini-cc-l{margin-top:10px;border-top:1px solid #f3f4f6}
+.ini-cc-l>div{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:14px;font-weight:600}
+.ini-cc-l>div:last-child{border:0}.ini-cc-more{color:#6b7280;font-size:12.5px!important;font-weight:600!important}
+.ini-open{margin-top:10px;font-size:13px;font-weight:800;color:#4338ca}
+.ini-ov{position:fixed;inset:0;z-index:1000;background:rgba(15,10,60,.45);display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .2s}
+.ini-ov.on{opacity:1}
+.ini-sh{background:#fff;color:#1e1b4b;width:100%;max-width:720px;max-height:92vh;border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(30px);transition:transform .28s cubic-bezier(.2,.9,.3,1);box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+.ini-ov.on .ini-sh{transform:none}
+@media (min-width:760px){.ini-ov{align-items:center}.ini-sh{border-radius:24px;max-height:88vh}}
+.ini-sh-h{display:flex;justify-content:space-between;gap:12px;padding:18px 18px 12px;border-bottom:1px solid #eef2ff;background:linear-gradient(135deg,#1e1b4b,#4338ca);color:#fff;border-radius:24px 24px 0 0}
+.ini-sh-t{font-size:20px;font-weight:800;line-height:1.2}.ini-sh-s{font-size:13px;color:#c7d2fe;margin-top:3px}
+.ini-x{border:0;background:rgba(255,255,255,.18);color:#fff;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;flex:0 0 auto}
+.ini-sh-b{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px 24px;overscroll-behavior:contain}
+.ini-sh-b h5{font-size:15px;font-weight:800;margin:18px 0 8px;display:flex;align-items:center;gap:8px}.ini-sh-b h5 span{font-size:12px;font-weight:700;color:#6b7280}
+.ini-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+@media (max-width:560px){.ini-tl{grid-template-columns:repeat(2,1fr)}}
+.ini-tl div{background:#f5f5ff;border:1px solid #e0e7ff;border-radius:14px;padding:10px}
+.ini-tl small{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#6b7280}
+.ini-tl b{display:block;font-size:19px;font-weight:800;color:#1e1b4b;margin-top:2px}.ini-tl em{font-style:normal;font-size:11.5px;color:#4b5563}
 .ini-lock{position:relative}
 .ini-sk{display:grid;gap:10px;filter:blur(3px);opacity:.75;pointer-events:none;user-select:none}
 .ini-sk div{height:64px;border-radius:16px;background:linear-gradient(90deg,#eef2ff,#f5f5ff,#eef2ff);border:1px solid #e0e7ff}
@@ -10470,9 +10501,9 @@ body.dp-ini #ini-sec{display:block}
 var FN="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/dp-inicet";
 var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
 var RZP_KEY="rzp_live_TfrVp5WBEyPS7y";
-var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:""};
-try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course","mb"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
-function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course,mb:ST.mb}));}catch(e){}}
+var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:"",vw:"seat"};
+try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course","mb","vw"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
+function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course,mb:ST.mb,vw:ST.vw}));}catch(e){}}
 function SB(){try{return typeof sb!=="undefined"&&sb?sb:null;}catch(e){return null;}}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function inr(p){return "₹"+Math.round(p/100).toLocaleString("en-IN");}
@@ -10536,14 +10567,14 @@ function paintBuy(b){b.textContent="Get INI-CET Pass · "+inr(ST.price);}
 var RN={R1:"Round 1",R2:"Round 2",Open:"Open round"};
 function sShort(s){return s.slice(0,3)+" ’"+s.slice(-2);}
 function cats(){var c={UR:1,OCS:1};c[ST.cat]=1;if(ST.ip)c.IP=1;if(ST.inst)c.INST=1;return c;}
-function chances(){var D=ST.data,C=cats(),g={},rank=parseInt(ST.rank,10)||0;
- D.rows.forEach(function(r){if(r[2]!==ST.course||!C[r[5]])return;if(r[6]&&!ST.pw)return;var k=r[3]+"|"+r[4];var x=g[k]||(g[k]={i:r[3],b:r[4],s:{},rows:[]});x.rows.push(r);if(!(r[0] in x.s)||r[8]>x.s[r[0]])x.s[r[0]]=r[8];});
- var out=[];Object.keys(g).forEach(function(k){var x=g[k];if(ST.mb!==""&&x.b!==+ST.mb)return;var ss=Object.keys(x.s).map(Number).sort(function(a,b){return b-a;});x.ss=ss;var rec=ss.slice(0,4).map(function(s){return x.s[s];});
+function chances(o){o=o||{};var co=o.co!=null?o.co:ST.course,one=o.i!=null,D=ST.data,C=cats(),g={},rank=parseInt(ST.rank,10)||0;
+ D.rows.forEach(function(r){if(r[2]!==co||(one&&r[3]!==o.i)||!C[r[5]])return;if(r[6]&&!ST.pw)return;var k=r[3]+"|"+r[4];var x=g[k]||(g[k]={i:r[3],b:r[4],s:{},rows:[]});x.rows.push(r);if(!(r[0] in x.s)||r[8]>x.s[r[0]])x.s[r[0]]=r[8];});
+ var out=[];Object.keys(g).forEach(function(k){var x=g[k];if(!one&&ST.mb!==""&&x.b!==+ST.mb)return;var ss=Object.keys(x.s).map(Number).sort(function(a,b){return b-a;});x.ss=ss;var rec=ss.slice(0,4).map(function(s){return x.s[s];});
   x.last=x.s[ss[0]];x.mx=Math.max.apply(null,rec);
   // like the NEET predictor: expected closing = recent sessions weighted to the newest (log scale), spread from how much it moved
   var wS=0,lS=0,ls=rec.map(function(c){return Math.log(c);});ls.forEach(function(l,j){var w=[4,2.5,1.5,1][j];wS+=w;lS+=w*l;});var mu=lS/wS,v=0;ls.forEach(function(l,j){var w=[4,2.5,1.5,1][j];v+=w*(l-mu)*(l-mu);});
   var sg=Math.max(rec.length>1?0.2:0.3,Math.min(0.6,Math.sqrt(v/wS)*1.1+0.08));x.exp=Math.round(Math.exp(mu));
-  if(rank){var pc=Math.round(100*phi((mu-Math.log(rank))/sg));x.pc=Math.max(1,Math.min(99,pc));if(x.pc<5&&ST.mb==="")return;x.ch=x.pc>=80?"s":x.pc>=55?"l":x.pc>=30?"m":x.pc>=5?"x":"u";}
+  if(rank){var pc=Math.round(100*phi((mu-Math.log(rank))/sg));x.pc=Math.max(1,Math.min(99,pc));if(x.pc<5&&ST.mb===""&&!one&&!o.all)return;x.ch=x.pc>=80?"s":x.pc>=55?"l":x.pc>=30?"m":x.pc>=5?"x":"u";}
   out.push(x);});
  out.sort(function(a,b){return rank?((b.pc>=80)-(a.pc>=80))||(a.pc>=80?a.exp-b.exp:b.pc-a.pc||b.exp-a.exp):(a.last-b.last);});return out;}
 function phi(z){var t=1/(1+0.3275911*Math.abs(z/Math.SQRT2)),y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2);return 0.5*(1+(z>=0?y:-y));}
@@ -10556,6 +10587,47 @@ function instFacts(i){var D=ST.data,x=D.I[D.inst[i]];if(!x)return "";var f=[];
 function rowTable(rows){var D=ST.data;rows=rows.slice().sort(function(a,b){return b[0]-a[0]||a[1].localeCompare(b[1])||a[5].localeCompare(b[5]);});
  return '<div class="ini-tw"><table class="ini-tb"><thead><tr><th>Session</th><th>Round</th><th>Seat</th><th class="op" style="text-align:right">Opening</th><th style="text-align:right">Closing</th><th style="text-align:right">Seats</th></tr></thead><tbody>'+
  rows.map(function(r){return "<tr><td>"+D.sessions[r[0]]+"</td><td>"+(RN[r[1]]||r[1])+"</td><td>"+esc(r[5])+(r[6]?" PwBD":"")+'</td><td class="n op">'+num(r[7])+'</td><td class="n">'+num(r[8])+'</td><td class="n">'+r[9]+"</td></tr>";}).join("")+"</tbody></table></div>";}
+
+function bestFirst(a,b){var A=a.pc>=55,B=b.pc>=55;return (B-A)||(A?a.exp-b.exp:b.pc-a.pc||a.exp-b.exp);}
+function lakh(v){v=Number(v);return v>=1e5?"\u20B9"+(v/1e5).toFixed(v%1e5?1:0).replace(/\.0$/,"")+" L":"\u20B9"+num(v);}
+function leaveShort(t){if(!t)return null;var m=(t.match(/Rs\.?\s?[\d,]+/g)||[]).map(function(x){return Number(x.replace(/[^\d]/g,""));}).filter(function(n){return n>=10000;});if(!m.length)return null;var a=Math.min.apply(null,m),b=Math.max.apply(null,m);return a===b?lakh(a):lakh(a).replace(" L","")+"\u2013"+lakh(b).replace("\u20B9","");}
+function tiles(i){var D=ST.data,x=D.I[D.inst[i]]||{},t=[];
+ if(x.fees_total_inr)t.push(["Fees",lakh(x.fees_total_inr),x.type==="JIPMER"?"first year":x.type==="NIMHANS"?"tuition":"whole course"]);
+ if(x.pay_entry_inr)t.push(["Stipend",lakh(x.pay_entry_inr),"a month + allowances"]);
+ var l=leaveShort(x.leaving_note);if(l)t.push(["If you leave",l,"penalty / bond"]);
+ var nb={};D.rows.forEach(function(r){if(r[3]===i)nb[r[2]+"|"+r[4]]=1;});t.push(["Branches",String(Object.keys(nb).length),"in INI-CET"]);
+ return '<div class="ini-tl">'+t.map(function(a){return "<div><small>"+a[0]+"</small><b>"+a[1]+"</b><em>"+a[2]+"</em></div>";}).join("")+"</div>";}
+function seatRow(x,withInst){var D=ST.data,p=x.ch?CH[x.ch]:null;
+ return '<div class="ini-r" tabindex="0"><div class="h"><div><div class="b">'+esc(D.br[x.b])+'</div>'+(withInst?'<button type="button" class="i ini-il" data-inst="'+x.i+'">'+esc(D.iname[x.i])+' \u203A</button>':'<div class="i">'+(x.ss.length?"Last closed at "+num(x.last)+" ("+sShort(D.sessions[x.ss[0]])+")":"")+"</div>")+"</div>"+
+ (p?'<div class="ini-pc"><b>'+x.pc+'%</b><span class="ini-p '+p[1]+'">'+p[0]+'</span></div>':"")+"</div>"+(p?'<div class="ini-bar '+p[1]+'"><i style="width:'+x.pc+'%"></i></div>':"")+
+ '<div class="ini-ex">Expected closing next session <b>~'+num(x.exp)+'</b></div>'+
+ '<div class="ini-ch">'+x.ss.slice(0,4).map(function(s){return "<span>"+sShort(D.sessions[s])+" \u00B7 <b>"+num(x.s[s])+"</b></span>";}).join("")+"</div>"+
+ '<div class="ini-d">'+rowTable(x.rows)+(withInst?instFacts(x.i):"")+"</div></div>";}
+var CO=["MD/MS","MDS","MCh 6-yr","DM 6-yr"];
+function openInst(i){var D=ST.data;if(!D)return;closeInst();var x=D.I[D.inst[i]]||{},off=/^official/i.test(x.conf||""),rank=parseInt(ST.rank,10)||0;
+ var secs=[0,1,2,3].map(function(co){var L=chances({i:i,co:co,all:1});if(!L.length)return "";
+  if(rank)L.sort(bestFirst);
+  return '<h5>'+CO[co]+' <span>'+L.length+" branch"+(L.length>1?"es":"")+"</span></h5>"+'<div class="ini-l">'+L.map(function(z){return seatRow(z,false);}).join("")+"</div>";}).join("");
+ var ov=document.createElement("div");ov.className="ini-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-modal","true");ov.setAttribute("aria-label",D.iname[i]);
+ ov.innerHTML='<div class="ini-sh"><div class="ini-sh-h"><div><div class="ini-sh-t">'+esc(D.iname[i])+'<span class="ini-badge '+(off?"o":"v")+'">'+(off?"Official":"Verify")+'</span></div><div class="ini-sh-s">'+esc([x.city,x.state].filter(Boolean).join(", "))+" \u00B7 "+esc(x.type||"")+" \u00B7 INI-CET</div></div>"+
+  '<button type="button" class="ini-x" aria-label="Close">\u2715</button></div><div class="ini-sh-b">'+tiles(i)+
+  '<div class="ini-sum">'+(rank?"Your chance at rank <b>"+num(rank)+"</b> ("+esc(({UR:"General"})[ST.cat]||ST.cat)+(ST.pw?", PwBD":"")+") for every branch here. Tap a branch for every round.":"Add your rank in My chances to see your % for each branch. Tap a branch for every round.")+"</div>"+
+  (secs||'<div class="ini-empty">No seats for your category here in recent sessions.</div>')+
+  '<h5>About '+esc(D.iname[i])+"</h5>"+instFacts(i)+(x.reservation?'<div class="ini-facts"><div><b>Reservation:</b> '+esc(x.reservation)+"</div></div>":"")+(x.src?'<div class="ini-src">Source: '+esc(x.src)+"</div>":"")+"</div></div>";
+ ov.addEventListener("click",function(e){if(e.target===ov||e.target.closest(".ini-x")){closeInst();return;}var r=e.target.closest(".ini-r");if(r&&!e.target.closest(".ini-d"))r.classList.toggle("open");});
+ document.body.appendChild(ov);document.documentElement.style.overflow="hidden";requestAnimationFrame(function(){ov.classList.add("on");});
+ try{history.pushState({iniInst:i},"");}catch(e){}openInst.k=1;}
+function closeInst(fromPop){var o=document.querySelector(".ini-ov");if(!o)return;o.remove();document.documentElement.style.overflow="";if(!fromPop&&openInst.k){openInst.k=0;try{history.back();}catch(e){}}openInst.k=0;}
+window.addEventListener("popstate",function(){if(document.querySelector(".ini-ov")){openInst.k=0;closeInst(true);}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeInst();});
+function viewColleges(L){var D=ST.data,by={},rank=parseInt(ST.rank,10)||0;L.forEach(function(x){(by[x.i]=by[x.i]||[]).push(x);});
+ var ks=Object.keys(by).map(Number);ks.sort(function(a,b){var A=by[a],B=by[b];if(rank){var sa=A.filter(function(x){return x.pc>=55;}).length,sb=B.filter(function(x){return x.pc>=55;}).length;return sb-sa||Math.max.apply(null,B.map(function(x){return x.pc;}))-Math.max.apply(null,A.map(function(x){return x.pc;}));}return Math.min.apply(null,A.map(function(x){return x.last;}))-Math.min.apply(null,B.map(function(x){return x.last;}));});
+ return '<div class="ini-l">'+ks.map(function(i){var A=by[i].slice().sort(function(a,b){return rank?bestFirst(a,b):(a.last-b.last);}),x=D.I[D.inst[i]]||{};
+  var q=[];if(x.fees_total_inr)q.push("Fees "+lakh(x.fees_total_inr));if(x.pay_entry_inr)q.push("Stipend "+lakh(x.pay_entry_inr)+"/mo");var l=leaveShort(x.leaving_note);if(l)q.push("Leave "+l);
+  return '<div class="ini-cc" data-inst="'+i+'" tabindex="0" role="button"><div class="ini-cc-h"><div><div class="b">'+esc(D.iname[i])+'</div><div class="i">'+esc([x.city,x.state].filter(Boolean).join(", "))+'</div></div><span class="ini-cc-n">'+A.length+" branch"+(A.length>1?"es":"")+" \u203A</span></div>"+
+   (q.length?'<div class="ini-cc-q">'+q.map(function(t){return "<span>"+esc(t)+"</span>";}).join("")+"</div>":"")+
+   '<div class="ini-cc-l">'+A.slice(0,4).map(function(z){var p=z.ch?CH[z.ch]:null;return '<div><span>'+esc(D.br[z.b])+"</span>"+(p?'<span class="ini-p '+p[1]+'">'+z.pc+"%</span>":"<b>"+num(z.last)+"</b>")+"</div>";}).join("")+
+   (A.length>4?'<div class="ini-cc-more">+'+(A.length-4)+" more branches</div>":"")+"</div></div>";}).join("")+"</div>";}
 // ---------- views ----------
 function brSel(){var D=ST.data,u={};D.rows.forEach(function(r){if(r[2]===ST.course)u[r[4]]=1;});
  return '<select id="ini-mb" aria-label="Branch"><option value="">All branches</option>'+D.br.map(function(n,i){return u[i]?'<option value="'+i+'"'+(String(i)===ST.mb?" selected":"")+">"+esc(n)+"</option>":"";}).join("")+"</select>";}
@@ -10566,11 +10638,9 @@ function controls(){return '<div class="ini-c"><input type="number" inputmode="n
 function viewMe(){var D=ST.data,L=chances(),rank=parseInt(ST.rank,10)||0,cnt={s:0,l:0,m:0,x:0,u:0};L.forEach(function(x){if(x.ch)cnt[x.ch]++;});
  var h=controls()+'<div class="ini-sum">'+(rank?"Rank <b>"+num(rank)+"</b> · "+L.length+(ST.mb===""?" seats in reach: ":" "+esc(D.br[+ST.mb])+" seats: ")+"<b>"+cnt.s+"</b> safe, <b>"+cnt.l+"</b> likely, <b>"+cnt.m+"</b> borderline, <b>"+cnt.x+"</b> stretch"+(cnt.u?", <b>"+cnt.u+"</b> unlikely":"")+". % = your chance next session from up to 4 recent sessions (newest counts most), like our NEET PG predictor. Tap a seat for every round.":"Enter your rank to see your chances. Showing all "+L.length+" seats, lowest closing rank first.")+"</div>";
  if(!L.length)return h+'<div class="ini-empty">No seats closed near this rank in recent sessions for this course and category. Try another course, or check All cutoffs.</div>';
- h+='<div class="ini-l">'+L.slice(0,ST.lim).map(function(x){var p=x.ch?CH[x.ch]:null;
-  return '<div class="ini-r" tabindex="0"><div class="h"><div><div class="b">'+esc(D.br[x.b])+'</div><div class="i">'+esc(D.iname[x.i])+"</div></div>"+(p?'<div class="ini-pc"><b>'+x.pc+'%</b><span class="ini-p '+p[1]+'">'+p[0]+'</span></div>':"")+"</div>"+(p?'<div class="ini-bar '+p[1]+'"><i style="width:'+x.pc+'%"></i></div>':"")+
-  '<div class="ini-ex">Expected closing next session <b>~'+num(x.exp)+'</b></div>'+
-  '<div class="ini-ch">'+x.ss.slice(0,4).map(function(s){return "<span>"+sShort(D.sessions[s])+" · <b>"+num(x.s[s])+"</b></span>";}).join("")+"</div>"+
-  '<div class="ini-d">'+rowTable(x.rows)+instFacts(x.i)+"</div></div>";}).join("")+"</div>";
+ h=h.replace('<div class="ini-sum">','<div class="ini-vw" role="group" aria-label="View"><button type="button" data-vw="seat" aria-pressed="'+(ST.vw!=="col")+'">By seat</button><button type="button" data-vw="col" aria-pressed="'+(ST.vw==="col")+'">By college</button></div><div class="ini-sum">');
+ if(ST.vw==="col")return h+viewColleges(L);
+ h+='<div class="ini-l">'+L.slice(0,ST.lim).map(function(x){return seatRow(x,true);}).join("")+"</div>";
  if(L.length>ST.lim)h+='<button type="button" class="ini-more" data-more="1">Show '+Math.min(40,L.length-ST.lim)+" more</button>";return h;}
 function viewAll(){var D=ST.data;function opt(arr,sel,all,lab){return '<select data-f="'+all+'" aria-label="'+lab+'"><option value="">'+lab+"</option>"+arr.map(function(n,i){return '<option value="'+i+'"'+(String(i)===sel?" selected":"")+">"+esc(n)+"</option>";}).join("")+"</select>";}
  var used={};D.rows.forEach(function(r){if(r[2]===ST.course)used[r[4]]=1;});var brs=D.br.map(function(n,i){return used[i]?n:null;});
@@ -10588,9 +10658,9 @@ function viewAll(){var D=ST.data;function opt(arr,sel,all,lab){return '<select d
  if(R.length>ST.lim*5)h+='<button type="button" class="ini-more" data-more="1">Show more rows</button>';return h;}
 function viewInst(){var D=ST.data,n={};D.rows.forEach(function(r){if(r[0]===D.sessions.length-1)n[r[3]]=(n[r[3]]||0)+r[9];});
  return '<div class="ini-sum">Fees, stipend and leaving penalty from each institute’s INI-CET prospectus. <span class="ini-badge o">Official</span> = from the prospectus; <span class="ini-badge v">Verify</span> = from a secondary source, check the latest prospectus.</div><div class="ini-l">'+
- D.inst.map(function(k,i){var x=D.I[k]||{};var off=/^official/i.test(x.conf||"");return '<div class="ini-ic"><h4>'+esc(D.iname[i])+'<span class="ini-badge '+(off?"o":"v")+'">'+(off?"Official":"Verify")+"</span></h4>"+
+ D.inst.map(function(k,i){var x=D.I[k]||{};var off=/^official/i.test(x.conf||"");return '<div class="ini-ic" data-inst="'+i+'" tabindex="0" role="button"><h4>'+esc(D.iname[i])+'<span class="ini-badge '+(off?"o":"v")+'">'+(off?"Official":"Verify")+"</span></h4>"+
   '<div class="i" style="font-size:13px;color:#6b7280">'+esc([x.city,x.state].filter(Boolean).join(", "))+"</div>"+instFacts(i)+
-  (x.reservation?'<div class="ini-facts"><div><b>Reservation:</b> '+esc(x.reservation)+"</div></div>":"")+(x.src?'<div class="ini-src">Source: '+esc(x.src)+"</div>":"")+"</div>";}).join("")+"</div>";}
+  (x.reservation?'<div class="ini-facts"><div><b>Reservation:</b> '+esc(x.reservation)+"</div></div>":"")+(x.src?'<div class="ini-src">Source: '+esc(x.src)+"</div>":"")+'<div class="ini-open">Open college card \u203A</div></div>';}).join("")+"</div>";}
 function viewLock(){var signed=ST.signed;
  return '<div class="ini-lock"><div class="ini-sk" aria-hidden="true"><div></div><div></div><div></div></div>'+
  '<div class="ini-pw"><h3>INI-CET Pass</h3><p>Every INI-CET seat allotment from the official AIIMS results, so you know exactly where your rank lands before you fill choices.</p>'+
@@ -10611,8 +10681,10 @@ document.addEventListener("click",function(e){var s=document.getElementById("ini
  if((t=e.target.closest("[data-tab]"))){ST.tab=t.getAttribute("data-tab");ST.lim=40;render();return;}
  if((t=e.target.closest("[data-co]"))){ST.course=+t.getAttribute("data-co");ST.lim=40;ST.fB="";ST.mb="";save();render();return;}
  if((t=e.target.closest("[data-more]"))){ST.lim+=40;render();return;}
+ if((t=e.target.closest("[data-vw]"))){ST.vw=t.getAttribute("data-vw");save();render();return;}
+ if((t=e.target.closest("[data-inst]"))){openInst(+t.getAttribute("data-inst"));return;}
  if((t=e.target.closest(".ini-r"))&&!e.target.closest(".ini-d")){t.classList.toggle("open");}});
-document.addEventListener("keydown",function(e){var r=e.target.closest&&e.target.closest(".ini-r");if(r&&(e.key==="Enter"||e.key===" ")&&e.target===r){e.preventDefault();r.classList.toggle("open");}});
+document.addEventListener("keydown",function(e){var c=e.target.closest&&e.target.closest(".ini-cc,.ini-ic");if(c&&e.target===c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openInst(+c.getAttribute("data-inst"));return;}var r=e.target.closest&&e.target.closest(".ini-r");if(r&&(e.key==="Enter"||e.key===" ")&&e.target===r){e.preventDefault();r.classList.toggle("open");}});
 document.addEventListener("change",function(e){var s=document.getElementById("ini-sec");if(!s||!s.contains(e.target))return;var t=e.target;
  if(t.id==="ini-rk"){ST.rank=t.value?String(Math.max(1,parseInt(t.value,10)||0)):"";}else if(t.id==="ini-ct")ST.cat=t.value;else if(t.id==="ini-mb")ST.mb=t.value;else if(t.id==="ini-pw")ST.pw=t.checked;else if(t.id==="ini-ip")ST.ip=t.checked;else if(t.id==="ini-in")ST.inst=t.checked;
  else if(t.getAttribute("data-f"))ST[t.getAttribute("data-f")]=t.value;else return;ST.lim=40;save();render();});
