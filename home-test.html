@@ -10422,6 +10422,10 @@ body.dp-ini #ini-sec{display:block}
 .ini-r .i{font-size:13px;color:#4b5563;margin-top:2px}
 .ini-p{font-size:11.5px;font-weight:800;border-radius:999px;padding:4px 9px;white-space:nowrap}
 .ini-p.s{background:#dcfce7;color:#166534}.ini-p.l{background:#ccfbf1;color:#115e59}.ini-p.m{background:#fef3c7;color:#92400e}.ini-p.x{background:#ffe4e6;color:#9f1239}
+.ini-pc{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.ini-pc b{font-size:20px;font-weight:800;line-height:1;color:#1e1b4b}
+.ini-bar{height:6px;border-radius:4px;background:#eef2ff;margin-top:9px;overflow:hidden}.ini-bar i{display:block;height:100%;border-radius:4px}
+.ini-bar.s i{background:#22c55e}.ini-bar.l i{background:#14b8a6}.ini-bar.m i{background:#f59e0b}.ini-bar.x i{background:#f43f5e}
+.ini-ex{font-size:12.5px;color:#4b5563;margin-top:7px}.ini-ex b{color:#1e1b4b}
 .ini-ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
 .ini-ch span{font-size:12px;background:#f5f5ff;border:1px solid #e0e7ff;border-radius:8px;padding:3px 7px;color:#3730a3}
 .ini-ch span b{color:#1e1b4b}
@@ -10466,9 +10470,9 @@ body.dp-ini #ini-sec{display:block}
 var FN="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/dp-inicet";
 var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
 var RZP_KEY="rzp_live_TfrVp5WBEyPS7y";
-var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:""};
-try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
-function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course}));}catch(e){}}
+var ST={price:129900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:""};
+try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course","mb"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
+function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course,mb:ST.mb}));}catch(e){}}
 function SB(){try{return typeof sb!=="undefined"&&sb?sb:null;}catch(e){return null;}}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function inr(p){return "₹"+Math.round(p/100).toLocaleString("en-IN");}
@@ -10534,13 +10538,16 @@ function sShort(s){return s.slice(0,3)+" ’"+s.slice(-2);}
 function cats(){var c={UR:1,OCS:1};c[ST.cat]=1;if(ST.ip)c.IP=1;if(ST.inst)c.INST=1;return c;}
 function chances(){var D=ST.data,C=cats(),g={},rank=parseInt(ST.rank,10)||0;
  D.rows.forEach(function(r){if(r[2]!==ST.course||!C[r[5]])return;if(r[6]&&!ST.pw)return;var k=r[3]+"|"+r[4];var x=g[k]||(g[k]={i:r[3],b:r[4],s:{},rows:[]});x.rows.push(r);if(!(r[0] in x.s)||r[8]>x.s[r[0]])x.s[r[0]]=r[8];});
- var out=[];Object.keys(g).forEach(function(k){var x=g[k],ss=Object.keys(x.s).map(Number).sort(function(a,b){return b-a;});x.ss=ss;var rec=ss.slice(0,4).map(function(s){return x.s[s];});
-  var mx=Math.max.apply(null,rec),mn=Math.min.apply(null,rec),srt=rec.slice().sort(function(a,b){return a-b;}),md=srt[Math.floor((srt.length-1)/2)];x.last=x.s[ss[0]];x.mx=mx;
-  if(rank){if(rec.length>1){if(rank<=mn*0.97)x.ch="s";else if(rank<=md)x.ch="l";else if(rank<=mx)x.ch="m";else if(rank<=mx*1.12+50)x.ch="x";else return;}
-   else{if(rank<=mx*0.9)x.ch="l";else if(rank<=mx)x.ch="m";else if(rank<=mx*1.12+50)x.ch="x";else return;}}
+ var out=[];Object.keys(g).forEach(function(k){var x=g[k];if(ST.mb!==""&&x.b!==+ST.mb)return;var ss=Object.keys(x.s).map(Number).sort(function(a,b){return b-a;});x.ss=ss;var rec=ss.slice(0,4).map(function(s){return x.s[s];});
+  x.last=x.s[ss[0]];x.mx=Math.max.apply(null,rec);
+  // like the NEET predictor: expected closing = recent sessions weighted to the newest (log scale), spread from how much it moved
+  var wS=0,lS=0,ls=rec.map(function(c){return Math.log(c);});ls.forEach(function(l,j){var w=[4,2.5,1.5,1][j];wS+=w;lS+=w*l;});var mu=lS/wS,v=0;ls.forEach(function(l,j){var w=[4,2.5,1.5,1][j];v+=w*(l-mu)*(l-mu);});
+  var sg=Math.max(rec.length>1?0.2:0.3,Math.min(0.6,Math.sqrt(v/wS)*1.1+0.08));x.exp=Math.round(Math.exp(mu));
+  if(rank){var pc=Math.round(100*phi((mu-Math.log(rank))/sg));x.pc=Math.max(1,Math.min(99,pc));if(x.pc<5&&ST.mb==="")return;x.ch=x.pc>=80?"s":x.pc>=55?"l":x.pc>=30?"m":x.pc>=5?"x":"u";}
   out.push(x);});
- var O={s:0,l:1,m:2,x:3};out.sort(function(a,b){return rank?(O[a.ch]-O[b.ch])||(a.mx-b.mx):(a.last-b.last);});return out;}
-var CH={s:["Safe","s"],l:["Likely","l"],m:["Borderline","m"],x:["Stretch","x"]};
+ out.sort(function(a,b){return rank?((b.pc>=80)-(a.pc>=80))||(a.pc>=80?a.exp-b.exp:b.pc-a.pc||b.exp-a.exp):(a.last-b.last);});return out;}
+function phi(z){var t=1/(1+0.3275911*Math.abs(z/Math.SQRT2)),y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2);return 0.5*(1+(z>=0?y:-y));}
+var CH={s:["Safe","s"],l:["Likely","l"],m:["Borderline","m"],x:["Stretch","x"],u:["Unlikely","x"]};
 function instFacts(i){var D=ST.data,x=D.I[D.inst[i]];if(!x)return "";var f=[];
  if(x.fees_note)f.push("<div><b>Fees:</b> "+esc(x.fees_note)+"</div>");if(x.pay_note)f.push("<div><b>Stipend:</b> "+esc(x.pay_note)+"</div>");
  if(x.leaving_note)f.push("<div><b>If you leave:</b> "+esc(x.leaving_note)+"</div>");if(x.ip_note)f.push("<div><b>Institutional preference:</b> "+esc(x.ip_note)+"</div>");
@@ -10550,15 +10557,18 @@ function rowTable(rows){var D=ST.data;rows=rows.slice().sort(function(a,b){retur
  return '<div class="ini-tw"><table class="ini-tb"><thead><tr><th>Session</th><th>Round</th><th>Seat</th><th class="op" style="text-align:right">Opening</th><th style="text-align:right">Closing</th><th style="text-align:right">Seats</th></tr></thead><tbody>'+
  rows.map(function(r){return "<tr><td>"+D.sessions[r[0]]+"</td><td>"+(RN[r[1]]||r[1])+"</td><td>"+esc(r[5])+(r[6]?" PwBD":"")+'</td><td class="n op">'+num(r[7])+'</td><td class="n">'+num(r[8])+'</td><td class="n">'+r[9]+"</td></tr>";}).join("")+"</tbody></table></div>";}
 // ---------- views ----------
+function brSel(){var D=ST.data,u={};D.rows.forEach(function(r){if(r[2]===ST.course)u[r[4]]=1;});
+ return '<select id="ini-mb" aria-label="Branch"><option value="">All branches</option>'+D.br.map(function(n,i){return u[i]?'<option value="'+i+'"'+(String(i)===ST.mb?" selected":"")+">"+esc(n)+"</option>":"";}).join("")+"</select>";}
 function controls(){return '<div class="ini-c"><input type="number" inputmode="numeric" min="1" id="ini-rk" placeholder="Your rank" value="'+esc(ST.rank)+'" aria-label="Your INI-CET rank">'+
- '<select id="ini-ct" aria-label="Category">'+catOpts(ST.cat)+'</select>'+
+ '<select id="ini-ct" aria-label="Category">'+catOpts(ST.cat)+'</select>'+brSel()+
  '<div class="ini-seg" role="group" aria-label="Course">'+["MD/MS","MDS","MCh 6-yr","DM 6-yr"].map(function(n,i){return '<button type="button" data-co="'+i+'" aria-pressed="'+(ST.course===i)+'">'+n+"</button>";}).join("")+"</div>"+
  '<label><input type="checkbox" id="ini-pw"'+(ST.pw?" checked":"")+'> PwBD</label><label title="MBBS from AIIMS New Delhi"><input type="checkbox" id="ini-ip"'+(ST.ip?" checked":"")+'> AIIMS Delhi MBBS</label><label title="MBBS from JIPMER"><input type="checkbox" id="ini-in"'+(ST.inst?" checked":"")+'> JIPMER MBBS</label></div>';}
-function viewMe(){var D=ST.data,L=chances(),rank=parseInt(ST.rank,10)||0,cnt={s:0,l:0,m:0,x:0};L.forEach(function(x){if(x.ch)cnt[x.ch]++;});
- var h=controls()+'<div class="ini-sum">'+(rank?"Rank <b>"+num(rank)+"</b> · "+L.length+" seats in reach: <b>"+cnt.s+"</b> safe, <b>"+cnt.l+"</b> likely, <b>"+cnt.m+"</b> borderline, <b>"+cnt.x+"</b> stretch. Based on the final closing rank in up to 4 recent sessions (your category + open seats). Tap a seat for every round.":"Enter your rank to see your chances. Showing all "+L.length+" seats, lowest closing rank first.")+"</div>";
+function viewMe(){var D=ST.data,L=chances(),rank=parseInt(ST.rank,10)||0,cnt={s:0,l:0,m:0,x:0,u:0};L.forEach(function(x){if(x.ch)cnt[x.ch]++;});
+ var h=controls()+'<div class="ini-sum">'+(rank?"Rank <b>"+num(rank)+"</b> · "+L.length+(ST.mb===""?" seats in reach: ":" "+esc(D.br[+ST.mb])+" seats: ")+"<b>"+cnt.s+"</b> safe, <b>"+cnt.l+"</b> likely, <b>"+cnt.m+"</b> borderline, <b>"+cnt.x+"</b> stretch"+(cnt.u?", <b>"+cnt.u+"</b> unlikely":"")+". % = your chance next session from up to 4 recent sessions (newest counts most), like our NEET PG predictor. Tap a seat for every round.":"Enter your rank to see your chances. Showing all "+L.length+" seats, lowest closing rank first.")+"</div>";
  if(!L.length)return h+'<div class="ini-empty">No seats closed near this rank in recent sessions for this course and category. Try another course, or check All cutoffs.</div>';
  h+='<div class="ini-l">'+L.slice(0,ST.lim).map(function(x){var p=x.ch?CH[x.ch]:null;
-  return '<div class="ini-r" tabindex="0"><div class="h"><div><div class="b">'+esc(D.br[x.b])+'</div><div class="i">'+esc(D.iname[x.i])+"</div></div>"+(p?'<span class="ini-p '+p[1]+'">'+p[0]+"</span>":"")+"</div>"+
+  return '<div class="ini-r" tabindex="0"><div class="h"><div><div class="b">'+esc(D.br[x.b])+'</div><div class="i">'+esc(D.iname[x.i])+"</div></div>"+(p?'<div class="ini-pc"><b>'+x.pc+'%</b><span class="ini-p '+p[1]+'">'+p[0]+'</span></div>':"")+"</div>"+(p?'<div class="ini-bar '+p[1]+'"><i style="width:'+x.pc+'%"></i></div>':"")+
+  '<div class="ini-ex">Expected closing next session <b>~'+num(x.exp)+'</b></div>'+
   '<div class="ini-ch">'+x.ss.slice(0,4).map(function(s){return "<span>"+sShort(D.sessions[s])+" · <b>"+num(x.s[s])+"</b></span>";}).join("")+"</div>"+
   '<div class="ini-d">'+rowTable(x.rows)+instFacts(x.i)+"</div></div>";}).join("")+"</div>";
  if(L.length>ST.lim)h+='<button type="button" class="ini-more" data-more="1">Show '+Math.min(40,L.length-ST.lim)+" more</button>";return h;}
@@ -10599,12 +10609,12 @@ function render(){var s=document.getElementById("ini-sec");if(!s||!document.body
 document.addEventListener("click",function(e){var s=document.getElementById("ini-sec");if(!s||!s.contains(e.target))return;var t;
  if((t=e.target.closest("[data-buy]"))){buy(t);return;}
  if((t=e.target.closest("[data-tab]"))){ST.tab=t.getAttribute("data-tab");ST.lim=40;render();return;}
- if((t=e.target.closest("[data-co]"))){ST.course=+t.getAttribute("data-co");ST.lim=40;ST.fB="";save();render();return;}
+ if((t=e.target.closest("[data-co]"))){ST.course=+t.getAttribute("data-co");ST.lim=40;ST.fB="";ST.mb="";save();render();return;}
  if((t=e.target.closest("[data-more]"))){ST.lim+=40;render();return;}
  if((t=e.target.closest(".ini-r"))&&!e.target.closest(".ini-d")){t.classList.toggle("open");}});
 document.addEventListener("keydown",function(e){var r=e.target.closest&&e.target.closest(".ini-r");if(r&&(e.key==="Enter"||e.key===" ")&&e.target===r){e.preventDefault();r.classList.toggle("open");}});
 document.addEventListener("change",function(e){var s=document.getElementById("ini-sec");if(!s||!s.contains(e.target))return;var t=e.target;
- if(t.id==="ini-rk"){ST.rank=t.value?String(Math.max(1,parseInt(t.value,10)||0)):"";}else if(t.id==="ini-ct")ST.cat=t.value;else if(t.id==="ini-pw")ST.pw=t.checked;else if(t.id==="ini-ip")ST.ip=t.checked;else if(t.id==="ini-in")ST.inst=t.checked;
+ if(t.id==="ini-rk"){ST.rank=t.value?String(Math.max(1,parseInt(t.value,10)||0)):"";}else if(t.id==="ini-ct")ST.cat=t.value;else if(t.id==="ini-mb")ST.mb=t.value;else if(t.id==="ini-pw")ST.pw=t.checked;else if(t.id==="ini-ip")ST.ip=t.checked;else if(t.id==="ini-in")ST.inst=t.checked;
  else if(t.getAttribute("data-f"))ST[t.getAttribute("data-f")]=t.value;else return;ST.lim=40;save();render();});
 // re-check after sign in (Google sign-in may come back to this page)
 function watchAuth(){var S=SB();if(!S||!S.auth||watchAuth.on)return;watchAuth.on=1;S.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="SIGNED_OUT"){if(ev==="SIGNED_OUT"){ST.data=null;ST.unlocked=false;}stP=null;if(document.body.classList.contains("dp-ini"))status(true);}});}
