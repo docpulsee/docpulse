@@ -9192,7 +9192,7 @@ function load(){
  call("coupon",{action:"owner_list"}).then(function(r){S.coupons=r.coupons||[];render();}).catch(function(){S.coupons=[];render();});
  finLoad();
  if(window.dpA2&&window.dpA2.poll)window.dpA2.poll().then(function(d){S.today=d;render();}).catch(function(){});}
-var NAV=[["store","Storefront","store",1],["prices","Prices","tag",8],["offers","Offers & banner","mega",3],["coupons","Coupons","ticket",4],["pro","Pro","crown",6]];
+var NAV=[["store","Storefront","store",1],["prices","Prices","tag",8],["offers","Offers & banner","mega",3],["inicet","INI-CET Pass","mega",5],["coupons","Coupons","ticket",4],["pro","Pro","crown",6]];
 function finNavs(){if(!window.DP_FIN)return NAV;return [["finance","Finance","chart",2]].concat(NAV).concat([["bookings","Bookings","cal",4,1],["seniors","Senior requests","people",2,1],["lucky","Lucky Roll","dice",5,1],["copilot","Copilot","bot",7,1]].concat(window.DP_SNUM?[["snum","Senior numbers","phone",3,1],["seatcards","Seat cards","party",6,1]]:[]).concat(window.DP_MOCK?[["invites","Invites","people",4,1]]:[]));}
 function finLoad(){if(!window.DP_FIN)return;S.fin=null;S.finErr=null;try{sb.functions.invoke("owner-finance",{body:{action:"list"}}).then(function(r){if(r.error||!r.data||r.data.error){var m=(r.data&&r.data.error)||(r.error&&r.error.message)||"Couldn't load";if(r.error&&r.error.context&&r.error.context.json)r.error.context.json().then(function(j){S.finErr=j&&j.error||m;render();}).catch(function(){S.finErr=m;render();});else{S.finErr=m;render();}return;}S.fin=r.data;render();}).catch(function(e){S.finErr=e.message;render();});}catch(e){S.finErr=e.message;}}
 function finRange(){var now=new Date(),p=S.fp||"month",day=864e5;function d0(t){var d=new Date(t);d.setHours(0,0,0,0);return d.getTime();}
@@ -9252,14 +9252,15 @@ function soonOffers(){var now=Date.now();return (S.offers||[]).filter(function(o
 function render(){if(!root)return;var w=$(".cc",root),v=S.view,sc=$(".cc-bd",w),top=sc?sc.scrollTop:0;
  var nlive=liveOffers().length,nedit=Object.keys(S.edit).length;
  var badge={offers:nlive?String(nlive):"",prices:nedit?String(nedit):"",coupons:S.coupons?String(S.coupons.filter(function(c){return c.active!==false;}).length):"",pro:S.pro?(S.pro.members||[]).length+"/"+S.pro.cap:""};
- var titles={finance:["Finance","Every rupee that came in, straight from Razorpay"],store:["Storefront","What students see on DocPulsee right now"],prices:["Prices","Normal prices for every plan. Offers sit on top of these."],offers:["Offers & banner","Time-limited prices and the banner switch on and off by themselves"],coupons:["Coupons","Codes you've made for students"],pro:["Pro","Slots, members and Pro prices"]};
+ var titles={finance:["Finance","Every rupee that came in, straight from Razorpay"],store:["Storefront","What students see on DocPulsee right now"],prices:["Prices","Normal prices for every plan. Offers sit on top of these."],offers:["Offers & banner","Time-limited prices and the banner switch on and off by themselves"],inicet:["INI-CET Pass","Price, banner and share kit for the INI-CET Pass"],coupons:["Coupons","Codes you've made for students"],pro:["Pro","Slots, members and Pro prices"]};
  w.innerHTML='<aside class="cc-sb"><div class="cc-tl"><i title="Close" data-x></i><i></i><i></i></div><h3>DocPulsee</h3>'+finNavs().map(function(n){return '<button type="button" class="cc-nv'+(v===n[0]?" on":"")+(n[4]?" ln":"")+'" '+(n[4]?'data-launch':'data-v')+'="'+n[0]+'">'+ic(n[2],n[3])+n[1]+(badge[n[0]]?'<em>'+badge[n[0]]+'</em>':'')+'</button>';}).join("")+
   '<div class="ft">Changes go live on the site and in the payment check straight away.</div></aside>'+
   '<section class="cc-mn"><div class="cc-tabs">'+finNavs().map(function(n){return '<button type="button" class="'+(v===n[0]?"on":"")+'" '+(n[4]?'data-launch':'data-v')+'="'+n[0]+'">'+n[1]+(badge[n[0]]?" · "+badge[n[0]]:"")+'</button>';}).join("")+'</div>'+
   '<div class="cc-hd"><div><h2>'+titles[v][0]+'</h2><small>'+titles[v][1]+'</small></div><button type="button" class="x" data-x aria-label="Close">✕</button></div>'+
   '<div class="cc-bd">'+(S.msg?'<div class="cc-msg'+(S.msg.bad?" bad":"")+'">'+(S.msg.bad?"⚠️ ":"✓ ")+esc(S.msg.t)+'</div>':'')+VIEW[v]()+'</div>'+
   '<div class="cc-bar'+(nedit?" on":"")+'"><span class="t"><b>'+nedit+' price change'+(nedit===1?"":"s")+'</b><small>Not live yet. Review to publish.</small></span><button type="button" class="u" data-undo>Undo</button><button type="button" class="rv" data-review>Review</button></div></section>';
- var nsc=$(".cc-bd",w);if(nsc)nsc.scrollTop=top;wire(w);}
+ var nsc=$(".cc-bd",w);if(nsc)nsc.scrollTop=top;wire(w);if(v==="inicet"&&window.dpIniOwn)try{window.dpIniOwn.wire(w);}catch(e){}}
+window.dpCcRender=function(){render();};
 function priceVal(k){var p=S.prices||{};return Math.round(((p["price_"+k+"_paise"])||0)/100);}
 function proVal(k){var d=S.pro||{};if(k==="cap")return d.cap||0;var f={fresh:"new_paise",upgrade:"upgrade_paise",together:"together_paise",partner:"partner_paise"}[k];return Math.round((d[f]||0)/100);}
 function sk(n){var h="";for(var i=0;i<(n||3);i++)h+='<div class="cc-sk" style="width:'+(60+i*9%30)+'%"></div>';return '<div class="cc-g">'+h+'</div>';}
@@ -9269,6 +9270,7 @@ function banHTML(){var lv=liveOffers()[0],so=soonOffers()[0];
  return '<div class="cc-ban none"><div class="k">No offer running</div><div class="nm">Normal prices are live</div><div class="tx">Start a time-limited offer and the banner, site prices and payment check switch by themselves.</div><div class="row"><button type="button" class="b" data-neweditor>+ New offer</button></div></div>';}
 var VIEW={
  finance:function(){return finView();},
+ inicet:function(){return window.dpIniOwn?window.dpIniOwn.html():'<div class="cc-note">INI-CET tools are loading… reopen in a moment.</div>';},
  store:function(){var lv=S.live,full=priceVal("full")*100,lof=liveOffers().filter(function(o){return (o.product||"full_access")==="full_access";})[0],st={now:lof||((window.DP_OFFER_STATE||{}).now)},fo=st.now?Math.min(st.now.price_paise,full||st.now.price_paise):0,t=S.today&&S.today.payments;
   var rows=[["College Directory",fo||full,fo?full:0,fo?(st.now.emoji||"🎉")+" "+st.now.name:"","full",1],
    ["Pro · new buyer",lv?lv.new_paise:proVal("fresh")*100,lv&&lv.offer?lv.offer.list_new_paise:0,lv&&lv.offer?(lv.offer.emoji||"")+" "+lv.offer.name:"","fresh",6],
@@ -10477,7 +10479,7 @@ button.ini-il{border:0;background:none;padding:0;font-family:inherit;cursor:poin
 .ini-tl b{display:block;font-size:19px;font-weight:800;color:#1e1b4b;margin-top:2px}.ini-tl em{font-style:normal;font-size:11.5px;color:#4b5563}
 #ini-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:linear-gradient(90deg,#1e1b4b,#4338ca 55%,#6d28d9);color:#e0e7ff;font-size:13.5px;line-height:1.3;position:relative;z-index:41}
 #ini-bar .ini-bar-t{flex:1;min-width:0;max-width:1100px;margin:0 auto}
-#ini-bar b{color:#fff}#ini-bar s{opacity:.7;margin-right:2px}#ini-bar [data-ini-price] b{color:#fde68a}
+#ini-bar b{color:#fff}#ini-bar s{opacity:.7;margin-right:2px}#ini-bar .ini-bar-pr{color:#fde68a}
 #ini-bar em{font-style:normal;font-size:11px;font-weight:800;background:#f43f5e;color:#fff;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:1px}
 #ini-bar [data-ini-go]{flex:0 0 auto;border:0;background:#fbbf24;color:#1e1b4b;font-weight:800;font-size:13px;font-family:inherit;border-radius:999px;padding:7px 14px;cursor:pointer}
 #ini-bar .ini-bar-c{flex:0 0 auto;border:0;background:rgba(255,255,255,.15);color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:12px}
@@ -10491,6 +10493,7 @@ body.dp-ini #offerBanner{display:none!important}
 .ini-plan-b{border:0;background:#fbbf24;color:#1e1b4b;font-weight:800;font-size:14.5px;font-family:inherit;border-radius:12px;padding:11px 18px;cursor:pointer}
 @media (max-width:640px){.ini-plan{flex-direction:column;align-items:stretch;text-align:left}.ini-plan-r{text-align:left}.ini-plan-b{width:100%}}
 .ini-pw-p{margin:0 0 10px;font-size:16px;color:#6b7280}.ini-pw-p b{font-size:30px;font-weight:800;color:#1e1b4b}.ini-pw-p em{display:block;font-style:normal;font-size:12.5px;font-weight:800;color:#be123c;margin-top:2px}
+@media (max-width:640px){.io-sk{grid-template-columns:1fr!important}.io-sk canvas{max-width:260px}}
 .ini-lock{position:relative}
 .ini-sk{display:grid;gap:10px;filter:blur(3px);opacity:.75;pointer-events:none;user-select:none}
 .ini-sk div{height:64px;border-radius:16px;background:linear-gradient(90deg,#eef2ff,#f5f5ff,#eef2ff);border:1px solid #e0e7ff}
@@ -10517,7 +10520,7 @@ body.dp-ini #offerBanner{display:none!important}
 var FN="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/dp-inicet";
 var ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys";
 var RZP_KEY="rzp_live_TfrVp5WBEyPS7y";
-var ST={price:129900,list:249900,unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:"",vw:"seat"};
+var ST={price:129900,list:249900,banner:{on:true,text:"🎯 INI-CET pre-paper offer · INI-CET Pass {was} {price} {off}"},unlocked:false,signed:false,data:null,loading:false,err:"",tab:"me",rank:"",cat:"UR",pw:false,ip:false,inst:false,course:0,lim:40,fB:"",fI:"",fS:"",fC:"",mb:"",vw:"seat"};
 try{var sv=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");["rank","cat","pw","ip","inst","course","mb","vw"].forEach(function(k){if(k in sv)ST[k]=sv[k];});}catch(e){}
 function save(){try{localStorage.setItem("dp_ini_f",JSON.stringify({rank:ST.rank,cat:ST.cat,pw:ST.pw,ip:ST.ip,inst:ST.inst,course:ST.course,mb:ST.mb,vw:ST.vw}));}catch(e){}}
 function SB(){try{return typeof sb!=="undefined"&&sb?sb:null;}catch(e){return null;}}
@@ -10578,12 +10581,15 @@ function buy(btn){var S=SB();ST.err="";
   .catch(function(e){ST.err=e.message;btn.disabled=false;render();});};
  if(!S||!S.auth){ST.err="Please wait a second for the page to load, then try again.";render();return;}
  S.auth.getSession().then(function(r){var u=r&&r.data&&r.data.session&&r.data.session.user;if(!u){try{sessionStorage.setItem("dp_ini_buy","1");}catch(e){}if(window.hnSignIn)hnSignIn();else ST.err="Please sign in first (top right), then tap the button again.";render();return;}go(u);});}
+function banHtml(t){var h=esc(t||"");var i=h.indexOf(" · ");if(i>0)h="<b>"+h.slice(0,i)+"</b>"+h.slice(i);
+ return h.replace(/\{was\}/g,ST.list>ST.price?"<s>"+inr(ST.list)+"</s>":"").replace(/\{price\}/g,'<b class="ini-bar-pr">'+inr(ST.price)+"</b>").replace(/\{off\}/g,off()?"<em>"+off()+"% off</em>":"").replace(/\s{2,}/g," ");}
+function pubLoad(){return fetch("https://uwrwtttkqywsmehexmbf.supabase.co/rest/v1/rpc/inicet_public",{method:"POST",headers:{apikey:ANON,Authorization:"Bearer "+ANON,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d)return;if(d.price_paise)ST.price=+d.price_paise;if(d.list_paise!=null)ST.list=+d.list_paise;if(d.banner)ST.banner=d.banner;paintPromos();if(document.body.classList.contains("dp-ini"))render();}).catch(function(){});}
 function pHtml(){return (ST.list>ST.price?"<s>"+inr(ST.list)+"</s> ":"")+"<b>"+inr(ST.price)+"</b>";}
 function off(){return ST.list>ST.price?Math.round(100*(1-ST.price/ST.list)):0;}
 function paintPromos(){document.querySelectorAll("[data-ini-price]").forEach(function(e){e.innerHTML=pHtml();});document.querySelectorAll("[data-ini-off]").forEach(function(e){var o=off();e.textContent=o?o+"% off":"";e.style.display=o?"":"none";});
- var bar=document.getElementById("ini-bar");if(bar){var ini=document.body.classList.contains("dp-ini");bar.style.display=(ST.unlocked||bar.__x)?"none":"";var c=bar.querySelector("[data-ini-go]");if(c)c.textContent=ini?"Get the pass":"Open INI-CET";}}
+ var bar=document.getElementById("ini-bar");if(bar){var ini=document.body.classList.contains("dp-ini");bar.style.display=(ST.unlocked||bar.__x||ST.banner.on===false)?"none":"";var bt=bar.querySelector(".ini-bar-t");if(bt)bt.innerHTML=banHtml(ST.banner.text);var c=bar.querySelector("[data-ini-go]");if(c)c.textContent=ini?"Get the pass":"Open INI-CET";}}
 function mkPromos(){if(!document.getElementById("ini-bar")){var ob=document.getElementById("offerBanner"),hd=document.querySelector("header");var host=ob||hd;if(host){var b=document.createElement("div");b.id="ini-bar";b.setAttribute("role","region");b.setAttribute("aria-label","INI-CET offer");
-  b.innerHTML='<span class="ini-bar-t"><b>🎯 INI-CET pre-paper offer</b><span class="ini-bar-x"> · INI-CET Pass</span> <span data-ini-price>'+pHtml()+'</span><em data-ini-off></em><span class="ini-bar-x"> · every AIIMS, JIPMER, PGIMER closing rank</span></span><button type="button" data-ini-go>Open INI-CET</button><button type="button" class="ini-bar-c" aria-label="Hide">✕</button>';
+  b.innerHTML='<span class="ini-bar-t"></span><button type="button" data-ini-go>Open INI-CET</button><button type="button" class="ini-bar-c" aria-label="Hide">✕</button>';
   b.querySelector("[data-ini-go]").onclick=function(){var ini=document.body.classList.contains("dp-ini");if(!ini)setExam("inicet");var t=ini?document.querySelector("#ini-sec [data-buy]")||document.getElementById("ini-sec"):null;if(t)t.scrollIntoView({behavior:"smooth",block:"center"});else window.scrollTo({top:0,behavior:"smooth"});try{if(window.gtag)gtag("event","inicet_banner",{mode:ini?"inicet":"neetpg"});}catch(e){}};
   b.querySelector(".ini-bar-c").onclick=function(){b.__x=1;b.style.display="none";try{sessionStorage.setItem("dp_ini_bar_x","1");}catch(e){}};
   try{if(sessionStorage.getItem("dp_ini_bar_x"))b.__x=1;}catch(e){}
@@ -10661,6 +10667,56 @@ function viewColleges(L){var D=ST.data,by={},rank=parseInt(ST.rank,10)||0;L.forE
    (q.length?'<div class="ini-cc-q">'+q.map(function(t){return "<span>"+esc(t)+"</span>";}).join("")+"</div>":"")+
    '<div class="ini-cc-l">'+A.slice(0,4).map(function(z){var p=z.ch?CH[z.ch]:null;return '<div><span>'+esc(D.br[z.b])+"</span>"+(p?'<span class="ini-p '+p[1]+'">'+z.pc+"%</span>":"<b>"+num(z.last)+"</b>")+"</div>";}).join("")+
    (A.length>4?'<div class="ini-cc-more">+'+(A.length-4)+" more branches</div>":"")+"</div></div>";}).join("")+"</div>";}
+
+// ---------- owner: Control Center > INI-CET Pass (price, struck price, banner, share kit) ----------
+var OW={msg:null,busy:false};
+function owShareText(){var o=off();return "🎯 INI-CET pre-paper offer\n\nWhich INI-CET seat can your rank get? DocPulsee's INI-CET Pass has every seat allotment from the official AIIMS results (Jan 2024 to Jul 2026, 23 institutes: AIIMS, JIPMER, PGIMER, NIMHANS, SCTIMST), your % chance for every branch, and fees, stipend and leaving penalty for each institute.\n\n"+(ST.list>ST.price?"~"+inr(ST.list)+"~ ":"")+"*"+inr(ST.price)+"*"+(o?" ("+o+"% off before the paper)":"")+"\n\n👉 https://docpulsee.in/?exam=inicet";}
+function owPoster(cv){var W=1080,H=1350,c=cv.getContext("2d");cv.width=W;cv.height=H;var g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,"#1e1b4b");g.addColorStop(.6,"#312e81");g.addColorStop(1,"#4338ca");c.fillStyle=g;c.fillRect(0,0,W,H);
+ c.globalAlpha=.18;c.fillStyle="#a5b4fc";c.beginPath();c.arc(W-120,140,260,0,7);c.fill();c.beginPath();c.arc(80,H-120,200,0,7);c.fill();c.globalAlpha=1;
+ var F='-apple-system,"SF Pro Display","Segoe UI",Inter,Roboto,Arial,sans-serif';function t(x,y,s,w,col,txt,al){c.font=w+" "+s+"px "+F;c.fillStyle=col;c.textAlign=al||"left";c.fillText(txt,x,y);}
+ function pill(x,y,txt,bg,fg,s){c.font="800 "+s+"px "+F;var w=c.measureText(txt).width+s*1.4,h=s*1.9;c.fillStyle=bg;c.beginPath();c.roundRect?c.roundRect(x,y,w,h,h/2):c.rect(x,y,w,h);c.fill();c.fillStyle=fg;c.textAlign="left";c.fillText(txt,x+s*.7,y+h*.68);return w;}
+ t(80,120,44,"800","#ffffff","docpulsee");pill(80,170,"INI-CET  ·  PRE-PAPER OFFER","rgba(255,255,255,.16)","#e0e7ff",30);
+ ["Which INI-CET seat","can your rank get?"].forEach(function(l,i){t(80,340+i*96,84,"800","#ffffff",l);});
+ t(80,500,34,"500","#c7d2fe","Every seat from the official AIIMS results");t(80,548,34,"500","#c7d2fe","Jan 2024 → Jul 2026 · 23 institutes");
+ var y=700;if(ST.list>ST.price){t(80,y,56,"700","rgba(224,231,255,.7)",inr(ST.list));c.font="700 56px "+F;var sw=c.measureText(inr(ST.list)).width;c.strokeStyle="rgba(224,231,255,.85)";c.lineWidth=5;c.beginPath();c.moveTo(76,y-18);c.lineTo(84+sw,y-18);c.stroke();}
+ t(80,y+130,150,"900","#fde68a",inr(ST.price));if(off()){c.font="900 150px "+F;var pw=c.measureText(inr(ST.price)).width;pill(110+pw,y+40,off()+"% OFF","#f43f5e","#ffffff",40);}
+ ["✓  Your % chance for every branch & institute","✓  Every round, every category, PwBD, IP / INST","✓  Fees, stipend (~₹1.1–1.3 L/mo) & leaving bond"].forEach(function(l,i){t(80,960+i*64,36,"600","#e0e7ff",l);});
+ c.fillStyle="#fbbf24";c.beginPath();c.roundRect?c.roundRect(80,1170,W-160,110,30):c.rect(80,1170,W-160,110);c.fill();t(W/2,1242,44,"800","#1e1b4b","docpulsee.in  →  tap INI-CET","center");}
+window.dpIniOwn={html:function(){var b=ST.banner||{};
+  return (OW.msg?'<div class="cc-msg'+(OW.msg.bad?" bad":"")+'">'+(OW.msg.bad?"⚠️ ":"✓ ")+esc(OW.msg.t)+"</div>":"")+
+  '<div class="cc-gh"><span>Price</span></div><div class="cc-g">'+
+   '<div class="cc-r"><span class="t"><b>INI-CET Pass price</b><small>What students pay (Razorpay + payment check use this)</small></span><label class="cc-in"><span>₹</span><input inputmode="numeric" data-io="price" value="'+Math.round(ST.price/100)+'"></label></div>'+
+   '<div class="cc-r"><span class="t"><b>Struck-out price</b><small>Shown crossed out (0 = none)</small></span><label class="cc-in"><span>₹</span><input inputmode="numeric" data-io="list" value="'+Math.round(ST.list/100)+'"></label></div></div>'+
+  '<div class="cc-gh"><span>Banner</span></div><div class="cc-g" style="padding:12px 14px">'+
+   '<label style="display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;margin-bottom:10px"><input type="checkbox" data-io="on"'+(b.on!==false?" checked":"")+'> Show the INI-CET banner on the site</label>'+
+   '<textarea data-io="text" rows="2" maxlength="220" style="width:100%;border:1px solid #d6dfdb;border-radius:10px;padding:9px 11px;font:inherit;font-size:14px">'+esc(b.text||"")+'</textarea>'+
+   '<div style="font-size:12px;color:#6b7a75;margin:6px 0 10px">Tap to add: <button type="button" data-io-tok="{was}" style="color:#4338ca;font-weight:700">{was}</button> struck price · <button type="button" data-io-tok="{price}" style="color:#4338ca;font-weight:700">{price}</button> price · <button type="button" data-io-tok="{off}" style="color:#4338ca;font-weight:700">{off}</button> % off. Text before the first “ · ” shows in bold.</div>'+
+   '<div data-io-prev style="border-radius:12px;overflow:hidden"></div></div>'+
+  '<button type="button" class="cc-big" data-io-save'+(OW.busy?" disabled":"")+'>'+(OW.busy?"Saving…":"Save price & banner")+'</button>'+
+  '<div class="cc-gh"><span>Share kit</span></div><div class="cc-g" style="padding:12px 14px"><div style="display:grid;grid-template-columns:minmax(0,220px) 1fr;gap:14px;align-items:start" class="io-sk">'+
+   '<canvas data-io-cv style="width:100%;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.15)"></canvas><div><textarea data-io-msg rows="10" style="width:100%;border:1px solid #d6dfdb;border-radius:10px;padding:9px 11px;font:inherit;font-size:13px">'+esc(owShareText())+'</textarea>'+
+   '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">'+[["copy","Copy message"],["dl","Download poster"],["share","Share poster + message"],["wa","WhatsApp"],["tg","Telegram"]].map(function(a){return '<button type="button" data-io-act="'+a[0]+'" style="border:1px solid #c7d2fe;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;color:#3730a3;background:#fff">'+a[1]+"</button>";}).join("")+'</div><div data-io-note style="font-size:12px;color:#6b7a75;margin-top:6px"></div></div></div></div>'+
+  '<div class="cc-note">Prices change for students straight away, including the payment check. The banner shows under the main offer banner and on the INI-CET tab.</div>';},
+ wire:function(w){var q=function(s){return w.querySelector(s);},prev=q("[data-io-prev]");
+  function draft(){return {price:Math.round(+q('[data-io="price"]').value||0),list:Math.round(+q('[data-io="list"]').value||0),on:q('[data-io="on"]').checked,text:q('[data-io="text"]').value};}
+  function pv(){var d=draft(),sv={p:ST.price,l:ST.list};ST.price=d.price*100;ST.list=d.list*100;prev.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:linear-gradient(90deg,#1e1b4b,#4338ca 55%,#6d28d9);color:#e0e7ff;font-size:13px;opacity:'+(d.on?1:.45)+'"><span style="flex:1">'+banHtml(d.text).replace(/<em>/g,'<em style="font-style:normal;font-size:11px;font-weight:800;background:#f43f5e;color:#fff;border-radius:6px;padding:2px 6px;margin-left:6px">').replace(/class="ini-bar-pr"/g,'style="color:#fde68a"')+'</span><span style="background:#fbbf24;color:#1e1b4b;font-weight:800;border-radius:999px;padding:6px 12px;font-size:12px">Open INI-CET</span></div>';ST.price=sv.p;ST.list=sv.l;}
+  pv();["price","list","on","text"].forEach(function(k){var e=q('[data-io="'+k+'"]');e.addEventListener("input",pv);e.addEventListener("change",pv);});
+  [].forEach.call(w.querySelectorAll("[data-io-tok]"),function(b){b.onclick=function(){var ta=q('[data-io="text"]'),tk=b.getAttribute("data-io-tok"),a=ta.selectionStart||ta.value.length;ta.value=ta.value.slice(0,a)+(a&&ta.value[a-1]!==" "?" ":"")+tk+" "+ta.value.slice(ta.selectionEnd||a);ta.focus();pv();};});
+  var cv=q("[data-io-cv]");try{owPoster(cv);}catch(e){}
+  q("[data-io-save]").onclick=function(){var d=draft();if(!(d.price>=99)){OW.msg={bad:1,t:"Enter a price of at least ₹99."};window.dpIniOwn.rerender();return;}
+   if(!confirm("Publish INI-CET Pass?\n\nPrice: "+inr(ST.price)+" → ₹"+d.price.toLocaleString("en-IN")+"\nStruck-out: "+(ST.list?inr(ST.list):"none")+" → "+(d.list?"₹"+d.list.toLocaleString("en-IN"):"none")+"\nBanner: "+(d.on?"on":"off")))return;
+   OW.busy=true;window.dpIniOwn.rerender();call({action:"owner_set",price_rupees:d.price,list_rupees:d.list,banner_on:d.on,banner_text:d.text}).then(function(r){if(!r||!r.ok)throw new Error((r&&r.error)||"Couldn't save");ST.price=r.price_paise;ST.list=r.list_paise;ST.banner=r.banner;OW.msg={t:"Published. Students see "+inr(ST.price)+" now."};paintPromos();render();})
+   .catch(function(e){OW.msg={bad:1,t:e.message}}).then(function(){OW.busy=false;window.dpIniOwn.rerender();});};
+  var note=q("[data-io-note]");function msg(){return q("[data-io-msg]").value;}
+  function blob(){return new Promise(function(res){cv.toBlob(res,"image/png");});}
+  [].forEach.call(w.querySelectorAll("[data-io-act]"),function(b){b.onclick=function(){var a=b.getAttribute("data-io-act");
+   if(a==="copy"){(navigator.clipboard?navigator.clipboard.writeText(msg()):Promise.reject()).then(function(){note.textContent="Copied.";}).catch(function(){q("[data-io-msg]").select();document.execCommand("copy");note.textContent="Copied.";});}
+   else if(a==="dl"){var l=document.createElement("a");l.download="docpulsee-inicet-pass.png";l.href=cv.toDataURL("image/png");l.click();note.textContent="Poster downloaded.";}
+   else if(a==="share"){blob().then(function(bl){var f=new File([bl],"docpulsee-inicet-pass.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]}))return navigator.share({files:[f],text:msg()});if(navigator.share)return navigator.share({text:msg()});throw new Error("Sharing isn't supported here. Use Download + Copy.");}).then(function(){note.textContent="";}).catch(function(e){if(e&&e.name!=="AbortError")note.textContent=e.message;});}
+   else if(a==="wa")window.open("https://wa.me/?text="+encodeURIComponent(msg()),"_blank");
+   else if(a==="tg")window.open("https://t.me/share/url?url="+encodeURIComponent("https://docpulsee.in/?exam=inicet")+"&text="+encodeURIComponent(msg().replace(/\n*👉 https:\/\/docpulsee\.in\/\?exam=inicet\s*$/,"")),"_blank");};});},
+ rerender:function(){if(window.dpCcRender)window.dpCcRender();},
+ load:function(){return pubLoad();}};
 // ---------- views ----------
 function brSel(){var D=ST.data,u={};D.rows.forEach(function(r){if(r[2]===ST.course)u[r[4]]=1;});
  return '<select id="ini-mb" aria-label="Branch"><option value="">All branches</option>'+D.br.map(function(n,i){return u[i]?'<option value="'+i+'"'+(String(i)===ST.mb?" selected":"")+">"+esc(n)+"</option>":"";}).join("")+"</select>";}
@@ -10723,7 +10779,7 @@ document.addEventListener("change",function(e){var s=document.getElementById("in
  else if(t.getAttribute("data-f"))ST[t.getAttribute("data-f")]=t.value;else return;ST.lim=40;save();render();});
 // re-check after sign in (Google sign-in may come back to this page)
 function watchAuth(){var S=SB();if(!S||!S.auth||watchAuth.on)return;watchAuth.on=1;S.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="SIGNED_OUT"){if(ev==="SIGNED_OUT"){ST.data=null;ST.unlocked=false;}stP=null;if(document.body.classList.contains("dp-ini"))status(true);}});}
-function boot(){if(!mount())return false;setExam(exam());window.addEventListener("resize",function(){document.querySelectorAll(".ini-sw").forEach(paintSw);});
+function boot(){if(!mount())return false;pubLoad();setExam(exam());window.addEventListener("resize",function(){document.querySelectorAll(".ini-sw").forEach(paintSw);});
  var t=0,iv=setInterval(function(){t++;mount();document.querySelectorAll(".ini-sw").forEach(paintSw);if(SB()&&!watchAuth.on){watchAuth();if(document.body.classList.contains("dp-ini")&&!ST.unlocked)status(true);}if(t>20)clearInterval(iv);},700);return true;}
 if(!boot()){var n=0,iv=setInterval(function(){if(boot()||++n>40)clearInterval(iv);},250);}
 })();</script></body>
