@@ -10589,11 +10589,12 @@ function rowTable(rows){var D=ST.data;rows=rows.slice().sort(function(a,b){retur
  rows.map(function(r){return "<tr><td>"+D.sessions[r[0]]+"</td><td>"+(RN[r[1]]||r[1])+"</td><td>"+esc(r[5])+(r[6]?" PwBD":"")+'</td><td class="n op">'+num(r[7])+'</td><td class="n">'+num(r[8])+'</td><td class="n">'+r[9]+"</td></tr>";}).join("")+"</tbody></table></div>";}
 
 function bestFirst(a,b){var A=a.pc>=55,B=b.pc>=55;return (B-A)||(A?a.exp-b.exp:b.pc-a.pc||a.exp-b.exp);}
+function rng(r){return "\u20B9"+(r[0]/1e5).toFixed(2).replace(/0$/,"")+"\u2013"+(r[1]/1e5).toFixed(2).replace(/0$/,"")+" L";}
 function lakh(v){v=Number(v);return v>=1e5?"\u20B9"+(v/1e5).toFixed(v%1e5?1:0).replace(/\.0$/,"")+" L":"\u20B9"+num(v);}
 function leaveShort(t){if(!t)return null;var m=(t.match(/Rs\.?\s?[\d,]+/g)||[]).map(function(x){return Number(x.replace(/[^\d]/g,""));}).filter(function(n){return n>=10000;});if(!m.length)return null;var a=Math.min.apply(null,m),b=Math.max.apply(null,m);return a===b?lakh(a):lakh(a).replace(" L","")+"\u2013"+lakh(b).replace("\u20B9","");}
 function tiles(i){var D=ST.data,x=D.I[D.inst[i]]||{},t=[];
  if(x.fees_total_inr)t.push(["Fees",lakh(x.fees_total_inr),x.type==="JIPMER"?"first year":x.type==="NIMHANS"?"tuition":"whole course"]);
- if(x.pay_entry_inr)t.push(["Stipend",lakh(x.pay_entry_inr),"a month + allowances"]);
+ var pr=x.pay_range_inr;if(pr)t.push(["Stipend","~"+rng(pr),"a month in hand"]);else if(x.pay_entry_inr)t.push(["Stipend",lakh(x.pay_entry_inr),"basic + allowances"]);
  var l=leaveShort(x.leaving_note);if(l)t.push(["If you leave",l,"penalty / bond"]);
  var nb={};D.rows.forEach(function(r){if(r[3]===i)nb[r[2]+"|"+r[4]]=1;});t.push(["Branches",String(Object.keys(nb).length),"in INI-CET"]);
  return '<div class="ini-tl">'+t.map(function(a){return "<div><small>"+a[0]+"</small><b>"+a[1]+"</b><em>"+a[2]+"</em></div>";}).join("")+"</div>";}
@@ -10623,7 +10624,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeInst();
 function viewColleges(L){var D=ST.data,by={},rank=parseInt(ST.rank,10)||0;L.forEach(function(x){(by[x.i]=by[x.i]||[]).push(x);});
  var ks=Object.keys(by).map(Number);ks.sort(function(a,b){var A=by[a],B=by[b];if(rank){var sa=A.filter(function(x){return x.pc>=55;}).length,sb=B.filter(function(x){return x.pc>=55;}).length;return sb-sa||Math.max.apply(null,B.map(function(x){return x.pc;}))-Math.max.apply(null,A.map(function(x){return x.pc;}));}return Math.min.apply(null,A.map(function(x){return x.last;}))-Math.min.apply(null,B.map(function(x){return x.last;}));});
  return '<div class="ini-l">'+ks.map(function(i){var A=by[i].slice().sort(function(a,b){return rank?bestFirst(a,b):(a.last-b.last);}),x=D.I[D.inst[i]]||{};
-  var q=[];if(x.fees_total_inr)q.push("Fees "+lakh(x.fees_total_inr));if(x.pay_entry_inr)q.push("Stipend "+lakh(x.pay_entry_inr)+"/mo");var l=leaveShort(x.leaving_note);if(l)q.push("Leave "+l);
+  var q=[];if(x.fees_total_inr)q.push("Fees "+lakh(x.fees_total_inr));if(x.pay_range_inr)q.push("Stipend ~"+rng(x.pay_range_inr)+"/mo");else if(x.pay_entry_inr)q.push("Basic "+lakh(x.pay_entry_inr)+"/mo");var l=leaveShort(x.leaving_note);if(l)q.push("Leave "+l);
   return '<div class="ini-cc" data-inst="'+i+'" tabindex="0" role="button"><div class="ini-cc-h"><div><div class="b">'+esc(D.iname[i])+'</div><div class="i">'+esc([x.city,x.state].filter(Boolean).join(", "))+'</div></div><span class="ini-cc-n">'+A.length+" branch"+(A.length>1?"es":"")+" \u203A</span></div>"+
    (q.length?'<div class="ini-cc-q">'+q.map(function(t){return "<span>"+esc(t)+"</span>";}).join("")+"</div>":"")+
    '<div class="ini-cc-l">'+A.slice(0,4).map(function(z){var p=z.ch?CH[z.ch]:null;return '<div><span>'+esc(D.br[z.b])+"</span>"+(p?'<span class="ini-p '+p[1]+'">'+z.pc+"%</span>":"<b>"+num(z.last)+"</b>")+"</div>";}).join("")+
