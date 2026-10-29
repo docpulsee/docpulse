@@ -10784,5 +10784,90 @@ function wrap(){var S=window.hxScrollTo;if(typeof S!=="function"||S.__inifix)ret
  W.__inifix=1;window.hxScrollTo=W;return true;}
 if(!wrap()){var n=0,iv=setInterval(function(){if(wrap()||++n>30)clearInterval(iv);},300);}
 })();
+</script><style id="dp-iniidc">
+.iic-scrim{position:fixed;inset:0;z-index:10060;display:grid;place-items:center;padding:16px;background:rgba(15,10,60,.62);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.iic-card{position:relative;width:min(380px,100%);max-height:calc(100vh - 32px);display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:#fff;color:#1e1b4b;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:inherit}
+.iic-hd{padding:18px 18px 16px;background:linear-gradient(135deg,#1e1b4b,#4338ca 60%,#6d28d9);color:#fff;position:relative}
+.iic-hd .b{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.iic-hd .k{font-size:15px;font-weight:800;margin-top:2px}
+.iic-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer}
+.iic-who{display:flex;gap:12px;align-items:center;margin-top:14px}
+.iic-av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2);font-weight:800;font-size:16px;flex:none}
+.iic-who b{display:block;font-size:16px}.iic-who span{font-size:12.5px;opacity:.85}
+.iic-rk{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.iic-rk div{background:rgba(255,255,255,.14);border-radius:12px;padding:8px 10px}
+.iic-rk small{display:block;font-size:11px;opacity:.8}.iic-rk b{font-size:16px}
+.iic-bd{overflow:auto;padding:14px 16px 16px;-webkit-overflow-scrolling:touch}
+.iic-next{border-radius:14px;background:#eef2ff;padding:10px 12px;margin-bottom:12px;font-size:13.5px}
+.iic-next b{color:#3730a3}
+.iic-h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#4338ca;margin:14px 0 6px}
+.iic-tl{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.iic-tl li{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #f1f0fb;font-size:13.5px;line-height:1.4}
+.iic-tl li .d{font-weight:800;color:#1e1b4b;font-size:12.5px}
+.iic-tl li.done{opacity:.55}.iic-tl li.done .d::after{content:" ✓";color:#059669}
+.iic-tl li.nx{background:#fef9c3;border-radius:10px;padding:8px;margin:0 -8px}
+.iic-tl li small{display:block;color:#6b7280;font-size:12px}
+.iic-ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.5;color:#1f2937}
+.iic-ul li{margin:3px 0}
+.iic-src{font-size:11.5px;color:#6b7280;margin-top:12px;line-height:1.4}
+@media (prefers-color-scheme:dark){.iic-card{background:#16142e;color:#e0e7ff}.iic-tl li .d{color:#e0e7ff}.iic-tl li{border-color:#2a2750}.iic-next{background:#25215a}.iic-next b{color:#c7d2fe}.iic-ul{color:#e5e7eb}.iic-tl li.nx{background:#3b3412}.iic-h{color:#a5b4fc}}
+</style>
+<script id="dp-iniidc-js">
+(function(){
+var TL=[
+ ["2026-10-13","13 Oct 2026","Category certificates uploaded with registration","SC / ST / OBC(NCL) / EWS / PwBD / OCI card, by 5 pm"],
+ ["2026-10-30","30 Oct 2026","Sponsorship certificate (sponsored candidates)","Uploaded in Completion of Application, by 5 pm. Foreign nationals: application with Health Ministry NOC must reach AIIMS by the same time"],
+ ["2026-11-01","1 Nov 2026","INI-CET exam","Computer-based test, cities all over India"],
+ ["2026-11-07","7 Nov 2026","Result (expected)",""],
+ ["","Awaited","Seat allocation: mock round, Round 1, Round 2, open round","AIIMS will notify the dates separately"],
+ ["","At reporting","Original documents checked at the allotted institute","After your seat is allotted. Any mismatch can cancel the seat"],
+ ["2026-12-31","31 Dec 2026","Sponsored: 3 years' service needed by this date for JIPMER and PGIMER",""],
+ ["2027-01-01","1 Jan 2027","Courses start",""],
+ ["2027-01-31","31 Jan 2027","Internship must be complete (all INIs)","Also the 3-year service date for sponsored candidates at AIIMS, SCTIMST and NIMHANS"],
+ ["2027-02-28","28 Feb 2027","Last date of admission",""]];
+var CATS={UR:"General",OBC:"OBC",EWS:"EWS",SC:"SC",ST:"ST"};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function today(){var d=new Date(Date.now()+330*60000);return d.toISOString().slice(0,10);}
+function me(){var f={};try{f=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");}catch(e){}return f;}
+function nameOf(cb){try{var S=typeof sb!=="undefined"&&sb?sb:null;if(S&&S.auth){S.auth.getSession().then(function(r){var u=r&&r.data&&r.data.session&&r.data.session.user;var m=u&&u.user_metadata||{};cb(m.full_name||m.name||(u&&u.email?u.email.split("@")[0]:""));}).catch(function(){cb("");});return;}}catch(e){}cb("");}
+function close(){var o=document.querySelector(".iic-scrim");if(o){o.remove();document.documentElement.style.overflow="";}document.removeEventListener("keydown",onKey);}
+function onKey(e){if(e.key==="Escape")close();}
+function open(){if(document.querySelector(".iic-scrim"))return;nameOf(function(nm){
+ var f=me(),t=today(),rk=parseInt(f.rank,10)>0?Number(f.rank).toLocaleString("en-IN"):"Not added",cat=CATS[f.cat]||"General";
+ var who=nm||"INI-CET aspirant",ini=who.split(/[\s._-]+/).filter(Boolean).slice(0,2).map(function(w){return w[0].toUpperCase();}).join("")||"Dr";
+ var nxi=-1;TL.forEach(function(x,i){if(nxi<0&&(!x[0]||x[0]>=t))nxi=i;});
+ var nx=TL[nxi];
+ var rows=TL.map(function(x,i){var cls=x[0]&&x[0]<t?"done":(i===nxi?"nx":"");return '<li class="'+cls+'"><span class="d">'+esc(x[1])+'</span><span>'+esc(x[2])+(x[3]?'<small>'+esc(x[3])+'</small>':'')+'</span></li>';}).join("");
+ var o=document.createElement("div");o.className="iic-scrim";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label","Your INI-CET counselling ID card");o.setAttribute("data-iic","1");
+ o.innerHTML='<div class="iic-card"><div class="iic-hd"><div class="b">DocPulsee</div><div class="k">INI-CET January 2027 counselling ID</div><button type="button" class="iic-x" aria-label="Close">✕</button>'+
+  '<div class="iic-who"><div class="iic-av" aria-hidden="true">'+esc(ini)+'</div><div><b>'+esc(who)+'</b><span>AIIMS · JIPMER · PGIMER · NIMHANS · SCTIMST</span></div></div>'+
+  '<div class="iic-rk"><div><small>INI-CET rank</small><b>'+esc(rk)+'</b></div><div><small>Category</small><b>'+esc(cat)+'</b></div></div></div>'+
+  '<div class="iic-bd">'+(nx?'<div class="iic-next">Next: <b>'+esc(nx[1])+'</b> · '+esc(nx[2])+'</div>':'')+
+  '<div class="iic-h">Dates and document deadlines</div><ul class="iic-tl">'+rows+'</ul>'+
+  '<div class="iic-h">Certificate date rules</div><ul class="iic-ul">'+
+  '<li><b>OBC (NCL):</b> central-list format, issued 1 Apr to 13 Oct 2026, valid for FY 2026-27. A state-list OBC certificate is rejected. Not renewed yet? Upload the older one with the renewal acknowledgement slip and show the valid one when asked.</li>'+
+  '<li><b>EWS:</b> central-government format, on FY 2025-26 income, issued 1 Apr to 13 Oct 2026.</li>'+
+  '<li><b>PwBD:</b> benchmark disability of 40% or more.</li></ul>'+
+  '<div class="iic-h">Originals to carry at reporting</div><ul class="iic-ul">'+
+  '<li>MBBS / BDS degree and marksheets (the aggregate marks you entered are checked)</li>'+
+  '<li>Internship completion certificate (internship done by 31 Jan 2027)</li>'+
+  '<li>The original of every category / PwBD certificate you uploaded</li>'+
+  '<li>Sponsored: original sponsorship certificate (without it the seat is cancelled)</li>'+
+  '<li>OCI card or Health Ministry NOC, if it applies to you</li>'+
+  '<li>Anything extra your institute asks for in its Part B prospectus</li></ul>'+
+  '<div class="iic-src">Source: INI-CET January 2027 Prospectus, Part A (AIIMS New Delhi), Important Dates and eligibility notes. Seat allocation dates are not out yet; check aiimsexams.ac.in.</div></div></div>';
+ o.addEventListener("click",function(e){if(e.target===o||e.target.closest(".iic-x"))close();});
+ document.body.appendChild(o);document.documentElement.style.overflow="hidden";document.addEventListener("keydown",onKey);
+ try{o.querySelector(".iic-x").focus();}catch(e){}
+ try{if(window.gtag)gtag("event","inicet_idcard_open");}catch(e){}
+});}
+document.addEventListener("click",function(e){
+ if(!document.body.classList.contains("dp-ini"))return;
+ var t=e.target&&e.target.closest&&e.target.closest("[data-idc-open]");
+ if(!t)return;
+ e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();open();
+},true);
+window.dpOpenIniCard=open;
+})();
 </script></body>
 </html>
