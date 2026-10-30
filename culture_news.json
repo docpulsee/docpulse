@@ -1,5 +1,5 @@
 {
-"v": "2026-10-27",
+"v": "2026-10-30",
 "n": 18,
 "items": [
 {
@@ -23,6 +23,17 @@
 "d": "Apr 2026",
 "u": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQcUE3VUtZNWhWYnVsU1VROVBBYkNmQzA5UmdpcS1YRlBhY19IN01KMUtKanJ0NHl1OUJhTFM5bllKeF9yVmpxTVBwd2NjRUdLM2VYZnRnNTBrdnNCa3VGdDZaRUF3MENzUDY1ODZPTnA3VjZLcENEOE1tRFhJdmZUbmE0cmtTZ3NNNU1LaTQ2RHFNa3IwRFBLcHVjV0FtMEplbWtfbVJPcTBUQUM3VU9nM0NYMjA3bExNYllhVUNGZjdvYnh4QTZmaC1GMExTZXUzdTVfTnFB0gHbAUFVX3lxTE5JWGZoR1JtSG1CSFkzdUU1d0F1aEFRTWdrNWlPS3RRV3RWbDV6N1FqSjhwaHVQR3gxek1jTWxnZndkWVZtblhORW5keURPMFdWX1V2a3BzUmM4MTBCbXNXd0tEeEdFRVNTR2tuOW91VE1Db0NKWlBESXpFRzBMNlRSNDdJLVVrNWVEc3NsNEdwakg5QTdFN2hrS1laanZHNk1QOUF1UUlzUDVnY2pHUVlSUWhjNnZpVDZNR2tSMHo0SEZySFVTNmt",
 "id": "news_81380b293037d691"
+},
+{
+"i": "459",
+"b": null,
+"dim": "hours",
+"v": 5,
+"h": "'Junior Doctors forced to work 36-hour shifts at AIIMS Bhubaneswar, AFMC Pune': Doctors demand Immediate...",
+"src": "Medical Dialogues",
+"d": "Jun 2025",
+"u": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQY0I3d3BsSmFrNkxjYXJQTnZTOU41UHdSbTYzQXI3NG5LMHJRdmZyZkpTbm1MTk9mWVRLOUl4ZHpUMERpRFlaMjFERG9BdmhZRUdhaFlRb2FuaVZjaVVHRGxDY1hzSHJRcnhROVphS1hfV1FqU1o2WjU2bjBCdVF3LU9yUWhJTmtGa0hKZmI1dHpRTkJlaHlOTkdpaWZEUTdFRG1nbm0xZzRVa01KRWRUS2pPdldrZFdiLWVJd204YXpXQlpzdHI5NXVoUjZWbXlZTUtrYUJwOTVVdVhvWmhRTFlGN09WanUwMWtfLXBDZUdibGNtMnpETHlQZ3gxSHo00gGGAkFVX3lxTE5nTWhMMUN0SlZKaFZZbmhScnd5SVJOc1VNUW0xS3FVanZPYVRTdjhsM3NhQ0dvSmNLWmcwT1JSTjNoVGhGZlkybUdUYTBKQkxfNW9uV1VrNmtBNzYzRkg5QUxnSWtJRkdzSEVZcDUtR3FqM3ZuenVxYzh1aWxuOUo3VGh4SlBOQ1ZLb3ljWEx0SWdSWGkxanVxLUdrVXJ",
+"id": "news_daf2dbeeed963634"
 },
 {
 "i": "490",
@@ -124,6 +135,17 @@
 "id": "news_17229757784a166e"
 },
 {
+"i": "1025",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "PG doctors at Kollam's Parippally Medical College go on strike over unpaid stipends",
+"src": "Onmanorama",
+"d": "Oct 2026",
+"u": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOTEhBRTJzSlAxRlFrUENTVW92ZThKbFBHeFhNMmpUWnV4eXowV3lRbGh4Um11NV9rZHZjLW91bTYxcTg4S3N4X3lSNzg1VHhjYS1qQTM3ci12b2FRM2syRTM1MWlWaTdfcThPYVRBOXdDZFhwanBqU0ljeGg3LVpSZllFcHdpdG5oQWl5TDk3TEkxdFhVMGlYNlZUbEIzRlhpSEprLXY5dHN4RVFjdjNDMVpZVXc3QmJkbTZZTjVGQU8?oc=5",
+"id": "news_b09e138c672c1f71"
+},
+{
 "i": "1052",
 "b": null,
 "dim": "toxicity",
@@ -166,28 +188,6 @@
 "d": "Jul 2025",
 "u": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPcjdydTFEOHE0ZFpyNnZwZjl4TzdodEpYLUwwNHV2WEFHR3JueVpDVzdrb1FDdWl0WlBsU00wSmRaRVVpOXA5Rm1ndl84T3k0NnN5cDhPWTUtbUZFTDB4MThYS0JVMnZUU3NtYnhocldQMFotRzdYQlFncmVCMTlZMXNuZ3JFWFB2dWNkUkhxVWRxUGJSWGQyNUVLelotVDRzVDJpTHRVM1ZGSklmdFYyeUVrRGdHaFhmckxSVWpPM3pNdjd2NWJpNmtaMGhKbnBSWVFRMExCYWR6ZEk4aERlSzlYZmI3d3l4aGdzdTFES1g3R3doZ05jRUdicjA1NGlrQTl30gGIAkFVX3lxTE5MM3FjWFFRZ1pXZHREQ3o5eUxYWF96UU5QWDNTdW1OanVsTjVpN0t4Yk93TmJYT2x2VV9USjU0VmtOWDRad3U3bUdMYnpEVXpVNUhoRi1lUFVrWnJNb0M0MTZ5S19SNXpEMlBTNVUtYXRVNm9fems2VUkyeTBialJPcTd1eUlqNGdma1hGSk81R3dySXRSUEFYRXB",
 "id": "news_9aff196a0169e464"
-},
-{
-"i": "1440",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Bitter pill: Delhi's MAMC junior doctors say forced to pay for seniors’ meals, undergo ‘murga’ punishment",
-"src": "The Times of India",
-"d": "Mar 2026",
-"u": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQT0I0aUdVbnhScXZJWHBKRlp3TDBzRzRhc3V1VnJsejFEWTFPSnBsX3ZScWpnOHluT28xYUpMeFhhVGRRTS1VeV95R2wzdmtTcmItM3ZJNnlzLVNNQ1R0U3dGdVNwMkZiUDRwOEEwWmlHOVdIYUpvaVVlR1ROQ2F5YklSREI1dExyUmh0aEp5LW12b19YY3V2N18ybGMxZVUyY0lIUzN2TmNQWU94ZDlTM0syRTFHQm53czcxSk13Tllnb3BQS3RYcHZ6blBvbkFqd3EzSDVFTEx5SjBOeHo3cG41dHFSb2E3Rm5qWUFB0gHzAUFVX3lxTE1hNXFkdVBJUTNCTGV6M1dNQ0tWZVNQMXNPVWVsbTZ2dVQ3Yk9QeTdKZldhOWhUSGhOY3Fwb1pTcWtWMWNkU3RvdnJVMUx6YXdhMnJiODJ6Qk9UMFZTSlp2aVlyNFU1anhNUTE0UjZrSFkyeFRFS2lZM0JkS2hydmpiWjNjdWJhdThGMUFVWXJrbVdCRHphQmRuTFphYzJzbGU4TkcxMlZObGdGRkhFMzJ",
-"id": "news_3347bd684bbee6da"
-},
-{
-"i": "1486",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Indore News: PG Student Loses 22 Kg After Severe Harassment By Seniors At MGM Medical College",
-"src": "Free Press Journal",
-"d": "Oct 2025",
-"u": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQVHk4UkdEempEblA4d2Y1NzdLQlpJbE1ueWE3TFNCUTY1UnU5eTU5dk5hRlRqTXdhWlBJQm1qQ2FCUlRVWWdUb0lobXNjeXRYdUx0RVlwWmYzbmRfWjlhSnAwbkIzRTI0eDlXa1dzN2gyc0psVkxZTjVsd0JFX1VVT2Q0TGFRRWtXcXpvdEJpVk91X3pZUE91VF9ESHpDbTAxb1h0djVVcng1ampuT2VQWmVnQ1RwbENrbFBRdjJSS001RHJzNnVZWUllZ9IB0AFBVV95cUxONlJiOTFOcG5HdHd1TnBtZDl2aFdMd3ppVjA3RWwyeUhnVWU0blJxa19kdjlmM0tGRVp4ODlVVDdPVUtZQ0VBalI2ZGI0bG5IU0t3Y2xUYkJKbThsUTlwYXNoUXJOR21RTVhiMlM4TlJaZDhicFN4bFhDN0JndVhXeWtnTXhwZWVVRXpVekg3dkhHUEhzOXc1T0ZzeGlfRHFuY2UzX05OX2ctTjU0SlF6RWRBNEFDQjFnU2VFQ0g2YlRUR1Z3WW5FN2xvRFJ2a1V1?oc",
-"id": "news_5917376a4c932331"
 },
 {
 "i": "1561",
