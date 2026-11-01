@@ -90,6 +90,25 @@ button{font:inherit}
 .lc ul{list-style:none;padding:0;margin:12px 0 16px;text-align:left;display:grid;gap:8px}
 .lc li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}.lc li span{flex:none}
 .lc .soon{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--dim);font-weight:700}
+.sc2{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh);padding:16px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+@media (max-width:700px){.sc2{grid-template-columns:1fr}}
+.sc2-in{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media (max-width:420px){.sc2-in{grid-template-columns:1fr}}
+.sc2-p{background:var(--bg);border-radius:16px;padding:12px}.sc2-p b{font-size:15px}.sc2-p small{display:block;color:var(--dim);font-size:12px;margin-bottom:6px}
+.sc2-p label{display:block;font-size:12.5px;font-weight:700;color:var(--dim);margin-top:8px}.sc2-p output{float:right;color:var(--ink);font-weight:800}
+.sc2-p input[type=range]{width:100%;accent-color:var(--teal);margin-top:4px}
+.sc2-out{border-radius:18px;padding:16px;background:linear-gradient(140deg,#0f6e5c,#178a71);color:#fff;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.sc2-out>*{position:relative;z-index:1}
+.sc2-out:after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,196,110,.55),transparent 70%);z-index:0}
+.sc2-out .big{font:800 46px/1 "Inter Tight",sans-serif}.sc2-out .big small{font-size:18px;opacity:.85}
+.sc2-out .rg{font-size:13px;opacity:.92}
+.sc2-meter{height:12px;border-radius:999px;background:rgba(255,255,255,.22);margin:4px 0 2px}
+.sc2-meter i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#ffd36b,#fff);transition:width .4s}
+.sc2-meter em{position:absolute;left:50%;top:-5px;bottom:-5px;width:2px;background:#fff;opacity:.9}
+.sc2-v{display:inline-block;font-weight:800;font-size:14px;border-radius:999px;padding:5px 12px;background:#fff;color:#0f6e5c;align-self:flex-start}
+.sc2-v.no{color:#c2402f}.sc2-v.mid{color:#8a6400}
+.sc2-out .cta{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.sc2-out .cta a,.sc2-out .cta button{border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:800;font-size:13.5px;cursor:pointer;text-decoration:none;background:#ffd36b;color:#2a1d00}
+.sc2-out .cta .gh{background:rgba(255,255,255,.18);color:#fff}
 .mine{background:linear-gradient(135deg,#fff7dc,#e9f7f1);border:1px solid #f1df9b;border-radius:20px;padding:14px 16px;margin:0 0 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;color:#14201d}.mine b{font-size:15px}.mine small{display:block;color:#5e6b66}
 .one{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--sh)}
 .one-l{display:flex;gap:12px;align-items:center}.one-ic{font-size:30px;width:52px;height:52px;border-radius:16px;background:var(--mint);display:grid;place-items:center}
@@ -136,6 +155,21 @@ footer{margin:48px 0 32px;color:var(--dim);font-size:12.5px;border-top:1px solid
   <div class="cd" id="cd"></div>
   <div class="steth" aria-hidden="true">🩺</div>
  </section>
+
+ <h2 class="fade" id="scH">Free FMGE score checker</h2>
+ <p class="lead fade">Count how many answers you're sure of, and how many were 50-50 guesses, in each part. FMGE has no negative marking: 1 mark per right answer, 150 out of 300 to pass.</p>
+ <div class="sc2 fade" id="sc2">
+  <div class="sc2-in">
+   <div class="sc2-p"><b>Part A</b><small>150 questions</small>
+    <label>Sure correct <output id="oas">0</output><input type="range" id="as" min="0" max="150" value="0"></label>
+    <label>50-50 guesses <output id="oag">0</output><input type="range" id="ag" min="0" max="150" value="0"></label></div>
+   <div class="sc2-p"><b>Part B</b><small>150 questions</small>
+    <label>Sure correct <output id="obs">0</output><input type="range" id="bs" min="0" max="150" value="0"></label>
+    <label>50-50 guesses <output id="obg">0</output><input type="range" id="bg" min="0" max="150" value="0"></label></div>
+  </div>
+  <div class="sc2-out" id="scOut"></div>
+ </div>
+ <p class="note" style="margin-top:8px">An estimate from your own count, not your result. NBEMS publishes the official FMGE October 2026 result (expected by 30 November).</p>
 
  <h2 class="fade">Your road from FMGE to the ward</h2>
  <p class="lead fade">Tick each step as you finish it. Your progress stays on this phone.</p>
@@ -200,6 +234,28 @@ document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 document.querySelectorAll('[data-count]').forEach(el=>{const to=+el.dataset.count,t0=performance.now(),dur=1400;const tick=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);});
 /* countdown to result (NBEMS: by 30 Nov 2026) */
 (function(){const end=new Date('2026-11-30T23:59:59+05:30').getTime(),el=$('#cd');function r(){const ms=end-Date.now();if(ms<=0){el.innerHTML='<span class="lab">🎉 FMGE October 2026 results are due now. Check natboard.edu.in</span>';return;}const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);el.innerHTML='<span class="lab">⏳ Result expected by 30 Nov</span>'+[[d,'days'],[h,'hrs'],[m,'min']].map(([v,l])=>'<div class="box"><b>'+v+'</b><small>'+l+'</small></div>').join('');}r();setInterval(r,30000);})();
+/* FMGE score checker (no negative marking; pass = 150/300) */
+(function(){const ids=['as','ag','bs','bg'];let saved={};try{saved=JSON.parse(localStorage.getItem('dp_fmg_sc')||'{}');}catch(_){}
+ ids.forEach(k=>{const el=$('#'+k);if(saved[k]!=null)el.value=saved[k];el.addEventListener('input',calc);});
+ function cap(sure,guess){const s=$('#'+sure),g=$('#'+guess);if(+s.value+ +g.value>150)g.value=150-s.value;}
+ function calc(){cap('as','ag');cap('bs','bg');const v={};ids.forEach(k=>{v[k]=+$('#'+k).value;$('#o'+k).textContent=v[k];});
+  try{localStorage.setItem('dp_fmg_sc',JSON.stringify(v));}catch(_){}
+  const lo=v.as+v.bs,hi=lo+v.ag+v.bg,ex=Math.round(lo+(v.ag+v.bg)/2),touched=hi>0;
+  let cls='',verdict,tip;
+  if(!touched){verdict='Move the sliders';tip='Start with the answers you are sure of.';}
+  else if(lo>=150){verdict='✅ Very likely pass';tip='Even without any guesses you reach 150. Start planning your internship now.';}
+  else if(ex>=160){verdict='👍 Likely pass';tip='Your expected score is above 150 with some margin.';}
+  else if(ex>=150){verdict='🤞 Borderline, just above';cls='mid';tip='It depends on how your 50-50 guesses went. Keep your documents ready either way.';}
+  else if(hi>=150){verdict='🤞 Borderline, just below';cls='mid';tip='You pass only if most of your guesses were right.';}
+  else{verdict='📚 Below 150 this time';cls='no';tip='The next session is a fresh start. Many FMGs clear it on the next attempt.';}
+  const pct=Math.min(100,ex/300*100),pass=touched&&ex>=150;
+  $('#scOut').innerHTML='<small style="opacity:.85;font-weight:700">Expected score</small><div class="big">'+(touched?ex:'–')+' <small>/ 300</small></div>'+
+   '<div class="rg">'+(touched?'Range '+lo+' to '+hi+' · need 150 to pass':'Pass mark 150 / 300')+'</div>'+
+   '<div class="sc2-meter"><i style="width:'+pct+'%"></i><em title="150"></em></div>'+
+   '<span class="sc2-v '+cls+'">'+verdict+'</span><div class="rg">'+tip+'</div>'+
+   '<div class="cta">'+(pass||!touched?'<a href="#finderH">See internship seats</a><button class="gh" type="button" onclick="openBook()">Talk to founders</button>':'<button type="button" onclick="openBook()">Plan my next attempt</button>')+'</div>';
+  try{if(touched&&window.gtag&&!calc.__s){calc.__s=1;gtag('event','fmge_score_check');}}catch(_){}}
+ calc();})();
 /* journey */
 const STEPS=[
  ['🎯','FMGE result','NBEMS publishes the October 2026 result; the expected date is by 30 November. Download your scorecard and pass certificate.','By 30 Nov 2026'],
