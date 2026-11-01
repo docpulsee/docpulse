@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document
 <meta property="og:image" content="https://docpulsee.in/icons/icon-512.png"><meta name="twitter:card" content="summary">
 <meta name="keywords" content="NEET PG 2026, NEET PG college predictor, NEET PG counselling, MCC counselling, NEET PG cutoff, DNB seats 2026, choice filling, NEET PG low rank">
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"DocPulsee","url":"https://docpulsee.in","logo":"https://docpulsee.in/icons/icon-512.png","email":"docpulsee@gmail.com","sameAs":["https://t.me/neetpgcouncelling2026"]},{"@context":"https://schema.org","@type":"WebSite","name":"DocPulsee","url":"https://docpulsee.in"},{"@context":"https://schema.org","@type":"WebApplication","name":"DocPulsee NEET PG College Predictor","url":"https://docpulsee.in","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}]</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KT453TYW06"></script>
+<script>window.addEventListener("load",function(){setTimeout(function(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=G-KT453TYW06";document.head.appendChild(s);},3000);});</script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -6421,7 +6421,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-<script>(function(){var done=0;function go(){if(done)return;done=1;var s=document.createElement("script");s.async=true;s.src="https://checkout.razorpay.com/v1/checkout.js";document.head.appendChild(s);}addEventListener("pointerdown",go,{once:true,passive:true});addEventListener("keydown",go,{once:true});addEventListener("load",function(){setTimeout(go,2500);});})();</script>
+<script>(function(){if(window.Razorpay)return;var P=null,U="https://checkout.razorpay.com/v1/checkout.js";
+function load(){if(window.Razorpay&&!window.Razorpay.__dpShim)return Promise.resolve(window.Razorpay);if(!P){P=new Promise(function(res,rej){var s=document.createElement("script");s.src=U;s.async=true;s.onload=function(){window.Razorpay&&!window.Razorpay.__dpShim?res(window.Razorpay):rej(new Error("no Razorpay"));};s.onerror=function(){P=null;rej(new Error("load"));};document.head.appendChild(s);});}return P;}
+function S(o){this.o=o;this.h=[];this.r=null;this.c=false;}
+S.prototype.on=function(e,f){if(this.r)this.r.on(e,f);else this.h.push([e,f]);return this;};
+S.prototype.close=function(){this.c=true;if(this.r&&this.r.close)this.r.close();};
+S.prototype.open=function(){var m=this;load().then(function(R){if(m.c)return;m.r=new R(m.o);m.h.forEach(function(x){m.r.on(x[0],x[1]);});m.r.open();}).catch(function(){alert("The payment window couldn't load. Please check your internet connection and try again.");});return this;};
+S.__dpShim=1;window.Razorpay=S;})();</script><script>(function(){var done=0;function go(){if(done)return;done=1;var s=document.createElement("script");s.async=true;s.src="https://checkout.razorpay.com/v1/checkout.js";document.head.appendChild(s);}addEventListener("load",function(){setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(go,{timeout:4000});else go();},8000);});})();</script>
 <script>
 // Location data for "near me" sorting. i: institute id -> [lat, lng, approx(1=only state/district-level)],
 // p: first 4 digits of a PIN code -> [lat, lng], c: major city -> [lat, lng]. Built from India Post / GeoNames PIN data.
@@ -7036,7 +7042,7 @@ function hsiOneTap(){if(window.__dpOneTap||!sb||!window.crypto||!crypto.subtle)r
   google.accounts.id.initialize({client_id:HSI_CID,nonce:n.hashed,auto_select:false,cancel_on_tap_outside:true,itp_support:true,use_fedcm_for_prompt:true,context:"signin",ux_mode:"popup",
    callback:async r=>{try{const{error}=await sb.auth.signInWithIdToken({provider:"google",token:r.credential,nonce:n.raw});if(error){console.warn("One Tap:",error.message);if(window.dpOpenSignIn)window.dpOpenSignIn();}}catch(e){console.warn("One Tap",e);}}});
   google.accounts.id.prompt(note=>{try{if(note&&note.isSkippedMoment&&note.isSkippedMoment())sessionStorage.setItem("dp_ot_off","1");}catch(_e){}});};
- setTimeout(()=>{if(window.google&&google.accounts&&google.accounts.id){go();return;}const s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.async=true;s.defer=true;s.onload=go;document.head.appendChild(s);},2600);}
+ const otStart=()=>{if(window.google&&google.accounts&&google.accounts.id){go();return;}const s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.async=true;s.defer=true;s.onload=go;document.head.appendChild(s);};const otIdle=()=>{const f=()=>setTimeout(otStart,1200);if(window.requestIdleCallback)requestIdleCallback(f,{timeout:5000});else f();};if(document.readyState==="complete")otIdle();else window.addEventListener("load",otIdle,{once:true});}
 function HsiChip({authState}){const[open,setOpen]=React.useState(false);const[busy,setBusy]=React.useState(false);const[err,setErr]=React.useState(null);
  React.useEffect(()=>{window.dpOpenSignIn=()=>setOpen(true);hsiOneTap();return()=>{if(window.dpOpenSignIn)window.dpOpenSignIn=null;};},[]);
  React.useEffect(()=>{if(!open)return;const k=e=>{if(e.key==="Escape")setOpen(false);};document.addEventListener("keydown",k);return()=>document.removeEventListener("keydown",k);},[open]);
