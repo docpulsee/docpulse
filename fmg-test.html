@@ -87,13 +87,33 @@ button{font:inherit}
 .chip.hot{background:#fff1ee;border-color:#ffd2cb;color:#c2402f}.chip.new{background:#efeaff;border-color:#dcd3ff;color:#5a46c8}.chip.money{background:#fff7dc;border-color:#ffe7a1;color:#8a6400}
 @media (prefers-color-scheme:dark){.chip.hot{background:#3a1d19;color:#ffb3a8;border-color:#5a2a23}.chip.new{background:#251f45;color:#c7bcff;border-color:#3a3170}.chip.money{background:#3a3010;color:#ffd970;border-color:#5a4a14}}
 .lock{position:absolute;left:0;right:0;top:300px;bottom:0;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;background:linear-gradient(to bottom,rgba(0,0,0,0) 0,var(--bg) 220px);z-index:3}.lock[hidden]{display:none}
-.locked .grid{pointer-events:none;user-select:none;max-height:700px;overflow:hidden}.locked .grid .cc:nth-child(n+3){filter:blur(4px)}.finder.locked{min-height:780px}
+.locked .grid{pointer-events:none;user-select:none;max-height:560px;overflow:hidden}.locked .grid .cc:nth-child(n+3){filter:blur(4px)}.finder.locked{min-height:660px}
 .lc{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh);padding:22px;max-width:440px;width:100%;text-align:center}
 .lc .ic{font-size:40px}.lc h3{margin:6px 0 6px;font:800 22px/1.2 "Inter Tight",sans-serif}
 .lc ul{list-style:none;padding:0;margin:12px 0 16px;text-align:left;display:grid;gap:8px}
 .lc li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}.lc li span{flex:none}
 .lc .soon{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--dim);font-weight:700}
 .mine{background:linear-gradient(135deg,#fff7dc,#e9f7f1);border:1px solid #f1df9b;border-radius:20px;padding:14px 16px;margin:0 0 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;color:#14201d}.mine b{font-size:15px}.mine small{display:block;color:#5e6b66}
+.one{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--sh)}
+.one-l{display:flex;gap:12px;align-items:center}.one-ic{font-size:30px;width:52px;height:52px;border-radius:16px;background:var(--mint);display:grid;place-items:center}
+.one-l b{font-size:16px}.one-l small{display:block;color:var(--dim);font-size:13px}
+.one-r{display:flex;gap:12px;align-items:center}.one-p b{font:800 24px/1 "Inter Tight",sans-serif}.one-p s{color:var(--dim);font-size:14px;margin-left:6px}
+.one-t{grid-column:1/-1;font-size:13px;font-weight:700;color:var(--teal)}
+@media (max-width:560px){.one{grid-template-columns:1fr}.one-r{justify-content:space-between}}
+.ov{position:fixed;inset:0;background:rgba(10,20,17,.55);backdrop-filter:blur(4px);z-index:50;display:flex;align-items:flex-end;justify-content:center}.ov[hidden]{display:none}
+.sheet{background:var(--card);color:var(--ink);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px 18px 24px;position:relative;animation:up .35s cubic-bezier(.2,.9,.3,1.1)}
+@media (min-width:640px){.ov{align-items:center}.sheet{border-radius:24px}}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet .x{position:absolute;right:12px;top:12px;border:0;background:var(--bg);width:36px;height:36px;border-radius:50%;cursor:pointer;color:var(--ink)}
+.sheet h3{margin:0 0 4px;font:800 21px/1.2 "Inter Tight",sans-serif}.sheet .sub{color:var(--dim);font-size:13.5px;margin:0 0 14px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fg .w{grid-column:1/-1}
+.fg label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--dim)}
+.fg input,.fg select,.fg textarea{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:11px 12px;font:inherit;font-size:14.5px;font-weight:500}
+.fg textarea{min-height:88px;resize:vertical}
+@media (max-width:480px){.fg{grid-template-columns:1fr}}
+.bkpay{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.bkpay b{font:800 22px/1 "Inter Tight",sans-serif}
+.bkm{font-size:13px;margin-top:8px;color:var(--dim)}.bkm.bad{color:#c2402f}
+.done{text-align:center;padding:20px 6px}.done .big{font-size:52px}
 .note{font-size:12.5px;color:var(--dim);margin-top:14px}
 .empty{padding:30px;text-align:center;color:var(--dim)}
 footer{margin:48px 0 32px;color:var(--dim);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
@@ -152,13 +172,24 @@ footer{margin:48px 0 32px;color:var(--dim);font-size:12.5px;border-top:1px solid
      <li><span>🏥</span>Every college with FMG seats, searchable by state and city</li>
      <li><span>💰</span>Intern stipend each college reported to NMC</li>
      <li><span>🆕</span>New and expanded colleges, where every added seat goes to FMGs</li>
-     <li><span>🧑‍⚕️</span><div><b>A 1:1 with our founders</b> (residents) to pick your state and college</div></li>
+     <li><span>🧑‍⚕️</span><div>Founders' 1:1 at <b>₹<span class="cmem">799</span></b> instead of ₹<span class="cstd">1,000</span></div></li>
     </ul>
     <button class="btn gold" id="buy">Unlock for <span id="pr">₹999</span></button>
     <div class="soon" id="bmsg">One-time payment · sign in with Google first</div>
    </div>
   </div>
  </div>
+ <h2 class="fade" id="oneH">Talk to our founders, 1:1</h2>
+ <p class="lead fade">Confused about which state to apply in, documents, or how allotment works there? Book a call with our founders, who are residents themselves.</p>
+ <div class="one fade">
+  <div class="one-l"><div class="one-ic">🧑‍⚕️</div><div><b>1:1 internship call</b><small>State and college shortlist, documents, timelines, your questions</small></div></div>
+  <div class="one-r"><div class="one-p" id="oneP"><b>₹1,000</b></div><button class="btn" id="oneB">📅 Book my 1:1</button></div>
+  <div class="one-t">💡 FMG Internship Pass holders pay just ₹<span class="cmem">799</span></div>
+ </div>
+ <div class="ov" id="ov" hidden><div class="sheet" role="dialog" aria-modal="true" aria-label="Book your 1:1">
+  <button class="x" id="ovX" aria-label="Close">✕</button>
+  <div id="bkBody"></div>
+ </div></div>
  <p class="note">Source: National Medical Commission, UGMEB Circular No. U-15024/2/2026-UGMEB dated 10-03-2026, Annexure-II (CRMI slots for FMGs, AY 2026-27; excludes INIs). Seats = 7.5% of the college's 2021-22 intake + all seats added between 2022-23 and 2025-26 (all seats in new colleges). Seats are allotted by your State Medical Council with the state's Directorate of Medical Education. Stipend = intern (UG) stipend the college reported to NMC (NMC stipend list, Feb 2026); confirm the FMG intern stipend with the college.</p>
 
  <footer>DocPulsee · built by residents · <a href="/">docpulsee.in</a> · docpulsee@gmail.com</footer>
@@ -203,7 +234,7 @@ function lockUI(){ $('#finder').classList.toggle('locked',LOCKED); $('#lock').hi
 lockUI(); render();
 /* ---- pass: sign-in, payment, unlock (dp-fmg) ---- */
 const SB_URL="https://uwrwtttkqywsmehexmbf.supabase.co", SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys", RZP="rzp_live_TfrVp5WBEyPS7y", FN=SB_URL+"/functions/v1/dp-fmg";
-let sb=null, PRICE=99900;
+let sb=null, PRICE=99900, CSTD=100000, CMEM=79900, HASPASS=false;
 const msg=(t,bad)=>{const m=$('#bmsg');m.textContent=t;m.style.color=bad?'#c2402f':'';};
 function ownCode(email){try{const c=JSON.parse(localStorage.getItem('dp_own_code')||'null');return c&&c.e===String(email||'').toLowerCase()?c.c:null;}catch(_){return null;}}
 async function call(extra){const s=sb?(await sb.auth.getSession()).data.session:null;const h={'Content-Type':'application/json',apikey:SB_KEY};if(s)h.Authorization='Bearer '+s.access_token;
@@ -211,10 +242,11 @@ async function call(extra){const s=sb?(await sb.auth.getSession()).data.session:
  const r=await fetch(FN,{method:'POST',headers:h,body:JSON.stringify(b)});const j=await r.json().catch(()=>({error:'Network error'}));if(!r.ok&&!j.error)j.error='Error '+r.status;return j;}
 function showPrice(){$('#pr').textContent='₹'+Math.round(PRICE/100).toLocaleString('en-IN');}
 function unlocked(j){D=j.rows;MAXF=Math.max(...D.map(d=>d[6]));LOCKED=false;lockUI();render();
- const pid=j.payment_id||'';const mail='mailto:docpulsee@gmail.com?subject='+encodeURIComponent('FMG Internship Pass: book my 1:1')+'&body='+encodeURIComponent('Hi DocPulsee team,\n\nI have the FMG Internship Pass and would like to book my 1:1 with the founders.\n\nAccount: '+(j.email||'')+(pid?'\nPayment ID: '+pid:'')+'\nPreferred state(s): \nPreferred time: \n\nThanks!');
- const m=$('#mine');m.hidden=false;m.innerHTML='<div><b>✅ Your FMG Internship Pass is active'+(j.via==='owner'?' (owner)':'')+'</b><small>All '+D.length+' colleges unlocked. Your 1:1 with the founders is included.</small></div><a class="btn" href="'+mail+'">📅 Book my 1:1</a>';
+
+ const m=$('#mine');m.hidden=false;m.innerHTML='<div><b>✅ Your FMG Internship Pass is active'+(j.via==='owner'?' (owner)':'')+'</b><small>All '+D.length+' colleges unlocked. Your founders\' 1:1 is ₹'+fmt(Math.round(CMEM/100))+' (pass price).</small></div><button class="btn" onclick="openBook()">📅 Book my 1:1</button>';HASPASS=true;paintOne();
  try{if(window.gtag)gtag('event','fmg_unlocked',{via:j.via||'paid'});}catch(_){}}
-async function refresh(){try{const j=await call();if(j.price_paise)PRICE=j.price_paise;showPrice();if(j.unlocked&&j.rows)unlocked(j);return j;}catch(e){return {};}}
+function paintOne(){document.querySelectorAll('.cmem').forEach(e=>e.textContent=fmt(Math.round(CMEM/100)));document.querySelectorAll('.cstd').forEach(e=>e.textContent=fmt(Math.round(CSTD/100)));$('#oneP').innerHTML=HASPASS?'<b>₹'+fmt(Math.round(CMEM/100))+'</b><s>₹'+fmt(Math.round(CSTD/100))+'</s>':'<b>₹'+fmt(Math.round(CSTD/100))+'</b>';}
+async function refresh(){try{const j=await call();if(j.price_paise)PRICE=j.price_paise;if(j.counsel_paise)CSTD=j.counsel_paise;if(j.counsel_member_paise)CMEM=j.counsel_member_paise;showPrice();paintOne();if(j.unlocked&&j.rows)unlocked(j);return j;}catch(e){return {};}}
 function loadRzp(){return new Promise((res,rej)=>{if(window.Razorpay)return res();const s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';s.onload=()=>res();s.onerror=()=>rej(new Error("The payment window couldn't load. Check your connection and try again."));document.head.appendChild(s);});}
 async function buy(){if(!sb){msg('Sign-in is still loading, try again in a moment.',1);return;}
  const s=(await sb.auth.getSession()).data.session;
@@ -227,8 +259,46 @@ async function buy(){if(!sb){msg('Sign-in is still loading, try again in a momen
   modal:{ondismiss:()=>msg('Payment cancelled. You can try again any time.')}});
  rzp.on('payment.failed',r=>msg('Payment failed: '+((r.error&&r.error.description)||'please try again')+'.',1));rzp.open();}
 $('#buy').addEventListener('click',buy);
+/* ---- FMG 1:1 booking (dp-fmg book_start / book_confirm -> consultation_bookings -> owner Telegram) ---- */
+const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function openBook(){const ov=$('#ov');ov.hidden=false;document.body.style.overflow='hidden';let em='';try{em=(window.__fmgEmail||'');}catch(_){}
+ const pr=HASPASS?CMEM:CSTD;
+ $('#bkBody').innerHTML='<h3>Book your 1:1 internship call</h3><p class="sub">Tell us about yourself so the founders come prepared. We\'ll WhatsApp you to fix a time.</p>'+
+ '<form id="bkF" class="fg" autocomplete="on">'+
+ '<label>Full name<input name="name" required maxlength="120" autocomplete="name"></label>'+
+ '<label>WhatsApp number<input name="phone" required inputmode="tel" maxlength="20" placeholder="10-digit number" autocomplete="tel"></label>'+
+ '<label class="w">Email<input name="email" type="email" required maxlength="200" value="'+esc(em)+'" autocomplete="email"></label>'+
+ '<label>Country &amp; university of MBBS<input name="uni" maxlength="140" placeholder="e.g. Russia, Kazan State Medical Univ."></label>'+
+ '<label>FMGE status<select name="fmge"><option>Appeared Oct 2026, awaiting result</option><option>Passed FMGE</option><option>Preparing for next attempt</option></select></label>'+
+ '<label>Home state<input name="home" maxlength="60"></label>'+
+ '<label>Internship states you want<input name="want" maxlength="140" placeholder="e.g. UP, Rajasthan"></label>'+
+ '<label>What matters most<select name="pri"><option>Good stipend</option><option>Near home</option><option>Big hospital / more exposure</option><option>Any seat, quickly</option></select></label>'+
+ '<label>Best time for the call<select name="pref"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Weekend</option></select></label>'+
+ '<label class="w">What do you want to know?<textarea name="note" maxlength="1000" placeholder="Documents, state rules, eligibility after online classes, compensatory internship, stipend... ask anything"></textarea></label>'+
+ '</form><div class="bkpay"><div><small style="color:var(--dim);font-weight:700">'+(HASPASS?'Pass price':'Session price')+'</small><br><b>₹'+fmt(Math.round(pr/100))+'</b>'+(HASPASS?' <s style="color:var(--dim)">₹'+fmt(Math.round(CSTD/100))+'</s>':'')+'</div><button class="btn gold" id="bkGo">Pay &amp; book</button></div><div class="bkm" id="bkM">Secure payment by Razorpay · confirmation on email</div>';
+ $('#bkGo').onclick=bookPay;}
+function closeBook(){$('#ov').hidden=true;document.body.style.overflow='';}
+$('#ovX').onclick=closeBook;$('#ov').addEventListener('click',e=>{if(e.target.id==='ov')closeBook();});
+$('#oneB').onclick=openBook;window.openBook=openBook;
+const bm=(t,bad)=>{const m=$('#bkM');if(m){m.textContent=t;m.classList.toggle('bad',!!bad);}};
+async function bookPay(){const f=$('#bkF');if(!f.reportValidity())return;const v=Object.fromEntries(new FormData(f).entries());
+ if(String(v.phone).replace(/\D/g,'').length<10){bm('Please enter a valid WhatsApp number.',1);return;}
+ const btn=$('#bkGo');btn.disabled=true;bm('Saving your details…');
+ const ctx={'Country / university':v.uni,'FMGE status':v.fmge,'Home state':v.home,'Internship states wanted':v.want,'What matters most':v.pri};
+ const st=await call({action:'book_start',name:v.name,phone:v.phone,email:v.email,preferred:v.pref,note:v.note,context:ctx});
+ if(st.error){bm(st.error,1);btn.disabled=false;return;}
+ try{await loadRzp();}catch(e){bm(e.message,1);btn.disabled=false;return;}
+ const s=sb?(await sb.auth.getSession()).data.session:null;
+ const rzp=new window.Razorpay({key:RZP,amount:st.amount_paise,currency:'INR',name:'DocPulsee',description:'FMG 1:1 with the founders',prefill:{name:v.name,email:v.email,contact:v.phone},
+  notes:{purpose:'FMG 1:1',product:'counselling_fmg',booking_id:String(st.booking_id),user_id:s?s.user.id:''},theme:{color:'#0f6e5c'},
+  handler:async r=>{bm('Payment received. Confirming…');for(let k=0;k<3;k++){const j=await call({action:'book_confirm',payment_id:r.razorpay_payment_id,booking_id:st.booking_id});
+    if(j.ok){$('#bkBody').innerHTML='<div class="done"><div class="big">🎉</div><h3>You\'re booked!</h3><p class="sub">We\'ll WhatsApp you on '+esc(v.phone)+' to fix the time, and you\'ll get the Google Meet invite by email.<br>Payment ID: '+esc(r.razorpay_payment_id)+'</p><button class="btn" onclick="closeBook()">Done</button></div>';try{if(window.gtag)gtag('event','fmg_1on1_booked');}catch(_){}return;}
+    if(k===2){bm((j.error||'Could not confirm')+' Payment ID '+r.razorpay_payment_id+'. Email docpulsee@gmail.com and we will book it.',1);btn.disabled=false;return;}await new Promise(z=>setTimeout(z,1500));}},
+  modal:{ondismiss:()=>{bm('Payment cancelled. Your details are saved; tap Pay & book to try again.');btn.disabled=false;}}});
+ rzp.on('payment.failed',r=>{bm('Payment failed: '+((r.error&&r.error.description)||'please try again')+'.',1);btn.disabled=false;});rzp.open();}
+window.closeBook=closeBook;
 (function boot(){let n=0;const iv=setInterval(async()=>{n++;if(window.supabase&&window.supabase.createClient){clearInterval(iv);sb=window.supabase.createClient(SB_URL,SB_KEY);
   const j=await refresh();let pend=false;try{pend=sessionStorage.getItem('dp_fmg_buy')==='1';sessionStorage.removeItem('dp_fmg_buy');}catch(_){}
-  if(j.signed_in&&!j.unlocked){msg('Signed in as '+(j.email||'you')+' · one-time payment');if(pend)buy();}}else if(n>60)clearInterval(iv);},200);})();
+  if(j.email)window.__fmgEmail=j.email;if(j.signed_in&&!j.unlocked){msg('Signed in as '+(j.email||'you')+' · one-time payment');if(pend)buy();}}else if(n>60)clearInterval(iv);},200);})();
 </script>
 </body></html>
