@@ -4947,6 +4947,30 @@ body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 .fmg-plan-b{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer;background:#ffd36b;color:#2a1d00}
 @media (max-width:640px){.fmg-plan{flex-direction:column;align-items:stretch}.fmg-plan-r{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.fmg-plan-n{margin:0}}
 @media (prefers-reduced-motion:reduce){.exd *{transition:none!important}}
+</style><style id="dp-pl2-css">
+#plans.pl2-on .hn-seg,#plans.pl2-on .hn-pgrid,#plans.pl2-on .hn-dots,#plans.pl2-on>.hn-tg,#plans.pl2-on .ini-plan,#plans.pl2-on .fmg-plan,#plans.pl2-on .hn-addons{display:none!important}
+#plans.pl2-on.pl2-open .hn-seg{display:grid!important}#plans.pl2-on.pl2-open .hn-pgrid{display:flex!important}#plans.pl2-on.pl2-open .hn-dots{display:flex!important}
+#plans.pl2-on.pl2-open .ini-plan,#plans.pl2-on.pl2-open .fmg-plan{display:flex!important}#plans.pl2-on.pl2-open .hn-addons{display:grid!important}
+@media (min-width:761px){#plans.pl2-on.pl2-open .hn-pgrid{display:grid!important}#plans.pl2-on.pl2-open>.hn-tg{display:flex!important}}
+.pl2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:left;margin:4px 0 12px}
+@media (min-width:640px){.pl2{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.pl2{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.pl2 button{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;border:1px solid rgba(13,31,26,.08);background:#fff;border-radius:18px;padding:12px 12px 11px;font:inherit;color:#0d1f1a;text-align:left;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 24px -20px rgba(15,60,50,.45);transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
+.pl2 button:hover{transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(15,60,50,.5)}
+.pl2 button:active{transform:scale(.98)}
+.pl2 .i{font-size:22px;line-height:1;margin-bottom:2px}
+.pl2 .n{font-size:13.5px;font-weight:800;line-height:1.2}
+.pl2 .p{font-size:17px;font-weight:900;color:#0f6e5c;letter-spacing:-.01em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pl2 .p s{font-size:11.5px;color:#94a3a0;font-weight:600;margin-left:4px}.pl2 .p [style*="display:none"],.pl2 .p [style*="display: none"]{display:none!important}
+.pl2 .d{font-size:11.5px;color:#5d6c67;line-height:1.3}
+.pl2 .b{position:absolute;top:-8px;right:10px;font-size:10px;font-weight:800;border-radius:999px;padding:2px 8px;color:#fff;background:linear-gradient(90deg,#f59e0b,#f97316)}
+.pl2 .b.nw{background:#ff5a5f}
+.pl2 .pro{border:2px solid #0f6e5c;background:linear-gradient(160deg,#fff,#f1faf6)}
+.pl2 .ini{background:linear-gradient(160deg,#fff,#f1f0ff)}.pl2 .ini .p{color:#4338ca}
+.pl2 .fmg{background:radial-gradient(160px 90px at 100% 0,rgba(255,196,110,.35),transparent 70%),#fff}
+.pl2-more{display:block;margin:0 auto 4px;border:0;background:none;color:#0f6e5c;font:inherit;font-weight:800;font-size:14px;cursor:pointer;padding:8px 12px;border-radius:999px}
+.pl2-more:hover{background:#eef6f3}
+html.dpdark .pl2 button{background:#111a18;color:#e7f2ee;border-color:rgba(255,255,255,.07)}html.dpdark .pl2 .d{color:#9fb0aa}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -9830,5 +9854,31 @@ function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector
 var t=0,iv=setInterval(function(){t++;plan();if(mount()&&t>8&&document.querySelector(".fmg-plan"))clearInterval(iv);if(t>40)clearInterval(iv);},400);
 new MutationObserver(function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 window.addEventListener("resize",function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});});
+})();</script><script id="dp-pl2-js">(function(){
+var FMG="/fmg-test.html";
+function q(s,r){return (r||document).querySelector(s);}
+function T(){var sec=q("#plans");if(!sec)return null;return [
+ {k:"free",i:"🌱",n:"Free",d:"Seat predictor preview",src:function(){return "₹0";},go:function(){var b=q(".hn-plan .hn-pb.ghost",sec);if(b)b.click();}},
+ {k:"dir",i:"🔓",n:"College Directory",d:"Every college: closing ranks, fees, stipend",src:function(){var f=q('.hn-pp [data-price="full"]',sec),e=f&&f.closest(".hn-pp");return e?e.innerHTML:"";},go:function(){if(window.hnBuyDirectory)hnBuyDirectory();}},
+ {k:"pro",i:"👑",n:"DocPulsee Pro",d:"Directory + 2 calls + seat verdicts",b:"Most popular",src:function(){var e=q(".hn-pro .hn-pp",sec);return e?e.innerHTML:"";},go:function(){var b=q(".hn-pro .hn-pb",sec);if(b)b.click();}},
+ {k:"tg",i:"👫",n:"Together",d:"Pro for two, on two phones",src:function(){var e=q("#plans>.hn-tg [data-tg-new]")||q(".hn-tg [data-tg-new]",sec);return e?e.innerHTML:"";},go:function(){var b=q("#plans>.hn-tg .hn-pb")||q(".hn-tg .hn-pb",sec);if(b)b.click();}},
+ {k:"ini",i:"🎓",n:"INI-CET Pass",d:"AIIMS, JIPMER, PGI seat chances",src:function(){var e=q(".ini-plan [data-ini-price]",sec);return e&&e.innerHTML?e.innerHTML.replace(/<s>.*?<\/s>\s*/,""):"";},go:function(){if(window.dpSetExam){dpSetExam("inicet",true);}else{var b=q(".ini-plan-b",sec);if(b)b.click();}}},
+ {k:"fmg",i:"✈️",n:"FMG Internship Pass",d:"Internship seats for FMGs",b:"NEW",nw:1,src:function(){return "₹999";},go:function(){location.href=FMG;}},
+ {k:"c",i:"🩺",n:"1:1 counselling",d:"Plan your list with a founder",src:function(){var e=q('.hn-addons [data-price="counsel"]',sec);return e?e.innerHTML:"";},go:function(){if(window.openConsultationModal)openConsultationModal();}},
+ {k:"s",i:"🧑‍⚕️",n:"Senior Connect",d:"Talk to a senior at your college",src:function(){var e=q('.hn-addons [data-price="senior"]',sec);return e?e.innerHTML:"";},go:function(){if(window.hnGo)hnGo("senior-connect");}},
+ {k:"l",i:"🗂️",n:"Choice List Maker",d:"Your MCC list in the right order",src:function(){var b=[].slice.call(sec.querySelectorAll(".hn-addons button")).find(function(x){return /Choice List/.test(x.textContent);});var m=b&&b.textContent.match(/₹[\d,]+/);return m?m[0]:"";},go:function(){if(window.dpOpenMaker)dpOpenMaker();}},
+ {k:"more",i:"📋",n:"Compare plans",d:"See everything each plan includes",src:function(){return "";},go:function(){toggle(true);}}];}
+var tiles=null;
+function toggle(open){var sec=q("#plans");if(!sec)return;var o=open===undefined?!sec.classList.contains("pl2-open"):open;sec.classList.toggle("pl2-open",o);var m=q(".pl2-more",sec);if(m)m.textContent=o?"Hide details ▴":"Compare what’s included ▾";
+ if(o){var g=q(".hn-seg",sec)||q(".hn-pgrid",sec);if(g)setTimeout(function(){g.scrollIntoView({behavior:"smooth",block:"start"});},60);}}
+function paint(){if(!tiles)return;tiles.forEach(function(t){var e=t.el.querySelector(".p");if(!e)return;var h=t.src()||"";if(e.__h!==h){e.__h=h;e.innerHTML=h;e.style.display=h?"":"none";}});}
+function mount(){var sec=q("#plans");if(!sec||q(".pl2",sec))return !!(sec&&q(".pl2",sec));var sub=q(".hn-sub",sec);if(!sub)return false;
+ var list=T();var g=document.createElement("div");g.className="pl2";g.setAttribute("aria-label","All plans");
+ tiles=list.map(function(t){var b=document.createElement("button");b.type="button";b.className=t.k;b.innerHTML=(t.b?'<span class="b'+(t.nw?" nw":"")+'">'+t.b+'</span>':"")+'<span class="i">'+t.i+'</span><span class="n">'+t.n+'</span><span class="p"></span><span class="d">'+t.d+'</span>';
+  b.onclick=function(){try{if(window.gtag)gtag("event","plan_tile",{plan:t.k});}catch(_){}t.go();};g.appendChild(b);t.el=b;return t;});
+ sub.parentNode.insertBefore(g,sub.nextSibling);var m=document.createElement("button");m.type="button";m.className="pl2-more";m.onclick=function(){toggle();};g.parentNode.insertBefore(m,g.nextSibling);
+ sec.classList.add("pl2-on");toggle(false);paint();return true;}
+var n=0,iv=setInterval(function(){n++;mount();paint();if(n>200)clearInterval(iv);},1500);
+setTimeout(function(){mount();paint();},300);
 })();</script></body>
 </html>
