@@ -4940,6 +4940,12 @@ html.cf-lock .dpg-mini,html.cf-lock .dpg-pill,html.cf-lock .dpg-tip,html.cf-lock
 .exd button[aria-pressed=true]{color:#0b3d33}
 body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 @media (max-width:360px){.exd svg{display:none}.exd b{font-size:12.5px}}
+.fmg-plan{display:flex;gap:18px;align-items:center;justify-content:space-between;margin:14px auto 0;max-width:980px;padding:18px 20px;border-radius:22px;background:radial-gradient(380px 200px at 95% 0%,rgba(255,196,110,.55),transparent 65%),linear-gradient(135deg,#0f6e5c,#178a71);color:#fff;box-shadow:0 10px 30px rgba(15,110,92,.22)}
+.fmg-plan-l b{display:block;font-size:18px;font-weight:800}.fmg-plan-l em{font-style:normal;font-size:11px;font-weight:800;background:#ff5a5f;color:#fff;border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
+.fmg-plan-l small{display:block;font-size:13.5px;line-height:1.5;margin-top:4px;color:#e3f6ef}
+.fmg-plan-r{flex:0 0 auto;text-align:right}.fmg-plan-p b{font-size:28px;font-weight:800}.fmg-plan-n{font-size:12px;color:#e3f6ef;margin:2px 0 8px}
+.fmg-plan-b{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer;background:#ffd36b;color:#2a1d00}
+@media (max-width:640px){.fmg-plan{flex-direction:column;align-items:stretch}.fmg-plan-r{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.fmg-plan-n{margin:0}}
 @media (prefers-reduced-motion:reduce){.exd *{transition:none!important}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -9816,7 +9822,12 @@ function cur(){return document.body.classList.contains("dp-ini")?"inicet":"neetp
 function paint(d,force){var x=force||cur();var bs=d.querySelectorAll("button"),on=null;bs.forEach(function(b){var p=b.getAttribute("data-x")===x;b.setAttribute("aria-pressed",p);if(p)on=b;});
  var g=d.querySelector(".glide");if(on&&on.offsetWidth){g.style.width=on.offsetWidth+"px";g.style.transform="translateX("+(on.offsetLeft-3)+"px)";}}
 function mount(){var sw=document.querySelector(".hn-hero .ini-sw");if(!sw)return false;var d=sw.parentNode.querySelector(".exd");if(!d){d=mk();sw.parentNode.insertBefore(d,sw);}paint(d);return true;}
-var t=0,iv=setInterval(function(){t++;if(mount()&&t>8)clearInterval(iv);if(t>40)clearInterval(iv);},400);
+function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector(".fmg-plan"))return;var c=document.createElement("div");c.className="fmg-plan";
+ c.innerHTML='<div class="fmg-plan-l"><b>\u2708\uFE0F FMG Internship Pass <em>NEW</em></b><small>For foreign medical graduates after FMGE: every Indian college with internship seats for FMGs in 2026-27, state by state, with intern stipend. Founders\u2019 1:1 at \u20B9799 for pass holders.</small></div>'+
+ '<div class="fmg-plan-r"><div class="fmg-plan-p"><b>\u20B9999</b></div><div class="fmg-plan-n">one-time</div><button type="button" class="fmg-plan-b">Open FMG Pass</button></div>';
+ c.querySelector("button").onclick=function(){try{if(window.gtag)gtag("event","fmg_plan_card");}catch(_){}location.href=FMG;};
+ var ini=pl.querySelector(".ini-plan"),after=ini||pl.querySelector(".hn-dots")||pl.querySelector(".hn-pgrid");if(after)after.parentNode.insertBefore(c,after.nextSibling);else pl.appendChild(c);}
+var t=0,iv=setInterval(function(){t++;plan();if(mount()&&t>8&&document.querySelector(".fmg-plan"))clearInterval(iv);if(t>40)clearInterval(iv);},400);
 new MutationObserver(function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 window.addEventListener("resize",function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});});
 })();</script></body>
