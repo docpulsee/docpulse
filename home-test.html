@@ -4947,30 +4947,39 @@ body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 .fmg-plan-b{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer;background:#ffd36b;color:#2a1d00}
 @media (max-width:640px){.fmg-plan{flex-direction:column;align-items:stretch}.fmg-plan-r{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.fmg-plan-n{margin:0}}
 @media (prefers-reduced-motion:reduce){.exd *{transition:none!important}}
-</style><style id="dp-pl2-css">
-#plans.pl2-on .hn-seg,#plans.pl2-on .hn-pgrid,#plans.pl2-on .hn-dots,#plans.pl2-on>.hn-tg,#plans.pl2-on .ini-plan,#plans.pl2-on .fmg-plan,#plans.pl2-on .hn-addons{display:none!important}
-#plans.pl2-on.pl2-open .hn-seg{display:grid!important}#plans.pl2-on.pl2-open .hn-pgrid{display:flex!important}#plans.pl2-on.pl2-open .hn-dots{display:flex!important}
-#plans.pl2-on.pl2-open .ini-plan,#plans.pl2-on.pl2-open .fmg-plan{display:flex!important}#plans.pl2-on.pl2-open .hn-addons{display:grid!important}
-@media (min-width:761px){#plans.pl2-on.pl2-open .hn-pgrid{display:grid!important}#plans.pl2-on.pl2-open>.hn-tg{display:flex!important}}
-.pl2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:left;margin:4px 0 12px}
-@media (min-width:640px){.pl2{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:1000px){.pl2{grid-template-columns:repeat(5,minmax(0,1fr))}}
-.pl2 button{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;border:1px solid rgba(13,31,26,.08);background:#fff;border-radius:18px;padding:12px 12px 11px;font:inherit;color:#0d1f1a;text-align:left;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 24px -20px rgba(15,60,50,.45);transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
-.pl2 button:hover{transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(15,60,50,.5)}
-.pl2 button:active{transform:scale(.98)}
-.pl2 .i{font-size:22px;line-height:1;margin-bottom:2px}
-.pl2 .n{font-size:13.5px;font-weight:800;line-height:1.2}
-.pl2 .p{font-size:17px;font-weight:900;color:#0f6e5c;letter-spacing:-.01em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.pl2 .p s{font-size:11.5px;color:#94a3a0;font-weight:600;margin-left:4px}.pl2 .p [style*="display:none"],.pl2 .p [style*="display: none"]{display:none!important}
-.pl2 .d{font-size:11.5px;color:#5d6c67;line-height:1.3}
-.pl2 .b{position:absolute;top:-8px;right:10px;font-size:10px;font-weight:800;border-radius:999px;padding:2px 8px;color:#fff;background:linear-gradient(90deg,#f59e0b,#f97316)}
-.pl2 .b.nw{background:#ff5a5f}
-.pl2 .pro{border:2px solid #0f6e5c;background:linear-gradient(160deg,#fff,#f1faf6)}
-.pl2 .ini{background:linear-gradient(160deg,#fff,#f1f0ff)}.pl2 .ini .p{color:#4338ca}
-.pl2 .fmg{background:radial-gradient(160px 90px at 100% 0,rgba(255,196,110,.35),transparent 70%),#fff}
-.pl2-more{display:block;margin:0 auto 4px;border:0;background:none;color:#0f6e5c;font:inherit;font-weight:800;font-size:14px;cursor:pointer;padding:8px 12px;border-radius:999px}
-.pl2-more:hover{background:#eef6f3}
-html.dpdark .pl2 button{background:#111a18;color:#e7f2ee;border-color:rgba(255,255,255,.07)}html.dpdark .pl2 .d{color:#9fb0aa}
+</style><style id="dp-dk2-css">
+#plans.dk2 .hn-seg,#plans.dk2 .hn-dots{display:none!important}
+#plans.dk2>.hn-tg{display:none!important}
+#plans.dk2 .dk2-wrap{position:relative}
+#plans.dk2 .hn-pgrid{display:flex!important;gap:14px!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:relative;padding:18px 4px 10px!important;margin:0!important;grid-template-columns:none!important;grid-template-areas:none!important;scroll-padding:0 4px;align-items:stretch}
+#plans.dk2 .hn-pgrid::-webkit-scrollbar{display:none}
+#plans.dk2 .hn-pgrid>*{flex:0 0 calc((100% - 28px)/3);scroll-snap-align:start;margin:0!important;min-width:0;max-width:none!important}
+@media (min-width:761px) and (max-width:1020px){#plans.dk2 .hn-pgrid>*{flex-basis:calc((100% - 14px)/2)}}
+@media (max-width:760px){#plans.dk2 .hn-pgrid{gap:12px!important;margin:0 -16px!important;padding:16px 16px 8px!important;scroll-padding:0 16px}#plans.dk2 .hn-pgrid>*{flex:0 0 86%;scroll-snap-align:center}}
+#plans.dk2 .hn-pgrid .hn-tg{display:flex!important;flex-direction:column;align-items:stretch;gap:14px;padding:22px 18px 18px!important;text-align:left}
+#plans.dk2 .hn-pgrid .hn-tg .hn-tg-l{flex-direction:column;align-items:flex-start;gap:12px}
+#plans.dk2 .hn-pgrid .hn-tg .hn-tg-r{align-items:flex-start;text-align:left;min-width:0;margin-top:auto}
+#plans.dk2 .hn-pgrid .hn-tg .hn-pb{width:100%;margin-top:12px}
+#plans.dk2 .hn-pgrid .hn-xc{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:space-between;gap:14px;border-radius:22px;padding:22px 18px 18px!important;text-align:left}
+#plans.dk2 .hn-xc .ini-plan-r,#plans.dk2 .hn-xc .fmg-plan-r{display:flex;flex-direction:column;align-items:flex-start;text-align:left;margin-top:auto;gap:2px}
+#plans.dk2 .hn-xc .ini-plan-l b,#plans.dk2 .hn-xc .fmg-plan-l b{font-size:19px}
+#plans.dk2 .hn-xc .ini-plan-p b,#plans.dk2 .hn-xc .fmg-plan-p b{font-size:34px}
+#plans.dk2 .hn-xc button{width:100%;margin-top:10px;padding:12px;border-radius:14px;font-size:15px}
+#plans.dk2 .hn-pgrid .hn-free{flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:22px 20px 20px!important}
+#plans.dk2 .hn-pgrid .hn-free .hn-pp{font-size:36px!important;margin:6px 0 2px!important}
+#plans.dk2 .hn-pgrid .hn-free ul{flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;margin:14px 0 16px!important;padding:14px 0 0!important;border-left:0!important;border-top:1px solid rgba(13,31,26,.08)!important}
+#plans.dk2 .hn-pgrid .hn-free .hn-pb{margin:auto 0 0!important;height:auto;width:100%}
+.dk2-seg{display:flex;position:relative;margin:0 auto 12px;padding:4px;border-radius:14px;background:#eef2f1;max-width:600px;overflow-x:auto;scrollbar-width:none}
+.dk2-seg::-webkit-scrollbar{display:none}
+.dk2-seg button{flex:1 0 auto;position:relative;z-index:1;border:0;background:none;font:700 13px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:#4d5d58;padding:10px 11px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:color .25s}
+.dk2-seg button.on{color:#0d1f1a}
+.dk2-seg i{position:absolute;top:4px;bottom:4px;left:4px;width:0;border-radius:10px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .45s cubic-bezier(.32,.72,0,1),width .45s}
+.dk2-a{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid #e3ebe8;background:#fff;box-shadow:0 8px 22px rgba(8,30,25,.16);font-size:28px;line-height:1;color:#0f6e5c;cursor:pointer;display:grid;place-items:center;transition:opacity .2s,transform .15s}
+.dk2-a:hover{transform:translateY(-50%) scale(1.06)}
+.dk2-a.l{left:-20px}.dk2-a.r{right:-20px}.dk2-a.off{opacity:0;pointer-events:none}
+@media (max-width:760px){.dk2-a{display:none}.dk2-seg button{font-size:12.5px;padding:10px 9px}}
+.dk2-dots{display:flex;justify-content:center;gap:6px;margin-top:8px}.dk2-dots i{width:6px;height:6px;border-radius:6px;background:#cfd8d5;transition:width .35s,background .35s;cursor:pointer}.dk2-dots i.on{width:18px;background:#0f6e5c}
+html.dpdark .dk2-seg{background:#18231f}html.dpdark .dk2-seg i{background:#2a3833}html.dpdark .dk2-seg button.on{color:#e7f2ee}html.dpdark .dk2-a{background:#111a18;border-color:rgba(255,255,255,.08)}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -9854,31 +9863,40 @@ function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector
 var t=0,iv=setInterval(function(){t++;plan();if(mount()&&t>8&&document.querySelector(".fmg-plan"))clearInterval(iv);if(t>40)clearInterval(iv);},400);
 new MutationObserver(function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 window.addEventListener("resize",function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});});
-})();</script><script id="dp-pl2-js">(function(){
-var FMG="/fmg-test.html";
+})();</script><script id="dp-dk2-js">(function(){
 function q(s,r){return (r||document).querySelector(s);}
-function T(){var sec=q("#plans");if(!sec)return null;return [
- {k:"free",i:"🌱",n:"Free",d:"Seat predictor preview",src:function(){return "₹0";},go:function(){var b=q(".hn-plan .hn-pb.ghost",sec);if(b)b.click();}},
- {k:"dir",i:"🔓",n:"College Directory",d:"Every college: closing ranks, fees, stipend",src:function(){var f=q('.hn-pp [data-price="full"]',sec),e=f&&f.closest(".hn-pp");return e?e.innerHTML:"";},go:function(){if(window.hnBuyDirectory)hnBuyDirectory();}},
- {k:"pro",i:"👑",n:"DocPulsee Pro",d:"Directory + 2 calls + seat verdicts",b:"Most popular",src:function(){var e=q(".hn-pro .hn-pp",sec);return e?e.innerHTML:"";},go:function(){var b=q(".hn-pro .hn-pb",sec);if(b)b.click();}},
- {k:"tg",i:"👫",n:"Together",d:"Pro for two, on two phones",src:function(){var e=q("#plans>.hn-tg [data-tg-new]")||q(".hn-tg [data-tg-new]",sec);return e?e.innerHTML:"";},go:function(){var b=q("#plans>.hn-tg .hn-pb")||q(".hn-tg .hn-pb",sec);if(b)b.click();}},
- {k:"ini",i:"🎓",n:"INI-CET Pass",d:"AIIMS, JIPMER, PGI seat chances",src:function(){var e=q(".ini-plan [data-ini-price]",sec);return e&&e.innerHTML?e.innerHTML.replace(/<s>.*?<\/s>\s*/,""):"";},go:function(){if(window.dpSetExam){dpSetExam("inicet",true);}else{var b=q(".ini-plan-b",sec);if(b)b.click();}}},
- {k:"fmg",i:"✈️",n:"FMG Internship Pass",d:"Internship seats for FMGs",b:"NEW",nw:1,src:function(){return "₹999";},go:function(){location.href=FMG;}},
- {k:"c",i:"🩺",n:"1:1 counselling",d:"Plan your list with a founder",src:function(){var e=q('.hn-addons [data-price="counsel"]',sec);return e?e.innerHTML:"";},go:function(){if(window.openConsultationModal)openConsultationModal();}},
- {k:"s",i:"🧑‍⚕️",n:"Senior Connect",d:"Talk to a senior at your college",src:function(){var e=q('.hn-addons [data-price="senior"]',sec);return e?e.innerHTML:"";},go:function(){if(window.hnGo)hnGo("senior-connect");}},
- {k:"l",i:"🗂️",n:"Choice List Maker",d:"Your MCC list in the right order",src:function(){var b=[].slice.call(sec.querySelectorAll(".hn-addons button")).find(function(x){return /Choice List/.test(x.textContent);});var m=b&&b.textContent.match(/₹[\d,]+/);return m?m[0]:"";},go:function(){if(window.dpOpenMaker)dpOpenMaker();}},
- {k:"more",i:"📋",n:"Compare plans",d:"See everything each plan includes",src:function(){return "";},go:function(){toggle(true);}}];}
-var tiles=null;
-function toggle(open){var sec=q("#plans");if(!sec)return;var o=open===undefined?!sec.classList.contains("pl2-open"):open;sec.classList.toggle("pl2-open",o);var m=q(".pl2-more",sec);if(m)m.textContent=o?"Hide details ▴":"Compare what’s included ▾";
- if(o){var g=q(".hn-seg",sec)||q(".hn-pgrid",sec);if(g)setTimeout(function(){g.scrollIntoView({behavior:"smooth",block:"start"});},60);}}
-function paint(){if(!tiles)return;tiles.forEach(function(t){var e=t.el.querySelector(".p");if(!e)return;var h=t.src()||"";if(e.__h!==h){e.__h=h;e.innerHTML=h;e.style.display=h?"":"none";}});}
-function mount(){var sec=q("#plans");if(!sec||q(".pl2",sec))return !!(sec&&q(".pl2",sec));var sub=q(".hn-sub",sec);if(!sub)return false;
- var list=T();var g=document.createElement("div");g.className="pl2";g.setAttribute("aria-label","All plans");
- tiles=list.map(function(t){var b=document.createElement("button");b.type="button";b.className=t.k;b.innerHTML=(t.b?'<span class="b'+(t.nw?" nw":"")+'">'+t.b+'</span>':"")+'<span class="i">'+t.i+'</span><span class="n">'+t.n+'</span><span class="p"></span><span class="d">'+t.d+'</span>';
-  b.onclick=function(){try{if(window.gtag)gtag("event","plan_tile",{plan:t.k});}catch(_){}t.go();};g.appendChild(b);t.el=b;return t;});
- sub.parentNode.insertBefore(g,sub.nextSibling);var m=document.createElement("button");m.type="button";m.className="pl2-more";m.onclick=function(){toggle();};g.parentNode.insertBefore(m,g.nextSibling);
- sec.classList.add("pl2-on");toggle(false);paint();return true;}
-var n=0,iv=setInterval(function(){n++;mount();paint();if(n>200)clearInterval(iv);},1500);
-setTimeout(function(){mount();paint();},300);
+function nm(c){return ((q(".hn-pn",c)||{}).textContent)||"";}
+function lab(c){if(c.classList.contains("hn-pro"))return "Pro";if(c.matches(".hn-tg"))return "Together";if(c.matches(".ini-plan"))return "INI-CET";if(c.matches(".fmg-plan"))return "FMG";var n=nm(c);return /Directory/.test(n)?"Directory":/Free/.test(n)?"Free":n.slice(0,12);}
+var t0=Date.now();
+function build(){var sec=q("#plans"),g=sec&&q(".hn-pgrid",sec);if(!g||!g.getAttribute("data-deck"))return false;if(g.getAttribute("data-deck2"))return true;
+ var ini=q(".ini-plan",sec),fmg=q(".fmg-plan",sec);if((!ini||!fmg)&&Date.now()-t0<9000)return false;
+ g.setAttribute("data-deck2","1");
+ [ini,fmg].forEach(function(c){if(c){c.classList.add("hn-xc");g.appendChild(c);}});
+ var cards=[].slice.call(g.children),pro=q(".hn-pro",g),dir=cards.find(function(c){return /Directory/.test(nm(c));}),free=cards.find(function(c){return /Free/.test(nm(c));}),tg=cards.find(function(c){return c.matches(".hn-tg");});
+ var order=[pro,dir,free,tg,ini,fmg].filter(Boolean);cards.forEach(function(c){if(order.indexOf(c)<0)order.push(c);});order.forEach(function(c){g.appendChild(c);});
+ sec.classList.add("dk2");
+ var wrap=document.createElement("div");wrap.className="dk2-wrap";g.parentNode.insertBefore(wrap,g);wrap.appendChild(g);
+ wrap.insertAdjacentHTML("beforeend",'<button type="button" class="dk2-a l" aria-label="Previous plans">‹</button><button type="button" class="dk2-a r" aria-label="More plans">›</button>');
+ var seg=document.createElement("div");seg.className="dk2-seg";seg.setAttribute("role","tablist");seg.setAttribute("aria-label","Plans");
+ seg.innerHTML='<i></i>'+order.map(function(c,i){return '<button type="button" role="tab" data-i="'+i+'">'+lab(c)+'</button>';}).join("");wrap.parentNode.insertBefore(seg,wrap);
+ var dots=document.createElement("div");dots.className="dk2-dots";dots.innerHTML=order.map(function(){return "<i></i>";}).join("");wrap.parentNode.insertBefore(dots,wrap.nextSibling);
+ var bs=[].slice.call(seg.querySelectorAll("button")),ds=[].slice.call(dots.children),pill=q("i",seg),aL=q(".dk2-a.l",wrap),aR=q(".dk2-a.r",wrap),cur=-1;
+ function mob(){return innerWidth<=760;}
+ function padL(){return parseFloat(getComputedStyle(g).paddingLeft)||0;}
+ function set(i,force){if(i===cur&&!force)return;cur=i;bs.forEach(function(b,k){b.classList.toggle("on",k===i);});ds.forEach(function(d,k){d.classList.toggle("on",k===i);});
+  var b=bs[i];if(b&&b.offsetWidth){pill.style.width=b.offsetWidth+"px";pill.style.transform="translateX("+(b.offsetLeft-4)+"px)";if(seg.scrollWidth>seg.clientWidth)seg.scrollTo({left:b.offsetLeft-seg.clientWidth/2+b.offsetWidth/2,behavior:"smooth"});}
+  var max=g.scrollWidth-g.clientWidth-2;aL.classList.toggle("off",g.scrollLeft<=2);aR.classList.toggle("off",g.scrollLeft>=max);}
+ function target(el){return mob()?el.offsetLeft-(g.clientWidth-el.clientWidth)/2:el.offsetLeft-padL();}
+ function go(i){i=Math.max(0,Math.min(order.length-1,i));g.scrollTo({left:target(order[i]),behavior:"smooth"});set(i);try{navigator.vibrate&&navigator.vibrate(6);}catch(e){}}
+ bs.forEach(function(b){b.onclick=function(){go(+b.getAttribute("data-i"));};});
+ ds.forEach(function(d,k){d.onclick=function(){go(k);};});
+ aL.onclick=function(){go(cur-1);};aR.onclick=function(){go(cur+1);};
+ var t=null;g.addEventListener("scroll",function(){clearTimeout(t);t=setTimeout(function(){var best=0,bd=1e9,ref=mob()?g.scrollLeft+g.clientWidth/2:g.scrollLeft+padL();
+  order.forEach(function(el,k){var p=mob()?el.offsetLeft+el.clientWidth/2:el.offsetLeft,d=Math.abs(p-ref);if(d<bd){bd=d;best=k;}});set(best,true);},60);},{passive:true});
+ g.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){e.preventDefault();go(cur+1);}else if(e.key==="ArrowLeft"){e.preventDefault();go(cur-1);}});g.tabIndex=0;
+ window.addEventListener("resize",function(){set(cur,true);});
+ requestAnimationFrame(function(){g.scrollLeft=0;set(0,true);});
+ return true;}
+var n=0;(function w(){if(build())return;if(++n<80)setTimeout(w,250);})();
 })();</script></body>
 </html>
