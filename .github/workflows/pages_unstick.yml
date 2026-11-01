@@ -1,0 +1,12 @@
+name: pages-unstick
+on:
+  workflow_dispatch:
+    inputs:
+      sha: { description: 'stuck Pages deployment id (commit sha)', required: true }
+permissions: { pages: write, contents: read }
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh api -X POST "repos/${{ github.repository }}/pages/deployments/${{ inputs.sha }}/cancel" || true
+        env: { GH_TOKEN: '${{ github.token }}' }
