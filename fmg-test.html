@@ -8,8 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@700;800&display=swap">
 <style>
-:root{--bg:#f6f4ee;--card:#fff;--ink:#14201d;--dim:#5e6b66;--line:#e4e1d7;--teal:#0f6e5c;--teal2:#14a085;--mint:#d9f2ea;--gold:#f5b301;--coral:#ff6b5b;--violet:#6d5bd0;--sh:0 1px 2px rgba(20,32,29,.06),0 8px 28px rgba(20,32,29,.08)}
-@media (prefers-color-scheme:dark){:root{--bg:#0d1412;--card:#15201d;--ink:#eef4f1;--dim:#9fb0aa;--line:#24322e;--mint:#123a31;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35)}}
+:root{color-scheme:light;--bg:#fbf6ee;--card:#fff;--ink:#14201d;--dim:#5e6b66;--line:#e4e1d7;--teal:#0f6e5c;--teal2:#14a085;--mint:#d9f2ea;--gold:#f5b301;--coral:#ff6b5b;--violet:#6d5bd0;--sh:0 1px 2px rgba(20,32,29,.06),0 8px 28px rgba(20,32,29,.08)}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;overflow-x:hidden}
 a{color:inherit}
@@ -18,7 +17,7 @@ a{color:inherit}
 .brand{display:flex;align-items:center;gap:8px;font-weight:800;text-decoration:none}.brand img{width:30px;height:30px;border-radius:8px}
 .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}
 /* hero */
-.hero{position:relative;border-radius:28px;overflow:hidden;padding:34px 22px 28px;background:linear-gradient(140deg,#0f6e5c 0%,#14a085 55%,#21b996 100%);color:#fff;box-shadow:var(--sh)}
+.hero{position:relative;border-radius:28px;overflow:hidden;padding:34px 22px 28px;background:radial-gradient(520px 300px at 92% 8%,rgba(255,196,110,.55),transparent 62%),linear-gradient(140deg,#0f6e5c 0%,#14866f 52%,#2a9a7a 100%);color:#fff;box-shadow:var(--sh)}
 .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.25}
 .hero:before{width:340px;height:340px;right:-90px;top:-120px;background:radial-gradient(circle,#fff 0,transparent 70%)}
 .hero:after{width:260px;height:260px;left:-80px;bottom:-110px;background:radial-gradient(circle,#f5b301 0,transparent 70%);opacity:.35}
@@ -80,12 +79,10 @@ button{font:inherit}
 .cc .s{color:var(--dim);font-size:12.5px;font-weight:600}
 .seat{flex:none;text-align:center;background:var(--mint);color:var(--teal);border-radius:14px;padding:6px 10px;min-width:62px}
 .seat b{display:block;font:800 22px/1 "Inter Tight",sans-serif}.seat small{font-size:10.5px;font-weight:800;letter-spacing:.3px}
-@media (prefers-color-scheme:dark){.seat{color:#7fe0c4}}
 .meter{height:6px;border-radius:999px;background:var(--line);overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--teal2),var(--gold))}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 9px;background:var(--bg);border:1px solid var(--line)}
 .chip.hot{background:#fff1ee;border-color:#ffd2cb;color:#c2402f}.chip.new{background:#efeaff;border-color:#dcd3ff;color:#5a46c8}.chip.money{background:#fff7dc;border-color:#ffe7a1;color:#8a6400}
-@media (prefers-color-scheme:dark){.chip.hot{background:#3a1d19;color:#ffb3a8;border-color:#5a2a23}.chip.new{background:#251f45;color:#c7bcff;border-color:#3a3170}.chip.money{background:#3a3010;color:#ffd970;border-color:#5a4a14}}
 .lock{position:absolute;left:0;right:0;top:300px;bottom:0;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;background:linear-gradient(to bottom,rgba(0,0,0,0) 0,var(--bg) 220px);z-index:3}.lock[hidden]{display:none}
 .locked .grid{pointer-events:none;user-select:none;max-height:560px;overflow:hidden}.locked .grid .cc:nth-child(n+3){filter:blur(4px)}.finder.locked{min-height:660px}
 .lc{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh);padding:22px;max-width:440px;width:100%;text-align:center}
@@ -101,16 +98,16 @@ button{font:inherit}
 .one-t{grid-column:1/-1;font-size:13px;font-weight:700;color:var(--teal)}
 @media (max-width:560px){.one{grid-template-columns:1fr}.one-r{justify-content:space-between}}
 .ov{position:fixed;inset:0;background:rgba(10,20,17,.55);backdrop-filter:blur(4px);z-index:50;display:flex;align-items:flex-end;justify-content:center}.ov[hidden]{display:none}
-.sheet{background:var(--card);color:var(--ink);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px 18px 24px;position:relative;animation:up .35s cubic-bezier(.2,.9,.3,1.1)}
+.sheet{box-sizing:border-box;overflow-x:hidden;background:var(--card);color:var(--ink);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px 18px 24px;position:relative;animation:up .35s cubic-bezier(.2,.9,.3,1.1)}
 @media (min-width:640px){.ov{align-items:center}.sheet{border-radius:24px}}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet .x{position:absolute;right:12px;top:12px;border:0;background:var(--bg);width:36px;height:36px;border-radius:50%;cursor:pointer;color:var(--ink)}
 .sheet h3{margin:0 0 4px;font:800 21px/1.2 "Inter Tight",sans-serif}.sheet .sub{color:var(--dim);font-size:13.5px;margin:0 0 14px}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fg .w{grid-column:1/-1}
+.fg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.fg>*{min-width:0}.fg .w{grid-column:1/-1}
 .fg label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--dim)}
-.fg input,.fg select,.fg textarea{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:11px 12px;font:inherit;font-size:14.5px;font-weight:500}
+.fg input,.fg select,.fg textarea{width:100%;max-width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:11px 12px;font:inherit;font-size:14.5px;font-weight:500}
 .fg textarea{min-height:88px;resize:vertical}
-@media (max-width:480px){.fg{grid-template-columns:1fr}}
+@media (max-width:480px){.fg{grid-template-columns:minmax(0,1fr)}}
 .bkpay{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.bkpay b{font:800 22px/1 "Inter Tight",sans-serif}
 .bkm{font-size:13px;margin-top:8px;color:var(--dim)}.bkm.bad{color:#c2402f}
 .done{text-align:center;padding:20px 6px}.done .big{font-size:52px}
