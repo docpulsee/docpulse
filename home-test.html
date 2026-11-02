@@ -5063,7 +5063,18 @@ html.dpdark .xch{color:#fff}
  .xk .xkc{margin-left:2px;font-size:10px;opacity:.9}.xk .xks{font-weight:800;font-size:10px;letter-spacing:.06em;background:#fff;color:#111827;border-radius:999px;padding:3px 7px;margin-left:4px}
  .xk:before{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid rgba(255,255,255,.8);opacity:0;animation:xPulse 2.2s ease-out .8s 3}
 }
-@media (prefers-reduced-motion:reduce){.xk:before{animation:none}.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
+
+/* v4.2: chip joined to the logo (divider + chip right after "docpulsee"), stronger glow and a shimmer */
+.xch-wrap{display:inline-flex;align-items:center;gap:12px;margin-left:4px;flex:none}
+.xch-wrap:before{content:"";width:1px;height:34px;background:linear-gradient(180deg,transparent,rgba(15,23,42,.18),transparent)}
+.dp-hdr-brand{flex:0 1 auto!important}
+.xch{overflow:hidden;height:46px;font-size:15px;box-shadow:0 10px 26px -8px rgba(13,148,136,.85),0 0 0 3px rgba(52,211,153,.18),inset 0 1px 0 rgba(255,255,255,.5)}
+.xch[data-x=inicet]{box-shadow:0 10px 26px -8px rgba(109,40,217,.85),0 0 0 3px rgba(129,140,248,.22),inset 0 1px 0 rgba(255,255,255,.5)}
+.xch:after{content:"";position:absolute;top:0;bottom:0;left:-45%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:xChShine 3.6s ease-in-out 1s infinite}
+@keyframes xChShine{0%,62%{left:-45%}100%{left:130%}}
+.xch:before{inset:0!important;border-radius:999px}
+@media (max-width:760px){.xch-wrap{display:none}}
+@media (prefers-reduced-motion:reduce){.xch:after{animation:none}.xk:before{animation:none}.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10014,7 +10025,7 @@ window.addEventListener("resize",function(){if(po&&innerWidth>760)close();});
 function chipHTML(x){return '<span class="dot x-'+x+'">'+IC[x]+'</span><span class="lb">'+X[x][0]+'</span><span class="cv">▾</span>';}
 function mountChip(){if(document.querySelector(".xch"))return true;var nav=document.querySelector(".hx-nav");if(!nav)return false;var btn=[].slice.call(nav.querySelectorAll(":scope>button")).find(function(b){return /INI-CET/.test(b.textContent);});if(!btn)return false;
  var c=document.createElement("button");c.type="button";c.className="xch";c.setAttribute("aria-haspopup","dialog");c.setAttribute("aria-expanded","false");c.setAttribute("aria-label","Choose your exam");c.innerHTML=chipHTML(cur());c.setAttribute("data-x",cur());c.onclick=function(e){e.preventDefault();e.stopPropagation();open(c,"header");};
- btn.style.display="none";btn.setAttribute("data-x4-hidden","1");var first=[].slice.call(nav.children).find(function(e){return e.tagName==="BUTTON"||e.classList.contains("hn-dd");});nav.insertBefore(c,first||btn);nav.style.marginLeft="";return true;}
+ btn.style.display="none";btn.setAttribute("data-x4-hidden","1");var br=document.querySelector(".dp-hdr-brand");if(br){var wr=document.createElement("span");wr.className="xch-wrap";wr.appendChild(c);br.appendChild(wr);}else{nav.insertBefore(c,nav.firstChild);}return true;}
 function tokHTML(x){return '<span class="xtv">'+X[x][0]+'</span><i aria-hidden="true">▾</i>';}
 function mountTok(){var ok=true;
  var h=document.getElementById("hn-h");if(h&&!h.querySelector(".xtok")){h.innerHTML='Which <button type="button" class="xtok" data-tok="neetpg" aria-label="Exam: NEET PG. Tap to change">'+tokHTML("neetpg")+'</button> seat can your rank get?';}else if(!h)ok=false;
