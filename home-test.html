@@ -5083,62 +5083,48 @@ html.dpdark .xch{color:#fff}
 html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;background:rgba(124,58,237,.18)!important}
 @media (prefers-reduced-motion:reduce){.xch:after{animation:none}.xk:before{animation:none}.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
 </style><style id="dp-nav5-css">
-.hx-nav{gap:2px!important;align-items:center}
-.hx-nav>button,.hx-nav .hx-more{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif!important;font-size:14px!important;font-weight:500!important;letter-spacing:-.01em!important;color:#1d1d1f!important;background:transparent!important;box-shadow:none!important;border:0!important;border-radius:999px!important;padding:8px 13px!important;min-height:36px!important;transition:background .2s,color .2s!important}
-.hx-nav>button:hover,.hx-nav .hx-more:hover,.hx-dd.open .hx-more{background:rgba(0,0,0,.055)!important;color:#000!important}
-.hx-nav>button:active{transform:scale(.97)}
+.hx-nav{gap:4px!important;align-items:center!important}
+.hx-nav>.hx-glide{display:none!important}
+.hx-nav>button[data-x4-hidden],.hx-nav>button[data-sec="neetpg-app-wrap"]{display:none!important}
+.hx-nav>button,.hx-nav .hx-more{flex-direction:row!important;align-items:center!important;gap:7px!important;height:38px!important;min-height:38px!important;padding:0 12px!important;border:0!important;border-radius:999px!important;background:transparent!important;box-shadow:none!important;
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif!important;font-size:14px!important;font-weight:500!important;letter-spacing:-.012em!important;line-height:1!important;color:#1d1d1f!important;white-space:nowrap;position:relative;transition:background .2s,color .2s!important}
+.hx-nav>button:hover,.hx-nav .hx-more:hover,.hx-dd.open .hx-more{background:rgba(0,0,0,.05)!important;color:#000!important}
+.hx-nav>button:active,.hx-nav .hx-more:active{transform:scale(.97)}
 .hx-nav>button svg.hx-ni{display:none!important}
-.hx-nav>button.cur:not(.hx-cta)::after{content:""!important;position:absolute;left:50%!important;right:auto!important;bottom:2px!important;width:4px!important;height:4px!important;margin-left:-2px;border-radius:50%!important;background:#0f6e5c!important;animation:none!important}
-.hx-nav>.hx-plans,.hx-nav>.hx-plans.cur{color:#1d1d1f!important;background:transparent!important;box-shadow:none!important;margin-left:0!important}
-.hx-nav>.hx-plans:hover{background:rgba(0,0,0,.055)!important}
-.hx-nav>button[onclick*="dpOpenMaker"]{color:#1d1d1f!important;background:transparent!important;box-shadow:none!important;font-weight:500!important}
-.hx-nav>button[onclick*="dpOpenMaker"]:hover{background:rgba(0,0,0,.055)!important}
-/* order */
+.nv-ic{display:inline-grid;place-items:center;width:18px;height:18px;flex:none;color:#6e6e73;transition:color .2s,transform .25s cubic-bezier(.3,1.6,.5,1)}
+.nv-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hx-nav>button:hover .nv-ic,.hx-nav .hx-more:hover .nv-ic{color:#0f6e5c;transform:translateY(-1px)}
+.hx-nav>button.cur:not(.hx-cta){color:#0f6e5c!important}.hx-nav>button.cur:not(.hx-cta) .nv-ic{color:#0f6e5c}
+.hx-nav>button.cur:not(.hx-cta)::after{content:""!important;position:absolute!important;left:50%!important;right:auto!important;bottom:1px!important;width:4px!important;height:4px!important;margin-left:-2px!important;border-radius:50%!important;background:#0f6e5c!important;animation:none!important}
+.hx-nav>.hx-plans,.hx-nav>.hx-plans.cur{background:transparent!important;box-shadow:none!important;margin-left:0!important}
+.hx-nav>button[onclick*="dpOpenMaker"]{font-weight:500!important;background:transparent!important;box-shadow:none!important;color:#1d1d1f!important}
+.hx-nav>button[onclick*="dpOpenMaker"]:hover{background:rgba(0,0,0,.05)!important}
+.hx-nav>button[onclick*="dpOpenMaker"] svg.hx-ni{display:none!important}
+.hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{display:none!important}
+.hx-nav>button[onclick*="dpOpenMaker"] .nv-star{font-size:11px;color:#f59e0b;margin-left:-3px;transform:translateY(-5px);display:inline-block;animation:nvTw 2.6s ease-in-out infinite}
+@keyframes nvTw{50%{transform:translateY(-5px) scale(1.25) rotate(18deg);opacity:.75}}
+.hx-nav .hx-more>svg{width:9px!important;height:9px!important;opacity:.55;margin-left:-2px}
+.hx-nav .hx-more>.nv-ic svg{width:18px!important;height:18px!important;opacity:1}
 .hx-nav>button[onclick*="dpOpenMaker"]{order:1}.hx-nav>button[onclick*="dpOpenPlan"]{order:2}.hx-nav>button[data-sec="senior-connect"]{order:3}
-.hx-nav>.hx-plans{order:4}.hx-nav>.hx-dd{order:5}.hx-nav>.hx-cta{order:9}.hx-nav>.hx-glide{display:none!important}
-/* the one accent: brand teal pill */
-.hx-nav>.hx-cta{margin-left:10px!important;padding:9px 16px!important;border-radius:999px!important;background:linear-gradient(180deg,#14937b,#0f6e5c)!important;color:#fff!important;font-weight:600!important;box-shadow:0 8px 18px -8px rgba(15,110,92,.7),inset 0 1px 0 rgba(255,255,255,.25)!important}
-.hx-nav>.hx-cta:hover{background:linear-gradient(180deg,#119079,#0b5a4b)!important;color:#fff!important}
-/* macOS-toolbar style with the dock's app-icon tiles: small gradient rounded square + white line icon on top, label underneath */
-.hx-nav>button:not(.hx-cta),.hx-nav .hx-more{flex-direction:column!important;justify-content:center!important;gap:3px!important;padding:4px 10px!important;min-height:54px!important;border-radius:14px!important;font-size:11.5px!important;line-height:1.1!important;font-weight:600!important;color:#3a3a3c!important;position:relative}
-.nv-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ig);box-shadow:0 4px 10px -4px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
-.nv-ic svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
-.hx-nav>button:hover .nv-ic,.hx-nav .hx-more:hover .nv-ic{transform:translateY(-2px) scale(1.08)}
-.hx-nav [data-nv=list]{--ig:linear-gradient(160deg,#fdba74,#ea580c)}.hx-nav [data-nv=plan]{--ig:linear-gradient(160deg,#5eead4,#0f766e)}
-.hx-nav [data-nv=senior]{--ig:linear-gradient(160deg,#c4b5fd,#7c3aed)}.hx-nav [data-nv=plans]{--ig:linear-gradient(160deg,#fde68a,#d97706)}
-.hx-nav [data-nv=more]{--ig:linear-gradient(160deg,#cbd5e1,#64748b)}
-.hx-nav .hx-more>svg{position:absolute;right:3px;top:10px;width:8px;height:8px;opacity:.45}
-.hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{position:absolute!important;top:2px;right:8px;margin:0!important}
-.hx-nav>button.cur:not(.hx-cta)::after{bottom:0!important}
-/* the counselling pill: phone on the left, two lines (name / price) */
-.hx-nav>.hx-cta{flex-direction:row!important;align-items:center!important;gap:0!important;padding:7px 16px 7px 12px!important;min-height:46px!important;line-height:1.15!important;font-size:13px!important;text-align:left}
-.hx-nav>.hx-cta span{display:block!important;font-size:11.5px!important;opacity:.8!important;margin:0!important}
-.hx-nav>.hx-cta{display:inline-grid!important;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:9px;row-gap:0}
-.hx-nav>.hx-cta .nv-ph{grid-row:1/3;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2)}.hx-nav>.hx-cta .nv-ph svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-.hx-nav>.hx-cta span{grid-column:2}
-
-/* v3 (owner: match the bottom dock exactly): same tile size ratio, same gradients and inset shadows, same label type; counselling is a tile too (pink stethoscope, as in the dock) */
-.hx-nav>button,.hx-nav .hx-more{font-family:inherit!important;font-size:11px!important;font-weight:600!important;letter-spacing:0!important;color:#3d4845!important;gap:4px!important;padding:3px 8px!important;min-height:58px!important;border-radius:14px!important;flex-direction:column!important;justify-content:center!important}
-.hx-nav>button:hover,.hx-nav .hx-more:hover{background:rgba(13,31,26,.05)!important;color:#1b2522!important}
-.nv-ic{width:36px!important;height:36px!important;border-radius:10px!important;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.12),0 4px 10px rgba(13,31,26,.18)!important;transform-origin:50% 100%}
-.nv-ic svg{width:20px!important;height:20px!important;stroke:currentColor!important;stroke-width:2!important}
-.hx-nav>button:hover .nv-ic,.hx-nav .hx-more:hover .nv-ic{transform:translateY(-3px) scale(1.1)!important}
-.hx-nav [data-nv=plan]{--ig:linear-gradient(160deg,#34d399,#0f766e)}.hx-nav [data-nv=list]{--ig:linear-gradient(160deg,#fdba74,#ea580c)}
-.hx-nav [data-nv=senior]{--ig:linear-gradient(160deg,#c4b5fd,#7c3aed)}.hx-nav [data-nv=plans]{--ig:linear-gradient(160deg,#fcd34d,#d97706)}
-.hx-nav [data-nv=more]{--ig:linear-gradient(160deg,#cbd5e1,#64748b)}.hx-nav [data-nv=steth]{--ig:linear-gradient(160deg,#f9a8d4,#db2777)}
-.hx-nav>.hx-cta{display:inline-flex!important;background:transparent!important;box-shadow:none!important;color:#3d4845!important;padding:3px 8px!important;margin-left:2px!important;min-height:58px!important;border-radius:14px!important;grid-template-columns:none!important}
-.hx-nav>.hx-cta:hover{background:rgba(13,31,26,.05)!important;color:#1b2522!important}
-.hx-nav>.hx-cta span{display:none!important}
-.hx-nav>.hx-cta .nv-ph{display:none!important}
-.hx-nav>button.cur::after{content:""!important;bottom:-1px!important;width:4px!important;height:4px!important;background:#1b2522!important;opacity:.7}
-/* tight header: smaller padding first, then the price, then Plans; the counselling pill never hides (display above is !important) */
-.hx-f1 .hx-nav>button:not(.hx-cta),.hx-f1 .hx-nav .hx-more{padding:5px 8px!important}
-.hx-f5 .hx-nav>.hx-plans{display:none!important}
-/* matching round icon buttons on the right (theme toggle) */
-.dpt-btn{width:36px!important;height:36px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
-html.dpdark .hx-nav>button,html.dpdark .hx-nav .hx-more,html.dpdark .hx-nav>.hx-plans,html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#f5f5f7!important}
-html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:rgba(255,255,255,.1)!important}
-
+.hx-nav>.hx-plans{order:4}.hx-nav>.hx-dd{order:5}.hx-nav>.hx-cta{order:9}
+.hx-nav>.hx-cta{display:inline-flex!important;gap:8px!important;height:40px!important;padding:0 16px 0 6px!important;margin-left:10px!important;border-radius:999px!important;background:linear-gradient(180deg,#14937b,#0f6e5c)!important;color:#fff!important;font-weight:600!important;box-shadow:0 6px 16px -8px rgba(15,110,92,.75),inset 0 1px 0 rgba(255,255,255,.22)!important}
+.hx-nav>.hx-cta:hover{background:linear-gradient(180deg,#129a80,#0b5a4b)!important;color:#fff!important}
+.hx-nav>.hx-cta .nv-ic{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff}
+.hx-nav>.hx-cta .nv-ic svg{width:15px;height:15px;stroke-width:2}
+.hx-nav>.hx-cta>span:not(.nv-ic):not(.nv-l):not(.nv-s){opacity:.78!important;font-weight:500!important;margin-left:-3px}
+body > header.sticky .max-w-6xl{max-width:1320px!important}
+.nv-s{display:none}
+/* sizes by screen width (instead of the old auto-hide, which hid "Talk to a senior" first) */
+.hx-nav>button[data-sec="senior-connect"],.hx-nav>button[onclick*="dpOpenMaker"],.hx-nav>.hx-dd,.hx-nav>.hx-plans{display:inline-flex!important}
+.hx-nav>.hx-cta>span:not(.nv-ic):not(.nv-l):not(.nv-s){display:none!important}
+@media (min-width:1700px){.hx-nav>.hx-cta>span:not(.nv-ic):not(.nv-l):not(.nv-s){display:inline!important}}
+@media (max-width:1439px){.hx-nav>button,.hx-nav .hx-more{padding:0 10px!important;gap:6px!important}}
+@media (max-width:1699px){html body .hx-nav>button[onclick*="dpOpenPlan"]{display:none!important}}
+@media (max-width:1199px){.nv-l{display:none}.nv-s{display:inline}.hx-nav>.hx-plans,.hx-nav .hx-more{font-size:0!important;gap:0!important;padding:0 9px!important}.hx-nav .hx-more>svg{display:none!important}.hx-nav>.hx-plans .nv-ic,.hx-nav .hx-more .nv-ic{width:20px;height:20px}}
+@media (max-width:1023px){html body .hx-nav>.hx-plans{display:none!important}.hx-nav>.hx-cta{padding:0 12px 0 6px!important}}
+.dpt-btn{width:38px!important;height:38px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
+html.dpdark .hx-nav>button:not(.hx-cta),html.dpdark .hx-nav .hx-more{color:#f5f5f7!important}html.dpdark .nv-ic{color:#a1a1a6}
+html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:rgba(255,255,255,.08)!important}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10105,19 +10091,20 @@ var n=0;(function w(){mountKick();var a=mountChip(),b=mountTok();paint();if((a&&
 new MutationObserver(function(){mountKick();mountTok();paint();}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 })();</script><script id="dp-nav5-js">(function(){
 var S='<svg viewBox="0 0 24 24" aria-hidden="true">',I={
- list:S+'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>',
+ list:S+'<path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4 6.5l1 1 1.8-2M4 12l1 1 1.8-2M4 17.5l1 1 1.8-2"/></svg>',
  plan:S+'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
- senior:S+'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>',
- plans:S+'<path d="M6 3h12l3 5-9 13L3 8z"/><path d="M3 8h18M9 3l3 5 3-5M12 21L9 8M12 21l3-13"/></svg>',
- more:S+'<circle cx="6" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/></svg>',
- steth:S+'<path d="M6 3v5.5a4 4 0 0 0 8 0V3"/><path d="M10 12.5v2a5 5 0 0 0 10 0V12"/><circle cx="20" cy="10" r="2.2"/></svg>',
- phone:S+'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'};
-function tile(el,k){if(!el||el.querySelector(".nv-ic"))return;el.setAttribute("data-nv",k);var t=document.createElement("span");t.className="nv-ic";t.setAttribute("aria-hidden","true");t.innerHTML=I[k];el.insertBefore(t,el.firstChild);}
+ senior:S+'<path d="M2.5 9.5L12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5V16c3 2.3 8 2.3 11 0v-4.5"/><path d="M21.5 9.5v5"/></svg>',
+ plans:S+'<path d="M3.5 12.5V5a1.5 1.5 0 0 1 1.5-1.5h7.5L21 12l-8.5 8.5z"/><circle cx="8" cy="8" r="1.4"/></svg>',
+ more:S+'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>',
+ phone:S+'<path d="M5 4h3.5l1.8 4.5-2.3 1.4a10.5 10.5 0 0 0 6.1 6.1l1.4-2.3L20 15.5V19a1.6 1.6 0 0 1-1.7 1.6C10.5 20.1 3.9 13.5 3.4 5.7A1.6 1.6 0 0 1 5 4z"/></svg>'};
+function ic(el,k){if(!el||el.querySelector(".nv-ic"))return;var t=document.createElement("span");t.className="nv-ic";t.setAttribute("aria-hidden","true");t.innerHTML=I[k];el.insertBefore(t,el.firstChild);}
+
+function lab(el,full,short){if(!el||el.querySelector(".nv-l"))return;var tn=[].slice.call(el.childNodes).find(function(x){return x.nodeType===3&&x.textContent.trim();});if(!tn)return;var l=document.createElement("span");l.className="nv-l";l.textContent=full;var s2=document.createElement("span");s2.className="nv-s";s2.textContent=short;el.replaceChild(l,tn);l.after(s2);}
 function run(){var n=document.querySelector(".hx-nav");if(!n)return false;
- tile(n.querySelector(':scope>button[onclick*="dpOpenMaker"]'),"list");tile(n.querySelector(':scope>button[onclick*="dpOpenPlan"]'),"plan");
- tile(n.querySelector(':scope>button[data-sec="senior-connect"]'),"senior");tile(n.querySelector(":scope>.hx-plans"),"plans");tile(n.querySelector(".hx-more"),"more");
- var c=n.querySelector(":scope>.hx-cta");if(c&&!c.querySelector(".nv-ic")){tile(c,"steth");c.title="1:1 counselling with our founders · \u20B92,000";}
- return true;}
+ var lm=n.querySelector(':scope>button[onclick*="dpOpenMaker"]');ic(lm,"list");if(lm&&!lm.querySelector(".nv-star")){var st=document.createElement("span");st.className="nv-star";st.setAttribute("aria-hidden","true");st.textContent="✦";lm.appendChild(st);}
+ ic(n.querySelector(':scope>button[onclick*="dpOpenPlan"]'),"plan");ic(n.querySelector(':scope>button[data-sec="senior-connect"]'),"senior");
+ ic(n.querySelector(":scope>.hx-plans"),"plans");ic(n.querySelector(".hx-more"),"more");ic(n.querySelector(":scope>.hx-cta"),"phone");
+ lab(lm,"List Maker","List");lab(n.querySelector(':scope>button[data-sec="senior-connect"]'),"Talk to a senior","Seniors");lab(n.querySelector(":scope>.hx-cta"),"1:1 counselling","1:1 call");return true;}
 var k=0;(function w(){if(run()&&++k>4)return;if(k<40)setTimeout(w,500);})();
 })();</script></body>
 </html>
