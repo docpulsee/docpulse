@@ -5087,7 +5087,7 @@ html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;backg
 .hx-nav>button,.hx-nav .hx-more{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif!important;font-size:14px!important;font-weight:500!important;letter-spacing:-.01em!important;color:#1d1d1f!important;background:transparent!important;box-shadow:none!important;border:0!important;border-radius:999px!important;padding:8px 13px!important;min-height:36px!important;transition:background .2s,color .2s!important}
 .hx-nav>button:hover,.hx-nav .hx-more:hover,.hx-dd.open .hx-more{background:rgba(0,0,0,.055)!important;color:#000!important}
 .hx-nav>button:active{transform:scale(.97)}
-.hx-nav>button svg.hx-ni,.hx-nav .a2-spk{display:none!important}
+.hx-nav>button svg.hx-ni{display:none!important}
 .hx-nav>button.cur:not(.hx-cta)::after{content:""!important;position:absolute;left:50%!important;right:auto!important;bottom:2px!important;width:4px!important;height:4px!important;margin-left:-2px;border-radius:50%!important;background:#0f6e5c!important;animation:none!important}
 .hx-nav>.hx-plans,.hx-nav>.hx-plans.cur{color:#1d1d1f!important;background:transparent!important;box-shadow:none!important;margin-left:0!important}
 .hx-nav>.hx-plans:hover{background:rgba(0,0,0,.055)!important}
@@ -5096,15 +5096,21 @@ html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;backg
 /* order */
 .hx-nav>button[onclick*="dpOpenMaker"]{order:1}.hx-nav>button[onclick*="dpOpenPlan"]{order:2}.hx-nav>button[data-sec="senior-connect"]{order:3}
 .hx-nav>.hx-plans{order:4}.hx-nav>.hx-dd{order:5}.hx-nav>.hx-cta{order:9}.hx-nav>.hx-glide{display:none!important}
-/* the one accent */
-.hx-nav>.hx-cta{margin-left:10px!important;padding:9px 16px!important;border-radius:999px!important;background:#1d1d1f!important;color:#fff!important;font-weight:600!important;box-shadow:0 6px 16px -8px rgba(0,0,0,.45)!important}
-.hx-nav>.hx-cta:hover{background:#000!important;color:#fff!important}
+/* the one accent: brand teal pill */
+.hx-nav>.hx-cta{margin-left:10px!important;padding:9px 16px!important;border-radius:999px!important;background:linear-gradient(180deg,#14937b,#0f6e5c)!important;color:#fff!important;font-weight:600!important;box-shadow:0 8px 18px -8px rgba(15,110,92,.7),inset 0 1px 0 rgba(255,255,255,.25)!important}
+.hx-nav>.hx-cta:hover{background:linear-gradient(180deg,#119079,#0b5a4b)!important;color:#fff!important}
+/* small emoji built into each tab */
+.hx-nav>button[onclick*="dpOpenPlan"]::before{content:"\1F9ED";margin-right:6px;font-size:14px}
+.hx-nav>button[data-sec="senior-connect"]::before{content:"\1F393";margin-right:6px;font-size:14px}
+.hx-nav>.hx-plans::before{content:"\1F48E";margin-right:6px;font-size:13px}
+.hx-nav>.hx-cta::before{content:"\1F4DE";margin-right:7px;font-size:14px;filter:saturate(1.2)}
+.hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{display:inline-block!important;margin-left:5px}
 .hx-nav>.hx-cta span{opacity:.7!important;font-weight:500!important}
 /* matching round icon buttons on the right (theme toggle) */
 .dpt-btn{width:36px!important;height:36px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
 html.dpdark .hx-nav>button,html.dpdark .hx-nav .hx-more,html.dpdark .hx-nav>.hx-plans,html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#f5f5f7!important}
 html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:rgba(255,255,255,.1)!important}
-html.dpdark .hx-nav>.hx-cta{background:#f5f5f7!important;color:#1d1d1f!important}
+
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
