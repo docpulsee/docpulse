@@ -96,25 +96,32 @@ body.go #marks,body.go #rank{margin-top:-22px;position:relative;z-index:4}
 .back{display:inline-block;margin:0 0 6px;font-size:13.5px;font-weight:700;color:var(--ind);background:none;border:0;cursor:pointer;font-family:inherit}
 #rank .rk .v{font-size:clamp(40px,12vw,56px)}.feel{margin-top:12px}.stand{margin-top:12px}.acts{margin-top:12px}
 
-/* laptop / desktop (2 Nov): AIIMS photo fills the left panel (whole photo visible over a blurred copy), app on the right, all on one screen */
+/* laptop / desktop (2 Nov, v2 "integrated"): the AIIMS photo is the whole page background; a soft frosted wash on the left
+   carries the title and the glass app card, the building and its signboard stay clear on the right */
 .ph i.full{display:none}
 @media (min-width:900px){
- body{overflow-x:hidden}
- .ph{position:fixed!important;left:0;top:0;bottom:0;width:56vw;height:100vh!important;margin:0!important;border-radius:0 40px 40px 0!important;z-index:2}
- .ph i.img{filter:blur(26px) brightness(.85) saturate(1.2);transform:scale(1.15)!important;animation:none!important;background-image:url(/img/aiims_hero_1200.webp)}
- .ph i.full{display:block;position:absolute;left:0;right:0;top:50%;height:calc(56vw * 941 / 1672);transform:translateY(-58%);background:url(/img/aiims_hero_1200.webp) center/cover no-repeat;opacity:0;transition:opacity 1.2s ease;box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
- .ph.on i.full{opacity:1;animation:kb2 30s ease-in-out 1.2s infinite alternate}@keyframes kb2{to{transform:translateY(-58%) scale(1.04)}}
- .ph:after{background:linear-gradient(180deg,rgba(20,18,60,.25) 0%,rgba(20,18,60,0) 25%,rgba(20,18,60,0) 55%,rgba(20,18,60,.75) 100%)!important}
- .ph .tag{left:28px;top:24px}
- .hello{bottom:48px!important;padding:0 44px!important}.hello h1{font-size:clamp(30px,3.2vw,46px)!important}.hello p{font-size:16px}.hello .orb{width:42px;height:42px}
- body.go .ph{height:100vh!important}body.go .hello p,body.go .hrow{display:block}body.go .hrow{display:flex}body.go .hello h1{font-size:clamp(30px,3.2vw,46px)!important}
- .wrap{margin-left:56vw;max-width:none;width:44vw;min-height:100vh;padding:18px clamp(24px,4vw,64px) 30px;display:flex;flex-direction:column}
- .wrap>.top{order:-1}.wrap>section.card,.wrap>.foot{width:100%;max-width:500px;margin-left:auto;margin-right:auto}
- #inp,body.go #marks,body.go #rank{margin-top:auto!important}#inp{margin-top:auto}
- .foot{margin-top:auto!important;padding-top:16px}
- .blob.b1{left:auto;right:-60px}
+ body{overflow-x:hidden;background:#1e1b4b}
+ .ph{position:fixed!important;inset:0;width:100vw;height:100vh!important;margin:0!important;border-radius:0!important;z-index:0;background:#2a2560}
+ .ph i.img{background-image:url(/img/aiims_hero_1200.webp)!important;background-position:62% 40%!important;transform:scale(1.04)}
+ .ph.on i.img{animation:kb 34s ease-in-out 1.2s infinite alternate}
+ .ph:after{background:linear-gradient(90deg,rgba(238,242,255,.94) 0%,rgba(238,242,255,.86) 30%,rgba(238,242,255,.35) 46%,rgba(238,242,255,0) 60%),linear-gradient(0deg,rgba(15,12,45,.35),rgba(15,12,45,0) 30%)!important}
+ .ph .tag{left:auto;right:26px;top:auto;bottom:22px}
+ .sp{display:none}
+ .blob{display:none}
+ .wrap{position:relative;z-index:2;max-width:none;width:min(46vw,600px);margin:0 0 0 clamp(24px,5vw,84px);min-height:100vh;padding:18px 0 22px;display:flex;flex-direction:column}
+ .hello{position:static!important;padding:0!important;margin:auto 0 0!important;color:var(--ink)}
+ .hello h1{color:var(--ink);text-shadow:none;font-size:clamp(30px,3vw,44px)!important}.hello p{color:var(--dim);text-shadow:none;font-size:16px}.hello .breath{color:var(--soft)}
+ .hrow{display:flex!important}body.go .hello p{display:block}body.go .hello h1{font-size:clamp(30px,3vw,44px)!important}
+ #inp,body.go #marks,body.go #rank{margin-top:16px!important;margin-bottom:auto}
+ .card{max-width:500px;background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.75)}
+ .foot{text-align:left;margin-top:14px}
+ .wrap>*:not(.ph):not(#cf){position:relative;z-index:3}
+ body.go .hello p{display:none}
 }
-@media (min-width:900px) and (max-height:760px){.card{padding:16px}.step input{font-size:24px}.ring{width:150px;height:150px}.ring b{font-size:40px}.cta{padding:13px}}
+@media (min-width:900px) and (max-height:780px){.card{padding:15px}.step input{font-size:24px}.ring{width:150px;height:150px}.ring b{font-size:40px}.cta{padding:13px;margin-top:10px}.hello h1{font-size:30px!important}.hello p{display:none!important}}
+/* phones: photo melts into the page instead of a separate box */
+@media (max-width:899px){.ph{border-radius:0!important}.ph:after{background:linear-gradient(180deg,rgba(20,18,60,.10) 0%,rgba(20,18,60,0) 28%,rgba(20,18,60,.45) 70%,rgba(238,242,255,.0) 100%)!important}
+ .ph:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;z-index:2;background:linear-gradient(180deg,rgba(238,242,255,0),#eef2ff)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
@@ -169,6 +176,7 @@ function popIn(el){el.classList.remove("pop");void el.offsetWidth;el.classList.a
 function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const c=$("#cf"),g=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;const cols=["#818cf8","#34d399","#fbbf24","#f472b6","#60a5fa"];const P=[];const cx=innerWidth/2,cy=Math.min(innerHeight*.38,320);
  for(let i=0;i<70;i++){const a=Math.random()*Math.PI*2,v=4+Math.random()*7;P.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,s:4+Math.random()*5,r:Math.random()*6,c:cols[i%5],l:1});}
  const t0=performance.now();(function f(t){g.clearRect(0,0,c.width,c.height);let on=false;P.forEach(p=>{p.vy+=.22;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=.15;p.l-=.012;if(p.l>0){on=true;g.globalAlpha=Math.max(0,p.l);g.fillStyle=p.c;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);g.restore();}});g.globalAlpha=1;if(on&&t-t0<2600)requestAnimationFrame(f);else g.clearRect(0,0,c.width,c.height);})(t0);}
+(function(){if(matchMedia("(min-width:900px)").matches){const h=document.querySelector(".hello"),w=document.querySelector(".wrap"),t=w.querySelector(".top");w.insertBefore(h,t.nextSibling);}})();
 (function br(){const w=["Breathe in…","Hold…","Breathe out…","You're doing fine"];let i=0;setInterval(()=>{const e=$("#breath");e.style.opacity=0;setTimeout(()=>{i=(i+1)%w.length;e.textContent=w[i];e.style.opacity=1;},700);},3000);})();
 document.querySelectorAll(".step button").forEach(b=>b.onclick=()=>{const el=$("#"+b.dataset.t);el.value=Math.max(0,Math.min(200,(parseInt(el.value)||0)+(+b.dataset.d)));vib(5);popIn(el);upd();});
 document.querySelectorAll("#cat button").forEach(b=>b.onclick=()=>{CAT=b.dataset.c;document.querySelectorAll("#cat button").forEach(x=>x.classList.toggle("on",x===b));vib(5);});
