@@ -5099,24 +5099,22 @@ html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;backg
 /* the one accent: brand teal pill */
 .hx-nav>.hx-cta{margin-left:10px!important;padding:9px 16px!important;border-radius:999px!important;background:linear-gradient(180deg,#14937b,#0f6e5c)!important;color:#fff!important;font-weight:600!important;box-shadow:0 8px 18px -8px rgba(15,110,92,.7),inset 0 1px 0 rgba(255,255,255,.25)!important}
 .hx-nav>.hx-cta:hover{background:linear-gradient(180deg,#119079,#0b5a4b)!important;color:#fff!important}
-/* macOS-toolbar style: emoji on top, short label underneath (two lines), so every tab keeps its icon and the row stays narrow */
-.hx-nav>button:not(.hx-cta),.hx-nav .hx-more{flex-direction:column!important;justify-content:center!important;gap:1px!important;padding:5px 11px!important;min-height:52px!important;border-radius:14px!important;font-size:12px!important;line-height:1.15!important;font-weight:600!important;color:#3a3a3c!important;position:relative}
-.hx-nav>button:not(.hx-cta)::before,.hx-nav .hx-more::before{display:block!important;font-size:19px;line-height:1;margin:0 0 2px!important;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
-.hx-nav>button:not(.hx-cta):hover::before,.hx-nav .hx-more:hover::before{transform:translateY(-2px) scale(1.12)}
-.hx-nav>button[onclick*="dpOpenMaker"]::before{content:"\1F5C2\FE0F"}
-.hx-nav>button[onclick*="dpOpenPlan"]::before{content:"\1F9ED"}
-.hx-nav>button[data-sec="senior-connect"]::before{content:"\1F393"}
-.hx-nav>.hx-plans::before{content:"\1F48E"}
-.hx-nav .hx-more::before{content:"\2728"}
-.hx-nav .hx-more svg{position:absolute;right:4px;top:12px;width:8px;height:8px;opacity:.5}
-.hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{position:absolute!important;top:3px;right:6px;margin:0!important}
-.hx-nav>button.cur:not(.hx-cta)::after{bottom:1px!important}
+/* macOS-toolbar style with the dock's app-icon tiles: small gradient rounded square + white line icon on top, label underneath */
+.hx-nav>button:not(.hx-cta),.hx-nav .hx-more{flex-direction:column!important;justify-content:center!important;gap:3px!important;padding:4px 10px!important;min-height:54px!important;border-radius:14px!important;font-size:11.5px!important;line-height:1.1!important;font-weight:600!important;color:#3a3a3c!important;position:relative}
+.nv-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ig);box-shadow:0 4px 10px -4px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.nv-ic svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.hx-nav>button:hover .nv-ic,.hx-nav .hx-more:hover .nv-ic{transform:translateY(-2px) scale(1.08)}
+.hx-nav [data-nv=list]{--ig:linear-gradient(160deg,#fdba74,#ea580c)}.hx-nav [data-nv=plan]{--ig:linear-gradient(160deg,#5eead4,#0f766e)}
+.hx-nav [data-nv=senior]{--ig:linear-gradient(160deg,#c4b5fd,#7c3aed)}.hx-nav [data-nv=plans]{--ig:linear-gradient(160deg,#fde68a,#d97706)}
+.hx-nav [data-nv=more]{--ig:linear-gradient(160deg,#cbd5e1,#64748b)}
+.hx-nav .hx-more>svg{position:absolute;right:3px;top:10px;width:8px;height:8px;opacity:.45}
+.hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{position:absolute!important;top:2px;right:8px;margin:0!important}
+.hx-nav>button.cur:not(.hx-cta)::after{bottom:0!important}
 /* the counselling pill: phone on the left, two lines (name / price) */
 .hx-nav>.hx-cta{flex-direction:row!important;align-items:center!important;gap:0!important;padding:7px 16px 7px 12px!important;min-height:46px!important;line-height:1.15!important;font-size:13px!important;text-align:left}
-.hx-nav>.hx-cta::before{content:"\1F4DE";font-size:20px;margin-right:9px;display:inline-block}
 .hx-nav>.hx-cta span{display:block!important;font-size:11.5px!important;opacity:.8!important;margin:0!important}
 .hx-nav>.hx-cta{display:inline-grid!important;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:9px;row-gap:0}
-.hx-nav>.hx-cta::before{grid-row:1/3;margin-right:0}
+.hx-nav>.hx-cta .nv-ph{grid-row:1/3;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2)}.hx-nav>.hx-cta .nv-ph svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
 .hx-nav>.hx-cta span{grid-column:2}
 /* tight header: smaller padding first, then the price, then Plans; the counselling pill never hides (display above is !important) */
 .hx-f1 .hx-nav>button:not(.hx-cta),.hx-f1 .hx-nav .hx-more{padding:5px 8px!important}
@@ -10090,5 +10088,20 @@ function mountKick(){[[".hn-kicker","neetpg"],["#ini-hero .ini-k","inicet"]].for
  setK();window.addEventListener("resize",setK);k.addEventListener("click",function(e){if(innerWidth>760)return;e.preventDefault();e.stopPropagation();open(k,"kicker");});});}
 var n=0;(function w(){mountKick();var a=mountChip(),b=mountTok();paint();if((a&&b)||++n>60)return;setTimeout(w,500);})();
 new MutationObserver(function(){mountKick();mountTok();paint();}).observe(document.body,{attributes:true,attributeFilter:["class"]});
+})();</script><script id="dp-nav5-js">(function(){
+var S='<svg viewBox="0 0 24 24" aria-hidden="true">',I={
+ list:S+'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>',
+ plan:S+'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
+ senior:S+'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>',
+ plans:S+'<path d="M6 3h12l3 5-9 13L3 8z"/><path d="M3 8h18M9 3l3 5 3-5M12 21L9 8M12 21l3-13"/></svg>',
+ more:S+'<circle cx="6" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/></svg>',
+ phone:S+'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'};
+function tile(el,k){if(!el||el.querySelector(".nv-ic"))return;el.setAttribute("data-nv",k);var t=document.createElement("span");t.className="nv-ic";t.setAttribute("aria-hidden","true");t.innerHTML=I[k];el.insertBefore(t,el.firstChild);}
+function run(){var n=document.querySelector(".hx-nav");if(!n)return false;
+ tile(n.querySelector(':scope>button[onclick*="dpOpenMaker"]'),"list");tile(n.querySelector(':scope>button[onclick*="dpOpenPlan"]'),"plan");
+ tile(n.querySelector(':scope>button[data-sec="senior-connect"]'),"senior");tile(n.querySelector(":scope>.hx-plans"),"plans");tile(n.querySelector(".hx-more"),"more");
+ var c=n.querySelector(":scope>.hx-cta");if(c&&!c.querySelector(".nv-ph")){var p=document.createElement("span");p.className="nv-ph";p.setAttribute("aria-hidden","true");p.innerHTML=I.phone;c.insertBefore(p,c.firstChild);}
+ return true;}
+var k=0;(function w(){if(run()&&++k>4)return;if(k<40)setTimeout(w,500);})();
 })();</script></body>
 </html>
