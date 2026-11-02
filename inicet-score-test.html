@@ -95,12 +95,32 @@ body.go #marks,body.go #rank{margin-top:-22px;position:relative;z-index:4}
 .ring{width:180px;height:180px}.ring b{font-size:48px}.two{margin-top:14px}.opt{padding:14px 16px}
 .back{display:inline-block;margin:0 0 6px;font-size:13.5px;font-weight:700;color:var(--ind);background:none;border:0;cursor:pointer;font-family:inherit}
 #rank .rk .v{font-size:clamp(40px,12vw,56px)}.feel{margin-top:12px}.stand{margin-top:12px}.acts{margin-top:12px}
+
+/* laptop / desktop (2 Nov): AIIMS photo fills the left panel (whole photo visible over a blurred copy), app on the right, all on one screen */
+.ph i.full{display:none}
+@media (min-width:900px){
+ body{overflow-x:hidden}
+ .ph{position:fixed!important;left:0;top:0;bottom:0;width:56vw;height:100vh!important;margin:0!important;border-radius:0 40px 40px 0!important;z-index:2}
+ .ph i.img{filter:blur(26px) brightness(.85) saturate(1.2);transform:scale(1.15)!important;animation:none!important;background-image:url(/img/aiims_hero_1200.webp)}
+ .ph i.full{display:block;position:absolute;left:0;right:0;top:50%;height:calc(56vw * 941 / 1672);transform:translateY(-58%);background:url(/img/aiims_hero_1200.webp) center/cover no-repeat;opacity:0;transition:opacity 1.2s ease;box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+ .ph.on i.full{opacity:1;animation:kb2 30s ease-in-out 1.2s infinite alternate}@keyframes kb2{to{transform:translateY(-58%) scale(1.04)}}
+ .ph:after{background:linear-gradient(180deg,rgba(20,18,60,.25) 0%,rgba(20,18,60,0) 25%,rgba(20,18,60,0) 55%,rgba(20,18,60,.75) 100%)!important}
+ .ph .tag{left:28px;top:24px}
+ .hello{bottom:48px!important;padding:0 44px!important}.hello h1{font-size:clamp(30px,3.2vw,46px)!important}.hello p{font-size:16px}.hello .orb{width:42px;height:42px}
+ body.go .ph{height:100vh!important}body.go .hello p,body.go .hrow{display:block}body.go .hrow{display:flex}body.go .hello h1{font-size:clamp(30px,3.2vw,46px)!important}
+ .wrap{margin-left:56vw;max-width:none;width:44vw;min-height:100vh;padding:18px clamp(24px,4vw,64px) 30px;display:flex;flex-direction:column}
+ .wrap>.top{order:-1}.wrap>section.card,.wrap>.foot{width:100%;max-width:500px;margin-left:auto;margin-right:auto}
+ #inp,body.go #marks,body.go #rank{margin-top:auto!important}#inp{margin-top:auto}
+ .foot{margin-top:auto!important;padding-top:16px}
+ .blob.b1{left:auto;right:-60px}
+}
+@media (min-width:900px) and (max-height:760px){.card{padding:16px}.step input{font-size:24px}.ring{width:150px;height:150px}.ring b{font-size:40px}.cta{padding:13px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="wrap">
 <div class="top"><a class="brand" href="/"><img src="/icons/icon-192.png" alt="">DocPulsee</a><span class="live"><i></i><span id="liveN">INI-CET · 1 Nov 2026</span></span></div>
-<div class="ph" id="ph"><i class="img"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span><section class="hello"><div class="hrow"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div></div><h1 id="h1">The paper is done.<br>You did your part.</h1><p id="hp">Enter your answers. We'll gently show your marks, then your rank.</p></section></div>
+<div class="ph" id="ph"><i class="img"></i><i class="full"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span><section class="hello"><div class="hrow"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div></div><h1 id="h1">The paper is done.<br>You did your part.</h1><p id="hp">Enter your answers. We'll gently show your marks, then your rank.</p></section></div>
 
 
 <section class="card" id="inp">
