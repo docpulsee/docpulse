@@ -122,11 +122,16 @@ body.go #marks,body.go #rank{margin-top:-22px;position:relative;z-index:4}
 /* phones: photo melts into the page instead of a separate box */
 @media (max-width:899px){.ph{border-radius:0!important}.ph:after{background:linear-gradient(180deg,rgba(20,18,60,.10) 0%,rgba(20,18,60,0) 28%,rgba(20,18,60,.45) 70%,rgba(238,242,255,.0) 100%)!important}
  .ph:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;z-index:2;background:linear-gradient(180deg,rgba(238,242,255,0),#eef2ff)}}
+.xpk{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:360px;margin:4px auto 0;padding:3px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 18px -12px rgba(0,0,0,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);position:relative;z-index:5}
+.xpk a{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;border-radius:999px;text-decoration:none;font:800 13px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:#4b5563;white-space:nowrap;transition:background .2s,color .2s}
+.xpk a.on{background:#fff;color:#111827;box-shadow:0 2px 8px rgba(0,0,0,.12)}.xpk a:not(.on):hover{color:#111827}
+.xpk{margin:2px 0 10px}@media (min-width:900px){.xpk{margin:0 0 6px;max-width:330px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="wrap">
 <div class="top"><a class="brand" href="/"><img src="/icons/icon-192.png" alt="">DocPulsee</a><span class="live"><i></i><span id="liveN">INI-CET · 1 Nov 2026</span></span></div>
+<nav class="xpk" aria-label="Choose your exam"><a href="/" data-xpk="neetpg">NEET PG</a><a href="/?exam=inicet" class="on" aria-current="page" data-xpk="inicet">INI-CET</a><a href="/fmg.html" data-xpk="fmge">FMGE</a></nav>
 <div class="ph" id="ph"><i class="img"></i><i class="full"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span><section class="hello"><div class="hrow"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div></div><h1 id="h1">The paper is done.<br>You did your part.</h1><p id="hp">Enter your answers. We'll gently show your marks, then your rank.</p></section></div>
 
 
@@ -176,7 +181,7 @@ function popIn(el){el.classList.remove("pop");void el.offsetWidth;el.classList.a
 function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const c=$("#cf"),g=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;const cols=["#818cf8","#34d399","#fbbf24","#f472b6","#60a5fa"];const P=[];const cx=innerWidth/2,cy=Math.min(innerHeight*.38,320);
  for(let i=0;i<70;i++){const a=Math.random()*Math.PI*2,v=4+Math.random()*7;P.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,s:4+Math.random()*5,r:Math.random()*6,c:cols[i%5],l:1});}
  const t0=performance.now();(function f(t){g.clearRect(0,0,c.width,c.height);let on=false;P.forEach(p=>{p.vy+=.22;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=.15;p.l-=.012;if(p.l>0){on=true;g.globalAlpha=Math.max(0,p.l);g.fillStyle=p.c;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);g.restore();}});g.globalAlpha=1;if(on&&t-t0<2600)requestAnimationFrame(f);else g.clearRect(0,0,c.width,c.height);})(t0);}
-(function(){if(matchMedia("(min-width:900px)").matches){const h=document.querySelector(".hello"),w=document.querySelector(".wrap"),t=w.querySelector(".top");w.insertBefore(h,t.nextSibling);}})();
+(function(){if(matchMedia("(min-width:900px)").matches){const h=document.querySelector(".hello"),w=document.querySelector(".wrap"),t=w.querySelector(".xpk")||w.querySelector(".top");w.insertBefore(h,t.nextSibling);}})();
 (function br(){const w=["Breathe in…","Hold…","Breathe out…","You're doing fine"];let i=0;setInterval(()=>{const e=$("#breath");e.style.opacity=0;setTimeout(()=>{i=(i+1)%w.length;e.textContent=w[i];e.style.opacity=1;},700);},3000);})();
 document.querySelectorAll(".step button").forEach(b=>b.onclick=()=>{const el=$("#"+b.dataset.t);el.value=Math.max(0,Math.min(200,(parseInt(el.value)||0)+(+b.dataset.d)));vib(5);popIn(el);upd();});
 document.querySelectorAll("#cat button").forEach(b=>b.onclick=()=>{CAT=b.dataset.c;document.querySelectorAll("#cat button").forEach(x=>x.classList.toggle("on",x===b));vib(5);});

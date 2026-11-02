@@ -78,14 +78,62 @@ canvas#hist{width:100%;height:150px;display:block;margin-top:8px}
 .ring b{display:inline-block}.ring.done b{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
 #cf{position:fixed;inset:0;pointer-events:none;z-index:50}
 .orb{animation:breathe 6s ease-in-out infinite,float 9s ease-in-out infinite}@keyframes float{50%{translate:0 -6px}}
+
+/* one-screen layout (2 Nov): title sits on the photo, card overlaps it; after "Show my marks" the photo shrinks to a slim band */
+.ph{height:min(36vh,300px);transition:height .6s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:700px){.ph{height:min(40vh,340px)}}
+.ph:after{background:linear-gradient(180deg,rgba(20,18,60,.12) 0%,rgba(20,18,60,0) 30%,rgba(20,18,60,.62) 100%)!important}
+.hello{position:absolute!important;z-index:3;left:0;right:0;bottom:40px;margin:0!important;padding:0 20px!important;text-align:left;color:#fff}
+.hrow{display:flex;align-items:center;gap:10px;margin-bottom:6px}.hello .orb{width:34px;height:34px;margin:0;box-shadow:0 0 0 6px rgba(199,210,254,.22)}
+.hello .breath{color:rgba(255,255,255,.85);font-size:11.5px;min-height:0}
+.hello h1{color:#fff;font-size:clamp(23px,6.4vw,32px);margin:0 0 4px;text-shadow:0 2px 14px rgba(0,0,0,.35);transition:font-size .4s}
+.hello p{color:rgba(255,255,255,.9);font-size:14px;margin:0;max-width:440px;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.card{margin-top:14px;padding:18px 18px}#inp{margin-top:-26px;position:relative;z-index:4}
+.step button{width:44px;height:44px}.step input{font-size:28px}.fld+.fld{margin-top:10px}.cat{margin-top:12px}.cta{margin-top:14px;padding:15px}
+body.go .ph{height:124px}body.go .hello{bottom:34px}body.go .hello p,body.go .hrow{display:none}body.go .hello h1{font-size:20px}
+body.go #marks,body.go #rank{margin-top:-22px;position:relative;z-index:4}
+.ring{width:180px;height:180px}.ring b{font-size:48px}.two{margin-top:14px}.opt{padding:14px 16px}
+.back{display:inline-block;margin:0 0 6px;font-size:13.5px;font-weight:700;color:var(--ind);background:none;border:0;cursor:pointer;font-family:inherit}
+#rank .rk .v{font-size:clamp(40px,12vw,56px)}.feel{margin-top:12px}.stand{margin-top:12px}.acts{margin-top:12px}
+
+/* laptop / desktop (2 Nov, v2 "integrated"): the AIIMS photo is the whole page background; a soft frosted wash on the left
+   carries the title and the glass app card, the building and its signboard stay clear on the right */
+.ph i.full{display:none}
+@media (min-width:900px){
+ body{overflow-x:hidden;background:#1e1b4b}
+ .ph{position:fixed!important;inset:0;width:100vw;height:100vh!important;margin:0!important;border-radius:0!important;z-index:0;background:#2a2560}
+ .ph i.img{background-image:url(/img/aiims_hero_1200.webp)!important;background-position:62% 40%!important;transform:scale(1.04)}
+ .ph.on i.img{animation:kb 34s ease-in-out 1.2s infinite alternate}
+ .ph:after{background:linear-gradient(90deg,rgba(238,242,255,.94) 0%,rgba(238,242,255,.86) 30%,rgba(238,242,255,.35) 46%,rgba(238,242,255,0) 60%),linear-gradient(0deg,rgba(15,12,45,.35),rgba(15,12,45,0) 30%)!important}
+ .ph .tag{left:auto;right:26px;top:auto;bottom:22px}
+ .sp{display:none}
+ .blob{display:none}
+ .wrap{position:relative;z-index:2;max-width:none;width:min(46vw,600px);margin:0 0 0 clamp(24px,5vw,84px);min-height:100vh;padding:18px 0 22px;display:flex;flex-direction:column}
+ .hello{position:static!important;padding:0!important;margin:auto 0 0!important;color:var(--ink)}
+ .hello h1{color:var(--ink);text-shadow:none;font-size:clamp(30px,3vw,44px)!important}.hello p{color:var(--dim);text-shadow:none;font-size:16px}.hello .breath{color:var(--soft)}
+ .hrow{display:flex!important}body.go .hello p{display:block}body.go .hello h1{font-size:clamp(30px,3vw,44px)!important}
+ #inp,body.go #marks,body.go #rank{margin-top:16px!important;margin-bottom:auto}
+ .card{max-width:500px;background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.75)}
+ .foot{text-align:left;margin-top:14px}
+ .wrap>*:not(.ph):not(#cf){position:relative;z-index:3}
+ body.go .hello p{display:none}
+}
+@media (min-width:900px) and (max-height:780px){.card{padding:15px}.step input{font-size:24px}.ring{width:150px;height:150px}.ring b{font-size:40px}.cta{padding:13px;margin-top:10px}.hello h1{font-size:30px!important}.hello p{display:none!important}}
+/* phones: photo melts into the page instead of a separate box */
+@media (max-width:899px){.ph{border-radius:0!important}.ph:after{background:linear-gradient(180deg,rgba(20,18,60,.10) 0%,rgba(20,18,60,0) 28%,rgba(20,18,60,.45) 70%,rgba(238,242,255,.0) 100%)!important}
+ .ph:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;z-index:2;background:linear-gradient(180deg,rgba(238,242,255,0),#eef2ff)}}
+.xpk{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:360px;margin:4px auto 0;padding:3px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 18px -12px rgba(0,0,0,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);position:relative;z-index:5}
+.xpk a{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;border-radius:999px;text-decoration:none;font:800 13px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:#4b5563;white-space:nowrap;transition:background .2s,color .2s}
+.xpk a.on{background:#fff;color:#111827;box-shadow:0 2px 8px rgba(0,0,0,.12)}.xpk a:not(.on):hover{color:#111827}
+.xpk{margin:2px 0 10px}@media (min-width:900px){.xpk{margin:0 0 6px;max-width:330px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="wrap">
 <div class="top"><a class="brand" href="/"><img src="/icons/icon-192.png" alt="">DocPulsee</a><span class="live"><i></i><span id="liveN">INI-CET · 1 Nov 2026</span></span></div>
-<div class="ph" id="ph"><i class="img"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span></div>
-<section class="hello"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div>
-<h1>The paper is done.<br>You did your part.</h1><p>Take a breath. Enter your answers and we'll gently show you your marks, then your rank.</p></section>
+<nav class="xpk" aria-label="Choose your exam"><a href="/" data-xpk="neetpg">NEET PG</a><a href="/?exam=inicet" class="on" aria-current="page" data-xpk="inicet">INI-CET</a><a href="/fmg.html" data-xpk="fmge">FMGE</a></nav>
+<div class="ph" id="ph"><i class="img"></i><i class="full"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span><section class="hello"><div class="hrow"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div></div><h1 id="h1">The paper is done.<br>You did your part.</h1><p id="hp">Enter your answers. We'll gently show your marks, then your rank.</p></section></div>
+
 
 <section class="card" id="inp">
 <div class="fld"><div class="lbl"><span>Correct answers</span><span>+1 each</span></div><div class="step"><button type="button" data-t="cr" data-d="-1" aria-label="Less">−</button><input id="cr" type="number" inputmode="numeric" min="0" max="200" placeholder="0"><button type="button" data-t="cr" data-d="1" aria-label="More">+</button></div></div>
@@ -106,7 +154,7 @@ canvas#hist{width:100%;height:150px;display:block;margin-top:8px}
 <button class="edit" id="edit">Edit my answers</button>
 </section>
 
-<section class="card fade" id="rank">
+<section class="card fade" id="rank"><button class="back" id="back">‹ Back to my marks</button>
 <div class="rk"><div class="k">Your expected rank</div><div class="v" id="rkv">—</div><div class="s" id="rks"></div></div>
 <div class="feel"><div class="q">How did this paper feel compared with last year?</div><div class="seg" id="feel"><button data-f="-4">Easier</button><button class="on" data-f="0">About the same</button><button data-f="4">Tougher</button></div></div>
 <div class="stand"><div class="row"><small>Among candidates who checked here</small><b id="stv">…</b></div><small id="sts"></small><div class="bar"><i id="stb"></i></div></div>
@@ -133,6 +181,7 @@ function popIn(el){el.classList.remove("pop");void el.offsetWidth;el.classList.a
 function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const c=$("#cf"),g=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;const cols=["#818cf8","#34d399","#fbbf24","#f472b6","#60a5fa"];const P=[];const cx=innerWidth/2,cy=Math.min(innerHeight*.38,320);
  for(let i=0;i<70;i++){const a=Math.random()*Math.PI*2,v=4+Math.random()*7;P.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,s:4+Math.random()*5,r:Math.random()*6,c:cols[i%5],l:1});}
  const t0=performance.now();(function f(t){g.clearRect(0,0,c.width,c.height);let on=false;P.forEach(p=>{p.vy+=.22;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=.15;p.l-=.012;if(p.l>0){on=true;g.globalAlpha=Math.max(0,p.l);g.fillStyle=p.c;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);g.restore();}});g.globalAlpha=1;if(on&&t-t0<2600)requestAnimationFrame(f);else g.clearRect(0,0,c.width,c.height);})(t0);}
+(function(){if(matchMedia("(min-width:900px)").matches){const h=document.querySelector(".hello"),w=document.querySelector(".wrap"),t=w.querySelector(".xpk")||w.querySelector(".top");w.insertBefore(h,t.nextSibling);}})();
 (function br(){const w=["Breathe in…","Hold…","Breathe out…","You're doing fine"];let i=0;setInterval(()=>{const e=$("#breath");e.style.opacity=0;setTimeout(()=>{i=(i+1)%w.length;e.textContent=w[i];e.style.opacity=1;},700);},3000);})();
 document.querySelectorAll(".step button").forEach(b=>b.onclick=()=>{const el=$("#"+b.dataset.t);el.value=Math.max(0,Math.min(200,(parseInt(el.value)||0)+(+b.dataset.d)));vib(5);popIn(el);upd();});
 document.querySelectorAll("#cat button").forEach(b=>b.onclick=()=>{CAT=b.dataset.c;document.querySelectorAll("#cat button").forEach(x=>x.classList.toggle("on",x===b));vib(5);});
@@ -145,12 +194,13 @@ function seatsAt(r){const P=D.peek[CAT]||D.peek.UR;let best=P[P.length-1];for(co
 function kindLine(s){if(s>=125)return "That's an excellent score. Be proud of the work behind it.";if(s>=105)return "A strong score. Many good AIIMS options open up around here.";if(s>=90)return "A solid effort. There are real options at this score.";if(s>=70)return "Every mark counts, and so does the open round. Let's see where you stand.";return "This paper doesn't define you. NEET PG and the next INI-CET session are still ahead.";}
 $("#calc").onclick=()=>{const [c,w]=vals();$("#err").textContent="";if(!c&&!w){$("#err").textContent="Enter your correct and wrong answers first.";return;}if(c+w>200){$("#err").textContent="Correct + wrong can't be more than 200.";return;}
  S=Math.round((c-w/3)*100)/100;try{localStorage.setItem("dp_ini_last2",JSON.stringify({c,w,cat:CAT}));}catch(_){}
- $("#inp").style.display="none";$("#marks").style.display="block";$(".ring").classList.remove("done");$("#rank").style.display="none";$("#two").classList.remove("show");window.scrollTo({top:0,behavior:"smooth"});vib(10);
+ document.body.classList.add("go");$("#h1").textContent="Your INI-CET result";$("#inp").style.display="none";$("#marks").style.display="block";$(".ring").classList.remove("done");$("#rank").style.display="none";$("#two").classList.remove("show");window.scrollTo({top:0,behavior:"smooth"});vib(10);
  const arc=$("#arc"),L=540.35,tgt=Math.max(0,S)/200,t0=performance.now(),dur=1600;$("#kind").textContent="";
  (function an(t){const u=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-u,3);$("#mk").textContent=(Math.round(S*e*100)/100).toString();arc.setAttribute("stroke-dashoffset",L*(1-tgt*e));if(u<1)requestAnimationFrame(an);else{$("#mk").textContent=S.toString();$(".ring").classList.add("done");if(S>=60)confetti();$("#kind").textContent=kindLine(S);$("#two").classList.add("show");const r=rankAt(S),n=seatsAt(r===null?30000:r);$("#seatHint").textContent=n>0?("About "+n+" seat options in reach. See them all"):"See every seat in reach, round by round";$("#seatHint2").textContent=$("#seatHint").textContent;}})(t0);
  try{gtag("event","inicet_marks",{band:Math.floor(S/10)*10,cat:CAT});}catch(_){}
  submit();};
-$("#edit").onclick=()=>{$("#marks").style.display="none";$("#rank").style.display="none";$("#inp").style.display="block";};
+$("#edit").onclick=()=>{document.body.classList.remove("go");$("#h1").innerHTML="The paper is done.<br>You did your part.";$("#marks").style.display="none";$("#rank").style.display="none";$("#afterC").style.display="none";$("#inp").style.display="block";window.scrollTo({top:0,behavior:"smooth"});};
+$("#back").onclick=()=>{$("#rank").style.display="none";$("#afterC").style.display="none";$("#marks").style.display="block";window.scrollTo({top:0,behavior:"smooth"});};
 async function submit(){try{if(!sb)return;const {data,error}=await sb.rpc("inicet_submit",{p_fp:fp(),p_score:S,p_cat:CAT});if(!error){stats=data;liveN(data);if($("#rank").style.display==="block")paintStand();}}catch(_){}}
 function liveN(st){}
 function countTo(el,v){const t0=performance.now(),d=900,from=Math.round(v*1.6);(function f(t){const u=Math.min(1,(t-t0)/d),e=1-Math.pow(1-u,3);el.textContent="~"+fmt(from+(v-from)*e);if(u<1)requestAnimationFrame(f);})(t0);}
@@ -159,7 +209,7 @@ function paintRank(){const s=S+FEEL,r=rankAt(s),lo=rankAt(s+2),hi=rankAt(s-2);
  else{countTo($("#rkv"),r);$("#rks").textContent="Likely "+fmt(lo||1)+" – "+(hi?fmt(hi):"25,000+")+(FEEL?(FEEL>0?" · paper felt tougher":" · paper felt easier"):" · if the paper was like last year's");}}
 function paintStand(){const st=stats,n=st&&st.n||0;if(n>=20&&st.below!=null){const p=100*st.below/n;$("#stv").textContent="Top "+Math.max(1,Math.round(100-p))+"%";$("#sts").textContent="You scored more than "+Math.round(p)+"% of candidates who checked"+(st.ncat>=20?" · "+Math.round(100*st.belowcat/st.ncat)+"% of "+({UR:"General",OBC:"OBC",EWS:"EWS",SC:"SC",ST:"ST"}[CAT])+" candidates":"");setTimeout(()=>$("#stb").style.width=Math.max(3,p)+"%",80);}
  else{$("#stv").textContent="Soon";$("#sts").textContent="Your live standing appears as more students check. Come back in a little while.";$("#stb").style.width="6%";}drawHist(st&&st.hist||[]);}
-$("#showRank").onclick=()=>{$("#rank").style.display="block";paintRank();paintStand();setTimeout(()=>$("#rank").scrollIntoView({behavior:"smooth",block:"start"}),60);vib(8);$("#afterC").style.display="block";try{gtag("event","inicet_rank_view");}catch(_){}};
+$("#showRank").onclick=()=>{$("#marks").style.display="none";$("#rank").style.display="block";paintRank();paintStand();window.scrollTo({top:0,behavior:"smooth"});vib(8);$("#afterC").style.display="block";try{gtag("event","inicet_rank_view");}catch(_){}};
 document.querySelectorAll("#feel button").forEach(b=>b.onclick=()=>{FEEL=+b.dataset.f;document.querySelectorAll("#feel button").forEach(x=>x.classList.toggle("on",x===b));paintRank();vib(5);});
 function goSeats(){const s=S+FEEL,r=rankAt(s);try{const f=JSON.parse(localStorage.getItem("dp_ini_f")||"{}");if(r)f.rank=Math.round(r);f.cat=CAT;localStorage.setItem("dp_ini_f",JSON.stringify(f));}catch(_){}try{gtag("event","inicet_to_pass",{band:Math.floor(S/10)*10});}catch(_){}location.href="/?exam=inicet";}
 $("#goSeats").onclick=goSeats;$("#goSeats2").onclick=goSeats;
