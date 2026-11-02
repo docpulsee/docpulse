@@ -92,10 +92,10 @@ function calc(){const s=score();$("#netv").textContent=s===null?"—":s==="bad"?
 ["#cr","#wr","#ns"].forEach(id=>$(id).addEventListener("input",calc));
 try{const sv=JSON.parse(localStorage.getItem("dp_ini_last")||"null");if(sv){if(sv.mode==="net"){$(".seg button[data-m=net]").click();$("#ns").value=sv.s;}else{$("#cr").value=sv.c;$("#wr").value=sv.w;}$("#cat").value=sv.cat||"UR";calc();}}catch(_){}
 function peek(cat,r){const P=D.peek[cat]||D.peek.UR;let best=P[P.length-1];for(const p of P){if(p[0]>=r){best=p;break;}}return best;}
-function showStats(st,s,cat){const n=st&&st.n||0;$("#liveN").textContent=n?fmt(n)+" candidates have checked their score":"Be among the first to check your score";
+function showStats(st,s,cat){const n=st&&st.n||0;$("#liveN").textContent=n?(n===1?"1 candidate has checked their score":fmt(n)+" candidates have checked their score"):"Be among the first to check your score";
  if(s===undefined)return;if(n>=5&&st.below!=null){const p=100*st.below/n;$("#stv").textContent="Top "+Math.max(1,Math.round(100-p))+"%";$("#sts").textContent="Ahead of "+fmt(st.below)+" of "+fmt(n)+" who entered";setTimeout(()=>$("#stb").style.width=Math.max(3,p)+"%",60);
   $("#catLine").textContent=st.ncat>=5?("Among "+fmt(st.ncat)+" "+catName(cat)+" candidates here, you're ahead of "+Math.round(100*st.belowcat/st.ncat)+"%."):"";}
- else{$("#stv").textContent="Early";$("#sts").textContent=n+" entries so far; check back in an hour as more students add theirs";$("#stb").style.width="8%";}
+ else{$("#stv").textContent="Early";$("#sts").textContent=(n===1?"You're the first entry":n+" entries so far")+". Check back in an hour as more students add theirs";$("#stb").style.width="8%";}
  drawHist(st&&st.hist||[],s);}
 function catName(c){return {UR:"General",OBC:"OBC",EWS:"EWS",SC:"SC",ST:"ST"}[c]||c;}
 function render(s,cat){const r=rankAt(s),lo=rankAt(s+2),hi=rankAt(s-2);$("#res").style.display="block";
