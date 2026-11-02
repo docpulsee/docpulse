@@ -9884,14 +9884,15 @@ function mk(){var d=document.createElement("div");d.className="exd";d.id="dp-exd
 function cur(){return document.body.classList.contains("dp-ini")?"inicet":"neetpg";}
 function paint(d,force){var x=force||cur();if(d.getAttribute("data-x")&&d.getAttribute("data-x")!==x){d.classList.remove("jelly");void d.offsetWidth;d.classList.add("jelly");}d.setAttribute("data-x",x);var bs=d.querySelectorAll("button"),on=null;bs.forEach(function(b){var p=b.getAttribute("data-x")===x;b.setAttribute("aria-pressed",p);if(p)on=b;});
  var g=d.querySelector(".glide");if(on&&on.offsetWidth){g.style.width=on.offsetWidth+"px";g.style.transform="translateX("+(on.offsetLeft-3)+"px)";}}
-function mount(){var sw=document.querySelector(".hn-hero .ini-sw");if(!sw)return false;var d=sw.parentNode.querySelector(".exd");if(!d){d=mk();sw.parentNode.insertBefore(d,sw);}paint(d);return true;}
+function mount(){var sw=document.querySelector(".hn-hero .ini-sw")||document.querySelector(".ini-sw");if(!sw)return false;var d=sw.parentNode.querySelector(".exd");if(!d){d=mk();sw.parentNode.insertBefore(d,sw);}paint(d);return true;}
 function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector(".fmg-plan"))return;var c=document.createElement("div");c.className="fmg-plan";
  c.innerHTML='<div class="fmg-plan-l"><b>\u2708\uFE0F FMG Internship Pass <em>NEW</em></b><small>For foreign medical graduates after FMGE: every Indian college with internship seats for FMGs in 2026-27, state by state, with intern stipend. Founders\u2019 1:1 at \u20B9799 for pass holders.</small></div>'+
  '<div class="fmg-plan-r"><div class="fmg-plan-p"><b>\u20B9999</b></div><div class="fmg-plan-n">one-time</div><button type="button" class="fmg-plan-b">Open FMG Pass</button></div>';
  c.querySelector("button").onclick=function(){try{if(window.gtag)gtag("event","fmg_plan_card");}catch(_){}location.href=FMG;};
  var ini=pl.querySelector(".ini-plan"),after=ini||pl.querySelector(".hn-dots")||pl.querySelector(".hn-pgrid");if(after)after.parentNode.insertBefore(c,after.nextSibling);else pl.appendChild(c);}
 var t=0,iv=setInterval(function(){t++;plan();if(mount()&&t>8&&document.querySelector(".fmg-plan"))clearInterval(iv);if(t>40)clearInterval(iv);},400);
-new MutationObserver(function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});}).observe(document.body,{attributes:true,attributeFilter:["class"]});
+new MutationObserver(function(){mount();document.querySelectorAll(".exd").forEach(function(d){paint(d);});}).observe(document.body,{attributes:true,attributeFilter:["class"]});
+var k2=0,iv2=setInterval(function(){mount();if(++k2>60)clearInterval(iv2);},1000);
 window.addEventListener("resize",function(){document.querySelectorAll(".exd").forEach(function(d){paint(d);});});
 })();</script><script id="dp-dk2-js">(function(){
 function q(s,r){return (r||document).querySelector(s);}
