@@ -5133,10 +5133,10 @@ html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:r
  .hn-hero .xk .xks{font-size:9px!important;padding:2px 6px!important;background:rgba(255,255,255,.9)!important}
  .hn-hero h2{font-size:30px!important;line-height:1.1!important;letter-spacing:-.025em!important;margin:14px 0 8px!important}
  .hn-hero .hn-sub{font-size:14.5px!important;line-height:1.45!important;color:rgba(255,255,255,.78)!important;margin:0 0 16px!important}
- .hn-hero .dpsp-hint{flex-wrap:nowrap!important;overflow-x:auto;gap:8px!important;margin:12px -18px 0!important;padding:6px 18px 4px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+ .hn-hero .dpsp-hint{flex-wrap:nowrap!important;overflow-x:auto;gap:8px!important;margin:12px -18px 0!important;padding:6px 18px 4px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;overflow-anchor:none;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent)}
  .hn-hero .dpsp-hint::-webkit-scrollbar{display:none}
- .hn-hero .dpsp-hint>button,.hn-hero .dpsp-hint>button.mrk-chip,.hn-hero .dpsp-hint>button.isl-chip{flex:none!important;scroll-snap-align:start;display:inline-flex!important;align-items:center;gap:6px;height:34px;padding:0 13px!important;border-radius:999px!important;
+ .hn-hero .dpsp-hint>button,.hn-hero .dpsp-hint>button.mrk-chip,.hn-hero .dpsp-hint>button.isl-chip{flex:none!important;display:inline-flex!important;align-items:center;gap:6px;height:34px;padding:0 13px!important;border-radius:999px!important;
   background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.2)!important;color:#fff!important;font-size:13px!important;font-weight:600!important;letter-spacing:-.005em;white-space:nowrap;box-shadow:none!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
  .hn-hero .dpsp-hint>button:active{transform:scale(.96);background:rgba(255,255,255,.2)!important}
  .hn-hero .dpsp-hint>button.mrk-chip i,.hn-hero .dpsp-hint>button.isl-chip i{position:static!important;order:-1;width:7px;height:7px;padding:0!important;border-radius:50%!important;background:#fbbf24!important;font-size:0!important;box-shadow:0 0 0 3px rgba(251,191,36,.22)}
@@ -10134,5 +10134,8 @@ var ok='<svg class="m5-ok" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8"
 function run(){var t=document.querySelector(".hn-hero .hn-trust");if(!t||t.dataset.m5)return!!t;var s=t.querySelectorAll(":scope>span"),b=t.querySelector(".hn-trk");
  if(s[0])s[0].innerHTML=ok+"MCC data";if(s[1])s[1].textContent="Built by doctors";if(b)b.innerHTML="75% → 76% tested ›";t.dataset.m5=1;return true;}
 var k=0;(function w(){if(run()||++k>30)return;setTimeout(w,400);})();
+/* chips are added to the front of the row by other scripts; keep the row at its start until the student touches it */
+var t0=Date.now(),hit=0;(function z(){var h=document.querySelector(".hn-hero .dpsp-hint");if(h&&!h.dataset.m5){h.dataset.m5=1;["touchstart","wheel","pointerdown"].forEach(function(e){h.addEventListener(e,function(){hit=1;},{passive:true});});}
+ if(h&&!hit&&h.scrollLeft)h.scrollLeft=0;if(!hit&&Date.now()-t0<12000)setTimeout(z,300);})();
 })();</script></body>
 </html>
