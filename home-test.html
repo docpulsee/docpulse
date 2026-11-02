@@ -5125,6 +5125,28 @@ body > header.sticky .max-w-6xl{max-width:1320px!important}
 .dpt-btn{width:38px!important;height:38px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
 html.dpdark .hx-nav>button:not(.hx-cta),html.dpdark .hx-nav .hx-more{color:#f5f5f7!important}html.dpdark .nv-ic{color:#a1a1a6}
 html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:rgba(255,255,255,.08)!important}
+</style><style id="dp-m5-css">
+@media (max-width:760px){
+ .hn-hero-in{padding:22px 18px 18px!important;border-radius:26px!important}
+ .hn-hero .hn-kicker.xk{padding:3px 9px 3px 3px!important;gap:6px!important;font-size:11px!important;letter-spacing:.04em!important;box-shadow:none!important;background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.22)!important}
+ .hn-hero .xk .xki{width:20px!important;height:20px!important}.hn-hero .xk .xki svg{width:11px!important;height:11px!important}
+ .hn-hero .xk .xks{font-size:9px!important;padding:2px 6px!important;background:rgba(255,255,255,.9)!important}
+ .hn-hero h2{font-size:30px!important;line-height:1.1!important;letter-spacing:-.025em!important;margin:14px 0 8px!important}
+ .hn-hero .hn-sub{font-size:14.5px!important;line-height:1.45!important;color:rgba(255,255,255,.78)!important;margin:0 0 16px!important}
+ .hn-hero .dpsp-hint{flex-wrap:nowrap!important;overflow-x:auto;gap:8px!important;margin:12px -18px 0!important;padding:6px 18px 4px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent)}
+ .hn-hero .dpsp-hint::-webkit-scrollbar{display:none}
+ .hn-hero .dpsp-hint>button,.hn-hero .dpsp-hint>button.mrk-chip,.hn-hero .dpsp-hint>button.isl-chip{flex:none!important;scroll-snap-align:start;display:inline-flex!important;align-items:center;gap:6px;height:34px;padding:0 13px!important;border-radius:999px!important;
+  background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.2)!important;color:#fff!important;font-size:13px!important;font-weight:600!important;letter-spacing:-.005em;white-space:nowrap;box-shadow:none!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+ .hn-hero .dpsp-hint>button:active{transform:scale(.96);background:rgba(255,255,255,.2)!important}
+ .hn-hero .dpsp-hint>button.mrk-chip i,.hn-hero .dpsp-hint>button.isl-chip i{position:static!important;order:-1;width:7px;height:7px;padding:0!important;border-radius:50%!important;background:#fbbf24!important;font-size:0!important;box-shadow:0 0 0 3px rgba(251,191,36,.22)}
+ .hn-hero .dpsp-hint>button.mrk-chip::after,.hn-hero .dpsp-hint>button.isl-chip::after{content:"New";font-size:10.5px;font-weight:700;color:#fde68a;margin-left:1px}
+ .hn-hero .hn-trust{flex-wrap:nowrap!important;gap:0!important;margin-top:14px!important;font-size:12px!important;color:rgba(255,255,255,.7)!important;white-space:nowrap;overflow:hidden}
+ .hn-hero .hn-trust>*{display:inline-flex;align-items:center}
+ .hn-hero .hn-trust>*+*::before{content:"·";margin:0 7px;opacity:.6;color:rgba(255,255,255,.7)}
+ .hn-hero .hn-trust .hn-trk{font-size:12px!important;font-weight:600;color:#fff}
+ .hn-hero .hn-trust .m5-ok{width:13px;height:13px;margin-right:4px;flex:none}
+}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10106,5 +10128,11 @@ function run(){var n=document.querySelector(".hx-nav");if(!n)return false;
  ic(n.querySelector(":scope>.hx-plans"),"plans");ic(n.querySelector(".hx-more"),"more");ic(n.querySelector(":scope>.hx-cta"),"phone");
  lab(lm,"List Maker","List");lab(n.querySelector(':scope>button[data-sec="senior-connect"]'),"Talk to a senior","Seniors");lab(n.querySelector(":scope>.hx-cta"),"1:1 counselling","1:1 call");return true;}
 var k=0;(function w(){if(run()&&++k>4)return;if(k<40)setTimeout(w,500);})();
+})();</script><script id="dp-m5-js">(function(){
+if(!matchMedia("(max-width:760px)").matches)return;
+var ok='<svg class="m5-ok" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="rgba(255,255,255,.18)"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="#6ee7b7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function run(){var t=document.querySelector(".hn-hero .hn-trust");if(!t||t.dataset.m5)return!!t;var s=t.querySelectorAll(":scope>span"),b=t.querySelector(".hn-trk");
+ if(s[0])s[0].innerHTML=ok+"MCC data";if(s[1])s[1].textContent="Built by doctors";if(b)b.innerHTML="75% → 76% tested ›";t.dataset.m5=1;return true;}
+var k=0;(function w(){if(run()||++k>30)return;setTimeout(w,400);})();
 })();</script></body>
 </html>
