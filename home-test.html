@@ -5106,6 +5106,12 @@ html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;backg
 .hx-nav>.hx-cta::before{content:"\1F4DE";margin-right:7px;font-size:14px;filter:saturate(1.2)}
 .hx-nav>button[onclick*="dpOpenMaker"] .a2-spk{display:inline-block!important;margin-left:5px}
 .hx-nav>.hx-cta span{opacity:.7!important;font-weight:500!important}
+/* keep the counselling pill always visible: when the header gets tight, first drop the emoji + padding, then the price, then Plans */
+.hx-nav>.hx-cta{display:inline-flex!important}
+.hx-f1 .hx-nav>button,.hx-f1 .hx-nav .hx-more{padding:8px 10px!important}
+.hx-f2 .hx-nav>button::before{display:none!important}
+.hx-f2 .hx-nav>.hx-cta::before{display:inline!important}
+.hx-f5 .hx-nav>.hx-plans{display:none!important}
 /* matching round icon buttons on the right (theme toggle) */
 .dpt-btn{width:36px!important;height:36px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
 html.dpdark .hx-nav>button,html.dpdark .hx-nav .hx-more,html.dpdark .hx-nav>.hx-plans,html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#f5f5f7!important}
