@@ -5074,6 +5074,13 @@ html.dpdark .xch{color:#fff}
 @keyframes xChShine{0%,62%{left:-45%}100%{left:130%}}
 .xch:before{inset:0!important;border-radius:999px}
 @media (max-width:760px){.xch-wrap{display:none}}
+
+/* 2 Nov (owner): the Choice List Maker takes the place of "Colleges" in the header (Colleges stays one tap away: hero search + dock) */
+.hx-nav>button[data-sec="neetpg-app-wrap"]{display:none!important}
+.hx-nav>button[onclick*="dpOpenMaker"]{display:inline-flex!important;color:#4c1d95!important;background:linear-gradient(135deg,#f5f3ff,#ede9fe)!important;box-shadow:inset 0 0 0 1px rgba(124,58,237,.22);font-weight:700!important}
+.hx-nav>button[onclick*="dpOpenMaker"]:hover{background:linear-gradient(135deg,#ede9fe,#ddd6fe)!important}
+.hx-nav>button[onclick*="dpOpenMaker"] svg.hx-ni{color:#7c3aed!important;opacity:1!important}
+html.dpdark .hx-nav>button[onclick*="dpOpenMaker"]{color:#ddd6fe!important;background:rgba(124,58,237,.18)!important}
 @media (prefers-reduced-motion:reduce){.xch:after{animation:none}.xk:before{animation:none}.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
