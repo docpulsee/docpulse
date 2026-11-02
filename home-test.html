@@ -4969,6 +4969,12 @@ body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 .exd[data-x=fmge] button[aria-pressed=true]{color:#3b1d00!important;text-shadow:none}
 .exd .nw{top:-7px;right:4px;animation:exdNew 2.4s ease-in-out infinite}@keyframes exdNew{50%{transform:translateY(-2px) scale(1.06)}}
 @media (prefers-reduced-motion:reduce){.exd .glide:after,.exd .nw{animation:none}}
+
+/* v3 (2 Nov): the switcher sits above the hero box (not inside the NEET PG box), centred, dark liquid glass so it reads on the light page */
+.exd-bar{display:flex;justify-content:center;margin:12px 16px 14px;position:relative;z-index:6}
+.exd-bar .exd{width:100%;max-width:420px;margin:0;background:linear-gradient(180deg,rgba(30,27,75,.88),rgba(30,27,75,.76))!important;border:1px solid rgba(255,255,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 14px 30px -14px rgba(20,16,60,.7)!important}
+html body.dp-ini .exd-bar,html body.dp-ini .exd-bar #dp-exd.exd{display:grid!important}html body.dp-ini .exd-bar{display:flex!important}
+html.dpdark .exd-bar .exd{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.06))!important}
 @media (prefers-reduced-motion:reduce){.exd *{transition:none!important}}
 </style><style id="dp-dk2-css">
 #plans.dk2 .hn-seg,#plans.dk2 .hn-dots{display:none!important}
@@ -9884,7 +9890,7 @@ function mk(){var d=document.createElement("div");d.className="exd";d.id="dp-exd
 function cur(){return document.body.classList.contains("dp-ini")?"inicet":"neetpg";}
 function paint(d,force){var x=force||cur();if(d.getAttribute("data-x")&&d.getAttribute("data-x")!==x){d.classList.remove("jelly");void d.offsetWidth;d.classList.add("jelly");}d.setAttribute("data-x",x);var bs=d.querySelectorAll("button"),on=null;bs.forEach(function(b){var p=b.getAttribute("data-x")===x;b.setAttribute("aria-pressed",p);if(p)on=b;});
  var g=d.querySelector(".glide");if(on&&on.offsetWidth){g.style.width=on.offsetWidth+"px";g.style.transform="translateX("+(on.offsetLeft-3)+"px)";}}
-function mount(){var sw=document.querySelector(".hn-hero .ini-sw")||document.querySelector(".ini-sw");if(!sw)return false;var d=sw.parentNode.querySelector(".exd");if(!d){d=mk();sw.parentNode.insertBefore(d,sw);}paint(d);return true;}
+function mount(){var sec=document.querySelector("section.hn-hero"),inn=sec&&sec.querySelector(".hn-hero-in");if(!sec||!inn||!document.querySelector(".ini-sw"))return false;var bar=sec.querySelector(".exd-bar");if(!bar){bar=document.createElement("div");bar.className="exd-bar";sec.insertBefore(bar,inn);}var d=document.getElementById("dp-exd");if(!d){d=mk();}if(d.parentNode!==bar)bar.appendChild(d);paint(d);return true;}
 function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector(".fmg-plan"))return;var c=document.createElement("div");c.className="fmg-plan";
  c.innerHTML='<div class="fmg-plan-l"><b>\u2708\uFE0F FMG Internship Pass <em>NEW</em></b><small>For foreign medical graduates after FMGE: every Indian college with internship seats for FMGs in 2026-27, state by state, with intern stipend. Founders\u2019 1:1 at \u20B9799 for pass holders.</small></div>'+
  '<div class="fmg-plan-r"><div class="fmg-plan-p"><b>\u20B9999</b></div><div class="fmg-plan-n">one-time</div><button type="button" class="fmg-plan-b">Open FMG Pass</button></div>';
