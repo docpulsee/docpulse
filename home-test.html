@@ -4985,7 +4985,7 @@ body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 .dk2-dots{display:flex;justify-content:center;gap:6px;margin-top:8px}.dk2-dots i{width:6px;height:6px;border-radius:6px;background:#cfd8d5;transition:width .35s,background .35s;cursor:pointer}.dk2-dots i.on{width:18px;background:#0f6e5c}
 html.dpdark .dk2-seg{background:#18231f}html.dpdark .dk2-seg i{background:#2a3833}html.dpdark .dk2-seg button.on{color:#e7f2ee}html.dpdark .dk2-a{background:#111a18;border-color:rgba(255,255,255,.08)}
 </style><style id="dp-isl-css">
-.isl-chip{background:linear-gradient(135deg,#e0e7ff,#a5b4fc)!important;color:#1e1b4b!important;border-color:transparent!important;font-weight:800!important;position:relative;text-decoration:none}
+.isl-chip{background:linear-gradient(135deg,#e0e7ff,#a5b4fc)!important;color:#1e1b4b!important;border-color:transparent!important;font-weight:800!important;position:relative}
 .isl-chip i{position:absolute;top:-8px;right:-6px;font-style:normal;font-size:9px;font-weight:900;background:#e11d48;color:#fff;border-radius:999px;padding:1px 6px;letter-spacing:.04em}
 .isl-cta{display:flex;align-items:center;gap:12px;max-width:520px;margin:0 0 18px;padding:12px 14px;border-radius:18px;text-decoration:none;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .15s,background .2s}
 .isl-cta:hover{background:rgba(255,255,255,.18)}.isl-cta:active{transform:scale(.985)}
@@ -9911,10 +9911,10 @@ function build(){var sec=q("#plans"),g=sec&&q(".hn-pgrid",sec);if(!g||!g.getAttr
 var n=0;(function w(){if(build())return;if(++n<80)setTimeout(w,250);})();
 })();</script><script id="dp-isl-js">(function(){var U="/inicet-score-test.html",n=0;
 function ga(w){try{window.gtag&&gtag("event","inicet_score_entry",{from:w});}catch(_){}}
-function chip(){var h=document.querySelector(".dpsp-hint");if(!h||h.querySelector(".isl-chip"))return!!h;var a=document.createElement("a");a.href=U;a.className="mrk-chip isl-chip";a.setAttribute("data-isl",1);
- a.innerHTML="📝 INI-CET marks → rank<i>NEW</i>";a.onclick=function(){ga("chip");};var g=h.querySelector(".mrk-chip");if(g&&g.nextSibling)h.insertBefore(a,g.nextSibling);else h.insertBefore(a,h.firstChild);return true;}
+function chip(){var h=document.querySelector(".dpsp-hint");if(!h||h.querySelector(".isl-chip"))return!!h;var a=document.createElement("button");a.type="button";a.className="mrk-chip isl-chip";a.setAttribute("data-isl",1);a.setAttribute("data-href",U);
+ a.innerHTML="📝 INI-CET marks → rank<i>NEW</i>";a.onclick=function(e){e.preventDefault();e.stopPropagation();ga("chip");location.href=U;};var g=h.querySelector(".mrk-chip");if(g&&g.nextSibling)h.insertBefore(a,g.nextSibling);else h.insertBefore(a,h.firstChild);return true;}
 function cta(){var p=document.querySelector("#ini-hero p.ini-s");if(!p||document.querySelector(".isl-cta"))return!!p;var a=document.createElement("a");a.href=U;a.className="isl-cta";a.setAttribute("data-isl",2);
- a.innerHTML='<span class="o" aria-hidden="true"></span><span><b>Paper done? See your marks &amp; expected rank</b><span>Calm, free, 20 seconds</span></span><em>›</em>';a.onclick=function(){ga("ini_hero");};p.parentNode.insertBefore(a,p.nextSibling);return true;}
+ a.innerHTML='<span class="o" aria-hidden="true"></span><span><b>Paper done? See your marks and expected rank</b><span>Calm, free, 20 seconds</span></span><em>›</em>';a.onclick=function(){ga("ini_hero");};p.parentNode.insertBefore(a,p.nextSibling);return true;}
 (function w(){var a=chip(),b=cta();if((a&&b)||++n>40)return;setTimeout(w,500);})();
 new MutationObserver(function(){if(!document.querySelector(".isl-cta"))cta();}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 })();</script></body>
