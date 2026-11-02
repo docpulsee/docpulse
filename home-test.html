@@ -4951,6 +4951,24 @@ body.dp-ini .exd button[aria-pressed=true]{color:#312e81}
 .fmg-plan-r{flex:0 0 auto;text-align:right}.fmg-plan-p b{font-size:28px;font-weight:800}.fmg-plan-n{font-size:12px;color:#e3f6ef;margin:2px 0 8px}
 .fmg-plan-b{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer;background:#ffd36b;color:#2a1d00}
 @media (max-width:640px){.fmg-plan{flex-direction:column;align-items:stretch}.fmg-plan-r{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.fmg-plan-n{margin:0}}
+
+/* v2 (2 Nov): Apple-style liquid-glass switcher. Each exam has its own glowing pill (NEET PG teal, INI-CET indigo, FMGE amber);
+   the pill slides with a springy stretch, icons lift like the macOS Dock on hover, a soft shine passes over the active pill. */
+.exd{max-width:400px;padding:4px;gap:0;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.10));border:1px solid rgba(255,255,255,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(0,0,0,.08),0 10px 30px -12px rgba(0,0,0,.45);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%)}
+.exd button{min-height:40px;padding:8px 6px;color:rgba(255,255,255,.92);transition:color .3s}
+.exd button svg{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){.exd button:hover svg{transform:translateY(-3px) scale(1.18)}.exd button:hover b{text-shadow:0 0 12px rgba(255,255,255,.6)}}
+.exd .glide{top:4px;bottom:4px;left:4px;background:linear-gradient(135deg,#34d399,#0d9488);box-shadow:0 6px 18px -4px rgba(16,185,129,.75),inset 0 1px 0 rgba(255,255,255,.55);overflow:hidden;transition:transform .55s cubic-bezier(.34,1.45,.5,1),width .55s cubic-bezier(.34,1.45,.5,1),background .45s,box-shadow .45s}
+.exd .glide:after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:exdShine 4.5s ease-in-out infinite}
+@keyframes exdShine{0%,70%{left:-40%}100%{left:130%}}
+.exd[data-x=inicet] .glide{background:linear-gradient(135deg,#818cf8,#6d28d9);box-shadow:0 6px 18px -4px rgba(99,102,241,.8),inset 0 1px 0 rgba(255,255,255,.55)}
+.exd[data-x=fmge] .glide{background:linear-gradient(135deg,#fcd34d,#f97316);box-shadow:0 6px 18px -4px rgba(249,115,22,.8),inset 0 1px 0 rgba(255,255,255,.6)}
+.exd.jelly .glide{animation:exdJelly .55s cubic-bezier(.3,1.4,.5,1)}
+@keyframes exdJelly{0%{scale:1 1}35%{scale:1.12 .86}65%{scale:.96 1.06}100%{scale:1 1}}
+.exd button[aria-pressed=true],body.dp-ini .exd button[aria-pressed=true]{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.exd[data-x=fmge] button[aria-pressed=true]{color:#3b1d00!important;text-shadow:none}
+.exd .nw{top:-7px;right:4px;animation:exdNew 2.4s ease-in-out infinite}@keyframes exdNew{50%{transform:translateY(-2px) scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.exd .glide:after,.exd .nw{animation:none}}
 @media (prefers-reduced-motion:reduce){.exd *{transition:none!important}}
 </style><style id="dp-dk2-css">
 #plans.dk2 .hn-seg,#plans.dk2 .hn-dots{display:none!important}
@@ -9864,7 +9882,7 @@ function mk(){var d=document.createElement("div");d.className="exd";d.id="dp-exd
   if(window.dpSetExam)window.dpSetExam(x);paint(d);});
  return d;}
 function cur(){return document.body.classList.contains("dp-ini")?"inicet":"neetpg";}
-function paint(d,force){var x=force||cur();var bs=d.querySelectorAll("button"),on=null;bs.forEach(function(b){var p=b.getAttribute("data-x")===x;b.setAttribute("aria-pressed",p);if(p)on=b;});
+function paint(d,force){var x=force||cur();if(d.getAttribute("data-x")&&d.getAttribute("data-x")!==x){d.classList.remove("jelly");void d.offsetWidth;d.classList.add("jelly");}d.setAttribute("data-x",x);var bs=d.querySelectorAll("button"),on=null;bs.forEach(function(b){var p=b.getAttribute("data-x")===x;b.setAttribute("aria-pressed",p);if(p)on=b;});
  var g=d.querySelector(".glide");if(on&&on.offsetWidth){g.style.width=on.offsetWidth+"px";g.style.transform="translateX("+(on.offsetLeft-3)+"px)";}}
 function mount(){var sw=document.querySelector(".hn-hero .ini-sw");if(!sw)return false;var d=sw.parentNode.querySelector(".exd");if(!d){d=mk();sw.parentNode.insertBefore(d,sw);}paint(d);return true;}
 function plan(){var pl=document.getElementById("plans");if(!pl||pl.querySelector(".fmg-plan"))return;var c=document.createElement("div");c.className="fmg-plan";

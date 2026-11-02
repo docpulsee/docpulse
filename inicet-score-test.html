@@ -122,16 +122,25 @@ body.go #marks,body.go #rank{margin-top:-22px;position:relative;z-index:4}
 /* phones: photo melts into the page instead of a separate box */
 @media (max-width:899px){.ph{border-radius:0!important}.ph:after{background:linear-gradient(180deg,rgba(20,18,60,.10) 0%,rgba(20,18,60,0) 28%,rgba(20,18,60,.45) 70%,rgba(238,242,255,.0) 100%)!important}
  .ph:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;z-index:2;background:linear-gradient(180deg,rgba(238,242,255,0),#eef2ff)}}
-.xpk{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:360px;margin:4px auto 0;padding:3px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 18px -12px rgba(0,0,0,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);position:relative;z-index:5}
-.xpk a{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;border-radius:999px;text-decoration:none;font:800 13px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:#4b5563;white-space:nowrap;transition:background .2s,color .2s}
-.xpk a.on{background:#fff;color:#111827;box-shadow:0 2px 8px rgba(0,0,0,.12)}.xpk a:not(.on):hover{color:#111827}
+.xpk{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:380px;margin:4px auto 0;padding:4px;border-radius:999px;position:relative;z-index:5;background:linear-gradient(180deg,rgba(30,27,75,.86),rgba(30,27,75,.74));border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 28px -14px rgba(20,16,60,.7);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%)}
+.xpk a{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:8px 6px;border-radius:999px;text-decoration:none;font:800 13px/1 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:rgba(255,255,255,.88);white-space:nowrap;overflow:hidden}
+.xpk svg{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){.xpk a:not(.on):hover svg{transform:translateY(-3px) scale(1.18)}.xpk a:not(.on):hover{color:#fff}}
+.xpk a.on{color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.xpk a.on[data-xpk=neetpg]{background:linear-gradient(135deg,#34d399,#0d9488);box-shadow:0 6px 16px -4px rgba(16,185,129,.8),inset 0 1px 0 rgba(255,255,255,.5)}
+.xpk a.on[data-xpk=inicet]{background:linear-gradient(135deg,#818cf8,#6d28d9);box-shadow:0 6px 16px -4px rgba(99,102,241,.85),inset 0 1px 0 rgba(255,255,255,.5)}
+.xpk a.on[data-xpk=fmge]{background:linear-gradient(135deg,#fcd34d,#f97316);color:#3b1d00;box-shadow:0 6px 16px -4px rgba(249,115,22,.85),inset 0 1px 0 rgba(255,255,255,.6)}
+.xpk a.on:after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:xpkShine 4.5s ease-in-out infinite}
+@keyframes xpkShine{0%,70%{left:-40%}100%{left:130%}}
+.xpk a:active{transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){.xpk a.on:after{animation:none}}
 .xpk{margin:2px 0 10px}@media (min-width:900px){.xpk{margin:0 0 6px;max-width:330px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="wrap">
 <div class="top"><a class="brand" href="/"><img src="/icons/icon-192.png" alt="">DocPulsee</a><span class="live"><i></i><span id="liveN">INI-CET · 1 Nov 2026</span></span></div>
-<nav class="xpk" aria-label="Choose your exam"><a href="/" data-xpk="neetpg">NEET PG</a><a href="/?exam=inicet" class="on" aria-current="page" data-xpk="inicet">INI-CET</a><a href="/fmg.html" data-xpk="fmge">FMGE</a></nav>
+<nav class="xpk" aria-label="Choose your exam"><a href="/" data-xpk="neetpg"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M13 7v9a7 7 0 0 0 14 0V7"/><path d="M11 7h4M25 7h4"/><path d="M20 23v4a7 7 0 0 0 14 0v-3"/><circle cx="34" cy="21" r="3"/></svg><span>NEET PG</span></a><a href="/?exam=inicet" class="on" aria-current="page" data-xpk="inicet"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 15l14-7 14 7-14 7z"/><path d="M11 18v8c0 2.5 4 4.5 9 4.5s9-2 9-4.5v-8"/><path d="M34 15v9"/></svg><span>INI-CET</span></a><a href="/fmg.html" data-xpk="fmge"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 22l32-12-8 22-7-8z"/><path d="M21 24l-4 8-2-10"/></svg><span>FMGE</span></a></nav>
 <div class="ph" id="ph"><i class="img"></i><i class="full"></i><span class="tag">AIIMS NEW DELHI</span><span class="sp" style="left:8%;animation-delay:0s"></span><span class="sp" style="left:22%;animation-delay:2.3s"></span><span class="sp" style="left:37%;animation-delay:4.6s"></span><span class="sp" style="left:55%;animation-delay:1.2s"></span><span class="sp" style="left:68%;animation-delay:3.5s"></span><span class="sp" style="left:82%;animation-delay:5.6s"></span><span class="sp" style="left:93%;animation-delay:2.9s"></span><section class="hello"><div class="hrow"><div class="orb" aria-hidden="true"></div><div class="breath" id="breath">Breathe in…</div></div><h1 id="h1">The paper is done.<br>You did your part.</h1><p id="hp">Enter your answers. We'll gently show your marks, then your rank.</p></section></div>
 
 
