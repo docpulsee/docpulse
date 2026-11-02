@@ -5055,7 +5055,15 @@ html.dpdark .xch{background:#1d2523;color:#e7f2ee;border-color:rgba(255,255,255,
 .xch[data-x=neetpg]:before{color:#34d399}.xch[data-x=inicet]:before{color:#818cf8}
 @keyframes xPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
 html.dpdark .xch{color:#fff}
-@media (prefers-reduced-motion:reduce){.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
+
+/* phones: the hero kicker line becomes the exam switch (first thing inside the hero, same height as before) */
+@media (max-width:760px){
+ .xk{display:inline-flex!important;align-items:center;gap:8px;padding:6px 12px 6px 6px!important;border-radius:999px!important;cursor:pointer;background:rgba(255,255,255,.16)!important;border:1px solid rgba(255,255,255,.4)!important;box-shadow:0 8px 20px -10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.35);position:relative}
+ .xk .xki{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}.xk .xki svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+ .xk .xkc{margin-left:2px;font-size:10px;opacity:.9}.xk .xks{font-weight:800;font-size:10px;letter-spacing:.06em;background:#fff;color:#111827;border-radius:999px;padding:3px 7px;margin-left:4px}
+ .xk:before{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid rgba(255,255,255,.8);opacity:0;animation:xPulse 2.2s ease-out .8s 3}
+}
+@media (prefers-reduced-motion:reduce){.xk:before{animation:none}.xch:before{animation:none}.xtok:after{animation:none}.xtok .xtv.roll{animation:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10014,7 +10022,11 @@ function mountTok(){var ok=true;
  document.querySelectorAll(".xtok").forEach(function(t){if(t.__x4)return;t.__x4=1;t.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();open(t,"headline");});});return ok;}
 function roll(x){document.querySelectorAll(".xtok .xtv").forEach(function(v){v.textContent=X[x][0];v.classList.remove("roll");void v.offsetWidth;v.classList.add("roll");});}
 var lastX=null;function paint(){var x=cur();document.querySelectorAll(".xch").forEach(function(c){c.innerHTML=chipHTML(x);c.setAttribute("data-x",x);});if(lastX&&lastX!==x){document.querySelectorAll(".xtok .xtv").forEach(function(v){v.classList.remove("roll");void v.offsetWidth;v.classList.add("roll");});}lastX=x;}
-var n=0;(function w(){var a=mountChip(),b=mountTok();paint();if((a&&b)||++n>60)return;setTimeout(w,500);})();
-new MutationObserver(function(){mountTok();paint();}).observe(document.body,{attributes:true,attributeFilter:["class"]});
+
+function mountKick(){[[".hn-kicker","neetpg"],["#ini-hero .ini-k","inicet"]].forEach(function(a){var k=document.querySelector(a[0]);if(!k||k.__x4)return;k.__x4=1;k.setAttribute("data-orig",k.textContent);k.classList.add("xk-src");
+ var setK=function(){if(innerWidth<=760){if(!k.classList.contains("xk")){k.classList.add("xk");k.setAttribute("role","button");k.setAttribute("tabindex","0");k.setAttribute("aria-label","Choose your exam");k.innerHTML='<span class="xki x-'+a[1]+'">'+IC[a[1]]+'</span>'+X[a[1]][0]+'<span class="xkc">▾</span><span class="xks">SWITCH</span>';}}else if(k.classList.contains("xk")){k.classList.remove("xk");k.removeAttribute("role");k.textContent=k.getAttribute("data-orig");}};
+ setK();window.addEventListener("resize",setK);k.addEventListener("click",function(e){if(innerWidth>760)return;e.preventDefault();e.stopPropagation();open(k,"kicker");});});}
+var n=0;(function w(){mountKick();var a=mountChip(),b=mountTok();paint();if((a&&b)||++n>60)return;setTimeout(w,500);})();
+new MutationObserver(function(){mountKick();mountTok();paint();}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 })();</script></body>
 </html>
