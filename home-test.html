@@ -5222,6 +5222,27 @@ html.dpdark .bx-stats>div b,html.dpdark .bx-br b,html.dpdark .bx-money b,html.dp
 html.dpdark .bx-stats>div small,html.dpdark .bx-br .n small,html.dpdark .bx-money small,html.dpdark .bx-money em{color:rgba(255,255,255,.75)!important}
 html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 @media (max-width:360px){.bx-br:not(:first-child) .n small{display:none}}
+</style><style id="dp-dnah-css">
+.hx-nav>.nv-dna{order:2;display:inline-flex!important}
+.hx-nav>.nv-dna .nv-ic{color:#7c3aed!important}
+.nv-free{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.05em;line-height:1;color:#fff;background:#16a34a;padding:3px 5px;border-radius:999px;margin-left:1px;transform:translateY(-1px)}
+.hx-nav>.nv-dna:hover .nv-ic{color:#6d28d9!important}
+.nv-dna .nv-l2{display:none}
+@media (max-width:1199px){.hx-nav>.nv-dna .nv-l{display:none}.hx-nav>.nv-dna .nv-l2{display:inline}}
+@media (max-width:1023px){.hx-nav>.nv-dna .nv-l2{display:none}.hx-nav>.nv-dna{gap:4px!important;padding:0 8px!important}}
+/* phones */
+.dnah-m{display:none}
+@media (max-width:760px){
+ .dnah-m{display:inline-flex;align-items:center;gap:5px;order:2;margin-left:auto;height:34px;padding:0 10px 0 7px;border:0;border-radius:999px;background:#f3eefe;color:#6d28d9;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none;position:relative}
+ .dnah-m svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+ .dnah-m:active{transform:scale(.95)}
+ header .dnah-m~.hx-mplans,header .dnah-m~.dpt-wrap{margin-left:0!important}
+ header .max-w-6xl{gap:6px!important}
+ .dpt-btn{width:34px!important;height:34px!important}
+}
+@media (max-width:374px){.dnah-m{padding:0 8px}.dnah-m span{display:none}.dnah-m::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 2px #fff}}
+html.dpdark .dnah-m{background:rgba(167,139,250,.16);color:#c4b5fd}
+html.dpdark .hx-nav>.nv-dna .nv-ic{color:#a78bfa!important}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -9360,6 +9381,8 @@ function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null
  document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  var el=bg.querySelector(".mrk-b");step1(el);load();myInv().then(function(){var g=el.querySelector("[data-gift]");if(g&&INV){var t=document.createElement("div");t.innerHTML=giftHTML();g.replaceWith(t.firstChild);wireGift(el,"",null);}});}
 window.dpOpenMock=open;
+/* header "Free Branch DNA" (3 Nov): unlocked -> open the test, else the invite-3-friends sheet */
+window.dpOpenDnaFree=function(){myInv().then(function(){if(INV&&INV.unlocked){location.href="https://docpulsee.in/branch-dna.html?paid=1";return;}invPop();});};
 /* invite popup for signed-in counselling students (not for members who already have DNA) */
 function invPop(){if(document.querySelector("[data-mock],[data-invpop]"))return;var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-invpop",1);
  bg.innerHTML='<div class="mrk" role="dialog" aria-label="Branch DNA free"><div class="mrk-h"><span style="font-size:24px">🎁</span><b>Your Branch DNA, free</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"><p class="mrk-sub">Not sure which branch fits you? Branch DNA tells you. Get it free: share DocPulsee with 3 friends or your college group.</p>'+giftHTML()+'</div></div>';
@@ -10212,5 +10235,19 @@ var k=0;(function w(){if(run()||++k>30)return;setTimeout(w,400);})();
 /* chips are added to the front of the row by other scripts; keep the row at its start until the student touches it */
 var t0=Date.now(),hit=0;(function z(){var h=document.querySelector(".hn-hero .dpsp-hint");if(h&&!h.dataset.m5){h.dataset.m5=1;["touchstart","wheel","pointerdown"].forEach(function(e){h.addEventListener(e,function(){hit=1;},{passive:true});});}
  if(h&&!hit&&h.scrollLeft)h.scrollLeft=0;if(!hit&&Date.now()-t0<12000)setTimeout(z,300);})();
+})();</script><script id="dp-dnah-js">(function(){
+var DNA='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3c0 6 10 6 10 12s-10 6-10 6"/><path d="M17 3c0 6-10 6-10 12"/><path d="M8.5 6.5h7M8.5 17.5h7M10 12h4"/></svg>';
+function go(e){if(e){e.preventDefault();e.stopPropagation();}
+ if(typeof window.dpOpenDnaFree==="function"){window.dpOpenDnaFree();return;}
+ if(typeof window.openBranchPayment==="function")window.openBranchPayment();}
+function run(){var ok=false,n=document.querySelector(".hx-nav");
+ if(n&&!n.querySelector(".nv-dna")){var b=document.createElement("button");b.type="button";b.className="nv-dna";b.setAttribute("aria-label","Branch DNA, free");b.setAttribute("data-dnah","1");
+  b.innerHTML='<span class="nv-ic" aria-hidden="true">'+DNA+'</span><span class="nv-l">Branch DNA</span><span class="nv-l2">DNA</span><i class="nv-free">FREE</i>';b.onclick=go;n.appendChild(b);}
+ if(n)ok=true;
+ var w=document.querySelector("header .dpt-wrap");
+ if(w&&!document.querySelector(".dnah-m")){var m=document.createElement("button");m.type="button";m.className="dnah-m";m.setAttribute("aria-label","Branch DNA, free");m.setAttribute("data-dnah","m");
+  m.innerHTML=DNA+'<span>Free DNA</span>';m.onclick=go;w.parentNode.insertBefore(m,w);}
+ return ok&&!!w;}
+var k=0;(function t(){if(run()&&++k>3)return;if(k<40)setTimeout(t,500);})();
 })();</script></body>
 </html>
