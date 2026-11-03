@@ -5230,17 +5230,22 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 .nv-dna .nv-l2{display:none}
 @media (max-width:1199px){.hx-nav>.nv-dna .nv-l{display:none}.hx-nav>.nv-dna .nv-l2{display:inline}}
 @media (max-width:1023px){.hx-nav>.nv-dna .nv-l2{display:none}.hx-nav>.nv-dna{gap:4px!important;padding:0 8px!important}}
-/* phones */
+/* phones: the logo never shrinks; the theme (sun) button gives its slot to the DNA pill (theme follows the phone's own
+   light/dark setting automatically); Plans and Sign in get a little tighter. Under 375px the pill becomes icon + green dot. */
 .dnah-m{display:none}
 @media (max-width:760px){
- .dnah-m{display:inline-flex;align-items:center;gap:5px;order:2;margin-left:auto;height:34px;padding:0 10px 0 7px;border:0;border-radius:999px;background:#f3eefe;color:#6d28d9;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none;position:relative}
- .dnah-m svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
- .dnah-m:active{transform:scale(.95)}
- header .dnah-m~.hx-mplans,header .dnah-m~.dpt-wrap{margin-left:0!important}
+ .dp-hdr-brand{flex:none!important}
+ header .dpt-btn{display:none!important}
  header .max-w-6xl{gap:6px!important}
- .dpt-btn{width:34px!important;height:34px!important}
+ .dnah-m{display:inline-flex;align-items:center;gap:4px;order:2;margin-left:auto;height:34px;padding:0 10px 0 7px;border:0;border-radius:999px;background:#f3eefe;color:#6d28d9;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none;position:relative}
+ .dnah-m svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+ .dnah-m:active{transform:scale(.95)}
+ header .dnah-m~.hx-mplans,header .dnah-m~.dpt-wrap,header .dnah-m~#hn-signin{margin-left:0!important}
+ header .hx-mplans{padding:6px 9px!important}
+ body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{padding:3px 10px 3px 3px!important;gap:6px!important}
 }
-@media (max-width:374px){.dnah-m{padding:0 8px}.dnah-m span{display:none}.dnah-m::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 2px #fff}}
+@media (max-width:374px){.dnah-m{width:34px;padding:0;justify-content:center}.dnah-m span{display:none}.dnah-m::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 2px #fff}
+ header .hx-mplans{font-size:12px!important;padding:6px 8px!important}}
 html.dpdark .dnah-m{background:rgba(167,139,250,.16);color:#c4b5fd}
 html.dpdark .hx-nav>.nv-dna .nv-ic{color:#a78bfa!important}
 </style></head>
