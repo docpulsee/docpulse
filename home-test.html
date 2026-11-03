@@ -5225,13 +5225,13 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 </style><style id="dp-dnah-css">
 .hx-nav>.nv-dna{order:2;display:inline-flex!important}
 .hx-nav>.nv-dna .nv-ic{color:#7c3aed!important}
-.nv-free{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.05em;line-height:1;color:#fff;background:#16a34a;padding:3px 5px;border-radius:999px;margin-left:1px;transform:translateY(-1px)}
+.nv-free{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:0;line-height:1;color:#6d28d9;background:#f3eefe;padding:3px 6px;border-radius:999px;margin-left:1px;transform:translateY(-1px)}
 .hx-nav>.nv-dna:hover .nv-ic{color:#6d28d9!important}
 .nv-dna .nv-l2{display:none}
 @media (max-width:1199px){.hx-nav>.nv-dna .nv-l{display:none}.hx-nav>.nv-dna .nv-l2{display:inline}}
 @media (max-width:1023px){.hx-nav>.nv-dna .nv-l2{display:none}.hx-nav>.nv-dna{gap:4px!important;padding:0 8px!important}}
 /* phones: the logo never shrinks; the theme (sun) button gives its slot to the DNA pill (theme follows the phone's own
-   light/dark setting automatically); Plans and Sign in get a little tighter. Under 375px the pill becomes icon + green dot; under 340px the Plans pill hides. */
+   light/dark setting automatically); Plans and Sign in get a little tighter. Under 375px the pill becomes the icon only; under 340px the Plans pill hides. */
 .dnah-m{display:none}
 @media (max-width:760px){
  .dp-hdr-brand{flex:none!important}
@@ -5244,7 +5244,7 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
  header .hx-mplans{padding:6px 9px!important}
  body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{padding:3px 10px 3px 3px!important;gap:6px!important}
 }
-@media (max-width:374px){.dnah-m{width:34px;padding:0;justify-content:center}.dnah-m span{display:none}.dnah-m::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 2px #fff}
+@media (max-width:374px){.dnah-m{width:34px;padding:0;justify-content:center}.dnah-m span{display:none}
  header .hx-mplans{font-size:11.5px!important;padding:6px 7px!important}
  body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{font-size:13px!important;padding:3px 8px 3px 3px!important}}
 @media (max-width:339px){header .hx-mplans{display:none!important}}
@@ -9388,8 +9388,6 @@ function open(){try{var s=JSON.parse(localStorage.getItem("dp_mock_last")||"null
  document.body.appendChild(bg);bg.querySelector(".mrk-x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  var el=bg.querySelector(".mrk-b");step1(el);load();myInv().then(function(){var g=el.querySelector("[data-gift]");if(g&&INV){var t=document.createElement("div");t.innerHTML=giftHTML();g.replaceWith(t.firstChild);wireGift(el,"",null);}});}
 window.dpOpenMock=open;
-/* header "Free Branch DNA" (3 Nov): unlocked -> open the test, else the invite-3-friends sheet */
-window.dpOpenDnaFree=function(){myInv().then(function(){if(INV&&INV.unlocked){location.href="https://docpulsee.in/branch-dna.html?paid=1";return;}invPop();});};
 /* invite popup for signed-in counselling students (not for members who already have DNA) */
 function invPop(){if(document.querySelector("[data-mock],[data-invpop]"))return;var bg=document.createElement("div");bg.className="mrk-bg";bg.setAttribute("data-invpop",1);
  bg.innerHTML='<div class="mrk" role="dialog" aria-label="Branch DNA free"><div class="mrk-h"><span style="font-size:24px">🎁</span><b>Your Branch DNA, free</b><button type="button" class="mrk-x" aria-label="Close">✕</button></div><div class="mrk-b"><p class="mrk-sub">Not sure which branch fits you? Branch DNA tells you. Get it free: share DocPulsee with 3 friends or your college group.</p>'+giftHTML()+'</div></div>';
@@ -10245,16 +10243,18 @@ var t0=Date.now(),hit=0;(function z(){var h=document.querySelector(".hn-hero .dp
 })();</script><script id="dp-dnah-js">(function(){
 var DNA='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3c0 6 10 6 10 12s-10 6-10 6"/><path d="M17 3c0 6-10 6-10 12"/><path d="M8.5 6.5h7M8.5 17.5h7M10 12h4"/></svg>';
 function go(e){if(e){e.preventDefault();e.stopPropagation();}
- if(typeof window.dpOpenDnaFree==="function"){window.dpOpenDnaFree();return;}
- if(typeof window.openBranchPayment==="function")window.openBranchPayment();}
+ if(typeof window.openBranchPayment==="function")window.openBranchPayment();else location.href="https://docpulsee.in/branch-dna.html";}
+function price(){var x=document.querySelector('[data-price="dna"]:not([data-dnah-p])');var t=x&&String(x.textContent||"").trim();return t&&/\d/.test(t)?t:"\u20b9149";}
+function fill(){var t=price();[].forEach.call(document.querySelectorAll("[data-dnah-p]"),function(e){if(e.textContent!==t)e.textContent=t;});}
+window.addEventListener("dp-prices",fill);
 function run(){var ok=false,n=document.querySelector(".hx-nav");
- if(n&&!n.querySelector(".nv-dna")){var b=document.createElement("button");b.type="button";b.className="nv-dna";b.setAttribute("aria-label","Branch DNA, free");b.setAttribute("data-dnah","1");
-  b.innerHTML='<span class="nv-ic" aria-hidden="true">'+DNA+'</span><span class="nv-l">Branch DNA</span><span class="nv-l2">DNA</span><i class="nv-free">FREE</i>';b.onclick=go;n.appendChild(b);}
+ if(n&&!n.querySelector(".nv-dna")){var b=document.createElement("button");b.type="button";b.className="nv-dna";b.setAttribute("aria-label","Branch DNA test");b.setAttribute("data-dnah","1");
+  b.innerHTML='<span class="nv-ic" aria-hidden="true">'+DNA+'</span><span class="nv-l">Branch DNA</span><span class="nv-l2">DNA</span><i class="nv-free" data-dnah-p>'+price()+'</i>';b.onclick=go;n.appendChild(b);}
  if(n)ok=true;
  var w=document.querySelector("header .dpt-wrap");
- if(w&&!document.querySelector(".dnah-m")){var m=document.createElement("button");m.type="button";m.className="dnah-m";m.setAttribute("aria-label","Branch DNA, free");m.setAttribute("data-dnah","m");
-  m.innerHTML=DNA+'<span>Free</span>';m.onclick=go;w.parentNode.insertBefore(m,w);}
- return ok&&!!w;}
+ if(w&&!document.querySelector(".dnah-m")){var m=document.createElement("button");m.type="button";m.className="dnah-m";m.setAttribute("aria-label","Branch DNA test");m.setAttribute("data-dnah","m");
+  m.innerHTML=DNA+'<span data-dnah-p>'+price()+'</span>';m.onclick=go;w.parentNode.insertBefore(m,w);}
+ fill();return ok&&!!w;}
 var k=0;(function t(){if(run()&&++k>3)return;if(k<40)setTimeout(t,500);})();
 })();</script></body>
 </html>
