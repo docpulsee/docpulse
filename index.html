@@ -5125,6 +5125,81 @@ body > header.sticky .max-w-6xl{max-width:1320px!important}
 .dpt-btn{width:38px!important;height:38px!important;border-radius:50%!important;background:rgba(0,0,0,.045)!important;box-shadow:none!important;border:0!important}
 html.dpdark .hx-nav>button:not(.hx-cta),html.dpdark .hx-nav .hx-more{color:#f5f5f7!important}html.dpdark .nv-ic{color:#a1a1a6}
 html.dpdark .hx-nav>button:hover,html.dpdark .hx-nav .hx-more:hover{background:rgba(255,255,255,.08)!important}
+</style><style id="dp-bx2-css">
+/* ---- post frame: card in card ---- */
+.bx-grid{gap:22px}
+.bx-post{border:0!important;border-radius:30px!important;padding:8px!important;background:var(--surface)!important;
+ box-shadow:0 1px 0 rgba(0,0,0,.04),0 22px 44px -30px rgba(10,30,40,.45)!important}
+.bx-head{padding:6px 6px 10px 8px!important}
+.bx-who b{font-size:14.5px!important;letter-spacing:-.01em}
+.bx-media{border-radius:24px;overflow:hidden;isolation:isolate}
+.bx-slide{padding:18px!important;gap:0}
+.bx-strip{border-radius:18px!important;margin-top:8px;padding:12px 16px!important}
+.bx-act{padding:8px 4px 0!important}
+.bx-cap{padding:4px 8px 10px!important}
+/* tone of each slide = colour used for numbers inside white tiles */
+.bx-g-gov{--bxc:#0b5e4f}.bx-g-pvt{--bxc:#4338ca}.bx-g-trust{--bxc:#b45309}.bx-g-dnb{--bxc:#0e7490}
+.bx-g-br{--bxc:#1d4ed8}.bx-g-money{--bxc:#047857}.bx-g-more{--bxc:#7e22ce}
+/* richer, softer gradients (same colour families as before) */
+.bx-slide.bx-g-gov{background:radial-gradient(120% 90% at 100% 0%,#34d3a8 0%,transparent 55%),linear-gradient(155deg,#064e42 0%,#0f7a64 60%,#14a083 100%)}
+.bx-slide.bx-g-pvt{background:radial-gradient(120% 90% at 100% 0%,#a78bfa 0%,transparent 55%),linear-gradient(155deg,#22206a 0%,#4f46e5 60%,#7c3aed 100%)}
+.bx-slide.bx-g-trust{background:radial-gradient(120% 90% at 100% 0%,#fcd34d 0%,transparent 55%),linear-gradient(155deg,#7c2d12 0%,#c2410c 60%,#f59e0b 100%)}
+.bx-slide.bx-g-dnb{background:radial-gradient(120% 90% at 100% 0%,#67e8f9 0%,transparent 55%),linear-gradient(155deg,#0c3653 0%,#0e7490 60%,#06b6d4 100%)}
+.bx-slide.bx-g-br{background:radial-gradient(120% 90% at 100% 0%,#93c5fd 0%,transparent 55%),linear-gradient(160deg,#172554 0%,#1d4ed8 65%,#3b82f6 100%)}
+.bx-slide.bx-g-money{background:radial-gradient(120% 90% at 100% 0%,#6ee7b7 0%,transparent 55%),linear-gradient(160deg,#064e3b 0%,#047857 60%,#10b981 100%)}
+.bx-slide.bx-g-more{background:radial-gradient(120% 90% at 100% 0%,#f0abfc 0%,transparent 55%),linear-gradient(160deg,#3b0764 0%,#7e22ce 60%,#c026d3 100%)}
+.bx-slide::after{display:none}
+/* shared bento tile */
+.bx-stats>div,.bx-br,.bx-money>div,.bx-facts>div{background:#fff!important;border:0!important;border-radius:18px!important;color:#1d1d1f!important;
+ box-shadow:0 10px 22px -16px rgba(0,0,0,.55)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.bx-pill{background:rgba(255,255,255,.22)!important;border-radius:999px}
+.bx-st{font-size:12.5px!important;letter-spacing:.02em;text-transform:uppercase;opacity:.95!important;margin-bottom:12px!important}
+/* ---- slide 1: cover ---- */
+.bx-name{font-size:clamp(25px,7vw,32px)!important;letter-spacing:-.025em!important;line-height:1.04!important}
+.bx-stats{grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:16px!important;margin-bottom:0!important}
+.bx-slide .bx-stats{margin-bottom:0!important}
+.bx-stats>div{padding:11px 13px!important;text-align:left!important;display:flex;flex-direction:column;justify-content:space-between;min-height:62px}
+.bx-stats>div b{color:var(--bxc,#1d1d1f);font-size:22px!important;letter-spacing:-.02em;order:2}
+.bx-stats>div small{color:#6e6e73;opacity:1!important;font-size:11px!important;text-transform:uppercase;letter-spacing:.04em;order:1}
+.bx-stats>div:nth-child(3){grid-column:1/-1;flex-direction:row;align-items:center;min-height:0;padding:12px 14px!important}
+.bx-stats>div:nth-child(3) b{font-size:26px!important;order:2}
+.bx-tapopen{top:16px;right:16px;bottom:auto!important;background:rgba(255,255,255,.22)!important}
+.bx-count{display:none}
+/* ---- slide 2: branches ---- */
+.bx-brs{grid-template-columns:1fr 1fr!important;gap:8px!important;align-content:stretch!important}
+.bx-br{grid-template-columns:auto 1fr!important;grid-template-areas:"e b" "n n";align-items:start!important;row-gap:6px!important;padding:10px 12px!important;min-width:0}
+.bx-br .e{grid-area:e;font-size:20px!important;text-align:left!important;line-height:1}
+.bx-br b{grid-area:b;justify-self:end;color:var(--bxc,#1d4ed8);font-size:17px!important;letter-spacing:-.02em}
+.bx-br .n{grid-area:n;font-size:12.5px!important;min-width:0}
+.bx-br .n small{color:#6e6e73;opacity:1!important}
+.bx-br .chev{display:none!important}
+.bx-br:first-child{grid-column:1/-1;grid-template-columns:auto 1fr auto!important;grid-template-areas:"e n b";align-items:center!important;padding:12px 14px!important}
+.bx-br:first-child .e{font-size:26px!important}.bx-br:first-child .n{font-size:14px!important}.bx-br:first-child b{font-size:24px!important}
+.bx-br:hover{background:#fff!important;transform:translateY(-1px)}
+.bx-more{margin-top:8px!important;opacity:.9!important}
+/* ---- slide 3: money ---- */
+.bx-money{grid-template-columns:1fr 1fr!important;gap:8px!important;margin:auto 0 0!important}
+.bx-money>div{display:flex!important;flex-direction:column;gap:3px;padding:12px 14px!important}
+.bx-money>div:first-child{grid-column:1/-1;padding:16px!important}
+.bx-money small{color:#6e6e73;opacity:1!important;font-size:11px!important;text-transform:uppercase;letter-spacing:.04em}
+.bx-money b{color:var(--bxc,#047857);text-align:left!important;font-size:19px!important;letter-spacing:-.02em}
+.bx-money>div:first-child b{font-size:28px!important}
+.bx-money em{color:#8e8e93;opacity:1!important}
+/* ---- slide 4: worth knowing ---- */
+.bx-facts{gap:8px!important}
+.bx-facts>div{padding:11px 12px!important}
+.bx-facts p{color:#1d1d1f}.bx-facts p b{color:var(--bxc,#7e22ce)}
+.bx-cta{grid-template-columns:1fr 1fr;gap:8px!important}
+.bx-cta button{border-radius:16px!important;padding:12px!important;font-size:13px!important;color:var(--bxc,#0b4f43)!important}
+.bx-cta button.w{color:#fff!important;background:rgba(255,255,255,.18)!important;border:0!important}
+/* dots in the action row */
+.bx-dots i.on{background:#1d1d1f!important;width:16px!important;height:6px!important;border-radius:9px}
+/* dark mode: glass tiles instead of white */
+html.dpdark .bx-stats>div,html.dpdark .bx-br,html.dpdark .bx-money>div,html.dpdark .bx-facts>div{background:rgba(255,255,255,.13)!important;color:#fff!important;box-shadow:none!important}
+html.dpdark .bx-stats>div b,html.dpdark .bx-br b,html.dpdark .bx-money b,html.dpdark .bx-facts p,html.dpdark .bx-facts p b{color:#fff!important}
+html.dpdark .bx-stats>div small,html.dpdark .bx-br .n small,html.dpdark .bx-money small,html.dpdark .bx-money em{color:rgba(255,255,255,.75)!important}
+html.dpdark .bx-dots i.on{background:#f5f5f7!important}
+@media (max-width:360px){.bx-br:not(:first-child) .n small{display:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
