@@ -5231,12 +5231,12 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 @media (max-width:1199px){.hx-nav>.nv-dna .nv-l{display:none}.hx-nav>.nv-dna .nv-l2{display:inline}}
 @media (max-width:1023px){.hx-nav>.nv-dna .nv-l2{display:none}.hx-nav>.nv-dna{gap:4px!important;padding:0 8px!important}}
 /* phones: the logo never shrinks; the theme (sun) button gives its slot to the DNA pill (theme follows the phone's own
-   light/dark setting automatically); Plans and Sign in get a little tighter. Under 375px the pill becomes icon + green dot. */
+   light/dark setting automatically); Plans and Sign in get a little tighter. Under 375px the pill becomes icon + green dot; under 340px the Plans pill hides. */
 .dnah-m{display:none}
 @media (max-width:760px){
  .dp-hdr-brand{flex:none!important}
  header .dpt-btn{display:none!important}
- header .max-w-6xl{gap:6px!important}
+ header .max-w-6xl{gap:4px!important}
  .dnah-m{display:inline-flex;align-items:center;gap:4px;order:2;margin-left:auto;height:34px;padding:0 10px 0 7px;border:0;border-radius:999px;background:#f3eefe;color:#6d28d9;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none;position:relative}
  .dnah-m svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
  .dnah-m:active{transform:scale(.95)}
@@ -5245,7 +5245,9 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
  body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{padding:3px 10px 3px 3px!important;gap:6px!important}
 }
 @media (max-width:374px){.dnah-m{width:34px;padding:0;justify-content:center}.dnah-m span{display:none}.dnah-m::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 2px #fff}
- header .hx-mplans{font-size:12px!important;padding:6px 8px!important}}
+ header .hx-mplans{font-size:11.5px!important;padding:6px 7px!important}
+ body.hn-ready .dpt-wrap:has(.dp-acct-slot:empty)~#hn-signin{font-size:13px!important;padding:3px 8px 3px 3px!important}}
+@media (max-width:339px){header .hx-mplans{display:none!important}}
 html.dpdark .dnah-m{background:rgba(167,139,250,.16);color:#c4b5fd}
 html.dpdark .hx-nav>.nv-dna .nv-ic{color:#a78bfa!important}
 </style></head>
@@ -10251,7 +10253,7 @@ function run(){var ok=false,n=document.querySelector(".hx-nav");
  if(n)ok=true;
  var w=document.querySelector("header .dpt-wrap");
  if(w&&!document.querySelector(".dnah-m")){var m=document.createElement("button");m.type="button";m.className="dnah-m";m.setAttribute("aria-label","Branch DNA, free");m.setAttribute("data-dnah","m");
-  m.innerHTML=DNA+'<span>Free DNA</span>';m.onclick=go;w.parentNode.insertBefore(m,w);}
+  m.innerHTML=DNA+'<span>Free</span>';m.onclick=go;w.parentNode.insertBefore(m,w);}
  return ok&&!!w;}
 var k=0;(function t(){if(run()&&++k>3)return;if(k<40)setTimeout(t,500);})();
 })();</script></body>
