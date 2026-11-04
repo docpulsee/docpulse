@@ -5223,27 +5223,38 @@ html.dpdark .bx-stats>div small,html.dpdark .bx-br .n small,html.dpdark .bx-mone
 html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 @media (max-width:360px){.bx-br:not(:first-child) .n small{display:none}}
 </style><style id="dp-diya-css">
-.dy-wrap{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:visible}
-.dy-lamp{position:absolute;left:50%;bottom:-6px;width:30px;height:22px;margin-left:-15px;transform:translateY(14px) scale(.6);opacity:0;
- animation:dyIn .55s cubic-bezier(.2,.9,.3,1.3) forwards,dyOut .5s ease-in 2.9s forwards;will-change:transform,opacity}
-.dy-lamp svg{width:30px;height:22px;display:block;overflow:visible;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
-.dy-fl{transform-origin:15px 9px;animation:dyFl .28s ease-in-out infinite alternate}
-.dy-glow{position:absolute;left:50%;bottom:6px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,80,.75),rgba(255,160,40,0) 70%);
- opacity:0;animation:dyGlow 2.6s ease-out .4s forwards;will-change:opacity,transform}
-.dy-spark{position:absolute;left:50%;bottom:16px;width:4px;height:12px;margin-left:-2px;border-radius:3px;background:linear-gradient(#fff6c2,#ffb020);opacity:0;
- animation:dyUp .55s cubic-bezier(.3,.7,.4,1) 1.05s forwards;will-change:transform,opacity}
-.dy-burst{position:absolute;left:50%;top:8px;width:0;height:0}
-.dy-burst i{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 6px var(--c);opacity:0;
- animation:dyP .95s cubic-bezier(.15,.7,.3,1) 1.6s forwards;will-change:transform,opacity}
-.dy-burst b{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,230,150,.9) 35%,rgba(255,180,60,0) 70%);
- opacity:0;animation:dyFlash .45s ease-out 1.58s forwards}
+.dy-stage{position:fixed;left:50%;top:44%;width:0;height:0;z-index:2147483000;pointer-events:none}
+.dy-lamp{position:absolute;left:-48px;top:-6px;width:96px;height:70px;transform:translateY(60px) scale(.5);opacity:0;
+ animation:dyIn .6s cubic-bezier(.2,.9,.3,1.3) forwards,dyOut .55s ease-in 3s forwards;will-change:transform,opacity}
+.dy-lamp svg{width:96px;height:70px;display:block;overflow:visible;filter:drop-shadow(0 8px 14px rgba(120,50,0,.35))}
+.dy-fl{transform-origin:15px 9px;animation:dyFl .26s ease-in-out infinite alternate}
+.dy-glow{position:absolute;left:-90px;top:-80px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,80,.55),rgba(255,160,40,0) 65%);
+ opacity:0;animation:dyGlow 3.3s ease-out .3s forwards;will-change:opacity,transform}
+.dy-spark{position:absolute;left:-3px;top:-8px;width:6px;height:22px;border-radius:4px;background:linear-gradient(#fffbe0,#ffb020 70%,rgba(255,120,0,0));opacity:0;
+ box-shadow:0 0 10px #ffcf5a;animation:dyUp .6s cubic-bezier(.3,.7,.4,1) 1s forwards;will-change:transform,opacity}
+.dy-burst{position:absolute;left:0;top:-170px;width:0;height:0}
+.dy-burst.b2{left:-70px;top:-120px}
+.dy-burst i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c);opacity:0;
+ animation:dyP 1.05s cubic-bezier(.15,.7,.3,1) var(--t,1.6s) forwards;will-change:transform,opacity}
+.dy-burst.b2 i{width:6px;height:6px;left:-3px;top:-3px}
+.dy-burst b{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,230,150,.95) 30%,rgba(255,180,60,0) 70%);
+ opacity:0;animation:dyFlash .5s ease-out var(--t,1.58s) forwards}
 @keyframes dyIn{to{transform:none;opacity:1}}
-@keyframes dyOut{to{transform:translateY(10px) scale(.7);opacity:0}}
+@keyframes dyOut{to{transform:translateY(30px) scale(.7);opacity:0}}
 @keyframes dyFl{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(.85,1.12) rotate(4deg)}}
-@keyframes dyGlow{0%{opacity:0;transform:scale(.6)}25%{opacity:1;transform:scale(1.3)}80%{opacity:.8}100%{opacity:0;transform:scale(1.6)}}
-@keyframes dyUp{0%{opacity:1;transform:translateY(0)}85%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+@keyframes dyGlow{0%{opacity:0;transform:scale(.5)}25%{opacity:1;transform:scale(1.1)}80%{opacity:.8}100%{opacity:0;transform:scale(1.4)}}
+@keyframes dyUp{0%{opacity:1;transform:translateY(0)}85%{opacity:1}100%{opacity:0;transform:translateY(-160px)}}
 @keyframes dyFlash{0%{opacity:0;transform:scale(.3)}30%{opacity:1}100%{opacity:0;transform:scale(1.8)}}
-@keyframes dyP{0%{opacity:1;transform:rotate(var(--a)) translateX(0) scale(1)}70%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--d)) translateY(10px) scale(.4)}}
+@keyframes dyP{0%{opacity:1;transform:rotate(var(--a)) translateX(0) scale(1)}70%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--d)) translateY(26px) scale(.35)}}
+/* running light on the logo border */
+@property --dyr{syntax:"<angle>";inherits:false;initial-value:0deg}
+.dy-run{position:absolute;inset:-3px;border-radius:19px;padding:3px;pointer-events:none;z-index:4;
+ background:conic-gradient(from var(--dyr),transparent 0 62%,#ffd23f 72%,#ff5d8f 80%,#fff3b0 84%,transparent 92%);
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+ filter:drop-shadow(0 0 4px #ffcf5a);animation:dyRun 1.3s linear 4,dyRunOut .5s ease 4.3s forwards}
+@keyframes dyRun{to{--dyr:360deg}}
+@keyframes dyRunOut{to{opacity:0}}
+@media (max-width:760px){.dy-stage{top:40%}.dy-burst{top:-150px}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10236,23 +10247,26 @@ var t0=Date.now(),hit=0;(function z(){var h=document.querySelector(".hn-hero .dp
  if(h&&!hit&&h.scrollLeft)h.scrollLeft=0;if(!hit&&Date.now()-t0<12000)setTimeout(z,300);})();
 })();</script><script id="dp-diya-js">(function(){
 var force=/[?&]diya=1/.test(location.search);
-try{if(!force){var now=Date.now();if(now>Date.parse("2026-11-10T18:30:00Z"))return;if(sessionStorage.getItem("dp_diya"))return;}}catch(e){}
+if(!force&&Date.now()>Date.parse("2026-11-10T18:30:00Z"))return;
 if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches&&!force)return;
 var lamp='<svg viewBox="0 0 30 22" aria-hidden="true"><defs><linearGradient id="dyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient>'+
  '<radialGradient id="dyf" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#fff7cc"/><stop offset=".5" stop-color="#ffcc33"/><stop offset="1" stop-color="#ff7a00"/></radialGradient></defs>'+
  '<path class="dy-fl" d="M15 1.5c2.6 3 3.6 5.2 3.6 7a3.6 3.6 0 0 1-7.2 0c0-1.8 1-4 3.6-7z" fill="url(#dyf)"/>'+
  '<path d="M2 11.5h26c-1 5.6-6.4 9-13 9s-12-3.4-13-9z" fill="url(#dyg)"/><path d="M2 11.5h26" stroke="#7c2d12" stroke-width="1.6" stroke-linecap="round"/>'+
  '<circle cx="9" cy="15.5" r="1.1" fill="#fde68a"/><circle cx="15" cy="16.5" r="1.1" fill="#fde68a"/><circle cx="21" cy="15.5" r="1.1" fill="#fde68a"/></svg>';
-function run(){var host=document.querySelector(".dp-hdr-brand>div:first-child");if(!host||document.hidden)return false;
- try{sessionStorage.setItem("dp_diya","1");}catch(e){}
- if(getComputedStyle(host).position==="static")host.style.position="relative";
- var C=["#ffd23f","#ff5d8f","#5eead4","#ff9f1c","#c084fc","#fff3b0"],p="";
- for(var i=0;i<18;i++){var a=Math.round(i*360/18+(i%2?6:0)),d=(i%2?28:42)+"px";p+='<i style="--a:'+a+'deg;--d:'+d+';--c:'+C[i%C.length]+'"></i>';}
- var w=document.createElement("div");w.className="dy-wrap";w.setAttribute("aria-hidden","true");
- w.innerHTML='<div class="dy-glow"></div><div class="dy-lamp">'+lamp+'</div><div class="dy-spark"></div><div class="dy-burst"><b></b>'+p+'</div>';
- host.appendChild(w);setTimeout(function(){if(w.parentNode)w.parentNode.removeChild(w);},3600);return true;}
+function parts(n,dmin,dmax,t){var C=["#ffd23f","#ff5d8f","#5eead4","#ff9f1c","#c084fc","#fff3b0","#7dd3fc"],p="";
+ for(var i=0;i<n;i++){var a=Math.round(i*360/n+(i%2?5:0)),d=(i%2?dmin:dmax)+"px";p+='<i style="--a:'+a+'deg;--d:'+d+';--c:'+C[i%C.length]+';--t:'+t+'"></i>';}return p;}
+function run(){if(document.hidden)return false;
+ var st=document.createElement("div");st.className="dy-stage";st.setAttribute("aria-hidden","true");
+ st.innerHTML='<div class="dy-glow"></div><div class="dy-spark"></div><div class="dy-burst" style="--t:1.58s"><b></b>'+parts(28,80,130,"1.6s")+'</div>'+
+  '<div class="dy-burst b2" style="--t:2.08s"><b></b>'+parts(16,45,70,"2.1s")+'</div><div class="dy-lamp">'+lamp+'</div>';
+ document.body.appendChild(st);setTimeout(function(){if(st.parentNode)st.parentNode.removeChild(st);},3800);
+ var host=document.querySelector(".dp-hdr-brand>div:first-child");
+ if(host){if(getComputedStyle(host).position==="static")host.style.position="relative";var r=document.createElement("div");r.className="dy-run";r.setAttribute("aria-hidden","true");host.appendChild(r);
+  setTimeout(function(){if(r.parentNode)r.parentNode.removeChild(r);},5000);}
+ return true;}
 function later(){var go=function(){var n=0;(function t(){if(run()||++n>10)return;setTimeout(t,600);})();};
- if("requestIdleCallback" in window)requestIdleCallback(function(){setTimeout(go,1200);},{timeout:4000});else setTimeout(go,2000);}
+ if("requestIdleCallback" in window)requestIdleCallback(function(){setTimeout(go,300);},{timeout:2500});else setTimeout(go,900);}
 if(document.readyState==="complete")later();else addEventListener("load",later,{once:true});
 })();</script></body>
 </html>
