@@ -9252,12 +9252,15 @@ if(document.readyState==="complete")boot();else window.addEventListener("load",b
 .snm-go{border:0;background:#0f6e5c;color:#fff;font-weight:800;border-radius:12px;padding:11px;cursor:pointer;font:800 14px Inter,system-ui,sans-serif}
 .snm-note{font-size:12px;opacity:.7;margin:0}
 .snm-back{border:0;background:none;color:#0f6e5c;font-weight:800;cursor:pointer;padding:0;text-align:left}
+.snm-seg{display:flex;gap:4px;background:rgba(15,110,92,.08);border-radius:12px;padding:3px}
+.snm-seg button{flex:1;border:0;background:transparent;border-radius:10px;padding:8px;font:700 13px Inter,system-ui,sans-serif;color:inherit;cursor:pointer}
+.snm-seg button.on{background:var(--surface,#fff);color:#0f6e5c;box-shadow:0 1px 4px rgba(0,0,0,.12)}
 </style><script>(function(){
 var D=null,P=null;function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function load(){if(P)return P;P=fetch("/seniors.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){D=d;return d;});return P;}
 function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
 function open(q0){var bg=document.createElement("div");bg.className="snm-bg";bg.setAttribute("data-snum",1);
- bg.innerHTML='<div class="snm" role="dialog" aria-label="Senior numbers"><div class="snm-h"><b>📞 Senior numbers</b><button type="button" class="x">Done</button></div><div class="snm-f"><input class="q" placeholder="College or hospital, e.g. Pushpanjali Agra" autocomplete="off"><p class="snm-note">2025 allottees (MCC). Owner only: numbers come from the server after your owner code is checked.</p></div><div class="snm-b"></div></div>';
+ bg.innerHTML='<div class="snm" role="dialog" aria-label="Senior numbers"><div class="snm-h"><b>📞 Senior numbers</b><button type="button" class="x">Done</button></div><div class="snm-f"><div class="snm-seg" role="tablist"><button type="button" class="on" data-m="col">By college</button><button type="button" data-m="name" data-snum-name>By student name</button></div><input class="q" placeholder="College or hospital, e.g. Pushpanjali Agra" autocomplete="off"><p class="snm-note">2025 allottees (MCC). Owner only: numbers come from the server after your owner code is checked.</p></div><div class="snm-b"></div></div>';
  document.body.appendChild(bg);var B=bg.querySelector(".snm-b"),Q=bg.querySelector(".q");
  bg.querySelector(".x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  function list(){var q=norm(Q.value);if(q.length<3){B.innerHTML='<p class="snm-note">Type at least 3 letters.</p>';return;}
@@ -9280,7 +9283,24 @@ function open(q0){var bg=document.createElement("div");bg.className="snm-bg";bg.
     O.innerHTML='<p class="snm-note">'+R.length+' seniors · '+Object.keys(M).length+' with contact details</p>'+R.map(function(r){var c=M[r[0]]||{};var mob=String(c.mobile||"").replace(/\D/g,"");var wa=mob.length===10?"91"+mob:mob;
      return '<div class="snm-r" data-snum-row><div class="t">'+esc(c.name||"Name not on file")+'</div><div class="m">'+esc(D.sp[r[2]])+' · Rank '+r[0]+' · '+esc(r[3])+' '+esc(r[4])+' · '+esc(r[5])+'</div><div class="ph">'+(mob?'<a href="tel:+'+esc(wa)+'">📞 '+esc(c.mobile)+'</a><a class="wa" href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="snm-note">No number</span>')+(c.email?'<a href="mailto:'+esc(c.email)+'">✉️ '+esc(c.email)+'</a>':'')+'</div></div>';}).join("");
    });};}
- Q.oninput=function(){if(D)list();};B.innerHTML='<p class="snm-note">Loading list…</p>';load().then(function(){if(q0){Q.value=q0;}list();Q.focus();}).catch(function(){B.innerHTML='<p class="snm-note">Could not load the seniors list.</p>';});}
+ var mode="col",tmr=0;
+ function row(c,r){var mob=String(c.mobile||"").replace(/\D/g,"");var wa=mob.length===10?"91"+mob:mob;
+  var m=r?esc(D.sp[r[2]])+' · Rank '+r[0]+' · '+esc(r[3])+' '+esc(r[4])+' · '+esc(r[5])+'<br>'+esc(D.i[r[1]][0])+', '+esc(D.i[r[1]][1]):'Rank '+esc(c.rank);
+  return '<div class="snm-r" data-snum-row><div class="t">'+esc(c.name||"Name not on file")+'</div><div class="m">'+m+'</div><div class="ph">'+(mob?'<a href="tel:+'+esc(wa)+'">📞 '+esc(c.mobile)+'</a><a class="wa" href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="snm-note">No number</span>')+(c.email?'<a href="mailto:'+esc(c.email)+'">✉️ '+esc(c.email)+'</a>':'')+'</div></div>';}
+ function byName(){var q=Q.value.trim();if(q.replace(/[^A-Za-z]/g,"").length<3){B.innerHTML='<p class="snm-note">Type at least 3 letters of the name.</p>';return;}
+  if(typeof sb==="undefined"||!sb||!sb.rpc){B.innerHTML='<p class="snm-note">Not connected. Reload and try again.</p>';return;}
+  B.innerHTML='<p class="snm-note">Searching…</p>';var mine=q;
+  sb.rpc("owner_today_seniors_find",{p_q:q}).then(function(res){if(mode!=="name"||Q.value.trim()!==mine)return;
+   if(res.error){B.innerHTML='<p class="snm-note">'+(/not allowed/i.test(res.error.message)?"Unlock the owner panel with your owner code first.":esc(res.error.message))+'</p>';return;}
+   var L=res.data||[];if(!L.length){B.innerHTML='<p class="snm-note">No senior with that name. Try first name only, or surname only.</p>';return;}
+   var RK={};if(D)D.r.forEach(function(r){if(!RK[r[0]])RK[r[0]]=r;});
+   B.innerHTML='<p class="snm-note">'+L.length+(L.length>=60?'+ (showing first 60, add more of the name)':'')+' found</p>'+L.map(function(c){return row(c,RK[c.rank]);}).join("");});}
+ Array.prototype.forEach.call(bg.querySelectorAll(".snm-seg button"),function(b){b.onclick=function(){mode=b.getAttribute("data-m");
+  Array.prototype.forEach.call(bg.querySelectorAll(".snm-seg button"),function(x){x.classList.toggle("on",x===b);});
+  Q.placeholder=mode==="name"?"Student name, e.g. Rahul Sharma":"College or hospital, e.g. Pushpanjali Agra";Q.value="";Q.focus();
+  B.innerHTML='<p class="snm-note">'+(mode==="name"?"Type at least 3 letters of the name.":"Type at least 3 letters.")+'</p>';};});
+ Q.oninput=function(){if(mode==="name"){clearTimeout(tmr);tmr=setTimeout(byName,450);return;}if(D)list();};
+ Q.onkeydown=function(e){if(e.key==="Enter"&&mode==="name"){clearTimeout(tmr);byName();}};B.innerHTML='<p class="snm-note">Loading list…</p>';load().then(function(){if(q0){Q.value=q0;}list();Q.focus();}).catch(function(){B.innerHTML='<p class="snm-note">Could not load the seniors list.</p>';});}
 window.dpSeniorNums=open;
 function stats(S){var bg=document.createElement("div");bg.className="snm-bg";bg.setAttribute("data-seatstats",1);S=S||{};var T=S.today||{},A=S.total||{},L=S.list||[];function n(o,k){return o[k]||0;}
  var rows=L.map(function(x){var t=new Date(x.t),ev={found:"made",share:"shared",save:"saved",open:"opened",photo:"photo"}[x.ev]||x.ev;return '<div class="snm-r"><div class="t">'+esc(x.e||"guest")+(x.r?' · AIR '+Number(x.r).toLocaleString("en-IN"):'')+'</div><div class="m">'+(x.c?esc(x.c)+' · ':'')+esc(ev)+' · '+t.toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})+'</div></div>';}).join("");
