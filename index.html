@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-8f101e5312.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
+<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-4cc88f038a.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
 <link rel="canonical" href="https://docpulsee.in/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://docpulsee.in/"><meta property="og:site_name" content="DocPulsee">
 <meta property="og:title" content="DocPulsee: NEET PG 2026 College Predictor & Choice List">
@@ -5229,9 +5229,14 @@ html.dpdark .bx-dots i.on{background:#f5f5f7!important}
 .dy-run{position:absolute;inset:-3px;border-radius:19px;padding:3px;pointer-events:none;z-index:4;
  background:conic-gradient(from var(--dyr),transparent 0 62%,#ffd23f 72%,#ff5d8f 80%,#fff3b0 84%,transparent 92%);
  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
- filter:drop-shadow(0 0 4px #ffcf5a);animation:dyRun 1.3s linear 4,dyRunOut .5s ease 4.3s forwards}
+ filter:drop-shadow(0 0 4px #ffcf5a);animation:dyRun 1.3s linear 3,dyRunOut .35s ease 3.75s forwards}
 @keyframes dyRun{to{--dyr:360deg}}
 @keyframes dyRunOut{to{opacity:0}}
+/* the light leaves the logo and flies into the ID locket */
+.dy-orb{position:fixed;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;pointer-events:none;z-index:2147483001;
+ background:radial-gradient(circle,#fff 0,#fff3b0 35%,#ffcf5a 60%,rgba(255,160,40,0) 72%);box-shadow:0 0 14px 4px rgba(255,200,80,.85);will-change:transform,opacity}
+.dy-orb.t{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;box-shadow:0 0 8px 2px rgba(255,93,143,.7);background:radial-gradient(circle,#fff 0,#ffb3cc 50%,rgba(255,93,143,0) 72%)}
+.dy-hit{position:fixed;left:0;top:0;border-radius:14px;pointer-events:none;z-index:2147483001;box-shadow:0 0 0 2px #ffd23f,0 0 22px 8px rgba(255,200,80,.75);opacity:0;will-change:opacity,transform}
 @media (max-width:760px){.dy-stage{top:40%}.dy-burst{top:-150px}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
@@ -6748,12 +6753,12 @@ window.DATA = null;
   var domReady = new Promise(function(res){ if(document.readyState!=='loading') res(); else document.addEventListener('DOMContentLoaded', function(){ res(); }); });
   Promise.all([window.__dpDataP, domReady]).then(function(v){
     var all = decode(v[0]); for (var i = 0; i < all.length; i++) all[i].__i = i; window.DATA_ALL = all; window.DATA = all.filter(function(o){ return !o.Hide; }); window.DATA_V = v[0].v || null; window.__dpDecode = decode;
-    var s = document.createElement('script'); s.src = '/assets/app-8f101e5312.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
+    var s = document.createElement('script'); s.src = '/assets/app-4cc88f038a.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
     document.body.appendChild(s);
   }).catch(function(e){ console.error(e); fail('Could not load the counselling directory.'); });
 })();
 </script>
-<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-8f101e5312.js"></script>
+<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-4cc88f038a.js"></script>
 <!-- DocPulsee: date-aware counselling timeline (side pop-up) -->
 <style id="dp-plan-css">
 .dpp{background:var(--surface);color:var(--text)}
@@ -9225,12 +9230,15 @@ if(document.readyState==="complete")boot();else window.addEventListener("load",b
 .snm-go{border:0;background:#0f6e5c;color:#fff;font-weight:800;border-radius:12px;padding:11px;cursor:pointer;font:800 14px Inter,system-ui,sans-serif}
 .snm-note{font-size:12px;opacity:.7;margin:0}
 .snm-back{border:0;background:none;color:#0f6e5c;font-weight:800;cursor:pointer;padding:0;text-align:left}
+.snm-seg{display:flex;gap:4px;background:rgba(15,110,92,.08);border-radius:12px;padding:3px}
+.snm-seg button{flex:1;border:0;background:transparent;border-radius:10px;padding:8px;font:700 13px Inter,system-ui,sans-serif;color:inherit;cursor:pointer}
+.snm-seg button.on{background:var(--surface,#fff);color:#0f6e5c;box-shadow:0 1px 4px rgba(0,0,0,.12)}
 </style><script>(function(){
 var D=null,P=null;function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function load(){if(P)return P;P=fetch("/seniors.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){D=d;return d;});return P;}
 function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
 function open(q0){var bg=document.createElement("div");bg.className="snm-bg";bg.setAttribute("data-snum",1);
- bg.innerHTML='<div class="snm" role="dialog" aria-label="Senior numbers"><div class="snm-h"><b>📞 Senior numbers</b><button type="button" class="x">Done</button></div><div class="snm-f"><input class="q" placeholder="College or hospital, e.g. Pushpanjali Agra" autocomplete="off"><p class="snm-note">2025 allottees (MCC). Owner only: numbers come from the server after your owner code is checked.</p></div><div class="snm-b"></div></div>';
+ bg.innerHTML='<div class="snm" role="dialog" aria-label="Senior numbers"><div class="snm-h"><b>📞 Senior numbers</b><button type="button" class="x">Done</button></div><div class="snm-f"><div class="snm-seg" role="tablist"><button type="button" class="on" data-m="col">By college</button><button type="button" data-m="name" data-snum-name>By student name</button></div><input class="q" placeholder="College or hospital, e.g. Pushpanjali Agra" autocomplete="off"><p class="snm-note">2025 allottees (MCC). Owner only: numbers come from the server after your owner code is checked.</p></div><div class="snm-b"></div></div>';
  document.body.appendChild(bg);var B=bg.querySelector(".snm-b"),Q=bg.querySelector(".q");
  bg.querySelector(".x").onclick=function(){bg.remove();};bg.onclick=function(e){if(e.target===bg)bg.remove();};
  function list(){var q=norm(Q.value);if(q.length<3){B.innerHTML='<p class="snm-note">Type at least 3 letters.</p>';return;}
@@ -9253,7 +9261,24 @@ function open(q0){var bg=document.createElement("div");bg.className="snm-bg";bg.
     O.innerHTML='<p class="snm-note">'+R.length+' seniors · '+Object.keys(M).length+' with contact details</p>'+R.map(function(r){var c=M[r[0]]||{};var mob=String(c.mobile||"").replace(/\D/g,"");var wa=mob.length===10?"91"+mob:mob;
      return '<div class="snm-r" data-snum-row><div class="t">'+esc(c.name||"Name not on file")+'</div><div class="m">'+esc(D.sp[r[2]])+' · Rank '+r[0]+' · '+esc(r[3])+' '+esc(r[4])+' · '+esc(r[5])+'</div><div class="ph">'+(mob?'<a href="tel:+'+esc(wa)+'">📞 '+esc(c.mobile)+'</a><a class="wa" href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="snm-note">No number</span>')+(c.email?'<a href="mailto:'+esc(c.email)+'">✉️ '+esc(c.email)+'</a>':'')+'</div></div>';}).join("");
    });};}
- Q.oninput=function(){if(D)list();};B.innerHTML='<p class="snm-note">Loading list…</p>';load().then(function(){if(q0){Q.value=q0;}list();Q.focus();}).catch(function(){B.innerHTML='<p class="snm-note">Could not load the seniors list.</p>';});}
+ var mode="col",tmr=0;
+ function row(c,r){var mob=String(c.mobile||"").replace(/\D/g,"");var wa=mob.length===10?"91"+mob:mob;
+  var m=r?esc(D.sp[r[2]])+' · Rank '+r[0]+' · '+esc(r[3])+' '+esc(r[4])+' · '+esc(r[5])+'<br>'+esc(D.i[r[1]][0])+', '+esc(D.i[r[1]][1]):'Rank '+esc(c.rank);
+  return '<div class="snm-r" data-snum-row><div class="t">'+esc(c.name||"Name not on file")+'</div><div class="m">'+m+'</div><div class="ph">'+(mob?'<a href="tel:+'+esc(wa)+'">📞 '+esc(c.mobile)+'</a><a class="wa" href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="snm-note">No number</span>')+(c.email?'<a href="mailto:'+esc(c.email)+'">✉️ '+esc(c.email)+'</a>':'')+'</div></div>';}
+ function byName(){var q=Q.value.trim();if(q.replace(/[^A-Za-z]/g,"").length<3){B.innerHTML='<p class="snm-note">Type at least 3 letters of the name.</p>';return;}
+  if(typeof sb==="undefined"||!sb||!sb.rpc){B.innerHTML='<p class="snm-note">Not connected. Reload and try again.</p>';return;}
+  B.innerHTML='<p class="snm-note">Searching…</p>';var mine=q;
+  sb.rpc("owner_today_seniors_find",{p_q:q}).then(function(res){if(mode!=="name"||Q.value.trim()!==mine)return;
+   if(res.error){B.innerHTML='<p class="snm-note">'+(/not allowed/i.test(res.error.message)?"Unlock the owner panel with your owner code first.":esc(res.error.message))+'</p>';return;}
+   var L=res.data||[];if(!L.length){B.innerHTML='<p class="snm-note">No senior with that name. Try first name only, or surname only.</p>';return;}
+   var RK={};if(D)D.r.forEach(function(r){if(!RK[r[0]])RK[r[0]]=r;});
+   B.innerHTML='<p class="snm-note">'+L.length+(L.length>=60?'+ (showing first 60, add more of the name)':'')+' found</p>'+L.map(function(c){return row(c,RK[c.rank]);}).join("");});}
+ Array.prototype.forEach.call(bg.querySelectorAll(".snm-seg button"),function(b){b.onclick=function(){mode=b.getAttribute("data-m");
+  Array.prototype.forEach.call(bg.querySelectorAll(".snm-seg button"),function(x){x.classList.toggle("on",x===b);});
+  Q.placeholder=mode==="name"?"Student name, e.g. Rahul Sharma":"College or hospital, e.g. Pushpanjali Agra";Q.value="";Q.focus();
+  B.innerHTML='<p class="snm-note">'+(mode==="name"?"Type at least 3 letters of the name.":"Type at least 3 letters.")+'</p>';};});
+ Q.oninput=function(){if(mode==="name"){clearTimeout(tmr);tmr=setTimeout(byName,450);return;}if(D)list();};
+ Q.onkeydown=function(e){if(e.key==="Enter"&&mode==="name"){clearTimeout(tmr);byName();}};B.innerHTML='<p class="snm-note">Loading list…</p>';load().then(function(){if(q0){Q.value=q0;}list();Q.focus();}).catch(function(){B.innerHTML='<p class="snm-note">Could not load the seniors list.</p>';});}
 window.dpSeniorNums=open;
 function stats(S){var bg=document.createElement("div");bg.className="snm-bg";bg.setAttribute("data-seatstats",1);S=S||{};var T=S.today||{},A=S.total||{},L=S.list||[];function n(o,k){return o[k]||0;}
  var rows=L.map(function(x){var t=new Date(x.t),ev={found:"made",share:"shared",save:"saved",open:"opened",photo:"photo"}[x.ev]||x.ev;return '<div class="snm-r"><div class="t">'+esc(x.e||"guest")+(x.r?' · AIR '+Number(x.r).toLocaleString("en-IN"):'')+'</div><div class="m">'+(x.c?esc(x.c)+' · ':'')+esc(ev)+' · '+t.toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})+'</div></div>';}).join("");
@@ -9866,7 +9891,7 @@ function viewColleges(L){var D=ST.data,by={},rank=parseInt(ST.rank,10)||0;L.forE
 
 // ---------- owner: Control Center > INI-CET Pass (price, struck price, banner, share kit) ----------
 var OW={msg:null,busy:false};
-function owShareText(){var o=off();return "🎯 INI-CET pre-paper offer\n\nWhich INI-CET seat can your rank get? DocPulsee's INI-CET Pass has every seat allotment from the official AIIMS results (Jan 2024 to Jul 2026, 23 institutes: AIIMS, JIPMER, PGIMER, NIMHANS, SCTIMST), your % chance for every branch, and fees, stipend and leaving penalty for each institute.\n\n"+(ST.list>ST.price?"~"+inr(ST.list)+"~ ":"")+"*"+inr(ST.price)+"*"+(o?" ("+o+"% off before the paper)":"")+"\n\n👉 https://docpulsee.in/?exam=inicet";}
+function owShareText(){var o=off();return "🎯 INI-CET pre-paper offer\n\nWhich INI-CET seat can your rank get? DocPulsee's INI-CET Pass has every seat allotment from the official AIIMS results (Jan 2024 to Jul 2026, 23 institutes: AIIMS, JIPMER, PGIMER, NIMHANS, SCTIMST), your % chance for every branch, and fees, stipend and leaving penalty for each institute.\n\n"+(ST.list>ST.price?"~"+inr(ST.list)+"~ ":"")+"*"+inr(ST.price)+"*"+(o?" ("+o+"% off before the paper)":"")+"\n\n👉 https://docpulsee.in/?exam=inicet\n\n💬 Free Telegram group: https://t.me/neetpgcouncelling2026";}
 function owPoster(cv){var W=1080,H=1350,c=cv.getContext("2d");cv.width=W;cv.height=H;var g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,"#1e1b4b");g.addColorStop(.6,"#312e81");g.addColorStop(1,"#4338ca");c.fillStyle=g;c.fillRect(0,0,W,H);
  c.globalAlpha=.18;c.fillStyle="#a5b4fc";c.beginPath();c.arc(W-120,140,260,0,7);c.fill();c.beginPath();c.arc(80,H-120,200,0,7);c.fill();c.globalAlpha=1;
  var F='-apple-system,"SF Pro Display","Segoe UI",Inter,Roboto,Arial,sans-serif';function t(x,y,s,w,col,txt,al){c.font=w+" "+s+"px "+F;c.fillStyle=col;c.textAlign=al||"left";c.fillText(txt,x,y);}
@@ -10213,6 +10238,19 @@ var lamp='<svg viewBox="0 0 30 22" aria-hidden="true"><defs><linearGradient id="
  '<circle cx="9" cy="15.5" r="1.1" fill="#fde68a"/><circle cx="15" cy="16.5" r="1.1" fill="#fde68a"/><circle cx="21" cy="15.5" r="1.1" fill="#fde68a"/></svg>';
 function parts(n,dmin,dmax,t){var C=["#ffd23f","#ff5d8f","#5eead4","#ff9f1c","#c084fc","#fff3b0","#7dd3fc"],p="";
  for(var i=0;i<n;i++){var a=Math.round(i*360/n+(i%2?5:0)),d=(i%2?dmin:dmax)+"px";p+='<i style="--a:'+a+'deg;--d:'+d+';--c:'+C[i%C.length]+';--t:'+t+'"></i>';}return p;}
+function vis(e){if(!e)return null;var b=e.getBoundingClientRect();return b.width>4&&b.height>4&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth?b:null;}
+function fly(host){var lk=null,bs=document.querySelectorAll("[data-idc-open]");for(var i=0;i<bs.length;i++){var b=vis(bs[i]);if(b){lk=b;break;}}
+ var hb=vis(host);if(!lk||!hb||!Element.prototype.animate)return;
+ var x1=hb.right-6,y1=hb.top+6,x2=lk.left+lk.width/2,y2=lk.top+lk.height/2,mx=(x1+x2)/2,my=Math.min(y1,y2)-Math.min(60,Math.abs(x2-x1)*.18);
+ function path(dx,dy,s){var P=[[x1,y1],[ (x1+mx)/2,(y1+my)/2-8],[mx,my],[(mx+x2)/2,(my+y2)/2-6],[x2,y2]];
+  return P.map(function(q,k){return {transform:"translate("+(q[0]+dx)+"px,"+(q[1]+dy)+"px) scale("+(k===4?s*.35:s)+")",opacity:k===0?0:k===4?.2:1};});}
+ var els=[],D=900;
+ [[0,0,1,0,""],[-3,4,1,90," t"],[3,-3,1,170," t"]].forEach(function(o){var e=document.createElement("div");e.className="dy-orb"+o[4];e.setAttribute("aria-hidden","true");document.body.appendChild(e);els.push(e);
+  e.animate(path(o[0],o[1],o[2]),{duration:D,delay:o[3],easing:"cubic-bezier(.45,.05,.35,1)",fill:"both"});});
+ setTimeout(function(){els.forEach(function(e){if(e.parentNode)e.parentNode.removeChild(e);});
+  var h=document.createElement("div");h.className="dy-hit";h.setAttribute("aria-hidden","true");h.style.width=lk.width+"px";h.style.height=lk.height+"px";h.style.transform="translate("+lk.left+"px,"+lk.top+"px)";document.body.appendChild(h);
+  h.animate([{opacity:0,transform:h.style.transform+" scale(.9)"},{opacity:1,transform:h.style.transform+" scale(1.04)",offset:.35},{opacity:0,transform:h.style.transform+" scale(1.12)"}],{duration:650,easing:"ease-out",fill:"both"});
+  setTimeout(function(){if(h.parentNode)h.parentNode.removeChild(h);},700);},D+190);}
 function run(){if(document.hidden)return false;
  var st=document.createElement("div");st.className="dy-stage";st.setAttribute("aria-hidden","true");
  st.innerHTML='<div class="dy-glow"></div><div class="dy-spark"></div><div class="dy-burst" style="--t:1.58s"><b></b>'+parts(28,80,130,"1.6s")+'</div>'+
@@ -10220,7 +10258,7 @@ function run(){if(document.hidden)return false;
  document.body.appendChild(st);setTimeout(function(){if(st.parentNode)st.parentNode.removeChild(st);},3800);
  var host=document.querySelector(".dp-hdr-brand>div:first-child");
  if(host){if(getComputedStyle(host).position==="static")host.style.position="relative";var r=document.createElement("div");r.className="dy-run";r.setAttribute("aria-hidden","true");host.appendChild(r);
-  setTimeout(function(){if(r.parentNode)r.parentNode.removeChild(r);},5000);}
+  setTimeout(function(){if(r.parentNode)r.parentNode.removeChild(r);},4300);setTimeout(function(){fly(host);},3750);}
  return true;}
 function later(){var go=function(){var n=0;(function t(){if(run()||++n>10)return;setTimeout(t,600);})();};
  if("requestIdleCallback" in window)requestIdleCallback(function(){setTimeout(go,300);},{timeout:2500});else setTimeout(go,900);}
