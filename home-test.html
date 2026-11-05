@@ -10441,9 +10441,10 @@ function hand(t){var prev=t.previousElementSibling;if(!prev||prev.__dpa)return;p
 /* ---- 6 payment success ---- */
 function paid(){var o=document.createElement("div");o.className="dpa-pay";o.innerHTML='<div class="c"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="ring" cx="42" cy="42" r="36"/><path class="tk" d="M27 43l10 10 20-22"/></svg><span>Payment successful</span></div>';document.body.appendChild(o);try{navigator.vibrate&&navigator.vibrate([12,60,18]);}catch(_){}setTimeout(function(){o.remove();},2000);}
 window.dpaPaid=paid;
-function wrapRzp(R){if(!R||R.__dpa)return R;var W=function(o){if(o&&typeof o.handler==="function"){var h=o.handler;o.handler=function(){try{paid();}catch(_){}return h.apply(this,arguments);};}return new R(o);};
- for(var k in R){try{W[k]=R[k];}catch(_){}}W.prototype=R.prototype;W.__dpa=1;return W;}
-try{var _R=window.Razorpay?wrapRzp(window.Razorpay):undefined;Object.defineProperty(window,"Razorpay",{configurable:true,get:function(){return _R;},set:function(v){_R=wrapRzp(v);}});}catch(_){}
+function wrapRzp(R){if(typeof R!=="function"||typeof Proxy!=="function")return R;if(R.__dpaP)return R.__dpaP;
+ var P=new Proxy(R,{construct:function(t,args,nt){try{var o=args[0];if(o&&typeof o.handler==="function"&&!o.__dpa){var h=o.handler;o.__dpa=1;o.handler=function(){try{paid();}catch(_){}return h.apply(this,arguments);};}}catch(_){}return Reflect.construct(t,args,nt);}});
+ try{Object.defineProperty(R,"__dpaP",{value:P,configurable:true});}catch(_){return R;}return P;}
+try{var _R=window.Razorpay;Object.defineProperty(window,"Razorpay",{configurable:true,enumerable:true,get:function(){return wrapRzp(_R);},set:function(v){_R=v;}});}catch(_){}
 /* ---- 7 tab hop ---- */
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".hn-tab button");if(!b)return;b.classList.remove("dpa-hop");void b.offsetWidth;b.classList.add("dpa-hop");},{passive:true});
 /* ---- 8 stat tiles ---- */
