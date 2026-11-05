@@ -5339,6 +5339,16 @@ html.dpdark .dpa-pay .c{background:#161b2e;color:#f3f4f6}
 .dpi b.dpa-tick{display:inline-block;animation:dpaTick .5s cubic-bezier(.3,1.4,.5,1)}
 @keyframes dpaTick{0%{transform:perspective(300px) rotateX(-90deg)}100%{transform:perspective(300px) rotateX(0)}}
 @media (prefers-reduced-motion:reduce){.dpa-in,.clm-ring-a,.pc-ring-p,.dpa-hs i,.dpa-hs .r,.dpa-hs .k,.bx-stats.dpa-fl>div,.dpi b.dpa-tick,.hn-tab button.dpa-hop .hn-e{animation:none!important}.dpa-pay{display:none}}
+</style><style id="dp-air-css">
+.v2 .hn-tab .hn-e{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),inset 0 -3px 0 rgba(0,0,0,.16),0 2px 0 rgba(0,0,0,.10),0 9px 16px -7px rgba(0,0,0,.42)!important;overflow:visible}
+.v2 .hn-tab .hn-e:before{content:"";position:absolute;left:5px;right:5px;top:3px;height:45%;border-radius:10px 10px 18px 18px/10px 10px 12px 12px;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0));pointer-events:none}
+.v2 .hn-tab .hn-e svg{filter:drop-shadow(0 1.5px 1.5px rgba(0,0,0,.28))!important}
+.v2 .hn-tab button.dpa-hop .hn-e{animation:airSpin .7s cubic-bezier(.3,1.35,.5,1)!important}
+@keyframes airSpin{0%{transform:perspective(260px) rotateY(0) translateY(0)}38%{transform:perspective(260px) rotateY(200deg) translateY(-9px) scale(1.12)}72%{transform:perspective(260px) rotateY(350deg) translateY(1px) scale(.97)}100%{transform:perspective(260px) rotateY(360deg) translateY(0)}}
+.xc-ic,.xch .dot{position:relative;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -3px 0 rgba(0,0,0,.16),0 7px 14px -7px rgba(0,0,0,.45)!important}
+.xc-ic:before{content:"";position:absolute;left:4px;right:4px;top:2px;height:45%;border-radius:9px 9px 14px 14px;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0));pointer-events:none}
+.xc.on .xc-ic{animation:airSpin .7s cubic-bezier(.3,1.35,.5,1)}
+@media (prefers-reduced-motion:reduce){.v2 .hn-tab button.dpa-hop .hn-e,.xc.on .xc-ic{animation:none!important}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10462,5 +10472,16 @@ function scan(){
 var q=0;function sched(){if(q)return;q=requestAnimationFrame(function(){q=0;scan();});}
 function start(){scan();new MutationObserver(sched).observe(document.body,{childList:true,subtree:true,characterData:true});}
 if("requestIdleCallback" in window)requestIdleCallback(start,{timeout:2500});else setTimeout(start,1200);
+})();</script><script id="dp-air-js">(function(){
+var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(_){}if(RM||!Element.prototype.animate)return;
+var last=null,CARD=".bx-post,.rb-card,.cpx-card,.cp-card";
+document.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(CARD);if(!c)return;var m=c.querySelector(".bx-media")||c,r=m.getBoundingClientRect();if(r.width<40)return;last={r:r,t:Date.now()};},true);
+function grow(ov){var box=ov.querySelector("[data-college-box]")||ov.querySelector(".modal");if(!box||!last)return;var c=last.r;last=null;var f=box.getBoundingClientRect();if(f.width<50||f.height<50)return;
+ var s=Math.max(.25,Math.min(1,Math.min(c.width/f.width,c.height/f.height))),dx=(c.left+c.width/2)-(f.left+f.width/2),dy=(c.top+c.height/2)-(f.top+f.height/2);
+ box.style.animation="none";
+ box.animate([{transform:"translate("+dx+"px,"+dy+"px) scale("+s+")",opacity:.4,borderRadius:"28px"},{transform:"none",opacity:1}],{duration:460,easing:"cubic-bezier(.2,.9,.28,1.06)"});
+ ov.animate([{opacity:0},{opacity:1}],{duration:260,easing:"ease-out"});}
+new MutationObserver(function(rs){if(!last)return;if(Date.now()-last.t>900){last=null;return;}
+ for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;for(var j=0;j<a.length;j++){var n=a[j];if(n.nodeType!==1)continue;var ov=n.matches(".overlay")?n:n.querySelector&&n.querySelector(".overlay");if(ov&&ov.querySelector("[data-college-box]")){grow(ov);return;}}}}).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
 </html>
