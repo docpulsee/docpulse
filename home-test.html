@@ -10476,11 +10476,12 @@ if("requestIdleCallback" in window)requestIdleCallback(start,{timeout:2500});els
 var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(_){}if(RM||!Element.prototype.animate)return;
 var last=null,CARD=".bx-post,.rb-card,.cpx-card,.cp-card";
 document.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(CARD);if(!c)return;var m=c.querySelector(".bx-media")||c,r=m.getBoundingClientRect();if(r.width<40)return;last={r:r,t:Date.now()};},true);
-function grow(ov){var box=ov.querySelector("[data-college-box]")||ov.querySelector(".modal");if(!box||!last)return;var c=last.r;last=null;var f=box.getBoundingClientRect();if(f.width<50||f.height<50)return;
- var s=Math.max(.25,Math.min(1,Math.min(c.width/f.width,c.height/f.height))),dx=(c.left+c.width/2)-(f.left+f.width/2),dy=(c.top+c.height/2)-(f.top+f.height/2);
- box.style.setProperty("animation","none","important");
- box.animate([{transform:"translate("+dx+"px,"+dy+"px) scale("+s+")",opacity:.4,borderRadius:"28px"},{transform:"none",opacity:1}],{duration:460,easing:"cubic-bezier(.2,.9,.28,1.06)"});
- ov.animate([{opacity:0},{opacity:1}],{duration:260,easing:"ease-out"});}
+function grow(ov){var box=ov.querySelector("[data-college-box]")||ov.querySelector(".modal");if(!box||!last)return;var c=last.r;last=null;
+ box.style.setProperty("animation","none","important");box.style.opacity="0";
+ requestAnimationFrame(function(){var f=box.getBoundingClientRect();box.style.opacity="";if(f.width<50)return;var fh=Math.max(f.height,innerHeight*.6);
+  var s=Math.max(.3,Math.min(.92,Math.min(c.width/f.width,c.height/fh))),dx=(c.left+c.width/2)-(f.left+f.width/2),dy=(c.top+c.height/2)-(f.top+fh/2);
+  box.animate([{transform:"translate("+dx+"px,"+dy+"px) scale("+s+")",opacity:.35},{transform:"none",opacity:1}],{duration:480,easing:"cubic-bezier(.2,.9,.28,1.06)"});
+  ov.animate([{opacity:0},{opacity:1}],{duration:260,easing:"ease-out"});});}
 new MutationObserver(function(rs){if(!last)return;if(Date.now()-last.t>900){last=null;return;}
  for(var i=0;i<rs.length;i++){var a=rs[i].addedNodes;for(var j=0;j<a.length;j++){var n=a[j];if(n.nodeType!==1)continue;var ov=n.matches(".overlay")?n:n.querySelector&&n.querySelector(".overlay");if(ov&&ov.querySelector("[data-college-box]")){grow(ov);return;}}}}).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
