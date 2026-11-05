@@ -5295,6 +5295,50 @@ html.dpdark .dfx-t{color:#f3f4f6}html.dpdark .dfx-t small{color:#9ca3af}
 .dfx-sp{position:absolute;width:7px;height:7px;border-radius:50%;opacity:0}
 .dfx.land .dfx-sp{animation:dfxSp .7s ease-out forwards}
 @keyframes dfxSp{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
+</style><style id="dp-anim9-css">
+/* 1 cards slide in */
+.dpa-in{animation:dpaIn .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--dpa-i,0)*55ms)}
+@keyframes dpaIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+/* 3 rings */
+.clm-ring-a{animation:dpaRing 1.35s cubic-bezier(.2,.8,.2,1) .1s both!important}
+@keyframes dpaRing{0%{stroke-dashoffset:var(--c);stroke:#e11d48}45%{stroke:#d08a1a}82%{stroke-dashoffset:calc(var(--off) - 7px)}100%{stroke-dashoffset:var(--off)}}
+.pc-ring-p{animation:dpaRingP 1.35s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes dpaRingP{0%{stroke-dashoffset:100;stroke:#e11d48}45%{stroke:#d08a1a}82%{stroke-dashoffset:calc(var(--p) - 4)}100%{stroke-dashoffset:var(--p)}}
+/* 4 confetti */
+.dpa-cf{position:fixed;z-index:2147483600;width:8px;height:12px;border-radius:2px;pointer-events:none;will-change:transform,opacity}
+/* 5 handshake */
+.dpa-hs{position:relative;height:64px;display:flex;align-items:center;justify-content:center}
+.dpa-hs i{position:absolute;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 15px/1 system-ui,sans-serif;font-style:normal;color:#fff;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+.dpa-hs .a{background:linear-gradient(135deg,#34d399,#0d9488);animation:dpaHa .9s cubic-bezier(.3,1.4,.5,1) both}
+.dpa-hs .b{background:linear-gradient(135deg,#fcd34d,#f59e0b);color:#3b1d00;animation:dpaHb .9s cubic-bezier(.3,1.4,.5,1) both}
+.dpa-hs .r{width:46px;height:46px;border-radius:50%;position:absolute;border:3px solid #10b981;opacity:0;animation:dpaHr .8s ease-out .75s both}
+.dpa-hs .k{position:absolute;top:-4px;left:50%;margin-left:-11px;width:22px;height:22px;border-radius:50%;background:#10b981;color:#fff;display:grid;place-items:center;font:800 12px/1 system-ui;opacity:0;animation:dpaHk .4s cubic-bezier(.3,1.6,.5,1) .85s both}
+@keyframes dpaHa{from{transform:translateX(-90px);opacity:0}to{transform:translateX(-20px);opacity:1}}
+@keyframes dpaHb{from{transform:translateX(90px);opacity:0}to{transform:translateX(20px);opacity:1}}
+@keyframes dpaHr{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(2.4)}}
+@keyframes dpaHk{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+/* 6 payment success */
+.dpa-pay{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;pointer-events:none;background:rgba(255,255,255,.0);animation:dpaPayBg 1.9s ease both}
+.dpa-pay .c{width:170px;padding:22px 0 18px;border-radius:28px;background:#fff;box-shadow:0 24px 60px -20px rgba(15,23,42,.45);display:grid;justify-items:center;gap:10px;animation:dpaPayC 1.9s cubic-bezier(.3,1.3,.5,1) both;font:700 14px/1.2 -apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;color:#111827}
+html.dpdark .dpa-pay .c{background:#161b2e;color:#f3f4f6}
+.dpa-pay svg{width:84px;height:84px}
+.dpa-pay .ring{fill:none;stroke:#10b981;stroke-width:6;stroke-linecap:round;stroke-dasharray:226;stroke-dashoffset:226;animation:dpaDraw .6s ease-out .15s forwards;transform:rotate(-90deg);transform-origin:50% 50%}
+.dpa-pay .tk{fill:none;stroke:#10b981;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:dpaDraw .35s ease-out .7s forwards}
+@keyframes dpaDraw{to{stroke-dashoffset:0}}
+@keyframes dpaPayBg{0%,100%{background:rgba(255,255,255,0)}15%,80%{background:rgba(255,255,255,.35)}}
+@keyframes dpaPayC{0%{opacity:0;transform:scale(.6)}14%{opacity:1;transform:scale(1)}82%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.92)}}
+/* 7 press + tab hop */
+.btn-solid,.plans-btn,.xc,.pc-main button,.clm-btn,.bx-av{transition:transform .16s cubic-bezier(.3,1.6,.5,1)}
+.btn-solid:active,.plans-btn:active,.xc:active,.clm-btn:active,.bx-av:active{transform:scale(.95)}
+.hn-tab button.dpa-hop .hn-e{animation:dpaHop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes dpaHop{0%{transform:none}35%{transform:translateY(-7px) scale(1.15)}70%{transform:translateY(1px) scale(.96)}100%{transform:none}}
+/* 8 stat tiles flip */
+.bx-stats.dpa-fl>div{animation:dpaFl .6s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(var(--dpa-i,0)*110ms);transform-origin:50% 0;backface-visibility:hidden}
+@keyframes dpaFl{0%{transform:perspective(500px) rotateX(-95deg);opacity:0}60%{opacity:1}100%{transform:perspective(500px) rotateX(0)}}
+/* 9 countdown flip */
+.dpi b.dpa-tick{display:inline-block;animation:dpaTick .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes dpaTick{0%{transform:perspective(300px) rotateX(-90deg)}100%{transform:perspective(300px) rotateX(0)}}
+@media (prefers-reduced-motion:reduce){.dpa-in,.clm-ring-a,.pc-ring-p,.dpa-hs i,.dpa-hs .r,.dpa-hs .k,.bx-stats.dpa-fl>div,.dpi b.dpa-tick,.hn-tab button.dpa-hop .hn-e{animation:none!important}.dpa-pay{display:none}}
 </style></head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -10368,5 +10412,54 @@ window.dpExFlip=function(from,to,done){
  setTimeout(function(){o.remove();busy=false;},2050);
 };
 window.addEventListener("pageshow",function(e){if(e.persisted){document.querySelectorAll(".dfx").forEach(function(n){n.remove();});busy=false;}});
+})();</script><script id="dp-anim9-js">(function(){
+var RM=false;try{RM=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(_){}if(RM)return;
+function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v);}catch(_){return null;}}
+/* ---- 1 count-up ---- */
+var CNT=".pc-ring-c b,.clm-funnel b.mono";
+function num(s){var m=String(s).match(/^\s*([\d,]+)(%?)\s*$/);if(!m)return null;return{v:parseInt(m[1].replace(/,/g,""),10),pct:m[2]};}
+function fmt(v,p){return Number(v).toLocaleString("en-IN")+p;}
+function count(el){var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.childNodes.length!==1)return;var t=tn.nodeValue;if(el.__dpaW===t)return;
+ var n=num(t);el.__dpaW=t;if(!n||n.v<5)return;
+ var t0=performance.now(),D=Math.min(1100,500+n.v/40),id=(el.__dpaId=(el.__dpaId||0)+1);
+ (function f(now){if(id!==el.__dpaId||tn.nodeValue!==el.__dpaW)return;
+  var u=Math.min(1,(now-t0)/D),e=1-Math.pow(1-u,3),s=u>=1?t:fmt(Math.round(n.v*e),n.pct);el.__dpaW=s;tn.nodeValue=s;if(u<1)requestAnimationFrame(f);})(t0);
+ if(n.v>0&&el.matches(".pc-ring-c b"))confetti(el);}
+/* ---- 4 confetti (once per visit) ---- */
+var COLS=["#10b981","#34d399","#6366f1","#f59e0b","#f43f5e","#0ea5e9"];
+function confetti(el){if(ss("dpa_cf"))return;ss("dpa_cf","1");var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var cx=r.left+r.width/2,cy=r.top+r.height/2;
+ setTimeout(function(){for(var i=0;i<26;i++){var p=document.createElement("i");p.className="dpa-cf";p.style.left=cx+"px";p.style.top=cy+"px";p.style.background=COLS[i%6];document.body.appendChild(p);
+  var a=Math.random()*Math.PI*2,v=90+Math.random()*130,dx=Math.cos(a)*v,dy=Math.sin(a)*v-120,rot=(Math.random()*720-360)|0;
+  var an=p.animate([{transform:"translate(-50%,-50%) rotate(0)",opacity:1},{transform:"translate("+(dx*.7)+"px,"+(dy*.7)+"px) rotate("+(rot/2)+"deg)",opacity:1,offset:.45},{transform:"translate("+dx+"px,"+(dy+220)+"px) rotate("+rot+"deg)",opacity:0}],{duration:1300+Math.random()*500,easing:"cubic-bezier(.2,.7,.4,1)"});
+  an.onfinish=(function(q){return function(){q.remove();};})(p);}},500);}
+/* ---- 2 shuffle into order ---- */
+function shuffle(box){var rows=[].slice.call(box.querySelectorAll(":scope>.clm-row")).slice(0,14);if(rows.length<2)return;
+ rows.forEach(function(r,i){r.style.animation="none";var dy=((i*7919)%5-2)*46+(i%2?-30:30),dx=((i*31)%3-1)*14,rz=((i*13)%5-2)*1.6;
+  r.animate([{transform:"translate("+dx+"px,"+dy+"px) rotate("+rz+"deg)",opacity:.25},{transform:"translate("+(dx*.3)+"px,"+(dy*.2)+"px) rotate("+(rz*.3)+"deg)",opacity:.9,offset:.55},{transform:"none",opacity:1}],{duration:900,delay:120+i*45,easing:"cubic-bezier(.3,1.25,.5,1)",fill:"backwards"});});}
+/* ---- 5 handshake ---- */
+function hand(t){var prev=t.previousElementSibling;if(!prev||prev.__dpa)return;prev.__dpa=1;prev.innerHTML='<div class="dpa-hs" aria-hidden="true"><span class="r"></span><i class="a">You</i><i class="b">Sr</i><span class="k">✓</span></div>';prev.className="";}
+/* ---- 6 payment success ---- */
+function paid(){var o=document.createElement("div");o.className="dpa-pay";o.innerHTML='<div class="c"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="ring" cx="42" cy="42" r="36"/><path class="tk" d="M27 43l10 10 20-22"/></svg><span>Payment successful</span></div>';document.body.appendChild(o);try{navigator.vibrate&&navigator.vibrate([12,60,18]);}catch(_){}setTimeout(function(){o.remove();},2000);}
+window.dpaPaid=paid;
+function wrapRzp(R){if(!R||R.__dpa)return R;var W=function(o){if(o&&typeof o.handler==="function"){var h=o.handler;o.handler=function(){try{paid();}catch(_){}return h.apply(this,arguments);};}return new R(o);};
+ for(var k in R){try{W[k]=R[k];}catch(_){}}W.prototype=R.prototype;W.__dpa=1;return W;}
+try{var _R=window.Razorpay?wrapRzp(window.Razorpay):undefined;Object.defineProperty(window,"Razorpay",{configurable:true,get:function(){return _R;},set:function(v){_R=wrapRzp(v);}});}catch(_){}
+/* ---- 7 tab hop ---- */
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".hn-tab button");if(!b)return;b.classList.remove("dpa-hop");void b.offsetWidth;b.classList.add("dpa-hop");},{passive:true});
+/* ---- 8 stat tiles ---- */
+var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;io.unobserve(en.target);var s=en.target.querySelectorAll(".bx-stats");s.forEach(function(x){[].forEach.call(x.children,function(c,i){c.style.setProperty("--dpa-i",i);});x.classList.add("dpa-fl");});});},{threshold:.35}):null;
+/* ---- 9 countdown ---- */
+function tick(b){var t=b.textContent;if(b.__dpaC===t)return;var first=b.__dpaC===undefined;b.__dpaC=t;if(first&&ss("dpa_cd"))return;ss("dpa_cd","1");b.classList.remove("dpa-tick");void b.offsetWidth;b.classList.add("dpa-tick");}
+/* ---- scan, once per frame after DOM changes ---- */
+function scan(){
+ document.querySelectorAll(CNT).forEach(count);
+ var cards=document.querySelectorAll(".rb-card:not(.rb-skel):not([data-dpa])");if(cards.length){var k=0;cards.forEach(function(c){c.setAttribute("data-dpa","1");var r=c.getBoundingClientRect();if(k<10&&r.top<innerHeight+200){c.style.setProperty("--dpa-i",k++);c.classList.add("dpa-in");}});}
+ document.querySelectorAll(".clm-rows:not([data-dpa])").forEach(function(b){b.setAttribute("data-dpa","1");if(b.querySelector(".clm-row"))shuffle(b);else b.removeAttribute("data-dpa");});
+ document.querySelectorAll("div.text-center.font-black:not([data-dpa])").forEach(function(t){t.setAttribute("data-dpa","1");if(/^Request sent!?$/.test((t.textContent||"").trim()))hand(t);});
+ if(io)document.querySelectorAll(".bx-post:not([data-dpa])").forEach(function(p){p.setAttribute("data-dpa","1");io.observe(p);});
+ document.querySelectorAll(".dpi b").forEach(tick);}
+var q=0;function sched(){if(q)return;q=requestAnimationFrame(function(){q=0;scan();});}
+function start(){scan();new MutationObserver(sched).observe(document.body,{childList:true,subtree:true,characterData:true});}
+if("requestIdleCallback" in window)requestIdleCallback(start,{timeout:2500});else setTimeout(start,1200);
 })();</script></body>
 </html>
