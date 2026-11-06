@@ -203,7 +203,7 @@ function ecg(){var h=document.querySelector('header');if(!h||document.getElement
  var ns='http://www.w3.org/2000/svg',sv=document.createElementNS(ns,'svg');sv.id='hx-ecg';sv.setAttribute('viewBox','0 0 1000 15');sv.setAttribute('preserveAspectRatio','none');sv.setAttribute('aria-hidden','true');
  sv.innerHTML='<path class="bg" d="'+beat+'"/><path class="fg" d="'+beat+'"/><circle class="dot" r="2.6" cx="0" cy="9"/>';document.body.appendChild(sv);
  var fg=sv.querySelector('.fg'),dot=sv.querySelector('.dot'),L=fg.getTotalLength();fg.style.strokeDasharray=L;fg.style.strokeDashoffset=L;
- function upd(){var d=document.documentElement,max=Math.max(1,d.scrollHeight-innerHeight),p=Math.min(1,Math.max(0,scrollY/max));fg.style.strokeDashoffset=L*(1-p);var pt=fg.getPointAtLength(L*p);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);dot.style.opacity=p>0.002?1:0;document.body.classList.toggle('hx-sc',scrollY>40);var hh=document.querySelector('header');if(hh)document.documentElement.style.setProperty('--hxh',(hh.offsetHeight-4)+'px');
+ function upd(){var d=document.documentElement,hh=document.querySelector('header'),hv=hh?hh.offsetHeight-4:0,max=Math.max(1,d.scrollHeight-innerHeight),p=Math.min(1,Math.max(0,scrollY/max));fg.style.strokeDashoffset=L*(1-p);var pt=fg.getPointAtLength(L*p);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);dot.style.opacity=p>0.002?1:0;document.body.classList.toggle('hx-sc',scrollY>40);if(hh&&hv!==upd._h){upd._h=hv;d.style.setProperty('--hxh',hv+'px');}
   var tb=document.getElementById('hx-top');if(tb){var want=scrollY>innerHeight*1.2;clearTimeout(tb._hxT);if(!want)tb.classList.remove('on');else{tb.classList.add('on');tb._hxT=setTimeout(function(){if(!tb.matches(':hover')&&document.activeElement!==tb)tb.classList.remove('on');},1400);}var r=tb.querySelector('.r');if(r){var C=2*Math.PI*20;r.style.strokeDasharray=C;r.style.strokeDashoffset=C*(1-p);}}}
  var raf=0;addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(function(){raf=0;upd();});},{passive:true});addEventListener('resize',upd);upd();}
 function top(){if(document.getElementById('hx-top'))return;var b=document.createElement('button');b.id='hx-top';b.type='button';b.setAttribute('aria-label','Back to top');b.innerHTML='<svg viewBox="0 0 46 46" aria-hidden="true"><circle class="t" cx="23" cy="23" r="20"/><circle class="r" cx="23" cy="23" r="20"/></svg><b aria-hidden="true">↑</b>';b.onclick=function(){scrollTo({top:0,behavior:RM?'auto':'smooth'});};document.body.appendChild(b);}
@@ -252,7 +252,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  addEventListener("resize",req);
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
- setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-4096d1a579.js">
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-04de4d2944.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -2021,7 +2021,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-4096d1a579.js"></script>
+<script defer src="/assets/pt-04de4d2944.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
