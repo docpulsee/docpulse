@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-dcb278f26d.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
+<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-222d99022a.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
 <link rel="canonical" href="https://docpulsee.in/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://docpulsee.in/"><meta property="og:site_name" content="DocPulsee">
 <meta property="og:title" content="DocPulsee: NEET PG 2026 College Predictor & Choice List">
@@ -6876,12 +6876,12 @@ window.DATA = null;
   var domReady = new Promise(function(res){ if(document.readyState!=='loading') res(); else document.addEventListener('DOMContentLoaded', function(){ res(); }); });
   Promise.all([window.__dpDataP, domReady]).then(function(v){
     var all = decode(v[0]); for (var i = 0; i < all.length; i++) all[i].__i = i; window.DATA_ALL = all; window.DATA = all.filter(function(o){ return !o.Hide; }); window.DATA_V = v[0].v || null; window.__dpDecode = decode;
-    var s = document.createElement('script'); s.src = '/assets/app-dcb278f26d.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
+    var s = document.createElement('script'); s.src = '/assets/app-222d99022a.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
     document.body.appendChild(s);
   }).catch(function(e){ console.error(e); fail('Could not load the counselling directory.'); });
 })();
 </script>
-<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-dcb278f26d.js"></script>
+<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-222d99022a.js"></script>
 <!-- DocPulsee: date-aware counselling timeline (side pop-up) -->
 <style id="dp-plan-css">
 .dpp{background:var(--surface);color:var(--text)}
@@ -10515,9 +10515,9 @@ function apply(){
   if(b){var nb=document.createElement("button");nb.type="button";nb.className="hn-pb gold own-x";nb.textContent="Open My Pro";nb.onclick=function(){window.dpOpenPro&&window.dpOpenPro();};b.parentNode.insertBefore(nb,b.nextSibling);}}
  if(dc){hide(q(".hn-pp",dc));dc.querySelectorAll(".hn-pnote").forEach(hide);var db=q("button.hn-pb",dc);hide(db);
   add(q(".hn-pn",dc),pro?'<div class="own-badge dir">✓ Included in your Pro<small>Every college, all rounds, fees, stipend and bond</small></div>':'<div class="own-badge dir">✓ Active on your account<small>Every college, all rounds, fees, stipend and bond</small></div>');}
- if(!pro&&paid&&pc){var up=q("[data-pro-up]",pc),nw=q("[data-pro-new]",pc);var upT=up?up.textContent:"",nwT=nw?nw.textContent:"";
+ if(!pro&&paid&&pc){var up=q("[data-pro-up]",pc),nw=q("[data-pro-new]",pc);var upT=window.__dpProUp?"₹"+Math.round(window.__dpProUp/100).toLocaleString("en-IN"):(up?up.textContent:""),nwT=nw?nw.textContent:"";
   hide(q(".hn-pp",pc));pc.querySelectorAll(".hn-pnote").forEach(hide);
-  if(upT)add(q(".hn-pn",pc),'<div class="own-up">Your upgrade: '+upT+(nwT&&nwT!==upT?"<s>"+nwT+"</s>":"")+'</div><div class="hn-pnote">Because you already have College Directory</div>');
+  if(upT)add(q(".hn-pn",pc),'<div class="own-up">Your upgrade: '+upT+(nwT&&nwT!==upT?"<s>"+nwT+"</s>":"")+'</div><div class="hn-pnote">Pro price minus what you paid for College Directory</div>');
   var b2=q("button.hn-pb",pc);if(b2){hide(b2);var nb2=document.createElement("button");nb2.type="button";nb2.className="hn-pb gold own-x";nb2.textContent="Upgrade to Pro";nb2.onclick=function(){window.dpOpenPro&&window.dpOpenPro();};b2.parentNode.insertBefore(nb2,b2.nextSibling);}}
 }
 var t=0;function soon(){clearTimeout(t);t=setTimeout(apply,60);}
