@@ -121,7 +121,7 @@ if(mq&&mq.addEventListener)mq.addEventListener("change",function(){if(ST.mode===
 document.addEventListener("visibilitychange",function(){if(!document.hidden)apply();});
 apply();tick();
 document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document.querySelectorAll("style:not([data-dpd])").forEach(twin);document.querySelectorAll("[style]").forEach(fixEl);}});
-})();</script><link rel="stylesheet" href="/assets/hd-5a0b925505.css">
+})();</script><link rel="stylesheet" href="/assets/hd-4f6735d119.css">
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -192,7 +192,10 @@ function hnBrowse(){hnMode('browse');hnGo('neetpg-app-wrap');}
 function hnBuyDirectory(){var b=document.querySelector('[data-open-plans]')||[].slice.call(document.querySelectorAll('button')).find(function(x){return /unlock full|get full access|unlock all|buy full access/i.test(x.innerText||'');});if(b){b.click();return;}hnPredict(true);}
 function hnOpenId(){var b=document.querySelector('[data-idc-open]');if(b){b.click();setTimeout(function(){var f=document.querySelector('[data-idc-ffbtn]');if(f)f.click();},700);}else{window.dispatchEvent(new CustomEvent('dp-rulebook',{detail:{jur:'MCC'}}));}}
 function hnMe(){var c=document.querySelector('#dp-acct-slot button, #dp-acct-slot [role=button]');if(c){c.click();return;}hnGo('neetpg-app-wrap');}
-function hnSignIn(){if(window.dpOpenSignIn){dpOpenSignIn();return;}var g=document.querySelector('[data-google-signin]');if(g){g.click();return;}hnPredict(true);}
+// 8 Nov 2026: the header Sign in button shows before the app (and its sign-in sheet) is ready; on slow phones a tap in that ~2 s gap
+// used to fall through to the predictor, so people had to tap twice. Now the tap is remembered, the button shows it is working,
+// and the sheet opens the moment it is ready (up to 15 s, then the old fallback).
+function hnSignIn(){if(window.dpOpenSignIn){dpOpenSignIn();return;}if(window.__dpSiWait)return;window.__dpSiWait=1;var b=document.getElementById('hn-signin');if(b){b.classList.add('hn-wait');b.setAttribute('aria-busy','true');}var n=0;(function w(){var done=function(){window.__dpSiWait=0;if(b){b.classList.remove('hn-wait');b.removeAttribute('aria-busy');}};if(window.dpOpenSignIn){done();dpOpenSignIn();return;}if(++n<150)return setTimeout(w,100);done();var g=document.querySelector('[data-google-signin]');if(g){g.click();return;}hnPredict(true);})();}
 setTimeout(function(){document.body.classList.add('hn-ready');},1800);
 document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('branchAutoTip');if(!t||!window.MutationObserver)return;function fit(){t.classList.remove('hn-below');var w=t.parentElement&&t.parentElement.getBoundingClientRect();if(w&&w.top-t.offsetHeight-14<4)t.classList.add('hn-below');}var was=t.classList.contains('show');if(was)fit();new MutationObserver(function(){var on=t.classList.contains('show');if(on&&!was)fit();was=on;}).observe(t,{attributes:true,attributeFilter:['class']});});
 window.addEventListener('scroll',function(){document.body.classList.toggle('hn-scrolled',window.scrollY>500);},{passive:true});
