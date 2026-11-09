@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-8c5d269bee.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
+<title>DocPulsee: NEET PG 2026 College Predictor, Cutoffs & Choice List | MCC Counselling</title><link rel="preload" as="script" href="/assets/app-1f6e9e5208.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. Make your choice list before Round 1 locking.">
 <link rel="canonical" href="https://docpulsee.in/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://docpulsee.in/"><meta property="og:site_name" content="DocPulsee">
 <meta property="og:title" content="DocPulsee: NEET PG 2026 College Predictor & Choice List">
@@ -261,7 +261,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  addEventListener("resize",req);
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
- setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-73bec12b5f.js">
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-95bc975bdd.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -338,9 +338,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // 9 Nov 2026 (owner: "make it interconnected, change once, reflect everywhere"): ONE definition of what DocPulsee Pro includes and of
 // the INI-CET Pass price. Offer banners ({pro_includes} token), the plans list, the Pro sheet, the Pro teaser and the owner Storefront
 // and price board all read these. Change DP_PRO_INC.items here (or prices in the control panel) and every place follows.
-window.DP_PRO_INC={items:["2 counselling calls","2 Senior Connects","your own Choice List","the INI-CET Pass","full College Directory"],
- poster:["Your own Choice List, built for your rank","2 counselling calls + 2 Senior Connects","INI-CET Pass included: every AIIMS seat","Full College Directory, Route Finder & Doctor DNA"],
- posterTogether:["Two full Pro accounts, one for each of you","Each gets 2 calls, 2 seniors & the INI-CET Pass","See which states & colleges you can both get"]};
+window.DP_PRO_INC={items:["2 NEET PG counselling calls","2 Senior Connects","your own Choice List","the INI-CET Pass (cutoffs)","full College Directory"],
+ poster:["Your own Choice List, built for your rank","2 NEET PG calls + 2 Senior Connects","INI-CET Pass: every AIIMS seat & cutoff","Full College Directory, Route Finder & Doctor DNA"],
+ posterTogether:["Two full Pro accounts, one for each of you","Each gets 2 NEET PG calls, 2 seniors & INI-CET Pass","See which states & colleges you can both get"]};
 window.dpProIncludes=function(){var a=window.DP_PRO_INC.items;return a.length>1?a.slice(0,-1).join(", ")+" & "+a[a.length-1]:(a[0]||"");};
 window.DP_INI=window.DP_INI||{price_paise:129900,list_paise:249900,live:false};
 window.dpSetIni=function(d){if(!d)return;var c=false;if(d.price_paise&&+d.price_paise!==window.DP_INI.price_paise){window.DP_INI.price_paise=+d.price_paise;c=true;}if(d.list_paise!=null&&+d.list_paise!==window.DP_INI.list_paise){window.DP_INI.list_paise=+d.list_paise;c=true;}window.DP_INI.live=true;if(c)try{window.dispatchEvent(new CustomEvent("dp-plans"));}catch(e){}};
@@ -1787,12 +1787,12 @@ window.DATA = null;
   var domReady = new Promise(function(res){ if(document.readyState!=='loading') res(); else document.addEventListener('DOMContentLoaded', function(){ res(); }); });
   Promise.all([window.__dpDataP, domReady]).then(function(v){
     var all = decode(v[0]); for (var i = 0; i < all.length; i++) all[i].__i = i; window.DATA_ALL = all; window.DATA = all.filter(function(o){ return !o.Hide; }); window.DATA_V = v[0].v || null; window.__dpDecode = decode;
-    var s = document.createElement('script'); s.src = '/assets/app-8c5d269bee.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
+    var s = document.createElement('script'); s.src = '/assets/app-1f6e9e5208.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
     document.body.appendChild(s);
   }).catch(function(e){ console.error(e); fail('Could not load the counselling directory.'); });
 })();
 </script>
-<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-8c5d269bee.js"></script>
+<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-1f6e9e5208.js"></script>
 <!-- DocPulsee: date-aware counselling timeline (side pop-up) -->
 <style id="dp-plan-css">
 .dpp{background:var(--surface);color:var(--text)}
@@ -2040,7 +2040,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-73bec12b5f.js"></script>
+<script defer src="/assets/pt-95bc975bdd.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
