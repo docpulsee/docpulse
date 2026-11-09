@@ -121,7 +121,7 @@ if(mq&&mq.addEventListener)mq.addEventListener("change",function(){if(ST.mode===
 document.addEventListener("visibilitychange",function(){if(!document.hidden)apply();});
 apply();tick();
 document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document.querySelectorAll("style:not([data-dpd])").forEach(twin);document.querySelectorAll("[style]").forEach(fixEl);}});
-})();</script><link rel="stylesheet" href="/assets/hd-4f6735d119.css">
+})();</script><link rel="stylesheet" href="/assets/hd-dac8a46f40.css">
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -261,7 +261,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  addEventListener("resize",req);
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
- setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-c3049a608f.js">
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-a01dae4028.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -2040,7 +2040,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-c3049a608f.js"></script>
+<script defer src="/assets/pt-a01dae4028.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
