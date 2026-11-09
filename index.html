@@ -195,8 +195,11 @@ function hnMe(){var c=document.querySelector('#dp-acct-slot button, #dp-acct-slo
 // 8 Nov 2026: the header Sign in button shows before the app (and its sign-in sheet) is ready; on slow phones a tap in that ~2 s gap
 // used to fall through to the predictor, so people had to tap twice. Now the tap is remembered, the button shows it is working,
 // and the sheet opens the moment it is ready (up to 15 s, then the old fallback).
-function hnSignIn(){if(window.dpOpenSignIn){dpOpenSignIn();return;}if(window.__dpSiWait)return;window.__dpSiWait=1;var b=document.getElementById('hn-signin');if(b){b.classList.add('hn-wait');b.setAttribute('aria-busy','true');}var n=0;(function w(){var done=function(){window.__dpSiWait=0;if(b){b.classList.remove('hn-wait');b.removeAttribute('aria-busy');}};if(window.dpOpenSignIn){done();dpOpenSignIn();return;}if(++n<150)return setTimeout(w,100);done();var g=document.querySelector('[data-google-signin]');if(g){g.click();return;}hnPredict(true);})();}
-setTimeout(function(){document.body.classList.add('hn-ready');},1800);
+function hnSignIn(){if(window.dpOpenSignIn&&!(window.hnAuthed&&hnAuthed())){dpOpenSignIn();return;}if(window.__dpSiWait)return;window.__dpSiWait=1;var b=document.getElementById('hn-signin');if(b){b.classList.add('hn-wait');b.setAttribute('aria-busy','true');}var n=0;(function w(){var done=function(){window.__dpSiWait=0;if(b){b.classList.remove('hn-wait');b.removeAttribute('aria-busy');}};var ac=document.querySelector('[data-acct-toggle]');if(window.dpOpenSignIn&&!ac&&!(window.hnAuthed&&hnAuthed())){done();dpOpenSignIn();return;}if(ac){done();if(ac.getAttribute('aria-expanded')!=='true')ac.click();return;}if(++n<150)return setTimeout(w,100);done();var g=document.querySelector('[data-google-signin]');if(g){g.click();return;}hnPredict(true);})();}
+// 9 Nov 2026: a signed-in student must never see the static "Sign in" button while the app loads (tapping it could not open their
+// account menu, so it looked broken until a refresh). If a saved session exists, the static button stays hidden.
+function hnAuthed(){if(/access_token=|[?&]code=/.test(location.hash+location.search))return true;try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^sb-.*-auth-token$/.test(k)&&localStorage.getItem(k))return true;}}catch(e){}return false;}
+setTimeout(function(){if(!hnAuthed())document.body.classList.add('hn-ready');},1800);
 document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('branchAutoTip');if(!t||!window.MutationObserver)return;function fit(){t.classList.remove('hn-below');var w=t.parentElement&&t.parentElement.getBoundingClientRect();if(w&&w.top-t.offsetHeight-14<4)t.classList.add('hn-below');}var was=t.classList.contains('show');if(was)fit();new MutationObserver(function(){var on=t.classList.contains('show');if(on&&!was)fit();was=on;}).observe(t,{attributes:true,attributeFilter:['class']});});
 window.addEventListener('scroll',function(){document.body.classList.toggle('hn-scrolled',window.scrollY>500);},{passive:true});
 
@@ -258,7 +261,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  addEventListener("resize",req);
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
- setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-2ff01dffea.js">
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-b85c566bf8.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -2027,7 +2030,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-2ff01dffea.js"></script>
+<script defer src="/assets/pt-b85c566bf8.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
@@ -2171,6 +2174,7 @@ html.scd2-open #noticeBanner,html.scd2-open .dpa-res,html.scd2-open .lr-fab,html
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}
 html:not(.dp-noanim) .dp-rv{opacity:0;translate:0 14px}
+html:not(.dp-noanim) #neetpg-app-wrap.dp-rv,html:not(.dp-noanim) .dp-rv:has(#neetpg-app-wrap){opacity:1;translate:none}
 html:not(.dp-noanim) .dp-rv.dp-in{opacity:1;translate:0 0;transition:opacity .5s ease,translate .65s cubic-bezier(.22,1,.36,1);transition-delay:var(--rd,0ms)}
 @keyframes dpBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 html:not(.dp-noanim) .dp-bar{transform-origin:left center;animation:dpBar .8s cubic-bezier(.22,1,.36,1) both;animation-delay:var(--bd,0ms)}
