@@ -292,7 +292,7 @@ window.DpR2New=function(p){useTick();var res=p.res||[];if(!D||!res.length||!wind
  var nm=function(r){var g=String(r.Display_Name||"").split(",").map(function(x){return x.trim();}),t=g[0];if(g[1]&&(t.length<30||/^(govt\.?|government) medical college$/i.test(t)))t+=", "+g[1];t=t.replace(/\b([A-Z]{2,})\b/g,function(w){return w.length>3?w.charAt(0)+w.slice(1).toLowerCase():w;});return t.length>48?t.slice(0,47)+"…":t;};
  return h("div",{className:"dp-r2-sum dp-r2-new","data-r2new":hit.length},h("b",null,"New in Round 2 for you: "),tot+" new seat"+(tot>1?"s":"")+" open for "+(cat==="GN"?"UR":cat)+" in branches and states where you can already get a seat. They have no past cutoff, so many students skip them.",
   h("div",{className:"dp-r2-ex"},hit.slice(0,3).map(function(x,i){return h("div",{key:i},"• "+nm(x.r)+" · "+x.r.Spec_Norm+(x.r.Deg&&x.r.Deg!=="MD"&&x.r.Deg!=="MS"?" ("+x.r.Deg+")":"")+" · "+x.n+" seat"+(x.n>1?"s":"")+"");})),
-  hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more new seats like these"):null);};
+  hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more courses like these"):null);};
 })();</script><link rel="preload" as="script" href="/assets/pt-2268a2b7d2.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
