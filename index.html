@@ -121,7 +121,7 @@ if(mq&&mq.addEventListener)mq.addEventListener("change",function(){if(ST.mode===
 document.addEventListener("visibilitychange",function(){if(!document.hidden)apply();});
 apply();tick();
 document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document.querySelectorAll("style:not([data-dpd])").forEach(twin);document.querySelectorAll("[style]").forEach(fixEl);}});
-})();</script><link rel="stylesheet" href="/assets/hd-075451301e.css">
+})();</script><link rel="stylesheet" href="/assets/hd-654db1e2ad.css">
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -262,8 +262,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
  setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><script>(function(){
-var D=null,W=[];function ping(){W.slice().forEach(function(f){try{f();}catch(e){}});}
-fetch("r2open.json?v=r2-10nov").then(function(r){return r.ok?r.json():null}).then(function(j){if(j){D=j;window.DP_R2=j;ping();try{window.dispatchEvent(new Event("dp-r2"));}catch(e){}}}).catch(function(){});
+var D=null,W=[],VV=true;function ping(){W.slice().forEach(function(f){try{f();}catch(e){}});}
+fetch("r2open.json?v=r2-11nov").then(function(r){return r.ok?r.json():null}).then(function(j){if(j){D=j;window.DP_R2=j;ping();try{window.dispatchEvent(new Event("dp-r2"));}catch(e){}}}).catch(function(){});
 var LBL={GN:"UR",EWS:"EWS",OBC:"OBC",SC:"SC",ST:"ST"};
 function pick(src,d,q){if(!src||!d)return null;var a=src[String(d.I)];if(!a)return null;var b=a[d.Spec_Norm+"|"+d.Deg];if(!b)return null;return q?b[q]||null:b;}
 function sum(o,f){var n=0;for(var k in o)if(!f||f(k))n+=o[k];return n;}
@@ -272,15 +272,18 @@ window.dpR2Info=function(d,q,cat){if(!D||!d)return null;var dnb=/^DNB/.test(d.De
  if(o){var all=sum(o);if(dnb||q!=="AIQ"){r.kind=all?"open":null;r.n=all;r.lab=all+" seat"+(all>1?"s":"");}
   else{var mine=sum(o,function(k){return k.replace(/-PwD$/,"")===cat&&!/-PwD$/.test(k);}),ur=cat!=="GN"?sum(o,function(k){return k==="GN";}):0;
    if(mine){r.kind="open";r.n=mine;r.lab=mine+" "+LBL[cat];}else if(ur){r.kind="open";r.n=ur;r.lab=ur+" UR";}else if(all){r.kind="oth";r.n=all;r.lab="other categories";}}}
- return(r.kind||r.isNew)?r:null;};
+ var v=VV?pick(D.v,d,q):null;if(v){var va=sum(v),vm=(dnb||q!=="AIQ")?va:sum(v,function(k){return(k===cat||k==="GN")&&!/-PwD$/.test(k);});
+  if(vm){r.vkind="may";r.vn=vm;r.vlab=vm+" seat"+(vm>1?"s":"");}}
+ return(r.kind||r.isNew||r.vkind)?r:null;};
 function useTick(){var s=React.useState(0);React.useEffect(function(){var f=function(){s[1](function(x){return x+1;});};W.push(f);return function(){W=W.filter(function(g){return g!==f;});};},[]);}
 window.DpR2=function(p){useTick();var tag=p.tag||"",q=p.q||(tag?tag.split("_")[0]:"AIQ"),cat=p.cat||(p.open?"GN":(tag?tag.split("_").pop():"GN"));
  var r=window.dpR2Info(p.d,q,cat);if(!r)return null;var h=React.createElement,k=[];
  if(r.kind)k.push(h("span",{key:"o",className:"dp-r2"+(r.kind==="oth"?" oth":""),title:r.kind==="oth"?"MCC Round 2 clear vacancy: seats here are only in other categories":"MCC Round 2 clear vacancy for this seat"},r.kind==="oth"?"R2: ":"Open in R2 · ",h("b",null,r.lab)));
+ if(r.vkind&&r.kind!=="open")k.push(h("span",{key:"v",className:"dp-r2 may",title:"MCC Round 2 virtual vacancy (11 Nov 2026): may open if a Round 1 candidate here resigns or upgrades. Not guaranteed."},"May open in R2 · ",h("b",null,r.vlab)));
  if(r.isNew)k.push(h("span",{key:"n",className:"dp-r2 new",title:"Newly added seat for Round 2 (MCC, 10 Nov 2026)"},"New in R2"));
- return h("span",{className:"dp-r2-wrap","data-r2":r.kind||"new"},k);};
-window.DpR2Sum=function(p){useTick();var L=p.list||[];if(!D||!L.length)return null;var o=0,nw=0;L.forEach(function(e){var r=window.dpR2Info(e.d,e.q,e.sc);if(r&&r.kind==="open")o++;if(r&&r.isNew)nw++;});
- return React.createElement("div",{className:"dp-r2-sum","data-r2sum":o},React.createElement("b",null,"Round 2: "),o+" of your "+L.length+" choices have a clear vacancy open for you"+(nw?", "+nw+" "+(nw>1?"are":"is")+" newly added":"")+". Seats without a badge may still open from Round 1 resignations (virtual vacancy).");};
+ if(!k.length)return null;return h("span",{className:"dp-r2-wrap","data-r2":r.kind||(r.vkind?"may":"new")},k);};
+window.DpR2Sum=function(p){useTick();var L=p.list||[];if(!D||!L.length)return null;var o=0,nw=0,mv=0;L.forEach(function(e){var r=window.dpR2Info(e.d,e.q,e.sc);if(r&&r.kind==="open")o++;if(r&&r.isNew)nw++;if(r&&r.vkind&&r.kind!=="open")mv++;});
+ return React.createElement("div",{className:"dp-r2-sum","data-r2sum":o},React.createElement("b",null,"Round 2: "),o+" of your "+L.length+" choices have a clear vacancy open for you"+(nw?", "+nw+" "+(nw>1?"are":"is")+" newly added":"")+(mv?". "+mv+" more may open if Round 1 candidates resign or upgrade (virtual vacancy), so keep them in your list too.":". Seats without a badge may still open from Round 1 resignations or upgrades."));};
 // Personal "new in Round 2 for you" (11 Nov 2026, owner): newly added seats open for the student's category in branches they can
 // already reach (same branch + same state in their own results first, then same branch elsewhere). No cutoff is invented.
 window.DpR2New=function(p){useTick();var res=p.res||[];if(!D||!res.length||!window.DATA)return null;var cat=(p.cat||"GN").replace(/-?PwD$/i,"");
