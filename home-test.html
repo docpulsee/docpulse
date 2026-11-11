@@ -296,6 +296,15 @@ window.DpR2New=function(p){useTick();var res=p.res||[];if(!D||!res.length||!wind
  return h("div",{className:"dp-r2-sum dp-r2-new","data-r2new":hit.length},h("b",null,"New in Round 2 for you: "),tot+" new seat"+(tot>1?"s":"")+" open for "+(cat==="GN"?"UR":cat)+" in branches and states where you can already get a seat. They have no past cutoff, so many students skip them.",
   h("div",{className:"dp-r2-ex"},hit.slice(0,3).map(function(x,i){return h("div",{key:i},"• "+nm(x.r)+" · "+x.r.Spec_Norm+(x.r.Deg&&x.r.Deg!=="MD"&&x.r.Deg!=="MS"?" ("+x.r.Deg+")":"")+" · "+x.n+" seat"+(x.n>1?"s":"")+"");})),
   hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more courses like these"):null);};
+})();</script><script>(function(){
+var inTg=false;try{inTg=/tgWebApp(Data|Version|Platform)=/.test(location.hash+location.search)||/Telegram/i.test(navigator.userAgent)||sessionStorage.getItem("dpTg")==="1";if(inTg)sessionStorage.setItem("dpTg","1");}catch(e){}
+window.dpInTg=inTg;if(!inTg)return;document.documentElement.classList.add("dp-tg");
+var s=document.createElement("script");s.src="https://telegram.org/js/telegram-web-app.js";s.onload=function(){try{var W=window.Telegram.WebApp;W.ready();W.expand();}catch(e){}};document.head.appendChild(s);
+function ext(){var u=location.origin+"/?from=telegram";try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openLink){Telegram.WebApp.openLink(u,{try_instant_view:false});return;}}catch(e){}window.open(u,"_blank");}
+document.addEventListener("click",function(e){var b=e.target&&e.target.closest&&e.target.closest("button,a,[role=button]");if(!b)return;var t=(b.textContent||"").trim();
+ if(/continue with google|sign in with google/i.test(t)){e.preventDefault();e.stopPropagation();
+  if(!document.getElementById("dp-tg-note")){var n=document.createElement("div");n.id="dp-tg-note";n.style.cssText="position:fixed;left:12px;right:12px;bottom:16px;z-index:2147483000;background:#0b3d33;color:#fff;padding:12px 14px;border-radius:14px;font:600 13.5px/1.45 system-ui;box-shadow:0 8px 30px rgba(0,0,0,.3)";n.textContent="Google sign-in doesn't work inside Telegram, so we're opening DocPulsee in your browser. Sign in there once and you're set.";document.body.appendChild(n);setTimeout(function(){n.remove();},6000);}
+  ext();}},true);
 })();</script><link rel="preload" as="script" href="/assets/pt-2268a2b7d2.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
