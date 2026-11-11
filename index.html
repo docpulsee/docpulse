@@ -121,11 +121,11 @@ if(mq&&mq.addEventListener)mq.addEventListener("change",function(){if(ST.mode===
 document.addEventListener("visibilitychange",function(){if(!document.hidden)apply();});
 apply();tick();
 document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document.querySelectorAll("style:not([data-dpd])").forEach(twin);document.querySelectorAll("[style]").forEach(fixEl);}});
-})();</script><link rel="stylesheet" href="/assets/hd-490e3c980b.css">
+})();</script><link rel="stylesheet" href="/assets/hd-075451301e.css">
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocPulsee: NEET PG 2026 & INI-CET College Predictor, Cutoffs & Choice List</title><link rel="preload" as="script" href="/assets/app-d28ab8feac.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. For INI-CET, every AIIMS, JIPMER, PGIMER and NIMHANS seat with real closing ranks. Make your choice list for every round.">
+<title>DocPulsee: NEET PG 2026 & INI-CET College Predictor, Cutoffs & Choice List</title><link rel="preload" as="script" href="/assets/app-230ef0f7ee.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. For INI-CET, every AIIMS, JIPMER, PGIMER and NIMHANS seat with real closing ranks. Make your choice list for every round.">
 <link rel="canonical" href="https://docpulsee.in/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://docpulsee.in/"><meta property="og:site_name" content="DocPulsee">
 <meta property="og:title" content="DocPulsee: NEET PG & INI-CET College Predictor & Choice List">
@@ -261,7 +261,39 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  addEventListener("resize",req);
  /* cheap check (no layout reads) for a newly opened sheet */
  var held=null;function hold(on){try{if(on&&!held&&document.getAnimations){held=document.getAnimations().filter(function(a){if(typeof CSSAnimation!=="undefined"&&!(a instanceof CSSAnimation))return false;if(a.playState!=="running")return false;var t=a.effect&&a.effect.target;return !(t&&t.closest&&t.closest(".overlay"));});held.forEach(function(a){a.pause();});}else if(!on&&held){held.forEach(function(a){try{a.play();}catch(_e){}});held=null;}}catch(_e){}}
- setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><link rel="preload" as="script" href="/assets/pt-be571bd1eb.js">
+ setInterval(function(){hold(!!document.querySelector(".overlay.fixed.inset-0"));var sh=document.querySelector(".col-sheet");if(sh!==bound){bound=sh;if(sh){setTimeout(req,350);setTimeout(req,900);}}},150);})();</script><script>window.DP_FIN=1;document.documentElement.classList.add("dp-fin")</script><script>window.DP_PROCP=1</script><script>window.DP_CLMQ=1;</script><script>window.DP_FAST=1;</script><script>window.DP_PYR=1;document.documentElement.classList.add("dp-pyr");</script><script>document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".offer-bar");if(!b||e.target.closest("a,button")||innerWidth>640)return;b.classList.toggle("ob-open");});</script><script>(function(){
+var D=null,W=[];function ping(){W.slice().forEach(function(f){try{f();}catch(e){}});}
+fetch("r2open.json?v=r2-10nov").then(function(r){return r.ok?r.json():null}).then(function(j){if(j){D=j;window.DP_R2=j;ping();try{window.dispatchEvent(new Event("dp-r2"));}catch(e){}}}).catch(function(){});
+var LBL={GN:"UR",EWS:"EWS",OBC:"OBC",SC:"SC",ST:"ST"};
+function pick(src,d,q){if(!src||!d)return null;var a=src[String(d.I)];if(!a)return null;var b=a[d.Spec_Norm+"|"+d.Deg];if(!b)return null;return q?b[q]||null:b;}
+function sum(o,f){var n=0;for(var k in o)if(!f||f(k))n+=o[k];return n;}
+window.dpR2Info=function(d,q,cat){if(!D||!d)return null;var dnb=/^DNB/.test(d.Deg||"");q=dnb?"DNB":(q||"AIQ");cat=(cat||"GN").replace(/-?PwD$/i,"");
+ var o=pick(D.o,d,q),nw=pick(D.n,d,q),r={q:q,isNew:!!nw&&sum(nw)>0,newN:nw?sum(nw):0};
+ if(o){var all=sum(o);if(dnb||q!=="AIQ"){r.kind=all?"open":null;r.n=all;r.lab=all+" seat"+(all>1?"s":"");}
+  else{var mine=sum(o,function(k){return k.replace(/-PwD$/,"")===cat&&!/-PwD$/.test(k);}),ur=cat!=="GN"?sum(o,function(k){return k==="GN";}):0;
+   if(mine){r.kind="open";r.n=mine;r.lab=mine+" "+LBL[cat];}else if(ur){r.kind="open";r.n=ur;r.lab=ur+" UR";}else if(all){r.kind="oth";r.n=all;r.lab="other categories";}}}
+ return(r.kind||r.isNew)?r:null;};
+function useTick(){var s=React.useState(0);React.useEffect(function(){var f=function(){s[1](function(x){return x+1;});};W.push(f);return function(){W=W.filter(function(g){return g!==f;});};},[]);}
+window.DpR2=function(p){useTick();var tag=p.tag||"",q=p.q||(tag?tag.split("_")[0]:"AIQ"),cat=p.cat||(p.open?"GN":(tag?tag.split("_").pop():"GN"));
+ var r=window.dpR2Info(p.d,q,cat);if(!r)return null;var h=React.createElement,k=[];
+ if(r.kind)k.push(h("span",{key:"o",className:"dp-r2"+(r.kind==="oth"?" oth":""),title:r.kind==="oth"?"MCC Round 2 clear vacancy: seats here are only in other categories":"MCC Round 2 clear vacancy for this seat"},r.kind==="oth"?"R2: ":"Open in R2 · ",h("b",null,r.lab)));
+ if(r.isNew)k.push(h("span",{key:"n",className:"dp-r2 new",title:"Newly added seat for Round 2 (MCC, 10 Nov 2026)"},"New in R2"));
+ return h("span",{className:"dp-r2-wrap","data-r2":r.kind||"new"},k);};
+window.DpR2Sum=function(p){useTick();var L=p.list||[];if(!D||!L.length)return null;var o=0,nw=0;L.forEach(function(e){var r=window.dpR2Info(e.d,e.q,e.sc);if(r&&r.kind==="open")o++;if(r&&r.isNew)nw++;});
+ return React.createElement("div",{className:"dp-r2-sum","data-r2sum":o},React.createElement("b",null,"Round 2: "),o+" of your "+L.length+" choices have a clear vacancy open for you"+(nw?", "+nw+" "+(nw>1?"are":"is")+" newly added":"")+". Seats without a badge may still open from Round 1 resignations (virtual vacancy).");};
+// Personal "new in Round 2 for you" (11 Nov 2026, owner): newly added seats open for the student's category in branches they can
+// already reach (same branch + same state in their own results first, then same branch elsewhere). No cutoff is invented.
+window.DpR2New=function(p){useTick();var res=p.res||[];if(!D||!res.length||!window.DATA)return null;var cat=(p.cat||"GN").replace(/-?PwD$/i,"");
+ var reachSS={},reachS={};res.forEach(function(d){reachSS[d.Spec_Norm+"|"+d.State]=1;reachS[d.Spec_Norm]=1;});
+ var hit=[],seen={};window.DATA.forEach(function(r){var a=D.n[String(r.I)];if(!a)return;var b=a[r.Spec_Norm+"|"+r.Deg];if(!b)return;var dnb=/^DNB/.test(r.Deg||"");
+  var q=dnb?"DNB":(b.AIQ?"AIQ":null);if(!q||!b[q])return;var o=b[q],n=0;for(var k in o){var kk=k.replace(/-PwD$/,"");if(/-PwD$/.test(k))continue;if(dnb||kk===cat||kk==="GN")n+=o[k];}if(!n)return;
+  var lvl=reachSS[r.Spec_Norm+"|"+r.State]?2:0;if(!lvl)return;var key=r.I+"|"+r.Spec_Norm+"|"+r.Deg;if(seen[key])return;seen[key]=1;hit.push({r:r,n:n,l:lvl});});
+ if(!hit.length)return null;hit.sort(function(x,y){return y.l-x.l||y.n-x.n;});var tot=hit.reduce(function(s,x){return s+x.n;},0),h=React.createElement;
+ var nm=function(r){var g=String(r.Display_Name||"").split(",").map(function(x){return x.trim();}),t=g[0];if(g[1]&&(t.length<30||/^(govt\.?|government) medical college$/i.test(t)))t+=", "+g[1];t=t.replace(/\b([A-Z]{2,})\b/g,function(w){return w.length>3?w.charAt(0)+w.slice(1).toLowerCase():w;});return t.length>48?t.slice(0,47)+"…":t;};
+ return h("div",{className:"dp-r2-sum dp-r2-new","data-r2new":hit.length},h("b",null,"New in Round 2 for you: "),tot+" new seat"+(tot>1?"s":"")+" open for "+(cat==="GN"?"UR":cat)+" in branches and states where you can already get a seat. They have no past cutoff, so many students skip them.",
+  h("div",{className:"dp-r2-ex"},hit.slice(0,3).map(function(x,i){return h("div",{key:i},"• "+nm(x.r)+" · "+x.r.Spec_Norm+(x.r.Deg&&x.r.Deg!=="MD"&&x.r.Deg!=="MS"?" ("+x.r.Deg+")":"")+" · "+x.n+" seat"+(x.n>1?"s":"")+"");})),
+  hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more courses like these"):null);};
+})();</script><link rel="preload" as="script" href="/assets/pt-be571bd1eb.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -1787,12 +1819,12 @@ window.DATA = null;
   var domReady = new Promise(function(res){ if(document.readyState!=='loading') res(); else document.addEventListener('DOMContentLoaded', function(){ res(); }); });
   Promise.all([window.__dpDataP, domReady]).then(function(v){
     var all = decode(v[0]); for (var i = 0; i < all.length; i++) all[i].__i = i; window.DATA_ALL = all; window.DATA = all.filter(function(o){ return !o.Hide; }); window.DATA_V = v[0].v || null; window.__dpDecode = decode;
-    var s = document.createElement('script'); s.src = '/assets/app-d28ab8feac.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
+    var s = document.createElement('script'); s.src = '/assets/app-230ef0f7ee.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
     document.body.appendChild(s);
   }).catch(function(e){ console.error(e); fail('Could not load the counselling directory.'); });
 })();
 </script>
-<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-d28ab8feac.js"></script>
+<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-230ef0f7ee.js"></script>
 <!-- DocPulsee: date-aware counselling timeline (side pop-up) -->
 <style id="dp-plan-css">
 .dpp{background:var(--surface);color:var(--text)}
