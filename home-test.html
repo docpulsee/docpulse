@@ -287,12 +287,12 @@ window.DpR2New=function(p){useTick();var res=p.res||[];if(!D||!res.length||!wind
  var reachSS={},reachS={};res.forEach(function(d){reachSS[d.Spec_Norm+"|"+d.State]=1;reachS[d.Spec_Norm]=1;});
  var hit=[],seen={};window.DATA.forEach(function(r){var a=D.n[String(r.I)];if(!a)return;var b=a[r.Spec_Norm+"|"+r.Deg];if(!b)return;var dnb=/^DNB/.test(r.Deg||"");
   var q=dnb?"DNB":(b.AIQ?"AIQ":null);if(!q||!b[q])return;var o=b[q],n=0;for(var k in o){var kk=k.replace(/-PwD$/,"");if(/-PwD$/.test(k))continue;if(dnb||kk===cat||kk==="GN")n+=o[k];}if(!n)return;
-  var lvl=reachSS[r.Spec_Norm+"|"+r.State]?2:(reachS[r.Spec_Norm]?1:0);if(!lvl)return;var key=r.I+"|"+r.Spec_Norm+"|"+r.Deg;if(seen[key])return;seen[key]=1;hit.push({r:r,n:n,l:lvl});});
+  var lvl=reachSS[r.Spec_Norm+"|"+r.State]?2:0;if(!lvl)return;var key=r.I+"|"+r.Spec_Norm+"|"+r.Deg;if(seen[key])return;seen[key]=1;hit.push({r:r,n:n,l:lvl});});
  if(!hit.length)return null;hit.sort(function(x,y){return y.l-x.l||y.n-x.n;});var tot=hit.reduce(function(s,x){return s+x.n;},0),h=React.createElement;
- var nm=function(r){var t=String(r.Display_Name||"").split(",")[0];return t.length>34?t.slice(0,33)+"…":t;};
- return h("div",{className:"dp-r2-sum dp-r2-new","data-r2new":hit.length},h("b",null,"New in Round 2 for you: "),tot+" new seat"+(tot>1?"s":"")+" open for "+(cat==="GN"?"UR":cat)+" in branches you can already reach. They have no past cutoff, so many students skip them.",
-  h("div",{className:"dp-r2-ex"},hit.slice(0,3).map(function(x,i){return h("div",{key:i},"• "+nm(x.r)+" · "+x.r.Spec_Norm+(x.r.Deg&&x.r.Deg!=="MD"&&x.r.Deg!=="MS"?" ("+x.r.Deg+")":"")+" · "+x.n+" seat"+(x.n>1?"s":"")+(x.l===2?"":" · "+x.r.State));})),
-  hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more in the Choice List Maker"):null);};
+ var nm=function(r){var g=String(r.Display_Name||"").split(",").map(function(x){return x.trim();}),t=g[0];if(g[1]&&(t.length<30||/^(govt\.?|government) medical college$/i.test(t)))t+=", "+g[1];t=t.replace(/\b([A-Z]{2,})\b/g,function(w){return w.length>3?w.charAt(0)+w.slice(1).toLowerCase():w;});return t.length>48?t.slice(0,47)+"…":t;};
+ return h("div",{className:"dp-r2-sum dp-r2-new","data-r2new":hit.length},h("b",null,"New in Round 2 for you: "),tot+" new seat"+(tot>1?"s":"")+" open for "+(cat==="GN"?"UR":cat)+" in branches and states where you can already get a seat. They have no past cutoff, so many students skip them.",
+  h("div",{className:"dp-r2-ex"},hit.slice(0,3).map(function(x,i){return h("div",{key:i},"• "+nm(x.r)+" · "+x.r.Spec_Norm+(x.r.Deg&&x.r.Deg!=="MD"&&x.r.Deg!=="MS"?" ("+x.r.Deg+")":"")+" · "+x.n+" seat"+(x.n>1?"s":"")+"");})),
+  hit.length>3?h("div",{className:"dp-r2-more"},"+"+(hit.length-3)+" more new seats like these"):null);};
 })();</script><link rel="preload" as="script" href="/assets/pt-2268a2b7d2.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
