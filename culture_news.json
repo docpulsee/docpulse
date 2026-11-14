@@ -1,6 +1,6 @@
 {
-"v": "2026-11-07",
-"n": 16,
+"v": "2026-11-14",
+"n": 17,
 "items": [
 {
 "i": "396",
@@ -45,6 +45,17 @@
 "d": "Aug 2026",
 "u": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOQ2ZHcDhTVE9xOENjbDBtSm1NaGVuYWtXeDYxc0JnRk5aOXF5QjZtbnlKTkRLcmJUV2lLMTNYaXBGNzFHRDl2ZDBNTlJpa1hzOUE4WTRyTnV3M1BIQ2dYWFZRT1M2LUllTnIyVE9kVklVMUZ0ckFMWHdHR201Z1NxYkU5SllXN1JYc21hdFNzNnQ4T3R0ZU8tNHBYT2ZWTngzX3Axa3cwS3hlRTNPS1hqeU5xeVBJRlBuVkZnU25MTGdLXzBORXdvNkt3UVY5UUVyU1JMQlFWSl9QWDQzNG1yZFpTVUlBU3ZOQVNVRUIzcE9pTmNV0gH6AUFVX3lxTE5acDRGMkprdUR5eVgyUUpMOHE3YTVna2FpWldWalA3Z0JLc0lETVh6dWYyNTY5WGRzbmRwYldHcGtuZThnTFk1MnladGVkY3o2V2RGOGxnVkVHUDQzMmJtSlVobi1uMWptUmhHQkctSFhlTkVNalFiT0NLVTVmS2lMOWRzZnNIQ3kzaEpJSjY3dTlxRFhncW1KcjFSZGhTbW90SHAwMzF4TDZ",
 "id": "news_e1468b62ba52fbb9"
+},
+{
+"i": "568",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "Pune: Ragging Incident at B.J. Medical College; Action Taken Against Resident Doctors",
+"src": "Punekar News",
+"d": "Jul 2025",
+"u": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQNjhrU21pdVBzcDc3TW9zNlRlTzM0MkJRTlQtT0VERzhZbDlEOFlIY3pLVTBaRFhSVUNUMENmM0ZpWE9BMTFOQ1djaldJdnlqRTZPVV8wZ1JXRGRmRWZYVDlaRXB5WnNTdnpLRnlXSDFnTENqVWdMcmU5TnVhVF9tZlJ0eVNyb2FXZGI1NWdOdG5UOE1SSzRpUzlSVHVUSHlYUUZMTWVjYmk3YUZHS0ow?oc=5",
+"id": "news_0585b14a6845d284"
 },
 {
 "i": "569",
@@ -128,22 +139,22 @@
 "b": null,
 "dim": "toxicity",
 "v": 5,
-"h": "Resident doctor at Surat Medical College dies by suicide after 'ragging'; 4 seniors suspended",
-"src": "Careers360",
+"h": "Suicide of PG student after ‘ragging’: Gujarat suspends Surat medical college Microbiology department head",
+"src": "The Indian Express",
 "d": "Aug 2026",
-"u": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNQ1JhVDZ5Q2pmVU1yZHViaF81U192clAwTTBTNjd3dEZjeWVRR0RWQlNIcTJyNWYyNl9ILWtzOENXWGVFTDBQMGJCVU5CZDNJOTh4bEFXcTRCWVNnVlpjUXJSRFBJMzk3UEdXX1JaYTNuNDVzZXZNRXlKcTU1b0pGb0N4ZXhsNFM4Y1A0Z1dSWU03WmNDQU14Y19JclN6TDdmRzU3bl9TdHBXVk9hQThaZnhMSllsbGZna0xzQVJyWTlfMVNLdFVVTVpWUHduakVQbWoxbUxtekNJcTV4ZVd5M1JacU5XQVpheXfSAe8BQVVfeXFMUGZ4bUdXWWFMbklWVGxpaC1IN2h4bUJzV2QyV0YySUlkZUZnV2JWSmZCYW9sQlRSWkdlUXV1UDNWOEQzeGdSbUd3OUcyWWp0V0xjMXdFMWhkMXVEUnZOc1RSWkRzVktOV3Z0WThYTXdnVFQ2OXVFT2h3TmM3VXJvekU0V1FvVjVzbG14eU1vV1JQUWNqUkYzd2l3SlN0bW8wUHVkUWhTYzA2MXRqamVwMjdDZU1",
-"id": "news_0d1d3d5835258fc7"
+"u": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQUhDcnVOVU95T1ZWRGxjN18tLTdPWjl3LVNJbGUwVktLb25USjN4d29iUkk1YVhFWlRVc0l4bnlxRkFraGl5ZFdJTDdCRHJmRERLbllDZnVlQ1pFUmdzMUZnRDFoa25TT3UzY0IzTXB0TmliM1h6ME93b0Y2Sjc2VVdvTGpSSnVTZ2NnMTgzdXc3ZEM2X1J2UzdJWWlMd2dSQnNGQ3VPbWFDY3dBdXRDUWVTR0J1MGJhWXZfaXZnaUU1d1Q4QzVRc2xvSHDSAdMBQVVfeXFMT2VDcF9OckNBT1d0UGdQNXpOS25jRnBRNnRtdktZNFEtTDlaZXlqRHlrM2hXay1URHBzNHVtSFpUdXA0aEdUd2xmS0ZndV9hNmNHZXJ4QXQwazlmUV9sQ25nRHdHOFNLR0xnTTRWYkxBdFhMYmtjMEtQaDEtX2ZCeFQtSHk0OWtRSHgzRHkwZTlaSVU0N2doeDlRS2xpa2Q3Z296RkQ5eFJFN0hOQ29Malg3MDd5c05FbGl5S2lBbjZkb1R6Q3dtbUhUZTdvM0xIRkJ",
+"id": "news_5688a35e5ec13c3d"
 },
 {
 "i": "1052",
 "b": null,
 "dim": "toxicity",
 "v": 5,
-"h": "Suicide of PG student after ‘ragging’: Gujarat suspends Surat medical college Microbiology department head",
-"src": "The Indian Express",
+"h": "GMC Surat medico suicide: Panel confirms ragging of 9 resident doctors in Microbiology dept, finds no...",
+"src": "Medical Dialogues",
 "d": "Aug 2026",
-"u": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQUhDcnVOVU95T1ZWRGxjN18tLTdPWjl3LVNJbGUwVktLb25USjN4d29iUkk1YVhFWlRVc0l4bnlxRkFraGl5ZFdJTDdCRHJmRERLbllDZnVlQ1pFUmdzMUZnRDFoa25TT3UzY0IzTXB0TmliM1h6ME93b0Y2Sjc2VVdvTGpSSnVTZ2NnMTgzdXc3ZEM2X1J2UzdJWWlMd2dSQnNGQ3VPbWFDY3dBdXRDUWVTR0J1MGJhWXZfaXZnaUU1d1Q4QzVRc2xvSHDSAdMBQVVfeXFMT2VDcF9OckNBT1d0UGdQNXpOS25jRnBRNnRtdktZNFEtTDlaZXlqRHlrM2hXay1URHBzNHVtSFpUdXA0aEdUd2xmS0ZndV9hNmNHZXJ4QXQwazlmUV9sQ25nRHdHOFNLR0xnTTRWYkxBdFhMYmtjMEtQaDEtX2ZCeFQtSHk0OWtRSHgzRHkwZTlaSVU0N2doeDlRS2xpa2Q3Z296RkQ5eFJFN0hOQ29Malg3MDd5c05FbGl5S2lBbjZkb1R6Q3dtbUhUZTdvM0xIRkJ",
-"id": "news_5688a35e5ec13c3d"
+"u": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQajEwdE5Gc05QRTBSX0NvNU5YcVhaZUJyWDJPTEItUU9ZUW5KVlJtVzhZa2dIbjFXRmVmTFJ6SFBhdWRndmsyUVM2ZWxvOGNYMl9oZ3VjTjRHOFRIVlFXTVFWcmhLU056am5jMWNKQTg4SUpqTXVxb2lTdjNSUngzT1lVTzlfYkgyX2ZaQjExOTFadmRYMWIxc3EydnJJSm8zb0MzS0J3amgyZGlhMTMteXpleG9VQ3JObGdBY1VrejZ0M01KWTBqZFdFNzBZQXhUS01DYkRVZG9CZFRUUnNZZVFyQ040RWRtdWRnMzZYb081WEVJMFhKeWhqbmhVaVdjWXZsVkhn0gGLAkFVX3lxTE8yVXJkMjZXLTlIWGJfel85RG5MSzZ2UVduMjJReWREZ29qXzE1cDFsT2pzSWNrYWI2RHFnT3V1cVI4eWZWcDRCSXNZemJ1MGR0VVBLTXB2NUVJb1QxbkIzMW9DeFV6UnZ5a2Q5WjNsV1BWSHJCWktPdzRJeHIwNXFxRzlWUDBfR0xTTmMxcEVPU21IMzFyaDd",
+"id": "news_5e521a8ea9fc1122"
 },
 {
 "i": "1094",
@@ -157,17 +168,6 @@
 "id": "news_9aff196a0169e464"
 },
 {
-"i": "1486",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Indore News: PG Student Loses 22 Kg After Severe Harassment By Seniors At MGM Medical College",
-"src": "Free Press Journal",
-"d": "Oct 2025",
-"u": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQVHk4UkdEempEblA4d2Y1NzdLQlpJbE1ueWE3TFNCUTY1UnU5eTU5dk5hRlRqTXdhWlBJQm1qQ2FCUlRVWWdUb0lobXNjeXRYdUx0RVlwWmYzbmRfWjlhSnAwbkIzRTI0eDlXa1dzN2gyc0psVkxZTjVsd0JFX1VVT2Q0TGFRRWtXcXpvdEJpVk91X3pZUE91VF9ESHpDbTAxb1h0djVVcng1ampuT2VQWmVnQ1RwbENrbFBRdjJSS001RHJzNnVZWUllZ9IB0AFBVV95cUxONlJiOTFOcG5HdHd1TnBtZDl2aFdMd3ppVjA3RWwyeUhnVWU0blJxa19kdjlmM0tGRVp4ODlVVDdPVUtZQ0VBalI2ZGI0bG5IU0t3Y2xUYkJKbThsUTlwYXNoUXJOR21RTVhiMlM4TlJaZDhicFN4bFhDN0JndVhXeWtnTXhwZWVVRXpVekg3dkhHUEhzOXc1T0ZzeGlfRHFuY2UzX05OX2ctTjU0SlF6RWRBNEFDQjFnU2VFQ0g2YlRUR1Z3WW5FN2xvRFJ2a1V1?oc",
-"id": "news_5917376a4c932331"
-},
-{
 "i": "1561",
 "b": null,
 "dim": "hands_on",
@@ -177,6 +177,17 @@
 "d": "May 2025",
 "u": "https://news.google.com/rss/articles/CBMijgJBVV95cUxQVER5VTR6SkdMNzFiQk04ejdncnhyNFpVVVphTndvMmo1N3VtNW14Mk1fajYwdWZVQkpCR2RoRENtdDM3Mk9keGdZbVlHZVBHNklhMzB0c1o4WklaYTRmTC1JY3dNM3dCU1Q0ZTdNM084MjAtMjhGTFl2ZUNNSTk3ODJMdnRVOTFUTTRlM1lTT0xqRS1BN2ZhRnAwQi03TWJFdlpOQW5Wb280Y0YwUXhiYWw0Y09kLWFFWGpXa3JLTmU4VExNRE1Za3FabGFzbEU5YnVuR2ZpSnZ1NGNsQXcwbTZKb05iV3RTdE5aSjRzWlBnX3lDUE9zcFlIYTdrdGx4bFY5YUJ4emcyY3d5S3fSAZMCQVVfeXFMUGpSUkY2UmhyQjU3bmU1dk9PUk1tbjVxcmNndlVjTUl0Vl9tVk51MFI3bmFNQWxpeWJTRlp3Wmh0ejh5ZzhkeFJ0S09lcWE4ZUpJdktBaTBuSEV6Y1B5VWFKdnBLVlBfNE5la0JyOWR5UjhVckpSbUxKQ29MWFZYQmg0SVpVVGo5V09fNVdKa3R",
 "id": "news_5e6d8cceb50f48c8"
+},
+{
+"i": "2317",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "14 second-year medicos suspended over ragging at GMC Kamareddy",
+"src": "The New Indian Express",
+"d": "Nov 2026",
+"u": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOUhobTdrdE9KQjdxXzUzd01FdTlud25PQVZYakVoTEszTEFIRTJZLXBZUnc1OE1PV0tka2xBbUJIcHd0YUtwdlNhQl9VbGc5T3JrYkItUDA4UElNSW4xOTBJVlZob1MyVkxhNEFaY3JCRFZCMEhXTkNoMGVxRWF1SzRBS2paMklVYklKQTRLZDVJQ0NCU0t5bGViS28wYzhZOXduby1IaXM3WGdFeGNtX214bkFET3BPUHdPV0pWVElNQdIBzwFBVV95cUxOcm1rSUZYZmpTOFN3UVMwRmlLb2VVVEJ3RTQ3TGZzQ3VpVENCS05XQnJHY0JZMzRIX0FLRHlSVzhzY2NRM0JMbkhOVTdnUGZOWl82QkZTTVpYWDZWUDZfSmdGY2FCelczWW5Fem9hdWtoXzUxdlhTUU9FdzBRMU5SdG82M05ZZVFnWlhWc2Jnelc1MVBhRzh0aEZGVUdxYUZlUzUzakpvUUdmZ2JOZnd2dW03N0UtVmJyZjR4RUVBc05wSXRXTVJELTlLaG82UUk?oc=5",
+"id": "news_022e83c468da9c7c"
 }
 ]
 }
