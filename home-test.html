@@ -121,7 +121,7 @@ if(mq&&mq.addEventListener)mq.addEventListener("change",function(){if(ST.mode===
 document.addEventListener("visibilitychange",function(){if(!document.hidden)apply();});
 apply();tick();
 document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document.querySelectorAll("style:not([data-dpd])").forEach(twin);document.querySelectorAll("[style]").forEach(fixEl);}});
-})();</script><link rel="stylesheet" href="/assets/hd-8f8ba3598e.css">
+})();</script><link rel="stylesheet" href="/assets/hd-a2c6fa12ad.css">
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -303,7 +303,7 @@ var s=document.createElement("script");s.src="https://telegram.org/js/telegram-w
 window.dpTgExternal=function(){note();ext();return true;};
 function note(){if(document.getElementById("dp-tg-note"))return;var n=document.createElement("div");n.id="dp-tg-note";n.style.cssText="position:fixed;left:12px;right:12px;bottom:16px;z-index:2147483000;background:#0b3d33;color:#fff;padding:12px 14px;border-radius:14px;font:600 13.5px/1.45 system-ui;box-shadow:0 8px 30px rgba(0,0,0,.3)";n.textContent="Google sign-in doesn't work inside Telegram, so we're opening DocPulsee in your browser. Sign in there once and you're set.";document.body.appendChild(n);setTimeout(function(){n.remove();},6000);}
 function ext(){var u=location.origin+"/?from=telegram";try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openLink){Telegram.WebApp.openLink(u,{try_instant_view:false});return;}}catch(e){}window.open(u,"_blank");}
-})();</script><link rel="preload" as="script" href="/assets/pt-87e83303f4.js">
+})();</script><link rel="preload" as="script" href="/assets/pt-5781b1bd00.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -646,6 +646,38 @@ setTimeout(function(){if(window.DP_INI.live)return;try{fetch("https://uwrwtttkqy
 </section>
 
 
+<section id="dp-bento" class="bn" aria-labelledby="bn-h">
+<div class="bn-hd"><span>Everything in one place</span><h2 id="bn-h">Your whole counselling, sorted.</h2><p>Built by doctors who went through it. Tap any tile.</p></div>
+<div class="bn-g">
+ <button type="button" class="bt2 b1" data-go="maker">
+  <span class="tg">Only on DocPulsee</span><h3>Choice List Maker</h3><p>Your full list in the right order, with the chance of every seat, round by round.</p>
+  <div class="mk2 l1" aria-hidden="true"><div><i>1</i><b>MD General Medicine</b><em class="e-d">Dream</em></div><div><i>2</i><b>MD Paediatrics</b><em class="e-t">Target</em></div><div><i>3</i><b>MS Orthopaedics</b><em class="e-t">Target</em></div><div><i>4</i><b>DNB General Medicine</b><em class="e-s">Safe</em></div></div>
+  <div class="mk2 l1x" aria-hidden="true"><span>Round 1</span><span>Round 2</span><span>Round 3</span><span class="on">Auto-order</span></div>
+  <span class="go">Make my list</span>
+ </button>
+ <button type="button" class="bt2 b2" data-go="rank">
+  <div class="bx"><h3>Seat predictor</h3><p>Type your rank. See every college you can really get, from official MCC and state allotments. Free.</p><span class="go">Check my rank</span></div>
+  <div class="mk2 ph2" aria-hidden="true"><div class="sc"><small>Your NEET PG rank</small><div class="in"><span class="tx"></span><span class="cu"></span></div>
+   <div class="ch"><em class="e-s">Safe</em><em class="e-t">Target</em><em class="e-d">Dream</em></div><div class="bt">See my colleges</div></div></div>
+ </button>
+ <button type="button" class="bt2 b3" data-go="senior">
+  <div class="mk2 ct" aria-hidden="true"><div class="l">How is the workload in Paeds here?</div><div class="r">Busy, but you learn a lot. Ask me anything.</div><div class="ty"><i></i><i></i><i></i></div></div>
+  <h3>Senior Connect</h3><p>Talk to a senior inside the college you are eyeing.</p><span class="go">Talk to a senior</span>
+ </button>
+ <button type="button" class="bt2 b4" data-go="plan">
+  <h3>My plan</h3><p>Every date and next step for your seat, MCC and your state.</p>
+  <div class="mk2 pl" aria-hidden="true"><div><i class="ok"></i>Round 1 <span>done</span></div><div><i class="nw"></i>Round 2 <span>now</span></div><div><i></i>Round 3 <span>next</span></div></div>
+ </button>
+ <button type="button" class="bt2 b5" data-go="browse">
+  <div class="bx"><h3>Closing ranks &amp; fees</h3><p>Cutoffs of every round plus fees, stipend and bond for 2,153 institutes.</p><span class="go">Browse colleges</span></div>
+  <div class="mk2 cc" aria-hidden="true"><div class="c1"><small>Closing rank</small><b>Every round</b><span>MCC + states</span></div><div class="c2"><small>Fees</small><b>Per year</b><span>govt · private · deemed</span></div><div class="c3"><small>Bond</small><b>Years + penalty</b><span>state rules</span></div><div class="c4"><small>Stipend</small><b>Per month</b><span>year 1 to 3</span></div></div>
+ </button>
+ <button type="button" class="bt2 b6" data-go="call">
+  <h3>1:1 with residents</h3><p>A call with our founders, residents themselves, for a clear plan.</p>
+  <div class="mk2 cl" aria-hidden="true"><div class="st"><b>9:41</b><i></i></div><div class="nt"><span class="lg">D</span><div><b>DocPulsee</b><small>Your 1:1 call is booked</small></div></div></div>
+ </button>
+</div>
+</section>
 <section id="neetpg-app-wrap" class="rounded-3xl overflow-hidden shadow-xl border border-slate-200">
 <div id="root"><div style="padding:48px 16px;text-align:center;color:#5b6d68;font-family:system-ui,sans-serif;">Loading counselling directory...</div></div>
 </section>
@@ -2083,7 +2115,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-87e83303f4.js"></script>
+<script defer src="/assets/pt-5781b1bd00.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
