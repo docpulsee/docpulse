@@ -303,7 +303,7 @@ var s=document.createElement("script");s.src="https://telegram.org/js/telegram-w
 window.dpTgExternal=function(){note();ext();return true;};
 function note(){if(document.getElementById("dp-tg-note"))return;var n=document.createElement("div");n.id="dp-tg-note";n.style.cssText="position:fixed;left:12px;right:12px;bottom:16px;z-index:2147483000;background:#0b3d33;color:#fff;padding:12px 14px;border-radius:14px;font:600 13.5px/1.45 system-ui;box-shadow:0 8px 30px rgba(0,0,0,.3)";n.textContent="Google sign-in doesn't work inside Telegram, so we're opening DocPulsee in your browser. Sign in there once and you're set.";document.body.appendChild(n);setTimeout(function(){n.remove();},6000);}
 function ext(){var u=location.origin+"/?from=telegram";try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openLink){Telegram.WebApp.openLink(u,{try_instant_view:false});return;}}catch(e){}window.open(u,"_blank");}
-})();</script><link rel="preload" as="script" href="/assets/pt-a85cbb869f.js">
+})();</script><link rel="preload" as="script" href="/assets/pt-b462140a64.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -2083,7 +2083,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-a85cbb869f.js"></script>
+<script defer src="/assets/pt-b462140a64.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
