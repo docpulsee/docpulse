@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded",function(){if(E&&E.active){document
 <meta charset="UTF-8">
 <script>(function(){var q="";try{q=localStorage.getItem("dp_data_v")||""}catch(e){}window.__dpDataP=fetch("neetpg_data.min.json"+(q?"?v="+encodeURIComponent(q):"")).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocPulsee: NEET PG 2026 & INI-CET College Predictor, Cutoffs & Choice List</title><link rel="preload" as="script" href="/assets/app-1c486acb92.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. For INI-CET, every AIIMS, JIPMER, PGIMER and NIMHANS seat with real closing ranks. Make your choice list for every round.">
+<title>DocPulsee: NEET PG 2026 & INI-CET College Predictor, Cutoffs & Choice List</title><link rel="preload" as="script" href="/assets/app-06ecf0e548.js"><meta name="description" content="NEET PG 2026 college predictor by doctors: enter your rank to see every MD/MS/DNB seat you can get in MCC counselling, with your chance, closing ranks, fees, stipend and bond. For INI-CET, every AIIMS, JIPMER, PGIMER and NIMHANS seat with real closing ranks. Make your choice list for every round.">
 <link rel="canonical" href="https://docpulsee.in/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://docpulsee.in/"><meta property="og:site_name" content="DocPulsee">
 <meta property="og:title" content="DocPulsee: NEET PG & INI-CET College Predictor & Choice List">
@@ -303,7 +303,7 @@ var s=document.createElement("script");s.src="https://telegram.org/js/telegram-w
 window.dpTgExternal=function(){note();ext();return true;};
 function note(){if(document.getElementById("dp-tg-note"))return;var n=document.createElement("div");n.id="dp-tg-note";n.style.cssText="position:fixed;left:12px;right:12px;bottom:16px;z-index:2147483000;background:#0b3d33;color:#fff;padding:12px 14px;border-radius:14px;font:600 13.5px/1.45 system-ui;box-shadow:0 8px 30px rgba(0,0,0,.3)";n.textContent="Google sign-in doesn't work inside Telegram, so we're opening DocPulsee in your browser. Sign in there once and you're set.";document.body.appendChild(n);setTimeout(function(){n.remove();},6000);}
 function ext(){var u=location.origin+"/?from=telegram";try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openLink){Telegram.WebApp.openLink(u,{try_instant_view:false});return;}}catch(e){}window.open(u,"_blank");}
-})();</script><link rel="preload" as="script" href="/assets/pt-025c7a2f35.js">
+})();</script><link rel="preload" as="script" href="/assets/pt-1ffc1cc095.js">
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col">
 <!-- Offer banner: driven by the owner's offers (table "offers"). Shows, counts down, switches the price and hides itself automatically. -->
@@ -1830,12 +1830,12 @@ window.DATA = null;
   var domReady = new Promise(function(res){ if(document.readyState!=='loading') res(); else document.addEventListener('DOMContentLoaded', function(){ res(); }); });
   Promise.all([window.__dpDataP, domReady]).then(function(v){
     var all = decode(v[0]); for (var i = 0; i < all.length; i++) all[i].__i = i; window.DATA_ALL = all; window.DATA = all.filter(function(o){ return !o.Hide; }); window.DATA_V = v[0].v || null; window.__dpDecode = decode;
-    var s = document.createElement('script'); s.src = '/assets/app-1c486acb92.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
+    var s = document.createElement('script'); s.src = '/assets/app-06ecf0e548.js'; s.onerror = function(){ fail('Could not load the counselling directory.'); };
     document.body.appendChild(s);
   }).catch(function(e){ console.error(e); fail('Could not load the counselling directory.'); });
 })();
 </script>
-<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-1c486acb92.js"></script>
+<script type="text/plain" id="neetpg-app-js" data-src="/assets/app-06ecf0e548.js"></script>
 <!-- DocPulsee: date-aware counselling timeline (side pop-up) -->
 <style id="dp-plan-css">
 .dpp{background:var(--surface);color:var(--text)}
@@ -2083,7 +2083,7 @@ window.DATA = null;
 #dp-tl-peek .dk-n a{color:#0f766e;font-weight:700}
 
 </style>
-<script defer src="/assets/pt-025c7a2f35.js"></script>
+<script defer src="/assets/pt-1ffc1cc095.js"></script>
 
 <nav class="hn-tab" aria-label="Quick">
 <button type="button" onclick="hnPredict(true)"><span class="hn-e">🎯</span><small>Predict</small></button>
