@@ -1,5 +1,5 @@
 {
-"v": "2026-11-14",
+"v": "2026-11-21",
 "n": 17,
 "items": [
 {
@@ -124,39 +124,6 @@
 "id": "news_b09e138c672c1f71"
 },
 {
-"i": "1052",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Surat resident doctor dies by suicide at government medical college",
-"src": "Deccan Herald",
-"d": "Sep 2026",
-"u": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPR2tQdDQ0dW15b3pMME93R0Q3MmxUVEtWTi1GS3BucFlqcW9xLXdNbHczZXNIV3JSUHJxTi1ESmQyZVdvXzZSLURvNVdfMHBRYU1rRS0tUnpjclJVWGlBcDF4T3VzbUMzRzBHZjV2WnFiQTUzX0VINFNySVlJZFBUYzdVUG1JVGt3OVRaZktFTmpma3JWSU55MWpaU3lRb0ozUkMwdDd2M0hYRUdnOWx3SWp3Xy1wUVhRMXc?oc=5",
-"id": "news_3b220ece7377aaf5"
-},
-{
-"i": "1052",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "Suicide of PG student after ‘ragging’: Gujarat suspends Surat medical college Microbiology department head",
-"src": "The Indian Express",
-"d": "Aug 2026",
-"u": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQUhDcnVOVU95T1ZWRGxjN18tLTdPWjl3LVNJbGUwVktLb25USjN4d29iUkk1YVhFWlRVc0l4bnlxRkFraGl5ZFdJTDdCRHJmRERLbllDZnVlQ1pFUmdzMUZnRDFoa25TT3UzY0IzTXB0TmliM1h6ME93b0Y2Sjc2VVdvTGpSSnVTZ2NnMTgzdXc3ZEM2X1J2UzdJWWlMd2dSQnNGQ3VPbWFDY3dBdXRDUWVTR0J1MGJhWXZfaXZnaUU1d1Q4QzVRc2xvSHDSAdMBQVVfeXFMT2VDcF9OckNBT1d0UGdQNXpOS25jRnBRNnRtdktZNFEtTDlaZXlqRHlrM2hXay1URHBzNHVtSFpUdXA0aEdUd2xmS0ZndV9hNmNHZXJ4QXQwazlmUV9sQ25nRHdHOFNLR0xnTTRWYkxBdFhMYmtjMEtQaDEtX2ZCeFQtSHk0OWtRSHgzRHkwZTlaSVU0N2doeDlRS2xpa2Q3Z296RkQ5eFJFN0hOQ29Malg3MDd5c05FbGl5S2lBbjZkb1R6Q3dtbUhUZTdvM0xIRkJ",
-"id": "news_5688a35e5ec13c3d"
-},
-{
-"i": "1052",
-"b": null,
-"dim": "toxicity",
-"v": 5,
-"h": "GMC Surat medico suicide: Panel confirms ragging of 9 resident doctors in Microbiology dept, finds no...",
-"src": "Medical Dialogues",
-"d": "Aug 2026",
-"u": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQajEwdE5Gc05QRTBSX0NvNU5YcVhaZUJyWDJPTEItUU9ZUW5KVlJtVzhZa2dIbjFXRmVmTFJ6SFBhdWRndmsyUVM2ZWxvOGNYMl9oZ3VjTjRHOFRIVlFXTVFWcmhLU056am5jMWNKQTg4SUpqTXVxb2lTdjNSUngzT1lVTzlfYkgyX2ZaQjExOTFadmRYMWIxc3EydnJJSm8zb0MzS0J3amgyZGlhMTMteXpleG9VQ3JObGdBY1VrejZ0M01KWTBqZFdFNzBZQXhUS01DYkRVZG9CZFRUUnNZZVFyQ040RWRtdWRnMzZYb081WEVJMFhKeWhqbmhVaVdjWXZsVkhn0gGLAkFVX3lxTE8yVXJkMjZXLTlIWGJfel85RG5MSzZ2UVduMjJReWREZ29qXzE1cDFsT2pzSWNrYWI2RHFnT3V1cVI4eWZWcDRCSXNZemJ1MGR0VVBLTXB2NUVJb1QxbkIzMW9DeFV6UnZ5a2Q5WjNsV1BWSHJCWktPdzRJeHIwNXFxRzlWUDBfR0xTTmMxcEVPU21IMzFyaDd",
-"id": "news_5e521a8ea9fc1122"
-},
-{
 "i": "1094",
 "b": "1094__MD__Paediatrics",
 "dim": "toxicity",
@@ -179,6 +146,17 @@
 "id": "news_5e6d8cceb50f48c8"
 },
 {
+"i": "2310",
+"b": null,
+"dim": "toxicity",
+"v": 4,
+"h": "Unpaid Stipend for 5 Months: GMC Ambernath Resident Doctors Declare Indefinite Strike",
+"src": "Medical Dialogues",
+"d": "Aug 2025",
+"u": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNclRYb21TMFZCNDlZMmhzXzBHeFQzMklHcHpfSHh1bUlCeDNiQlZ0QjF1OVhwRFpMT0E0dGR1cjVjc1hRZ3hIVnZJOUdKY2NXWVZUQXFVZzlOY3pHUjZJZzF6NU9Md215aVVZQy1WM1loaThiemxYRVZCb0gwUFZTbmtLSXRjeUtNTzN2Sm5NUFlzNTZSMWRRMkZOQ2FxaEhNYXZwdGdibF9EeHBqQ1dJcHRRZ1U1eVJVNk1FWHhhY2RPUW1uTGhwZmU1ajFUbjl2TDhfbTFn0gHbAUFVX3lxTE9JOWJYdVJVOWlmOWoyMTJEbmR1ZGw0dEItNjJkcFBid1pfTnBPZi1uRGczQkhRUjh0RmdEWVA3SXJMUzRHVlFTQWxHenVic3VpOE16RGk5Q0JlaEFHNVpZa2VwTlpHZXJVREZoWmVUVkFMaUdNcnlRM1NSa1ZUemFLT0ZIUnhjc0dHWC04WjY1TFdONU1ENzkyelVxOFdEYU1HazhZUHFMR2h3WU5Mdl91eFNuN0t1UWUtY2RtalNFeUtxZnVrcVN",
+"id": "news_33121e2df27dfd92"
+},
+{
 "i": "2317",
 "b": null,
 "dim": "toxicity",
@@ -188,6 +166,28 @@
 "d": "Nov 2026",
 "u": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOUhobTdrdE9KQjdxXzUzd01FdTlud25PQVZYakVoTEszTEFIRTJZLXBZUnc1OE1PV0tka2xBbUJIcHd0YUtwdlNhQl9VbGc5T3JrYkItUDA4UElNSW4xOTBJVlZob1MyVkxhNEFaY3JCRFZCMEhXTkNoMGVxRWF1SzRBS2paMklVYklKQTRLZDVJQ0NCU0t5bGViS28wYzhZOXduby1IaXM3WGdFeGNtX214bkFET3BPUHdPV0pWVElNQdIBzwFBVV95cUxOcm1rSUZYZmpTOFN3UVMwRmlLb2VVVEJ3RTQ3TGZzQ3VpVENCS05XQnJHY0JZMzRIX0FLRHlSVzhzY2NRM0JMbkhOVTdnUGZOWl82QkZTTVpYWDZWUDZfSmdGY2FCelczWW5Fem9hdWtoXzUxdlhTUU9FdzBRMU5SdG82M05ZZVFnWlhWc2Jnelc1MVBhRzh0aEZGVUdxYUZlUzUzakpvUUdmZ2JOZnd2dW03N0UtVmJyZjR4RUVBc05wSXRXTVJELTlLaG82UUk?oc=5",
 "id": "news_022e83c468da9c7c"
+},
+{
+"i": "2325",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "GMC Suspends 4 Medicos For Indulging In Ragging In Nagarkurnool",
+"src": "Deccan Chronicle",
+"d": "Nov 2025",
+"u": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPSU84MFZWNTZ2cDMzaWQ4RGM1ZlZmaWU1anc4Z01ya2RCSlowOUR0Q250NEZKQThQbEdmbVJ3NWdOejRXVGl0TEQwQ0hVNHRpSkEzLTV0a1U1SmlnZTdZekx1QWpvbWJJZkpiaUIwdEkxWEpHREhzMW5FcGNaQU00WjlGNTNIOUYydWZDbGg3TDlPVG5YbWFjc1JsRDgtSTdhSmZ0SGE5YVNRTFZBN29SUTM4dGpoS3ZvYzd4MFhoY1FZaGJDUlM4StIBzgFBVV95cUxQTnpfeVp2cUt6cFV2aHBfWEhhTlZiaGstcS1jWHBaODVfbzBld2pJQldrSmNScVJSeFVvTzN1eHFjemVOa3d4U2pvaHEzeHRFZk5aRjNVZy1FYUNwMTE5NmJVZnZjN0hhRjY5U3Fjc2RtTWRUMGwtSmNISWdPYndCMFZfMENfdVdZdFlLWXF6RUlxVnIxdjc5YVh4UEwxQUxVU3pBREY1NHFrQnF0YUN4TVlkQlUwVVJKR2tNQVBmY0FhdmpCcXlmUVRCR1pMQQ?oc=5",
+"id": "news_8712f63bb0957ecf"
+},
+{
+"i": "2325",
+"b": null,
+"dim": "toxicity",
+"v": 5,
+"h": "Telangana: Three medicos suspended for ragging junior at Nagarkurnool Government Medical College",
+"src": "Telangana Today",
+"d": "Apr 2025",
+"u": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOZkNZZVl1ejk2QkZpb3M4OUY5Ykd3WmJMT1FhaXBUTGhEUEN1UWtLa2daOXQ1aW50aTFzMnRNQW85WVN0QXVxZFViTFJlUE9md1d0YU1FQjduVDhkSTBWUUdRbW5WaEE5OTRKNXIyVkEzODZrZ2ZQa2JWQ0tuVzdnMklTWHZfVHdPeEJYYkdNM0NCbDMzSFIwZTdCODd5YzZ2UVQ5dzZKeXVFRWR6RFRZaTJCejMxbFNEX2FqUkNwNA?oc=5",
+"id": "news_f3c93de2f47f54f9"
 }
 ]
 }
