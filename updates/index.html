@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEET PG 2026 Counselling Updates | DocPulsee</title>
+<meta name="description" content="Official NEET PG 2026 counselling updates from MCC and every state, posted by DocPulsee: schedules, allotment lists, merit lists and rule changes, with the official link.">
+<link rel="canonical" href="https://docpulsee.in/updates/">
+<link rel="icon" href="/icons/icon-192.png">
+<style>
+:root{--bg:#f6faf8;--ink:#10332b;--mut:#5b7a71;--card:#fff;--line:#e3eeea;--go:#0f6e5c;--chip:#e3f1ec}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1a17;--ink:#eafaf5;--mut:#9fb8b0;--card:#14201d;--line:#22312d;--go:#8fe0c7;--chip:#1b2a26}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(120deg,#10332b,#0f6e5c);color:#fff;padding:22px 16px 18px}
+.w{max-width:760px;margin:0 auto}h1{margin:6px 0 4px;font-size:24px}header p{margin:0;opacity:.88;font-size:14px;line-height:1.45}
+.top{display:flex;align-items:center;gap:10px}.top a{color:#fff;text-decoration:none;font-weight:800}.top img{width:30px;height:30px;border-radius:8px}
+.f{display:flex;gap:8px;flex-wrap:wrap;padding:14px 16px 0}.f input,.f select{height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:0 12px;font-size:15px;flex:1 1 160px;min-width:0}
+main{padding:12px 16px 30px}.c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px}
+.m{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}.st{background:var(--chip);color:var(--go);font-weight:800;border-radius:999px;padding:3px 10px;font-size:12px}
+.t{white-space:pre-line;margin-top:8px;font-size:14.5px;line-height:1.5;overflow-wrap:anywhere}.l{display:inline-block;margin-top:8px;font-size:13.5px;font-weight:700;color:var(--go);text-decoration:none}
+.e{text-align:center;color:var(--mut);padding:30px 10px}.cta{display:block;text-align:center;margin:16px 0 0;padding:13px;border-radius:14px;background:#f5b800;color:#10332b;font-weight:900;text-decoration:none}
+footer{text-align:center;color:var(--mut);font-size:12.5px;padding:0 16px 28px}
+</style></head>
+<body>
+<header><div class="w"><div class="top"><img src="/icons/icon-192.png" alt=""><a href="/">DocPulsee</a></div>
+<h1>NEET PG 2026 counselling updates</h1><p>Official notices from MCC and the states, caught by DocPulsee IMMUNE and explained in plain words, with the official link.</p></div></header>
+<div class="w"><div class="f"><select id="s" aria-label="State"><option value="">All states</option></select><input id="q" type="search" placeholder="Search updates" aria-label="Search"></div>
+<main id="L"><div class="e">Loading updates…</div></main>
+<footer>Updates also go to our free Telegram group: <a href="https://t.me/neetpgcouncelling2026" style="color:inherit">t.me/neetpgcouncelling2026</a></footer></div>
+<script>
+// 28 Nov 2026: public list of IMMUNE posts (Supabase rpc immune_updates; anon key is the site's public key).
+(function(){
+var U="https://uwrwtttkqywsmehexmbf.supabase.co/rest/v1/rpc/immune_updates",K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cnd0dHRrcXl3c21laGV4bWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNjQyMDQsImV4cCI6MjEwNDk0MDIwNH0.hkwI81L-WS0ECygrrK3IXOOeSmIvDooW5NJQCi2o-Ys",D=[],L=document.getElementById("L"),S=document.getElementById("s"),Q=document.getElementById("q");
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function when(t){try{return new Date(t).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit",timeZone:"Asia/Kolkata"});}catch(e){return "";}}
+function draw(){var s=S.value,q=(Q.value||"").toLowerCase().trim();var X=D.filter(function(d){return (!s||d.state===s)&&(!q||(d.state+" "+d.text).toLowerCase().indexOf(q)>=0);});
+ if(!X.length){L.innerHTML='<div class="e">No updates match. Try another state or word.</div>';return;}
+ L.innerHTML=X.map(function(d){return '<div class="c"><div class="m"><span class="st">'+esc(d.state)+'</span><span>'+esc(when(d.posted_at))+'</span></div><div class="t">'+esc(d.text)+'</div>'+(d.url?'<a class="l" href="'+esc(d.url)+'" target="_blank" rel="noopener">Official notice ↗</a>':'')+'</div>';}).join("")
+  +'<a class="cta" href="/?utm_source=updates_page">Check your seats and chances on DocPulsee</a>';}
+fetch(U,{method:"POST",headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json"},body:'{"p_limit":200}'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){D=j||[];
+ Array.from(new Set(D.map(function(d){return d.state;}))).sort().forEach(function(n){var o=document.createElement("option");o.value=n;o.textContent=n;S.appendChild(o);});draw();})
+ .catch(function(){L.innerHTML='<div class="e">Could not load updates. Check your connection and refresh.</div>';});
+S.onchange=draw;Q.oninput=draw;
+})();
+</script></body></html>
