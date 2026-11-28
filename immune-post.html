@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Post to group</title>
+<style>
+:root{--bg:#f4f1ea;--ink:#14213d;--mut:#5b6475;--line:#d6d0c4;--card:#fff;--go:#0f766e}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1a17;--ink:#eafaf5;--mut:#9fb8b0;--line:#2a3b36;--card:#14201d}}
+body{font-family:system-ui,sans-serif;margin:0;padding:20px;background:var(--bg);color:var(--ink)}
+h2{margin:0 0 4px}p{color:var(--mut);font-size:14px;margin:0 0 14px}
+textarea{width:100%;box-sizing:border-box;font:15px/1.45 system-ui;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+a{color:var(--go);word-break:break-all}button{width:100%;padding:14px;border:0;border-radius:999px;background:var(--go);color:#fff;font-size:16px;font-weight:700;margin-top:6px}
+button:disabled{opacity:.6}.c{text-align:center;padding-top:40px}
+</style></head>
+<body><div id="app"><p class="c">Loading…</p></div>
+<script>
+// IMMUNE review page (28 Nov 2026): edit the notice text and post it to the DocPulsee Telegram group. Signed link from the owner's alert.
+(function(){
+var F="https://uwrwtttkqywsmehexmbf.supabase.co/functions/v1/immune",q=new URLSearchParams(location.search),id=q.get("post"),s=q.get("s"),A=document.getElementById("app");
+function esc(x){return String(x||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function msg(h,m){A.innerHTML='<div class="c"><h2>'+esc(h)+'</h2><p>'+esc(m)+'</p></div>';}
+if(!id||!s){msg("Not valid","This link is broken.");return;}
+var U=F+"?post="+encodeURIComponent(id)+"&s="+encodeURIComponent(s)+"&json=1";
+fetch(U).then(function(r){return r.json();}).then(function(n){
+ if(!n.ok){msg("Not valid","This link is not valid.");return;}
+ if(n.posted){msg("Already posted","This notice was posted earlier.");return;}
+ A.innerHTML='<h2>'+esc(n.state)+' update</h2><p>Edit the lines below if you like, then post. The official link and DocPulsee.in are added automatically.</p><textarea id="t" rows="10">'+esc(n.text)+'</textarea><p style="margin-top:10px">Official notice: <a href="'+esc(n.url)+'">'+esc(n.url)+'</a></p><button id="b">Post to group</button>';
+ document.getElementById("b").onclick=function(){var b=this;b.disabled=true;b.textContent="Posting…";
+  fetch(U,{method:"POST",headers:{"Content-Type":"text/plain"},body:document.getElementById("t").value}).then(function(r){return r.json();}).then(function(j){
+   var M={posted:["Posted to the group","The notice is now in the DocPulsee Telegram group."],already:["Already posted","This notice was posted earlier, so nothing was sent again."],bad:["Not valid","This link is not valid."],missing:["Not found","This notice is no longer in the list."],notoken:["Could not post","The bot is not set up."]};
+   var x=M[j.r]||["Could not post","Something went wrong. Try again in a minute."];msg(x[0],x[1]);
+  }).catch(function(){b.disabled=false;b.textContent="Post to group";alert("Could not reach the server. Try again.");});};
+}).catch(function(){msg("Could not load","Check your connection and open the link again.");});
+})();
+</script></body></html>
